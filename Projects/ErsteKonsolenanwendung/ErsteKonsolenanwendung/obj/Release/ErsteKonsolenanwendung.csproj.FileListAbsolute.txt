@@ -1,0 +1,6 @@
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\bin\Release\ErsteKonsolenanwendung.exe.config
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\bin\Release\ErsteKonsolenanwendung.exe
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\bin\Release\ErsteKonsolenanwendung.pdb
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\obj\Release\ErsteKonsolenanwendung.csprojResolveAssemblyReference.cache
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\obj\Release\ErsteKonsolenanwendung.exe
+c:\users\test\documents\visual studio 2015\Projects\ErsteKonsolenanwendung\ErsteKonsolenanwendung\obj\Release\ErsteKonsolenanwendung.pdb
