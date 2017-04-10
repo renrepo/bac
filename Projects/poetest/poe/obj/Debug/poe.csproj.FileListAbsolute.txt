@@ -7,3 +7,12 @@ c:\users\test\documents\visual studio 2015\Projects\poetest\poe\obj\Debug\poe.cs
 c:\users\test\documents\visual studio 2015\Projects\poetest\poe\obj\Debug\poe.exe
 c:\users\test\documents\visual studio 2015\Projects\poetest\poe\obj\Debug\poe.pdb
 c:\users\test\documents\visual studio 2015\Projects\poetest\poe\obj\Debug\poe.Form1.resources
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.exe.config
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.exe
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.pdb
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.csprojResolveAssemblyReference.cache
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.Form1.resources
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.Properties.Resources.resources
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.csproj.GenerateResource.Cache
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.exe
+C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.pdb
