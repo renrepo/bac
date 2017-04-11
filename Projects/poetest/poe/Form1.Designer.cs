@@ -38,10 +38,17 @@
             this.btn4_add = new System.Windows.Forms.Button();
             this.tb_erg = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.btn_clear = new System.Windows.Forms.Button();
+            this.btn_fib = new System.Windows.Forms.Button();
+            this.btn_end_fib = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn1_div
             // 
+            this.btn1_div.Enabled = false;
             this.btn1_div.Location = new System.Drawing.Point(34, 113);
             this.btn1_div.Name = "btn1_div";
             this.btn1_div.Size = new System.Drawing.Size(117, 23);
@@ -52,6 +59,7 @@
             // 
             // btn2_mult
             // 
+            this.btn2_mult.Enabled = false;
             this.btn2_mult.Location = new System.Drawing.Point(34, 85);
             this.btn2_mult.Name = "btn2_mult";
             this.btn2_mult.Size = new System.Drawing.Size(117, 23);
@@ -96,6 +104,7 @@
             // 
             // btn3_sub
             // 
+            this.btn3_sub.Enabled = false;
             this.btn3_sub.Location = new System.Drawing.Point(34, 143);
             this.btn3_sub.Name = "btn3_sub";
             this.btn3_sub.Size = new System.Drawing.Size(117, 23);
@@ -106,6 +115,7 @@
             // 
             // btn4_add
             // 
+            this.btn4_add.Enabled = false;
             this.btn4_add.Location = new System.Drawing.Point(34, 173);
             this.btn4_add.Name = "btn4_add";
             this.btn4_add.Size = new System.Drawing.Size(117, 23);
@@ -131,11 +141,72 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "Ergebnis";
             // 
+            // btn_clear
+            // 
+            this.btn_clear.Location = new System.Drawing.Point(172, 231);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(75, 23);
+            this.btn_clear.TabIndex = 10;
+            this.btn_clear.Text = "clear";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
+            // 
+            // btn_fib
+            // 
+            this.btn_fib.Location = new System.Drawing.Point(172, 172);
+            this.btn_fib.Name = "btn_fib";
+            this.btn_fib.Size = new System.Drawing.Size(75, 23);
+            this.btn_fib.TabIndex = 11;
+            this.btn_fib.Text = "Fibonacci";
+            this.btn_fib.UseVisualStyleBackColor = true;
+            this.btn_fib.Click += new System.EventHandler(this.btn_fib_Click);
+            // 
+            // btn_end_fib
+            // 
+            this.btn_end_fib.Location = new System.Drawing.Point(172, 202);
+            this.btn_end_fib.Name = "btn_end_fib";
+            this.btn_end_fib.Size = new System.Drawing.Size(91, 23);
+            this.btn_end_fib.TabIndex = 12;
+            this.btn_end_fib.Text = "end Fibonacci";
+            this.btn_end_fib.UseVisualStyleBackColor = true;
+            this.btn_end_fib.Click += new System.EventHandler(this.btn_end_fib_Click);
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(34, 202);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(117, 23);
+            this.progressBar1.TabIndex = 13;
+            this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click);
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(34, 231);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "status";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.btn_end_fib);
+            this.Controls.Add(this.btn_fib);
+            this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tb_erg);
             this.Controls.Add(this.btn4_add);
@@ -148,6 +219,7 @@
             this.Controls.Add(this.btn1_div);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,6 +237,12 @@
         private System.Windows.Forms.Button btn4_add;
         private System.Windows.Forms.TextBox tb_erg;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_clear;
+        private System.Windows.Forms.Button btn_fib;
+        private System.Windows.Forms.Button btn_end_fib;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label4;
     }
 }
 
