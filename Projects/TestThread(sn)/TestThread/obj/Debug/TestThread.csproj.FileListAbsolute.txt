@@ -1,9 +1,0 @@
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\bin\Debug\TestThread.exe.config
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\bin\Debug\TestThread.exe
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\bin\Debug\TestThread.pdb
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.csprojResolveAssemblyReference.cache
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.Form1.resources
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.Properties.Resources.resources
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.csproj.GenerateResource.Cache
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.exe
-c:\users\test\documents\visual studio 2015\Projects\TestThread(sn)\TestThread\obj\Debug\TestThread.pdb

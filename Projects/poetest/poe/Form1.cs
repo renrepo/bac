@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.IO;
 
 namespace poe
 {
@@ -96,8 +97,8 @@ namespace poe
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            int[] fib = new int[50];
-            int sum = 0;
+            double[] fib = new double[50];
+            double sum = 0;
             fib[0] = 1;
             fib[1] = 1;
             for (int i = 2; i < 50; i++)
@@ -105,7 +106,7 @@ namespace poe
                 fib[i] = fib[i - 1] + fib[i - 2];
                // tb_erg.Text = fib[i].ToString();
                // tb_erg.Update();
-                Thread.Sleep(500);
+                Thread.Sleep(100);
                 backgroundWorker1.ReportProgress((i+1)*2);
                 sum = fib[i];
 
@@ -202,3 +203,31 @@ namespace poe
     }
 
 }
+
+
+
+
+
+
+/*
+ string path = @"c:\temp\MyTest.txt";
+
+        // This text is added only once to the file.
+        if (!File.Exists(path))
+        {
+            // Create a file to write to.
+            string[] createText = { "Hello", "And", "Welcome" };
+            File.WriteAllLines(path, createText, Encoding.UTF8);
+        }
+
+        // This text is always added, making the file longer over time
+        // if it is not deleted.
+        string appendText = "This is extra text" + Environment.NewLine;
+        File.AppendAllText(path, appendText, Encoding.UTF8);
+
+        // Open the file to read from.
+        string[] readText = File.ReadAllLines(path, Encoding.UTF8);
+        foreach (string s in readText)
+        {
+            Console.WriteLine(s);
+        }*/
