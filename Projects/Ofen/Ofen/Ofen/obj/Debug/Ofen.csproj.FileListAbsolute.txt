@@ -16,3 +16,12 @@ C:\Users\Rene\Desktop\Ofen\Ofen\Ofen\obj\Debug\Ofen.Properties.Resources.resourc
 C:\Users\Rene\Desktop\Ofen\Ofen\Ofen\obj\Debug\Ofen.csproj.GenerateResource.Cache
 C:\Users\Rene\Desktop\Ofen\Ofen\Ofen\obj\Debug\Ofen.exe
 C:\Users\Rene\Desktop\Ofen\Ofen\Ofen\obj\Debug\Ofen.pdb
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\bin\Debug\Ofen.exe.config
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.exe
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.pdb
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\bin\Debug\Ofen.exe
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\bin\Debug\Ofen.pdb
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.csprojResolveAssemblyReference.cache
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.Form1.resources
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.Properties.Resources.resources
+C:\Users\Test\Desktop\bac\Projects\Ofen\Ofen\Ofen\obj\Debug\Ofen.csproj.GenerateResource.Cache
