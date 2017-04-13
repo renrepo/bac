@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Text;
+using System.Threading;
 
 
 namespace filewriter
@@ -23,24 +23,29 @@ namespace filewriter
         
         private void btn1_Click(object sender, EventArgs e)
         {
-            string path = @"c:\\Desktop\MyTest.txt";
+            //string path = Path.GetTempFileName();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            List<string> liste = new List<string>();
 
-            // This text is added only once to the file.
-            if (!File.Exists(path))
+
+
+            //   File.WriteAllLines(path + @"\test.txt", liste);
+            string now = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+            for (int i = 0; i <= 1000; i++)
+            using (var tw = new StreamWriter(path +  @"\test_" + now + ".txt", true))
             {
-                // Create a file to write to.
-                string createText = "Hello and Welcome" + Environment.NewLine;
-                File.WriteAllText(path, createText);
+                {
+                        //DateTime now = DateTime.Now;
+                        now = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
+                        string var = "Beitrag Nummer" + i.ToString("000");
+                        string var2 = "zusätzlich" + (2 * i).ToString("000");
+                        tw.WriteLine(var +"\t" + var2 + "\t" + now);
+                        liste.Add(var + var2);
+                        tw.Close();
+                        Thread.Sleep(1);
+
+                }
             }
-
-            // This text is always added, making the file longer over time
-            // if it is not deleted.
-            string appendText = "This is extra text" + Environment.NewLine;
-            File.AppendAllText(path, appendText);
-
-            // Open the file to read from.
-            string readText = File.ReadAllText(path);
-            Console.WriteLine(readText);
         }
     }
 }

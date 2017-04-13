@@ -16,3 +16,12 @@ C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.Properties.Resource
 C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.csproj.GenerateResource.Cache
 C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.exe
 C:\Users\Rene\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.pdb
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.exe.config
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.exe
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.pdb
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.exe
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\bin\Debug\poe.pdb
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.csprojResolveAssemblyReference.cache
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.Form1.resources
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.Properties.Resources.resources
+C:\Users\Test\Desktop\bac\Projects\poetest\poe\obj\Debug\poe.csproj.GenerateResource.Cache

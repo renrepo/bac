@@ -16,3 +16,12 @@ C:\Users\Rene\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplicat
 C:\Users\Rene\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.csproj.GenerateResource.Cache
 C:\Users\Rene\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.exe
 C:\Users\Rene\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.pdb
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\bin\Debug\WindowsFormsApplication4.exe.config
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.exe
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.pdb
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\bin\Debug\WindowsFormsApplication4.exe
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\bin\Debug\WindowsFormsApplication4.pdb
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.csprojResolveAssemblyReference.cache
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.Form1.resources
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.Properties.Resources.resources
+C:\Users\Test\Desktop\bac\Projects\WindowsFormsApplication4\WindowsFormsApplication4\WindowsFormsApplication4\obj\Debug\WindowsFormsApplication4.csproj.GenerateResource.Cache
