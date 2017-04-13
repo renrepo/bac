@@ -167,7 +167,7 @@
             // lb_perc_gauss
             // 
             this.lb_perc_gauss.AutoSize = true;
-            this.lb_perc_gauss.Location = new System.Drawing.Point(199, 52);
+            this.lb_perc_gauss.Location = new System.Drawing.Point(193, 108);
             this.lb_perc_gauss.Name = "lb_perc_gauss";
             this.lb_perc_gauss.Size = new System.Drawing.Size(0, 13);
             this.lb_perc_gauss.TabIndex = 11;
@@ -221,7 +221,7 @@
             // lb_perc_fib
             // 
             this.lb_perc_fib.AutoSize = true;
-            this.lb_perc_fib.Location = new System.Drawing.Point(189, 112);
+            this.lb_perc_fib.Location = new System.Drawing.Point(193, 48);
             this.lb_perc_fib.Name = "lb_perc_fib";
             this.lb_perc_fib.Size = new System.Drawing.Size(0, 13);
             this.lb_perc_fib.TabIndex = 17;

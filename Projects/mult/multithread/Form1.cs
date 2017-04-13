@@ -31,6 +31,7 @@ namespace multithread
             if ((!bW_gauss.IsBusy))
             {
                 bW_gauss.RunWorkerAsync(); //run bW if it is not still running
+                tb_gauss_startvalue.Enabled = false;
             }
         }
 
@@ -40,6 +41,7 @@ namespace multithread
             if (bW_gauss.IsBusy) // .IsBusy is true, if bW is running, otherwise false
             {
                 bW_gauss.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+                btn_clear.Enabled = true;
             }
         }
 
@@ -52,7 +54,7 @@ namespace multithread
             {
                 end += i;
                 bW_gauss.ReportProgress(100 * i /num_gauss);
-                Thread.Sleep(10);
+                Thread.Sleep(5);
 
 
                 if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
@@ -114,6 +116,7 @@ namespace multithread
             if (!bW_fib.IsBusy)
             {
                 bW_fib.RunWorkerAsync();
+                tb_fib_startvalue.Enabled = false;
             }
         }
 
@@ -122,6 +125,7 @@ namespace multithread
             if (bW_fib.IsBusy)
             {
                 bW_fib.CancelAsync();
+                btn_clear.Enabled = true;
             }
         }
 
@@ -137,7 +141,7 @@ namespace multithread
             {
                 fib[i] = fib[(i-1)] + fib[(i-2)];
                 bW_fib.ReportProgress(100 * i / (num_fib - 1));
-                Thread.Sleep(100);
+                Thread.Sleep(500);
                 end = fib[i];
 
 
@@ -200,12 +204,34 @@ namespace multithread
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            tb_fib.Text = "";
-            tb_gauss.Text = "";
-            tb_gauss_startvalue.Text = "";
-            tb_fib_startvalue.Text = "";
-            tb_gauss_startvalue.BackColor = Color.Red;
-            tb_fib_startvalue.BackColor = Color.Red;
+            if (bW_fib.IsBusy)
+            {
+                if (bW_gauss.IsBusy)
+                {
+                    btn_clear.Enabled = false;
+                }
+
+                else
+                {
+                    tb_gauss.Text = "";
+                    tb_gauss_startvalue.Text = "";
+                    lb_perc_gauss.Text = "";
+                    tb_gauss_startvalue.BackColor = Color.Red;
+                    tb_gauss_startvalue.Enabled = true;
+                    progressBar1.Value = 0;
+                }
+            }
+
+            else
+            {
+                tb_fib.Text = "";
+                tb_fib_startvalue.Text = "";
+                lb_perc_fib.Text = "";
+                tb_fib_startvalue.BackColor = Color.Red;
+                tb_fib_startvalue.Enabled = true;
+                progressBar2.Value = 0;
+
+            }
         }
 
 

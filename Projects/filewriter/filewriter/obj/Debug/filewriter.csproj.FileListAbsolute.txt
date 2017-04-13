@@ -1,0 +1,9 @@
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\bin\Debug\filewriter.exe.config
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\bin\Debug\filewriter.exe
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\bin\Debug\filewriter.pdb
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.csprojResolveAssemblyReference.cache
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.Form1.resources
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.Properties.Resources.resources
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.csproj.GenerateResource.Cache
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.exe
+c:\users\rene\documents\visual studio 2017\Projects\filewriter\filewriter\obj\Debug\filewriter.pdb
