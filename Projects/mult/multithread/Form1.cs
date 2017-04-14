@@ -9,13 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
+
 namespace multithread
 {
+    
     public partial class Form1 : Form
     {
 
         int num_gauss;
         int num_fib;
+        string p;
+        List<string> l;
+        string n;
 
 
         public Form1()
@@ -23,6 +28,8 @@ namespace multithread
             InitializeComponent();
             tb_gauss_startvalue.BackColor = Color.Red;
             tb_fib_startvalue.BackColor = Color.Red;
+            //saver sv1 = new saver(p, l, n);
+            //safer.safe(p, l, n);
         }
 
 
