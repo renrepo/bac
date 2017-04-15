@@ -9,27 +9,21 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
-
 namespace multithread
 {
-    
     public partial class Form1 : Form
     {
 
         int num_gauss;
         int num_fib;
-        string p;
-        List<string> l;
-        string n;
-
+        List<string> list_fib = new List<string>();
+        List<string> list_gauss = new List<string>();
 
         public Form1()
         {
             InitializeComponent();
             tb_gauss_startvalue.BackColor = Color.Red;
             tb_fib_startvalue.BackColor = Color.Red;
-            //saver sv1 = new saver(p, l, n);
-            //safer.safe(p, l, n);
         }
 
 
@@ -57,9 +51,13 @@ namespace multithread
         {
             int i;
             double end = 0;
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
             for (i = 0; i <= num_gauss; i++)
             {
                 end += i;
+                list_gauss.Add(end + "\t" + 2 * end);
                 bW_gauss.ReportProgress(100 * i /num_gauss);
                 Thread.Sleep(5);
 
@@ -72,7 +70,7 @@ namespace multithread
                 }
 
             }
-
+            safer.safe(path,list_gauss);
             e.Result = end; //stores the results of what has been done in bW
         }
 
@@ -148,6 +146,7 @@ namespace multithread
             {
                 fib[i] = fib[(i-1)] + fib[(i-2)];
                 bW_fib.ReportProgress(100 * i / (num_fib - 1));
+                list_fib.Add(fib[i].ToString() + "\t" + (2*fib[i]).ToString());
                 Thread.Sleep(500);
                 end = fib[i];
 

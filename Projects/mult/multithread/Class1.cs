@@ -7,10 +7,17 @@ using System.IO;
 
 namespace multithread
 {
+
+    public static class Constants
+    {
+        public const int fav = 3;
+    }
+
     public class safer
     {
+       static string now = DateTime.Now.ToString("dd_MM_yyyy");
 
-        public static void safe(string path, List<string> liste, string now)
+        public static void safe(string path, List<string> liste)
         {
             using (var tw = new StreamWriter(path + @"\test_" + now + ".txt", true))
             {
@@ -32,13 +39,12 @@ namespace multithread
     {
         public string p;
         List<string> l;
-        string n;
+        string n = DateTime.Now.ToString("dd_MM_yyyy");
 
-        public saver(string path, List<string> liste, string now)
+        public saver(string path, List<string> liste)
         {
             p = path;
             l = liste;
-            n = now;
         }
 
         public void save()
