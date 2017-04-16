@@ -14,10 +14,10 @@ namespace multithread
     public partial class Form1 : Form
     {
 
-        int num_gauss;
-        int num_fib;
         List<string> list_fib = new List<string>();
         List<string> list_gauss = new List<string>();
+        Constants c = new Constants();
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         public Form1()
         {
@@ -51,26 +51,26 @@ namespace multithread
         {
             int i;
             double end = 0;
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-            for (i = 0; i <= num_gauss; i++)
+            for (i = 0; i <= c.num_gauss; i++)
             {
                 end += i;
                 list_gauss.Add(end + "\t" + 2 * end);
-                bW_gauss.ReportProgress(100 * i /num_gauss);
-                Thread.Sleep(5);
+                bW_gauss.ReportProgress(100 * i /c.num_gauss);
+                safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+                Thread.Sleep(500);
 
 
                 if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
                 {
                     e.Cancel = true;
                     bW_gauss.ReportProgress(0);
-                    return; //warum? ist wichtig!
+                    break; //warum? ist wichtig!
                 }
 
             }
-            safer.safe(path,list_gauss);
+            //safer.safe(path,list_gauss);
             e.Result = end; //stores the results of what has been done in bW
         }
 
@@ -139,15 +139,16 @@ namespace multithread
         {
             int i = 0;
             double end = 0;
-            double[] fib = new double[num_fib];
+            double[] fib = new double[c.num_fib];
             fib[0] = 1;
             fib[1] = 1;
-            for (i = 2; i <= (num_fib - 1); i++)
+            for (i = 2; i <= (c.num_fib - 1); i++)
             {
                 fib[i] = fib[(i-1)] + fib[(i-2)];
-                bW_fib.ReportProgress(100 * i / (num_fib - 1));
+                bW_fib.ReportProgress(100 * i / (c.num_fib - 1));
                 list_fib.Add(fib[i].ToString() + "\t" + (2*fib[i]).ToString());
-                Thread.Sleep(500);
+                safer.safe_line(path + @"\fib", fib[i].ToString());
+                Thread.Sleep(5);
                 end = fib[i];
 
 
@@ -245,7 +246,7 @@ namespace multithread
         {
         
             string eingabe = tb_gauss_startvalue.Text;
-            if (int.TryParse(eingabe,out num_gauss))
+            if (int.TryParse(eingabe,out c.num_gauss))
             {
                 btn_gauss.Enabled = true;
                 tb_gauss_startvalue.BackColor = Color.White;
@@ -256,7 +257,7 @@ namespace multithread
         private void tb_fib_startvalue_TextChanged_1(object sender, EventArgs e)
         {
             string eingabe = tb_fib_startvalue.Text;
-            if (int.TryParse(eingabe, out num_fib))
+            if (int.TryParse(eingabe, out c.num_fib))
             {
                 btn_fib.Enabled = true;
                 tb_fib_startvalue.BackColor = Color.White;

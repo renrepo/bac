@@ -8,18 +8,19 @@ using System.IO;
 namespace multithread
 {
 
-    public static class Constants
+    public class Constants
     {
-        public const int fav = 3;
+        public int num_gauss = 0;
+        public int num_fib = 0;
     }
 
     public class safer
     {
-       static string now = DateTime.Now.ToString("dd_MM_yyyy");
+        static string now = DateTime.Now.ToString("dd_MM_yyyy_hh_mm");
 
         public static void safe(string path, List<string> liste)
         {
-            using (var tw = new StreamWriter(path + @"\test_" + now + ".txt", true))
+            using (var tw = new StreamWriter(path + now + ".txt", true))
             {
                 //tw.WriteLine(var + "\t" + var2 + "\t" + now);
                 foreach (var item in liste)
@@ -29,9 +30,17 @@ namespace multithread
                 tw.Close();
             }
         }
+
+        public static void safe_line(string path, string line)
+        {
+            using (var tw = new StreamWriter(path + now + ".txt", true))
+            {
+                tw.Write(line + Environment.NewLine);
+                tw.Close();
+            }
+        }
+
     }
-
-
 
 
 
