@@ -1,0 +1,25 @@
+allg Vertiefung (10-18 LP):
+Atmosphärenphysik 			9
+Gruppen und Darstellungstheorie		6
+					15
+
+Vertiefung Kondensierte Materie (18-24 LP):
+Theoretische Festkörperphysik		9
+Messtechnik und Signalverarbeitung	5
+Experimentelle Röntgenphysik		4
+(Numerische Methoden weicher Materie)	(6)
+					18/(24)
+	
+
+
+nichtphys. Wahlpflichtmodule (8-12 LP):
+Einführung in Operations Research	9
+
+
+
+
+
+
+
+Summe					42/(48)
+Soll					48
