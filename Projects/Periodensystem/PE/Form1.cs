@@ -1,6 +1,14 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
 
 namespace PE
 {
@@ -19,6 +27,7 @@ namespace PE
         private void Form1_Load(object sender, EventArgs e)
         {
 
+          
         }
 
 
@@ -37,6 +46,12 @@ namespace PE
         int bordersize_deactivated = 1;
         string not_pressed = "DimGray";
         string pressed = "black";
+
+
+
+
+
+        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First();
 
 
 

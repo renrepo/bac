@@ -63,6 +63,11 @@ namespace filewriter
             saver sv1 = new saver(path, liste, now);
             sv1.save();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
@@ -72,7 +77,7 @@ namespace filewriter
 
 
 
-      public class safer
+    public class safer
       {
 
           public static void safe(string path, List<string> liste, string now)
