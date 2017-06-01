@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PE
@@ -27,65 +21,171 @@ namespace PE
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void elementnames_Popup(object sender, PopupEventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
+
+
+        string font = "Arial";
+        int fontsize_activated = 12;
+        int fontsize_deactivated = 11;
+        int bordersize_activated = 2;
+        int bordersize_deactivated = 1;
+        string not_pressed = "DimGray";
+        string pressed = "black";
+
+
+
+        public void colorchanger(object sender)
+        {
+            Button btn = (Button)sender;
+
+            if (btn.ForeColor == Color.FromName(not_pressed))
+            {
+                btn.Font = new Font(font, fontsize_activated, FontStyle.Bold);
+                btn.ForeColor = Color.FromName(pressed);
+                btn.FlatAppearance.BorderColor = Color.FromName(pressed);
+                btn.FlatAppearance.BorderSize = bordersize_activated;
+
+            }
+
+            else
+            {
+                btn.ForeColor = Color.FromName(not_pressed);
+                btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
+                btn.FlatAppearance.BorderSize = bordersize_deactivated;
+                btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
+            }
+        }
+
+
+
+
+
+
+        private void H_Click(object sender, EventArgs e)
+        {
+            // Button btn = (Button)sender;
+            colorchanger((Button)sender);
+        }
+
+
+
+        private void He_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+
+        private void Li_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+
+        private void Be_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+        private void B_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void C_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+        private void N_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+        private void O_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void F_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+        private void Ne_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
         }
 
         private void Na_Click(object sender, EventArgs e)
         {
-
+            colorchanger((Button)sender);
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void Mg_Click(object sender, EventArgs e)
         {
-
+            colorchanger((Button)sender);
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        private void Al_Click(object sender, EventArgs e)
         {
-
+            colorchanger((Button)sender);
         }
+
+        private void Si_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void P_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void S_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void Cl_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+        private void Ar_Click(object sender, EventArgs e)
+        {
+            colorchanger((Button)sender);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void button159_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void He_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-
-            if (btn.ForeColor == Color.Black)
-            {
-                btn.ForeColor = Color.Red;
-            }
-
-            else
-            {
-                btn.ForeColor = Color.Black;
-            }
-        }
-
-        private void H_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-
-            if (btn.ForeColor ==  Color.Black )
-            {
-                btn.ForeColor = Color.Red;
-            }
-
-            else
-            {
-                btn.ForeColor = Color.Black;
-            }
-        }
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -100,31 +200,6 @@ namespace PE
         private void button134_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void tableLayoutPanel1_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Be_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-
-            if (btn.ForeColor == Color.Black)
-            {
-                btn.ForeColor = Color.Red;
-            }
-
-            else
-            {
-                btn.ForeColor = Color.Black;
-            }
         }
     }
 }

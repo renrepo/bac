@@ -7,3 +7,12 @@ c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.csproj.Ge
 c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.exe
 c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.pdb
 c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.csprojResolveAssemblyReference.cache
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.exe.config
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.exe
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.pdb
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.csprojResolveAssemblyReference.cache
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Form1.resources
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Resources.resources
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.csproj.GenerateResource.Cache
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
