@@ -1,0 +1,9 @@
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\bin\Debug\PE.exe.config
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\bin\Debug\PE.exe
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\bin\Debug\PE.pdb
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.Form1.resources
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.Properties.Resources.resources
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.csproj.GenerateResource.Cache
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.exe
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.pdb
+c:\users\rene\documents\visual studio 2017\Projects\PE\PE\obj\Debug\PE.csprojResolveAssemblyReference.cache
