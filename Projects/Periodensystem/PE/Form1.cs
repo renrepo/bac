@@ -14,6 +14,10 @@ namespace PE
 {
     public partial class Form1 : Form
     {
+
+        List<List<string>> row = new List<List<string>>();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -24,10 +28,15 @@ namespace PE
 
         }
 
+        
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
-          
+            string filePath = System.IO.Path.GetFullPath("Bindungsenergiencsv.csv");
+           // StreamReader sr = new StreamReader(filePath);
+            row = File.ReadAllLines(filePath).Select(l => l.Split(',').ToList()).ToList();
+            MessageBox.Show(row[6][3]);
         }
 
 
@@ -49,13 +58,13 @@ namespace PE
 
 
 
-
-
+  
+    
         //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First();
 
 
 
-        public void colorchanger(object sender)
+public void colorchanger(object sender)
         {
             Button btn = (Button)sender;
 
@@ -77,6 +86,18 @@ namespace PE
             }
         }
 
+
+
+
+        public void labelchanger(object sender)
+        {
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
+            label1.Text = thePanelName;
+            label2.Text = row[12][3];
+            
+        }
 
 
 
@@ -215,6 +236,22 @@ namespace PE
         private void button134_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void H_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+
+        private void H_MouseEnter(object sender, EventArgs e)
+        {
+            labelchanger(sender);
+        }
+
+        private void H_MouseLeave(object sender, EventArgs e)
+        {
+            label1.Text = "";
+            label2.Text = "";
         }
     }
 }
