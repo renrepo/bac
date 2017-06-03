@@ -9,14 +9,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using ZedGraph;
 
 namespace PE
 {
     public partial class Form1 : Form
     {
 
+
         List<List<string>> row = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        string font = "Arial";
+        int fontsize_activated = 12;
+        int fontsize_deactivated = 11;
+        int bordersize_activated = 2;
+        int bordersize_deactivated = 1;
+        string not_pressed = "DimGray";
+        string pressed = "black";
+
+
 
 
         public Form1()
@@ -24,10 +35,6 @@ namespace PE
             InitializeComponent();
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         
 
@@ -44,6 +51,15 @@ namespace PE
             {
                 dictionary.Add(row[i][1],row[i][0]);
             }
+
+
+                        // Setup the graph
+            CreateGraph(zedGraphControl1);
+            // Size the control to fill the form with a margin
+            //https://www.codeproject.com/Articles/5431/A-flexible-charting-library-for-NET
+
+
+
         }
 
 
@@ -52,16 +68,12 @@ namespace PE
 
         }
 
+        private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
+        {
+            tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            tableLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        }
 
-
-
-        string font = "Arial";
-        int fontsize_activated = 12;
-        int fontsize_deactivated = 11;
-        int bordersize_activated = 2;
-        int bordersize_deactivated = 1;
-        string not_pressed = "DimGray";
-        string pressed = "black";
 
 
 
@@ -71,7 +83,7 @@ namespace PE
 
 
 
-public void colorchanger(object sender)
+        public void colorchanger(object sender)
         {
             Button btn = (Button)sender;
 
@@ -2403,5 +2415,60 @@ public void colorchanger(object sender)
                 labelchanger(sender);
             }
         }
+
+
+
+
+        // SetSize() is separate from Resize() so we can 
+        // call it independently from the Form1_Load() method
+        // This leaves a 10 px margin around the outside of the control
+        // Customize this to fit your needs
+
+        
+
+        private void CreateGraph(ZedGraphControl zgc)
+        {
+            // get a reference to the GraphPane
+            GraphPane myPane = zgc.GraphPane;
+
+
+            //myPane.Border.IsVisible = false;
+
+            // Set the Titles
+            myPane.Title.Text = "XPS spectra";
+            myPane.Title.FontSpec.Size = 14;
+            myPane.XAxis.Title.Text = "binding energy [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 11;
+            myPane.YAxis.Title.Text = "counts";
+            myPane.YAxis.Title.FontSpec.Size = 11;
+
+            // Make up some data arrays based on the Sine function
+            double x, y1, y2;
+            PointPairList list1 = new PointPairList();
+            PointPairList list2 = new PointPairList();
+            for (int i = 0; i < 36; i++)
+            {
+                x = (double)i + 5;
+                y1 = 1.5 + Math.Sin((double)i * 0.2);
+                y2 = 3.0 * (1.5 + Math.Sin((double)i * 0.2));
+                list1.Add(x, y1);
+                list2.Add(x, y2);
+            }
+
+            // Generate a red curve with diamond
+            // symbols, and "Porsche" in the legend
+            LineItem myCurve = myPane.AddCurve("Porsche",
+                  list1, Color.Red, SymbolType.Diamond);
+
+            // Generate a blue curve with circle
+            // symbols, and "Piper" in the legend
+            LineItem myCurve2 = myPane.AddCurve("Piper",
+                  list2, Color.Blue, SymbolType.Circle);
+
+            // Tell ZedGraph to refigure the
+            // axes since the data have changed
+            zgc.AxisChange();
+        }
+
     }
 }

@@ -237,6 +237,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
+            this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -1526,130 +1527,131 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox33, 19, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBox34, 19, 7);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel1_Layout);
             // 
             // textBox19
             // 
-            resources.ApplyResources(this.textBox19, "textBox19");
             this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox19, "textBox19");
             this.textBox19.ForeColor = System.Drawing.Color.DimGray;
             this.textBox19.Name = "textBox19";
             // 
             // textBox18
             // 
-            resources.ApplyResources(this.textBox18, "textBox18");
             this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox18, "textBox18");
             this.textBox18.ForeColor = System.Drawing.Color.DimGray;
             this.textBox18.Name = "textBox18";
             // 
             // textBox17
             // 
-            resources.ApplyResources(this.textBox17, "textBox17");
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox17, "textBox17");
             this.textBox17.ForeColor = System.Drawing.Color.DimGray;
             this.textBox17.Name = "textBox17";
             // 
             // textBox16
             // 
-            resources.ApplyResources(this.textBox16, "textBox16");
             this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox16, "textBox16");
             this.textBox16.ForeColor = System.Drawing.Color.DimGray;
             this.textBox16.Name = "textBox16";
             // 
             // textBox15
             // 
-            resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.ForeColor = System.Drawing.Color.DimGray;
             this.textBox15.Name = "textBox15";
             // 
             // textBox14
             // 
-            resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.ForeColor = System.Drawing.Color.DimGray;
             this.textBox14.Name = "textBox14";
             // 
             // textBox13
             // 
-            resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.ForeColor = System.Drawing.Color.DimGray;
             this.textBox13.Name = "textBox13";
             // 
             // textBox12
             // 
-            resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.ForeColor = System.Drawing.Color.DimGray;
             this.textBox12.Name = "textBox12";
             // 
             // textBox11
             // 
-            resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.ForeColor = System.Drawing.Color.DimGray;
             this.textBox11.Name = "textBox11";
             // 
             // textBox10
             // 
-            resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.ForeColor = System.Drawing.Color.DimGray;
             this.textBox10.Name = "textBox10";
             // 
             // textBox9
             // 
-            resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.ForeColor = System.Drawing.Color.DimGray;
             this.textBox9.Name = "textBox9";
             // 
             // textBox8
             // 
-            resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.ForeColor = System.Drawing.Color.DimGray;
             this.textBox8.Name = "textBox8";
             // 
             // textBox7
             // 
-            resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.ForeColor = System.Drawing.Color.DimGray;
             this.textBox7.Name = "textBox7";
             // 
             // textBox6
             // 
-            resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.ForeColor = System.Drawing.Color.DimGray;
             this.textBox6.Name = "textBox6";
             // 
             // textBox5
             // 
-            resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.ForeColor = System.Drawing.Color.DimGray;
             this.textBox5.Name = "textBox5";
             // 
             // textBox4
             // 
-            resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.ForeColor = System.Drawing.Color.DimGray;
             this.textBox4.Name = "textBox4";
             // 
             // textBox3
             // 
-            resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.ForeColor = System.Drawing.Color.DimGray;
             this.textBox3.Name = "textBox3";
             // 
             // textBox1
             // 
-            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.ForeColor = System.Drawing.Color.DimGray;
             this.textBox1.Name = "textBox1";
             // 
@@ -2087,10 +2089,23 @@
             resources.ApplyResources(this.label52, "label52");
             this.label52.Name = "label52";
             // 
+            // zedGraphControl1
+            // 
+            resources.ApplyResources(this.zedGraphControl1, "zedGraphControl1");
+            this.zedGraphControl1.Name = "zedGraphControl1";
+            this.zedGraphControl1.ScrollGrace = 0D;
+            this.zedGraphControl1.ScrollMaxX = 0D;
+            this.zedGraphControl1.ScrollMaxY = 0D;
+            this.zedGraphControl1.ScrollMaxY2 = 0D;
+            this.zedGraphControl1.ScrollMinX = 0D;
+            this.zedGraphControl1.ScrollMinY = 0D;
+            this.zedGraphControl1.ScrollMinY2 = 0D;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
@@ -2313,6 +2328,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label52;
+        private ZedGraph.ZedGraphControl zedGraphControl1;
     }
 }
 

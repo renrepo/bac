@@ -16,3 +16,5 @@ C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Res
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.csproj.GenerateResource.Cache
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.dll
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.Web.dll
