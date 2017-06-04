@@ -57,7 +57,7 @@ namespace multithread
             {
                 end += i;
                 list_gauss.Add(end + "\t" + 2 * end);
-                bW_gauss.ReportProgress(100 * i /c.num_gauss);
+                bW_gauss.ReportProgress(100 * i /c.num_gauss, end.ToString());
                 safer.safe_line(path + @"\gauss", end.ToString("000000000"));
                 Thread.Sleep(500);
 
@@ -80,6 +80,7 @@ namespace multithread
         {   //this event is raised, when the ReportProgress-Method is called (in DoWork!)
             progressBar1.Value = e.ProgressPercentage;
             lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
+            tb_gauss.Text = e.UserState as String;
         }
 
 
@@ -263,6 +264,11 @@ namespace multithread
                 tb_fib_startvalue.BackColor = Color.White;
                 btn_fib.Enabled = true;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -185,27 +185,16 @@
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.elementnames = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label50 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
-            this.label44 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
@@ -238,6 +227,22 @@
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.Clear = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -385,6 +390,7 @@
             // H
             // 
             this.H.BackColor = System.Drawing.Color.Moccasin;
+            this.H.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.H, "H");
             this.H.ForeColor = System.Drawing.Color.DimGray;
             this.H.Name = "H";
@@ -640,7 +646,7 @@
             this.As.Name = "As";
             this.elementnames.SetToolTip(this.As, resources.GetString("As.ToolTip"));
             this.As.UseVisualStyleBackColor = false;
-            this.As.MouseDown += new System.Windows.Forms.MouseEventHandler(this.As_MouseUp);
+            this.As.MouseDown += new System.Windows.Forms.MouseEventHandler(this.As_MouseDown);
             // 
             // Se
             // 
@@ -830,7 +836,7 @@
             this.La.Name = "La";
             this.elementnames.SetToolTip(this.La, resources.GetString("La.ToolTip"));
             this.La.UseVisualStyleBackColor = false;
-            this.La.MouseDown += new System.Windows.Forms.MouseEventHandler(this.La_MouseUp);
+            this.La.MouseDown += new System.Windows.Forms.MouseEventHandler(this.La_MouseDown);
             // 
             // Hf
             // 
@@ -995,6 +1001,7 @@
             // Rf
             // 
             this.Rf.BackColor = System.Drawing.Color.LightCoral;
+            this.Rf.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Rf, "Rf");
             this.Rf.ForeColor = System.Drawing.Color.White;
             this.Rf.Name = "Rf";
@@ -1003,6 +1010,7 @@
             // Db
             // 
             this.Db.BackColor = System.Drawing.Color.LightCoral;
+            this.Db.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Db, "Db");
             this.Db.ForeColor = System.Drawing.Color.White;
             this.Db.Name = "Db";
@@ -1011,6 +1019,7 @@
             // Sg
             // 
             this.Sg.BackColor = System.Drawing.Color.LightCoral;
+            this.Sg.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Sg, "Sg");
             this.Sg.ForeColor = System.Drawing.Color.White;
             this.Sg.Name = "Sg";
@@ -1019,6 +1028,7 @@
             // Bh
             // 
             this.Bh.BackColor = System.Drawing.Color.LightCoral;
+            this.Bh.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Bh, "Bh");
             this.Bh.ForeColor = System.Drawing.Color.White;
             this.Bh.Name = "Bh";
@@ -1027,6 +1037,7 @@
             // Hs
             // 
             this.Hs.BackColor = System.Drawing.Color.LightCoral;
+            this.Hs.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Hs, "Hs");
             this.Hs.ForeColor = System.Drawing.Color.White;
             this.Hs.Name = "Hs";
@@ -1035,6 +1046,7 @@
             // Mt
             // 
             this.Mt.BackColor = System.Drawing.Color.LightCoral;
+            this.Mt.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Mt, "Mt");
             this.Mt.ForeColor = System.Drawing.Color.White;
             this.Mt.Name = "Mt";
@@ -1043,6 +1055,7 @@
             // Ds
             // 
             this.Ds.BackColor = System.Drawing.Color.LightCoral;
+            this.Ds.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Ds, "Ds");
             this.Ds.ForeColor = System.Drawing.Color.White;
             this.Ds.Name = "Ds";
@@ -1051,6 +1064,7 @@
             // Rg
             // 
             this.Rg.BackColor = System.Drawing.Color.LightCoral;
+            this.Rg.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Rg, "Rg");
             this.Rg.ForeColor = System.Drawing.Color.White;
             this.Rg.Name = "Rg";
@@ -1059,6 +1073,7 @@
             // Cn
             // 
             this.Cn.BackColor = System.Drawing.Color.LightCoral;
+            this.Cn.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cn, "Cn");
             this.Cn.ForeColor = System.Drawing.Color.White;
             this.Cn.Name = "Cn";
@@ -1067,6 +1082,7 @@
             // Uut
             // 
             this.Uut.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Uut.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uut, "Uut");
             this.Uut.ForeColor = System.Drawing.Color.White;
             this.Uut.Name = "Uut";
@@ -1075,6 +1091,7 @@
             // Fl
             // 
             this.Fl.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Fl.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Fl, "Fl");
             this.Fl.ForeColor = System.Drawing.Color.White;
             this.Fl.Name = "Fl";
@@ -1083,6 +1100,7 @@
             // Uup
             // 
             this.Uup.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Uup.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uup, "Uup");
             this.Uup.ForeColor = System.Drawing.Color.White;
             this.Uup.Name = "Uup";
@@ -1091,6 +1109,7 @@
             // Lv
             // 
             this.Lv.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Lv.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Lv, "Lv");
             this.Lv.ForeColor = System.Drawing.Color.White;
             this.Lv.Name = "Lv";
@@ -1099,6 +1118,7 @@
             // Uus
             // 
             this.Uus.BackColor = System.Drawing.Color.LimeGreen;
+            this.Uus.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uus, "Uus");
             this.Uus.ForeColor = System.Drawing.Color.White;
             this.Uus.Name = "Uus";
@@ -1107,6 +1127,7 @@
             // Uuo
             // 
             this.Uuo.BackColor = System.Drawing.Color.Goldenrod;
+            this.Uuo.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uuo, "Uuo");
             this.Uuo.ForeColor = System.Drawing.Color.White;
             this.Uuo.Name = "Uuo";
@@ -1114,7 +1135,7 @@
             // 
             // Ce
             // 
-            this.Ce.BackColor = System.Drawing.Color.Bisque;
+            this.Ce.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Ce, "Ce");
             this.Ce.ForeColor = System.Drawing.Color.DimGray;
             this.Ce.Name = "Ce";
@@ -1124,7 +1145,7 @@
             // 
             // Pr
             // 
-            this.Pr.BackColor = System.Drawing.Color.Bisque;
+            this.Pr.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Pr, "Pr");
             this.Pr.ForeColor = System.Drawing.Color.DimGray;
             this.Pr.Name = "Pr";
@@ -1134,7 +1155,7 @@
             // 
             // Nd
             // 
-            this.Nd.BackColor = System.Drawing.Color.Bisque;
+            this.Nd.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Nd, "Nd");
             this.Nd.ForeColor = System.Drawing.Color.DimGray;
             this.Nd.Name = "Nd";
@@ -1144,7 +1165,7 @@
             // 
             // Pm
             // 
-            this.Pm.BackColor = System.Drawing.Color.Bisque;
+            this.Pm.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Pm, "Pm");
             this.Pm.ForeColor = System.Drawing.Color.DimGray;
             this.Pm.Name = "Pm";
@@ -1154,7 +1175,7 @@
             // 
             // Sm
             // 
-            this.Sm.BackColor = System.Drawing.Color.Bisque;
+            this.Sm.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Sm, "Sm");
             this.Sm.ForeColor = System.Drawing.Color.DimGray;
             this.Sm.Name = "Sm";
@@ -1164,7 +1185,7 @@
             // 
             // Eu
             // 
-            this.Eu.BackColor = System.Drawing.Color.Bisque;
+            this.Eu.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Eu, "Eu");
             this.Eu.ForeColor = System.Drawing.Color.DimGray;
             this.Eu.Name = "Eu";
@@ -1174,7 +1195,7 @@
             // 
             // Gd
             // 
-            this.Gd.BackColor = System.Drawing.Color.Bisque;
+            this.Gd.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Gd, "Gd");
             this.Gd.ForeColor = System.Drawing.Color.DimGray;
             this.Gd.Name = "Gd";
@@ -1184,7 +1205,7 @@
             // 
             // Tb
             // 
-            this.Tb.BackColor = System.Drawing.Color.Bisque;
+            this.Tb.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Tb, "Tb");
             this.Tb.ForeColor = System.Drawing.Color.DimGray;
             this.Tb.Name = "Tb";
@@ -1194,7 +1215,7 @@
             // 
             // Dy
             // 
-            this.Dy.BackColor = System.Drawing.Color.Bisque;
+            this.Dy.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Dy, "Dy");
             this.Dy.ForeColor = System.Drawing.Color.DimGray;
             this.Dy.Name = "Dy";
@@ -1204,7 +1225,7 @@
             // 
             // Ho
             // 
-            this.Ho.BackColor = System.Drawing.Color.Bisque;
+            this.Ho.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Ho, "Ho");
             this.Ho.ForeColor = System.Drawing.Color.DimGray;
             this.Ho.Name = "Ho";
@@ -1214,7 +1235,7 @@
             // 
             // Er
             // 
-            this.Er.BackColor = System.Drawing.Color.Bisque;
+            this.Er.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Er, "Er");
             this.Er.ForeColor = System.Drawing.Color.DimGray;
             this.Er.Name = "Er";
@@ -1224,7 +1245,7 @@
             // 
             // Tm
             // 
-            this.Tm.BackColor = System.Drawing.Color.Bisque;
+            this.Tm.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Tm, "Tm");
             this.Tm.ForeColor = System.Drawing.Color.DimGray;
             this.Tm.Name = "Tm";
@@ -1234,7 +1255,7 @@
             // 
             // Yb
             // 
-            this.Yb.BackColor = System.Drawing.Color.Bisque;
+            this.Yb.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Yb, "Yb");
             this.Yb.ForeColor = System.Drawing.Color.DimGray;
             this.Yb.Name = "Yb";
@@ -1244,7 +1265,7 @@
             // 
             // Lu
             // 
-            this.Lu.BackColor = System.Drawing.Color.Bisque;
+            this.Lu.BackColor = System.Drawing.Color.Coral;
             resources.ApplyResources(this.Lu, "Lu");
             this.Lu.ForeColor = System.Drawing.Color.DimGray;
             this.Lu.Name = "Lu";
@@ -1255,6 +1276,7 @@
             // Th
             // 
             this.Th.BackColor = System.Drawing.Color.OliveDrab;
+            this.Th.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Th, "Th");
             this.Th.ForeColor = System.Drawing.Color.DimGray;
             this.Th.Name = "Th";
@@ -1265,6 +1287,7 @@
             // Pa
             // 
             this.Pa.BackColor = System.Drawing.Color.OliveDrab;
+            this.Pa.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Pa, "Pa");
             this.Pa.ForeColor = System.Drawing.Color.DimGray;
             this.Pa.Name = "Pa";
@@ -1275,6 +1298,7 @@
             // U
             // 
             this.U.BackColor = System.Drawing.Color.OliveDrab;
+            this.U.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.U, "U");
             this.U.ForeColor = System.Drawing.Color.DimGray;
             this.U.Name = "U";
@@ -1285,6 +1309,7 @@
             // Np
             // 
             this.Np.BackColor = System.Drawing.Color.OliveDrab;
+            this.Np.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Np, "Np");
             this.Np.ForeColor = System.Drawing.Color.White;
             this.Np.Name = "Np";
@@ -1293,6 +1318,7 @@
             // Pu
             // 
             this.Pu.BackColor = System.Drawing.Color.OliveDrab;
+            this.Pu.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Pu, "Pu");
             this.Pu.ForeColor = System.Drawing.Color.White;
             this.Pu.Name = "Pu";
@@ -1301,6 +1327,7 @@
             // Am
             // 
             this.Am.BackColor = System.Drawing.Color.OliveDrab;
+            this.Am.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Am, "Am");
             this.Am.ForeColor = System.Drawing.Color.White;
             this.Am.Name = "Am";
@@ -1309,6 +1336,7 @@
             // Cm
             // 
             this.Cm.BackColor = System.Drawing.Color.OliveDrab;
+            this.Cm.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cm, "Cm");
             this.Cm.ForeColor = System.Drawing.Color.White;
             this.Cm.Name = "Cm";
@@ -1317,6 +1345,7 @@
             // Bk
             // 
             this.Bk.BackColor = System.Drawing.Color.OliveDrab;
+            this.Bk.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Bk, "Bk");
             this.Bk.ForeColor = System.Drawing.Color.White;
             this.Bk.Name = "Bk";
@@ -1325,6 +1354,7 @@
             // Cf
             // 
             this.Cf.BackColor = System.Drawing.Color.OliveDrab;
+            this.Cf.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cf, "Cf");
             this.Cf.ForeColor = System.Drawing.Color.White;
             this.Cf.Name = "Cf";
@@ -1333,6 +1363,7 @@
             // Es
             // 
             this.Es.BackColor = System.Drawing.Color.OliveDrab;
+            this.Es.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Es, "Es");
             this.Es.ForeColor = System.Drawing.Color.White;
             this.Es.Name = "Es";
@@ -1341,6 +1372,7 @@
             // Fm
             // 
             this.Fm.BackColor = System.Drawing.Color.OliveDrab;
+            this.Fm.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Fm, "Fm");
             this.Fm.ForeColor = System.Drawing.Color.White;
             this.Fm.Name = "Fm";
@@ -1349,6 +1381,7 @@
             // Md
             // 
             this.Md.BackColor = System.Drawing.Color.OliveDrab;
+            this.Md.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Md, "Md");
             this.Md.ForeColor = System.Drawing.Color.White;
             this.Md.Name = "Md";
@@ -1357,6 +1390,7 @@
             // No
             // 
             this.No.BackColor = System.Drawing.Color.OliveDrab;
+            this.No.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.No, "No");
             this.No.ForeColor = System.Drawing.Color.White;
             this.No.Name = "No";
@@ -1365,6 +1399,7 @@
             // Lr
             // 
             this.Lr.BackColor = System.Drawing.Color.OliveDrab;
+            this.Lr.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Lr, "Lr");
             this.Lr.ForeColor = System.Drawing.Color.White;
             this.Lr.Name = "Lr";
@@ -1516,7 +1551,6 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox23, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.textBox24, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBox25, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.textBox26, 3, 9);
             this.tableLayoutPanel1.Controls.Add(this.textBox27, 3, 10);
             this.tableLayoutPanel1.Controls.Add(this.textBox20, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBox28, 19, 1);
@@ -1526,6 +1560,8 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox32, 19, 5);
             this.tableLayoutPanel1.Controls.Add(this.textBox33, 19, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBox34, 19, 7);
+            this.tableLayoutPanel1.Controls.Add(this.textBox26, 3, 9);
+            this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel1_Layout);
             // 
@@ -1644,6 +1680,7 @@
             // textBox3
             // 
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.textBox3, "textBox3");
             this.textBox3.ForeColor = System.Drawing.Color.DimGray;
             this.textBox3.Name = "textBox3";
@@ -1775,33 +1812,13 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.tableLayoutPanel2.Controls.Add(this.label50, 1, 25);
-            this.tableLayoutPanel2.Controls.Add(this.label49, 0, 25);
-            this.tableLayoutPanel2.Controls.Add(this.label48, 1, 24);
-            this.tableLayoutPanel2.Controls.Add(this.label47, 0, 24);
-            this.tableLayoutPanel2.Controls.Add(this.label46, 1, 23);
-            this.tableLayoutPanel2.Controls.Add(this.label45, 0, 23);
-            this.tableLayoutPanel2.Controls.Add(this.label44, 1, 22);
-            this.tableLayoutPanel2.Controls.Add(this.label43, 0, 22);
-            this.tableLayoutPanel2.Controls.Add(this.label42, 1, 21);
-            this.tableLayoutPanel2.Controls.Add(this.label41, 0, 21);
-            this.tableLayoutPanel2.Controls.Add(this.label40, 1, 20);
-            this.tableLayoutPanel2.Controls.Add(this.label39, 0, 20);
-            this.tableLayoutPanel2.Controls.Add(this.label38, 1, 19);
-            this.tableLayoutPanel2.Controls.Add(this.label37, 0, 19);
-            this.tableLayoutPanel2.Controls.Add(this.label36, 1, 18);
-            this.tableLayoutPanel2.Controls.Add(this.label35, 0, 18);
-            this.tableLayoutPanel2.Controls.Add(this.label34, 1, 17);
-            this.tableLayoutPanel2.Controls.Add(this.label33, 0, 17);
-            this.tableLayoutPanel2.Controls.Add(this.label32, 1, 16);
-            this.tableLayoutPanel2.Controls.Add(this.label31, 0, 16);
-            this.tableLayoutPanel2.Controls.Add(this.label30, 1, 15);
-            this.tableLayoutPanel2.Controls.Add(this.label29, 0, 15);
-            this.tableLayoutPanel2.Controls.Add(this.label28, 1, 14);
-            this.tableLayoutPanel2.Controls.Add(this.label27, 0, 14);
             this.tableLayoutPanel2.Controls.Add(this.label26, 1, 13);
             this.tableLayoutPanel2.Controls.Add(this.label25, 0, 13);
             this.tableLayoutPanel2.Controls.Add(this.label24, 1, 12);
+            this.tableLayoutPanel2.Controls.Add(this.label51, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label56, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label52, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label55, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label23, 0, 12);
             this.tableLayoutPanel2.Controls.Add(this.label22, 1, 11);
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 11);
@@ -1825,118 +1842,99 @@
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label2, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label51, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label52, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label28, 3, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label30, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label32, 3, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label34, 3, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label36, 3, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label38, 3, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label40, 3, 8);
+            this.tableLayoutPanel2.Controls.Add(this.label42, 3, 9);
+            this.tableLayoutPanel2.Controls.Add(this.label44, 3, 10);
+            this.tableLayoutPanel2.Controls.Add(this.label46, 3, 11);
+            this.tableLayoutPanel2.Controls.Add(this.label48, 3, 12);
+            this.tableLayoutPanel2.Controls.Add(this.label50, 3, 13);
+            this.tableLayoutPanel2.Controls.Add(this.label27, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label29, 2, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label31, 2, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label33, 2, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label35, 2, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label37, 2, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label39, 2, 8);
+            this.tableLayoutPanel2.Controls.Add(this.label41, 2, 9);
+            this.tableLayoutPanel2.Controls.Add(this.label43, 2, 10);
+            this.tableLayoutPanel2.Controls.Add(this.label45, 2, 11);
+            this.tableLayoutPanel2.Controls.Add(this.label47, 2, 12);
+            this.tableLayoutPanel2.Controls.Add(this.label49, 2, 13);
+            this.tableLayoutPanel2.Controls.Add(this.label53, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label54, 3, 1);
+            this.tableLayoutPanel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // label50
-            // 
-            resources.ApplyResources(this.label50, "label50");
-            this.label50.Name = "label50";
             // 
             // label49
             // 
             resources.ApplyResources(this.label49, "label49");
+            this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label49.Name = "label49";
-            // 
-            // label48
-            // 
-            resources.ApplyResources(this.label48, "label48");
-            this.label48.Name = "label48";
             // 
             // label47
             // 
             resources.ApplyResources(this.label47, "label47");
+            this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label47.Name = "label47";
-            // 
-            // label46
-            // 
-            resources.ApplyResources(this.label46, "label46");
-            this.label46.Name = "label46";
             // 
             // label45
             // 
             resources.ApplyResources(this.label45, "label45");
+            this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label45.Name = "label45";
-            // 
-            // label44
-            // 
-            resources.ApplyResources(this.label44, "label44");
-            this.label44.Name = "label44";
             // 
             // label43
             // 
             resources.ApplyResources(this.label43, "label43");
+            this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label43.Name = "label43";
-            // 
-            // label42
-            // 
-            resources.ApplyResources(this.label42, "label42");
-            this.label42.Name = "label42";
             // 
             // label41
             // 
             resources.ApplyResources(this.label41, "label41");
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label41.Name = "label41";
-            // 
-            // label40
-            // 
-            resources.ApplyResources(this.label40, "label40");
-            this.label40.Name = "label40";
             // 
             // label39
             // 
             resources.ApplyResources(this.label39, "label39");
+            this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label39.Name = "label39";
-            // 
-            // label38
-            // 
-            resources.ApplyResources(this.label38, "label38");
-            this.label38.Name = "label38";
             // 
             // label37
             // 
             resources.ApplyResources(this.label37, "label37");
+            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label37.Name = "label37";
-            // 
-            // label36
-            // 
-            resources.ApplyResources(this.label36, "label36");
-            this.label36.Name = "label36";
             // 
             // label35
             // 
             resources.ApplyResources(this.label35, "label35");
+            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label35.Name = "label35";
-            // 
-            // label34
-            // 
-            resources.ApplyResources(this.label34, "label34");
-            this.label34.Name = "label34";
             // 
             // label33
             // 
             resources.ApplyResources(this.label33, "label33");
+            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label33.Name = "label33";
-            // 
-            // label32
-            // 
-            resources.ApplyResources(this.label32, "label32");
-            this.label32.Name = "label32";
             // 
             // label31
             // 
             resources.ApplyResources(this.label31, "label31");
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label31.Name = "label31";
-            // 
-            // label30
-            // 
-            resources.ApplyResources(this.label30, "label30");
-            this.label30.Name = "label30";
             // 
             // label29
             // 
             resources.ApplyResources(this.label29, "label29");
+            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label29.Name = "label29";
             // 
             // label28
@@ -1947,6 +1945,7 @@
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
+            this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label27.Name = "label27";
             // 
             // label26
@@ -1957,6 +1956,7 @@
             // label25
             // 
             resources.ApplyResources(this.label25, "label25");
+            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label25.Name = "label25";
             // 
             // label24
@@ -1967,6 +1967,7 @@
             // label23
             // 
             resources.ApplyResources(this.label23, "label23");
+            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label23.Name = "label23";
             // 
             // label22
@@ -1977,6 +1978,7 @@
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label21.Name = "label21";
             // 
             // label20
@@ -1987,6 +1989,7 @@
             // label19
             // 
             resources.ApplyResources(this.label19, "label19");
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label19.Name = "label19";
             // 
             // label18
@@ -1997,6 +2000,7 @@
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label17.Name = "label17";
             // 
             // label16
@@ -2007,6 +2011,7 @@
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label15.Name = "label15";
             // 
             // label14
@@ -2017,6 +2022,7 @@
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label13.Name = "label13";
             // 
             // label12
@@ -2027,6 +2033,7 @@
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label11.Name = "label11";
             // 
             // label10
@@ -2037,6 +2044,7 @@
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label9.Name = "label9";
             // 
             // label8
@@ -2047,6 +2055,7 @@
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label7.Name = "label7";
             // 
             // label6
@@ -2057,6 +2066,7 @@
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label5.Name = "label5";
             // 
             // label4
@@ -2067,6 +2077,7 @@
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label3.Name = "label3";
             // 
             // label2
@@ -2077,6 +2088,7 @@
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Name = "label1";
             // 
             // label51
@@ -2091,6 +2103,7 @@
             // 
             // zedGraphControl1
             // 
+            this.zedGraphControl1.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.zedGraphControl1, "zedGraphControl1");
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
@@ -2101,6 +2114,88 @@
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
             // 
+            // label30
+            // 
+            resources.ApplyResources(this.label30, "label30");
+            this.label30.Name = "label30";
+            // 
+            // label32
+            // 
+            resources.ApplyResources(this.label32, "label32");
+            this.label32.Name = "label32";
+            // 
+            // label34
+            // 
+            resources.ApplyResources(this.label34, "label34");
+            this.label34.Name = "label34";
+            // 
+            // label36
+            // 
+            resources.ApplyResources(this.label36, "label36");
+            this.label36.Name = "label36";
+            // 
+            // label38
+            // 
+            resources.ApplyResources(this.label38, "label38");
+            this.label38.Name = "label38";
+            // 
+            // label40
+            // 
+            resources.ApplyResources(this.label40, "label40");
+            this.label40.Name = "label40";
+            // 
+            // label42
+            // 
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.Name = "label42";
+            // 
+            // label44
+            // 
+            resources.ApplyResources(this.label44, "label44");
+            this.label44.Name = "label44";
+            // 
+            // label46
+            // 
+            resources.ApplyResources(this.label46, "label46");
+            this.label46.Name = "label46";
+            // 
+            // label48
+            // 
+            resources.ApplyResources(this.label48, "label48");
+            this.label48.Name = "label48";
+            // 
+            // label50
+            // 
+            resources.ApplyResources(this.label50, "label50");
+            this.label50.Name = "label50";
+            // 
+            // label53
+            // 
+            resources.ApplyResources(this.label53, "label53");
+            this.label53.ForeColor = System.Drawing.Color.Black;
+            this.label53.Name = "label53";
+            // 
+            // label54
+            // 
+            resources.ApplyResources(this.label54, "label54");
+            this.label54.Name = "label54";
+            // 
+            // label55
+            // 
+            resources.ApplyResources(this.label55, "label55");
+            this.label55.Name = "label55";
+            // 
+            // label56
+            // 
+            resources.ApplyResources(this.label56, "label56");
+            this.label56.Name = "label56";
+            // 
+            // Clear
+            // 
+            resources.ApplyResources(this.Clear, "Clear");
+            this.Clear.Name = "Clear";
+            this.Clear.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
@@ -2108,6 +2203,8 @@
             this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.Clear);
+            this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -2276,27 +2373,16 @@
         private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.TextBox textBox34;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label48;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label27;
@@ -2329,6 +2415,22 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label52;
         private ZedGraph.ZedGraphControl zedGraphControl1;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Button Clear;
     }
 }
 

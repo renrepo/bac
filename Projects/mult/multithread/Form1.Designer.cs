@@ -272,6 +272,7 @@
             this.Controls.Add(this.btn_fib);
             this.Name = "Form1";
             this.Text = "Multithreads";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
