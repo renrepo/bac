@@ -1294,12 +1294,89 @@ namespace PE
             if (e.Button == MouseButtons.Left)
             {
                 colorchanger((Button)sender);
-                myPane.Title.Text = "Iwas";
+                var y3 = myPane.AddYAxis("");
+                var y4 = myPane.AddYAxis("");
+                var y5 = myPane.AddYAxis("");
+                var y6 = myPane.AddYAxis("");
+                var y7 = myPane.AddYAxis("");
+                var y8 = myPane.AddYAxis("");
+
+                //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
+
+                myPane.YAxisList[1].Scale.LabelGap = 0f;
+                myPane.YAxisList[1].Color = Color.Orange;
+                myPane.YAxisList[1].AxisGap = 0f;
+                myPane.YAxisList[1].Scale.IsVisible = false;
+                myPane.YAxisList[1].MajorTic.IsAllTics = false;
+                myPane.YAxisList[1].MinorTic.IsAllTics = false;
+                myPane.YAxisList[1].Cross = 10;
+                myPane.YAxisList[2].Scale.LabelGap = 0f;
+                myPane.YAxisList[2].Color = Color.Red;
+                myPane.YAxisList[2].AxisGap = 0f;
+                myPane.YAxisList[2].Scale.IsVisible = false;
+                myPane.YAxisList[2].MajorTic.IsAllTics = false;
+                myPane.YAxisList[2].MinorTic.IsAllTics = false;
+                myPane.YAxisList[2].Cross = 15;
+                myPane.YAxisList[3].Scale.LabelGap = 0f;
+                myPane.YAxisList[3].AxisGap = 0f;
+                myPane.YAxisList[3].Color = Color.Blue;
+                myPane.YAxisList[3].Scale.IsVisible = false;
+                myPane.YAxisList[3].MajorTic.IsAllTics = false;
+                myPane.YAxisList[3].MinorTic.IsAllTics = false;
+                myPane.YAxisList[3].Cross = 20;
+                myPane.YAxisList[4].Scale.LabelGap = 0f;
+                myPane.YAxisList[4].AxisGap = 0f;
+                myPane.YAxisList[4].Color = Color.Black;
+                myPane.YAxisList[4].Scale.IsVisible = false;
+                myPane.YAxisList[4].MajorTic.IsAllTics = false;
+                myPane.YAxisList[4].MinorTic.IsAllTics = false;
+                myPane.YAxisList[4].Cross = 37;
+                myPane.YAxisList[5].Scale.LabelGap = 0f;
+                myPane.YAxisList[5].AxisGap = 0f;
+                myPane.YAxisList[5].Color = Color.Green;
+                myPane.YAxisList[5].Scale.IsVisible = false;
+                myPane.YAxisList[5].MajorTic.IsAllTics = false;
+                myPane.YAxisList[5].MinorTic.IsAllTics = false;
+                myPane.YAxisList[5].Cross = 3.6;
+                myPane.YAxisList[6].Scale.LabelGap = 0f;
+                myPane.YAxisList[6].AxisGap = 0f;
+                myPane.YAxisList[6].Color = Color.Yellow;
+                myPane.YAxisList[6].Scale.IsVisible = false;
+                myPane.YAxisList[6].MajorTic.IsAllTics = false;
+                myPane.YAxisList[6].MinorTic.IsAllTics = false;
+                myPane.YAxisList[6].Cross = 3.2;
+
+               
+                
+
+
+                TextObj label = new TextObj("Sm L1", 10, 0.05);
+                label.FontSpec.Size = 10f;
+                label.FontSpec.FontColor = Color.DimGray;
+                label.FontSpec.Border.IsVisible = false;
+                //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
+                //label.FontSpec.Fill.Color = Color.Gray;
+                label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+                label.Location.AlignH = AlignH.Left;
+                myPane.GraphObjList.Add(label);
+                //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
+                //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
+                //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
+
+                //zedGraphControl1.Refresh();
                 zedGraphControl1.Refresh();
             }
             if (e.Button == MouseButtons.Right)
             {
                 labelchanger(sender);
+
+                myPane.YAxisList[1].IsVisible = false;
+                myPane.YAxisList[2].IsVisible = false;
+                myPane.YAxisList[3].IsVisible = false;
+                myPane.YAxisList[4].IsVisible = false;
+                myPane.YAxisList[5].IsVisible = false;
+
+                zedGraphControl1.Refresh();
             }
         }
 
@@ -1354,74 +1431,7 @@ namespace PE
             LineItem myCurve2 = myPane.AddCurve("Piper",
                   list2, Color.Blue, SymbolType.Circle);
 
-            var y3 = myPane.AddYAxis("");
-            var y4 = myPane.AddYAxis("");
-            var y5 = myPane.AddYAxis("");
-            var y6 = myPane.AddYAxis("");
-            var y7 = myPane.AddYAxis("");
-            var y8 = myPane.AddYAxis("");
-
-            //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
-
-            myPane.YAxisList[1].Scale.LabelGap = 0f;
-            myPane.YAxisList[1].Color = Color.Orange;
-            myPane.YAxisList[1].AxisGap = 0f;
-            myPane.YAxisList[1].Scale.IsVisible = false;
-            myPane.YAxisList[1].MajorTic.IsAllTics = false;
-            myPane.YAxisList[1].MinorTic.IsAllTics = false;
-            myPane.YAxisList[1].Cross = 10;
-            myPane.YAxisList[2].Scale.LabelGap = 0f;
-            myPane.YAxisList[2].Color = Color.Red;
-            myPane.YAxisList[2].AxisGap = 0f;
-            myPane.YAxisList[2].Scale.IsVisible = false;
-            myPane.YAxisList[2].MajorTic.IsAllTics = false;
-            myPane.YAxisList[2].MinorTic.IsAllTics = false;
-            myPane.YAxisList[2].Cross = 15;
-            myPane.YAxisList[3].Scale.LabelGap = 0f;
-            myPane.YAxisList[3].AxisGap = 0f;
-            myPane.YAxisList[3].Color = Color.Blue;
-            myPane.YAxisList[3].Scale.IsVisible = false;
-            myPane.YAxisList[3].MajorTic.IsAllTics = false;
-            myPane.YAxisList[3].MinorTic.IsAllTics = false;
-            myPane.YAxisList[3].Cross = 20;
-            myPane.YAxisList[4].Scale.LabelGap = 0f;
-            myPane.YAxisList[4].AxisGap = 0f;
-            myPane.YAxisList[4].Color = Color.Black;
-            myPane.YAxisList[4].Scale.IsVisible = false;
-            myPane.YAxisList[4].MajorTic.IsAllTics = false;
-            myPane.YAxisList[4].MinorTic.IsAllTics = false;
-            myPane.YAxisList[4].Cross = 37;
-            myPane.YAxisList[5].Scale.LabelGap = 0f;
-            myPane.YAxisList[5].AxisGap = 0f;
-            myPane.YAxisList[5].Color = Color.Green;
-            myPane.YAxisList[5].Scale.IsVisible = false;
-            myPane.YAxisList[5].MajorTic.IsAllTics = false;
-            myPane.YAxisList[5].MinorTic.IsAllTics = false;
-            myPane.YAxisList[5].Cross = 3.6;
-            myPane.YAxisList[6].Scale.LabelGap = 0f;
-            myPane.YAxisList[6].AxisGap = 0f;
-            myPane.YAxisList[6].Color = Color.Yellow;
-            myPane.YAxisList[6].Scale.IsVisible = false;
-            myPane.YAxisList[6].MajorTic.IsAllTics = false;
-            myPane.YAxisList[6].MinorTic.IsAllTics = false;
-            myPane.YAxisList[6].Cross = 3.2;
-
-
-
-            TextObj label = new TextObj("Sm L1", 10, 0.05);
-            label.FontSpec.Size = 10f;
-            label.FontSpec.FontColor = Color.DimGray;
-            label.FontSpec.Border.IsVisible = false;
-            //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
-            //label.FontSpec.Fill.Color = Color.Gray;
-            label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-            label.Location.AlignH = AlignH.Left;
-            myPane.GraphObjList.Add(label);
-            //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
-            //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
-            //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
-
-            //zedGraphControl1.Refresh();
+           
 
             // Tell ZedGraph to refigure the
             // axes since the data have changed
