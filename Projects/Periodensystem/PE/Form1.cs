@@ -28,6 +28,11 @@ namespace PE
         string pressed = "black";
 
         GraphPane myPane;
+        TextObj label = new TextObj("Sm L1", 10, 0.05);
+
+
+        List<string> list_gauss = new List<string>();
+        public int num_gauss = 0;
 
 
         public Form1()
@@ -55,7 +60,69 @@ namespace PE
             }
 
 
-                        // Setup the graph
+
+            var y3 = myPane.AddYAxis("");
+            var y4 = myPane.AddYAxis("");
+            var y5 = myPane.AddYAxis("");
+            var y6 = myPane.AddYAxis("");
+            var y7 = myPane.AddYAxis("");
+
+            //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
+
+            myPane.YAxisList[1].Scale.LabelGap = 0f;
+            myPane.YAxisList[1].Color = Color.Orange;
+            myPane.YAxisList[1].AxisGap = 0f;
+            myPane.YAxisList[1].Scale.IsVisible = false;
+            myPane.YAxisList[1].MajorTic.IsAllTics = false;
+            myPane.YAxisList[1].MinorTic.IsAllTics = false;
+            myPane.YAxisList[1].Cross = 10;
+            myPane.YAxisList[2].Scale.LabelGap = 0f;
+            myPane.YAxisList[2].Color = Color.Red;
+            myPane.YAxisList[2].AxisGap = 0f;
+            myPane.YAxisList[2].Scale.IsVisible = false;
+            myPane.YAxisList[2].MajorTic.IsAllTics = false;
+            myPane.YAxisList[2].MinorTic.IsAllTics = false;
+            myPane.YAxisList[2].Cross = 15;
+            myPane.YAxisList[3].Scale.LabelGap = 0f;
+            myPane.YAxisList[3].Color = Color.Blue;
+            myPane.YAxisList[3].AxisGap = 0f;
+            myPane.YAxisList[3].Scale.IsVisible = false;
+            myPane.YAxisList[3].MajorTic.IsAllTics = false;
+            myPane.YAxisList[3].MinorTic.IsAllTics = false;
+            myPane.YAxisList[3].Cross = 20;
+            myPane.YAxisList[4].Scale.LabelGap = 0f;
+            myPane.YAxisList[4].Color = Color.Black;
+            myPane.YAxisList[4].AxisGap = 0f;
+            myPane.YAxisList[4].Scale.IsVisible = false;
+            myPane.YAxisList[4].MajorTic.IsAllTics = false;
+            myPane.YAxisList[4].MinorTic.IsAllTics = false;
+            myPane.YAxisList[4].Cross = 37;
+            myPane.YAxisList[5].Scale.LabelGap = 0f;
+            myPane.YAxisList[5].Color = Color.Green;
+            myPane.YAxisList[5].AxisGap = 0f;
+            myPane.YAxisList[5].Scale.IsVisible = false;
+            myPane.YAxisList[5].MajorTic.IsAllTics = false;
+            myPane.YAxisList[5].MinorTic.IsAllTics = false;
+            myPane.YAxisList[5].Cross = 3.6;
+
+
+
+
+
+            label.FontSpec.Size = 10f;
+            label.FontSpec.FontColor = Color.DimGray;
+            label.FontSpec.Border.IsVisible = false;
+            //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
+            //label.FontSpec.Fill.Color = Color.Gray;
+            label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+            label.Location.AlignH = AlignH.Left;
+            //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
+            //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
+            //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
+
+            //zedGraphControl1.Refresh();
+
+            // Setup the graph
             CreateGraph(zedGraphControl1);
             // Size the control to fill the form with a margin
             //https://www.codeproject.com/Articles/5431/A-flexible-charting-library-for-NET
@@ -96,6 +163,15 @@ namespace PE
                 btn.FlatAppearance.BorderColor = Color.FromName(pressed);
                 btn.FlatAppearance.BorderSize = bordersize_activated;
 
+                myPane.YAxisList[1].IsVisible = true;
+                myPane.YAxisList[2].IsVisible = true;
+                myPane.YAxisList[3].IsVisible = true;
+                myPane.YAxisList[4].IsVisible = true;
+                myPane.YAxisList[5].IsVisible = true;
+                myPane.GraphObjList.Add(label);
+
+                zedGraphControl1.Refresh();
+
             }
 
             else
@@ -104,6 +180,15 @@ namespace PE
                 btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
                 btn.FlatAppearance.BorderSize = bordersize_deactivated;
                 btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
+
+                myPane.YAxisList[1].IsVisible = false;
+                myPane.YAxisList[2].IsVisible = false;
+                myPane.YAxisList[3].IsVisible = false;
+                myPane.YAxisList[4].IsVisible = false;
+                myPane.YAxisList[5].IsVisible = false;
+                myPane.GraphObjList.Remove(label);
+
+                zedGraphControl1.Refresh();
             }
         }
 
@@ -1289,94 +1374,18 @@ namespace PE
             }
         }
 
+
+
         private void U_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
                 colorchanger((Button)sender);
-                var y3 = myPane.AddYAxis("");
-                var y4 = myPane.AddYAxis("");
-                var y5 = myPane.AddYAxis("");
-                var y6 = myPane.AddYAxis("");
-                var y7 = myPane.AddYAxis("");
-                var y8 = myPane.AddYAxis("");
 
-                //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
-
-                myPane.YAxisList[1].Scale.LabelGap = 0f;
-                myPane.YAxisList[1].Color = Color.Orange;
-                myPane.YAxisList[1].AxisGap = 0f;
-                myPane.YAxisList[1].Scale.IsVisible = false;
-                myPane.YAxisList[1].MajorTic.IsAllTics = false;
-                myPane.YAxisList[1].MinorTic.IsAllTics = false;
-                myPane.YAxisList[1].Cross = 10;
-                myPane.YAxisList[2].Scale.LabelGap = 0f;
-                myPane.YAxisList[2].Color = Color.Red;
-                myPane.YAxisList[2].AxisGap = 0f;
-                myPane.YAxisList[2].Scale.IsVisible = false;
-                myPane.YAxisList[2].MajorTic.IsAllTics = false;
-                myPane.YAxisList[2].MinorTic.IsAllTics = false;
-                myPane.YAxisList[2].Cross = 15;
-                myPane.YAxisList[3].Scale.LabelGap = 0f;
-                myPane.YAxisList[3].AxisGap = 0f;
-                myPane.YAxisList[3].Color = Color.Blue;
-                myPane.YAxisList[3].Scale.IsVisible = false;
-                myPane.YAxisList[3].MajorTic.IsAllTics = false;
-                myPane.YAxisList[3].MinorTic.IsAllTics = false;
-                myPane.YAxisList[3].Cross = 20;
-                myPane.YAxisList[4].Scale.LabelGap = 0f;
-                myPane.YAxisList[4].AxisGap = 0f;
-                myPane.YAxisList[4].Color = Color.Black;
-                myPane.YAxisList[4].Scale.IsVisible = false;
-                myPane.YAxisList[4].MajorTic.IsAllTics = false;
-                myPane.YAxisList[4].MinorTic.IsAllTics = false;
-                myPane.YAxisList[4].Cross = 37;
-                myPane.YAxisList[5].Scale.LabelGap = 0f;
-                myPane.YAxisList[5].AxisGap = 0f;
-                myPane.YAxisList[5].Color = Color.Green;
-                myPane.YAxisList[5].Scale.IsVisible = false;
-                myPane.YAxisList[5].MajorTic.IsAllTics = false;
-                myPane.YAxisList[5].MinorTic.IsAllTics = false;
-                myPane.YAxisList[5].Cross = 3.6;
-                myPane.YAxisList[6].Scale.LabelGap = 0f;
-                myPane.YAxisList[6].AxisGap = 0f;
-                myPane.YAxisList[6].Color = Color.Yellow;
-                myPane.YAxisList[6].Scale.IsVisible = false;
-                myPane.YAxisList[6].MajorTic.IsAllTics = false;
-                myPane.YAxisList[6].MinorTic.IsAllTics = false;
-                myPane.YAxisList[6].Cross = 3.2;
-
-               
-                
-
-
-                TextObj label = new TextObj("Sm L1", 10, 0.05);
-                label.FontSpec.Size = 10f;
-                label.FontSpec.FontColor = Color.DimGray;
-                label.FontSpec.Border.IsVisible = false;
-                //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
-                //label.FontSpec.Fill.Color = Color.Gray;
-                label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                label.Location.AlignH = AlignH.Left;
-                myPane.GraphObjList.Add(label);
-                //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
-                //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
-                //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
-
-                //zedGraphControl1.Refresh();
-                zedGraphControl1.Refresh();
             }
             if (e.Button == MouseButtons.Right)
             {
                 labelchanger(sender);
-
-                myPane.YAxisList[1].IsVisible = false;
-                myPane.YAxisList[2].IsVisible = false;
-                myPane.YAxisList[3].IsVisible = false;
-                myPane.YAxisList[4].IsVisible = false;
-                myPane.YAxisList[5].IsVisible = false;
-
-                zedGraphControl1.Refresh();
             }
         }
 
@@ -1431,11 +1440,159 @@ namespace PE
             LineItem myCurve2 = myPane.AddCurve("Piper",
                   list2, Color.Blue, SymbolType.Circle);
 
-           
+
 
             // Tell ZedGraph to refigure the
             // axes since the data have changed
             zgc.AxisChange();
+        }
+
+
+
+
+
+        private void btn_gauss_Click(object sender, EventArgs e)
+        {
+            if ((!bW_gauss.IsBusy))
+            {
+                bW_gauss.RunWorkerAsync(); //run bW if it is not still running
+                tb_gauss_startvalue.Enabled = false;
+            }
+        }
+
+        private void btn_gauss_can_Click(object sender, EventArgs e)
+        {
+            if (bW_gauss.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            {
+                bW_gauss.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+                btn_clear.Enabled = true;
+            }
+        }
+
+
+        private void bW_gauss_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int i;
+            double end = 0;
+
+
+            for (i = 0; i <= num_gauss; i++)
+            {
+                end += i;
+                list_gauss.Add(end + "\t" + 2 * end);
+                bW_gauss.ReportProgress(100 * i / num_gauss, end.ToString());
+                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+                Thread.Sleep(500);
+
+
+                if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+                {
+                    e.Cancel = true;
+                    bW_gauss.ReportProgress(0);
+                    break; //warum? ist wichtig!
+                }
+
+            }
+            //safer.safe(path,list_gauss);
+            e.Result = end; //stores the results of what has been done in bW
+        }
+
+
+
+        private void bW_gauss_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {   //this event is raised, when the ReportProgress-Method is called (in DoWork!)
+            progressBar1.Value = e.ProgressPercentage;
+            lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
+            tb_gauss.Text = e.UserState as String;
+
+
+
+
+            // get a reference to the GraphPane
+            GraphPane myPane = zedGraphControl1.GraphPane;
+
+
+            //myPane.Border.IsVisible = false;
+
+            // Set the Titles
+            myPane.Title.Text = "XPS spectra";
+            myPane.Title.FontSpec.Size = 14;
+            myPane.XAxis.Title.Text = "binding energy [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 11;
+            myPane.YAxis.Title.Text = "counts";
+            myPane.YAxis.Title.FontSpec.Size = 11;
+
+            // Make up some data arrays based on the Sine function
+            double x, y1;
+            PointPairList list1 = new PointPairList();
+            x = e.ProgressPercentage;
+            y1 = Convert.ToDouble(e.UserState);
+            list1.Add(x, y1);
+            
+
+            // Generate a red curve with diamond
+            // symbols, and "Porsche" in the legend
+            LineItem myCurve = myPane.AddCurve("",
+                  list1, Color.Red, SymbolType.Diamond);
+
+            zedGraphControl1.Invalidate();
+
+            // Tell ZedGraph to refigure the
+            // axes since the data have changed
+            zedGraphControl1.AxisChange();
+
+
+
+        }
+
+
+        private void bW_gauss_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
+            if (e.Cancelled)
+            {
+                tb_gauss.Text = "Cancelled!";
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                tb_gauss.Text = e.Error.Message;
+            }
+
+            else
+            {
+                tb_gauss.Text = e.Result.ToString();
+            }
+        }
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+
+                if (bW_gauss.IsBusy)
+                {
+                    btn_clear.Enabled = false;
+                }
+
+                else
+                {
+                    tb_gauss.Text = "";
+                    tb_gauss_startvalue.Text = "";
+                    lb_perc_gauss.Text = "";
+                    tb_gauss_startvalue.BackColor = Color.Red;
+                    tb_gauss_startvalue.Enabled = true;
+                    progressBar1.Value = 0;
+                }
+        }
+
+        private void tb_gauss_startvalue_TextChanged(object sender, EventArgs e)
+        {
+            string eingabe = tb_gauss_startvalue.Text;
+            if (int.TryParse(eingabe, out num_gauss))
+            {
+                btn_gauss.Enabled = true;
+                tb_gauss_startvalue.BackColor = Color.White;
+                btn_gauss.Enabled = true;
+            }
         }
     }
 }
