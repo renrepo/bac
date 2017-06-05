@@ -28,7 +28,7 @@ namespace PE
         string pressed = "black";
 
         GraphPane myPane;
-        TextObj label = new TextObj("Sm L1", 10, 0.05);
+        TextObj label = new TextObj();
 
 
         List<string> list_gauss = new List<string>();
@@ -65,7 +65,6 @@ namespace PE
             var y4 = myPane.AddYAxis("");
             var y5 = myPane.AddYAxis("");
             var y6 = myPane.AddYAxis("");
-            var y7 = myPane.AddYAxis("");
 
             //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
 
@@ -97,25 +96,19 @@ namespace PE
             myPane.YAxisList[4].MajorTic.IsAllTics = false;
             myPane.YAxisList[4].MinorTic.IsAllTics = false;
             myPane.YAxisList[4].Cross = 37;
-            myPane.YAxisList[5].Scale.LabelGap = 0f;
-            myPane.YAxisList[5].Color = Color.Green;
-            myPane.YAxisList[5].AxisGap = 0f;
-            myPane.YAxisList[5].Scale.IsVisible = false;
-            myPane.YAxisList[5].MajorTic.IsAllTics = false;
-            myPane.YAxisList[5].MinorTic.IsAllTics = false;
-            myPane.YAxisList[5].Cross = 3.6;
 
 
 
 
 
-            label.FontSpec.Size = 10f;
-            label.FontSpec.FontColor = Color.DimGray;
-            label.FontSpec.Border.IsVisible = false;
+
+           // label.FontSpec.Size = 10f;
+            //label.FontSpec.FontColor = Color.DimGray;
+            //label.FontSpec.Border.IsVisible = false;
             //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
             //label.FontSpec.Fill.Color = Color.Gray;
-            label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-            label.Location.AlignH = AlignH.Left;
+            //label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+            //label.Location.AlignH = AlignH.Left;
             //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
             //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
             //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
@@ -155,6 +148,17 @@ namespace PE
         public void colorchanger(object sender)
         {
             Button btn = (Button)sender;
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            TextObj label = new TextObj(panel.Name + " L1", 10, 0.05);
+            label.FontSpec.Size = 10f;
+            label.FontSpec.FontColor = Color.DimGray;
+            label.FontSpec.Border.IsVisible = false;
+            label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+            label.Location.AlignH = AlignH.Left;
+            label.ZOrder = ZOrder.E_BehindCurves;
+
+            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
 
             if (btn.ForeColor == Color.FromName(not_pressed))
             {
@@ -163,14 +167,50 @@ namespace PE
                 btn.FlatAppearance.BorderColor = Color.FromName(pressed);
                 btn.FlatAppearance.BorderSize = bordersize_activated;
 
+
+                
+
+
+
+                myPane.YAxisList[1].Scale.LabelGap = 0f;
+                myPane.YAxisList[1].Color = Color.Orange;
+                myPane.YAxisList[1].AxisGap = 0f;
+                myPane.YAxisList[1].Scale.IsVisible = false;
+                myPane.YAxisList[1].MajorTic.IsAllTics = false;
+                myPane.YAxisList[1].MinorTic.IsAllTics = false;
+                myPane.YAxisList[1].Cross = Convert.ToDouble(row[zeile][2])/10;
+                myPane.YAxisList[2].Scale.LabelGap = 0f;
+                myPane.YAxisList[2].Color = Color.Red;
+                myPane.YAxisList[2].AxisGap = 0f;
+                myPane.YAxisList[2].Scale.IsVisible = false;
+                myPane.YAxisList[2].MajorTic.IsAllTics = false;
+                myPane.YAxisList[2].MinorTic.IsAllTics = false;
+                myPane.YAxisList[2].Cross = Convert.ToDouble(row[zeile][3]) / 10;
+                myPane.YAxisList[3].Scale.LabelGap = 0f;
+                myPane.YAxisList[3].Color = Color.Blue;
+                myPane.YAxisList[3].AxisGap = 0f;
+                myPane.YAxisList[3].Scale.IsVisible = false;
+                myPane.YAxisList[3].MajorTic.IsAllTics = false;
+                myPane.YAxisList[3].MinorTic.IsAllTics = false;
+                myPane.YAxisList[3].Cross = Convert.ToDouble(row[zeile][4]) / 10;
+                myPane.YAxisList[4].Scale.LabelGap = 0f;
+                myPane.YAxisList[4].Color = Color.Black;
+                myPane.YAxisList[4].AxisGap = 0f;
+                myPane.YAxisList[4].Scale.IsVisible = false;
+                myPane.YAxisList[4].MajorTic.IsAllTics = false;
+                myPane.YAxisList[4].MinorTic.IsAllTics = false;
+                myPane.YAxisList[4].Cross = Convert.ToDouble(row[zeile][5]) / 10;
+
+
+
                 myPane.YAxisList[1].IsVisible = true;
                 myPane.YAxisList[2].IsVisible = true;
                 myPane.YAxisList[3].IsVisible = true;
                 myPane.YAxisList[4].IsVisible = true;
-                myPane.YAxisList[5].IsVisible = true;
                 myPane.GraphObjList.Add(label);
 
                 zedGraphControl1.Refresh();
+                zedGraphControl1.Invalidate();
 
             }
 
@@ -185,10 +225,10 @@ namespace PE
                 myPane.YAxisList[2].IsVisible = false;
                 myPane.YAxisList[3].IsVisible = false;
                 myPane.YAxisList[4].IsVisible = false;
-                myPane.YAxisList[5].IsVisible = false;
-                myPane.GraphObjList.Remove(label);
+                myPane.GraphObjList.Clear();
 
                 zedGraphControl1.Refresh();
+                zedGraphControl1.Invalidate();
             }
         }
 
@@ -1418,27 +1458,27 @@ namespace PE
             myPane.YAxis.Title.FontSpec.Size = 11;
 
             // Make up some data arrays based on the Sine function
-            double x, y1, y2;
-            PointPairList list1 = new PointPairList();
-            PointPairList list2 = new PointPairList();
-            for (int i = 0; i < 36; i++)
-            {
-                x = (double)i + 5;
-                y1 = 1.5 + Math.Sin((double)i * 0.2);
-                y2 = 3.0 * (1.5 + Math.Sin((double)i * 0.2));
-                list1.Add(x, y1);
-                list2.Add(x, y2);
-            }
+           // double x, y1, y2;
+           // PointPairList list1 = new PointPairList();
+           // PointPairList list2 = new PointPairList();
+           // for (int i = 0; i < 36; i++)
+          //  {
+            //    x = (double)i + 5;
+           //     y1 = 1.5 + Math.Sin((double)i * 0.2);
+           //     y2 = 3.0 * (1.5 + Math.Sin((double)i * 0.2));
+           //     list1.Add(x, y1);
+           //     list2.Add(x, y2);
+           // }
 
             // Generate a red curve with diamond
             // symbols, and "Porsche" in the legend
-            LineItem myCurve = myPane.AddCurve("Porsche",
-                  list1, Color.Red, SymbolType.Diamond);
+          //  LineItem myCurve = myPane.AddCurve("Porsche",
+            //      list1, Color.Red, SymbolType.Diamond);
 
             // Generate a blue curve with circle
             // symbols, and "Piper" in the legend
-            LineItem myCurve2 = myPane.AddCurve("Piper",
-                  list2, Color.Blue, SymbolType.Circle);
+          //  LineItem myCurve2 = myPane.AddCurve("Piper",
+            //      list2, Color.Blue, SymbolType.Circle);
 
 
 
@@ -1509,7 +1549,7 @@ namespace PE
 
 
             // get a reference to the GraphPane
-            GraphPane myPane = zedGraphControl1.GraphPane;
+           
 
 
             //myPane.Border.IsVisible = false;
@@ -1535,7 +1575,7 @@ namespace PE
             LineItem myCurve = myPane.AddCurve("",
                   list1, Color.Red, SymbolType.Diamond);
 
-            zedGraphControl1.Invalidate();
+            zedGraphControl1.Refresh();
 
             // Tell ZedGraph to refigure the
             // axes since the data have changed
