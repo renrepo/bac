@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using ZedGraph;
+using System.Globalization;
 
 namespace PE
 {
@@ -60,42 +61,52 @@ namespace PE
             }
 
 
-
+            var y0 = myPane.AddYAxis("");
+            var y1 = myPane.AddYAxis("");
+            var y2 = myPane.AddYAxis("");
             var y3 = myPane.AddYAxis("");
             var y4 = myPane.AddYAxis("");
             var y5 = myPane.AddYAxis("");
             var y6 = myPane.AddYAxis("");
+            var y7 = myPane.AddYAxis("");
+            var y8 = myPane.AddYAxis("");
+            var y9 = myPane.AddYAxis("");
+            var y10 = myPane.AddYAxis("");
+            var y11 = myPane.AddYAxis("");
+            var y12 = myPane.AddYAxis("");
+            var y13 = myPane.AddYAxis("");
+            var y14 = myPane.AddYAxis("");
+            var y15 = myPane.AddYAxis("");
+            var y16 = myPane.AddYAxis("");
+            var y17 = myPane.AddYAxis("");
+            var y18 = myPane.AddYAxis("");
+            var y19 = myPane.AddYAxis("");
+            var y20 = myPane.AddYAxis("");
+            var y31 = myPane.AddYAxis("");
+            var y32 = myPane.AddYAxis("");
+            var y33 = myPane.AddYAxis("");
+            var y34 = myPane.AddYAxis("");
+            var y35 = myPane.AddYAxis("");
+            var y36 = myPane.AddYAxis("");
+            var y37 = myPane.AddYAxis("");
+            var y38 = myPane.AddYAxis("");
+            var y39 = myPane.AddYAxis("");
+            var y40 = myPane.AddYAxis("");
+            var y41 = myPane.AddYAxis("");
+
+
 
             //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
-
-            myPane.YAxisList[1].Scale.LabelGap = 0f;
-            myPane.YAxisList[1].Color = Color.Orange;
-            myPane.YAxisList[1].AxisGap = 0f;
-            myPane.YAxisList[1].Scale.IsVisible = false;
-            myPane.YAxisList[1].MajorTic.IsAllTics = false;
-            myPane.YAxisList[1].MinorTic.IsAllTics = false;
-            myPane.YAxisList[1].Cross = 10;
-            myPane.YAxisList[2].Scale.LabelGap = 0f;
-            myPane.YAxisList[2].Color = Color.Red;
-            myPane.YAxisList[2].AxisGap = 0f;
-            myPane.YAxisList[2].Scale.IsVisible = false;
-            myPane.YAxisList[2].MajorTic.IsAllTics = false;
-            myPane.YAxisList[2].MinorTic.IsAllTics = false;
-            myPane.YAxisList[2].Cross = 15;
-            myPane.YAxisList[3].Scale.LabelGap = 0f;
-            myPane.YAxisList[3].Color = Color.Blue;
-            myPane.YAxisList[3].AxisGap = 0f;
-            myPane.YAxisList[3].Scale.IsVisible = false;
-            myPane.YAxisList[3].MajorTic.IsAllTics = false;
-            myPane.YAxisList[3].MinorTic.IsAllTics = false;
-            myPane.YAxisList[3].Cross = 20;
-            myPane.YAxisList[4].Scale.LabelGap = 0f;
-            myPane.YAxisList[4].Color = Color.Black;
-            myPane.YAxisList[4].AxisGap = 0f;
-            myPane.YAxisList[4].Scale.IsVisible = false;
-            myPane.YAxisList[4].MajorTic.IsAllTics = false;
-            myPane.YAxisList[4].MinorTic.IsAllTics = false;
-            myPane.YAxisList[4].Cross = 37;
+            for (int i = 0; i < 30; i++)
+            {
+            myPane.YAxisList[i].Scale.LabelGap = 0f;
+            myPane.YAxisList[i].Color = Color.Orange;
+            myPane.YAxisList[i].AxisGap = 0f;
+            myPane.YAxisList[i].Scale.IsVisible = false;
+            myPane.YAxisList[i].MajorTic.IsAllTics = false;
+            myPane.YAxisList[i].MinorTic.IsAllTics = false;
+            myPane.YAxisList[i].Cross = 10;
+            }
 
 
 
@@ -103,15 +114,15 @@ namespace PE
 
 
            // label.FontSpec.Size = 10f;
-            //label.FontSpec.FontColor = Color.DimGray;
-            //label.FontSpec.Border.IsVisible = false;
-            //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
-            //label.FontSpec.Fill.Color = Color.Gray;
-            //label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-            //label.Location.AlignH = AlignH.Left;
-            //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
-            //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
-            //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
+           //label.FontSpec.FontColor = Color.DimGray;
+           //label.FontSpec.Border.IsVisible = false;
+           //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
+           //label.FontSpec.Fill.Color = Color.Gray;
+           //label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+           //label.Location.AlignH = AlignH.Left;
+           //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
+           //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
+           //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
 
             //zedGraphControl1.Refresh();
 
@@ -150,67 +161,119 @@ namespace PE
             Button btn = (Button)sender;
             var panel = sender as Control;
             var thePanelName = panel.Name;
-            TextObj label = new TextObj(panel.Name + " L1", 10, 0.05);
+            TextObj label = new TextObj(panel.Name + " L1", 10, -0.02);
             label.FontSpec.Size = 10f;
             label.FontSpec.FontColor = Color.DimGray;
             label.FontSpec.Border.IsVisible = false;
             label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
             label.Location.AlignH = AlignH.Left;
             label.ZOrder = ZOrder.E_BehindCurves;
-
             int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+
+
+
+
 
             if (btn.ForeColor == Color.FromName(not_pressed))
             {
+
                 btn.Font = new Font(font, fontsize_activated, FontStyle.Bold);
                 btn.ForeColor = Color.FromName(pressed);
                 btn.FlatAppearance.BorderColor = Color.FromName(pressed);
                 btn.FlatAppearance.BorderSize = bordersize_activated;
 
 
-                
+                double value;
+                int j = 0;
+                int safelastj = 0;
+                int k = 0;
+                for (int l = 0; l <= zeile; l++)
+                {
+                    for (int i = 2; i < 25; i++)
+                    {
+                        bool result = double.TryParse(row[l][i], out value);
+
+                        if (result)
+                        {
+                            j += 1;
+                        }
+                    }
+
+                    k += j;
+                    safelastj = j;
+                    j = 0;
+                }
 
 
+                switch (thePanelName)
+                {
+                    case "H":
+                        MessageBox.Show("H");
+                        break;
+                    case "He":
+                        MessageBox.Show("He");
+                        break;
+                    case "Li":
+                        for (int i = (k - safelastj); i < k; i++)
+                        {
+                            myPane.YAxisList[i].Scale.LabelGap = 0f;
+                            myPane.YAxisList[i].Color = Color.Orange;
+                            myPane.YAxisList[i].AxisGap = 0f;
+                            myPane.YAxisList[i].Scale.IsVisible = false;
+                            myPane.YAxisList[i].MajorTic.IsAllTics = false;
+                            myPane.YAxisList[i].MinorTic.IsAllTics = false;
+                            myPane.YAxisList[i].Cross = Double.Parse(row[zeile][2], CultureInfo.InvariantCulture);
+                            myPane.YAxisList[i].IsVisible = true;
+                            myPane.GraphObjList.Add(label);
 
-                myPane.YAxisList[1].Scale.LabelGap = 0f;
-                myPane.YAxisList[1].Color = Color.Orange;
-                myPane.YAxisList[1].AxisGap = 0f;
-                myPane.YAxisList[1].Scale.IsVisible = false;
-                myPane.YAxisList[1].MajorTic.IsAllTics = false;
-                myPane.YAxisList[1].MinorTic.IsAllTics = false;
-                myPane.YAxisList[1].Cross = Convert.ToDouble(row[zeile][2])/10;
-                myPane.YAxisList[2].Scale.LabelGap = 0f;
-                myPane.YAxisList[2].Color = Color.Red;
-                myPane.YAxisList[2].AxisGap = 0f;
-                myPane.YAxisList[2].Scale.IsVisible = false;
-                myPane.YAxisList[2].MajorTic.IsAllTics = false;
-                myPane.YAxisList[2].MinorTic.IsAllTics = false;
-                myPane.YAxisList[2].Cross = Convert.ToDouble(row[zeile][3]) / 10;
-                myPane.YAxisList[3].Scale.LabelGap = 0f;
-                myPane.YAxisList[3].Color = Color.Blue;
-                myPane.YAxisList[3].AxisGap = 0f;
-                myPane.YAxisList[3].Scale.IsVisible = false;
-                myPane.YAxisList[3].MajorTic.IsAllTics = false;
-                myPane.YAxisList[3].MinorTic.IsAllTics = false;
-                myPane.YAxisList[3].Cross = Convert.ToDouble(row[zeile][4]) / 10;
-                myPane.YAxisList[4].Scale.LabelGap = 0f;
-                myPane.YAxisList[4].Color = Color.Black;
-                myPane.YAxisList[4].AxisGap = 0f;
-                myPane.YAxisList[4].Scale.IsVisible = false;
-                myPane.YAxisList[4].MajorTic.IsAllTics = false;
-                myPane.YAxisList[4].MinorTic.IsAllTics = false;
-                myPane.YAxisList[4].Cross = Convert.ToDouble(row[zeile][5]) / 10;
+                            zedGraphControl1.Refresh();
+                            zedGraphControl1.Invalidate();
+                        }
+                        MessageBox.Show("Li");
+                        break;
+                    case "Be":
+                        MessageBox.Show("Be");
+                        break;
+                    case "B":
+                        for (int i = (k - safelastj); i < k; i++)
+                        {
+                            myPane.YAxisList[i].Scale.LabelGap = 0f;
+                            myPane.YAxisList[i].Color = Color.Orange;
+                            myPane.YAxisList[i].AxisGap = 0f;
+                            myPane.YAxisList[i].Scale.IsVisible = false;
+                            myPane.YAxisList[i].MajorTic.IsAllTics = false;
+                            myPane.YAxisList[i].MinorTic.IsAllTics = false;
+                            myPane.YAxisList[i].Cross = Double.Parse(row[zeile][2], CultureInfo.InvariantCulture);
+                            myPane.YAxisList[i].IsVisible = true;
+                            myPane.GraphObjList.Add(label);
 
+                            zedGraphControl1.Refresh();
+                            zedGraphControl1.Invalidate();
+                        }
+                        MessageBox.Show("B");
+                        break;
+                    case "U":
+                        for (int i = (k - safelastj); i < k; i++)
+                        {
+                            myPane.YAxisList[i].Scale.LabelGap = 0f;
+                            myPane.YAxisList[i].Color = Color.Orange;
+                            myPane.YAxisList[i].AxisGap = 0f;
+                            myPane.YAxisList[i].Scale.IsVisible = false;
+                            myPane.YAxisList[i].MajorTic.IsAllTics = false;
+                            myPane.YAxisList[i].MinorTic.IsAllTics = false;
+                            myPane.YAxisList[i].Cross = Double.Parse(row[zeile][2], CultureInfo.InvariantCulture);
+                            myPane.YAxisList[i].IsVisible = true;
+                            myPane.GraphObjList.Add(label);
 
+                            zedGraphControl1.Refresh();
+                            zedGraphControl1.Invalidate();
+                        }
+                        MessageBox.Show("U");
+                        break;
+                    default:
+                        break;
+                }
 
-                myPane.YAxisList[1].IsVisible = true;
-                myPane.YAxisList[2].IsVisible = true;
-                myPane.YAxisList[3].IsVisible = true;
-                myPane.YAxisList[4].IsVisible = true;
-                myPane.GraphObjList.Add(label);
-
-                zedGraphControl1.Refresh();
-                zedGraphControl1.Invalidate();
 
             }
 
