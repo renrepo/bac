@@ -20,6 +20,7 @@ namespace PE
 
         List<List<string>> row = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        Dictionary<string, string> fab = new Dictionary<string, string>();
         string font = "Arial";
         int fontsize_activated = 12;
         int fontsize_deactivated = 11;
@@ -44,8 +45,10 @@ namespace PE
         {
 
             string filePath = System.IO.Path.GetFullPath("Bindungsenergiencsv.csv");
-           // StreamReader sr = new StreamReader(filePath);
+            string filePath2 = System.IO.Path.GetFullPath("colors2.csv");
+            // StreamReader sr = new StreamReader(filePath);
             row = File.ReadAllLines(filePath).Select(l => l.Split(',').ToList()).ToList();
+            var fab = File.ReadLines(filePath2).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
             //MessageBox.Show(row[6][3]);
             var num = row.Count;
   
@@ -60,7 +63,7 @@ namespace PE
             //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
             for (int i = 0; i < 1700; i++)
             {
-                myPane.YAxisList[i].IsVisible = false;
+                myPane.YAxisList[i+1].IsVisible = false;
             }
 
 
@@ -109,13 +112,14 @@ namespace PE
     
         //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First();
 
-        public void drawlines(int k, int safelastj, int zeile)
+        public void drawlines(int k, int safelastj, int zeile, string thePanelName)
         {
             int s = 2;
             for (int i = (k - safelastj); i < k; i++)
             {
                 myPane.YAxisList[i + 1].Scale.LabelGap = 0f;
-                myPane.YAxisList[i + 1].Color = Color.Orange;
+                myPane.YAxisList[i + 1].Color = Color.FromName(fab[thePanelName]);
+                myPane.XAxis.Color = Color.Black;
                 myPane.YAxisList[i + 1].AxisGap = 0f;
                 myPane.YAxisList[i + 1].Scale.IsVisible = false;
                 myPane.YAxisList[i + 1].MajorTic.IsAllTics = false;
@@ -173,13 +177,10 @@ namespace PE
                         j += 1;
                     }
                 }
-
                 k += j;
                 safelastj = j;
                 j = 0;
             }
-
-
 
 
             if (btn.ForeColor == Color.FromName(not_pressed))
@@ -190,10 +191,7 @@ namespace PE
                 btn.FlatAppearance.BorderColor = Color.FromName(pressed);
                 btn.FlatAppearance.BorderSize = bordersize_activated;
 
-                drawlines(k, safelastj, zeile);
-
-
-
+                drawlines(k, safelastj, zeile, thePanelName);
             }
 
             else
@@ -202,7 +200,6 @@ namespace PE
                 btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
                 btn.FlatAppearance.BorderSize = bordersize_deactivated;
                 btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
-
 
                 // myPane.GraphObjList.Clear();
                 removelines(k,safelastj,zeile);
