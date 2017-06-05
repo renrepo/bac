@@ -7,6 +7,7 @@ using ZedGraph;
 
 namespace PE
 {
+    
     class periodic_table
     {
     }
