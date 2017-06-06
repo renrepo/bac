@@ -32,6 +32,7 @@ namespace PE
         GraphPane myPane;
         TextObj b1 = new TextObj();
         TextObj b2 = new TextObj();
+        TextObj b92 = new TextObj();
 
 
         List<string> list_gauss = new List<string>();
@@ -208,6 +209,7 @@ namespace PE
 
 
                 removelines(k,safelastj,zeile);
+
                 myPane.GraphObjList.Remove(phi);
                 zedGraphControl1.Refresh();
             }
@@ -295,27 +297,44 @@ namespace PE
 
 
 
-        private void H_MouseDown(object sender, MouseEventArgs e)
+
+
+
+
+        public void labs(string thePanelName, TextObj b)
         {
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
             int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
             double value;
+            myPane.GraphObjList.Remove(b);
+            //nimmt sonst nicht das label der linien zurück
             for (int i = 2; i <= 25; i++)
             {
                 bool result = double.TryParse(row[zeile][i], out value);
 
                 if (result)
                 {
-                    b1 = new TextObj("    " + row[zeile][1] + " " + scores[i] + "    ", float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.02);
-                    b1.FontSpec.Size = 10f;
-                    b1.FontSpec.FontColor = Color.DimGray;
-                    b1.FontSpec.Border.IsVisible = false;
-                    b1.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                    b1.Location.AlignH = AlignH.Left;
-                    b1.ZOrder = ZOrder.E_BehindCurves;
+                    b.Text = (row[zeile][1] + " " + scores[i]);
+                    b.Location.X = float.Parse(row[zeile][i], CultureInfo.InvariantCulture);
+                    b.Location.Y = -0.02;
+                    b.FontSpec.Size = 10f;
+                    b.FontSpec.FontColor = Color.DimGray;
+                    b.FontSpec.Border.IsVisible = true;
+                    b.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+                    b.Location.AlignH = AlignH.Center;
+                    b.ZOrder = ZOrder.E_BehindCurves;
+                    zedGraphControl1.Refresh();
                 }
             }
+        }
+
+
+
+
+        private void H_MouseDown(object sender, MouseEventArgs e)
+        {
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            labs(thePanelName,b1);          
 
             if (e.Button == MouseButtons.Left)
             {
@@ -333,25 +352,7 @@ namespace PE
         {
             var panel = sender as Control;
             var thePanelName = panel.Name;
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-            double value;
-            for (int i = 2; i <= 25; i++)
-            {
-                bool result = double.TryParse(row[zeile][i], out value);
-
-                if (result)
-                {
-                    b2 = new TextObj("    " + row[zeile][1] + " " + scores[i] + "    ", float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.02);
-                    b2.FontSpec.Size = 10f;
-                    b2.FontSpec.FontColor = Color.DimGray;
-                    b2.FontSpec.Border.IsVisible = false;
-                    b2.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                    b2.Location.AlignH = AlignH.Left;
-                    b2.ZOrder = ZOrder.E_BehindCurves;
-                    //myPane.GraphObjList.Add(b2);
-                    //zedGraphControl1.Refresh();
-                }
-            }
+            labs(thePanelName, b2);
 
             if (e.Button == MouseButtons.Left)
             {
@@ -1443,10 +1444,32 @@ namespace PE
 
         private void U_MouseDown(object sender, MouseEventArgs e)
         {
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+            //myPane.GraphObjList.RemoveRange(20,2);
+            double value;
+            for (int i = 2; i <= 25; i++)
+            {
+                bool result = double.TryParse(row[zeile][i], out value);
+
+                if (result)
+                {
+                    b92 = new TextObj(row[zeile][1] + " " + scores[i], float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.02);
+                    b92.FontSpec.Size = 10f;
+                    b92.FontSpec.FontColor = Color.DimGray;
+                    b92.FontSpec.Border.IsVisible = true;
+                    b92.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+                    b92.Location.AlignH = AlignH.Center;
+                    b92.ZOrder = ZOrder.E_BehindCurves;
+                    myPane.GraphObjList.Add(b92);
+                }
+            }
+            zedGraphControl1.Refresh();
+
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
-
+                colorchanger((Button)sender, b92);
             }
             if (e.Button == MouseButtons.Right)
             {
