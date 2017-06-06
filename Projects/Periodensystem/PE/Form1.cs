@@ -196,6 +196,7 @@ namespace PE
 
                 myPane.GraphObjList.Add(phi);
                 zedGraphControl1.Refresh();
+
             }
 
             else
@@ -207,7 +208,6 @@ namespace PE
 
 
                 removelines(k,safelastj,zeile);
-
                 myPane.GraphObjList.Remove(phi);
                 zedGraphControl1.Refresh();
             }
@@ -290,7 +290,8 @@ namespace PE
 
 
         string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
-            "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4","O5","P1","P2","P3"};
+            "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
+            "O5","P1","P2","P3"};
 
 
 
