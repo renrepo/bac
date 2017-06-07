@@ -199,24 +199,6 @@ namespace PE
 
 
             double value;
-            int j = 0;
-            int safelastj = 0;
-            int k = 0;
-            for (int l = 0; l <= zeile; l++)
-            {
-                for (int i = 2; i <= 25; i++)
-                {
-                    bool result = double.TryParse(row[l][i], out value);
-
-                    if (result)
-                    {
-                        j += 1;
-                    }
-                }
-                k += j;
-                safelastj = j;
-                j = 0;
-            }
 
             
 
@@ -244,7 +226,7 @@ namespace PE
                         b = new TextObj((row[zeile][1] + " " + scores[i] + "\n" + row[zeile][i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), 0.01,
                             CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
                         b.FontSpec.Size = 10f;
-                        b.FontSpec.Fill.Color = Color.LightGray;
+                        b.FontSpec.Fill.Color = Color.Transparent;
                         b.FontSpec.FontColor = Color.DimGray;
                         b.FontSpec.Border.IsVisible = false;
                         //b.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
@@ -275,14 +257,14 @@ namespace PE
                         ya.MajorGrid.IsZeroLine = false;
                         // hides xaxis
                         myPane.YAxisList.Add(ya);
+                        //zedGraphControl1.Invalidate();
 
-                        zedGraphControl1.Invalidate();
                     }
 
                 }
 
 
-
+                //zedGraphControl1.Invalidate();
                 zedGraphControl1.Refresh();
 
             }
@@ -304,7 +286,7 @@ namespace PE
                         fuerlabels.RemoveAt(y);
                         myPane.GraphObjList.RemoveAt(y);
                         myPane.YAxisList.RemoveAt(y+1);
-                        zedGraphControl1.Invalidate();
+                        //zedGraphControl1.Invalidate();
                     }
                 }
 

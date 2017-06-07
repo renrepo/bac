@@ -6328,7 +6328,7 @@
     <value>1, 0, 1, 0</value>
   </data>
   <data name="label26.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 16</value>
+    <value>62, 17</value>
   </data>
   <data name="label26.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -6361,7 +6361,7 @@
     <value>1, 0, 1, 0</value>
   </data>
   <data name="label25.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 16</value>
+    <value>30, 17</value>
   </data>
   <data name="label25.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -7765,7 +7765,7 @@
     <value>1, 0, 1, 0</value>
   </data>
   <data name="label50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 16</value>
+    <value>64, 17</value>
   </data>
   <data name="label50.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
@@ -8194,7 +8194,7 @@
     <value>1, 0, 1, 0</value>
   </data>
   <data name="label49.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 16</value>
+    <value>30, 17</value>
   </data>
   <data name="label49.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
@@ -8296,13 +8296,13 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 209</value>
+    <value>3, 208</value>
   </data>
   <data name="tableLayoutPanel2.RowCount" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 211</value>
+    <value>194, 212</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -8660,9 +8660,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1184, 861</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Form1</value>
