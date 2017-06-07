@@ -251,8 +251,14 @@
             this.btn_clear = new System.Windows.Forms.Button();
             this.bW_gauss = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2254,20 +2260,38 @@
             resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
             this.lb_perc_gauss.Name = "lb_perc_gauss";
             // 
+            // tableLayoutPanel3
+            // 
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.zedGraphControl1, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.btn_gauss, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.btn_gauss_can, 1, 2);
+            this.tableLayoutPanel5.Controls.Add(this.btn_clear, 0, 4);
+            this.tableLayoutPanel5.Controls.Add(this.tb_gauss_startvalue, 0, 3);
+            this.tableLayoutPanel5.Controls.Add(this.tb_gauss, 1, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.lb_perc_gauss);
-            this.Controls.Add(this.btn_clear);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.tb_gauss);
-            this.Controls.Add(this.tb_gauss_startvalue);
-            this.Controls.Add(this.btn_gauss_can);
-            this.Controls.Add(this.btn_gauss);
-            this.Controls.Add(this.zedGraphControl1);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.Clear);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "Form1";
@@ -2276,6 +2300,12 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2504,6 +2534,9 @@
         private System.Windows.Forms.Button btn_clear;
         private System.ComponentModel.BackgroundWorker bW_gauss;
         private System.Windows.Forms.Label lb_perc_gauss;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }
 
