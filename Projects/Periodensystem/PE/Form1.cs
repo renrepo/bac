@@ -30,9 +30,6 @@ namespace PE
         string pressed = "black";
 
         GraphPane myPane;
-        TextObj b1 = new TextObj();
-        TextObj b2 = new TextObj();
-        TextObj b92 = new TextObj();
 
 
         List<string> list_gauss = new List<string>();
@@ -40,7 +37,18 @@ namespace PE
 
 
 
-        
+        List<string> fuerlabels = new List<string>();
+
+
+        string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
+            "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
+            "O5","P1","P2","P3"};
+
+
+        TextObj b = new TextObj();
+        YAxis ya = new YAxis();
+
+
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -106,117 +114,6 @@ namespace PE
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
-
-
-
-
-  
-    
-        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First();
-
-        public void drawlines(int k, int safelastj, int zeile, string thePanelName)
-        {
-            int s = 2;
-            string col = fab[thePanelName];
-            for (int i = (k - safelastj); i < k; i++)
-            {
-                myPane.YAxisList[i + 1].Scale.IsVisible = false;
-                myPane.YAxisList[i + 1].Scale.LabelGap = 0f;
-                //myPane.YAxisList[i + 1].Title.Text = thePanelName ;
-                //myPane.YAxisList[i + 1].Title.IsVisible = true;
-                myPane.YAxisList[i + 1].Color = Color.FromName(col);
-                myPane.YAxisList[i + 1].AxisGap = 0f;
-                myPane.YAxisList[i + 1].Scale.Format = "#";
-                myPane.YAxisList[i + 1].Scale.Mag = 0;
-                myPane.YAxisList[i + 1].MajorTic.IsAllTics = false;
-                myPane.YAxisList[i + 1].MinorTic.IsAllTics = false;
-                myPane.YAxisList[i + 1].Cross = Double.Parse(row[zeile][s], CultureInfo.InvariantCulture);
-                myPane.YAxisList[i + 1].IsVisible = true;
-
-                //myPane.GraphObjList.Add(label);
-
-                s += 1;
-            }
-            myPane.XAxis.Color = Color.Black;
-            s = 2;
-           // zedGraphControl1.Refresh();
-        }
-
-
-        public void removelines(int k, int safelastj, int zeile)
-        {
-            for (int i = (k - safelastj); i < k; i++)
-            {
-                myPane.YAxisList[i + 1].IsVisible = false;
-            }
-           // zedGraphControl1.Refresh();
-        }
-
-
-        public void colorchanger(object sender, TextObj phi)
-        {
-            Button btn = (Button)sender;
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            string col = fab[thePanelName];
-
-
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-
-
-            double value;
-            int j = 0;
-            int safelastj = 0;
-            int k = 0;
-            for (int l = 0; l <= zeile; l++)
-            {
-                for (int i = 2; i <= 25; i++)
-                {
-                    bool result = double.TryParse(row[l][i], out value);
-
-                    if (result)
-                    {
-                        j += 1;
-                    }
-                }
-                k += j;
-                safelastj = j;
-                j = 0;
-            }
-
-
-            if (btn.ForeColor == Color.FromName(not_pressed))
-            {
-
-                btn.Font = new Font(font, fontsize_activated, FontStyle.Bold);
-                btn.ForeColor = Color.FromName(pressed);
-                btn.FlatAppearance.BorderColor = Color.FromName(pressed);
-                btn.FlatAppearance.BorderSize = bordersize_activated;
-
-                drawlines(k, safelastj, zeile, thePanelName);
-
-                myPane.GraphObjList.Add(phi);
-                zedGraphControl1.Refresh();
-
-            }
-
-            else
-            {
-                btn.ForeColor = Color.FromName(not_pressed);
-                btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
-                btn.FlatAppearance.BorderSize = bordersize_deactivated;
-                btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
-
-
-                removelines(k,safelastj,zeile);
-
-                myPane.GraphObjList.Remove(phi);
-                zedGraphControl1.Refresh();
-            }
-        }
-
-
-
 
         public void labelchanger(object sender)
         {
@@ -291,54 +188,190 @@ namespace PE
 
 
 
-        string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
-            "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
-            "O5","P1","P2","P3"};
+        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First();
 
-
-
-
-
-
-
-        public void labs(string thePanelName, TextObj b)
+        public void drawlines(int k, int safelastj, int zeile, string thePanelName)
         {
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-            double value;
-            myPane.GraphObjList.Remove(b);
-            //nimmt sonst nicht das label der linien zurück
-            for (int i = 2; i <= 25; i++)
-            {
-                bool result = double.TryParse(row[zeile][i], out value);
+            int s = 2;
+            string col = fab[thePanelName];
 
-                if (result)
+
+            for (int i = (k - safelastj); i < k; i++)
+            {
+                myPane.YAxisList[i + 1].Scale.IsVisible = false;
+                myPane.YAxisList[i + 1].Scale.LabelGap = 0f;
+                //myPane.YAxisList[i + 1].Title.Text = thePanelName ;
+                //myPane.YAxisList[i + 1].Title.IsVisible = true;
+                myPane.YAxisList[i + 1].Color = Color.FromName(col);
+                myPane.YAxisList[i + 1].AxisGap = 0f;
+                myPane.YAxisList[i + 1].Scale.Format = "#";
+                myPane.YAxisList[i + 1].Scale.Mag = 0;
+                myPane.YAxisList[i + 1].MajorTic.IsAllTics = false;
+                myPane.YAxisList[i + 1].MinorTic.IsAllTics = false;
+                myPane.YAxisList[i + 1].Cross = Double.Parse(row[zeile][s], CultureInfo.InvariantCulture);
+                myPane.YAxisList[i + 1].IsVisible = true;
+
+                //myPane.GraphObjList.Add(label);
+
+                s += 1;
+            }
+            myPane.XAxis.Color = Color.Black;
+            s = 2;
+           // zedGraphControl1.Refresh();
+        }
+
+
+        public void removelines(int k, int safelastj, int zeile)
+        {
+            for (int i = (k - safelastj); i < k; i++)
+            {
+                myPane.YAxisList[i + 1].IsVisible = false;
+            }
+           // zedGraphControl1.Refresh();
+        }
+
+
+        public void colorchanger(object sender, TextObj phi, YAxis ya)
+        {
+            Button btn = (Button)sender;
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            string col = fab[thePanelName];
+
+
+            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+
+
+            double value;
+            int j = 0;
+            int safelastj = 0;
+            int k = 0;
+            for (int l = 0; l <= zeile; l++)
+            {
+                for (int i = 2; i <= 25; i++)
                 {
-                    b.Text = (row[zeile][1] + " " + scores[i]);
-                    b.Location.X = float.Parse(row[zeile][i], CultureInfo.InvariantCulture);
-                    b.Location.Y = -0.02;
-                    b.FontSpec.Size = 10f;
-                    b.FontSpec.FontColor = Color.DimGray;
-                    b.FontSpec.Border.IsVisible = true;
-                    b.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                    b.Location.AlignH = AlignH.Center;
-                    b.ZOrder = ZOrder.E_BehindCurves;
-                    zedGraphControl1.Refresh();
+                    bool result = double.TryParse(row[l][i], out value);
+
+                    if (result)
+                    {
+                        j += 1;
+                    }
                 }
+                k += j;
+                safelastj = j;
+                j = 0;
+            }
+
+            
+
+            if (btn.ForeColor == Color.FromName(not_pressed))
+            {
+
+                btn.Font = new Font(font, fontsize_activated, FontStyle.Bold);
+                btn.ForeColor = Color.FromName(pressed);
+                btn.FlatAppearance.BorderColor = Color.FromName(pressed);
+                btn.FlatAppearance.BorderSize = bordersize_activated;
+
+               // drawlines(k, safelastj, zeile, thePanelName);
+
+
+
+                for (int i = 2; i <= 25; i++)
+                {
+                    bool result = double.TryParse(row[zeile][i], out value);
+
+                    if (result)
+                    {
+                        //b.Text = (row[zeile][1] + " " + scores[i]);
+                        //b.Location.X = float.Parse(row[zeile][i], CultureInfo.InvariantCulture);
+                        //b.Location.Y = -0.02;
+                        b = new TextObj((row[zeile][1] + " " + scores[i] + "\n" + row[zeile][i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.0,
+                            CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
+                        b.FontSpec.Size = 10f;
+                        b.FontSpec.FontColor = Color.DimGray;
+                        b.FontSpec.Border.IsVisible = false;
+                        //b.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
+                        //b.Location.AlignH = AlignH.Center;
+                        b.ZOrder = ZOrder.E_BehindCurves;
+                        myPane.GraphObjList.Add(b);
+                        fuerlabels.Add(thePanelName);
+
+
+
+                        ya = new YAxis();                        
+                        ya.Scale.IsVisible = false;
+                        ya.Scale.LabelGap = 0f;
+                        ya.Title.Gap = 0f;
+                        ya.Title.Text = "";
+                        //myPane.YAxisList.Add(y).Title.Text = thePanelName ;
+                        //myPane.YAxisList.Add(y).Title.IsVisible = true;
+                        ya.Color = Color.FromName(col);
+                        ya.AxisGap = 0f;
+                        ya.Scale.Format = "#";
+                        ya.Scale.Min = 0;
+                        ya.Scale.Mag = 0;
+                        //ya.Title.IsVisible = false;
+                        ya.MajorTic.IsAllTics = false;
+                        ya.MinorTic.IsAllTics = false;
+                        
+                        ya.Cross = Double.Parse(row[zeile][i], CultureInfo.InvariantCulture);
+                        ya.IsVisible = true;
+                        myPane.YAxisList.Add(ya);
+
+
+
+                        zedGraphControl1.Invalidate();
+                    }
+
+                }
+
+
+
+                zedGraphControl1.Refresh();
+
+            }
+
+            else
+            {
+                btn.ForeColor = Color.FromName(not_pressed);
+                btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
+                btn.FlatAppearance.BorderSize = bordersize_deactivated;
+                btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
+
+
+
+                int laenge = fuerlabels.Count - 1;
+                for (int y = laenge; y >= 0; y--)
+                {
+                    if (fuerlabels[y] == thePanelName)
+                    {
+                        fuerlabels.RemoveAt(y);
+                        myPane.GraphObjList.RemoveAt(y);
+                        myPane.YAxisList.RemoveAt(y+1);
+                    }
+                }
+
+
+                zedGraphControl1.Invalidate();
+
+
+
+               // removelines(k,safelastj,zeile);
+
+                //myPane.GraphObjList.Remove(phi);
+                zedGraphControl1.Refresh();
             }
         }
 
 
 
 
+
         private void H_MouseDown(object sender, MouseEventArgs e)
         {
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            labs(thePanelName,b1);          
-
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b1);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {              
@@ -350,13 +383,9 @@ namespace PE
 
         private void He_MouseDown(object sender, MouseEventArgs e)
         {
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            labs(thePanelName, b2);
-
             if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender, b2);
+            {            
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -370,7 +399,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -384,7 +413,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -397,7 +426,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -407,9 +436,10 @@ namespace PE
 
         private void C_MouseDown(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -422,7 +452,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -435,7 +465,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -447,7 +477,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -460,7 +490,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -472,7 +502,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -484,7 +514,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -496,7 +526,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -508,7 +538,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -520,7 +550,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -532,7 +562,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -544,7 +574,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -554,9 +584,12 @@ namespace PE
 
         private void Ar_MouseDown(object sender, MouseEventArgs e)
         {
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -568,7 +601,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -580,7 +613,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -592,7 +625,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -604,7 +637,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -616,7 +649,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -628,7 +661,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -640,7 +673,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -652,7 +685,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -664,7 +697,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -676,7 +709,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -688,7 +721,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -700,7 +733,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -712,7 +745,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -724,7 +757,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -736,7 +769,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -748,7 +781,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -760,7 +793,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -772,7 +805,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -784,7 +817,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -796,7 +829,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -808,7 +841,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -820,7 +853,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -832,7 +865,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -844,7 +877,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -856,7 +889,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -868,7 +901,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -880,7 +913,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -892,7 +925,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -904,7 +937,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -916,7 +949,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -928,7 +961,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -940,7 +973,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -952,7 +985,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -964,7 +997,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -976,7 +1009,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -988,7 +1021,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1000,7 +1033,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1012,7 +1045,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1024,7 +1057,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1036,7 +1069,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1048,7 +1081,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1060,7 +1093,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1072,7 +1105,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1084,7 +1117,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1096,7 +1129,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1108,7 +1141,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1120,7 +1153,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1132,7 +1165,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1144,7 +1177,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1156,7 +1189,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1168,7 +1201,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1180,7 +1213,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1192,7 +1225,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1204,7 +1237,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1216,7 +1249,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1228,7 +1261,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1240,7 +1273,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1252,7 +1285,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1264,7 +1297,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1276,7 +1309,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1288,7 +1321,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1300,7 +1333,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1312,7 +1345,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1324,7 +1357,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1336,7 +1369,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1348,7 +1381,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1360,7 +1393,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1372,7 +1405,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1384,7 +1417,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1396,7 +1429,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1408,7 +1441,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1420,7 +1453,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1432,7 +1465,7 @@ namespace PE
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b2);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
@@ -1441,35 +1474,11 @@ namespace PE
         }
 
 
-
         private void U_MouseDown(object sender, MouseEventArgs e)
         {
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-            //myPane.GraphObjList.RemoveRange(20,2);
-            double value;
-            for (int i = 2; i <= 25; i++)
-            {
-                bool result = double.TryParse(row[zeile][i], out value);
-
-                if (result)
-                {
-                    b92 = new TextObj(row[zeile][1] + " " + scores[i], float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.02);
-                    b92.FontSpec.Size = 10f;
-                    b92.FontSpec.FontColor = Color.DimGray;
-                    b92.FontSpec.Border.IsVisible = true;
-                    b92.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                    b92.Location.AlignH = AlignH.Center;
-                    b92.ZOrder = ZOrder.E_BehindCurves;
-                    myPane.GraphObjList.Add(b92);
-                }
-            }
-            zedGraphControl1.Refresh();
-
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, b92);
+                colorchanger((Button)sender,b ,ya);
             }
             if (e.Button == MouseButtons.Right)
             {
