@@ -17,99 +17,288 @@ namespace PE
     public partial class Form1 : Form
     {
 
-
+        string filePath = System.IO.Path.GetFullPath("Bindungsenergiencsv.csv");
+        string filePath2 = System.IO.Path.GetFullPath("colors2.csv");
         List<List<string>> row = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
-        Dictionary<string, string> fab = new Dictionary<string, string>();
-        string font = "Arial";
-        int fontsize_activated = 12;
-        int fontsize_deactivated = 11;
-        int bordersize_activated = 2;
-        int bordersize_deactivated = 1;
-        string not_pressed = "DimGray";
-        string pressed = "black";
-
+        Dictionary<string, string> fab = new Dictionary<string, string>(); 
         GraphPane myPane;
-
-
+        LineItem myCurve;
         List<string> list_gauss = new List<string>();
         public int num_gauss = 0;
-
-
-
+        PointPairList list1 = new PointPairList();
         List<string> fuerlabels = new List<string>();
-
-
         string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
             "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
             "O5","P1","P2","P3"};
+        TextObj pane_labs;
+        YAxis yaxis = new YAxis();
 
 
-        TextObj b = new TextObj();
-        YAxis ya = new YAxis();
+        int i;
+        int end = 0;
+        // bw-DoWork
 
+        
+
+
+
+
+        public Form1()
+        {
+            InitializeComponent();
+            myPane = zedGraphControl1.GraphPane;
+        }
 
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            string filePath = System.IO.Path.GetFullPath("Bindungsenergiencsv.csv");
-            string filePath2 = System.IO.Path.GetFullPath("colors2.csv");
             // StreamReader sr = new StreamReader(filePath);
             row = File.ReadAllLines(filePath).Select(l => l.Split(',').ToList()).ToList();
             fab = File.ReadLines(filePath2).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
             //MessageBox.Show(row[6][3]);
             var num = row.Count;
-  
+            
             for (int i = 0; i < num; i++)
             {
                 dictionary.Add(row[i][1],row[i][0]);
             }
 
-
-
-
-            //https://stackoverflow.com/questions/11239904/zedgraph-decrease-dist-between-label-and-axis-labels
-
-
-
-
-
-
-           // label.FontSpec.Size = 10f;
-           //label.FontSpec.FontColor = Color.DimGray;
-           //label.FontSpec.Border.IsVisible = false;
-           //https://stackoverflow.com/questions/32715379/add-padding-to-a-textobj-item-in-a-zedgraph-chart
-           //label.FontSpec.Fill.Color = Color.Gray;
-           //label.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-           //label.Location.AlignH = AlignH.Left;
-           //https://stackoverflow.com/questions/11960531/positioning-an-imageobj-in-zedgraph
-           //https://stackoverflow.com/questions/3808792/zedgraph-axis-labels
-           //https://stackoverflow.com/questions/12248141/how-to-position-text-label-in-the-x-axis-using-zedgraph-api
-
-            //zedGraphControl1.Refresh();
-
-            // Setup the graph
-            CreateGraph(zedGraphControl1);
-            // Size the control to fill the form with a margin
-            //https://www.codeproject.com/Articles/5431/A-flexible-charting-library-for-NET
-
-
-
+            myPane.Title.Text = "XPS spectra";
+            myPane.Title.FontSpec.Size = 14;
+            myPane.XAxis.Title.Text = "binding energy [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 11;
+            myPane.YAxis.Title.Text = "counts";
+            myPane.YAxis.Title.FontSpec.Size = 11;
+            myPane.Fill.Color = Color.LightGray;
         }
+
 
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
         {
-
         }
+
+
+
 
         private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
         {
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             tableLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
+        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First()
+
+
+        public void colorchanger(object sender, YAxis ya)
+        {
+            Button btn = (Button)sender;
+            var panel = sender as Control;
+            var thePanelName = panel.Name;
+            string col = fab[thePanelName];
+            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+            float value;
+
+            if (btn.ForeColor == Color.DimGray)
+            {
+                btn.Font = new Font("Arial", 12, FontStyle.Bold);
+                btn.ForeColor = Color.Black;
+                btn.FlatAppearance.BorderColor = Color.Black;
+                btn.FlatAppearance.BorderSize = 2;
+
+                for (int i = 2; i <= 25; i++)
+                {
+                    bool result = float.TryParse(row[zeile][i], out value);
+
+                    if (result)
+                    {
+                        pane_labs = new TextObj((row[zeile][i] + "\n" + row[zeile][1] + " " + scores[i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), 0.01,
+                            CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
+                        pane_labs.FontSpec.Size = 10f;
+                        pane_labs.FontSpec.Fill.Color = Color.Transparent;
+                        pane_labs.FontSpec.FontColor = Color.DimGray;
+                        pane_labs.FontSpec.Border.IsVisible = false;
+                        pane_labs.ZOrder = ZOrder.E_BehindCurves;
+                        myPane.GraphObjList.Add(pane_labs);
+                        fuerlabels.Add(thePanelName);
+
+                        ya = new YAxis();                        
+                        ya.Scale.IsVisible = false;
+                        ya.Scale.LabelGap = 0f;
+                        ya.Title.Gap = 0f;
+                        ya.Title.Text = "";
+                        ya.Color = Color.FromName(col);
+                        ya.AxisGap = 0f;
+                        ya.Scale.Format = "#";
+                        ya.Scale.Min = 0;
+                        ya.Scale.Mag = 0;
+                        ya.MajorTic.IsAllTics = false;
+                        ya.MinorTic.IsAllTics = false;                      
+                        ya.Cross = Double.Parse(row[zeile][i], CultureInfo.InvariantCulture);
+                        ya.IsVisible = true;
+                        ya.MajorGrid.IsZeroLine = false;
+                        // hides xaxis
+                        myPane.YAxisList.Add(ya);
+                    }
+                }
+                zedGraphControl1.Refresh();
+            }
+
+            else
+            {
+                btn.ForeColor = Color.DimGray;
+                btn.Font = new Font("Arial", 11, FontStyle.Regular);
+                btn.FlatAppearance.BorderSize = 1;
+                btn.FlatAppearance.BorderColor = Color.DimGray;
+
+                int laenge = fuerlabels.Count - 1;
+                for (int y = laenge; y >= 0; y--)
+                {
+                    if (fuerlabels[y] == thePanelName)
+                    {
+                        fuerlabels.RemoveAt(y);
+                        myPane.GraphObjList.RemoveAt(y);
+                        myPane.YAxisList.RemoveAt(y+1);
+                    }
+                }
+                zedGraphControl1.Refresh();
+            }
+        }
+
+
+
+        private void set_element(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                colorchanger((Button)sender, yaxis);
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                labelchanger(sender);
+            }
+        }
+
+
+
+        private void btn_gauss_Click(object sender, EventArgs e)
+        {
+            if ((!bW_gauss.IsBusy))
+            {
+                myCurve = myPane.AddCurve("",
+                list1, Color.Black, SymbolType.None);
+                bW_gauss.RunWorkerAsync(); //run bW if it is not still running
+                tb_gauss_startvalue.Enabled = false;
+            }
+        }
+
+
+
+        private void btn_gauss_can_Click(object sender, EventArgs e)
+        {
+            if (bW_gauss.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            {
+                bW_gauss.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+                btn_clear.Enabled = true;
+            }
+        }
+
+
+
+        private void bW_gauss_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (i = 0; i <= num_gauss; i++)
+            {
+                end += i;
+                list_gauss.Add(end + "\t" + 2 * end);
+                bW_gauss.ReportProgress(100 * i / num_gauss, end);
+                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+                Thread.Sleep(500);
+
+                if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+                {
+                    e.Cancel = true;
+                    bW_gauss.ReportProgress(0);
+                    break; //warum? ist wichtig!
+                }
+            }
+            //safer.safe(path,list_gauss);
+            e.Result = end; //stores the results of what has been done in bW
+        }
+
+
+
+        private void bW_gauss_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {   //this event is raised, when the ReportProgress-Method is called (in DoWork!)
+            progressBar1.Value = e.ProgressPercentage;
+            lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
+            tb_gauss.Text = e.UserState as String;
+            // x = e.ProgressPercentage
+            //list1.Add(i, Convert.ToDouble(e.UserState));
+            list1.Add(i, end);
+            myCurve.AddPoint(i, end);
+
+            zedGraphControl1.Invalidate();
+            zedGraphControl1.AxisChange();
+        }
+
+
+
+        private void bW_gauss_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
+            if (e.Cancelled)
+            {
+                tb_gauss.Text = "Cancelled!";
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                tb_gauss.Text = e.Error.Message;
+            }
+
+            else
+            {
+                tb_gauss.Text = e.Result.ToString();
+            }
+        }
+
+
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            if (bW_gauss.IsBusy)
+            {
+                btn_clear.Enabled = false;
+            }
+
+            else
+            {
+                tb_gauss.Text = "";
+                tb_gauss_startvalue.Text = "";
+                lb_perc_gauss.Text = "";
+                tb_gauss_startvalue.BackColor = Color.Red;
+                tb_gauss_startvalue.Enabled = true;
+                progressBar1.Value = 0;
+            }
+        }
+
+
+
+        private void tb_gauss_startvalue_TextChanged(object sender, EventArgs e)
+        {
+            string eingabe = tb_gauss_startvalue.Text;
+
+            if (int.TryParse(eingabe, out num_gauss))
+            {
+                btn_gauss.Enabled = true;
+                tb_gauss_startvalue.BackColor = Color.White;
+                btn_gauss.Enabled = true;
+            }
+        }
+
+
 
         public void labelchanger(object sender)
         {
@@ -117,7 +306,6 @@ namespace PE
             var thePanelName = panel.Name;
             //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
             int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-
 
             if (label51.Text == thePanelName)
             {
@@ -178,1503 +366,468 @@ namespace PE
                 label48.Text = row[zeile][24];
                 label50.Text = row[zeile][25];
             }
-
         }
-
-
-
-
-        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First()
-
-
-        public void colorchanger(object sender, TextObj phi, YAxis ya)
-        {
-            Button btn = (Button)sender;
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            string col = fab[thePanelName];
-
-
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
-
-
-            double value;
-
-            
-
-            if (btn.ForeColor == Color.FromName(not_pressed))
-            {
-
-                btn.Font = new Font(font, fontsize_activated, FontStyle.Bold);
-                btn.ForeColor = Color.FromName(pressed);
-                btn.FlatAppearance.BorderColor = Color.FromName(pressed);
-                btn.FlatAppearance.BorderSize = bordersize_activated;
-
-               // drawlines(k, safelastj, zeile, thePanelName);
-
-
-
-                for (int i = 2; i <= 25; i++)
-                {
-                    bool result = double.TryParse(row[zeile][i], out value);
-
-                    if (result)
-                    {
-                        //b.Text = (row[zeile][1] + " " + scores[i]);
-                        //b.Location.X = float.Parse(row[zeile][i], CultureInfo.InvariantCulture);
-                        //b.Location.Y = -0.02;
-                        b = new TextObj((row[zeile][1] + " " + scores[i] + "\n" + row[zeile][i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), 0.01,
-                            CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
-                        b.FontSpec.Size = 10f;
-                        b.FontSpec.Fill.Color = Color.Transparent;
-                        b.FontSpec.FontColor = Color.DimGray;
-                        b.FontSpec.Border.IsVisible = false;
-                        //b.Location.CoordinateFrame = CoordType.XScaleYChartFraction;
-                        //b.Location.AlignH = AlignH.Center;
-                        b.ZOrder = ZOrder.E_BehindCurves;
-                        myPane.GraphObjList.Add(b);
-                        fuerlabels.Add(thePanelName);
-
-
-
-                        ya = new YAxis();                        
-                        ya.Scale.IsVisible = false;
-                        ya.Scale.LabelGap = 0f;
-                        ya.Title.Gap = 0f;
-                        ya.Title.Text = "";
-                        //myPane.YAxisList.Add(y).Title.Text = thePanelName ;
-                        //myPane.YAxisList.Add(y).Title.IsVisible = true;
-                        ya.Color = Color.FromName(col);
-                        ya.AxisGap = 0f;
-                        ya.Scale.Format = "#";
-                        ya.Scale.Min = 0;
-                        ya.Scale.Mag = 0;
-                        //ya.Title.IsVisible = false;
-                        ya.MajorTic.IsAllTics = false;
-                        ya.MinorTic.IsAllTics = false;                      
-                        ya.Cross = Double.Parse(row[zeile][i], CultureInfo.InvariantCulture);
-                        ya.IsVisible = true;
-                        ya.MajorGrid.IsZeroLine = false;
-                        // hides xaxis
-                        myPane.YAxisList.Add(ya);
-                        //zedGraphControl1.Invalidate();
-
-                    }
-
-                }
-
-
-                //zedGraphControl1.Invalidate();
-                zedGraphControl1.Refresh();
-
-            }
-
-            else
-            {
-                btn.ForeColor = Color.FromName(not_pressed);
-                btn.Font = new Font(font, fontsize_deactivated, FontStyle.Regular);
-                btn.FlatAppearance.BorderSize = bordersize_deactivated;
-                btn.FlatAppearance.BorderColor = Color.FromName(not_pressed);
-
-
-
-                int laenge = fuerlabels.Count - 1;
-                for (int y = laenge; y >= 0; y--)
-                {
-                    if (fuerlabels[y] == thePanelName)
-                    {
-                        fuerlabels.RemoveAt(y);
-                        myPane.GraphObjList.RemoveAt(y);
-                        myPane.YAxisList.RemoveAt(y+1);
-                        //zedGraphControl1.Invalidate();
-                    }
-                }
-
-
-               
-
-
-
-               // removelines(k,safelastj,zeile);
-
-                //myPane.GraphObjList.Remove(phi);
-                zedGraphControl1.Refresh();
-            }
-        }
-
-
 
 
 
         private void H_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {              
-                labelchanger(sender);
-            }
+           set_element(sender, e);
         }
-
-
 
         private void He_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {            
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
-
 
         private void Li_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
-
 
         private void Be_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
 
         private void B_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void C_MouseDown(object sender, MouseEventArgs e)
         {
-
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
 
         private void N_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
 
         private void O_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void F_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
 
         private void Ne_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Na_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Mg_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Al_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Si_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void P_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void S_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Cl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ar_MouseDown(object sender, MouseEventArgs e)
         {
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void K_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ca_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Sc_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ti_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void V_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Cr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Mn_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Fe_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Co_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ni_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Cu_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Zn_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ga_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ge_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void As_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Se_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Br_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Kr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            };
+            set_element(sender, e);
         }
 
         private void Rb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Sr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Y_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Zr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Nb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Mo_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Tc_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ru_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Rh_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pd_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ag_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Cd_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void In_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Sn_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Sb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Te_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void I_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Xe_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Cs_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ba_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void La_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Hf_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ta_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void W_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Re_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Os_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ir_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pt_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Au_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Hg_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Tl_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Bi_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Po_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void At_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Rn_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Fr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ra_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ac_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ce_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pr_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Nd_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Sm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Eu_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Gd_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Tb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Dy_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Ho_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Er_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Tm_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Yb_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Lu_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Th_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
 
         private void Pa_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
+            set_element(sender, e);
         }
-
 
         private void U_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender,b ,ya);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
-        }
-
-
-
-
-
-
-        // SetSize() is separate from Resize() so we can 
-        // call it independently from the Form1_Load() method
-        // This leaves a 10 px margin around the outside of the control
-        // Customize this to fit your needs
-
-        
-
-        private void CreateGraph(ZedGraphControl zgc)
-        {
-            // get a reference to the GraphPane
-            GraphPane myPane = zgc.GraphPane;
-
-
-            //myPane.Border.IsVisible = false;
-
-            // Set the Titles
-            myPane.Title.Text = "XPS spectra";
-            myPane.Title.FontSpec.Size = 14;
-            myPane.XAxis.Title.Text = "binding energy [eV]";
-            myPane.XAxis.Title.FontSpec.Size = 11;
-            myPane.YAxis.Title.Text = "counts";
-            myPane.YAxis.Title.FontSpec.Size = 11;
-            //myPane.X2Axis.Title.Text = "lines";
-            myPane.Fill.Color = Color.LightGray;
-
-            
-
-
-
-
-            // Make up some data arrays based on the Sine function
-            // double x, y1, y2;
-            // PointPairList list1 = new PointPairList();
-            // PointPairList list2 = new PointPairList();
-            // for (int i = 0; i < 36; i++)
-            //  {
-            //    x = (double)i + 5;
-            //     y1 = 1.5 + Math.Sin((double)i * 0.2);
-            //     y2 = 3.0 * (1.5 + Math.Sin((double)i * 0.2));
-            //     list1.Add(x, y1);
-            //     list2.Add(x, y2);
-            // }
-
-            // Generate a red curve with diamond
-            // symbols, and "Porsche" in the legend
-            //  LineItem myCurve = myPane.AddCurve("Porsche",
-            //      list1, Color.Red, SymbolType.Diamond);
-
-            // Generate a blue curve with circle
-            // symbols, and "Piper" in the legend
-            //  LineItem myCurve2 = myPane.AddCurve("Piper",
-            //      list2, Color.Blue, SymbolType.Circle);
-
-
-
-            // Tell ZedGraph to refigure the
-            // axes since the data have changed
-            zgc.AxisChange();
-        }
-
-
-
-
-
-        private void btn_gauss_Click(object sender, EventArgs e)
-        {
-            if ((!bW_gauss.IsBusy))
-            {
-                bW_gauss.RunWorkerAsync(); //run bW if it is not still running
-                tb_gauss_startvalue.Enabled = false;
-            }
-        }
-
-        private void btn_gauss_can_Click(object sender, EventArgs e)
-        {
-            if (bW_gauss.IsBusy) // .IsBusy is true, if bW is running, otherwise false
-            {
-                bW_gauss.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
-                btn_clear.Enabled = true;
-            }
-        }
-
-
-        private void bW_gauss_DoWork(object sender, DoWorkEventArgs e)
-        {
-            int i;
-            double end = 0;
-
-
-            for (i = 0; i <= num_gauss; i++)
-            {
-                end += i;
-                list_gauss.Add(end + "\t" + 2 * end);
-                bW_gauss.ReportProgress(100 * i / num_gauss, end.ToString());
-                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-                Thread.Sleep(500);
-
-
-                if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
-                {
-                    e.Cancel = true;
-                    bW_gauss.ReportProgress(0);
-                    break; //warum? ist wichtig!
-                }
-
-            }
-            //safer.safe(path,list_gauss);
-            e.Result = end; //stores the results of what has been done in bW
-        }
-
-
-
-        private void bW_gauss_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {   //this event is raised, when the ReportProgress-Method is called (in DoWork!)
-            progressBar1.Value = e.ProgressPercentage;
-            lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
-            tb_gauss.Text = e.UserState as String;
-
-
-
-
-            // get a reference to the GraphPane
-           
-
-
-            //myPane.Border.IsVisible = false;
-
-            // Set the Titles
-            //myPane.Title.Text = "XPS spectra";
-            //myPane.Title.FontSpec.Size = 14;
-            //myPane.XAxis.Title.Text = "binding energy [eV]";
-            //myPane.XAxis.Title.FontSpec.Size = 11;
-            //myPane.YAxis.Title.Text = "counts";
-           // myPane.YAxis.Title.FontSpec.Size = 11;
-
-            // Make up some data arrays based on the Sine function
-            double x, y1;
-            PointPairList list1 = new PointPairList();
-            x = e.ProgressPercentage;
-            y1 = Convert.ToDouble(e.UserState);
-            list1.Add(x, y1);
-            
-
-            // Generate a red curve with diamond
-            // symbols, and "Porsche" in the legend
-            LineItem myCurve = myPane.AddCurve("",
-                  list1, Color.Black, SymbolType.Circle);
-
-            zedGraphControl1.Refresh();
-
-            // Tell ZedGraph to refigure the
-            // axes since the data have changed
-            zedGraphControl1.AxisChange();
-
-
-
-        }
-
-
-        private void bW_gauss_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
-            if (e.Cancelled)
-            {
-                tb_gauss.Text = "Cancelled!";
-            }
-
-            else if (e.Error != null)
-            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
-                tb_gauss.Text = e.Error.Message;
-            }
-
-            else
-            {
-                tb_gauss.Text = e.Result.ToString();
-            }
-        }
-
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-
-                if (bW_gauss.IsBusy)
-                {
-                    btn_clear.Enabled = false;
-                }
-
-                else
-                {
-                    tb_gauss.Text = "";
-                    tb_gauss_startvalue.Text = "";
-                    lb_perc_gauss.Text = "";
-                    tb_gauss_startvalue.BackColor = Color.Red;
-                    tb_gauss_startvalue.Enabled = true;
-                    progressBar1.Value = 0;
-                }
-        }
-
-        private void tb_gauss_startvalue_TextChanged(object sender, EventArgs e)
-        {
-            string eingabe = tb_gauss_startvalue.Text;
-            if (int.TryParse(eingabe, out num_gauss))
-            {
-                btn_gauss.Enabled = true;
-                tb_gauss_startvalue.BackColor = Color.White;
-                btn_gauss.Enabled = true;
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public Form1()
-        {
-            InitializeComponent();
-            myPane = zedGraphControl1.GraphPane;
+            set_element(sender, e);
         }
     }
 }

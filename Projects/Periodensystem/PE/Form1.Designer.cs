@@ -160,6 +160,7 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
+            this.Clear = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -242,7 +243,6 @@
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.Clear = new System.Windows.Forms.Button();
             this.btn_gauss = new System.Windows.Forms.Button();
             this.btn_gauss_can = new System.Windows.Forms.Button();
             this.tb_gauss_startvalue = new System.Windows.Forms.TextBox();
@@ -251,14 +251,36 @@
             this.btn_clear = new System.Windows.Forms.Button();
             this.bW_gauss = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label86 = new System.Windows.Forms.Label();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.textBox51 = new System.Windows.Forms.TextBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.textBox50 = new System.Windows.Forms.TextBox();
+            this.textBox49 = new System.Windows.Forms.TextBox();
+            this.textBox48 = new System.Windows.Forms.TextBox();
+            this.textBox47 = new System.Windows.Forms.TextBox();
+            this.textBox46 = new System.Windows.Forms.TextBox();
+            this.textBox45 = new System.Windows.Forms.TextBox();
+            this.textBox44 = new System.Windows.Forms.TextBox();
+            this.textBox43 = new System.Windows.Forms.TextBox();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label73 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -1434,6 +1456,7 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox11, 10, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox10, 9, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox9, 8, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Clear, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.textBox8, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox7, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox6, 5, 0);
@@ -1655,6 +1678,13 @@
             resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.ForeColor = System.Drawing.Color.DimGray;
             this.textBox9.Name = "textBox9";
+            // 
+            // Clear
+            // 
+            resources.ApplyResources(this.Clear, "Clear");
+            this.Clear.BackColor = System.Drawing.Color.LightGray;
+            this.Clear.Name = "Clear";
+            this.Clear.UseVisualStyleBackColor = false;
             // 
             // textBox8
             // 
@@ -2193,8 +2223,8 @@
             // 
             // zedGraphControl1
             // 
-            this.zedGraphControl1.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.zedGraphControl1, "zedGraphControl1");
+            this.zedGraphControl1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -2203,12 +2233,6 @@
             this.zedGraphControl1.ScrollMinX = 0D;
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
-            // 
-            // Clear
-            // 
-            resources.ApplyResources(this.Clear, "Clear");
-            this.Clear.Name = "Clear";
-            this.Clear.UseVisualStyleBackColor = true;
             // 
             // btn_gauss
             // 
@@ -2260,39 +2284,184 @@
             resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
             this.lb_perc_gauss.Name = "lb_perc_gauss";
             // 
-            // tableLayoutPanel3
+            // groupBox1
             // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.zedGraphControl1, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.groupBox1.Controls.Add(this.label88);
+            this.groupBox1.Controls.Add(this.label87);
+            this.groupBox1.Controls.Add(this.label86);
+            this.groupBox1.Controls.Add(this.label85);
+            this.groupBox1.Controls.Add(this.label84);
+            this.groupBox1.Controls.Add(this.label83);
+            this.groupBox1.Controls.Add(this.label82);
+            this.groupBox1.Controls.Add(this.textBox51);
+            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.textBox50);
+            this.groupBox1.Controls.Add(this.textBox49);
+            this.groupBox1.Controls.Add(this.textBox48);
+            this.groupBox1.Controls.Add(this.textBox47);
+            this.groupBox1.Controls.Add(this.textBox46);
+            this.groupBox1.Controls.Add(this.textBox45);
+            this.groupBox1.Controls.Add(this.textBox44);
+            this.groupBox1.Controls.Add(this.textBox43);
+            this.groupBox1.Controls.Add(this.label81);
+            this.groupBox1.Controls.Add(this.label80);
+            this.groupBox1.Controls.Add(this.label79);
+            this.groupBox1.Controls.Add(this.label78);
+            this.groupBox1.Controls.Add(this.label77);
+            this.groupBox1.Controls.Add(this.label76);
+            this.groupBox1.Controls.Add(this.label75);
+            this.groupBox1.Controls.Add(this.label74);
+            this.groupBox1.Controls.Add(this.label73);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
             // 
-            // tableLayoutPanel4
+            // label88
             // 
-            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            resources.ApplyResources(this.label88, "label88");
+            this.label88.Name = "label88";
             // 
-            // tableLayoutPanel5
+            // label87
             // 
-            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.btn_gauss, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.btn_gauss_can, 1, 2);
-            this.tableLayoutPanel5.Controls.Add(this.btn_clear, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.tb_gauss_startvalue, 0, 3);
-            this.tableLayoutPanel5.Controls.Add(this.tb_gauss, 1, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            resources.ApplyResources(this.label87, "label87");
+            this.label87.Name = "label87";
+            // 
+            // label86
+            // 
+            resources.ApplyResources(this.label86, "label86");
+            this.label86.Name = "label86";
+            // 
+            // label85
+            // 
+            resources.ApplyResources(this.label85, "label85");
+            this.label85.Name = "label85";
+            // 
+            // label84
+            // 
+            resources.ApplyResources(this.label84, "label84");
+            this.label84.Name = "label84";
+            // 
+            // label83
+            // 
+            resources.ApplyResources(this.label83, "label83");
+            this.label83.Name = "label83";
+            // 
+            // label82
+            // 
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
+            // 
+            // textBox51
+            // 
+            resources.ApplyResources(this.textBox51, "textBox51");
+            this.textBox51.Name = "textBox51";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            resources.ApplyResources(this.comboBox2, "comboBox2");
+            this.comboBox2.Name = "comboBox2";
+            // 
+            // textBox50
+            // 
+            resources.ApplyResources(this.textBox50, "textBox50");
+            this.textBox50.Name = "textBox50";
+            // 
+            // textBox49
+            // 
+            resources.ApplyResources(this.textBox49, "textBox49");
+            this.textBox49.Name = "textBox49";
+            // 
+            // textBox48
+            // 
+            resources.ApplyResources(this.textBox48, "textBox48");
+            this.textBox48.Name = "textBox48";
+            // 
+            // textBox47
+            // 
+            resources.ApplyResources(this.textBox47, "textBox47");
+            this.textBox47.Name = "textBox47";
+            // 
+            // textBox46
+            // 
+            resources.ApplyResources(this.textBox46, "textBox46");
+            this.textBox46.Name = "textBox46";
+            // 
+            // textBox45
+            // 
+            resources.ApplyResources(this.textBox45, "textBox45");
+            this.textBox45.Name = "textBox45";
+            // 
+            // textBox44
+            // 
+            resources.ApplyResources(this.textBox44, "textBox44");
+            this.textBox44.Name = "textBox44";
+            // 
+            // textBox43
+            // 
+            resources.ApplyResources(this.textBox43, "textBox43");
+            this.textBox43.Name = "textBox43";
+            // 
+            // label81
+            // 
+            resources.ApplyResources(this.label81, "label81");
+            this.label81.Name = "label81";
+            // 
+            // label80
+            // 
+            resources.ApplyResources(this.label80, "label80");
+            this.label80.Name = "label80";
+            // 
+            // label79
+            // 
+            resources.ApplyResources(this.label79, "label79");
+            this.label79.Name = "label79";
+            // 
+            // label78
+            // 
+            resources.ApplyResources(this.label78, "label78");
+            this.label78.Name = "label78";
+            // 
+            // label77
+            // 
+            resources.ApplyResources(this.label77, "label77");
+            this.label77.Name = "label77";
+            // 
+            // label76
+            // 
+            resources.ApplyResources(this.label76, "label76");
+            this.label76.Name = "label76";
+            // 
+            // label75
+            // 
+            resources.ApplyResources(this.label75, "label75");
+            this.label75.Name = "label75";
+            // 
+            // label74
+            // 
+            resources.ApplyResources(this.label74, "label74");
+            this.label74.Name = "label74";
+            // 
+            // label73
+            // 
+            resources.ApplyResources(this.label73, "label73");
+            this.label73.Name = "label73";
             // 
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.lb_perc_gauss);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.Clear);
+            this.Controls.Add(this.btn_clear);
+            this.Controls.Add(this.tb_gauss);
+            this.Controls.Add(this.tb_gauss_startvalue);
+            this.Controls.Add(this.btn_gauss_can);
+            this.Controls.Add(this.btn_gauss);
+            this.Controls.Add(this.lb_perc_gauss);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -2300,12 +2469,8 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2460,13 +2625,6 @@
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TextBox textBox28;
-        private System.Windows.Forms.TextBox textBox29;
-        private System.Windows.Forms.TextBox textBox30;
-        private System.Windows.Forms.TextBox textBox31;
-        private System.Windows.Forms.TextBox textBox32;
-        private System.Windows.Forms.TextBox textBox33;
-        private System.Windows.Forms.TextBox textBox34;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label47;
@@ -2534,9 +2692,40 @@
         private System.Windows.Forms.Button btn_clear;
         private System.ComponentModel.BackgroundWorker bW_gauss;
         private System.Windows.Forms.Label lb_perc_gauss;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TextBox textBox28;
+        private System.Windows.Forms.TextBox textBox29;
+        private System.Windows.Forms.TextBox textBox30;
+        private System.Windows.Forms.TextBox textBox31;
+        private System.Windows.Forms.TextBox textBox32;
+        private System.Windows.Forms.TextBox textBox33;
+        private System.Windows.Forms.TextBox textBox34;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.TextBox textBox49;
+        private System.Windows.Forms.TextBox textBox48;
+        private System.Windows.Forms.TextBox textBox47;
+        private System.Windows.Forms.TextBox textBox46;
+        private System.Windows.Forms.TextBox textBox45;
+        private System.Windows.Forms.TextBox textBox44;
+        private System.Windows.Forms.TextBox textBox43;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label85;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.TextBox textBox51;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBox50;
     }
 }
 
