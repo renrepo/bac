@@ -17,7 +17,7 @@ namespace PE
     public partial class Form1 : Form
     {
 
-        string filePath = System.IO.Path.GetFullPath("Bindungsenergiencsv.csv");
+        string filePath = System.IO.Path.GetFullPath("Bindungsenergien.csv");
         string filePath2 = System.IO.Path.GetFullPath("colors2.csv");
         List<List<string>> row = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
