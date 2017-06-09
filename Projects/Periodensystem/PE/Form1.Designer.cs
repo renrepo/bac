@@ -160,7 +160,6 @@
             this.textBox11 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
-            this.Clear = new System.Windows.Forms.Button();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -1456,7 +1455,6 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox11, 10, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox10, 9, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox9, 8, 0);
-            this.tableLayoutPanel1.Controls.Add(this.Clear, 1, 10);
             this.tableLayoutPanel1.Controls.Add(this.textBox8, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox7, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox6, 5, 0);
@@ -1678,13 +1676,6 @@
             resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.ForeColor = System.Drawing.Color.DimGray;
             this.textBox9.Name = "textBox9";
-            // 
-            // Clear
-            // 
-            resources.ApplyResources(this.Clear, "Clear");
-            this.Clear.BackColor = System.Drawing.Color.LightGray;
-            this.Clear.Name = "Clear";
-            this.Clear.UseVisualStyleBackColor = false;
             // 
             // textBox8
             // 
@@ -2683,7 +2674,6 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Button Clear;
         private System.Windows.Forms.Button btn_gauss;
         private System.Windows.Forms.Button btn_gauss_can;
         private System.Windows.Forms.TextBox tb_gauss_startvalue;
