@@ -284,7 +284,7 @@
             // 
             // Y
             // 
-            this.Y.BackColor = System.Drawing.Color.LightCoral;
+            this.Y.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Y, "Y");
             this.Y.ForeColor = System.Drawing.Color.DimGray;
             this.Y.Name = "Y";
@@ -294,7 +294,7 @@
             // 
             // Sc
             // 
-            this.Sc.BackColor = System.Drawing.Color.LightCoral;
+            this.Sc.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Sc, "Sc");
             this.Sc.ForeColor = System.Drawing.Color.DimGray;
             this.Sc.Name = "Sc";
@@ -565,7 +565,7 @@
             // 
             // Ti
             // 
-            this.Ti.BackColor = System.Drawing.Color.LightCoral;
+            this.Ti.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ti, "Ti");
             this.Ti.ForeColor = System.Drawing.Color.DimGray;
             this.Ti.Name = "Ti";
@@ -575,7 +575,7 @@
             // 
             // V
             // 
-            this.V.BackColor = System.Drawing.Color.LightCoral;
+            this.V.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.V, "V");
             this.V.ForeColor = System.Drawing.Color.DimGray;
             this.V.Name = "V";
@@ -585,7 +585,7 @@
             // 
             // Cr
             // 
-            this.Cr.BackColor = System.Drawing.Color.LightCoral;
+            this.Cr.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Cr, "Cr");
             this.Cr.ForeColor = System.Drawing.Color.DimGray;
             this.Cr.Name = "Cr";
@@ -595,7 +595,7 @@
             // 
             // Mn
             // 
-            this.Mn.BackColor = System.Drawing.Color.LightCoral;
+            this.Mn.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Mn, "Mn");
             this.Mn.ForeColor = System.Drawing.Color.DimGray;
             this.Mn.Name = "Mn";
@@ -605,7 +605,7 @@
             // 
             // Fe
             // 
-            this.Fe.BackColor = System.Drawing.Color.LightCoral;
+            this.Fe.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Fe, "Fe");
             this.Fe.ForeColor = System.Drawing.Color.DimGray;
             this.Fe.Name = "Fe";
@@ -615,7 +615,7 @@
             // 
             // Co
             // 
-            this.Co.BackColor = System.Drawing.Color.LightCoral;
+            this.Co.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Co, "Co");
             this.Co.ForeColor = System.Drawing.Color.DimGray;
             this.Co.Name = "Co";
@@ -625,7 +625,7 @@
             // 
             // Ni
             // 
-            this.Ni.BackColor = System.Drawing.Color.LightCoral;
+            this.Ni.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ni, "Ni");
             this.Ni.ForeColor = System.Drawing.Color.DimGray;
             this.Ni.Name = "Ni";
@@ -635,7 +635,7 @@
             // 
             // Cu
             // 
-            this.Cu.BackColor = System.Drawing.Color.LightCoral;
+            this.Cu.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Cu, "Cu");
             this.Cu.ForeColor = System.Drawing.Color.DimGray;
             this.Cu.Name = "Cu";
@@ -645,7 +645,7 @@
             // 
             // Zn
             // 
-            this.Zn.BackColor = System.Drawing.Color.LightCoral;
+            this.Zn.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Zn, "Zn");
             this.Zn.ForeColor = System.Drawing.Color.DimGray;
             this.Zn.Name = "Zn";
@@ -715,7 +715,7 @@
             // 
             // Zr
             // 
-            this.Zr.BackColor = System.Drawing.Color.LightCoral;
+            this.Zr.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Zr, "Zr");
             this.Zr.ForeColor = System.Drawing.Color.DimGray;
             this.Zr.Name = "Zr";
@@ -725,7 +725,7 @@
             // 
             // Nb
             // 
-            this.Nb.BackColor = System.Drawing.Color.LightCoral;
+            this.Nb.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Nb, "Nb");
             this.Nb.ForeColor = System.Drawing.Color.DimGray;
             this.Nb.Name = "Nb";
@@ -735,7 +735,7 @@
             // 
             // Mo
             // 
-            this.Mo.BackColor = System.Drawing.Color.LightCoral;
+            this.Mo.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Mo, "Mo");
             this.Mo.ForeColor = System.Drawing.Color.DimGray;
             this.Mo.Name = "Mo";
@@ -745,7 +745,7 @@
             // 
             // Tc
             // 
-            this.Tc.BackColor = System.Drawing.Color.LightCoral;
+            this.Tc.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Tc, "Tc");
             this.Tc.ForeColor = System.Drawing.Color.DimGray;
             this.Tc.Name = "Tc";
@@ -755,7 +755,7 @@
             // 
             // Ru
             // 
-            this.Ru.BackColor = System.Drawing.Color.LightCoral;
+            this.Ru.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ru, "Ru");
             this.Ru.ForeColor = System.Drawing.Color.DimGray;
             this.Ru.Name = "Ru";
@@ -765,7 +765,7 @@
             // 
             // Rh
             // 
-            this.Rh.BackColor = System.Drawing.Color.LightCoral;
+            this.Rh.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Rh, "Rh");
             this.Rh.ForeColor = System.Drawing.Color.DimGray;
             this.Rh.Name = "Rh";
@@ -775,7 +775,7 @@
             // 
             // Pd
             // 
-            this.Pd.BackColor = System.Drawing.Color.LightCoral;
+            this.Pd.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Pd, "Pd");
             this.Pd.ForeColor = System.Drawing.Color.DimGray;
             this.Pd.Name = "Pd";
@@ -785,7 +785,7 @@
             // 
             // Ag
             // 
-            this.Ag.BackColor = System.Drawing.Color.LightCoral;
+            this.Ag.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ag, "Ag");
             this.Ag.ForeColor = System.Drawing.Color.DimGray;
             this.Ag.Name = "Ag";
@@ -795,7 +795,7 @@
             // 
             // Cd
             // 
-            this.Cd.BackColor = System.Drawing.Color.LightCoral;
+            this.Cd.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Cd, "Cd");
             this.Cd.ForeColor = System.Drawing.Color.DimGray;
             this.Cd.Name = "Cd";
@@ -865,7 +865,7 @@
             // 
             // La
             // 
-            this.La.BackColor = System.Drawing.Color.LightCoral;
+            this.La.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.La, "La");
             this.La.ForeColor = System.Drawing.Color.DimGray;
             this.La.Name = "La";
@@ -875,7 +875,7 @@
             // 
             // Hf
             // 
-            this.Hf.BackColor = System.Drawing.Color.LightCoral;
+            this.Hf.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Hf, "Hf");
             this.Hf.ForeColor = System.Drawing.Color.DimGray;
             this.Hf.Name = "Hf";
@@ -885,7 +885,7 @@
             // 
             // Ta
             // 
-            this.Ta.BackColor = System.Drawing.Color.LightCoral;
+            this.Ta.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ta, "Ta");
             this.Ta.ForeColor = System.Drawing.Color.DimGray;
             this.Ta.Name = "Ta";
@@ -895,7 +895,7 @@
             // 
             // W
             // 
-            this.W.BackColor = System.Drawing.Color.LightCoral;
+            this.W.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.W, "W");
             this.W.ForeColor = System.Drawing.Color.DimGray;
             this.W.Name = "W";
@@ -905,7 +905,7 @@
             // 
             // Re
             // 
-            this.Re.BackColor = System.Drawing.Color.LightCoral;
+            this.Re.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Re, "Re");
             this.Re.ForeColor = System.Drawing.Color.DimGray;
             this.Re.Name = "Re";
@@ -915,7 +915,7 @@
             // 
             // Os
             // 
-            this.Os.BackColor = System.Drawing.Color.LightCoral;
+            this.Os.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Os, "Os");
             this.Os.ForeColor = System.Drawing.Color.DimGray;
             this.Os.Name = "Os";
@@ -925,7 +925,7 @@
             // 
             // Ir
             // 
-            this.Ir.BackColor = System.Drawing.Color.LightCoral;
+            this.Ir.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ir, "Ir");
             this.Ir.ForeColor = System.Drawing.Color.DimGray;
             this.Ir.Name = "Ir";
@@ -935,7 +935,7 @@
             // 
             // Pt
             // 
-            this.Pt.BackColor = System.Drawing.Color.LightCoral;
+            this.Pt.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Pt, "Pt");
             this.Pt.ForeColor = System.Drawing.Color.DimGray;
             this.Pt.Name = "Pt";
@@ -945,7 +945,7 @@
             // 
             // Au
             // 
-            this.Au.BackColor = System.Drawing.Color.LightCoral;
+            this.Au.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Au, "Au");
             this.Au.ForeColor = System.Drawing.Color.DimGray;
             this.Au.Name = "Au";
@@ -955,7 +955,7 @@
             // 
             // Hg
             // 
-            this.Hg.BackColor = System.Drawing.Color.LightCoral;
+            this.Hg.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Hg, "Hg");
             this.Hg.ForeColor = System.Drawing.Color.DimGray;
             this.Hg.Name = "Hg";
@@ -1025,7 +1025,7 @@
             // 
             // Ac
             // 
-            this.Ac.BackColor = System.Drawing.Color.LightCoral;
+            this.Ac.BackColor = System.Drawing.Color.Salmon;
             resources.ApplyResources(this.Ac, "Ac");
             this.Ac.ForeColor = System.Drawing.Color.DimGray;
             this.Ac.Name = "Ac";
@@ -1035,7 +1035,7 @@
             // 
             // Rf
             // 
-            this.Rf.BackColor = System.Drawing.Color.LightCoral;
+            this.Rf.BackColor = System.Drawing.Color.LightSalmon;
             this.Rf.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Rf, "Rf");
             this.Rf.ForeColor = System.Drawing.Color.White;
@@ -1044,7 +1044,7 @@
             // 
             // Db
             // 
-            this.Db.BackColor = System.Drawing.Color.LightCoral;
+            this.Db.BackColor = System.Drawing.Color.LightSalmon;
             this.Db.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Db, "Db");
             this.Db.ForeColor = System.Drawing.Color.White;
@@ -1053,7 +1053,7 @@
             // 
             // Sg
             // 
-            this.Sg.BackColor = System.Drawing.Color.LightCoral;
+            this.Sg.BackColor = System.Drawing.Color.LightSalmon;
             this.Sg.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Sg, "Sg");
             this.Sg.ForeColor = System.Drawing.Color.White;
@@ -1062,7 +1062,7 @@
             // 
             // Bh
             // 
-            this.Bh.BackColor = System.Drawing.Color.LightCoral;
+            this.Bh.BackColor = System.Drawing.Color.LightSalmon;
             this.Bh.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Bh, "Bh");
             this.Bh.ForeColor = System.Drawing.Color.White;
@@ -1071,7 +1071,7 @@
             // 
             // Hs
             // 
-            this.Hs.BackColor = System.Drawing.Color.LightCoral;
+            this.Hs.BackColor = System.Drawing.Color.LightSalmon;
             this.Hs.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Hs, "Hs");
             this.Hs.ForeColor = System.Drawing.Color.White;
@@ -1080,7 +1080,7 @@
             // 
             // Mt
             // 
-            this.Mt.BackColor = System.Drawing.Color.LightCoral;
+            this.Mt.BackColor = System.Drawing.Color.LightSalmon;
             this.Mt.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Mt, "Mt");
             this.Mt.ForeColor = System.Drawing.Color.White;
@@ -1089,7 +1089,7 @@
             // 
             // Ds
             // 
-            this.Ds.BackColor = System.Drawing.Color.LightCoral;
+            this.Ds.BackColor = System.Drawing.Color.LightSalmon;
             this.Ds.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Ds, "Ds");
             this.Ds.ForeColor = System.Drawing.Color.White;
@@ -1098,7 +1098,7 @@
             // 
             // Rg
             // 
-            this.Rg.BackColor = System.Drawing.Color.LightCoral;
+            this.Rg.BackColor = System.Drawing.Color.LightSalmon;
             this.Rg.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Rg, "Rg");
             this.Rg.ForeColor = System.Drawing.Color.White;
@@ -1107,7 +1107,7 @@
             // 
             // Cn
             // 
-            this.Cn.BackColor = System.Drawing.Color.LightCoral;
+            this.Cn.BackColor = System.Drawing.Color.LightSalmon;
             this.Cn.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cn, "Cn");
             this.Cn.ForeColor = System.Drawing.Color.White;
@@ -1116,7 +1116,7 @@
             // 
             // Uut
             // 
-            this.Uut.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Uut.BackColor = System.Drawing.Color.Aquamarine;
             this.Uut.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uut, "Uut");
             this.Uut.ForeColor = System.Drawing.Color.White;
@@ -1125,7 +1125,7 @@
             // 
             // Fl
             // 
-            this.Fl.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Fl.BackColor = System.Drawing.Color.Aquamarine;
             this.Fl.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Fl, "Fl");
             this.Fl.ForeColor = System.Drawing.Color.White;
@@ -1134,7 +1134,7 @@
             // 
             // Uup
             // 
-            this.Uup.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Uup.BackColor = System.Drawing.Color.Aquamarine;
             this.Uup.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uup, "Uup");
             this.Uup.ForeColor = System.Drawing.Color.White;
@@ -1143,7 +1143,7 @@
             // 
             // Lv
             // 
-            this.Lv.BackColor = System.Drawing.Color.MediumAquamarine;
+            this.Lv.BackColor = System.Drawing.Color.Aquamarine;
             this.Lv.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Lv, "Lv");
             this.Lv.ForeColor = System.Drawing.Color.White;
@@ -1152,7 +1152,7 @@
             // 
             // Uus
             // 
-            this.Uus.BackColor = System.Drawing.Color.LimeGreen;
+            this.Uus.BackColor = System.Drawing.Color.PaleGreen;
             this.Uus.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uus, "Uus");
             this.Uus.ForeColor = System.Drawing.Color.White;
@@ -1161,7 +1161,7 @@
             // 
             // Uuo
             // 
-            this.Uuo.BackColor = System.Drawing.Color.Goldenrod;
+            this.Uuo.BackColor = System.Drawing.Color.Orange;
             this.Uuo.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Uuo, "Uuo");
             this.Uuo.ForeColor = System.Drawing.Color.White;
@@ -1310,7 +1310,7 @@
             // 
             // Th
             // 
-            this.Th.BackColor = System.Drawing.Color.OliveDrab;
+            this.Th.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Th.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Th, "Th");
             this.Th.ForeColor = System.Drawing.Color.DimGray;
@@ -1321,7 +1321,7 @@
             // 
             // Pa
             // 
-            this.Pa.BackColor = System.Drawing.Color.OliveDrab;
+            this.Pa.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Pa.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Pa, "Pa");
             this.Pa.ForeColor = System.Drawing.Color.DimGray;
@@ -1332,7 +1332,7 @@
             // 
             // U
             // 
-            this.U.BackColor = System.Drawing.Color.OliveDrab;
+            this.U.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.U.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.U, "U");
             this.U.ForeColor = System.Drawing.Color.DimGray;
@@ -1343,7 +1343,7 @@
             // 
             // Np
             // 
-            this.Np.BackColor = System.Drawing.Color.OliveDrab;
+            this.Np.BackColor = System.Drawing.Color.SpringGreen;
             this.Np.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Np, "Np");
             this.Np.ForeColor = System.Drawing.Color.White;
@@ -1352,7 +1352,7 @@
             // 
             // Pu
             // 
-            this.Pu.BackColor = System.Drawing.Color.OliveDrab;
+            this.Pu.BackColor = System.Drawing.Color.SpringGreen;
             this.Pu.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Pu, "Pu");
             this.Pu.ForeColor = System.Drawing.Color.White;
@@ -1361,7 +1361,7 @@
             // 
             // Am
             // 
-            this.Am.BackColor = System.Drawing.Color.OliveDrab;
+            this.Am.BackColor = System.Drawing.Color.SpringGreen;
             this.Am.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Am, "Am");
             this.Am.ForeColor = System.Drawing.Color.White;
@@ -1370,7 +1370,7 @@
             // 
             // Cm
             // 
-            this.Cm.BackColor = System.Drawing.Color.OliveDrab;
+            this.Cm.BackColor = System.Drawing.Color.SpringGreen;
             this.Cm.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cm, "Cm");
             this.Cm.ForeColor = System.Drawing.Color.White;
@@ -1379,7 +1379,7 @@
             // 
             // Bk
             // 
-            this.Bk.BackColor = System.Drawing.Color.OliveDrab;
+            this.Bk.BackColor = System.Drawing.Color.SpringGreen;
             this.Bk.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Bk, "Bk");
             this.Bk.ForeColor = System.Drawing.Color.White;
@@ -1388,7 +1388,7 @@
             // 
             // Cf
             // 
-            this.Cf.BackColor = System.Drawing.Color.OliveDrab;
+            this.Cf.BackColor = System.Drawing.Color.SpringGreen;
             this.Cf.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Cf, "Cf");
             this.Cf.ForeColor = System.Drawing.Color.White;
@@ -1397,7 +1397,7 @@
             // 
             // Es
             // 
-            this.Es.BackColor = System.Drawing.Color.OliveDrab;
+            this.Es.BackColor = System.Drawing.Color.SpringGreen;
             this.Es.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Es, "Es");
             this.Es.ForeColor = System.Drawing.Color.White;
@@ -1406,7 +1406,7 @@
             // 
             // Fm
             // 
-            this.Fm.BackColor = System.Drawing.Color.OliveDrab;
+            this.Fm.BackColor = System.Drawing.Color.SpringGreen;
             this.Fm.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Fm, "Fm");
             this.Fm.ForeColor = System.Drawing.Color.White;
@@ -1415,7 +1415,7 @@
             // 
             // Md
             // 
-            this.Md.BackColor = System.Drawing.Color.OliveDrab;
+            this.Md.BackColor = System.Drawing.Color.SpringGreen;
             this.Md.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Md, "Md");
             this.Md.ForeColor = System.Drawing.Color.White;
@@ -1424,7 +1424,7 @@
             // 
             // No
             // 
-            this.No.BackColor = System.Drawing.Color.OliveDrab;
+            this.No.BackColor = System.Drawing.Color.SpringGreen;
             this.No.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.No, "No");
             this.No.ForeColor = System.Drawing.Color.White;
@@ -1433,7 +1433,7 @@
             // 
             // Lr
             // 
-            this.Lr.BackColor = System.Drawing.Color.OliveDrab;
+            this.Lr.BackColor = System.Drawing.Color.SpringGreen;
             this.Lr.Cursor = System.Windows.Forms.Cursors.No;
             resources.ApplyResources(this.Lr, "Lr");
             this.Lr.ForeColor = System.Drawing.Color.White;

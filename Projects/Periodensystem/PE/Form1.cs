@@ -51,6 +51,19 @@ namespace PE
         }
 
 
+        private void create_graph (GraphPane myPane)
+        {
+            myPane.Title.Text = "XPS spectra";
+            myPane.Title.FontSpec.Size = 13;
+            myPane.TitleGap = 1.6f;
+            myPane.XAxis.Title.Text = "binding energy [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 11;
+            myPane.YAxis.Title.Text = "counts";
+            myPane.YAxis.Title.FontSpec.Size = 11;
+            myPane.Fill.Color = Color.LightGray;
+        }
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -64,14 +77,7 @@ namespace PE
             {
                 dictionary.Add(row[i][1],row[i][0]);
             }
-
-            myPane.Title.Text = "XPS spectra";
-            myPane.Title.FontSpec.Size = 14;
-            myPane.XAxis.Title.Text = "binding energy [eV]";
-            myPane.XAxis.Title.FontSpec.Size = 11;
-            myPane.YAxis.Title.Text = "counts";
-            myPane.YAxis.Title.FontSpec.Size = 11;
-            myPane.Fill.Color = Color.LightGray;
+            create_graph(myPane);
         }
 
 
@@ -113,9 +119,10 @@ namespace PE
 
                     if (result)
                     {
-                        pane_labs = new TextObj((row[zeile][i] + "\n" + row[zeile][1] + " " + scores[i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), 0.01,
+                        pane_labs = new TextObj((row[zeile][i] + "\n" + row[zeile][1] + " " + scores[i]), float.Parse(row[zeile][i], CultureInfo.InvariantCulture), -0.05,
                             CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
                         pane_labs.FontSpec.Size = 10f;
+                        pane_labs.FontSpec.Angle = 40;
                         pane_labs.FontSpec.Fill.Color = Color.Transparent;
                         pane_labs.FontSpec.FontColor = Color.DimGray;
                         pane_labs.FontSpec.Border.IsVisible = false;
@@ -281,6 +288,8 @@ namespace PE
                 tb_gauss_startvalue.BackColor = Color.Red;
                 tb_gauss_startvalue.Enabled = true;
                 progressBar1.Value = 0;
+                //create_graph(myPane);
+                //zedGraphControl1.Refresh();
             }
         }
 
