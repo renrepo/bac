@@ -242,13 +242,12 @@
             this.label53 = new System.Windows.Forms.Label();
             this.label54 = new System.Windows.Forms.Label();
             this.zedGraphControl1 = new ZedGraph.ZedGraphControl();
-            this.btn_gauss = new System.Windows.Forms.Button();
-            this.btn_gauss_can = new System.Windows.Forms.Button();
-            this.tb_gauss_startvalue = new System.Windows.Forms.TextBox();
-            this.tb_gauss = new System.Windows.Forms.TextBox();
+            this.btn_start = new System.Windows.Forms.Button();
+            this.btn_can = new System.Windows.Forms.Button();
+            this.tb_show = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.bW_gauss = new System.ComponentModel.BackgroundWorker();
+            this.bW_data = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label88 = new System.Windows.Forms.Label();
@@ -278,8 +277,8 @@
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tb_safe = new System.Windows.Forms.TextBox();
             this.browse = new System.Windows.Forms.Button();
+            this.tb_safe = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -2229,30 +2228,26 @@
             this.zedGraphControl1.ScrollMinY = 0D;
             this.zedGraphControl1.ScrollMinY2 = 0D;
             // 
-            // btn_gauss
+            // btn_start
             // 
-            resources.ApplyResources(this.btn_gauss, "btn_gauss");
-            this.btn_gauss.Name = "btn_gauss";
-            this.btn_gauss.UseVisualStyleBackColor = true;
-            this.btn_gauss.Click += new System.EventHandler(this.btn_gauss_Click);
+            resources.ApplyResources(this.btn_start, "btn_start");
+            this.btn_start.Name = "btn_start";
+            this.btn_start.UseVisualStyleBackColor = true;
+            this.btn_start.Click += new System.EventHandler(this.btn_start_Click);
             // 
-            // btn_gauss_can
+            // btn_can
             // 
-            resources.ApplyResources(this.btn_gauss_can, "btn_gauss_can");
-            this.btn_gauss_can.Name = "btn_gauss_can";
-            this.btn_gauss_can.UseVisualStyleBackColor = true;
-            this.btn_gauss_can.Click += new System.EventHandler(this.btn_gauss_can_Click);
+            resources.ApplyResources(this.btn_can, "btn_can");
+            this.btn_can.Name = "btn_can";
+            this.btn_can.UseVisualStyleBackColor = true;
+            this.btn_can.Click += new System.EventHandler(this.btn_can_Click);
             // 
-            // tb_gauss_startvalue
+            // tb_show
             // 
-            resources.ApplyResources(this.tb_gauss_startvalue, "tb_gauss_startvalue");
-            this.tb_gauss_startvalue.Name = "tb_gauss_startvalue";
-            this.tb_gauss_startvalue.TextChanged += new System.EventHandler(this.tb_gauss_startvalue_TextChanged);
-            // 
-            // tb_gauss
-            // 
-            resources.ApplyResources(this.tb_gauss, "tb_gauss");
-            this.tb_gauss.Name = "tb_gauss";
+            this.tb_show.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_show, "tb_show");
+            this.tb_show.Name = "tb_show";
+            this.tb_show.ReadOnly = true;
             // 
             // progressBar1
             // 
@@ -2266,13 +2261,13 @@
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // bW_gauss
+            // bW_data
             // 
-            this.bW_gauss.WorkerReportsProgress = true;
-            this.bW_gauss.WorkerSupportsCancellation = true;
-            this.bW_gauss.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bW_gauss_DoWork);
-            this.bW_gauss.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bW_gauss_ProgressChanged);
-            this.bW_gauss.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bW_gauss_RunWorkerCompleted);
+            this.bW_data.WorkerReportsProgress = true;
+            this.bW_data.WorkerSupportsCancellation = true;
+            this.bW_data.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bW_data_DoWork);
+            this.bW_data.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bW_data_ProgressChanged);
+            this.bW_data.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bW_data_RunWorkerCompleted);
             // 
             // lb_perc_gauss
             // 
@@ -2450,17 +2445,17 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // tb_safe
-            // 
-            resources.ApplyResources(this.tb_safe, "tb_safe");
-            this.tb_safe.Name = "tb_safe";
-            // 
             // browse
             // 
             resources.ApplyResources(this.browse, "browse");
             this.browse.Name = "browse";
             this.browse.UseVisualStyleBackColor = true;
             this.browse.Click += new System.EventHandler(this.browse_Click);
+            // 
+            // tb_safe
+            // 
+            resources.ApplyResources(this.tb_safe, "tb_safe");
+            this.tb_safe.Name = "tb_safe";
             // 
             // XPS
             // 
@@ -2473,10 +2468,9 @@
             this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btn_clear);
-            this.Controls.Add(this.tb_gauss);
-            this.Controls.Add(this.tb_gauss_startvalue);
-            this.Controls.Add(this.btn_gauss_can);
-            this.Controls.Add(this.btn_gauss);
+            this.Controls.Add(this.tb_show);
+            this.Controls.Add(this.btn_can);
+            this.Controls.Add(this.btn_start);
             this.Controls.Add(this.lb_perc_gauss);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "XPS";
@@ -2701,13 +2695,12 @@
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.Button btn_gauss;
-        private System.Windows.Forms.Button btn_gauss_can;
-        private System.Windows.Forms.TextBox tb_gauss_startvalue;
-        private System.Windows.Forms.TextBox tb_gauss;
+        private System.Windows.Forms.Button btn_start;
+        private System.Windows.Forms.Button btn_can;
+        private System.Windows.Forms.TextBox tb_show;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btn_clear;
-        private System.ComponentModel.BackgroundWorker bW_gauss;
+        private System.ComponentModel.BackgroundWorker bW_data;
         private System.Windows.Forms.Label lb_perc_gauss;
         private System.Windows.Forms.TextBox textBox28;
         private System.Windows.Forms.TextBox textBox29;

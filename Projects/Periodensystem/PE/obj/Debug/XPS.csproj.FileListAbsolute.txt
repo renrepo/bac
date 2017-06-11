@@ -9,3 +9,14 @@ C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.Genera
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.XPS.resources
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.exe.config
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.exe
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.pdb
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.dll
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.Web.dll
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csprojResolveAssemblyReference.cache
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.XPS.resources
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Resources.resources
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.GenerateResource.Cache
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb

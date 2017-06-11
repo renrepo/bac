@@ -24,8 +24,8 @@ namespace XPS
         Dictionary<string, string> fab = new Dictionary<string, string>(); 
         GraphPane myPane;
         LineItem myCurve;
-        List<string> list_gauss = new List<string>();
-        public int num_gauss = 0;
+        List<string> values = new List<string>();
+        public int num_gauss = 20;
         PointPairList list1 = new PointPairList();
         List<string> fuerlabels = new List<string>();
         string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
@@ -39,10 +39,9 @@ namespace XPS
         int end = 0;
         // bw-DoWork
 
-        StreamWriter file;
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string now = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
-
+        string now = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
+        string curr_time;
 
 
 
@@ -83,9 +82,9 @@ namespace XPS
 
             try
             {
-                if (!Directory.Exists(path + @"\Logfiles"))
+                if (!Directory.Exists(path + @"\Logfiles_XPS"))
                 {
-                    Directory.CreateDirectory(path + @"\Logfiles");
+                    Directory.CreateDirectory(path + @"\Logfiles_XPS");
                 }
             }
             catch
@@ -200,57 +199,59 @@ namespace XPS
                 labelchanger(sender);
             }
         }
+        string path2;
 
 
-
-        private void btn_gauss_Click(object sender, EventArgs e)
+        private void btn_start_Click(object sender, EventArgs e)
         {
-            if ((!bW_gauss.IsBusy))
+            if ((!bW_data.IsBusy))
             {
                 myCurve = myPane.AddCurve("",
                 list1, Color.Black, SymbolType.None);
-                using (var file = new StreamWriter(path + @"\Logfiles\" + "_" + tb_safe.Text + now + ".txt", true))
+                curr_time = now;
+                string u = tb_safe.Text + curr_time;
+                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + tb_safe.Text + curr_time + "\\"));
+                path2 = dl.FullName;
+                using (var file = new StreamWriter(path2 + "data.txt", true))
                 {
-                    file.WriteLine("kommt noch");
+                    file.WriteLine("#XPS-spectrum" + Environment.NewLine);
+                    file.WriteLine("#Date/time: \t{0}", now);
+                    file.WriteLine("#X-ray source :\t" + Environment.NewLine);
+                    file.WriteLine("#E_b \t counts");                   
                 }
-                bW_gauss.RunWorkerAsync(); //run bW if it is not still running
-                tb_gauss_startvalue.Enabled = false;
 
-                
+                bW_data.RunWorkerAsync(); //run bW if it is not still running
+                btn_start.Enabled = false;
+                btn_can.Enabled = true;
+                tb_show.Enabled = true;
             }
+
+            else
+	        {
+                    MessageBox.Show("Backgroundworker is busy!");
+            }                      
         }
 
 
 
-        private void btn_gauss_can_Click(object sender, EventArgs e)
+        private void bW_data_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (bW_gauss.IsBusy) // .IsBusy is true, if bW is running, otherwise false
-            {
-                bW_gauss.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
-                btn_clear.Enabled = true;
-            }
-        }
-
-
-
-        private void bW_gauss_DoWork(object sender, DoWorkEventArgs e)
-        {
-            for (i = 0; i <= num_gauss; i++)
+            for (i = 0; i <= num_gauss; i++) 
             {
                 end += i;
-                list_gauss.Add(end + "\t" + 2 * end);
-                bW_gauss.ReportProgress(100 * i / num_gauss, end);
+                values.Add(end + "\t" + 2 * end);
+                bW_data.ReportProgress(100 * i / num_gauss, end);
                 //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-                using (var file = new StreamWriter(path + @"\Logfiles\" + "_" + tb_safe.Text + now + ".txt", true))
+                using (var file = new StreamWriter(path2 + "data.txt", true))
                 {
-                    file.WriteLine(end);
+                    file.WriteLine(i.ToString("000") + "\t" + end.ToString("00000"));
                 }
                 Thread.Sleep(500);
 
-                if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+                if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
                 {
                     e.Cancel = true;
-                    bW_gauss.ReportProgress(0);
+                    bW_data.ReportProgress(0);
                     break; //warum? ist wichtig!
                 }
             }
@@ -258,13 +259,11 @@ namespace XPS
             e.Result = end; //stores the results of what has been done in bW
         }
 
-
-
-        private void bW_gauss_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {   //this event is raised, when the ReportProgress-Method is called (in DoWork!)
+        private void bW_data_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
             progressBar1.Value = e.ProgressPercentage;
             lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
-            tb_gauss.Text = e.UserState as String;
+            tb_show.Text = Convert.ToString(e.UserState);
             // x = e.ProgressPercentage
             //list1.Add(i, Convert.ToDouble(e.UserState));
             list1.Add(i, end);
@@ -274,24 +273,42 @@ namespace XPS
             zedGraphControl1.AxisChange();
         }
 
-
-
-        private void bW_gauss_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void bW_data_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
             if (e.Cancelled)
             {
-                tb_gauss.Text = "Cancelled!";
+                tb_show.Text = "Cancelled!";
+                using (var file = new StreamWriter(path2 + "data.txt", true))
+                {
+                    file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
+                }
             }
 
             else if (e.Error != null)
             {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
-                tb_gauss.Text = e.Error.Message;
+                tb_show.Text = e.Error.Message;
             }
 
             else
             {
-                tb_gauss.Text = e.Result.ToString();
+                tb_show.Text = Convert.ToString(e.UserState);
+                btn_can.Enabled = false;
+                btn_clear.Enabled = true;
+                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
+            }
+           
+        }
+
+
+
+        private void btn_can_Click(object sender, EventArgs e)
+        {
+            if (bW_data.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            {
+                bW_data.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+                btn_clear.Enabled = true;
+                btn_can.Enabled = false;
             }
         }
 
@@ -299,35 +316,23 @@ namespace XPS
 
         private void btn_clear_Click(object sender, EventArgs e)
         {
-            if (bW_gauss.IsBusy)
+            if (bW_data.IsBusy)
             {
-                btn_clear.Enabled = false;
+                MessageBox.Show("Backgroundworker is still busy!");
             }
 
             else
             {
-                tb_gauss.Text = "";
-                tb_gauss_startvalue.Text = "";
-                lb_perc_gauss.Text = "";
-                tb_gauss_startvalue.BackColor = Color.Red;
-                tb_gauss_startvalue.Enabled = true;
+                tb_show.Text = "";
+                lb_perc_gauss.Text = "%";
+                btn_start.Enabled = true;
+                btn_clear.Enabled = false;
+                zedGraphControl1.GraphPane.CurveList.Clear();
+                zedGraphControl1.GraphPane.GraphObjList.Clear();
+                list1.Clear();
                 progressBar1.Value = 0;
-                //create_graph(myPane);
-                //zedGraphControl1.Refresh();
-            }
-        }
-
-
-
-        private void tb_gauss_startvalue_TextChanged(object sender, EventArgs e)
-        {
-            string eingabe = tb_gauss_startvalue.Text;
-
-            if (int.TryParse(eingabe, out num_gauss))
-            {
-                btn_gauss.Enabled = true;
-                tb_gauss_startvalue.BackColor = Color.White;
-                btn_gauss.Enabled = true;
+                create_graph(myPane);
+                zedGraphControl1.Refresh();
             }
         }
 
