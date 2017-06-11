@@ -9442,7 +9442,7 @@
     <value>8, 356</value>
   </data>
   <data name="btn_start.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 29</value>
+    <value>60, 40</value>
   </data>
   <data name="btn_start.TabIndex" type="System.Int32, mscorlib">
     <value>254</value>
@@ -9472,7 +9472,7 @@
     <value>76, 356</value>
   </data>
   <data name="btn_can.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 29</value>
+    <value>60, 40</value>
   </data>
   <data name="btn_can.TabIndex" type="System.Int32, mscorlib">
     <value>255</value>
@@ -9496,10 +9496,10 @@
     <value>False</value>
   </data>
   <data name="tb_show.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 391</value>
+    <value>11, 334</value>
   </data>
   <data name="tb_show.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 20</value>
+    <value>32, 13</value>
   </data>
   <data name="tb_show.TabIndex" type="System.Int32, mscorlib">
     <value>257</value>
@@ -9523,10 +9523,10 @@
     <value>NoControl</value>
   </data>
   <data name="progressBar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 332</value>
+    <value>49, 332</value>
   </data>
   <data name="progressBar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 18</value>
+    <value>112, 18</value>
   </data>
   <data name="progressBar1.TabIndex" type="System.Int32, mscorlib">
     <value>258</value>
@@ -9553,7 +9553,7 @@
     <value>143, 356</value>
   </data>
   <data name="btn_clear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 29</value>
+    <value>60, 40</value>
   </data>
   <data name="btn_clear.TabIndex" type="System.Int32, mscorlib">
     <value>259</value>
@@ -10635,6 +10635,21 @@
   <data name="&gt;&gt;label73.ZOrder" xml:space="preserve">
     <value>25</value>
   </data>
+  <data name="browse.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="browse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 18</value>
+  </data>
+  <data name="browse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="browse.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="browse.Text" xml:space="preserve">
+    <value>Save Fig.</value>
+  </data>
   <data name="&gt;&gt;browse.Name" xml:space="preserve">
     <value>browse</value>
   </data>
@@ -10646,6 +10661,18 @@
   </data>
   <data name="&gt;&gt;browse.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="tb_safe.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 20</value>
+  </data>
+  <data name="tb_safe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="tb_safe.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tb_safe.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
   </data>
   <data name="&gt;&gt;tb_safe.Name" xml:space="preserve">
     <value>tb_safe</value>
@@ -10682,51 +10709,6 @@
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="browse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 18</value>
-  </data>
-  <data name="browse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="browse.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="browse.Text" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="&gt;&gt;browse.Name" xml:space="preserve">
-    <value>browse</value>
-  </data>
-  <data name="&gt;&gt;browse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;browse.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;browse.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tb_safe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 20</value>
-  </data>
-  <data name="tb_safe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="tb_safe.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tb_safe.Name" xml:space="preserve">
-    <value>tb_safe</value>
-  </data>
-  <data name="&gt;&gt;tb_safe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_safe.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;tb_safe.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -2244,7 +2244,7 @@
             // 
             // tb_show
             // 
-            this.tb_show.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tb_show.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.tb_show, "tb_show");
             this.tb_show.Name = "tb_show";
             this.tb_show.ReadOnly = true;

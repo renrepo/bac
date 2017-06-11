@@ -206,11 +206,12 @@ namespace XPS
         {
             if ((!bW_data.IsBusy))
             {
+                end = 0;
                 myCurve = myPane.AddCurve("",
                 list1, Color.Black, SymbolType.None);
                 curr_time = now;
                 string u = tb_safe.Text + curr_time;
-                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + tb_safe.Text + curr_time + "\\"));
+                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + tb_safe.Text + "_" + curr_time + "\\"));
                 path2 = dl.FullName;
                 using (var file = new StreamWriter(path2 + "data.txt", true))
                 {
@@ -278,11 +279,12 @@ namespace XPS
             //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
             if (e.Cancelled)
             {
-                tb_show.Text = "Cancelled!";
+                tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path2 + "data.txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
+                browse.Enabled = true;
             }
 
             else if (e.Error != null)
@@ -292,9 +294,10 @@ namespace XPS
 
             else
             {
-                tb_show.Text = Convert.ToString(e.UserState);
+                //tb_show.Text = Convert.ToString(e.UserState);
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
+                browse.Enabled = true;
                 zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
             }
            
@@ -327,6 +330,7 @@ namespace XPS
                 lb_perc_gauss.Text = "%";
                 btn_start.Enabled = true;
                 btn_clear.Enabled = false;
+                browse.Enabled = false;
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
                 list1.Clear();
@@ -868,11 +872,18 @@ namespace XPS
             set_element(sender, e);
         }
 
+        int counter = 2;
+
         private void browse_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sv = new SaveFileDialog();
-            sv.Title = "Save data";
-            sv.ShowDialog();
+            zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + counter + ".png"));
+            tb_safe.Text = "Fig. saved";
+            tb_safe.BackColor = Color.LimeGreen;
+            counter += 1;
+
+            //SaveFileDialog sv = new SaveFileDialog();
+            //sv.Title = "Save data";
+            //sv.ShowDialog();
         }
     }
 }
