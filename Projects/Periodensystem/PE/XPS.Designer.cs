@@ -1,6 +1,6 @@
-﻿namespace PE
+﻿namespace XPS
 {
-    partial class Form1
+    partial class XPS
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
             this.Y = new System.Windows.Forms.Button();
             this.Sc = new System.Windows.Forms.Button();
             this.Ra = new System.Windows.Forms.Button();
@@ -277,9 +277,13 @@
             this.label75 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tb_safe = new System.Windows.Forms.TextBox();
+            this.browse = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2438,10 +2442,31 @@
             resources.ApplyResources(this.label73, "label73");
             this.label73.Name = "label73";
             // 
-            // Form1
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.browse);
+            this.groupBox2.Controls.Add(this.tb_safe);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // tb_safe
+            // 
+            resources.ApplyResources(this.tb_safe, "tb_safe");
+            this.tb_safe.Name = "tb_safe";
+            // 
+            // browse
+            // 
+            resources.ApplyResources(this.browse, "browse");
+            this.browse.Name = "browse";
+            this.browse.UseVisualStyleBackColor = true;
+            this.browse.Click += new System.EventHandler(this.browse_Click);
+            // 
+            // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
@@ -2454,7 +2479,7 @@
             this.Controls.Add(this.btn_gauss);
             this.Controls.Add(this.lb_perc_gauss);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.Name = "Form1";
+            this.Name = "XPS";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -2462,6 +2487,8 @@
             this.tableLayoutPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2716,6 +2743,9 @@
         private System.Windows.Forms.TextBox textBox51;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox50;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox tb_safe;
+        private System.Windows.Forms.Button browse;
     }
 }
 

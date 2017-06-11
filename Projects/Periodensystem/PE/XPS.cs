@@ -12,13 +12,13 @@ using System.Threading;
 using ZedGraph;
 using System.Globalization;
 
-namespace PE
+namespace XPS
 {
-    public partial class Form1 : Form
+    public partial class XPS : Form
     {
 
-        string filePath = System.IO.Path.GetFullPath("Bindungsenergien.csv");
-        string filePath2 = System.IO.Path.GetFullPath("colors2.csv");
+        string filePath = Path.GetFullPath("Bindungsenergien.csv");
+        string filePath2 = Path.GetFullPath("colors2.csv");
         List<List<string>> row = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
         Dictionary<string, string> fab = new Dictionary<string, string>(); 
@@ -39,12 +39,14 @@ namespace PE
         int end = 0;
         // bw-DoWork
 
-        
+        StreamWriter file;
+        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string now = DateTime.Now.ToString("yyyy-MM-dd-HH-mm");
 
 
 
 
-        public Form1()
+        public XPS()
         {
             InitializeComponent();
             myPane = zedGraphControl1.GraphPane;
@@ -78,6 +80,18 @@ namespace PE
                 dictionary.Add(row[i][1],row[i][0]);
             }
             create_graph(myPane);
+
+            try
+            {
+                if (!Directory.Exists(path + @"\Logfiles"))
+                {
+                    Directory.CreateDirectory(path + @"\Logfiles");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Can't create Folder 'Logfile' on Desktop");
+            }
         }
 
 
@@ -195,8 +209,14 @@ namespace PE
             {
                 myCurve = myPane.AddCurve("",
                 list1, Color.Black, SymbolType.None);
+                using (var file = new StreamWriter(path + @"\Logfiles\" + "_" + tb_safe.Text + now + ".txt", true))
+                {
+                    file.WriteLine("kommt noch");
+                }
                 bW_gauss.RunWorkerAsync(); //run bW if it is not still running
                 tb_gauss_startvalue.Enabled = false;
+
+                
             }
         }
 
@@ -221,6 +241,10 @@ namespace PE
                 list_gauss.Add(end + "\t" + 2 * end);
                 bW_gauss.ReportProgress(100 * i / num_gauss, end);
                 //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+                using (var file = new StreamWriter(path + @"\Logfiles\" + "_" + tb_safe.Text + now + ".txt", true))
+                {
+                    file.WriteLine(end);
+                }
                 Thread.Sleep(500);
 
                 if (bW_gauss.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
@@ -837,6 +861,13 @@ namespace PE
         private void U_MouseDown(object sender, MouseEventArgs e)
         {
             set_element(sender, e);
+        }
+
+        private void browse_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sv = new SaveFileDialog();
+            sv.Title = "Save data";
+            sv.ShowDialog();
         }
     }
 }
