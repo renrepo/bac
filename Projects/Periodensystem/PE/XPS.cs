@@ -11,6 +11,7 @@ using System.IO;
 using System.Threading;
 using ZedGraph;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace XPS
 {
@@ -284,7 +285,9 @@ namespace XPS
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
+                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
                 browse.Enabled = true;
+                button1.Enabled = true;
             }
 
             else if (e.Error != null)
@@ -298,6 +301,7 @@ namespace XPS
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
                 browse.Enabled = true;
+                button1.Enabled = true;
                 zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
             }
            
@@ -331,6 +335,7 @@ namespace XPS
                 btn_start.Enabled = true;
                 btn_clear.Enabled = false;
                 browse.Enabled = false;
+                button1.Enabled = false;
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
                 list1.Clear();
@@ -881,9 +886,15 @@ namespace XPS
             tb_safe.BackColor = Color.LimeGreen;
             counter += 1;
 
+
             //SaveFileDialog sv = new SaveFileDialog();
             //sv.Title = "Save data";
             //sv.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("notepad.exe", path2 + "data.txt");
         }
     }
 }

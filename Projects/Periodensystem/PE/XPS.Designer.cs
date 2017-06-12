@@ -279,10 +279,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.browse = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2439,6 +2443,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.label57);
             this.groupBox2.Controls.Add(this.browse);
             this.groupBox2.Controls.Add(this.tb_safe);
             resources.ApplyResources(this.groupBox2, "groupBox2");
@@ -2457,21 +2463,40 @@
             resources.ApplyResources(this.tb_safe, "tb_safe");
             this.tb_safe.Name = "tb_safe";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btn_can);
+            this.groupBox3.Controls.Add(this.lb_perc_gauss);
+            this.groupBox3.Controls.Add(this.btn_start);
+            this.groupBox3.Controls.Add(this.tb_show);
+            this.groupBox3.Controls.Add(this.btn_clear);
+            this.groupBox3.Controls.Add(this.progressBar1);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // label57
+            // 
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.Name = "label57";
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.zedGraphControl1);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.btn_clear);
-            this.Controls.Add(this.tb_show);
-            this.Controls.Add(this.btn_can);
-            this.Controls.Add(this.btn_start);
-            this.Controls.Add(this.lb_perc_gauss);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "XPS";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -2483,6 +2508,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2739,6 +2766,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tb_safe;
         private System.Windows.Forms.Button browse;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Button button1;
     }
 }
 
