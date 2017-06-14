@@ -202,6 +202,7 @@ namespace XPS
         }
         string path2;
 
+        int data_coutner = 0;
 
         private void btn_start_Click(object sender, EventArgs e)
         {
@@ -214,10 +215,10 @@ namespace XPS
                 string u = tb_safe.Text + curr_time;
                 DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + tb_safe.Text + "_" + curr_time + "\\"));
                 path2 = dl.FullName;
-                using (var file = new StreamWriter(path2 + "data.txt", true))
+                using (var file = new StreamWriter(path2  +"data" + data_coutner + ".txt", true))
                 {
                     file.WriteLine("#XPS-spectrum" + Environment.NewLine);
-                    file.WriteLine("#Date/time: \t{0}", now);
+                    file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
                     file.WriteLine("#X-ray source :\t" + Environment.NewLine);
                     file.WriteLine("#E_b \t counts");                   
                 }
@@ -244,7 +245,7 @@ namespace XPS
                 values.Add(end + "\t" + 2 * end);
                 bW_data.ReportProgress(100 * i / num_gauss, end);
                 //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-                using (var file = new StreamWriter(path2 + "data.txt", true))
+                using (var file = new StreamWriter(path2 +  "data" + data_coutner + ".txt", true))
                 {
                     file.WriteLine(i.ToString("000") + "\t" + end.ToString("00000"));
                 }
@@ -281,13 +282,14 @@ namespace XPS
             if (e.Cancelled)
             {
                 tb_show.Text = "Stop!";
-                using (var file = new StreamWriter(path2 + "data.txt", true))
+                using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
-                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
-                browse.Enabled = true;
+              //  zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
+               // browse.Enabled = true;
                 button1.Enabled = true;
+                data_coutner += 1;
             }
 
             else if (e.Error != null)
@@ -300,9 +302,10 @@ namespace XPS
                 //tb_show.Text = Convert.ToString(e.UserState);
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
-                browse.Enabled = true;
+               // browse.Enabled = true;
                 button1.Enabled = true;
-                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot.png"));
+               // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
+                data_coutner += 1;
             }
            
         }
@@ -334,8 +337,9 @@ namespace XPS
                 lb_perc_gauss.Text = "%";
                 btn_start.Enabled = true;
                 btn_clear.Enabled = false;
-                browse.Enabled = false;
                 button1.Enabled = false;
+                browse.Enabled = false;
+                textBox35.Clear();
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
                 list1.Clear();
@@ -879,12 +883,16 @@ namespace XPS
 
         int counter = 2;
 
-        private void browse_Click(object sender, EventArgs e)
+        private async void browse_Click(object sender, EventArgs e)
         {
-            zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + counter + ".png"));
-            tb_safe.Text = "Fig. saved";
-            tb_safe.BackColor = Color.LimeGreen;
+            zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + textBox35.Text + ".png"));
+            browse.Text = "Fig. saved";
+            browse.BackColor = Color.LimeGreen;
+            await Task.Delay(800);
             counter += 1;
+            browse.Text = "Save fig.";
+            browse.BackColor = SystemColors.Control;
+
 
 
             //SaveFileDialog sv = new SaveFileDialog();
@@ -894,7 +902,25 @@ namespace XPS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process.Start("notepad.exe", path2 + "data.txt");
+            Process.Start("notepad.exe", path2 + "data" + (data_coutner-1) + ".txt");
+        }
+
+        private void tb_safe_TextChanged(object sender, EventArgs e)
+        {
+            btn_start.Enabled = true;
+            tb_safe.BackColor = Color.LightGray;
+        }
+
+        private void textBox35_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox35.Text == "")
+            {
+                browse.Enabled = false;
+            }
+            else
+            {
+                browse.Enabled = true;
+            }
         }
     }
 }

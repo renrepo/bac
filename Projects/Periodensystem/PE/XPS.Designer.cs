@@ -277,11 +277,13 @@
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label57 = new System.Windows.Forms.Label();
             this.browse = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -2443,6 +2445,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label58);
+            this.groupBox2.Controls.Add(this.textBox35);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.label57);
             this.groupBox2.Controls.Add(this.browse);
@@ -2450,6 +2454,18 @@
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label57
+            // 
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.Name = "label57";
             // 
             // browse
             // 
@@ -2460,8 +2476,10 @@
             // 
             // tb_safe
             // 
+            this.tb_safe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             resources.ApplyResources(this.tb_safe, "tb_safe");
             this.tb_safe.Name = "tb_safe";
+            this.tb_safe.TextChanged += new System.EventHandler(this.tb_safe_TextChanged);
             // 
             // groupBox3
             // 
@@ -2475,17 +2493,16 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // label57
+            // textBox35
             // 
-            resources.ApplyResources(this.label57, "label57");
-            this.label57.Name = "label57";
+            resources.ApplyResources(this.textBox35, "textBox35");
+            this.textBox35.Name = "textBox35";
+            this.textBox35.TextChanged += new System.EventHandler(this.textBox35_TextChanged);
             // 
-            // button1
+            // label58
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.Name = "label58";
             // 
             // XPS
             // 
@@ -2769,6 +2786,8 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox textBox35;
     }
 }
 
