@@ -206,7 +206,7 @@ namespace XPS
 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            if ((!bW_data.IsBusy))
+            if (!bW_data.IsBusy)
             {
                 end = 0;
                 myCurve = myPane.AddCurve("",
@@ -227,11 +227,14 @@ namespace XPS
                 btn_start.Enabled = false;
                 btn_can.Enabled = true;
                 tb_show.Enabled = true;
+                tb_safe.Enabled = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
             }
 
             else
 	        {
-                    MessageBox.Show("Backgroundworker is busy!");
+                    MessageBox.Show("BW busy!");
             }                      
         }
 
@@ -289,6 +292,7 @@ namespace XPS
               //  zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
                // browse.Enabled = true;
                 button1.Enabled = true;
+                textBox35.Enabled = true;
                 data_coutner += 1;
             }
 
@@ -302,7 +306,8 @@ namespace XPS
                 //tb_show.Text = Convert.ToString(e.UserState);
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
-               // browse.Enabled = true;
+                textBox35.Enabled = true;
+                // browse.Enabled = true;
                 button1.Enabled = true;
                // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
                 data_coutner += 1;
@@ -339,6 +344,8 @@ namespace XPS
                 btn_clear.Enabled = false;
                 button1.Enabled = false;
                 browse.Enabled = false;
+                tb_safe.Enabled = true;
+                textBox35.Enabled = false;
                 textBox35.Clear();
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
@@ -907,7 +914,10 @@ namespace XPS
 
         private void tb_safe_TextChanged(object sender, EventArgs e)
         {
-            btn_start.Enabled = true;
+            if (checkBox1.Checked || checkBox2.Checked)
+            {
+                btn_start.Enabled = true;
+            }
             tb_safe.BackColor = Color.LightGray;
         }
 
@@ -920,6 +930,44 @@ namespace XPS
             else
             {
                 browse.Enabled = true;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                checkBox2.Enabled = false;
+
+                if (!(string.IsNullOrWhiteSpace(textBox35.Text)))
+                {
+                    btn_start.Enabled = true;
+                }
+            }
+
+            else
+            {
+               // checkBox1.Enabled = false;
+                checkBox2.Enabled = true;
+            }      
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                checkBox1.Enabled = false;
+
+                if (!(string.IsNullOrWhiteSpace(textBox35.Text)))
+                {
+                    btn_start.Enabled = true;
+                }
+            }
+
+            else
+            {
+                // checkBox1.Enabled = false;
+                checkBox1.Enabled = true;
             }
         }
     }

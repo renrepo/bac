@@ -277,18 +277,22 @@
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.textBox35 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
             this.browse = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
+            this.XRaySource = new System.Windows.Forms.GroupBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.XRaySource.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2455,6 +2459,17 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // label58
+            // 
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.Name = "label58";
+            // 
+            // textBox35
+            // 
+            resources.ApplyResources(this.textBox35, "textBox35");
+            this.textBox35.Name = "textBox35";
+            this.textBox35.TextChanged += new System.EventHandler(this.textBox35_TextChanged);
+            // 
             // button1
             // 
             resources.ApplyResources(this.button1, "button1");
@@ -2476,7 +2491,7 @@
             // 
             // tb_safe
             // 
-            this.tb_safe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.tb_safe.BackColor = System.Drawing.Color.LightCoral;
             resources.ApplyResources(this.tb_safe, "tb_safe");
             this.tb_safe.Name = "tb_safe";
             this.tb_safe.TextChanged += new System.EventHandler(this.tb_safe_TextChanged);
@@ -2493,21 +2508,33 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // textBox35
+            // XRaySource
             // 
-            resources.ApplyResources(this.textBox35, "textBox35");
-            this.textBox35.Name = "textBox35";
-            this.textBox35.TextChanged += new System.EventHandler(this.textBox35_TextChanged);
+            this.XRaySource.Controls.Add(this.checkBox2);
+            this.XRaySource.Controls.Add(this.checkBox1);
+            resources.ApplyResources(this.XRaySource, "XRaySource");
+            this.XRaySource.Name = "XRaySource";
+            this.XRaySource.TabStop = false;
             // 
-            // label58
+            // checkBox2
             // 
-            resources.ApplyResources(this.label58, "label58");
-            this.label58.Name = "label58";
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.XRaySource);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -2527,6 +2554,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.XRaySource.ResumeLayout(false);
+            this.XRaySource.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2788,6 +2817,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.GroupBox XRaySource;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 
