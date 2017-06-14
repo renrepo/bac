@@ -228,8 +228,8 @@ namespace XPS
                 btn_can.Enabled = true;
                 tb_show.Enabled = true;
                 tb_safe.Enabled = false;
-                checkBox1.Enabled = false;
-                checkBox2.Enabled = false;
+                Mg_anode.Enabled = false;
+                Al_anode.Enabled = false;
             }
 
             else
@@ -290,9 +290,9 @@ namespace XPS
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
               //  zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
-               // browse.Enabled = true;
-                button1.Enabled = true;
-                textBox35.Enabled = true;
+               // safe_fig.Enabled = true;
+                showdata.Enabled = true;
+                fig_name.Enabled = true;
                 data_coutner += 1;
             }
 
@@ -306,9 +306,9 @@ namespace XPS
                 //tb_show.Text = Convert.ToString(e.UserState);
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
-                textBox35.Enabled = true;
-                // browse.Enabled = true;
-                button1.Enabled = true;
+                fig_name.Enabled = true;
+                // safe_fig.Enabled = true;
+                showdata.Enabled = true;
                // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
                 data_coutner += 1;
             }
@@ -342,14 +342,19 @@ namespace XPS
                 lb_perc_gauss.Text = "%";
                 btn_start.Enabled = true;
                 btn_clear.Enabled = false;
-                button1.Enabled = false;
-                browse.Enabled = false;
+                showdata.Enabled = false;
+                safe_fig.Enabled = false;
                 tb_safe.Enabled = true;
-                textBox35.Enabled = false;
-                textBox35.Clear();
+                fig_name.Enabled = false;
+                if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
+                    else { Al_anode.Enabled = true;}
+                fig_name.Clear();
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
                 list1.Clear();
+                fuerlabels.Clear();
+                myPane.YAxisList.Clear();
+                myPane.AddYAxis("counts");
                 progressBar1.Value = 0;
                 create_graph(myPane);
                 zedGraphControl1.Refresh();
@@ -888,58 +893,60 @@ namespace XPS
             set_element(sender, e);
         }
 
-        int counter = 2;
 
-        private async void browse_Click(object sender, EventArgs e)
+
+        private async void safe_fig_Click(object sender, EventArgs e)
         {
-            zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + textBox35.Text + ".png"));
-            browse.Text = "Fig. saved";
-            browse.BackColor = Color.LimeGreen;
+            zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, fig_name.Text + ".png"));
+            safe_fig.Text = "Fig. saved";
+            safe_fig.BackColor = Color.LimeGreen;
             await Task.Delay(800);
-            counter += 1;
-            browse.Text = "Save fig.";
-            browse.BackColor = SystemColors.Control;
-
-
-
-            //SaveFileDialog sv = new SaveFileDialog();
-            //sv.Title = "Save data";
-            //sv.ShowDialog();
+            safe_fig.Text = "Save fig.";
+            safe_fig.BackColor = Color.Transparent;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+
+        private void showdata_Click(object sender, EventArgs e)
         {
-            Process.Start("notepad.exe", path2 + "data" + (data_coutner-1) + ".txt");
+            Process.Start("notepad.exe", path2 + "data" + (data_coutner - 1) + ".txt");
         }
+
+
 
         private void tb_safe_TextChanged(object sender, EventArgs e)
         {
-            if (checkBox1.Checked || checkBox2.Checked)
+            tb_safe.BackColor = Color.LightGray;
+            if (Mg_anode.Checked || Al_anode.Checked)
             {
                 btn_start.Enabled = true;
             }
-            tb_safe.BackColor = Color.LightGray;
         }
 
-        private void textBox35_TextChanged(object sender, EventArgs e)
+
+
+        private void fig_name_TextChanged(object sender, EventArgs e)
         {
-            if (textBox35.Text == "")
+            if (fig_name.Text == "")
             {
-                browse.Enabled = false;
+                safe_fig.Enabled = false;
             }
             else
             {
-                browse.Enabled = true;
+                safe_fig.Enabled = true;
             }
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                checkBox2.Enabled = false;
 
-                if (!(string.IsNullOrWhiteSpace(textBox35.Text)))
+
+        private void Mg_anode_CheckedChanged(object sender, EventArgs e)
+        {
+            Mg_anode.BackColor = SystemColors.Control;
+            Al_anode.BackColor = SystemColors.Control;
+            if (Mg_anode.Checked)
+            {
+                Al_anode.Enabled = false;
+                if (!string.IsNullOrWhiteSpace(tb_safe.Text))
                 {
                     btn_start.Enabled = true;
                 }
@@ -947,18 +954,20 @@ namespace XPS
 
             else
             {
-               // checkBox1.Enabled = false;
-                checkBox2.Enabled = true;
+                Al_anode.Enabled = true;
             }      
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox2.Checked)
-            {
-                checkBox1.Enabled = false;
 
-                if (!(string.IsNullOrWhiteSpace(textBox35.Text)))
+
+        private void Al_anode_CheckedChanged(object sender, EventArgs e)
+        {
+            Al_anode.BackColor = SystemColors.Control;
+            Mg_anode.BackColor = SystemColors.Control;
+            if (Al_anode.Checked)
+            {
+                Mg_anode.Enabled = false;
+                if (!string.IsNullOrWhiteSpace(tb_safe.Text))
                 {
                     btn_start.Enabled = true;
                 }
@@ -966,9 +975,14 @@ namespace XPS
 
             else
             {
-                // checkBox1.Enabled = false;
-                checkBox1.Enabled = true;
+                Mg_anode.Enabled = true;
             }
         }
     }
 }
+
+
+
+
+//bugs:
+// - nach clear führt das abwählen von elementen zzu einem error (da ebtl. noch in liste gespeichert)

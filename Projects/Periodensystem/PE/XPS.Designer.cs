@@ -278,15 +278,15 @@
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.textBox35 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.fig_name = new System.Windows.Forms.TextBox();
+            this.showdata = new System.Windows.Forms.Button();
             this.label57 = new System.Windows.Forms.Label();
-            this.browse = new System.Windows.Forms.Button();
+            this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.XRaySource = new System.Windows.Forms.GroupBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.Al_anode = new System.Windows.Forms.CheckBox();
+            this.Mg_anode = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -2450,10 +2450,10 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label58);
-            this.groupBox2.Controls.Add(this.textBox35);
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.fig_name);
+            this.groupBox2.Controls.Add(this.showdata);
             this.groupBox2.Controls.Add(this.label57);
-            this.groupBox2.Controls.Add(this.browse);
+            this.groupBox2.Controls.Add(this.safe_fig);
             this.groupBox2.Controls.Add(this.tb_safe);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
@@ -2464,30 +2464,30 @@
             resources.ApplyResources(this.label58, "label58");
             this.label58.Name = "label58";
             // 
-            // textBox35
+            // fig_name
             // 
-            resources.ApplyResources(this.textBox35, "textBox35");
-            this.textBox35.Name = "textBox35";
-            this.textBox35.TextChanged += new System.EventHandler(this.textBox35_TextChanged);
+            resources.ApplyResources(this.fig_name, "fig_name");
+            this.fig_name.Name = "fig_name";
+            this.fig_name.TextChanged += new System.EventHandler(this.fig_name_TextChanged);
             // 
-            // button1
+            // showdata
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.showdata, "showdata");
+            this.showdata.Name = "showdata";
+            this.showdata.UseVisualStyleBackColor = true;
+            this.showdata.Click += new System.EventHandler(this.showdata_Click);
             // 
             // label57
             // 
             resources.ApplyResources(this.label57, "label57");
             this.label57.Name = "label57";
             // 
-            // browse
+            // safe_fig
             // 
-            resources.ApplyResources(this.browse, "browse");
-            this.browse.Name = "browse";
-            this.browse.UseVisualStyleBackColor = true;
-            this.browse.Click += new System.EventHandler(this.browse_Click);
+            resources.ApplyResources(this.safe_fig, "safe_fig");
+            this.safe_fig.Name = "safe_fig";
+            this.safe_fig.UseVisualStyleBackColor = true;
+            this.safe_fig.Click += new System.EventHandler(this.safe_fig_Click);
             // 
             // tb_safe
             // 
@@ -2510,25 +2510,28 @@
             // 
             // XRaySource
             // 
-            this.XRaySource.Controls.Add(this.checkBox2);
-            this.XRaySource.Controls.Add(this.checkBox1);
+            this.XRaySource.Controls.Add(this.Al_anode);
+            this.XRaySource.Controls.Add(this.Mg_anode);
             resources.ApplyResources(this.XRaySource, "XRaySource");
             this.XRaySource.Name = "XRaySource";
             this.XRaySource.TabStop = false;
             // 
-            // checkBox2
+            // Al_anode
             // 
-            resources.ApplyResources(this.checkBox2, "checkBox2");
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            resources.ApplyResources(this.Al_anode, "Al_anode");
+            this.Al_anode.BackColor = System.Drawing.Color.LightCoral;
+            this.Al_anode.Name = "Al_anode";
+            this.Al_anode.UseVisualStyleBackColor = false;
+            this.Al_anode.CheckedChanged += new System.EventHandler(this.Al_anode_CheckedChanged);
             // 
-            // checkBox1
+            // Mg_anode
             // 
-            resources.ApplyResources(this.checkBox1, "checkBox1");
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            resources.ApplyResources(this.Mg_anode, "Mg_anode");
+            this.Mg_anode.BackColor = System.Drawing.Color.LightCoral;
+            this.Mg_anode.ForeColor = System.Drawing.Color.Black;
+            this.Mg_anode.Name = "Mg_anode";
+            this.Mg_anode.UseVisualStyleBackColor = false;
+            this.Mg_anode.CheckedChanged += new System.EventHandler(this.Mg_anode_CheckedChanged);
             // 
             // XPS
             // 
@@ -2811,15 +2814,15 @@
         private System.Windows.Forms.TextBox textBox50;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tb_safe;
-        private System.Windows.Forms.Button browse;
+        private System.Windows.Forms.Button safe_fig;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button showdata;
         private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.TextBox fig_name;
         private System.Windows.Forms.GroupBox XRaySource;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox Al_anode;
+        private System.Windows.Forms.CheckBox Mg_anode;
     }
 }
 
