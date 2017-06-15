@@ -209,6 +209,9 @@ namespace XPS
             if (!bW_data.IsBusy)
             {
                 end = 0;
+                string source;
+                if (Al_anode.Checked){source = "Aluminium";}
+                else {source = "Magnesium";}
                 myCurve = myPane.AddCurve("",
                 list1, Color.Black, SymbolType.None);
                 curr_time = now;
@@ -219,7 +222,7 @@ namespace XPS
                 {
                     file.WriteLine("#XPS-spectrum" + Environment.NewLine);
                     file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
-                    file.WriteLine("#X-ray source :\t" + Environment.NewLine);
+                    file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
                     file.WriteLine("#E_b \t counts");                   
                 }
 
