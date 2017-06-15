@@ -115,9 +115,9 @@
             this.Rg = new System.Windows.Forms.Button();
             this.Cn = new System.Windows.Forms.Button();
             this.Uut = new System.Windows.Forms.Button();
-            this.Fl = new System.Windows.Forms.Button();
+            this.Uuq = new System.Windows.Forms.Button();
             this.Uup = new System.Windows.Forms.Button();
-            this.Lv = new System.Windows.Forms.Button();
+            this.Uuh = new System.Windows.Forms.Button();
             this.Uus = new System.Windows.Forms.Button();
             this.Uuo = new System.Windows.Forms.Button();
             this.Ce = new System.Windows.Forms.Button();
@@ -184,7 +184,6 @@
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
             this.elementnames = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
@@ -287,12 +286,13 @@
             this.XRaySource = new System.Windows.Forms.GroupBox();
             this.Al_anode = new System.Windows.Forms.CheckBox();
             this.Mg_anode = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.XRaySource.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -1136,14 +1136,14 @@
             this.Uut.Name = "Uut";
             this.Uut.UseVisualStyleBackColor = false;
             // 
-            // Fl
+            // Uuq
             // 
-            this.Fl.BackColor = System.Drawing.Color.Aquamarine;
-            this.Fl.Cursor = System.Windows.Forms.Cursors.No;
-            resources.ApplyResources(this.Fl, "Fl");
-            this.Fl.ForeColor = System.Drawing.Color.White;
-            this.Fl.Name = "Fl";
-            this.Fl.UseVisualStyleBackColor = false;
+            this.Uuq.BackColor = System.Drawing.Color.Aquamarine;
+            this.Uuq.Cursor = System.Windows.Forms.Cursors.No;
+            resources.ApplyResources(this.Uuq, "Uuq");
+            this.Uuq.ForeColor = System.Drawing.Color.White;
+            this.Uuq.Name = "Uuq";
+            this.Uuq.UseVisualStyleBackColor = false;
             // 
             // Uup
             // 
@@ -1154,14 +1154,14 @@
             this.Uup.Name = "Uup";
             this.Uup.UseVisualStyleBackColor = false;
             // 
-            // Lv
+            // Uuh
             // 
-            this.Lv.BackColor = System.Drawing.Color.Aquamarine;
-            this.Lv.Cursor = System.Windows.Forms.Cursors.No;
-            resources.ApplyResources(this.Lv, "Lv");
-            this.Lv.ForeColor = System.Drawing.Color.White;
-            this.Lv.Name = "Lv";
-            this.Lv.UseVisualStyleBackColor = false;
+            this.Uuh.BackColor = System.Drawing.Color.Aquamarine;
+            this.Uuh.Cursor = System.Windows.Forms.Cursors.No;
+            resources.ApplyResources(this.Uuh, "Uuh");
+            this.Uuh.ForeColor = System.Drawing.Color.White;
+            this.Uuh.Name = "Uuh";
+            this.Uuh.UseVisualStyleBackColor = false;
             // 
             // Uus
             // 
@@ -1504,9 +1504,9 @@
             this.tableLayoutPanel1.Controls.Add(this.Ce, 4, 9);
             this.tableLayoutPanel1.Controls.Add(this.Uuo, 18, 7);
             this.tableLayoutPanel1.Controls.Add(this.Uus, 17, 7);
-            this.tableLayoutPanel1.Controls.Add(this.Lv, 16, 7);
+            this.tableLayoutPanel1.Controls.Add(this.Uuh, 16, 7);
             this.tableLayoutPanel1.Controls.Add(this.Uup, 15, 7);
-            this.tableLayoutPanel1.Controls.Add(this.Fl, 14, 7);
+            this.tableLayoutPanel1.Controls.Add(this.Uuq, 14, 7);
             this.tableLayoutPanel1.Controls.Add(this.Uut, 13, 7);
             this.tableLayoutPanel1.Controls.Add(this.Cn, 12, 7);
             this.tableLayoutPanel1.Controls.Add(this.Rg, 11, 7);
@@ -1856,69 +1856,6 @@
             // 
             this.elementnames.Popup += new System.Windows.Forms.PopupEventHandler(this.elementnames_Popup);
             // 
-            // tableLayoutPanel2
-            // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.tableLayoutPanel2.Controls.Add(this.label26, 1, 13);
-            this.tableLayoutPanel2.Controls.Add(this.label25, 0, 13);
-            this.tableLayoutPanel2.Controls.Add(this.label24, 1, 12);
-            this.tableLayoutPanel2.Controls.Add(this.label51, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label56, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label52, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label55, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label23, 0, 12);
-            this.tableLayoutPanel2.Controls.Add(this.label22, 1, 11);
-            this.tableLayoutPanel2.Controls.Add(this.label21, 0, 11);
-            this.tableLayoutPanel2.Controls.Add(this.label20, 1, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label19, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label18, 1, 9);
-            this.tableLayoutPanel2.Controls.Add(this.label17, 0, 9);
-            this.tableLayoutPanel2.Controls.Add(this.label16, 1, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label15, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label14, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label13, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label8, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label28, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label30, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label32, 3, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label34, 3, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label36, 3, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label38, 3, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label40, 3, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label42, 3, 9);
-            this.tableLayoutPanel2.Controls.Add(this.label44, 3, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label46, 3, 11);
-            this.tableLayoutPanel2.Controls.Add(this.label48, 3, 12);
-            this.tableLayoutPanel2.Controls.Add(this.label50, 3, 13);
-            this.tableLayoutPanel2.Controls.Add(this.label27, 2, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label29, 2, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label31, 2, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label33, 2, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label35, 2, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label37, 2, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label39, 2, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label41, 2, 9);
-            this.tableLayoutPanel2.Controls.Add(this.label43, 2, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label45, 2, 11);
-            this.tableLayoutPanel2.Controls.Add(this.label47, 2, 12);
-            this.tableLayoutPanel2.Controls.Add(this.label49, 2, 13);
-            this.tableLayoutPanel2.Controls.Add(this.label53, 2, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label54, 3, 1);
-            this.tableLayoutPanel2.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
             // label26
             // 
             resources.ApplyResources(this.label26, "label26");
@@ -1927,7 +1864,7 @@
             // label25
             // 
             resources.ApplyResources(this.label25, "label25");
-            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label25.ForeColor = System.Drawing.Color.DimGray;
             this.label25.Name = "label25";
             // 
             // label24
@@ -1958,7 +1895,7 @@
             // label23
             // 
             resources.ApplyResources(this.label23, "label23");
-            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label23.ForeColor = System.Drawing.Color.DimGray;
             this.label23.Name = "label23";
             // 
             // label22
@@ -1969,7 +1906,7 @@
             // label21
             // 
             resources.ApplyResources(this.label21, "label21");
-            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label21.ForeColor = System.Drawing.Color.DimGray;
             this.label21.Name = "label21";
             // 
             // label20
@@ -1980,7 +1917,7 @@
             // label19
             // 
             resources.ApplyResources(this.label19, "label19");
-            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label19.ForeColor = System.Drawing.Color.DimGray;
             this.label19.Name = "label19";
             // 
             // label18
@@ -1991,7 +1928,7 @@
             // label17
             // 
             resources.ApplyResources(this.label17, "label17");
-            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label17.ForeColor = System.Drawing.Color.DimGray;
             this.label17.Name = "label17";
             // 
             // label16
@@ -2002,7 +1939,7 @@
             // label15
             // 
             resources.ApplyResources(this.label15, "label15");
-            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label15.ForeColor = System.Drawing.Color.DimGray;
             this.label15.Name = "label15";
             // 
             // label14
@@ -2013,7 +1950,7 @@
             // label13
             // 
             resources.ApplyResources(this.label13, "label13");
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label13.ForeColor = System.Drawing.Color.DimGray;
             this.label13.Name = "label13";
             // 
             // label12
@@ -2024,7 +1961,7 @@
             // label11
             // 
             resources.ApplyResources(this.label11, "label11");
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label11.ForeColor = System.Drawing.Color.DimGray;
             this.label11.Name = "label11";
             // 
             // label10
@@ -2035,7 +1972,7 @@
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label9.ForeColor = System.Drawing.Color.DimGray;
             this.label9.Name = "label9";
             // 
             // label8
@@ -2046,7 +1983,7 @@
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label7.ForeColor = System.Drawing.Color.DimGray;
             this.label7.Name = "label7";
             // 
             // label6
@@ -2057,7 +1994,7 @@
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label5.ForeColor = System.Drawing.Color.DimGray;
             this.label5.Name = "label5";
             // 
             // label4
@@ -2068,7 +2005,7 @@
             // label3
             // 
             resources.ApplyResources(this.label3, "label3");
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
             this.label3.Name = "label3";
             // 
             // label2
@@ -2145,73 +2082,73 @@
             // label27
             // 
             resources.ApplyResources(this.label27, "label27");
-            this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label27.ForeColor = System.Drawing.Color.DimGray;
             this.label27.Name = "label27";
             // 
             // label29
             // 
             resources.ApplyResources(this.label29, "label29");
-            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label29.ForeColor = System.Drawing.Color.DimGray;
             this.label29.Name = "label29";
             // 
             // label31
             // 
             resources.ApplyResources(this.label31, "label31");
-            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label31.ForeColor = System.Drawing.Color.DimGray;
             this.label31.Name = "label31";
             // 
             // label33
             // 
             resources.ApplyResources(this.label33, "label33");
-            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label33.ForeColor = System.Drawing.Color.DimGray;
             this.label33.Name = "label33";
             // 
             // label35
             // 
             resources.ApplyResources(this.label35, "label35");
-            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label35.ForeColor = System.Drawing.Color.DimGray;
             this.label35.Name = "label35";
             // 
             // label37
             // 
             resources.ApplyResources(this.label37, "label37");
-            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label37.ForeColor = System.Drawing.Color.DimGray;
             this.label37.Name = "label37";
             // 
             // label39
             // 
             resources.ApplyResources(this.label39, "label39");
-            this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label39.ForeColor = System.Drawing.Color.DimGray;
             this.label39.Name = "label39";
             // 
             // label41
             // 
             resources.ApplyResources(this.label41, "label41");
-            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label41.ForeColor = System.Drawing.Color.DimGray;
             this.label41.Name = "label41";
             // 
             // label43
             // 
             resources.ApplyResources(this.label43, "label43");
-            this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label43.ForeColor = System.Drawing.Color.DimGray;
             this.label43.Name = "label43";
             // 
             // label45
             // 
             resources.ApplyResources(this.label45, "label45");
-            this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label45.ForeColor = System.Drawing.Color.DimGray;
             this.label45.Name = "label45";
             // 
             // label47
             // 
             resources.ApplyResources(this.label47, "label47");
-            this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label47.ForeColor = System.Drawing.Color.DimGray;
             this.label47.Name = "label47";
             // 
             // label49
             // 
             resources.ApplyResources(this.label49, "label49");
-            this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label49.ForeColor = System.Drawing.Color.DimGray;
             this.label49.Name = "label49";
             // 
             // label53
@@ -2533,24 +2470,84 @@
             this.Mg_anode.UseVisualStyleBackColor = false;
             this.Mg_anode.CheckedChanged += new System.EventHandler(this.Mg_anode_CheckedChanged);
             // 
+            // groupBox4
+            // 
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Controls.Add(this.label26);
+            this.groupBox4.Controls.Add(this.label33);
+            this.groupBox4.Controls.Add(this.label25);
+            this.groupBox4.Controls.Add(this.label52);
+            this.groupBox4.Controls.Add(this.label24);
+            this.groupBox4.Controls.Add(this.label54);
+            this.groupBox4.Controls.Add(this.label51);
+            this.groupBox4.Controls.Add(this.label53);
+            this.groupBox4.Controls.Add(this.label56);
+            this.groupBox4.Controls.Add(this.label49);
+            this.groupBox4.Controls.Add(this.label55);
+            this.groupBox4.Controls.Add(this.label47);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Controls.Add(this.label45);
+            this.groupBox4.Controls.Add(this.label22);
+            this.groupBox4.Controls.Add(this.label43);
+            this.groupBox4.Controls.Add(this.label21);
+            this.groupBox4.Controls.Add(this.label41);
+            this.groupBox4.Controls.Add(this.label20);
+            this.groupBox4.Controls.Add(this.label39);
+            this.groupBox4.Controls.Add(this.label19);
+            this.groupBox4.Controls.Add(this.label37);
+            this.groupBox4.Controls.Add(this.label18);
+            this.groupBox4.Controls.Add(this.label35);
+            this.groupBox4.Controls.Add(this.label17);
+            this.groupBox4.Controls.Add(this.label31);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.label29);
+            this.groupBox4.Controls.Add(this.label15);
+            this.groupBox4.Controls.Add(this.label27);
+            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Controls.Add(this.label50);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.label48);
+            this.groupBox4.Controls.Add(this.label12);
+            this.groupBox4.Controls.Add(this.label46);
+            this.groupBox4.Controls.Add(this.label11);
+            this.groupBox4.Controls.Add(this.label44);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.label42);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.label40);
+            this.groupBox4.Controls.Add(this.label8);
+            this.groupBox4.Controls.Add(this.label38);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label36);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.label34);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label32);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.label30);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.label28);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.XRaySource);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.zedGraphControl1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "XPS";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -2559,8 +2556,9 @@
             this.groupBox3.PerformLayout();
             this.XRaySource.ResumeLayout(false);
             this.XRaySource.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -2651,9 +2649,9 @@
         private System.Windows.Forms.Button Rg;
         private System.Windows.Forms.Button Cn;
         private System.Windows.Forms.Button Uut;
-        private System.Windows.Forms.Button Fl;
+        private System.Windows.Forms.Button Uuq;
         private System.Windows.Forms.Button Uup;
-        private System.Windows.Forms.Button Lv;
+        private System.Windows.Forms.Button Uuh;
         private System.Windows.Forms.Button Uus;
         private System.Windows.Forms.Button Uuo;
         private System.Windows.Forms.Button Ce;
@@ -2713,7 +2711,6 @@
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.TextBox textBox20;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label47;
         private System.Windows.Forms.Label label45;
@@ -2823,6 +2820,7 @@
         private System.Windows.Forms.GroupBox XRaySource;
         private System.Windows.Forms.CheckBox Al_anode;
         private System.Windows.Forms.CheckBox Mg_anode;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 

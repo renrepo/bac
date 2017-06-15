@@ -92,8 +92,34 @@ namespace XPS
             {
                 MessageBox.Show("Can't create Folder 'Logfile' on Desktop");
             }
-        }
 
+            Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Bh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Hs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Mt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Ds.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Rg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Cn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Uuh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
+            Uup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uuq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uuo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
+            Np.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Pu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Am.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Cm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Bk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Cf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Es.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Fm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Mo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+            Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+        }
 
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
@@ -102,13 +128,11 @@ namespace XPS
 
 
 
-
         private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
         {
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            tableLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
-        //string line = File.ReadLines(path + @"\Bindungsenergien.csv").Skip(14).Take(1).First()
+
 
 
         public void colorchanger(object sender, YAxis ya)
@@ -407,7 +431,7 @@ namespace XPS
             {
                 label51.Text = thePanelName;
                 label52.Text = dictionary[thePanelName];
-                label4.Text = row[zeile][2];
+                label4.Text =  row[zeile][2];
                 label6.Text = row[zeile][3];
                 label8.Text = row[zeile][4];
                 label10.Text = row[zeile][5];
