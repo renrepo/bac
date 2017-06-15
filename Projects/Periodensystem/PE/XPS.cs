@@ -93,32 +93,7 @@ namespace XPS
                 MessageBox.Show("Can't create Folder 'Logfile' on Desktop");
             }
 
-            Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Bh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Hs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Mt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Ds.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Rg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Cn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Uuh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
-            Uup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uuq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uuo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
-            Np.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Pu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Am.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Cm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Bk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Cf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Es.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Fm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Mo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
-            Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.SpringGreen;
+
         }
 
 
@@ -384,6 +359,7 @@ namespace XPS
                 myPane.AddYAxis("counts");
                 progressBar1.Value = 0;
                 create_graph(myPane);
+                                                      zedGraphControl1.AxisChange();
                 zedGraphControl1.Refresh();
             }
         }
@@ -944,10 +920,7 @@ namespace XPS
         private void tb_safe_TextChanged(object sender, EventArgs e)
         {
             tb_safe.BackColor = Color.LightGray;
-            if (Mg_anode.Checked || Al_anode.Checked)
-            {
-                btn_start.Enabled = true;
-            }
+            enable_start();
         }
 
 
@@ -973,16 +946,13 @@ namespace XPS
             if (Mg_anode.Checked)
             {
                 Al_anode.Enabled = false;
-                if (!string.IsNullOrWhiteSpace(tb_safe.Text))
-                {
-                    btn_start.Enabled = true;
-                }
             }
 
             else
             {
                 Al_anode.Enabled = true;
-            }      
+            }
+            enable_start();
         }
 
 
@@ -994,16 +964,18 @@ namespace XPS
             if (Al_anode.Checked)
             {
                 Mg_anode.Enabled = false;
-                if (!string.IsNullOrWhiteSpace(tb_safe.Text))
-                {
-                    btn_start.Enabled = true;
-                }
             }
 
             else
             {
                 Mg_anode.Enabled = true;
             }
+            enable_start();
+        }
+
+        private void enable_start ()
+        {
+            btn_start.Enabled = tb_safe.Text != string.Empty && (Al_anode.Checked || Mg_anode.Checked);
         }
     }
 }

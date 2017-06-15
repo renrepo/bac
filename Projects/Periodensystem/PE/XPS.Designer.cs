@@ -287,12 +287,15 @@
             this.Al_anode = new System.Windows.Forms.CheckBox();
             this.Mg_anode = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.XRaySource.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -1049,7 +1052,7 @@
             // Rf
             // 
             this.Rf.BackColor = System.Drawing.Color.LightSalmon;
-            this.Rf.Cursor = System.Windows.Forms.Cursors.No;
+            this.Rf.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Rf, "Rf");
             this.Rf.ForeColor = System.Drawing.Color.White;
             this.Rf.Name = "Rf";
@@ -1058,7 +1061,7 @@
             // Db
             // 
             this.Db.BackColor = System.Drawing.Color.LightSalmon;
-            this.Db.Cursor = System.Windows.Forms.Cursors.No;
+            this.Db.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Db, "Db");
             this.Db.ForeColor = System.Drawing.Color.White;
             this.Db.Name = "Db";
@@ -1067,7 +1070,7 @@
             // Sg
             // 
             this.Sg.BackColor = System.Drawing.Color.LightSalmon;
-            this.Sg.Cursor = System.Windows.Forms.Cursors.No;
+            this.Sg.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Sg, "Sg");
             this.Sg.ForeColor = System.Drawing.Color.White;
             this.Sg.Name = "Sg";
@@ -1076,7 +1079,7 @@
             // Bh
             // 
             this.Bh.BackColor = System.Drawing.Color.LightSalmon;
-            this.Bh.Cursor = System.Windows.Forms.Cursors.No;
+            this.Bh.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Bh, "Bh");
             this.Bh.ForeColor = System.Drawing.Color.White;
             this.Bh.Name = "Bh";
@@ -1085,7 +1088,7 @@
             // Hs
             // 
             this.Hs.BackColor = System.Drawing.Color.LightSalmon;
-            this.Hs.Cursor = System.Windows.Forms.Cursors.No;
+            this.Hs.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Hs, "Hs");
             this.Hs.ForeColor = System.Drawing.Color.White;
             this.Hs.Name = "Hs";
@@ -1094,7 +1097,7 @@
             // Mt
             // 
             this.Mt.BackColor = System.Drawing.Color.LightSalmon;
-            this.Mt.Cursor = System.Windows.Forms.Cursors.No;
+            this.Mt.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Mt, "Mt");
             this.Mt.ForeColor = System.Drawing.Color.White;
             this.Mt.Name = "Mt";
@@ -1103,7 +1106,7 @@
             // Ds
             // 
             this.Ds.BackColor = System.Drawing.Color.LightSalmon;
-            this.Ds.Cursor = System.Windows.Forms.Cursors.No;
+            this.Ds.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Ds, "Ds");
             this.Ds.ForeColor = System.Drawing.Color.White;
             this.Ds.Name = "Ds";
@@ -1112,7 +1115,7 @@
             // Rg
             // 
             this.Rg.BackColor = System.Drawing.Color.LightSalmon;
-            this.Rg.Cursor = System.Windows.Forms.Cursors.No;
+            this.Rg.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Rg, "Rg");
             this.Rg.ForeColor = System.Drawing.Color.White;
             this.Rg.Name = "Rg";
@@ -1121,7 +1124,7 @@
             // Cn
             // 
             this.Cn.BackColor = System.Drawing.Color.LightSalmon;
-            this.Cn.Cursor = System.Windows.Forms.Cursors.No;
+            this.Cn.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cn, "Cn");
             this.Cn.ForeColor = System.Drawing.Color.White;
             this.Cn.Name = "Cn";
@@ -1130,7 +1133,7 @@
             // Uut
             // 
             this.Uut.BackColor = System.Drawing.Color.Aquamarine;
-            this.Uut.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uut.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uut, "Uut");
             this.Uut.ForeColor = System.Drawing.Color.White;
             this.Uut.Name = "Uut";
@@ -1139,7 +1142,7 @@
             // Uuq
             // 
             this.Uuq.BackColor = System.Drawing.Color.Aquamarine;
-            this.Uuq.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uuq.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuq, "Uuq");
             this.Uuq.ForeColor = System.Drawing.Color.White;
             this.Uuq.Name = "Uuq";
@@ -1148,7 +1151,7 @@
             // Uup
             // 
             this.Uup.BackColor = System.Drawing.Color.Aquamarine;
-            this.Uup.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uup.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uup, "Uup");
             this.Uup.ForeColor = System.Drawing.Color.White;
             this.Uup.Name = "Uup";
@@ -1157,7 +1160,7 @@
             // Uuh
             // 
             this.Uuh.BackColor = System.Drawing.Color.Aquamarine;
-            this.Uuh.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uuh.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuh, "Uuh");
             this.Uuh.ForeColor = System.Drawing.Color.White;
             this.Uuh.Name = "Uuh";
@@ -1166,7 +1169,7 @@
             // Uus
             // 
             this.Uus.BackColor = System.Drawing.Color.PaleGreen;
-            this.Uus.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uus.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uus, "Uus");
             this.Uus.ForeColor = System.Drawing.Color.White;
             this.Uus.Name = "Uus";
@@ -1175,7 +1178,7 @@
             // Uuo
             // 
             this.Uuo.BackColor = System.Drawing.Color.Orange;
-            this.Uuo.Cursor = System.Windows.Forms.Cursors.No;
+            this.Uuo.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuo, "Uuo");
             this.Uuo.ForeColor = System.Drawing.Color.White;
             this.Uuo.Name = "Uuo";
@@ -1356,8 +1359,8 @@
             // 
             // Np
             // 
-            this.Np.BackColor = System.Drawing.Color.SpringGreen;
-            this.Np.Cursor = System.Windows.Forms.Cursors.No;
+            this.Np.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Np.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Np, "Np");
             this.Np.ForeColor = System.Drawing.Color.White;
             this.Np.Name = "Np";
@@ -1365,8 +1368,8 @@
             // 
             // Pu
             // 
-            this.Pu.BackColor = System.Drawing.Color.SpringGreen;
-            this.Pu.Cursor = System.Windows.Forms.Cursors.No;
+            this.Pu.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Pu.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Pu, "Pu");
             this.Pu.ForeColor = System.Drawing.Color.White;
             this.Pu.Name = "Pu";
@@ -1374,8 +1377,8 @@
             // 
             // Am
             // 
-            this.Am.BackColor = System.Drawing.Color.SpringGreen;
-            this.Am.Cursor = System.Windows.Forms.Cursors.No;
+            this.Am.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Am.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Am, "Am");
             this.Am.ForeColor = System.Drawing.Color.White;
             this.Am.Name = "Am";
@@ -1383,8 +1386,8 @@
             // 
             // Cm
             // 
-            this.Cm.BackColor = System.Drawing.Color.SpringGreen;
-            this.Cm.Cursor = System.Windows.Forms.Cursors.No;
+            this.Cm.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Cm.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cm, "Cm");
             this.Cm.ForeColor = System.Drawing.Color.White;
             this.Cm.Name = "Cm";
@@ -1392,8 +1395,8 @@
             // 
             // Bk
             // 
-            this.Bk.BackColor = System.Drawing.Color.SpringGreen;
-            this.Bk.Cursor = System.Windows.Forms.Cursors.No;
+            this.Bk.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Bk.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Bk, "Bk");
             this.Bk.ForeColor = System.Drawing.Color.White;
             this.Bk.Name = "Bk";
@@ -1401,8 +1404,8 @@
             // 
             // Cf
             // 
-            this.Cf.BackColor = System.Drawing.Color.SpringGreen;
-            this.Cf.Cursor = System.Windows.Forms.Cursors.No;
+            this.Cf.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Cf.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cf, "Cf");
             this.Cf.ForeColor = System.Drawing.Color.White;
             this.Cf.Name = "Cf";
@@ -1410,8 +1413,8 @@
             // 
             // Es
             // 
-            this.Es.BackColor = System.Drawing.Color.SpringGreen;
-            this.Es.Cursor = System.Windows.Forms.Cursors.No;
+            this.Es.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Es.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Es, "Es");
             this.Es.ForeColor = System.Drawing.Color.White;
             this.Es.Name = "Es";
@@ -1419,8 +1422,8 @@
             // 
             // Fm
             // 
-            this.Fm.BackColor = System.Drawing.Color.SpringGreen;
-            this.Fm.Cursor = System.Windows.Forms.Cursors.No;
+            this.Fm.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Fm.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Fm, "Fm");
             this.Fm.ForeColor = System.Drawing.Color.White;
             this.Fm.Name = "Fm";
@@ -1428,8 +1431,8 @@
             // 
             // Md
             // 
-            this.Md.BackColor = System.Drawing.Color.SpringGreen;
-            this.Md.Cursor = System.Windows.Forms.Cursors.No;
+            this.Md.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Md.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Md, "Md");
             this.Md.ForeColor = System.Drawing.Color.White;
             this.Md.Name = "Md";
@@ -1437,8 +1440,8 @@
             // 
             // No
             // 
-            this.No.BackColor = System.Drawing.Color.SpringGreen;
-            this.No.Cursor = System.Windows.Forms.Cursors.No;
+            this.No.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.No.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.No, "No");
             this.No.ForeColor = System.Drawing.Color.White;
             this.No.Name = "No";
@@ -1446,8 +1449,8 @@
             // 
             // Lr
             // 
-            this.Lr.BackColor = System.Drawing.Color.SpringGreen;
-            this.Lr.Cursor = System.Windows.Forms.Cursors.No;
+            this.Lr.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Lr.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Lr, "Lr");
             this.Lr.ForeColor = System.Drawing.Color.White;
             this.Lr.Name = "Lr";
@@ -1784,8 +1787,8 @@
             // 
             // textBox27
             // 
-            this.textBox27.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox27, "textBox27");
+            this.textBox27.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox27.ForeColor = System.Drawing.Color.DimGray;
             this.textBox27.Name = "textBox27";
             // 
@@ -2165,7 +2168,7 @@
             // zedGraphControl1
             // 
             resources.ApplyResources(this.zedGraphControl1, "zedGraphControl1");
-            this.zedGraphControl1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.zedGraphControl1.Cursor = System.Windows.Forms.Cursors.Cross;
             this.zedGraphControl1.Name = "zedGraphControl1";
             this.zedGraphControl1.ScrollGrace = 0D;
             this.zedGraphControl1.ScrollMaxX = 0D;
@@ -2532,6 +2535,18 @@
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -2558,6 +2573,7 @@
             this.XRaySource.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2821,6 +2837,8 @@
         private System.Windows.Forms.CheckBox Al_anode;
         private System.Windows.Forms.CheckBox Mg_anode;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
