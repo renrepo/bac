@@ -50,6 +50,32 @@ namespace XPS
         {
             InitializeComponent();
             myPane = zedGraphControl1.GraphPane;
+            Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Bh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Hs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Mt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Ds.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Rg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Cn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
+            Uuh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
+            Uup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uuq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
+            Uuo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
+            Np.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Pu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Am.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Cm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Bk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Cf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Es.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Fm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+            Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
         }
 
 
