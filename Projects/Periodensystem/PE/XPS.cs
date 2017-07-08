@@ -21,7 +21,9 @@ namespace XPS
 
         string filePath = Path.GetFullPath("Bindungsenergien.csv");
         string filePath2 = Path.GetFullPath("colors2.csv");
+        string filePath3 = Path.GetFullPath("electronconfiguration.csv");
         List<List<string>> row = new List<List<string>>();
+        List<List<string>> elec_bind = new List<List<string>>();
         Dictionary<string, string> dictionary = new Dictionary<string, string>();
         Dictionary<string, string> fab = new Dictionary<string, string>(); 
         GraphPane myPane;
@@ -103,6 +105,7 @@ namespace XPS
         {
             // StreamReader sr = new StreamReader(filePath);
             row = File.ReadAllLines(filePath).Select(l => l.Split(',').ToList()).ToList();
+            elec_bind = File.ReadAllLines(filePath3).Select(l => l.Split(',').ToList()).ToList();
             fab = File.ReadLines(filePath2).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
             //MessageBox.Show(row[6][3]);
             var num = row.Count;
@@ -433,6 +436,7 @@ namespace XPS
                 label50.Text = "";
                 label51.Text = "";
                 label52.Text = "";
+                s1.Text = "";
             }
 
             else
@@ -463,6 +467,7 @@ namespace XPS
                 label46.Text = row[zeile][23];
                 label48.Text = row[zeile][24];
                 label50.Text = row[zeile][25];
+                s1.Text = elec_bind[zeile][1];
             }
         }
 
