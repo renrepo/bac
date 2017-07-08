@@ -12,6 +12,7 @@ using System.Threading;
 using ZedGraph;
 using System.Globalization;
 using System.Diagnostics;
+using NationalInstruments.Visa;
 
 namespace XPS
 {
@@ -43,6 +44,11 @@ namespace XPS
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string now = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
         string curr_time;
+
+
+
+        private MessageBasedSession mbSession;
+        private string lastResourceString = null;
 
 
 
@@ -1002,6 +1008,127 @@ namespace XPS
         private void enable_start ()
         {
             btn_start.Enabled = tb_safe.Text != string.Empty && (Al_anode.Checked || Mg_anode.Checked);
+        }
+
+        private void openSessionButton_Click(object sender, EventArgs e)
+        {
+            using (SelectResource sr = new SelectResource())
+            {
+                if (lastResourceString != null)
+                {
+                    sr.ResourceName = lastResourceString;
+                }
+                DialogResult result = sr.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    lastResourceString = sr.ResourceName;
+                    Cursor.Current = Cursors.WaitCursor;
+                    using (var rmSession = new ResourceManager())
+                    {
+                        try
+                        {
+                            mbSession = (MessageBasedSession)rmSession.Open(sr.ResourceName);
+                            //SetupControlState(true);
+                        }
+                        catch (InvalidCastException)
+                        {
+                            MessageBox.Show("Resource selected must be a message-based session");
+                        }
+                        catch (Exception exp)
+                        {
+                            MessageBox.Show(exp.Message);
+                        }
+                        finally
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void closeSession_Click(object sender, System.EventArgs e)
+        {
+            mbSession.RawIO.Write("*RST\n");
+            mbSession.Dispose();
+        }
+
+        private void query_Click(object sender, EventArgs e)
+        {
+            readTextBox.Text = String.Empty;
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
+                mbSession.RawIO.Write(textToWrite);
+                readTextBox.Text = InsertCommonEscapeSequences(mbSession.RawIO.ReadString());
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void write_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
+                mbSession.RawIO.Write(textToWrite);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+        }
+
+        private void read_Click(object sender, EventArgs e)
+        {
+            readTextBox.Text = String.Empty;
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                readTextBox.Text = InsertCommonEscapeSequences(mbSession.RawIO.ReadString());
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
+        }
+
+        private void clear_Click(object sender, EventArgs e)
+        {
+            readTextBox.Text = String.Empty;
+        }
+
+        private string ReplaceCommonEscapeSequences(string s)
+        {
+            return s.Replace("\\n", "\n").Replace("\\r", "\r");
+        }
+
+        private string InsertCommonEscapeSequences(string s)
+        {
+            return s.Replace("\n", "\\n").Replace("\r", "\\r");
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mbSession.RawIO.Write("*RST\n");
+            mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
+            mbSession.RawIO.Write(":VOLT ON,(@5)\n");
         }
     }
 }

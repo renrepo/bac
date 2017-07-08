@@ -20,3 +20,7 @@ C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Res
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.GenerateResource.Cache
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Ivi.Visa.dll
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\NationalInstruments.Visa.dll
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.PE.exe.config
+C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.SelectResource.resources

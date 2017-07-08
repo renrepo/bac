@@ -289,6 +289,15 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.openSessionButton = new System.Windows.Forms.Button();
+            this.queryButton = new System.Windows.Forms.Button();
+            this.writeButton = new System.Windows.Forms.Button();
+            this.readButton = new System.Windows.Forms.Button();
+            this.clearButton = new System.Windows.Forms.Button();
+            this.writeTextBox = new System.Windows.Forms.TextBox();
+            this.readTextBox = new System.Windows.Forms.TextBox();
+            this.closeSessionButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -2547,10 +2556,74 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
+            // openSessionButton
+            // 
+            resources.ApplyResources(this.openSessionButton, "openSessionButton");
+            this.openSessionButton.Name = "openSessionButton";
+            this.openSessionButton.Click += new System.EventHandler(this.openSessionButton_Click);
+            // 
+            // queryButton
+            // 
+            resources.ApplyResources(this.queryButton, "queryButton");
+            this.queryButton.Name = "queryButton";
+            this.queryButton.Click += new System.EventHandler(this.query_Click);
+            // 
+            // writeButton
+            // 
+            resources.ApplyResources(this.writeButton, "writeButton");
+            this.writeButton.Name = "writeButton";
+            this.writeButton.Click += new System.EventHandler(this.write_Click);
+            // 
+            // readButton
+            // 
+            resources.ApplyResources(this.readButton, "readButton");
+            this.readButton.Name = "readButton";
+            this.readButton.Click += new System.EventHandler(this.read_Click);
+            // 
+            // clearButton
+            // 
+            resources.ApplyResources(this.clearButton, "clearButton");
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Click += new System.EventHandler(this.clear_Click);
+            // 
+            // writeTextBox
+            // 
+            resources.ApplyResources(this.writeTextBox, "writeTextBox");
+            this.writeTextBox.Name = "writeTextBox";
+            // 
+            // readTextBox
+            // 
+            resources.ApplyResources(this.readTextBox, "readTextBox");
+            this.readTextBox.Name = "readTextBox";
+            this.readTextBox.ReadOnly = true;
+            this.readTextBox.TabStop = false;
+            // 
+            // closeSessionButton
+            // 
+            resources.ApplyResources(this.closeSessionButton, "closeSessionButton");
+            this.closeSessionButton.Name = "closeSessionButton";
+            this.closeSessionButton.Click += new System.EventHandler(this.closeSession_Click);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.closeSessionButton);
+            this.Controls.Add(this.readTextBox);
+            this.Controls.Add(this.writeTextBox);
+            this.Controls.Add(this.clearButton);
+            this.Controls.Add(this.readButton);
+            this.Controls.Add(this.writeButton);
+            this.Controls.Add(this.queryButton);
+            this.Controls.Add(this.openSessionButton);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.XRaySource);
             this.Controls.Add(this.groupBox3);
@@ -2575,6 +2648,7 @@
             this.groupBox4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -2839,6 +2913,15 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button openSessionButton;
+        private System.Windows.Forms.Button queryButton;
+        private System.Windows.Forms.Button writeButton;
+        private System.Windows.Forms.Button readButton;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.TextBox writeTextBox;
+        private System.Windows.Forms.TextBox readTextBox;
+        private System.Windows.Forms.Button closeSessionButton;
+        private System.Windows.Forms.Button button1;
     }
 }
 
