@@ -1126,6 +1126,7 @@ namespace XPS
 
         private void button1_Click(object sender, EventArgs e)
         {
+            mbSession.RawIO.Write("CONF:HVMICC HV_OK\n");
             mbSession.RawIO.Write("*RST\n");
             mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
