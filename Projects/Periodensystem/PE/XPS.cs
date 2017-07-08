@@ -153,7 +153,7 @@ namespace XPS
 
             if (btn.ForeColor == Color.DimGray)
             {
-                btn.Font = new Font("Arial", 12, FontStyle.Bold);
+                btn.Font = new Font("Arial", 10, FontStyle.Bold);
                 btn.ForeColor = Color.Black;
                 btn.FlatAppearance.BorderColor = Color.Black;
                 btn.FlatAppearance.BorderSize = 2;
@@ -200,7 +200,7 @@ namespace XPS
             else
             {
                 btn.ForeColor = Color.DimGray;
-                btn.Font = new Font("Arial", 11, FontStyle.Regular);
+                btn.Font = new Font("Arial", 10, FontStyle.Regular);
                 btn.FlatAppearance.BorderSize = 1;
                 btn.FlatAppearance.BorderColor = Color.DimGray;
 
@@ -1130,6 +1130,16 @@ namespace XPS
             mbSession.RawIO.Write("*RST\n");
             mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
+        }
+
+        private void label59_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

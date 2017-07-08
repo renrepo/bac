@@ -24,3 +24,7 @@ C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Ivi.Visa.dll
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\NationalInstruments.Visa.dll
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.PE.exe.config
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.SelectResource.resources
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Ivi.Visa.dll
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\NationalInstruments.Visa.dll
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.PE.exe.config
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.SelectResource.resources
