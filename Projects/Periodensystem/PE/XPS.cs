@@ -157,7 +157,7 @@ namespace XPS
 
             if (btn.ForeColor == Color.DimGray)
             {
-                btn.Font = new Font("Arial", 10, FontStyle.Bold);
+                btn.Font = new Font("Arial", 12, FontStyle.Bold);
                 btn.ForeColor = Color.Black;
                 btn.FlatAppearance.BorderColor = Color.Black;
                 btn.FlatAppearance.BorderSize = 2;
@@ -204,7 +204,7 @@ namespace XPS
             else
             {
                 btn.ForeColor = Color.DimGray;
-                btn.Font = new Font("Arial", 10, FontStyle.Regular);
+                btn.Font = new Font("Arial", 12, FontStyle.Regular);
                 btn.FlatAppearance.BorderSize = 1;
                 btn.FlatAppearance.BorderColor = Color.DimGray;
 
@@ -445,13 +445,24 @@ namespace XPS
                 s6.Text = "--";
                 s7.Text = "--";
                 s8.Text = "--";
+                s9.Text = "--";
+                s10.Text = "--";
+                s11.Text = "--";
+                s12.Text = "--";
+                s13.Text = "--";
+                s14.Text = "--";
+                s15.Text = "--";
+                s16.Text = "--";
+                s17.Text = "--";
+                s18.Text = "--";
+
             }
 
             else
             {
                 label51.Text = thePanelName;
                 label52.Text = dictionary[thePanelName];
-                label4.Text =  row[zeile][2];
+                label4.Text = row[zeile][2];
                 label6.Text = row[zeile][3];
                 label8.Text = row[zeile][4];
                 label10.Text = row[zeile][5];
@@ -476,21 +487,23 @@ namespace XPS
                 label48.Text = row[zeile][24];
                 label50.Text = row[zeile][25];
                 s1.Text = elec_bind[zeile][1];
-                s1.ForeColor = Color.Black;
                 s2.Text = elec_bind[zeile][2];
-                s2.ForeColor = Color.Black;
                 s3.Text = elec_bind[zeile][3];
-                s3.ForeColor = Color.Black;
                 s4.Text = elec_bind[zeile][4];
-                s4.ForeColor = Color.Black;
                 s5.Text = elec_bind[zeile][5];
-                s5.ForeColor = Color.Black;
                 s6.Text = elec_bind[zeile][6];
-                s6.ForeColor = Color.Black;
                 s7.Text = elec_bind[zeile][7];
-                s7.ForeColor = Color.Black;
                 s8.Text = elec_bind[zeile][8];
-                s8.ForeColor = Color.Black;
+                s9.Text = elec_bind[zeile][9];
+                s10.Text = elec_bind[zeile][10];
+                s11.Text = elec_bind[zeile][11];
+                s12.Text = elec_bind[zeile][12];
+                s13.Text = elec_bind[zeile][13];
+                s14.Text = elec_bind[zeile][14];
+                s15.Text = elec_bind[zeile][15];
+                s16.Text = elec_bind[zeile][16];
+                s17.Text = elec_bind[zeile][17];
+                s18.Text = elec_bind[zeile][18];
             }
         }
 

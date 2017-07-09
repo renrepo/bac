@@ -248,7 +248,6 @@
             this.btn_clear = new System.Windows.Forms.Button();
             this.bW_data = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label88 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
@@ -256,7 +255,6 @@
             this.label84 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.textBox51 = new System.Windows.Forms.TextBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox50 = new System.Windows.Forms.TextBox();
             this.textBox49 = new System.Windows.Forms.TextBox();
@@ -266,7 +264,6 @@
             this.textBox45 = new System.Windows.Forms.TextBox();
             this.textBox44 = new System.Windows.Forms.TextBox();
             this.textBox43 = new System.Windows.Forms.TextBox();
-            this.label81 = new System.Windows.Forms.Label();
             this.label80 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
@@ -384,13 +381,18 @@
             this.label95 = new System.Windows.Forms.Label();
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.XRaySource.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2319,38 +2321,6 @@
             resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
             this.lb_perc_gauss.Name = "lb_perc_gauss";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label88);
-            this.groupBox1.Controls.Add(this.label87);
-            this.groupBox1.Controls.Add(this.label86);
-            this.groupBox1.Controls.Add(this.label85);
-            this.groupBox1.Controls.Add(this.label84);
-            this.groupBox1.Controls.Add(this.label83);
-            this.groupBox1.Controls.Add(this.label82);
-            this.groupBox1.Controls.Add(this.textBox51);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.textBox50);
-            this.groupBox1.Controls.Add(this.textBox49);
-            this.groupBox1.Controls.Add(this.textBox48);
-            this.groupBox1.Controls.Add(this.textBox47);
-            this.groupBox1.Controls.Add(this.textBox46);
-            this.groupBox1.Controls.Add(this.textBox45);
-            this.groupBox1.Controls.Add(this.textBox44);
-            this.groupBox1.Controls.Add(this.textBox43);
-            this.groupBox1.Controls.Add(this.label81);
-            this.groupBox1.Controls.Add(this.label80);
-            this.groupBox1.Controls.Add(this.label79);
-            this.groupBox1.Controls.Add(this.label78);
-            this.groupBox1.Controls.Add(this.label77);
-            this.groupBox1.Controls.Add(this.label76);
-            this.groupBox1.Controls.Add(this.label75);
-            this.groupBox1.Controls.Add(this.label74);
-            this.groupBox1.Controls.Add(this.label73);
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
-            // 
             // label88
             // 
             resources.ApplyResources(this.label88, "label88");
@@ -2385,11 +2355,6 @@
             // 
             resources.ApplyResources(this.label82, "label82");
             this.label82.Name = "label82";
-            // 
-            // textBox51
-            // 
-            resources.ApplyResources(this.textBox51, "textBox51");
-            this.textBox51.Name = "textBox51";
             // 
             // comboBox2
             // 
@@ -2436,11 +2401,6 @@
             // 
             resources.ApplyResources(this.textBox43, "textBox43");
             this.textBox43.Name = "textBox43";
-            // 
-            // label81
-            // 
-            resources.ApplyResources(this.label81, "label81");
-            this.label81.Name = "label81";
             // 
             // label80
             // 
@@ -2724,7 +2684,7 @@
             resources.ApplyResources(this.s44, "s44");
             this.s44.BackColor = System.Drawing.Color.Gainsboro;
             this.s44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s44.ForeColor = System.Drawing.Color.DarkGray;
+            this.s44.ForeColor = System.Drawing.Color.Black;
             this.s44.Name = "s44";
             // 
             // s28
@@ -2732,7 +2692,7 @@
             resources.ApplyResources(this.s28, "s28");
             this.s28.BackColor = System.Drawing.Color.Gainsboro;
             this.s28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s28.ForeColor = System.Drawing.Color.DarkGray;
+            this.s28.ForeColor = System.Drawing.Color.Black;
             this.s28.Name = "s28";
             // 
             // s55
@@ -2740,7 +2700,7 @@
             resources.ApplyResources(this.s55, "s55");
             this.s55.BackColor = System.Drawing.Color.Gainsboro;
             this.s55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s55.ForeColor = System.Drawing.Color.DarkGray;
+            this.s55.ForeColor = System.Drawing.Color.Black;
             this.s55.Name = "s55";
             // 
             // s39
@@ -2748,7 +2708,7 @@
             resources.ApplyResources(this.s39, "s39");
             this.s39.BackColor = System.Drawing.Color.Gainsboro;
             this.s39.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s39.ForeColor = System.Drawing.Color.DarkGray;
+            this.s39.ForeColor = System.Drawing.Color.Black;
             this.s39.Name = "s39";
             // 
             // s23
@@ -2756,7 +2716,7 @@
             resources.ApplyResources(this.s23, "s23");
             this.s23.BackColor = System.Drawing.Color.Gainsboro;
             this.s23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s23.ForeColor = System.Drawing.Color.DarkGray;
+            this.s23.ForeColor = System.Drawing.Color.Black;
             this.s23.Name = "s23";
             // 
             // s42
@@ -2764,7 +2724,7 @@
             resources.ApplyResources(this.s42, "s42");
             this.s42.BackColor = System.Drawing.Color.Gainsboro;
             this.s42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s42.ForeColor = System.Drawing.Color.DarkGray;
+            this.s42.ForeColor = System.Drawing.Color.Black;
             this.s42.Name = "s42";
             // 
             // s14
@@ -2772,7 +2732,7 @@
             resources.ApplyResources(this.s14, "s14");
             this.s14.BackColor = System.Drawing.Color.Gainsboro;
             this.s14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s14.ForeColor = System.Drawing.Color.DarkGray;
+            this.s14.ForeColor = System.Drawing.Color.Black;
             this.s14.Name = "s14";
             // 
             // s26
@@ -2780,7 +2740,7 @@
             resources.ApplyResources(this.s26, "s26");
             this.s26.BackColor = System.Drawing.Color.Gainsboro;
             this.s26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s26.ForeColor = System.Drawing.Color.DarkGray;
+            this.s26.ForeColor = System.Drawing.Color.Black;
             this.s26.Name = "s26";
             // 
             // s53
@@ -2788,7 +2748,7 @@
             resources.ApplyResources(this.s53, "s53");
             this.s53.BackColor = System.Drawing.Color.Gainsboro;
             this.s53.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s53.ForeColor = System.Drawing.Color.DarkGray;
+            this.s53.ForeColor = System.Drawing.Color.Black;
             this.s53.Name = "s53";
             // 
             // s37
@@ -2796,7 +2756,7 @@
             resources.ApplyResources(this.s37, "s37");
             this.s37.BackColor = System.Drawing.Color.Gainsboro;
             this.s37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s37.ForeColor = System.Drawing.Color.DarkGray;
+            this.s37.ForeColor = System.Drawing.Color.Black;
             this.s37.Name = "s37";
             // 
             // s21
@@ -2804,7 +2764,7 @@
             resources.ApplyResources(this.s21, "s21");
             this.s21.BackColor = System.Drawing.Color.Gainsboro;
             this.s21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s21.ForeColor = System.Drawing.Color.DarkGray;
+            this.s21.ForeColor = System.Drawing.Color.Black;
             this.s21.Name = "s21";
             // 
             // s12
@@ -2812,7 +2772,7 @@
             resources.ApplyResources(this.s12, "s12");
             this.s12.BackColor = System.Drawing.Color.Gainsboro;
             this.s12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s12.ForeColor = System.Drawing.Color.DarkGray;
+            this.s12.ForeColor = System.Drawing.Color.Black;
             this.s12.Name = "s12";
             // 
             // s43
@@ -2820,7 +2780,7 @@
             resources.ApplyResources(this.s43, "s43");
             this.s43.BackColor = System.Drawing.Color.Gainsboro;
             this.s43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s43.ForeColor = System.Drawing.Color.DarkGray;
+            this.s43.ForeColor = System.Drawing.Color.Black;
             this.s43.Name = "s43";
             // 
             // s54
@@ -2828,7 +2788,7 @@
             resources.ApplyResources(this.s54, "s54");
             this.s54.BackColor = System.Drawing.Color.Gainsboro;
             this.s54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s54.ForeColor = System.Drawing.Color.DarkGray;
+            this.s54.ForeColor = System.Drawing.Color.Black;
             this.s54.Name = "s54";
             // 
             // s38
@@ -2836,7 +2796,7 @@
             resources.ApplyResources(this.s38, "s38");
             this.s38.BackColor = System.Drawing.Color.Gainsboro;
             this.s38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s38.ForeColor = System.Drawing.Color.DarkGray;
+            this.s38.ForeColor = System.Drawing.Color.Black;
             this.s38.Name = "s38";
             // 
             // s27
@@ -2844,7 +2804,7 @@
             resources.ApplyResources(this.s27, "s27");
             this.s27.BackColor = System.Drawing.Color.Gainsboro;
             this.s27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s27.ForeColor = System.Drawing.Color.DarkGray;
+            this.s27.ForeColor = System.Drawing.Color.Black;
             this.s27.Name = "s27";
             // 
             // s22
@@ -2852,7 +2812,7 @@
             resources.ApplyResources(this.s22, "s22");
             this.s22.BackColor = System.Drawing.Color.Gainsboro;
             this.s22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s22.ForeColor = System.Drawing.Color.DarkGray;
+            this.s22.ForeColor = System.Drawing.Color.Black;
             this.s22.Name = "s22";
             // 
             // s13
@@ -2860,7 +2820,7 @@
             resources.ApplyResources(this.s13, "s13");
             this.s13.BackColor = System.Drawing.Color.Gainsboro;
             this.s13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s13.ForeColor = System.Drawing.Color.DarkGray;
+            this.s13.ForeColor = System.Drawing.Color.Black;
             this.s13.Name = "s13";
             // 
             // s41
@@ -2868,7 +2828,7 @@
             resources.ApplyResources(this.s41, "s41");
             this.s41.BackColor = System.Drawing.Color.Gainsboro;
             this.s41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s41.ForeColor = System.Drawing.Color.DarkGray;
+            this.s41.ForeColor = System.Drawing.Color.Black;
             this.s41.Name = "s41";
             // 
             // s59
@@ -2876,7 +2836,7 @@
             resources.ApplyResources(this.s59, "s59");
             this.s59.BackColor = System.Drawing.Color.Gainsboro;
             this.s59.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s59.ForeColor = System.Drawing.Color.DarkGray;
+            this.s59.ForeColor = System.Drawing.Color.Black;
             this.s59.Name = "s59";
             // 
             // s50
@@ -2884,7 +2844,7 @@
             resources.ApplyResources(this.s50, "s50");
             this.s50.BackColor = System.Drawing.Color.Gainsboro;
             this.s50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s50.ForeColor = System.Drawing.Color.DarkGray;
+            this.s50.ForeColor = System.Drawing.Color.Black;
             this.s50.Name = "s50";
             // 
             // s34
@@ -2892,7 +2852,7 @@
             resources.ApplyResources(this.s34, "s34");
             this.s34.BackColor = System.Drawing.Color.Gainsboro;
             this.s34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s34.ForeColor = System.Drawing.Color.DarkGray;
+            this.s34.ForeColor = System.Drawing.Color.Black;
             this.s34.Name = "s34";
             // 
             // s46
@@ -2900,7 +2860,7 @@
             resources.ApplyResources(this.s46, "s46");
             this.s46.BackColor = System.Drawing.Color.Gainsboro;
             this.s46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s46.ForeColor = System.Drawing.Color.DarkGray;
+            this.s46.ForeColor = System.Drawing.Color.Black;
             this.s46.Name = "s46";
             // 
             // s25
@@ -2908,7 +2868,7 @@
             resources.ApplyResources(this.s25, "s25");
             this.s25.BackColor = System.Drawing.Color.Gainsboro;
             this.s25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s25.ForeColor = System.Drawing.Color.DarkGray;
+            this.s25.ForeColor = System.Drawing.Color.Black;
             this.s25.Name = "s25";
             // 
             // label120
@@ -2924,7 +2884,7 @@
             resources.ApplyResources(this.s30, "s30");
             this.s30.BackColor = System.Drawing.Color.Gainsboro;
             this.s30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s30.ForeColor = System.Drawing.Color.DarkGray;
+            this.s30.ForeColor = System.Drawing.Color.Black;
             this.s30.Name = "s30";
             // 
             // label109
@@ -2940,7 +2900,7 @@
             resources.ApplyResources(this.s52, "s52");
             this.s52.BackColor = System.Drawing.Color.Gainsboro;
             this.s52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s52.ForeColor = System.Drawing.Color.DarkGray;
+            this.s52.ForeColor = System.Drawing.Color.Black;
             this.s52.Name = "s52";
             // 
             // s36
@@ -2948,7 +2908,7 @@
             resources.ApplyResources(this.s36, "s36");
             this.s36.BackColor = System.Drawing.Color.Gainsboro;
             this.s36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s36.ForeColor = System.Drawing.Color.DarkGray;
+            this.s36.ForeColor = System.Drawing.Color.Black;
             this.s36.Name = "s36";
             // 
             // s18
@@ -2956,7 +2916,7 @@
             resources.ApplyResources(this.s18, "s18");
             this.s18.BackColor = System.Drawing.Color.Gainsboro;
             this.s18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s18.ForeColor = System.Drawing.Color.DarkGray;
+            this.s18.ForeColor = System.Drawing.Color.Black;
             this.s18.Name = "s18";
             // 
             // s20
@@ -2964,7 +2924,7 @@
             resources.ApplyResources(this.s20, "s20");
             this.s20.BackColor = System.Drawing.Color.Gainsboro;
             this.s20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s20.ForeColor = System.Drawing.Color.DarkGray;
+            this.s20.ForeColor = System.Drawing.Color.Black;
             this.s20.Name = "s20";
             // 
             // s40
@@ -2972,7 +2932,7 @@
             resources.ApplyResources(this.s40, "s40");
             this.s40.BackColor = System.Drawing.Color.Gainsboro;
             this.s40.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s40.ForeColor = System.Drawing.Color.DarkGray;
+            this.s40.ForeColor = System.Drawing.Color.Black;
             this.s40.Name = "s40";
             // 
             // s9
@@ -2980,7 +2940,7 @@
             resources.ApplyResources(this.s9, "s9");
             this.s9.BackColor = System.Drawing.Color.Gainsboro;
             this.s9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s9.ForeColor = System.Drawing.Color.DarkGray;
+            this.s9.ForeColor = System.Drawing.Color.Black;
             this.s9.Name = "s9";
             // 
             // s24
@@ -2988,7 +2948,7 @@
             resources.ApplyResources(this.s24, "s24");
             this.s24.BackColor = System.Drawing.Color.Gainsboro;
             this.s24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s24.ForeColor = System.Drawing.Color.DarkGray;
+            this.s24.ForeColor = System.Drawing.Color.Black;
             this.s24.Name = "s24";
             // 
             // s51
@@ -2996,7 +2956,7 @@
             resources.ApplyResources(this.s51, "s51");
             this.s51.BackColor = System.Drawing.Color.Gainsboro;
             this.s51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s51.ForeColor = System.Drawing.Color.DarkGray;
+            this.s51.ForeColor = System.Drawing.Color.Black;
             this.s51.Name = "s51";
             // 
             // s35
@@ -3004,7 +2964,7 @@
             resources.ApplyResources(this.s35, "s35");
             this.s35.BackColor = System.Drawing.Color.Gainsboro;
             this.s35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s35.ForeColor = System.Drawing.Color.DarkGray;
+            this.s35.ForeColor = System.Drawing.Color.Black;
             this.s35.Name = "s35";
             // 
             // s11
@@ -3012,7 +2972,7 @@
             resources.ApplyResources(this.s11, "s11");
             this.s11.BackColor = System.Drawing.Color.Gainsboro;
             this.s11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s11.ForeColor = System.Drawing.Color.DarkGray;
+            this.s11.ForeColor = System.Drawing.Color.Black;
             this.s11.Name = "s11";
             // 
             // s19
@@ -3020,7 +2980,7 @@
             resources.ApplyResources(this.s19, "s19");
             this.s19.BackColor = System.Drawing.Color.Gainsboro;
             this.s19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s19.ForeColor = System.Drawing.Color.DarkGray;
+            this.s19.ForeColor = System.Drawing.Color.Black;
             this.s19.Name = "s19";
             // 
             // s5
@@ -3028,7 +2988,7 @@
             resources.ApplyResources(this.s5, "s5");
             this.s5.BackColor = System.Drawing.Color.Gainsboro;
             this.s5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s5.ForeColor = System.Drawing.Color.DarkGray;
+            this.s5.ForeColor = System.Drawing.Color.Black;
             this.s5.Name = "s5";
             // 
             // s45
@@ -3036,7 +2996,7 @@
             resources.ApplyResources(this.s45, "s45");
             this.s45.BackColor = System.Drawing.Color.Gainsboro;
             this.s45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s45.ForeColor = System.Drawing.Color.DarkGray;
+            this.s45.ForeColor = System.Drawing.Color.Black;
             this.s45.Name = "s45";
             // 
             // s10
@@ -3044,7 +3004,7 @@
             resources.ApplyResources(this.s10, "s10");
             this.s10.BackColor = System.Drawing.Color.Gainsboro;
             this.s10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s10.ForeColor = System.Drawing.Color.DarkGray;
+            this.s10.ForeColor = System.Drawing.Color.Black;
             this.s10.Name = "s10";
             // 
             // label117
@@ -3068,7 +3028,7 @@
             resources.ApplyResources(this.label108, "label108");
             this.label108.BackColor = System.Drawing.Color.Gainsboro;
             this.label108.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label108.ForeColor = System.Drawing.Color.DarkGray;
+            this.label108.ForeColor = System.Drawing.Color.Black;
             this.label108.Name = "label108";
             // 
             // s58
@@ -3076,7 +3036,7 @@
             resources.ApplyResources(this.s58, "s58");
             this.s58.BackColor = System.Drawing.Color.Gainsboro;
             this.s58.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s58.ForeColor = System.Drawing.Color.DarkGray;
+            this.s58.ForeColor = System.Drawing.Color.Black;
             this.s58.Name = "s58";
             // 
             // s49
@@ -3084,7 +3044,7 @@
             resources.ApplyResources(this.s49, "s49");
             this.s49.BackColor = System.Drawing.Color.Gainsboro;
             this.s49.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s49.ForeColor = System.Drawing.Color.DarkGray;
+            this.s49.ForeColor = System.Drawing.Color.Black;
             this.s49.Name = "s49";
             // 
             // s57
@@ -3092,7 +3052,7 @@
             resources.ApplyResources(this.s57, "s57");
             this.s57.BackColor = System.Drawing.Color.Gainsboro;
             this.s57.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s57.ForeColor = System.Drawing.Color.DarkGray;
+            this.s57.ForeColor = System.Drawing.Color.Black;
             this.s57.Name = "s57";
             // 
             // s33
@@ -3100,7 +3060,7 @@
             resources.ApplyResources(this.s33, "s33");
             this.s33.BackColor = System.Drawing.Color.Gainsboro;
             this.s33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s33.ForeColor = System.Drawing.Color.DarkGray;
+            this.s33.ForeColor = System.Drawing.Color.Black;
             this.s33.Name = "s33";
             // 
             // s48
@@ -3108,7 +3068,7 @@
             resources.ApplyResources(this.s48, "s48");
             this.s48.BackColor = System.Drawing.Color.Gainsboro;
             this.s48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s48.ForeColor = System.Drawing.Color.DarkGray;
+            this.s48.ForeColor = System.Drawing.Color.Black;
             this.s48.Name = "s48";
             // 
             // s17
@@ -3116,7 +3076,7 @@
             resources.ApplyResources(this.s17, "s17");
             this.s17.BackColor = System.Drawing.Color.Gainsboro;
             this.s17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s17.ForeColor = System.Drawing.Color.DarkGray;
+            this.s17.ForeColor = System.Drawing.Color.Black;
             this.s17.Name = "s17";
             // 
             // s32
@@ -3124,7 +3084,7 @@
             resources.ApplyResources(this.s32, "s32");
             this.s32.BackColor = System.Drawing.Color.Gainsboro;
             this.s32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s32.ForeColor = System.Drawing.Color.DarkGray;
+            this.s32.ForeColor = System.Drawing.Color.Black;
             this.s32.Name = "s32";
             // 
             // s16
@@ -3132,7 +3092,7 @@
             resources.ApplyResources(this.s16, "s16");
             this.s16.BackColor = System.Drawing.Color.Gainsboro;
             this.s16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s16.ForeColor = System.Drawing.Color.DarkGray;
+            this.s16.ForeColor = System.Drawing.Color.Black;
             this.s16.Name = "s16";
             // 
             // s8
@@ -3140,7 +3100,7 @@
             resources.ApplyResources(this.s8, "s8");
             this.s8.BackColor = System.Drawing.Color.Gainsboro;
             this.s8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s8.ForeColor = System.Drawing.Color.DarkGray;
+            this.s8.ForeColor = System.Drawing.Color.Black;
             this.s8.Name = "s8";
             // 
             // s7
@@ -3148,7 +3108,7 @@
             resources.ApplyResources(this.s7, "s7");
             this.s7.BackColor = System.Drawing.Color.Gainsboro;
             this.s7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s7.ForeColor = System.Drawing.Color.DarkGray;
+            this.s7.ForeColor = System.Drawing.Color.Black;
             this.s7.Name = "s7";
             // 
             // s56
@@ -3156,7 +3116,7 @@
             resources.ApplyResources(this.s56, "s56");
             this.s56.BackColor = System.Drawing.Color.Gainsboro;
             this.s56.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s56.ForeColor = System.Drawing.Color.DarkGray;
+            this.s56.ForeColor = System.Drawing.Color.Black;
             this.s56.Name = "s56";
             // 
             // s47
@@ -3164,7 +3124,7 @@
             resources.ApplyResources(this.s47, "s47");
             this.s47.BackColor = System.Drawing.Color.Gainsboro;
             this.s47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s47.ForeColor = System.Drawing.Color.DarkGray;
+            this.s47.ForeColor = System.Drawing.Color.Black;
             this.s47.Name = "s47";
             // 
             // s31
@@ -3172,7 +3132,7 @@
             resources.ApplyResources(this.s31, "s31");
             this.s31.BackColor = System.Drawing.Color.Gainsboro;
             this.s31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s31.ForeColor = System.Drawing.Color.DarkGray;
+            this.s31.ForeColor = System.Drawing.Color.Black;
             this.s31.Name = "s31";
             // 
             // s15
@@ -3180,7 +3140,7 @@
             resources.ApplyResources(this.s15, "s15");
             this.s15.BackColor = System.Drawing.Color.Gainsboro;
             this.s15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s15.ForeColor = System.Drawing.Color.DarkGray;
+            this.s15.ForeColor = System.Drawing.Color.Black;
             this.s15.Name = "s15";
             // 
             // s4
@@ -3188,7 +3148,7 @@
             resources.ApplyResources(this.s4, "s4");
             this.s4.BackColor = System.Drawing.Color.Gainsboro;
             this.s4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s4.ForeColor = System.Drawing.Color.DarkGray;
+            this.s4.ForeColor = System.Drawing.Color.Black;
             this.s4.Name = "s4";
             // 
             // s6
@@ -3196,7 +3156,7 @@
             resources.ApplyResources(this.s6, "s6");
             this.s6.BackColor = System.Drawing.Color.Gainsboro;
             this.s6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s6.ForeColor = System.Drawing.Color.DarkGray;
+            this.s6.ForeColor = System.Drawing.Color.Black;
             this.s6.Name = "s6";
             // 
             // s3
@@ -3204,7 +3164,7 @@
             resources.ApplyResources(this.s3, "s3");
             this.s3.BackColor = System.Drawing.Color.Gainsboro;
             this.s3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s3.ForeColor = System.Drawing.Color.DarkGray;
+            this.s3.ForeColor = System.Drawing.Color.Black;
             this.s3.Name = "s3";
             // 
             // s2
@@ -3212,7 +3172,7 @@
             resources.ApplyResources(this.s2, "s2");
             this.s2.BackColor = System.Drawing.Color.Gainsboro;
             this.s2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s2.ForeColor = System.Drawing.Color.DarkGray;
+            this.s2.ForeColor = System.Drawing.Color.Black;
             this.s2.Name = "s2";
             // 
             // s1
@@ -3220,7 +3180,7 @@
             resources.ApplyResources(this.s1, "s1");
             this.s1.BackColor = System.Drawing.Color.Gainsboro;
             this.s1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s1.ForeColor = System.Drawing.Color.DarkGray;
+            this.s1.ForeColor = System.Drawing.Color.Black;
             this.s1.Name = "s1";
             // 
             // label63
@@ -3337,10 +3297,64 @@
             this.label97.ForeColor = System.Drawing.Color.Blue;
             this.label97.Name = "label97";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label88);
+            this.tabPage1.Controls.Add(this.label74);
+            this.tabPage1.Controls.Add(this.label87);
+            this.tabPage1.Controls.Add(this.label73);
+            this.tabPage1.Controls.Add(this.label86);
+            this.tabPage1.Controls.Add(this.label75);
+            this.tabPage1.Controls.Add(this.label85);
+            this.tabPage1.Controls.Add(this.label76);
+            this.tabPage1.Controls.Add(this.label84);
+            this.tabPage1.Controls.Add(this.label77);
+            this.tabPage1.Controls.Add(this.label83);
+            this.tabPage1.Controls.Add(this.label78);
+            this.tabPage1.Controls.Add(this.label82);
+            this.tabPage1.Controls.Add(this.label79);
+            this.tabPage1.Controls.Add(this.comboBox2);
+            this.tabPage1.Controls.Add(this.label80);
+            this.tabPage1.Controls.Add(this.textBox50);
+            this.tabPage1.Controls.Add(this.textBox43);
+            this.tabPage1.Controls.Add(this.textBox49);
+            this.tabPage1.Controls.Add(this.textBox44);
+            this.tabPage1.Controls.Add(this.textBox48);
+            this.tabPage1.Controls.Add(this.textBox45);
+            this.tabPage1.Controls.Add(this.textBox47);
+            this.tabPage1.Controls.Add(this.textBox46);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.readTextBox);
+            this.tabPage2.Controls.Add(this.clearButton);
+            this.tabPage2.Controls.Add(this.writeTextBox);
+            this.tabPage2.Controls.Add(this.openSessionButton);
+            this.tabPage2.Controls.Add(this.closeSessionButton);
+            this.tabPage2.Controls.Add(this.queryButton);
+            this.tabPage2.Controls.Add(this.readButton);
+            this.tabPage2.Controls.Add(this.writeButton);
+            this.tabPage2.Controls.Add(this.button1);
+            resources.ApplyResources(this.tabPage2, "tabPage2");
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
             this.Controls.Add(this.label96);
@@ -3367,32 +3381,22 @@
             this.Controls.Add(this.s28);
             this.Controls.Add(this.s55);
             this.Controls.Add(this.label51);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.s39);
             this.Controls.Add(this.label56);
-            this.Controls.Add(this.closeSessionButton);
             this.Controls.Add(this.s23);
             this.Controls.Add(this.label55);
-            this.Controls.Add(this.readTextBox);
             this.Controls.Add(this.s42);
-            this.Controls.Add(this.writeTextBox);
-            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.s14);
             this.Controls.Add(this.s26);
-            this.Controls.Add(this.readButton);
             this.Controls.Add(this.s53);
-            this.Controls.Add(this.writeButton);
             this.Controls.Add(this.s37);
-            this.Controls.Add(this.queryButton);
             this.Controls.Add(this.s21);
-            this.Controls.Add(this.openSessionButton);
             this.Controls.Add(this.s12);
             this.Controls.Add(this.XRaySource);
             this.Controls.Add(this.s43);
             this.Controls.Add(this.s54);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.s38);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.s27);
             this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.s22);
@@ -3448,8 +3452,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -3459,6 +3461,11 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3684,7 +3691,6 @@
         private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.TextBox textBox49;
         private System.Windows.Forms.TextBox textBox48;
@@ -3693,7 +3699,6 @@
         private System.Windows.Forms.TextBox textBox45;
         private System.Windows.Forms.TextBox textBox44;
         private System.Windows.Forms.TextBox textBox43;
-        private System.Windows.Forms.Label label81;
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Label label78;
@@ -3708,7 +3713,6 @@
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.TextBox textBox51;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox50;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -3820,6 +3824,9 @@
         private System.Windows.Forms.Label label95;
         private System.Windows.Forms.Label label96;
         private System.Windows.Forms.Label label97;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }
 
