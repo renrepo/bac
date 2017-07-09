@@ -437,10 +437,14 @@ namespace XPS
                 label50.Text = "";
                 label51.Text = "";
                 label52.Text = "";
-                s1.Text = "↑↓";
-                s1.ForeColor = Color.DarkGray;
-                s2.Text = "↑↓";
-                s2.ForeColor = Color.DarkGray;
+                s1.Text = "--";
+                s2.Text = "--";
+                s3.Text = "--";
+                s4.Text = "--";
+                s5.Text = "--";
+                s6.Text = "--";
+                s7.Text = "--";
+                s8.Text = "--";
             }
 
             else
@@ -475,6 +479,18 @@ namespace XPS
                 s1.ForeColor = Color.Black;
                 s2.Text = elec_bind[zeile][2];
                 s2.ForeColor = Color.Black;
+                s3.Text = elec_bind[zeile][3];
+                s3.ForeColor = Color.Black;
+                s4.Text = elec_bind[zeile][4];
+                s4.ForeColor = Color.Black;
+                s5.Text = elec_bind[zeile][5];
+                s5.ForeColor = Color.Black;
+                s6.Text = elec_bind[zeile][6];
+                s6.ForeColor = Color.Black;
+                s7.Text = elec_bind[zeile][7];
+                s7.ForeColor = Color.Black;
+                s8.Text = elec_bind[zeile][8];
+                s8.ForeColor = Color.Black;
             }
         }
 
@@ -1144,10 +1160,6 @@ namespace XPS
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
         }
 
-        private void label59_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 

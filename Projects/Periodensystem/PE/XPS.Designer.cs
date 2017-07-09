@@ -287,6 +287,10 @@
             this.Al_anode = new System.Windows.Forms.CheckBox();
             this.Mg_anode = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label61 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openSessionButton = new System.Windows.Forms.Button();
@@ -361,10 +365,25 @@
             this.s3 = new System.Windows.Forms.Label();
             this.s2 = new System.Windows.Forms.Label();
             this.s1 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label61 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label72 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label90 = new System.Windows.Forms.Label();
+            this.label91 = new System.Windows.Forms.Label();
+            this.label92 = new System.Windows.Forms.Label();
+            this.label93 = new System.Windows.Forms.Label();
+            this.label94 = new System.Windows.Forms.Label();
+            this.label95 = new System.Windows.Forms.Label();
+            this.label96 = new System.Windows.Forms.Label();
+            this.label97 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -2611,6 +2630,28 @@
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
+            // label62
+            // 
+            resources.ApplyResources(this.label62, "label62");
+            this.label62.Name = "label62";
+            // 
+            // label60
+            // 
+            resources.ApplyResources(this.label60, "label60");
+            this.label60.Name = "label60";
+            // 
+            // label61
+            // 
+            resources.ApplyResources(this.label61, "label61");
+            this.label61.ForeColor = System.Drawing.Color.Black;
+            this.label61.Name = "label61";
+            // 
+            // label59
+            // 
+            resources.ApplyResources(this.label59, "label59");
+            this.label59.ForeColor = System.Drawing.Color.Black;
+            this.label59.Name = "label59";
+            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -3182,32 +3223,143 @@
             this.s1.ForeColor = System.Drawing.Color.DarkGray;
             this.s1.Name = "s1";
             // 
-            // label59
+            // label63
             // 
-            resources.ApplyResources(this.label59, "label59");
-            this.label59.ForeColor = System.Drawing.Color.Black;
-            this.label59.Name = "label59";
+            resources.ApplyResources(this.label63, "label63");
+            this.label63.ForeColor = System.Drawing.Color.Blue;
+            this.label63.Name = "label63";
             // 
-            // label60
+            // label64
             // 
-            resources.ApplyResources(this.label60, "label60");
-            this.label60.Name = "label60";
+            resources.ApplyResources(this.label64, "label64");
+            this.label64.ForeColor = System.Drawing.Color.Blue;
+            this.label64.Name = "label64";
             // 
-            // label61
+            // label65
             // 
-            resources.ApplyResources(this.label61, "label61");
-            this.label61.ForeColor = System.Drawing.Color.Black;
-            this.label61.Name = "label61";
+            resources.ApplyResources(this.label65, "label65");
+            this.label65.ForeColor = System.Drawing.Color.Blue;
+            this.label65.Name = "label65";
             // 
-            // label62
+            // label66
             // 
-            resources.ApplyResources(this.label62, "label62");
-            this.label62.Name = "label62";
+            resources.ApplyResources(this.label66, "label66");
+            this.label66.ForeColor = System.Drawing.Color.Blue;
+            this.label66.Name = "label66";
+            // 
+            // label67
+            // 
+            resources.ApplyResources(this.label67, "label67");
+            this.label67.ForeColor = System.Drawing.Color.Blue;
+            this.label67.Name = "label67";
+            // 
+            // label68
+            // 
+            resources.ApplyResources(this.label68, "label68");
+            this.label68.ForeColor = System.Drawing.Color.Blue;
+            this.label68.Name = "label68";
+            // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.ForeColor = System.Drawing.Color.Blue;
+            this.label69.Name = "label69";
+            // 
+            // label70
+            // 
+            resources.ApplyResources(this.label70, "label70");
+            this.label70.ForeColor = System.Drawing.Color.Blue;
+            this.label70.Name = "label70";
+            // 
+            // label71
+            // 
+            resources.ApplyResources(this.label71, "label71");
+            this.label71.ForeColor = System.Drawing.Color.Blue;
+            this.label71.Name = "label71";
+            // 
+            // label72
+            // 
+            resources.ApplyResources(this.label72, "label72");
+            this.label72.ForeColor = System.Drawing.Color.Blue;
+            this.label72.Name = "label72";
+            // 
+            // label89
+            // 
+            resources.ApplyResources(this.label89, "label89");
+            this.label89.ForeColor = System.Drawing.Color.Blue;
+            this.label89.Name = "label89";
+            // 
+            // label90
+            // 
+            resources.ApplyResources(this.label90, "label90");
+            this.label90.ForeColor = System.Drawing.Color.Blue;
+            this.label90.Name = "label90";
+            // 
+            // label91
+            // 
+            resources.ApplyResources(this.label91, "label91");
+            this.label91.ForeColor = System.Drawing.Color.Blue;
+            this.label91.Name = "label91";
+            // 
+            // label92
+            // 
+            resources.ApplyResources(this.label92, "label92");
+            this.label92.ForeColor = System.Drawing.Color.Blue;
+            this.label92.Name = "label92";
+            // 
+            // label93
+            // 
+            resources.ApplyResources(this.label93, "label93");
+            this.label93.ForeColor = System.Drawing.Color.Blue;
+            this.label93.Name = "label93";
+            // 
+            // label94
+            // 
+            resources.ApplyResources(this.label94, "label94");
+            this.label94.ForeColor = System.Drawing.Color.Blue;
+            this.label94.Name = "label94";
+            // 
+            // label95
+            // 
+            resources.ApplyResources(this.label95, "label95");
+            this.label95.ForeColor = System.Drawing.Color.Blue;
+            this.label95.Name = "label95";
+            // 
+            // label96
+            // 
+            resources.ApplyResources(this.label96, "label96");
+            this.label96.ForeColor = System.Drawing.Color.Blue;
+            this.label96.Name = "label96";
+            // 
+            // label97
+            // 
+            resources.ApplyResources(this.label97, "label97");
+            this.label97.ForeColor = System.Drawing.Color.Blue;
+            this.label97.Name = "label97";
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label68);
+            this.Controls.Add(this.label67);
+            this.Controls.Add(this.label96);
+            this.Controls.Add(this.label95);
+            this.Controls.Add(this.label94);
+            this.Controls.Add(this.label97);
+            this.Controls.Add(this.label93);
+            this.Controls.Add(this.label92);
+            this.Controls.Add(this.label91);
+            this.Controls.Add(this.label90);
+            this.Controls.Add(this.label89);
+            this.Controls.Add(this.label72);
+            this.Controls.Add(this.label71);
+            this.Controls.Add(this.label70);
+            this.Controls.Add(this.label69);
+            this.Controls.Add(this.label66);
+            this.Controls.Add(this.label65);
+            this.Controls.Add(this.label64);
+            this.Controls.Add(this.label63);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.s44);
@@ -3649,6 +3801,25 @@
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label89;
+        private System.Windows.Forms.Label label90;
+        private System.Windows.Forms.Label label91;
+        private System.Windows.Forms.Label label92;
+        private System.Windows.Forms.Label label93;
+        private System.Windows.Forms.Label label94;
+        private System.Windows.Forms.Label label95;
+        private System.Windows.Forms.Label label96;
+        private System.Windows.Forms.Label label97;
     }
 }
 
