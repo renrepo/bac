@@ -101,6 +101,7 @@ namespace XPS
 
 
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
             // StreamReader sr = new StreamReader(filePath);
@@ -1143,6 +1144,16 @@ namespace XPS
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tabControl1.Size = new Size(220, 220);
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
 
         }
