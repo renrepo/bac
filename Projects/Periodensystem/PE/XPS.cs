@@ -437,7 +437,10 @@ namespace XPS
                 label50.Text = "";
                 label51.Text = "";
                 label52.Text = "";
-                s1.Text = "";
+                s1.Text = "↑↓";
+                s1.ForeColor = Color.DarkGray;
+                s2.Text = "↑↓";
+                s2.ForeColor = Color.DarkGray;
             }
 
             else
@@ -469,6 +472,9 @@ namespace XPS
                 label48.Text = row[zeile][24];
                 label50.Text = row[zeile][25];
                 s1.Text = elec_bind[zeile][1];
+                s1.ForeColor = Color.Black;
+                s2.Text = elec_bind[zeile][2];
+                s2.ForeColor = Color.Black;
             }
         }
 
@@ -1139,21 +1145,6 @@ namespace XPS
         }
 
         private void label59_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            tabControl1.Size = new Size(220, 220);
-        }
-
-        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
         {
 
         }
