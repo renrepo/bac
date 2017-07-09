@@ -280,7 +280,6 @@
             this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.XRaySource = new System.Windows.Forms.GroupBox();
             this.Al_anode = new System.Windows.Forms.CheckBox();
             this.Mg_anode = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -323,9 +322,7 @@
             this.s34 = new System.Windows.Forms.Label();
             this.s46 = new System.Windows.Forms.Label();
             this.s25 = new System.Windows.Forms.Label();
-            this.label120 = new System.Windows.Forms.Label();
             this.s30 = new System.Windows.Forms.Label();
-            this.label109 = new System.Windows.Forms.Label();
             this.s52 = new System.Windows.Forms.Label();
             this.s36 = new System.Windows.Forms.Label();
             this.s18 = new System.Windows.Forms.Label();
@@ -342,7 +339,6 @@
             this.s10 = new System.Windows.Forms.Label();
             this.label117 = new System.Windows.Forms.Label();
             this.s29 = new System.Windows.Forms.Label();
-            this.label108 = new System.Windows.Forms.Label();
             this.s58 = new System.Windows.Forms.Label();
             this.s49 = new System.Windows.Forms.Label();
             this.s57 = new System.Windows.Forms.Label();
@@ -387,7 +383,6 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.XRaySource.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -2503,14 +2498,6 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
-            // XRaySource
-            // 
-            this.XRaySource.Controls.Add(this.Al_anode);
-            this.XRaySource.Controls.Add(this.Mg_anode);
-            resources.ApplyResources(this.XRaySource, "XRaySource");
-            this.XRaySource.Name = "XRaySource";
-            this.XRaySource.TabStop = false;
-            // 
             // Al_anode
             // 
             resources.ApplyResources(this.Al_anode, "Al_anode");
@@ -2871,14 +2858,6 @@
             this.s25.ForeColor = System.Drawing.Color.Black;
             this.s25.Name = "s25";
             // 
-            // label120
-            // 
-            resources.ApplyResources(this.label120, "label120");
-            this.label120.BackColor = System.Drawing.Color.Gainsboro;
-            this.label120.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label120.ForeColor = System.Drawing.Color.DarkGray;
-            this.label120.Name = "label120";
-            // 
             // s30
             // 
             resources.ApplyResources(this.s30, "s30");
@@ -2886,14 +2865,6 @@
             this.s30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.s30.ForeColor = System.Drawing.Color.Black;
             this.s30.Name = "s30";
-            // 
-            // label109
-            // 
-            resources.ApplyResources(this.label109, "label109");
-            this.label109.BackColor = System.Drawing.Color.Gainsboro;
-            this.label109.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label109.ForeColor = System.Drawing.Color.DarkGray;
-            this.label109.Name = "label109";
             // 
             // s52
             // 
@@ -3020,16 +2991,8 @@
             resources.ApplyResources(this.s29, "s29");
             this.s29.BackColor = System.Drawing.Color.Gainsboro;
             this.s29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s29.ForeColor = System.Drawing.Color.DarkGray;
+            this.s29.ForeColor = System.Drawing.Color.Black;
             this.s29.Name = "s29";
-            // 
-            // label108
-            // 
-            resources.ApplyResources(this.label108, "label108");
-            this.label108.BackColor = System.Drawing.Color.Gainsboro;
-            this.label108.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label108.ForeColor = System.Drawing.Color.Black;
-            this.label108.Name = "label108";
             // 
             // s58
             // 
@@ -3307,7 +3270,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.Al_anode);
             this.tabPage1.Controls.Add(this.label88);
+            this.tabPage1.Controls.Add(this.Mg_anode);
             this.tabPage1.Controls.Add(this.label74);
             this.tabPage1.Controls.Add(this.label87);
             this.tabPage1.Controls.Add(this.label73);
@@ -3392,7 +3357,6 @@
             this.Controls.Add(this.s37);
             this.Controls.Add(this.s21);
             this.Controls.Add(this.s12);
-            this.Controls.Add(this.XRaySource);
             this.Controls.Add(this.s43);
             this.Controls.Add(this.s54);
             this.Controls.Add(this.groupBox3);
@@ -3414,11 +3378,9 @@
             this.Controls.Add(this.s4);
             this.Controls.Add(this.s25);
             this.Controls.Add(this.s15);
-            this.Controls.Add(this.label120);
             this.Controls.Add(this.s31);
             this.Controls.Add(this.s30);
             this.Controls.Add(this.s47);
-            this.Controls.Add(this.label109);
             this.Controls.Add(this.s56);
             this.Controls.Add(this.s52);
             this.Controls.Add(this.s7);
@@ -3441,7 +3403,6 @@
             this.Controls.Add(this.s11);
             this.Controls.Add(this.s58);
             this.Controls.Add(this.s19);
-            this.Controls.Add(this.label108);
             this.Controls.Add(this.s5);
             this.Controls.Add(this.s29);
             this.Controls.Add(this.s45);
@@ -3456,8 +3417,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.XRaySource.ResumeLayout(false);
-            this.XRaySource.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -3723,7 +3682,6 @@
         private System.Windows.Forms.Button showdata;
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.TextBox fig_name;
-        private System.Windows.Forms.GroupBox XRaySource;
         private System.Windows.Forms.CheckBox Al_anode;
         private System.Windows.Forms.CheckBox Mg_anode;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -3760,12 +3718,10 @@
         private System.Windows.Forms.Label s13;
         private System.Windows.Forms.Label s34;
         private System.Windows.Forms.Label s25;
-        private System.Windows.Forms.Label label109;
         private System.Windows.Forms.Label s18;
         private System.Windows.Forms.Label s20;
         private System.Windows.Forms.Label s24;
         private System.Windows.Forms.Label s19;
-        private System.Windows.Forms.Label label108;
         private System.Windows.Forms.Label s33;
         private System.Windows.Forms.Label s17;
         private System.Windows.Forms.Label s32;
@@ -3785,7 +3741,6 @@
         private System.Windows.Forms.Label s59;
         private System.Windows.Forms.Label s50;
         private System.Windows.Forms.Label s46;
-        private System.Windows.Forms.Label label120;
         private System.Windows.Forms.Label s30;
         private System.Windows.Forms.Label s52;
         private System.Windows.Forms.Label s36;

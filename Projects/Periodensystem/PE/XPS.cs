@@ -455,6 +455,12 @@ namespace XPS
                 s16.Text = "--";
                 s17.Text = "--";
                 s18.Text = "--";
+                s19.Text = "--";
+                s20.Text = "--";
+                s21.Text = "--";
+                s22.Text = "--";
+                s23.Text = "--";
+                s24.Text = "--";
 
             }
 
@@ -504,6 +510,12 @@ namespace XPS
                 s16.Text = elec_bind[zeile][16];
                 s17.Text = elec_bind[zeile][17];
                 s18.Text = elec_bind[zeile][18];
+                s19.Text = elec_bind[zeile][19];
+                s20.Text = elec_bind[zeile][20];
+                s21.Text = elec_bind[zeile][21];
+                s22.Text = elec_bind[zeile][22];
+                s23.Text = elec_bind[zeile][23];
+                s24.Text = elec_bind[zeile][24];
             }
         }
 
