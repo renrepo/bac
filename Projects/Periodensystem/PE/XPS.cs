@@ -409,7 +409,7 @@ namespace XPS
             //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
             int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
 
-            if (label51.Text == thePanelName)
+            if (label51.Text == elementnames.GetToolTip(panel))
             {
                 label4.Text = "";
                 label6.Text = "";
@@ -503,7 +503,7 @@ namespace XPS
 
             else
             {
-                label51.Text = thePanelName;
+                label51.Text = elementnames.GetToolTip(panel);
                 label52.Text = dictionary[thePanelName];
                 label4.Text = row[zeile][2];
                 label6.Text = row[zeile][3];

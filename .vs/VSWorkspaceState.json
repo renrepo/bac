@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Projects",
+    "\\Projects\\Periodensystem",
+    "\\Projects\\Periodensystem\\PE"
   ],
-  "SelectedNode": "\\Projects",
+  "SelectedNode": "\\Projects\\Periodensystem",
   "PreviewInSolutionExplorer": false
 }

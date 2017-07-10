@@ -272,7 +272,6 @@
             this.label75 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label58 = new System.Windows.Forms.Label();
             this.fig_name = new System.Windows.Forms.TextBox();
             this.showdata = new System.Windows.Forms.Button();
@@ -381,7 +380,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -2449,18 +2447,6 @@
             resources.ApplyResources(this.label73, "label73");
             this.label73.Name = "label73";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label58);
-            this.groupBox2.Controls.Add(this.fig_name);
-            this.groupBox2.Controls.Add(this.showdata);
-            this.groupBox2.Controls.Add(this.label57);
-            this.groupBox2.Controls.Add(this.safe_fig);
-            this.groupBox2.Controls.Add(this.tb_safe);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
-            // 
             // label58
             // 
             resources.ApplyResources(this.label58, "label58");
@@ -2500,11 +2486,17 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label58);
             this.groupBox3.Controls.Add(this.btn_can);
+            this.groupBox3.Controls.Add(this.safe_fig);
+            this.groupBox3.Controls.Add(this.fig_name);
             this.groupBox3.Controls.Add(this.lb_perc_gauss);
+            this.groupBox3.Controls.Add(this.label57);
+            this.groupBox3.Controls.Add(this.showdata);
             this.groupBox3.Controls.Add(this.btn_start);
             this.groupBox3.Controls.Add(this.tb_show);
             this.groupBox3.Controls.Add(this.btn_clear);
+            this.groupBox3.Controls.Add(this.tb_safe);
             this.groupBox3.Controls.Add(this.progressBar1);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
@@ -3351,7 +3343,6 @@
             this.Controls.Add(this.label65);
             this.Controls.Add(this.label64);
             this.Controls.Add(this.label63);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.s44);
             this.Controls.Add(this.label52);
@@ -3425,8 +3416,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -3686,7 +3675,6 @@
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox50;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox tb_safe;
         private System.Windows.Forms.Button safe_fig;
         private System.Windows.Forms.GroupBox groupBox3;
