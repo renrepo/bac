@@ -1195,6 +1195,12 @@ namespace XPS
             btn_start.Enabled = tb_safe.Text != string.Empty && (Al_anode.Checked || Mg_anode.Checked);
         }
 
+
+
+//################################################################################################################################################################
+            // ISEG TERMINAL
+
+
         private void openSessionButton_Click(object sender, EventArgs e)
         {
             using (SelectResource sr = new SelectResource())
@@ -1244,9 +1250,14 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
+                // string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
+                string textToWrite = writeTextBox.Text + '\n';
                 mbSession.RawIO.Write(textToWrite);
+                Thread.Sleep(5);
                 readTextBox.Text = InsertCommonEscapeSequences(mbSession.RawIO.ReadString());
+                Thread.Sleep(5);
+                readTextBox.Text = mbSession.RawIO.ReadString();
+                // WARUM KLAPPT DAS NUR BEI ZUWEIMAL LESEN?
             }
             catch (Exception exp)
             {
@@ -1304,10 +1315,6 @@ namespace XPS
             return s.Replace("\n", "\\n").Replace("\r", "\\r");
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -1316,6 +1323,8 @@ namespace XPS
             mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
         }
+//##########################################################################################################################################
+
     }
 }
 
