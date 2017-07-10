@@ -461,6 +461,43 @@ namespace XPS
                 s22.Text = "--";
                 s23.Text = "--";
                 s24.Text = "--";
+                s25.Text = "--";
+                s26.Text = "--";
+                s27.Text = "--";
+                s28.Text = "--";
+                s29.Text = "--";
+                s30.Text = "--";
+                s31.Text = "--";
+                s32.Text = "--";
+                s33.Text = "--";
+                s34.Text = "--";
+                s35.Text = "--";
+                s36.Text = "--";
+                s37.Text = "--";
+                s38.Text = "--";
+                s39.Text = "--";
+                s40.Text = "--";
+                s41.Text = "--";
+                s42.Text = "--";
+                s43.Text = "--";
+                s44.Text = "--";
+                s45.Text = "--";
+                s46.Text = "--";
+                s47.Text = "--";
+                s48.Text = "--";
+                s49.Text = "--";
+                s50.Text = "--";
+                s51.Text = "--";
+                s52.Text = "--";
+                s53.Text = "--";
+                s54.Text = "--";
+                s55.Text = "--";
+                s56.Text = "--";
+                s57.Text = "--";
+                s58.Text = "--";
+                s59.Text = "--";
+
+
 
             }
 
@@ -516,6 +553,41 @@ namespace XPS
                 s22.Text = elec_bind[zeile][22];
                 s23.Text = elec_bind[zeile][23];
                 s24.Text = elec_bind[zeile][24];
+                s25.Text = elec_bind[zeile][25];
+                s26.Text = elec_bind[zeile][26];
+                s27.Text = elec_bind[zeile][27];
+                s28.Text = elec_bind[zeile][28];
+                s29.Text = elec_bind[zeile][29];
+                s30.Text = elec_bind[zeile][30];
+                s31.Text = elec_bind[zeile][31];
+                s32.Text = elec_bind[zeile][32];
+                s33.Text = elec_bind[zeile][33];
+                s34.Text = elec_bind[zeile][34];
+                s35.Text = elec_bind[zeile][35];
+                s36.Text = elec_bind[zeile][36];
+                s37.Text = elec_bind[zeile][37];
+                s38.Text = elec_bind[zeile][38];
+                s39.Text = elec_bind[zeile][39];
+                s40.Text = elec_bind[zeile][40];
+                s41.Text = elec_bind[zeile][41];
+                s42.Text = elec_bind[zeile][42];
+                s43.Text = elec_bind[zeile][43];
+                s44.Text = elec_bind[zeile][44];
+                s45.Text = elec_bind[zeile][45];
+                s46.Text = elec_bind[zeile][46];
+                s47.Text = elec_bind[zeile][47];
+                s48.Text = elec_bind[zeile][48];
+                s49.Text = elec_bind[zeile][49];
+                s50.Text = elec_bind[zeile][50];
+                s51.Text = elec_bind[zeile][51];
+                s52.Text = elec_bind[zeile][52];
+                s53.Text = elec_bind[zeile][53];
+                s54.Text = elec_bind[zeile][54];
+                s55.Text = elec_bind[zeile][55];
+                s56.Text = elec_bind[zeile][56];
+                s57.Text = elec_bind[zeile][57];
+                s58.Text = elec_bind[zeile][58];
+                s59.Text = elec_bind[zeile][59];
             }
         }
 
