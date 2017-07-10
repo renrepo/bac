@@ -1143,12 +1143,13 @@
             // 
             // Rf
             // 
-            this.Rf.BackColor = System.Drawing.Color.LightSalmon;
+            this.Rf.BackColor = System.Drawing.Color.Salmon;
             this.Rf.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Rf, "Rf");
-            this.Rf.ForeColor = System.Drawing.Color.White;
+            this.Rf.ForeColor = System.Drawing.Color.DimGray;
             this.Rf.Name = "Rf";
             this.Rf.UseVisualStyleBackColor = false;
+            this.Rf.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rf_MouseDown);
             // 
             // Db
             // 
@@ -1451,102 +1452,113 @@
             // 
             // Np
             // 
-            this.Np.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Np.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Np.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Np, "Np");
-            this.Np.ForeColor = System.Drawing.Color.White;
+            this.Np.ForeColor = System.Drawing.Color.DimGray;
             this.Np.Name = "Np";
             this.Np.UseVisualStyleBackColor = false;
+            this.Np.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Np_MouseDown);
             // 
             // Pu
             // 
-            this.Pu.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Pu.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Pu.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Pu, "Pu");
-            this.Pu.ForeColor = System.Drawing.Color.White;
+            this.Pu.ForeColor = System.Drawing.Color.DimGray;
             this.Pu.Name = "Pu";
             this.Pu.UseVisualStyleBackColor = false;
+            this.Pu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pu_MouseDown);
             // 
             // Am
             // 
-            this.Am.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Am.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Am.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Am, "Am");
-            this.Am.ForeColor = System.Drawing.Color.White;
+            this.Am.ForeColor = System.Drawing.Color.DimGray;
             this.Am.Name = "Am";
             this.Am.UseVisualStyleBackColor = false;
+            this.Am.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Am_MouseDown);
             // 
             // Cm
             // 
-            this.Cm.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Cm.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Cm.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cm, "Cm");
-            this.Cm.ForeColor = System.Drawing.Color.White;
+            this.Cm.ForeColor = System.Drawing.Color.DimGray;
             this.Cm.Name = "Cm";
             this.Cm.UseVisualStyleBackColor = false;
+            this.Cm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cm_MouseDown);
             // 
             // Bk
             // 
-            this.Bk.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Bk.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Bk.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Bk, "Bk");
-            this.Bk.ForeColor = System.Drawing.Color.White;
+            this.Bk.ForeColor = System.Drawing.Color.DimGray;
             this.Bk.Name = "Bk";
             this.Bk.UseVisualStyleBackColor = false;
+            this.Bk.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Bk_MouseDown);
             // 
             // Cf
             // 
-            this.Cf.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Cf.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Cf.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cf, "Cf");
-            this.Cf.ForeColor = System.Drawing.Color.White;
+            this.Cf.ForeColor = System.Drawing.Color.DimGray;
             this.Cf.Name = "Cf";
             this.Cf.UseVisualStyleBackColor = false;
+            this.Cf.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cf_MouseDown);
             // 
             // Es
             // 
-            this.Es.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Es.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Es.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Es, "Es");
-            this.Es.ForeColor = System.Drawing.Color.White;
+            this.Es.ForeColor = System.Drawing.Color.DimGray;
             this.Es.Name = "Es";
             this.Es.UseVisualStyleBackColor = false;
+            this.Es.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Es_MouseDown);
             // 
             // Fm
             // 
-            this.Fm.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Fm.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Fm.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Fm, "Fm");
-            this.Fm.ForeColor = System.Drawing.Color.White;
+            this.Fm.ForeColor = System.Drawing.Color.DimGray;
             this.Fm.Name = "Fm";
             this.Fm.UseVisualStyleBackColor = false;
+            this.Fm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Fm_MouseDown);
             // 
             // Md
             // 
-            this.Md.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Md.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Md.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Md, "Md");
-            this.Md.ForeColor = System.Drawing.Color.White;
+            this.Md.ForeColor = System.Drawing.Color.DimGray;
             this.Md.Name = "Md";
             this.Md.UseVisualStyleBackColor = false;
+            this.Md.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Md_MouseDown);
             // 
             // No
             // 
-            this.No.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.No.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.No.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.No, "No");
-            this.No.ForeColor = System.Drawing.Color.White;
+            this.No.ForeColor = System.Drawing.Color.DimGray;
             this.No.Name = "No";
             this.No.UseVisualStyleBackColor = false;
+            this.No.MouseDown += new System.Windows.Forms.MouseEventHandler(this.No_MouseDown);
             // 
             // Lr
             // 
-            this.Lr.BackColor = System.Drawing.Color.MediumSpringGreen;
+            this.Lr.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.Lr.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Lr, "Lr");
-            this.Lr.ForeColor = System.Drawing.Color.White;
+            this.Lr.ForeColor = System.Drawing.Color.DimGray;
             this.Lr.Name = "Lr";
             this.Lr.UseVisualStyleBackColor = false;
+            this.Lr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Lr_MouseDown);
             // 
             // tableLayoutPanel1
             // 

@@ -1053,6 +1053,66 @@ namespace XPS
             set_element(sender, e);
         }
 
+        private void Rf_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Np_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Pu_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Am_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Cm_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Bk_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Cf_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Es_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Fm_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Md_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void No_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
+        private void Lr_MouseDown(object sender, MouseEventArgs e)
+        {
+            set_element(sender, e);
+        }
+
 
 
         private async void safe_fig_Click(object sender, EventArgs e)
@@ -1256,7 +1316,6 @@ namespace XPS
             mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
         }
-
     }
 }
 
