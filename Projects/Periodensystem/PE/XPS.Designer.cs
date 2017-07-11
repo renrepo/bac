@@ -387,54 +387,60 @@
             this.label98 = new System.Windows.Forms.Label();
             this.lb_vset = new System.Windows.Forms.Label();
             this.lb_vmin = new System.Windows.Forms.Label();
-            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.ch1_meas = new System.Windows.Forms.TextBox();
             this.lb_vmax = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
             this.lb_stepsize = new System.Windows.Forms.Label();
             this.lb_time = new System.Windows.Forms.Label();
             this.lb_vmeas = new System.Windows.Forms.Label();
             this.lb_stat = new System.Windows.Forms.Label();
-            this.textBox37 = new System.Windows.Forms.TextBox();
-            this.textBox38 = new System.Windows.Forms.TextBox();
-            this.textBox39 = new System.Windows.Forms.TextBox();
-            this.textBox40 = new System.Windows.Forms.TextBox();
-            this.textBox41 = new System.Windows.Forms.TextBox();
-            this.textBox42 = new System.Windows.Forms.TextBox();
+            this.ch2_meas = new System.Windows.Forms.TextBox();
+            this.ch1_v = new System.Windows.Forms.TextBox();
+            this.ch1_vmin = new System.Windows.Forms.TextBox();
+            this.ch1_vmax = new System.Windows.Forms.TextBox();
+            this.ch1_step = new System.Windows.Forms.TextBox();
+            this.ch1_ramp = new System.Windows.Forms.TextBox();
             this.label101 = new System.Windows.Forms.Label();
-            this.textBox36 = new System.Windows.Forms.TextBox();
-            this.textBox51 = new System.Windows.Forms.TextBox();
-            this.textBox53 = new System.Windows.Forms.TextBox();
-            this.textBox54 = new System.Windows.Forms.TextBox();
-            this.textBox56 = new System.Windows.Forms.TextBox();
-            this.textBox52 = new System.Windows.Forms.TextBox();
-            this.textBox57 = new System.Windows.Forms.TextBox();
-            this.textBox58 = new System.Windows.Forms.TextBox();
-            this.textBox59 = new System.Windows.Forms.TextBox();
-            this.textBox60 = new System.Windows.Forms.TextBox();
-            this.textBox55 = new System.Windows.Forms.TextBox();
-            this.textBox61 = new System.Windows.Forms.TextBox();
-            this.textBox62 = new System.Windows.Forms.TextBox();
-            this.textBox63 = new System.Windows.Forms.TextBox();
-            this.textBox64 = new System.Windows.Forms.TextBox();
-            this.textBox65 = new System.Windows.Forms.TextBox();
-            this.textBox66 = new System.Windows.Forms.TextBox();
-            this.textBox67 = new System.Windows.Forms.TextBox();
-            this.textBox68 = new System.Windows.Forms.TextBox();
-            this.textBox69 = new System.Windows.Forms.TextBox();
-            this.textBox70 = new System.Windows.Forms.TextBox();
-            this.textBox71 = new System.Windows.Forms.TextBox();
-            this.textBox72 = new System.Windows.Forms.TextBox();
-            this.textBox73 = new System.Windows.Forms.TextBox();
-            this.textBox74 = new System.Windows.Forms.TextBox();
-            this.textBox75 = new System.Windows.Forms.TextBox();
-            this.textBox76 = new System.Windows.Forms.TextBox();
-            this.textBox77 = new System.Windows.Forms.TextBox();
-            this.textBox78 = new System.Windows.Forms.TextBox();
+            this.ch2_v = new System.Windows.Forms.TextBox();
+            this.ch2_vmin = new System.Windows.Forms.TextBox();
+            this.ch2_step = new System.Windows.Forms.TextBox();
+            this.ch2_ramp = new System.Windows.Forms.TextBox();
+            this.ch3_vmin = new System.Windows.Forms.TextBox();
+            this.ch3_vmax = new System.Windows.Forms.TextBox();
+            this.ch2_vmax = new System.Windows.Forms.TextBox();
+            this.ch3_step = new System.Windows.Forms.TextBox();
+            this.ch3_ramp = new System.Windows.Forms.TextBox();
+            this.ch3_meas = new System.Windows.Forms.TextBox();
+            this.ch4_v = new System.Windows.Forms.TextBox();
+            this.ch3_v = new System.Windows.Forms.TextBox();
+            this.ch4_vmin = new System.Windows.Forms.TextBox();
+            this.ch4_vmax = new System.Windows.Forms.TextBox();
+            this.ch4_step = new System.Windows.Forms.TextBox();
+            this.ch4_ramp = new System.Windows.Forms.TextBox();
+            this.ch4_meas = new System.Windows.Forms.TextBox();
+            this.ch5_v = new System.Windows.Forms.TextBox();
+            this.ch5_vmin = new System.Windows.Forms.TextBox();
+            this.ch5_vmax = new System.Windows.Forms.TextBox();
+            this.ch5_step = new System.Windows.Forms.TextBox();
+            this.ch5_ramp = new System.Windows.Forms.TextBox();
+            this.ch5_meas = new System.Windows.Forms.TextBox();
+            this.ch6_v = new System.Windows.Forms.TextBox();
+            this.ch6_vmin = new System.Windows.Forms.TextBox();
+            this.ch6_vmax = new System.Windows.Forms.TextBox();
+            this.ch6_step = new System.Windows.Forms.TextBox();
+            this.ch6_ramp = new System.Windows.Forms.TextBox();
+            this.ch6_meas = new System.Windows.Forms.TextBox();
             this.stat2 = new System.Windows.Forms.CheckBox();
             this.stat3 = new System.Windows.Forms.CheckBox();
             this.stat4 = new System.Windows.Forms.CheckBox();
             this.stat5 = new System.Windows.Forms.CheckBox();
             this.stat6 = new System.Windows.Forms.CheckBox();
+            this.btn_reload1 = new System.Windows.Forms.Button();
+            this.btn_reload2 = new System.Windows.Forms.Button();
+            this.btn_reload3 = new System.Windows.Forms.Button();
+            this.btn_reload4 = new System.Windows.Forms.Button();
+            this.btn_reload5 = new System.Windows.Forms.Button();
+            this.btn_reload6 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3380,61 +3386,67 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.stat1, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.label102, 6, 0);
             this.tableLayoutPanel3.Controls.Add(this.label100, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.label99, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.label98, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_vset, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmin, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox35, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_meas, 1, 6);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmax, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label81, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_stepsize, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.lb_time, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmeas, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.lb_stat, 0, 7);
-            this.tableLayoutPanel3.Controls.Add(this.textBox37, 2, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox38, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox39, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox40, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox41, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox42, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_meas, 2, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_v, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_vmin, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_vmax, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_step, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_ramp, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.label101, 5, 0);
-            this.tableLayoutPanel3.Controls.Add(this.textBox36, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox51, 2, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox53, 2, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox54, 2, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox56, 3, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox52, 3, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox57, 2, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox58, 3, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox59, 3, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox60, 3, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox55, 4, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox61, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox62, 4, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox63, 4, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox64, 4, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox65, 4, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox66, 4, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox67, 5, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox68, 5, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox69, 5, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox70, 5, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox71, 5, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox72, 5, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox73, 6, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox74, 6, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox75, 6, 3);
-            this.tableLayoutPanel3.Controls.Add(this.textBox76, 6, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox77, 6, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox78, 6, 6);
-            this.tableLayoutPanel3.Controls.Add(this.stat2, 2, 7);
-            this.tableLayoutPanel3.Controls.Add(this.stat3, 3, 7);
-            this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 7);
-            this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 7);
-            this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 7);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_v, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_vmin, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_step, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_ramp, 2, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_vmin, 3, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_vmax, 3, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_vmax, 2, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_step, 3, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_ramp, 3, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_meas, 3, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_v, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_v, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_vmin, 4, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_vmax, 4, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_step, 4, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_ramp, 4, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_meas, 4, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_v, 5, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_vmin, 5, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_vmax, 5, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_step, 5, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_ramp, 5, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_meas, 5, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_v, 6, 1);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_vmin, 6, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_vmax, 6, 3);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_step, 6, 4);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_ramp, 6, 5);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_meas, 6, 6);
+            this.tableLayoutPanel3.Controls.Add(this.stat1, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.stat2, 2, 8);
+            this.tableLayoutPanel3.Controls.Add(this.stat3, 3, 8);
+            this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 8);
+            this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 8);
+            this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 8);
+            this.tableLayoutPanel3.Controls.Add(this.lb_stat, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload1, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload2, 2, 7);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload3, 3, 7);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload4, 4, 7);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload5, 5, 7);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload6, 6, 7);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // stat1
@@ -3474,10 +3486,10 @@
             resources.ApplyResources(this.lb_vmin, "lb_vmin");
             this.lb_vmin.Name = "lb_vmin";
             // 
-            // textBox35
+            // ch1_meas
             // 
-            resources.ApplyResources(this.textBox35, "textBox35");
-            this.textBox35.Name = "textBox35";
+            resources.ApplyResources(this.ch1_meas, "ch1_meas");
+            this.ch1_meas.Name = "ch1_meas";
             // 
             // lb_vmax
             // 
@@ -3509,185 +3521,185 @@
             resources.ApplyResources(this.lb_stat, "lb_stat");
             this.lb_stat.Name = "lb_stat";
             // 
-            // textBox37
+            // ch2_meas
             // 
-            resources.ApplyResources(this.textBox37, "textBox37");
-            this.textBox37.Name = "textBox37";
+            resources.ApplyResources(this.ch2_meas, "ch2_meas");
+            this.ch2_meas.Name = "ch2_meas";
             // 
-            // textBox38
+            // ch1_v
             // 
-            resources.ApplyResources(this.textBox38, "textBox38");
-            this.textBox38.Name = "textBox38";
+            resources.ApplyResources(this.ch1_v, "ch1_v");
+            this.ch1_v.Name = "ch1_v";
             // 
-            // textBox39
+            // ch1_vmin
             // 
-            resources.ApplyResources(this.textBox39, "textBox39");
-            this.textBox39.Name = "textBox39";
+            resources.ApplyResources(this.ch1_vmin, "ch1_vmin");
+            this.ch1_vmin.Name = "ch1_vmin";
             // 
-            // textBox40
+            // ch1_vmax
             // 
-            resources.ApplyResources(this.textBox40, "textBox40");
-            this.textBox40.Name = "textBox40";
+            resources.ApplyResources(this.ch1_vmax, "ch1_vmax");
+            this.ch1_vmax.Name = "ch1_vmax";
             // 
-            // textBox41
+            // ch1_step
             // 
-            resources.ApplyResources(this.textBox41, "textBox41");
-            this.textBox41.Name = "textBox41";
+            resources.ApplyResources(this.ch1_step, "ch1_step");
+            this.ch1_step.Name = "ch1_step";
             // 
-            // textBox42
+            // ch1_ramp
             // 
-            resources.ApplyResources(this.textBox42, "textBox42");
-            this.textBox42.Name = "textBox42";
+            resources.ApplyResources(this.ch1_ramp, "ch1_ramp");
+            this.ch1_ramp.Name = "ch1_ramp";
             // 
             // label101
             // 
             resources.ApplyResources(this.label101, "label101");
             this.label101.Name = "label101";
             // 
-            // textBox36
+            // ch2_v
             // 
-            resources.ApplyResources(this.textBox36, "textBox36");
-            this.textBox36.Name = "textBox36";
+            resources.ApplyResources(this.ch2_v, "ch2_v");
+            this.ch2_v.Name = "ch2_v";
             // 
-            // textBox51
+            // ch2_vmin
             // 
-            resources.ApplyResources(this.textBox51, "textBox51");
-            this.textBox51.Name = "textBox51";
+            resources.ApplyResources(this.ch2_vmin, "ch2_vmin");
+            this.ch2_vmin.Name = "ch2_vmin";
             // 
-            // textBox53
+            // ch2_step
             // 
-            resources.ApplyResources(this.textBox53, "textBox53");
-            this.textBox53.Name = "textBox53";
+            resources.ApplyResources(this.ch2_step, "ch2_step");
+            this.ch2_step.Name = "ch2_step";
             // 
-            // textBox54
+            // ch2_ramp
             // 
-            resources.ApplyResources(this.textBox54, "textBox54");
-            this.textBox54.Name = "textBox54";
+            resources.ApplyResources(this.ch2_ramp, "ch2_ramp");
+            this.ch2_ramp.Name = "ch2_ramp";
             // 
-            // textBox56
+            // ch3_vmin
             // 
-            resources.ApplyResources(this.textBox56, "textBox56");
-            this.textBox56.Name = "textBox56";
+            resources.ApplyResources(this.ch3_vmin, "ch3_vmin");
+            this.ch3_vmin.Name = "ch3_vmin";
             // 
-            // textBox52
+            // ch3_vmax
             // 
-            resources.ApplyResources(this.textBox52, "textBox52");
-            this.textBox52.Name = "textBox52";
+            resources.ApplyResources(this.ch3_vmax, "ch3_vmax");
+            this.ch3_vmax.Name = "ch3_vmax";
             // 
-            // textBox57
+            // ch2_vmax
             // 
-            resources.ApplyResources(this.textBox57, "textBox57");
-            this.textBox57.Name = "textBox57";
+            resources.ApplyResources(this.ch2_vmax, "ch2_vmax");
+            this.ch2_vmax.Name = "ch2_vmax";
             // 
-            // textBox58
+            // ch3_step
             // 
-            resources.ApplyResources(this.textBox58, "textBox58");
-            this.textBox58.Name = "textBox58";
+            resources.ApplyResources(this.ch3_step, "ch3_step");
+            this.ch3_step.Name = "ch3_step";
             // 
-            // textBox59
+            // ch3_ramp
             // 
-            resources.ApplyResources(this.textBox59, "textBox59");
-            this.textBox59.Name = "textBox59";
+            resources.ApplyResources(this.ch3_ramp, "ch3_ramp");
+            this.ch3_ramp.Name = "ch3_ramp";
             // 
-            // textBox60
+            // ch3_meas
             // 
-            resources.ApplyResources(this.textBox60, "textBox60");
-            this.textBox60.Name = "textBox60";
+            resources.ApplyResources(this.ch3_meas, "ch3_meas");
+            this.ch3_meas.Name = "ch3_meas";
             // 
-            // textBox55
+            // ch4_v
             // 
-            resources.ApplyResources(this.textBox55, "textBox55");
-            this.textBox55.Name = "textBox55";
+            resources.ApplyResources(this.ch4_v, "ch4_v");
+            this.ch4_v.Name = "ch4_v";
             // 
-            // textBox61
+            // ch3_v
             // 
-            resources.ApplyResources(this.textBox61, "textBox61");
-            this.textBox61.Name = "textBox61";
+            resources.ApplyResources(this.ch3_v, "ch3_v");
+            this.ch3_v.Name = "ch3_v";
             // 
-            // textBox62
+            // ch4_vmin
             // 
-            resources.ApplyResources(this.textBox62, "textBox62");
-            this.textBox62.Name = "textBox62";
+            resources.ApplyResources(this.ch4_vmin, "ch4_vmin");
+            this.ch4_vmin.Name = "ch4_vmin";
             // 
-            // textBox63
+            // ch4_vmax
             // 
-            resources.ApplyResources(this.textBox63, "textBox63");
-            this.textBox63.Name = "textBox63";
+            resources.ApplyResources(this.ch4_vmax, "ch4_vmax");
+            this.ch4_vmax.Name = "ch4_vmax";
             // 
-            // textBox64
+            // ch4_step
             // 
-            resources.ApplyResources(this.textBox64, "textBox64");
-            this.textBox64.Name = "textBox64";
+            resources.ApplyResources(this.ch4_step, "ch4_step");
+            this.ch4_step.Name = "ch4_step";
             // 
-            // textBox65
+            // ch4_ramp
             // 
-            resources.ApplyResources(this.textBox65, "textBox65");
-            this.textBox65.Name = "textBox65";
+            resources.ApplyResources(this.ch4_ramp, "ch4_ramp");
+            this.ch4_ramp.Name = "ch4_ramp";
             // 
-            // textBox66
+            // ch4_meas
             // 
-            resources.ApplyResources(this.textBox66, "textBox66");
-            this.textBox66.Name = "textBox66";
+            resources.ApplyResources(this.ch4_meas, "ch4_meas");
+            this.ch4_meas.Name = "ch4_meas";
             // 
-            // textBox67
+            // ch5_v
             // 
-            resources.ApplyResources(this.textBox67, "textBox67");
-            this.textBox67.Name = "textBox67";
+            resources.ApplyResources(this.ch5_v, "ch5_v");
+            this.ch5_v.Name = "ch5_v";
             // 
-            // textBox68
+            // ch5_vmin
             // 
-            resources.ApplyResources(this.textBox68, "textBox68");
-            this.textBox68.Name = "textBox68";
+            resources.ApplyResources(this.ch5_vmin, "ch5_vmin");
+            this.ch5_vmin.Name = "ch5_vmin";
             // 
-            // textBox69
+            // ch5_vmax
             // 
-            resources.ApplyResources(this.textBox69, "textBox69");
-            this.textBox69.Name = "textBox69";
+            resources.ApplyResources(this.ch5_vmax, "ch5_vmax");
+            this.ch5_vmax.Name = "ch5_vmax";
             // 
-            // textBox70
+            // ch5_step
             // 
-            resources.ApplyResources(this.textBox70, "textBox70");
-            this.textBox70.Name = "textBox70";
+            resources.ApplyResources(this.ch5_step, "ch5_step");
+            this.ch5_step.Name = "ch5_step";
             // 
-            // textBox71
+            // ch5_ramp
             // 
-            resources.ApplyResources(this.textBox71, "textBox71");
-            this.textBox71.Name = "textBox71";
+            resources.ApplyResources(this.ch5_ramp, "ch5_ramp");
+            this.ch5_ramp.Name = "ch5_ramp";
             // 
-            // textBox72
+            // ch5_meas
             // 
-            resources.ApplyResources(this.textBox72, "textBox72");
-            this.textBox72.Name = "textBox72";
+            resources.ApplyResources(this.ch5_meas, "ch5_meas");
+            this.ch5_meas.Name = "ch5_meas";
             // 
-            // textBox73
+            // ch6_v
             // 
-            resources.ApplyResources(this.textBox73, "textBox73");
-            this.textBox73.Name = "textBox73";
+            resources.ApplyResources(this.ch6_v, "ch6_v");
+            this.ch6_v.Name = "ch6_v";
             // 
-            // textBox74
+            // ch6_vmin
             // 
-            resources.ApplyResources(this.textBox74, "textBox74");
-            this.textBox74.Name = "textBox74";
+            resources.ApplyResources(this.ch6_vmin, "ch6_vmin");
+            this.ch6_vmin.Name = "ch6_vmin";
             // 
-            // textBox75
+            // ch6_vmax
             // 
-            resources.ApplyResources(this.textBox75, "textBox75");
-            this.textBox75.Name = "textBox75";
+            resources.ApplyResources(this.ch6_vmax, "ch6_vmax");
+            this.ch6_vmax.Name = "ch6_vmax";
             // 
-            // textBox76
+            // ch6_step
             // 
-            resources.ApplyResources(this.textBox76, "textBox76");
-            this.textBox76.Name = "textBox76";
+            resources.ApplyResources(this.ch6_step, "ch6_step");
+            this.ch6_step.Name = "ch6_step";
             // 
-            // textBox77
+            // ch6_ramp
             // 
-            resources.ApplyResources(this.textBox77, "textBox77");
-            this.textBox77.Name = "textBox77";
+            resources.ApplyResources(this.ch6_ramp, "ch6_ramp");
+            this.ch6_ramp.Name = "ch6_ramp";
             // 
-            // textBox78
+            // ch6_meas
             // 
-            resources.ApplyResources(this.textBox78, "textBox78");
-            this.textBox78.Name = "textBox78";
+            resources.ApplyResources(this.ch6_meas, "ch6_meas");
+            this.ch6_meas.Name = "ch6_meas";
             // 
             // stat2
             // 
@@ -3723,6 +3735,42 @@
             this.stat6.Name = "stat6";
             this.stat6.UseVisualStyleBackColor = true;
             this.stat6.CheckedChanged += new System.EventHandler(this.stat6_CheckedChanged);
+            // 
+            // btn_reload1
+            // 
+            resources.ApplyResources(this.btn_reload1, "btn_reload1");
+            this.btn_reload1.Name = "btn_reload1";
+            this.btn_reload1.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload2
+            // 
+            resources.ApplyResources(this.btn_reload2, "btn_reload2");
+            this.btn_reload2.Name = "btn_reload2";
+            this.btn_reload2.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload3
+            // 
+            resources.ApplyResources(this.btn_reload3, "btn_reload3");
+            this.btn_reload3.Name = "btn_reload3";
+            this.btn_reload3.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload4
+            // 
+            resources.ApplyResources(this.btn_reload4, "btn_reload4");
+            this.btn_reload4.Name = "btn_reload4";
+            this.btn_reload4.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload5
+            // 
+            resources.ApplyResources(this.btn_reload5, "btn_reload5");
+            this.btn_reload5.Name = "btn_reload5";
+            this.btn_reload5.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload6
+            // 
+            resources.ApplyResources(this.btn_reload6, "btn_reload6");
+            this.btn_reload6.Name = "btn_reload6";
+            this.btn_reload6.UseVisualStyleBackColor = true;
             // 
             // XPS
             // 
@@ -4203,48 +4251,54 @@
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label102;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TextBox textBox35;
-        private System.Windows.Forms.TextBox textBox37;
-        private System.Windows.Forms.TextBox textBox38;
-        private System.Windows.Forms.TextBox textBox39;
-        private System.Windows.Forms.TextBox textBox40;
-        private System.Windows.Forms.TextBox textBox41;
-        private System.Windows.Forms.TextBox textBox42;
-        private System.Windows.Forms.TextBox textBox36;
-        private System.Windows.Forms.TextBox textBox51;
-        private System.Windows.Forms.TextBox textBox53;
-        private System.Windows.Forms.TextBox textBox54;
-        private System.Windows.Forms.TextBox textBox56;
-        private System.Windows.Forms.TextBox textBox52;
-        private System.Windows.Forms.TextBox textBox57;
-        private System.Windows.Forms.TextBox textBox58;
-        private System.Windows.Forms.TextBox textBox59;
-        private System.Windows.Forms.TextBox textBox60;
-        private System.Windows.Forms.TextBox textBox55;
-        private System.Windows.Forms.TextBox textBox61;
-        private System.Windows.Forms.TextBox textBox62;
-        private System.Windows.Forms.TextBox textBox63;
-        private System.Windows.Forms.TextBox textBox64;
-        private System.Windows.Forms.TextBox textBox65;
-        private System.Windows.Forms.TextBox textBox66;
-        private System.Windows.Forms.TextBox textBox67;
-        private System.Windows.Forms.TextBox textBox68;
-        private System.Windows.Forms.TextBox textBox69;
-        private System.Windows.Forms.TextBox textBox70;
-        private System.Windows.Forms.TextBox textBox71;
-        private System.Windows.Forms.TextBox textBox72;
-        private System.Windows.Forms.TextBox textBox73;
-        private System.Windows.Forms.TextBox textBox74;
-        private System.Windows.Forms.TextBox textBox75;
-        private System.Windows.Forms.TextBox textBox76;
-        private System.Windows.Forms.TextBox textBox77;
-        private System.Windows.Forms.TextBox textBox78;
+        private System.Windows.Forms.TextBox ch1_meas;
+        private System.Windows.Forms.TextBox ch2_meas;
+        private System.Windows.Forms.TextBox ch1_v;
+        private System.Windows.Forms.TextBox ch1_vmin;
+        private System.Windows.Forms.TextBox ch1_vmax;
+        private System.Windows.Forms.TextBox ch1_step;
+        private System.Windows.Forms.TextBox ch1_ramp;
+        private System.Windows.Forms.TextBox ch2_v;
+        private System.Windows.Forms.TextBox ch2_vmin;
+        private System.Windows.Forms.TextBox ch2_step;
+        private System.Windows.Forms.TextBox ch2_ramp;
+        private System.Windows.Forms.TextBox ch3_vmin;
+        private System.Windows.Forms.TextBox ch3_vmax;
+        private System.Windows.Forms.TextBox ch2_vmax;
+        private System.Windows.Forms.TextBox ch3_step;
+        private System.Windows.Forms.TextBox ch3_ramp;
+        private System.Windows.Forms.TextBox ch3_meas;
+        private System.Windows.Forms.TextBox ch4_v;
+        private System.Windows.Forms.TextBox ch3_v;
+        private System.Windows.Forms.TextBox ch4_vmin;
+        private System.Windows.Forms.TextBox ch4_vmax;
+        private System.Windows.Forms.TextBox ch4_step;
+        private System.Windows.Forms.TextBox ch4_ramp;
+        private System.Windows.Forms.TextBox ch4_meas;
+        private System.Windows.Forms.TextBox ch5_v;
+        private System.Windows.Forms.TextBox ch5_vmin;
+        private System.Windows.Forms.TextBox ch5_vmax;
+        private System.Windows.Forms.TextBox ch5_step;
+        private System.Windows.Forms.TextBox ch5_ramp;
+        private System.Windows.Forms.TextBox ch5_meas;
+        private System.Windows.Forms.TextBox ch6_v;
+        private System.Windows.Forms.TextBox ch6_vmin;
+        private System.Windows.Forms.TextBox ch6_vmax;
+        private System.Windows.Forms.TextBox ch6_step;
+        private System.Windows.Forms.TextBox ch6_ramp;
+        private System.Windows.Forms.TextBox ch6_meas;
         private System.Windows.Forms.CheckBox stat1;
         private System.Windows.Forms.CheckBox stat2;
         private System.Windows.Forms.CheckBox stat3;
         private System.Windows.Forms.CheckBox stat4;
         private System.Windows.Forms.CheckBox stat5;
         private System.Windows.Forms.CheckBox stat6;
+        private System.Windows.Forms.Button btn_reload1;
+        private System.Windows.Forms.Button btn_reload2;
+        private System.Windows.Forms.Button btn_reload3;
+        private System.Windows.Forms.Button btn_reload4;
+        private System.Windows.Forms.Button btn_reload5;
+        private System.Windows.Forms.Button btn_reload6;
     }
 }
 

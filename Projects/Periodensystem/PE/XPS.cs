@@ -49,7 +49,7 @@ namespace XPS
 
 
 
-        private MessageBasedSession mbSession;
+        private MessageBasedSession iseg;
         private string lastResourceString = null;
 
 
@@ -149,10 +149,10 @@ namespace XPS
         public void colorchanger(object sender, YAxis ya)
         {
             Button btn = (Button)sender;
-            var panel = sender as Control;
-            var thePanelName = panel.Name;
-            string col = fab[thePanelName];
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+           // var panel = sender as Control;
+            //var thePanelName = btn.Name;
+            string col = fab[btn.Name];
+            int zeile = Convert.ToInt32(dictionary[btn.Name]) - 1;
             float value;
 
             if (btn.ForeColor == Color.DimGray)
@@ -177,7 +177,7 @@ namespace XPS
                         pane_labs.FontSpec.Border.IsVisible = false;
                         pane_labs.ZOrder = ZOrder.E_BehindCurves;
                         myPane.GraphObjList.Add(pane_labs);
-                        fuerlabels.Add(thePanelName);
+                        fuerlabels.Add(btn.Name);
 
                         ya = new YAxis();                        
                         ya.Scale.IsVisible = false;
@@ -211,7 +211,7 @@ namespace XPS
                 int laenge = fuerlabels.Count - 1;
                 for (int y = laenge; y >= 0; y--)
                 {
-                    if (fuerlabels[y] == thePanelName)
+                    if (fuerlabels[y] == btn.Name)
                     {
                         fuerlabels.RemoveAt(y);
                         myPane.GraphObjList.RemoveAt(y);
@@ -405,9 +405,9 @@ namespace XPS
         public void labelchanger(object sender)
         {
             var panel = sender as Control;
-            var thePanelName = panel.Name;
+            //var thePanelName = panel.Name;
             //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
-            int zeile = Convert.ToInt32(dictionary[thePanelName]) - 1;
+            int zeile = Convert.ToInt32(dictionary[panel.Name]) - 1;
 
             if (label51.Text == elementnames.GetToolTip(panel))
             {
@@ -428,6 +428,7 @@ namespace XPS
                 label32.Text = "";
                 label34.Text = "";
                 label36.Text = "";
+                //https://stackoverflow.com/questions/15008871/how-to-create-many-labels-and-textboxes-dynamically-depending-on-the-value-of-an
                 label38.Text = "";
                 label40.Text = "";
                 label42.Text = "";
@@ -504,7 +505,7 @@ namespace XPS
             else
             {
                 label51.Text = elementnames.GetToolTip(panel);
-                label52.Text = dictionary[thePanelName];
+                label52.Text = dictionary[panel.Name];
                 label4.Text = row[zeile][2];
                 label6.Text = row[zeile][3];
                 label8.Text = row[zeile][4];
@@ -1218,7 +1219,9 @@ namespace XPS
                     {
                         try
                         {
-                            mbSession = (MessageBasedSession)rmSession.Open(sr.ResourceName);
+                            iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
+                            iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
+
                             //SetupControlState(true);
                         }
                         catch (InvalidCastException)
@@ -1240,8 +1243,8 @@ namespace XPS
 
         private void closeSession_Click(object sender, System.EventArgs e)
         {
-            mbSession.RawIO.Write("*RST\n");
-            mbSession.Dispose();
+            iseg.RawIO.Write("*RST\n");
+            iseg.Dispose();
         }
 
         private void query_Click(object sender, EventArgs e)
@@ -1252,11 +1255,11 @@ namespace XPS
             {
                 // string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 string textToWrite = writeTextBox.Text + '\n';
-                mbSession.RawIO.Write(textToWrite);
+                iseg.RawIO.Write(textToWrite);
                 Thread.Sleep(5);
-                readTextBox.Text = InsertCommonEscapeSequences(mbSession.RawIO.ReadString());
+                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
                 Thread.Sleep(5);
-                readTextBox.Text = mbSession.RawIO.ReadString();
+                readTextBox.Text = iseg.RawIO.ReadString();
                 // WARUM KLAPPT DAS NUR BEI ZUWEIMAL LESEN?
             }
             catch (Exception exp)
@@ -1274,7 +1277,7 @@ namespace XPS
             try
             {
                 string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                mbSession.RawIO.Write(textToWrite);
+                iseg.RawIO.Write(textToWrite);
             }
             catch (Exception exp)
             {
@@ -1288,7 +1291,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                readTextBox.Text = InsertCommonEscapeSequences(mbSession.RawIO.ReadString());
+                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
             }
             catch (Exception exp)
             {
@@ -1318,10 +1321,9 @@ namespace XPS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            mbSession.RawIO.Write("CONF:HVMICC HV_OK\n");
-            mbSession.RawIO.Write("*RST\n");
-            mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
-            mbSession.RawIO.Write(":VOLT ON,(@5)\n");
+            iseg.RawIO.Write("*RST\n");
+            iseg.RawIO.Write(":VOLT 25.000,(@5)\n");
+            iseg.RawIO.Write(":VOLT ON,(@5)\n");
         }
 
         private void stat1_CheckedChanged(object sender, EventArgs e)
