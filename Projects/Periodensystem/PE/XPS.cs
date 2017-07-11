@@ -1323,6 +1323,99 @@ namespace XPS
             mbSession.RawIO.Write(":VOLT 25.000,(@5)\n");
             mbSession.RawIO.Write(":VOLT ON,(@5)\n");
         }
+
+        private void stat1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat1.Checked)
+            {
+                stat1.BackColor = Color.LimeGreen;
+                //stat1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
+                stat1.Text = "On";
+            }
+
+            else
+            {
+                stat1.BackColor = SystemColors.ControlLightLight;
+            }
+        }
+
+        private void stat2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat2.Checked)
+            {
+                stat2.BackColor = Color.LimeGreen;
+                stat2.Text = "On";
+            }
+
+            else
+            {
+                stat2.BackColor = SystemColors.ControlLightLight;
+                stat2.Text = "Off";
+            }
+        }
+
+        private void stat3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat3.Checked)
+            {
+                stat3.BackColor = Color.LimeGreen;
+                stat3.Text = "On";
+            }
+
+            else
+            {
+                stat3.BackColor = SystemColors.ControlLightLight;
+                stat3.Text = "Off";
+            }
+        }
+
+        private void stat4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat4.Checked)
+            {
+                stat4.BackColor = Color.LimeGreen;
+                stat4.Text = "On";
+            }
+
+            else
+            {
+                stat4.BackColor = SystemColors.ControlLightLight;
+                stat4.Text = "Off";
+            }
+        }
+
+        private void stat5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat5.Checked)
+            {
+                stat5.BackColor = Color.LimeGreen;
+                stat5.Text = "On";
+            }
+
+            else
+            {
+                stat5.BackColor = SystemColors.ControlLightLight;
+                stat5.Text = "Off";
+            }
+        }
+
+        private void stat6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (stat6.Checked)
+            {
+                stat6.BackColor = Color.LimeGreen;
+                stat6.Text = "On";
+            }
+
+            else
+            {
+                stat6.BackColor = SystemColors.ControlLightLight;
+                stat6.Text = "Off";
+            }
+        }
+
+
+
         //##########################################################################################################################################
 
     }
