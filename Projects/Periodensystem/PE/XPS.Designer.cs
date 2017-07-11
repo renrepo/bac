@@ -380,7 +380,6 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.stat1 = new System.Windows.Forms.CheckBox();
             this.label102 = new System.Windows.Forms.Label();
             this.label100 = new System.Windows.Forms.Label();
             this.label99 = new System.Windows.Forms.Label();
@@ -393,7 +392,6 @@
             this.lb_stepsize = new System.Windows.Forms.Label();
             this.lb_time = new System.Windows.Forms.Label();
             this.lb_vmeas = new System.Windows.Forms.Label();
-            this.lb_stat = new System.Windows.Forms.Label();
             this.ch2_meas = new System.Windows.Forms.TextBox();
             this.ch1_v = new System.Windows.Forms.TextBox();
             this.ch1_vmin = new System.Windows.Forms.TextBox();
@@ -430,11 +428,13 @@
             this.ch6_step = new System.Windows.Forms.TextBox();
             this.ch6_ramp = new System.Windows.Forms.TextBox();
             this.ch6_meas = new System.Windows.Forms.TextBox();
+            this.stat1 = new System.Windows.Forms.CheckBox();
             this.stat2 = new System.Windows.Forms.CheckBox();
             this.stat3 = new System.Windows.Forms.CheckBox();
             this.stat4 = new System.Windows.Forms.CheckBox();
             this.stat5 = new System.Windows.Forms.CheckBox();
             this.stat6 = new System.Windows.Forms.CheckBox();
+            this.lb_stat = new System.Windows.Forms.Label();
             this.btn_reload1 = new System.Windows.Forms.Button();
             this.btn_reload2 = new System.Windows.Forms.Button();
             this.btn_reload3 = new System.Windows.Forms.Button();
@@ -459,7 +459,6 @@
             this.Y.Name = "Y";
             this.elementnames.SetToolTip(this.Y, resources.GetString("Y.ToolTip"));
             this.Y.UseVisualStyleBackColor = false;
-            this.Y.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Y_MouseDown);
             // 
             // Sc
             // 
@@ -469,7 +468,6 @@
             this.Sc.Name = "Sc";
             this.elementnames.SetToolTip(this.Sc, resources.GetString("Sc.ToolTip"));
             this.Sc.UseVisualStyleBackColor = false;
-            this.Sc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Sc_MouseDown);
             // 
             // Ra
             // 
@@ -479,7 +477,6 @@
             this.Ra.Name = "Ra";
             this.elementnames.SetToolTip(this.Ra, resources.GetString("Ra.ToolTip"));
             this.Ra.UseVisualStyleBackColor = false;
-            this.Ra.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ra_MouseDown);
             // 
             // Ba
             // 
@@ -489,7 +486,6 @@
             this.Ba.Name = "Ba";
             this.elementnames.SetToolTip(this.Ba, resources.GetString("Ba.ToolTip"));
             this.Ba.UseVisualStyleBackColor = false;
-            this.Ba.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ba_MouseDown);
             // 
             // Sr
             // 
@@ -499,7 +495,6 @@
             this.Sr.Name = "Sr";
             this.elementnames.SetToolTip(this.Sr, resources.GetString("Sr.ToolTip"));
             this.Sr.UseVisualStyleBackColor = false;
-            this.Sr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Sr_MouseDown);
             // 
             // Rb
             // 
@@ -509,7 +504,6 @@
             this.Rb.Name = "Rb";
             this.elementnames.SetToolTip(this.Rb, resources.GetString("Rb.ToolTip"));
             this.Rb.UseVisualStyleBackColor = false;
-            this.Rb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rb_MouseDown);
             // 
             // Ca
             // 
@@ -519,7 +513,6 @@
             this.Ca.Name = "Ca";
             this.elementnames.SetToolTip(this.Ca, resources.GetString("Ca.ToolTip"));
             this.Ca.UseVisualStyleBackColor = false;
-            this.Ca.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ca_MouseDown);
             // 
             // Mg
             // 
@@ -529,7 +522,6 @@
             this.Mg.Name = "Mg";
             this.elementnames.SetToolTip(this.Mg, resources.GetString("Mg.ToolTip"));
             this.Mg.UseVisualStyleBackColor = false;
-            this.Mg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Mg_MouseDown);
             // 
             // Be
             // 
@@ -539,7 +531,6 @@
             this.Be.Name = "Be";
             this.elementnames.SetToolTip(this.Be, resources.GetString("Be.ToolTip"));
             this.Be.UseVisualStyleBackColor = false;
-            this.Be.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Be_MouseDown);
             // 
             // Fr
             // 
@@ -549,7 +540,6 @@
             this.Fr.Name = "Fr";
             this.elementnames.SetToolTip(this.Fr, resources.GetString("Fr.ToolTip"));
             this.Fr.UseVisualStyleBackColor = false;
-            this.Fr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Fr_MouseDown);
             // 
             // Cs
             // 
@@ -559,7 +549,6 @@
             this.Cs.Name = "Cs";
             this.elementnames.SetToolTip(this.Cs, resources.GetString("Cs.ToolTip"));
             this.Cs.UseVisualStyleBackColor = false;
-            this.Cs.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cs_MouseDown);
             // 
             // K
             // 
@@ -569,7 +558,6 @@
             this.K.Name = "K";
             this.elementnames.SetToolTip(this.K, resources.GetString("K.ToolTip"));
             this.K.UseVisualStyleBackColor = false;
-            this.K.MouseDown += new System.Windows.Forms.MouseEventHandler(this.K_MouseDown);
             // 
             // Na
             // 
@@ -579,7 +567,6 @@
             this.Na.Name = "Na";
             this.elementnames.SetToolTip(this.Na, resources.GetString("Na.ToolTip"));
             this.Na.UseVisualStyleBackColor = false;
-            this.Na.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Na_MouseDown);
             // 
             // Li
             // 
@@ -589,7 +576,6 @@
             this.Li.Name = "Li";
             this.elementnames.SetToolTip(this.Li, resources.GetString("Li.ToolTip"));
             this.Li.UseVisualStyleBackColor = false;
-            this.Li.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Li_MouseDown);
             // 
             // H
             // 
@@ -600,7 +586,6 @@
             this.H.Name = "H";
             this.elementnames.SetToolTip(this.H, resources.GetString("H.ToolTip"));
             this.H.UseVisualStyleBackColor = false;
-            this.H.MouseDown += new System.Windows.Forms.MouseEventHandler(this.H_MouseDown);
             // 
             // He
             // 
@@ -610,7 +595,6 @@
             this.He.Name = "He";
             this.elementnames.SetToolTip(this.He, resources.GetString("He.ToolTip"));
             this.He.UseVisualStyleBackColor = false;
-            this.He.MouseDown += new System.Windows.Forms.MouseEventHandler(this.He_MouseDown);
             // 
             // B
             // 
@@ -620,7 +604,6 @@
             this.B.Name = "B";
             this.elementnames.SetToolTip(this.B, resources.GetString("B.ToolTip"));
             this.B.UseVisualStyleBackColor = false;
-            this.B.MouseDown += new System.Windows.Forms.MouseEventHandler(this.B_MouseDown);
             // 
             // C
             // 
@@ -630,7 +613,6 @@
             this.C.Name = "C";
             this.elementnames.SetToolTip(this.C, resources.GetString("C.ToolTip"));
             this.C.UseVisualStyleBackColor = false;
-            this.C.MouseDown += new System.Windows.Forms.MouseEventHandler(this.C_MouseDown);
             // 
             // N
             // 
@@ -640,7 +622,6 @@
             this.N.Name = "N";
             this.elementnames.SetToolTip(this.N, resources.GetString("N.ToolTip"));
             this.N.UseVisualStyleBackColor = false;
-            this.N.MouseDown += new System.Windows.Forms.MouseEventHandler(this.N_MouseDown);
             // 
             // O
             // 
@@ -650,7 +631,6 @@
             this.O.Name = "O";
             this.elementnames.SetToolTip(this.O, resources.GetString("O.ToolTip"));
             this.O.UseVisualStyleBackColor = false;
-            this.O.MouseDown += new System.Windows.Forms.MouseEventHandler(this.O_MouseDown);
             // 
             // F
             // 
@@ -660,7 +640,6 @@
             this.F.Name = "F";
             this.elementnames.SetToolTip(this.F, resources.GetString("F.ToolTip"));
             this.F.UseVisualStyleBackColor = false;
-            this.F.MouseDown += new System.Windows.Forms.MouseEventHandler(this.F_MouseDown);
             // 
             // Ne
             // 
@@ -670,7 +649,6 @@
             this.Ne.Name = "Ne";
             this.elementnames.SetToolTip(this.Ne, resources.GetString("Ne.ToolTip"));
             this.Ne.UseVisualStyleBackColor = false;
-            this.Ne.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ne_MouseDown);
             // 
             // Al
             // 
@@ -680,7 +658,6 @@
             this.Al.Name = "Al";
             this.elementnames.SetToolTip(this.Al, resources.GetString("Al.ToolTip"));
             this.Al.UseVisualStyleBackColor = false;
-            this.Al.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Al_MouseDown);
             // 
             // Si
             // 
@@ -690,7 +667,6 @@
             this.Si.Name = "Si";
             this.elementnames.SetToolTip(this.Si, resources.GetString("Si.ToolTip"));
             this.Si.UseVisualStyleBackColor = false;
-            this.Si.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Si_MouseDown);
             // 
             // P
             // 
@@ -700,7 +676,6 @@
             this.P.Name = "P";
             this.elementnames.SetToolTip(this.P, resources.GetString("P.ToolTip"));
             this.P.UseVisualStyleBackColor = false;
-            this.P.MouseDown += new System.Windows.Forms.MouseEventHandler(this.P_MouseDown);
             // 
             // S
             // 
@@ -710,7 +685,6 @@
             this.S.Name = "S";
             this.elementnames.SetToolTip(this.S, resources.GetString("S.ToolTip"));
             this.S.UseVisualStyleBackColor = false;
-            this.S.MouseDown += new System.Windows.Forms.MouseEventHandler(this.S_MouseDown);
             // 
             // Cl
             // 
@@ -720,7 +694,6 @@
             this.Cl.Name = "Cl";
             this.elementnames.SetToolTip(this.Cl, resources.GetString("Cl.ToolTip"));
             this.Cl.UseVisualStyleBackColor = false;
-            this.Cl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cl_MouseDown);
             // 
             // Ar
             // 
@@ -730,7 +703,6 @@
             this.Ar.Name = "Ar";
             this.elementnames.SetToolTip(this.Ar, resources.GetString("Ar.ToolTip"));
             this.Ar.UseVisualStyleBackColor = false;
-            this.Ar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ar_MouseDown);
             // 
             // Ti
             // 
@@ -740,7 +712,6 @@
             this.Ti.Name = "Ti";
             this.elementnames.SetToolTip(this.Ti, resources.GetString("Ti.ToolTip"));
             this.Ti.UseVisualStyleBackColor = false;
-            this.Ti.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ti_MouseDown);
             // 
             // V
             // 
@@ -750,7 +721,6 @@
             this.V.Name = "V";
             this.elementnames.SetToolTip(this.V, resources.GetString("V.ToolTip"));
             this.V.UseVisualStyleBackColor = false;
-            this.V.MouseDown += new System.Windows.Forms.MouseEventHandler(this.V_MouseDown);
             // 
             // Cr
             // 
@@ -760,7 +730,6 @@
             this.Cr.Name = "Cr";
             this.elementnames.SetToolTip(this.Cr, resources.GetString("Cr.ToolTip"));
             this.Cr.UseVisualStyleBackColor = false;
-            this.Cr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cr_MouseDown);
             // 
             // Mn
             // 
@@ -770,7 +739,6 @@
             this.Mn.Name = "Mn";
             this.elementnames.SetToolTip(this.Mn, resources.GetString("Mn.ToolTip"));
             this.Mn.UseVisualStyleBackColor = false;
-            this.Mn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Mn_MouseDown);
             // 
             // Fe
             // 
@@ -780,7 +748,6 @@
             this.Fe.Name = "Fe";
             this.elementnames.SetToolTip(this.Fe, resources.GetString("Fe.ToolTip"));
             this.Fe.UseVisualStyleBackColor = false;
-            this.Fe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Fe_MouseDown);
             // 
             // Co
             // 
@@ -790,7 +757,6 @@
             this.Co.Name = "Co";
             this.elementnames.SetToolTip(this.Co, resources.GetString("Co.ToolTip"));
             this.Co.UseVisualStyleBackColor = false;
-            this.Co.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Co_MouseDown);
             // 
             // Ni
             // 
@@ -800,7 +766,6 @@
             this.Ni.Name = "Ni";
             this.elementnames.SetToolTip(this.Ni, resources.GetString("Ni.ToolTip"));
             this.Ni.UseVisualStyleBackColor = false;
-            this.Ni.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ni_MouseDown);
             // 
             // Cu
             // 
@@ -810,7 +775,6 @@
             this.Cu.Name = "Cu";
             this.elementnames.SetToolTip(this.Cu, resources.GetString("Cu.ToolTip"));
             this.Cu.UseVisualStyleBackColor = false;
-            this.Cu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cu_MouseDown);
             // 
             // Zn
             // 
@@ -820,7 +784,6 @@
             this.Zn.Name = "Zn";
             this.elementnames.SetToolTip(this.Zn, resources.GetString("Zn.ToolTip"));
             this.Zn.UseVisualStyleBackColor = false;
-            this.Zn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Zn_MouseDown);
             // 
             // Ga
             // 
@@ -830,7 +793,6 @@
             this.Ga.Name = "Ga";
             this.elementnames.SetToolTip(this.Ga, resources.GetString("Ga.ToolTip"));
             this.Ga.UseVisualStyleBackColor = false;
-            this.Ga.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gd_MouseDown);
             // 
             // Ge
             // 
@@ -840,7 +802,6 @@
             this.Ge.Name = "Ge";
             this.elementnames.SetToolTip(this.Ge, resources.GetString("Ge.ToolTip"));
             this.Ge.UseVisualStyleBackColor = false;
-            this.Ge.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ge_MouseDown);
             // 
             // As
             // 
@@ -850,7 +811,6 @@
             this.As.Name = "As";
             this.elementnames.SetToolTip(this.As, resources.GetString("As.ToolTip"));
             this.As.UseVisualStyleBackColor = false;
-            this.As.MouseDown += new System.Windows.Forms.MouseEventHandler(this.As_MouseDown);
             // 
             // Se
             // 
@@ -860,7 +820,6 @@
             this.Se.Name = "Se";
             this.elementnames.SetToolTip(this.Se, resources.GetString("Se.ToolTip"));
             this.Se.UseVisualStyleBackColor = false;
-            this.Se.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Se_MouseDown);
             // 
             // Br
             // 
@@ -870,7 +829,6 @@
             this.Br.Name = "Br";
             this.elementnames.SetToolTip(this.Br, resources.GetString("Br.ToolTip"));
             this.Br.UseVisualStyleBackColor = false;
-            this.Br.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Br_MouseDown);
             // 
             // Kr
             // 
@@ -880,7 +838,6 @@
             this.Kr.Name = "Kr";
             this.elementnames.SetToolTip(this.Kr, resources.GetString("Kr.ToolTip"));
             this.Kr.UseVisualStyleBackColor = false;
-            this.Kr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Kr_MouseDown);
             // 
             // Zr
             // 
@@ -890,7 +847,6 @@
             this.Zr.Name = "Zr";
             this.elementnames.SetToolTip(this.Zr, resources.GetString("Zr.ToolTip"));
             this.Zr.UseVisualStyleBackColor = false;
-            this.Zr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Zr_MouseDown);
             // 
             // Nb
             // 
@@ -900,7 +856,6 @@
             this.Nb.Name = "Nb";
             this.elementnames.SetToolTip(this.Nb, resources.GetString("Nb.ToolTip"));
             this.Nb.UseVisualStyleBackColor = false;
-            this.Nb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Nb_MouseDown);
             // 
             // Mo
             // 
@@ -910,7 +865,6 @@
             this.Mo.Name = "Mo";
             this.elementnames.SetToolTip(this.Mo, resources.GetString("Mo.ToolTip"));
             this.Mo.UseVisualStyleBackColor = false;
-            this.Mo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Mo_MouseDown);
             // 
             // Tc
             // 
@@ -920,7 +874,6 @@
             this.Tc.Name = "Tc";
             this.elementnames.SetToolTip(this.Tc, resources.GetString("Tc.ToolTip"));
             this.Tc.UseVisualStyleBackColor = false;
-            this.Tc.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tc_MouseDown);
             // 
             // Ru
             // 
@@ -930,7 +883,6 @@
             this.Ru.Name = "Ru";
             this.elementnames.SetToolTip(this.Ru, resources.GetString("Ru.ToolTip"));
             this.Ru.UseVisualStyleBackColor = false;
-            this.Ru.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ru_MouseDown);
             // 
             // Rh
             // 
@@ -940,7 +892,6 @@
             this.Rh.Name = "Rh";
             this.elementnames.SetToolTip(this.Rh, resources.GetString("Rh.ToolTip"));
             this.Rh.UseVisualStyleBackColor = false;
-            this.Rh.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rh_MouseDown);
             // 
             // Pd
             // 
@@ -950,7 +901,6 @@
             this.Pd.Name = "Pd";
             this.elementnames.SetToolTip(this.Pd, resources.GetString("Pd.ToolTip"));
             this.Pd.UseVisualStyleBackColor = false;
-            this.Pd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pd_MouseDown);
             // 
             // Ag
             // 
@@ -960,7 +910,6 @@
             this.Ag.Name = "Ag";
             this.elementnames.SetToolTip(this.Ag, resources.GetString("Ag.ToolTip"));
             this.Ag.UseVisualStyleBackColor = false;
-            this.Ag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ag_MouseDown);
             // 
             // Cd
             // 
@@ -970,7 +919,6 @@
             this.Cd.Name = "Cd";
             this.elementnames.SetToolTip(this.Cd, resources.GetString("Cd.ToolTip"));
             this.Cd.UseVisualStyleBackColor = false;
-            this.Cd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cd_MouseDown);
             // 
             // In
             // 
@@ -980,7 +928,6 @@
             this.In.Name = "In";
             this.elementnames.SetToolTip(this.In, resources.GetString("In.ToolTip"));
             this.In.UseVisualStyleBackColor = false;
-            this.In.MouseDown += new System.Windows.Forms.MouseEventHandler(this.In_MouseDown);
             // 
             // Sn
             // 
@@ -990,7 +937,6 @@
             this.Sn.Name = "Sn";
             this.elementnames.SetToolTip(this.Sn, resources.GetString("Sn.ToolTip"));
             this.Sn.UseVisualStyleBackColor = false;
-            this.Sn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Sn_MouseDown);
             // 
             // Sb
             // 
@@ -1000,7 +946,6 @@
             this.Sb.Name = "Sb";
             this.elementnames.SetToolTip(this.Sb, resources.GetString("Sb.ToolTip"));
             this.Sb.UseVisualStyleBackColor = false;
-            this.Sb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Sb_MouseDown);
             // 
             // Te
             // 
@@ -1010,7 +955,6 @@
             this.Te.Name = "Te";
             this.elementnames.SetToolTip(this.Te, resources.GetString("Te.ToolTip"));
             this.Te.UseVisualStyleBackColor = false;
-            this.Te.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Te_MouseDown);
             // 
             // I
             // 
@@ -1020,7 +964,6 @@
             this.I.Name = "I";
             this.elementnames.SetToolTip(this.I, resources.GetString("I.ToolTip"));
             this.I.UseVisualStyleBackColor = false;
-            this.I.MouseDown += new System.Windows.Forms.MouseEventHandler(this.I_MouseDown);
             // 
             // Xe
             // 
@@ -1030,7 +973,6 @@
             this.Xe.Name = "Xe";
             this.elementnames.SetToolTip(this.Xe, resources.GetString("Xe.ToolTip"));
             this.Xe.UseVisualStyleBackColor = false;
-            this.Xe.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Xe_MouseDown);
             // 
             // La
             // 
@@ -1040,7 +982,6 @@
             this.La.Name = "La";
             this.elementnames.SetToolTip(this.La, resources.GetString("La.ToolTip"));
             this.La.UseVisualStyleBackColor = false;
-            this.La.MouseDown += new System.Windows.Forms.MouseEventHandler(this.La_MouseDown);
             // 
             // Hf
             // 
@@ -1050,7 +991,6 @@
             this.Hf.Name = "Hf";
             this.elementnames.SetToolTip(this.Hf, resources.GetString("Hf.ToolTip"));
             this.Hf.UseVisualStyleBackColor = false;
-            this.Hf.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Hf_MouseDown);
             // 
             // Ta
             // 
@@ -1060,7 +1000,6 @@
             this.Ta.Name = "Ta";
             this.elementnames.SetToolTip(this.Ta, resources.GetString("Ta.ToolTip"));
             this.Ta.UseVisualStyleBackColor = false;
-            this.Ta.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ta_MouseDown);
             // 
             // W
             // 
@@ -1070,7 +1009,6 @@
             this.W.Name = "W";
             this.elementnames.SetToolTip(this.W, resources.GetString("W.ToolTip"));
             this.W.UseVisualStyleBackColor = false;
-            this.W.MouseDown += new System.Windows.Forms.MouseEventHandler(this.W_MouseDown);
             // 
             // Re
             // 
@@ -1080,7 +1018,6 @@
             this.Re.Name = "Re";
             this.elementnames.SetToolTip(this.Re, resources.GetString("Re.ToolTip"));
             this.Re.UseVisualStyleBackColor = false;
-            this.Re.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Re_MouseDown);
             // 
             // Os
             // 
@@ -1090,7 +1027,6 @@
             this.Os.Name = "Os";
             this.elementnames.SetToolTip(this.Os, resources.GetString("Os.ToolTip"));
             this.Os.UseVisualStyleBackColor = false;
-            this.Os.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Os_MouseDown);
             // 
             // Ir
             // 
@@ -1100,7 +1036,6 @@
             this.Ir.Name = "Ir";
             this.elementnames.SetToolTip(this.Ir, resources.GetString("Ir.ToolTip"));
             this.Ir.UseVisualStyleBackColor = false;
-            this.Ir.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ir_MouseDown);
             // 
             // Pt
             // 
@@ -1110,7 +1045,6 @@
             this.Pt.Name = "Pt";
             this.elementnames.SetToolTip(this.Pt, resources.GetString("Pt.ToolTip"));
             this.Pt.UseVisualStyleBackColor = false;
-            this.Pt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pt_MouseDown);
             // 
             // Au
             // 
@@ -1120,7 +1054,6 @@
             this.Au.Name = "Au";
             this.elementnames.SetToolTip(this.Au, resources.GetString("Au.ToolTip"));
             this.Au.UseVisualStyleBackColor = false;
-            this.Au.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Au_MouseDown);
             // 
             // Hg
             // 
@@ -1130,7 +1063,6 @@
             this.Hg.Name = "Hg";
             this.elementnames.SetToolTip(this.Hg, resources.GetString("Hg.ToolTip"));
             this.Hg.UseVisualStyleBackColor = false;
-            this.Hg.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Hg_MouseDown);
             // 
             // Tl
             // 
@@ -1140,7 +1072,6 @@
             this.Tl.Name = "Tl";
             this.elementnames.SetToolTip(this.Tl, resources.GetString("Tl.ToolTip"));
             this.Tl.UseVisualStyleBackColor = false;
-            this.Tl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tl_MouseDown);
             // 
             // Pb
             // 
@@ -1150,7 +1081,6 @@
             this.Pb.Name = "Pb";
             this.elementnames.SetToolTip(this.Pb, resources.GetString("Pb.ToolTip"));
             this.Pb.UseVisualStyleBackColor = false;
-            this.Pb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pb_MouseDown);
             // 
             // Bi
             // 
@@ -1160,7 +1090,6 @@
             this.Bi.Name = "Bi";
             this.elementnames.SetToolTip(this.Bi, resources.GetString("Bi.ToolTip"));
             this.Bi.UseVisualStyleBackColor = false;
-            this.Bi.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Bi_MouseDown);
             // 
             // Po
             // 
@@ -1170,7 +1099,6 @@
             this.Po.Name = "Po";
             this.elementnames.SetToolTip(this.Po, resources.GetString("Po.ToolTip"));
             this.Po.UseVisualStyleBackColor = false;
-            this.Po.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Po_MouseDown);
             // 
             // At
             // 
@@ -1180,7 +1108,6 @@
             this.At.Name = "At";
             this.elementnames.SetToolTip(this.At, resources.GetString("At.ToolTip"));
             this.At.UseVisualStyleBackColor = false;
-            this.At.MouseDown += new System.Windows.Forms.MouseEventHandler(this.At_MouseDown);
             // 
             // Rn
             // 
@@ -1190,7 +1117,6 @@
             this.Rn.Name = "Rn";
             this.elementnames.SetToolTip(this.Rn, resources.GetString("Rn.ToolTip"));
             this.Rn.UseVisualStyleBackColor = false;
-            this.Rn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rn_MouseDown);
             // 
             // Ac
             // 
@@ -1200,7 +1126,6 @@
             this.Ac.Name = "Ac";
             this.elementnames.SetToolTip(this.Ac, resources.GetString("Ac.ToolTip"));
             this.Ac.UseVisualStyleBackColor = false;
-            this.Ac.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ac_MouseDown);
             // 
             // Rf
             // 
@@ -1210,7 +1135,6 @@
             this.Rf.ForeColor = System.Drawing.Color.DimGray;
             this.Rf.Name = "Rf";
             this.Rf.UseVisualStyleBackColor = false;
-            this.Rf.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Rf_MouseDown);
             // 
             // Db
             // 
@@ -1346,7 +1270,6 @@
             this.Ce.Name = "Ce";
             this.elementnames.SetToolTip(this.Ce, resources.GetString("Ce.ToolTip"));
             this.Ce.UseVisualStyleBackColor = false;
-            this.Ce.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ce_MouseDown);
             // 
             // Pr
             // 
@@ -1356,7 +1279,6 @@
             this.Pr.Name = "Pr";
             this.elementnames.SetToolTip(this.Pr, resources.GetString("Pr.ToolTip"));
             this.Pr.UseVisualStyleBackColor = false;
-            this.Pr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pr_MouseDown);
             // 
             // Nd
             // 
@@ -1366,7 +1288,6 @@
             this.Nd.Name = "Nd";
             this.elementnames.SetToolTip(this.Nd, resources.GetString("Nd.ToolTip"));
             this.Nd.UseVisualStyleBackColor = false;
-            this.Nd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Nd_MouseDown);
             // 
             // Pm
             // 
@@ -1376,7 +1297,6 @@
             this.Pm.Name = "Pm";
             this.elementnames.SetToolTip(this.Pm, resources.GetString("Pm.ToolTip"));
             this.Pm.UseVisualStyleBackColor = false;
-            this.Pm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pm_MouseDown);
             // 
             // Sm
             // 
@@ -1386,7 +1306,6 @@
             this.Sm.Name = "Sm";
             this.elementnames.SetToolTip(this.Sm, resources.GetString("Sm.ToolTip"));
             this.Sm.UseVisualStyleBackColor = false;
-            this.Sm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Sm_MouseDown);
             // 
             // Eu
             // 
@@ -1396,7 +1315,6 @@
             this.Eu.Name = "Eu";
             this.elementnames.SetToolTip(this.Eu, resources.GetString("Eu.ToolTip"));
             this.Eu.UseVisualStyleBackColor = false;
-            this.Eu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Eu_MouseDown);
             // 
             // Gd
             // 
@@ -1406,7 +1324,6 @@
             this.Gd.Name = "Gd";
             this.elementnames.SetToolTip(this.Gd, resources.GetString("Gd.ToolTip"));
             this.Gd.UseVisualStyleBackColor = false;
-            this.Gd.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Gd_MouseDown);
             // 
             // Tb
             // 
@@ -1416,7 +1333,6 @@
             this.Tb.Name = "Tb";
             this.elementnames.SetToolTip(this.Tb, resources.GetString("Tb.ToolTip"));
             this.Tb.UseVisualStyleBackColor = false;
-            this.Tb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tb_MouseDown);
             // 
             // Dy
             // 
@@ -1426,7 +1342,6 @@
             this.Dy.Name = "Dy";
             this.elementnames.SetToolTip(this.Dy, resources.GetString("Dy.ToolTip"));
             this.Dy.UseVisualStyleBackColor = false;
-            this.Dy.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Dy_MouseDown);
             // 
             // Ho
             // 
@@ -1436,7 +1351,6 @@
             this.Ho.Name = "Ho";
             this.elementnames.SetToolTip(this.Ho, resources.GetString("Ho.ToolTip"));
             this.Ho.UseVisualStyleBackColor = false;
-            this.Ho.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Ho_MouseDown);
             // 
             // Er
             // 
@@ -1446,7 +1360,6 @@
             this.Er.Name = "Er";
             this.elementnames.SetToolTip(this.Er, resources.GetString("Er.ToolTip"));
             this.Er.UseVisualStyleBackColor = false;
-            this.Er.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Er_MouseDown);
             // 
             // Tm
             // 
@@ -1456,7 +1369,6 @@
             this.Tm.Name = "Tm";
             this.elementnames.SetToolTip(this.Tm, resources.GetString("Tm.ToolTip"));
             this.Tm.UseVisualStyleBackColor = false;
-            this.Tm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Tm_MouseDown);
             // 
             // Yb
             // 
@@ -1466,7 +1378,6 @@
             this.Yb.Name = "Yb";
             this.elementnames.SetToolTip(this.Yb, resources.GetString("Yb.ToolTip"));
             this.Yb.UseVisualStyleBackColor = false;
-            this.Yb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Yb_MouseDown);
             // 
             // Lu
             // 
@@ -1476,7 +1387,6 @@
             this.Lu.Name = "Lu";
             this.elementnames.SetToolTip(this.Lu, resources.GetString("Lu.ToolTip"));
             this.Lu.UseVisualStyleBackColor = false;
-            this.Lu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Lu_MouseDown);
             // 
             // Th
             // 
@@ -1487,7 +1397,6 @@
             this.Th.Name = "Th";
             this.elementnames.SetToolTip(this.Th, resources.GetString("Th.ToolTip"));
             this.Th.UseVisualStyleBackColor = false;
-            this.Th.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Th_MouseDown);
             // 
             // Pa
             // 
@@ -1498,7 +1407,6 @@
             this.Pa.Name = "Pa";
             this.elementnames.SetToolTip(this.Pa, resources.GetString("Pa.ToolTip"));
             this.Pa.UseVisualStyleBackColor = false;
-            this.Pa.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pa_MouseDown);
             // 
             // U
             // 
@@ -1509,7 +1417,6 @@
             this.U.Name = "U";
             this.elementnames.SetToolTip(this.U, resources.GetString("U.ToolTip"));
             this.U.UseVisualStyleBackColor = false;
-            this.U.MouseDown += new System.Windows.Forms.MouseEventHandler(this.U_MouseDown);
             // 
             // Np
             // 
@@ -1519,7 +1426,6 @@
             this.Np.ForeColor = System.Drawing.Color.DimGray;
             this.Np.Name = "Np";
             this.Np.UseVisualStyleBackColor = false;
-            this.Np.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Np_MouseDown);
             // 
             // Pu
             // 
@@ -1529,7 +1435,6 @@
             this.Pu.ForeColor = System.Drawing.Color.DimGray;
             this.Pu.Name = "Pu";
             this.Pu.UseVisualStyleBackColor = false;
-            this.Pu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Pu_MouseDown);
             // 
             // Am
             // 
@@ -1539,7 +1444,6 @@
             this.Am.ForeColor = System.Drawing.Color.DimGray;
             this.Am.Name = "Am";
             this.Am.UseVisualStyleBackColor = false;
-            this.Am.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Am_MouseDown);
             // 
             // Cm
             // 
@@ -1549,7 +1453,6 @@
             this.Cm.ForeColor = System.Drawing.Color.DimGray;
             this.Cm.Name = "Cm";
             this.Cm.UseVisualStyleBackColor = false;
-            this.Cm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cm_MouseDown);
             // 
             // Bk
             // 
@@ -1559,7 +1462,6 @@
             this.Bk.ForeColor = System.Drawing.Color.DimGray;
             this.Bk.Name = "Bk";
             this.Bk.UseVisualStyleBackColor = false;
-            this.Bk.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Bk_MouseDown);
             // 
             // Cf
             // 
@@ -1569,7 +1471,6 @@
             this.Cf.ForeColor = System.Drawing.Color.DimGray;
             this.Cf.Name = "Cf";
             this.Cf.UseVisualStyleBackColor = false;
-            this.Cf.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Cf_MouseDown);
             // 
             // Es
             // 
@@ -1579,7 +1480,6 @@
             this.Es.ForeColor = System.Drawing.Color.DimGray;
             this.Es.Name = "Es";
             this.Es.UseVisualStyleBackColor = false;
-            this.Es.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Es_MouseDown);
             // 
             // Fm
             // 
@@ -1589,7 +1489,6 @@
             this.Fm.ForeColor = System.Drawing.Color.DimGray;
             this.Fm.Name = "Fm";
             this.Fm.UseVisualStyleBackColor = false;
-            this.Fm.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Fm_MouseDown);
             // 
             // Md
             // 
@@ -1599,7 +1498,6 @@
             this.Md.ForeColor = System.Drawing.Color.DimGray;
             this.Md.Name = "Md";
             this.Md.UseVisualStyleBackColor = false;
-            this.Md.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Md_MouseDown);
             // 
             // No
             // 
@@ -1609,7 +1507,6 @@
             this.No.ForeColor = System.Drawing.Color.DimGray;
             this.No.Name = "No";
             this.No.UseVisualStyleBackColor = false;
-            this.No.MouseDown += new System.Windows.Forms.MouseEventHandler(this.No_MouseDown);
             // 
             // Lr
             // 
@@ -1619,7 +1516,6 @@
             this.Lr.ForeColor = System.Drawing.Color.DimGray;
             this.Lr.Name = "Lr";
             this.Lr.UseVisualStyleBackColor = false;
-            this.Lr.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Lr_MouseDown);
             // 
             // tableLayoutPanel1
             // 
@@ -3449,13 +3345,6 @@
             this.tableLayoutPanel3.Controls.Add(this.btn_reload6, 6, 7);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
-            // stat1
-            // 
-            resources.ApplyResources(this.stat1, "stat1");
-            this.stat1.Name = "stat1";
-            this.stat1.UseVisualStyleBackColor = true;
-            this.stat1.CheckedChanged += new System.EventHandler(this.stat1_CheckedChanged);
-            // 
             // label102
             // 
             resources.ApplyResources(this.label102, "label102");
@@ -3515,11 +3404,6 @@
             // 
             resources.ApplyResources(this.lb_vmeas, "lb_vmeas");
             this.lb_vmeas.Name = "lb_vmeas";
-            // 
-            // lb_stat
-            // 
-            resources.ApplyResources(this.lb_stat, "lb_stat");
-            this.lb_stat.Name = "lb_stat";
             // 
             // ch2_meas
             // 
@@ -3701,6 +3585,13 @@
             resources.ApplyResources(this.ch6_meas, "ch6_meas");
             this.ch6_meas.Name = "ch6_meas";
             // 
+            // stat1
+            // 
+            resources.ApplyResources(this.stat1, "stat1");
+            this.stat1.Name = "stat1";
+            this.stat1.UseVisualStyleBackColor = true;
+            this.stat1.CheckedChanged += new System.EventHandler(this.stat1_CheckedChanged);
+            // 
             // stat2
             // 
             resources.ApplyResources(this.stat2, "stat2");
@@ -3735,6 +3626,11 @@
             this.stat6.Name = "stat6";
             this.stat6.UseVisualStyleBackColor = true;
             this.stat6.CheckedChanged += new System.EventHandler(this.stat6_CheckedChanged);
+            // 
+            // lb_stat
+            // 
+            resources.ApplyResources(this.lb_stat, "lb_stat");
+            this.lb_stat.Name = "lb_stat";
             // 
             // btn_reload1
             // 

@@ -47,11 +47,8 @@ namespace XPS
         string now = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
         string curr_time;
 
-
-
         private MessageBasedSession iseg;
         private string lastResourceString = null;
-
 
 
         public XPS()
@@ -84,6 +81,8 @@ namespace XPS
             Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+
+
         }
 
 
@@ -129,9 +128,111 @@ namespace XPS
                 MessageBox.Show("Can't create Folder 'Logfile' on Desktop");
             }
 
-
+            H.MouseDown += Global_Button_Click;
+            He.MouseDown += Global_Button_Click;
+            Li.MouseDown += Global_Button_Click;
+            Be.MouseDown += Global_Button_Click;
+            B.MouseDown += Global_Button_Click;
+            C.MouseDown += Global_Button_Click;
+            N.MouseDown += Global_Button_Click;
+            O.MouseDown += Global_Button_Click;
+            F.MouseDown += Global_Button_Click;
+            Ne.MouseDown += Global_Button_Click;
+            Na.MouseDown += Global_Button_Click;
+            Mg.MouseDown += Global_Button_Click;
+            Al.MouseDown += Global_Button_Click;
+            Si.MouseDown += Global_Button_Click;
+            P.MouseDown += Global_Button_Click;
+            S.MouseDown += Global_Button_Click;
+            Cl.MouseDown += Global_Button_Click;
+            Ar.MouseDown += Global_Button_Click;
+            K.MouseDown += Global_Button_Click;
+            Ca.MouseDown += Global_Button_Click;
+            Sc.MouseDown += Global_Button_Click;
+            Ti.MouseDown += Global_Button_Click;
+            V.MouseDown += Global_Button_Click;
+            Cr.MouseDown += Global_Button_Click;
+            Mn.MouseDown += Global_Button_Click;
+            Fe.MouseDown += Global_Button_Click;
+            Co.MouseDown += Global_Button_Click;
+            Ni.MouseDown += Global_Button_Click;
+            Cu.MouseDown += Global_Button_Click;
+            Zn.MouseDown += Global_Button_Click;
+            Ga.MouseDown += Global_Button_Click;
+            Ge.MouseDown += Global_Button_Click;
+            As.MouseDown += Global_Button_Click;
+            Se.MouseDown += Global_Button_Click;
+            Br.MouseDown += Global_Button_Click;
+            Kr.MouseDown += Global_Button_Click;
+            Rb.MouseDown += Global_Button_Click;
+            Sr.MouseDown += Global_Button_Click;
+            Y.MouseDown += Global_Button_Click;
+            Zr.MouseDown += Global_Button_Click;
+            Nb.MouseDown += Global_Button_Click;
+            Mo.MouseDown += Global_Button_Click;
+            Tc.MouseDown += Global_Button_Click;
+            Ru.MouseDown += Global_Button_Click;
+            Rh.MouseDown += Global_Button_Click;
+            Pd.MouseDown += Global_Button_Click;
+            Ag.MouseDown += Global_Button_Click;
+            Cd.MouseDown += Global_Button_Click;
+            In.MouseDown += Global_Button_Click;
+            Sn.MouseDown += Global_Button_Click;
+            Sb.MouseDown += Global_Button_Click;
+            Te.MouseDown += Global_Button_Click;
+            I.MouseDown += Global_Button_Click;
+            Xe.MouseDown += Global_Button_Click;
+            Cs.MouseDown += Global_Button_Click;
+            Ba.MouseDown += Global_Button_Click;
+            La.MouseDown += Global_Button_Click;
+            Hf.MouseDown += Global_Button_Click;
+            Ta.MouseDown += Global_Button_Click;
+            W.MouseDown += Global_Button_Click;
+            Re.MouseDown += Global_Button_Click;
+            Os.MouseDown += Global_Button_Click;
+            Ir.MouseDown += Global_Button_Click;
+            Pt.MouseDown += Global_Button_Click;
+            Au.MouseDown += Global_Button_Click;
+            Hg.MouseDown += Global_Button_Click;
+            Tl.MouseDown += Global_Button_Click;
+            Pb.MouseDown += Global_Button_Click;
+            Bi.MouseDown += Global_Button_Click;
+            Po.MouseDown += Global_Button_Click;
+            At.MouseDown += Global_Button_Click;
+            Rn.MouseDown += Global_Button_Click;
+            Fr.MouseDown += Global_Button_Click;
+            Ra.MouseDown += Global_Button_Click;
+            Ac.MouseDown += Global_Button_Click;
+            Ce.MouseDown += Global_Button_Click;
+            Pr.MouseDown += Global_Button_Click;
+            Nd.MouseDown += Global_Button_Click;
+            Pm.MouseDown += Global_Button_Click;
+            Sm.MouseDown += Global_Button_Click;
+            Eu.MouseDown += Global_Button_Click;
+            Gd.MouseDown += Global_Button_Click;
+            Tb.MouseDown += Global_Button_Click;
+            Dy.MouseDown += Global_Button_Click;
+            Ho.MouseDown += Global_Button_Click;
+            Er.MouseDown += Global_Button_Click;
+            Tm.MouseDown += Global_Button_Click;
+            Yb.MouseDown += Global_Button_Click;
+            Lu.MouseDown += Global_Button_Click;
+            Th.MouseDown += Global_Button_Click;
+            Pa.MouseDown += Global_Button_Click;
+            U.MouseDown += Global_Button_Click;
+            Rf.MouseDown += Global_Button_Click;
+            Np.MouseDown += Global_Button_Click;
+            Pu.MouseDown += Global_Button_Click;
+            Am.MouseDown += Global_Button_Click;
+            Cm.MouseDown += Global_Button_Click;
+            Bk.MouseDown += Global_Button_Click;
+            Cf.MouseDown += Global_Button_Click;
+            Es.MouseDown += Global_Button_Click;
+            Fm.MouseDown += Global_Button_Click;
+            Md.MouseDown += Global_Button_Click;
+            No.MouseDown += Global_Button_Click;
+            Lr.MouseDown += Global_Button_Click;
         }
-
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
         {
@@ -401,7 +502,6 @@ namespace XPS
         }
 
 
-
         public void labelchanger(object sender)
         {
             var panel = sender as Control;
@@ -409,710 +509,58 @@ namespace XPS
             //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
             int zeile = Convert.ToInt32(dictionary[panel.Name]) - 1;
 
+            System.Windows.Forms.Label[] li = {label4,label6,label8,label10,label12,label14,label16,label18,label20,label22,
+                                                   label24,label26,label28,label30,label32,label34,label36,label38,label40,label42,
+                                                    label44,label46,label48,label50};
+            System.Windows.Forms.Label[] eb = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,
+                                                   s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34,s35,s36,s37,s38,s39,s40,s41,s42,
+                                                   s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59};
+
+
             if (label51.Text == elementnames.GetToolTip(panel))
             {
-                label4.Text = "";
-                label6.Text = "";
-                label8.Text = "";
-                label10.Text = "";
-                label12.Text = "";
-                label14.Text = "";
-                label16.Text = "";
-                label18.Text = "";
-                label20.Text = "";
-                label22.Text = "";
-                label24.Text = "";
-                label26.Text = "";
-                label28.Text = "";
-                label30.Text = "";
-                label32.Text = "";
-                label34.Text = "";
-                label36.Text = "";
-                //https://stackoverflow.com/questions/15008871/how-to-create-many-labels-and-textboxes-dynamically-depending-on-the-value-of-an
-                label38.Text = "";
-                label40.Text = "";
-                label42.Text = "";
-                label44.Text = "";
-                label46.Text = "";
-                label48.Text = "";
-                label50.Text = "";
+                foreach (System.Windows.Forms.Label label in li)
+                {
+                    label.Text = "";
+                }
                 label51.Text = "";
                 label52.Text = "";
-                s1.Text = "--";
-                s2.Text = "--";
-                s3.Text = "--";
-                s4.Text = "--";
-                s5.Text = "--";
-                s6.Text = "--";
-                s7.Text = "--";
-                s8.Text = "--";
-                s9.Text = "--";
-                s10.Text = "--";
-                s11.Text = "--";
-                s12.Text = "--";
-                s13.Text = "--";
-                s14.Text = "--";
-                s15.Text = "--";
-                s16.Text = "--";
-                s17.Text = "--";
-                s18.Text = "--";
-                s19.Text = "--";
-                s20.Text = "--";
-                s21.Text = "--";
-                s22.Text = "--";
-                s23.Text = "--";
-                s24.Text = "--";
-                s25.Text = "--";
-                s26.Text = "--";
-                s27.Text = "--";
-                s28.Text = "--";
-                s29.Text = "--";
-                s30.Text = "--";
-                s31.Text = "--";
-                s32.Text = "--";
-                s33.Text = "--";
-                s34.Text = "--";
-                s35.Text = "--";
-                s36.Text = "--";
-                s37.Text = "--";
-                s38.Text = "--";
-                s39.Text = "--";
-                s40.Text = "--";
-                s41.Text = "--";
-                s42.Text = "--";
-                s43.Text = "--";
-                s44.Text = "--";
-                s45.Text = "--";
-                s46.Text = "--";
-                s47.Text = "--";
-                s48.Text = "--";
-                s49.Text = "--";
-                s50.Text = "--";
-                s51.Text = "--";
-                s52.Text = "--";
-                s53.Text = "--";
-                s54.Text = "--";
-                s55.Text = "--";
-                s56.Text = "--";
-                s57.Text = "--";
-                s58.Text = "--";
-                s59.Text = "--";
 
-
-
+                foreach (System.Windows.Forms.Label label in eb)
+                {
+                    label.Text = "--";
+                }
             }
 
             else
             {
+                int count = 2;
+                foreach (System.Windows.Forms.Label label in li)
+                {
+                    label.Text = row[zeile][count];
+                    count += 1;
+                }
                 label51.Text = elementnames.GetToolTip(panel);
                 label52.Text = dictionary[panel.Name];
-                label4.Text = row[zeile][2];
-                label6.Text = row[zeile][3];
-                label8.Text = row[zeile][4];
-                label10.Text = row[zeile][5];
-                label12.Text = row[zeile][6];
-                label14.Text = row[zeile][7];
-                label16.Text = row[zeile][8];
-                label18.Text = row[zeile][9];
-                label20.Text = row[zeile][10];
-                label22.Text = row[zeile][11];
-                label24.Text = row[zeile][12];
-                label26.Text = row[zeile][13];
-                label28.Text = row[zeile][14];
-                label30.Text = row[zeile][15];
-                label32.Text = row[zeile][16];
-                label34.Text = row[zeile][17];
-                label36.Text = row[zeile][18];
-                label38.Text = row[zeile][19];
-                label40.Text = row[zeile][20];
-                label42.Text = row[zeile][21];
-                label44.Text = row[zeile][22];
-                label46.Text = row[zeile][23];
-                label48.Text = row[zeile][24];
-                label50.Text = row[zeile][25];
-                s1.Text = elec_bind[zeile][1];
-                s2.Text = elec_bind[zeile][2];
-                s3.Text = elec_bind[zeile][3];
-                s4.Text = elec_bind[zeile][4];
-                s5.Text = elec_bind[zeile][5];
-                s6.Text = elec_bind[zeile][6];
-                s7.Text = elec_bind[zeile][7];
-                s8.Text = elec_bind[zeile][8];
-                s9.Text = elec_bind[zeile][9];
-                s10.Text = elec_bind[zeile][10];
-                s11.Text = elec_bind[zeile][11];
-                s12.Text = elec_bind[zeile][12];
-                s13.Text = elec_bind[zeile][13];
-                s14.Text = elec_bind[zeile][14];
-                s15.Text = elec_bind[zeile][15];
-                s16.Text = elec_bind[zeile][16];
-                s17.Text = elec_bind[zeile][17];
-                s18.Text = elec_bind[zeile][18];
-                s19.Text = elec_bind[zeile][19];
-                s20.Text = elec_bind[zeile][20];
-                s21.Text = elec_bind[zeile][21];
-                s22.Text = elec_bind[zeile][22];
-                s23.Text = elec_bind[zeile][23];
-                s24.Text = elec_bind[zeile][24];
-                s25.Text = elec_bind[zeile][25];
-                s26.Text = elec_bind[zeile][26];
-                s27.Text = elec_bind[zeile][27];
-                s28.Text = elec_bind[zeile][28];
-                s29.Text = elec_bind[zeile][29];
-                s30.Text = elec_bind[zeile][30];
-                s31.Text = elec_bind[zeile][31];
-                s32.Text = elec_bind[zeile][32];
-                s33.Text = elec_bind[zeile][33];
-                s34.Text = elec_bind[zeile][34];
-                s35.Text = elec_bind[zeile][35];
-                s36.Text = elec_bind[zeile][36];
-                s37.Text = elec_bind[zeile][37];
-                s38.Text = elec_bind[zeile][38];
-                s39.Text = elec_bind[zeile][39];
-                s40.Text = elec_bind[zeile][40];
-                s41.Text = elec_bind[zeile][41];
-                s42.Text = elec_bind[zeile][42];
-                s43.Text = elec_bind[zeile][43];
-                s44.Text = elec_bind[zeile][44];
-                s45.Text = elec_bind[zeile][45];
-                s46.Text = elec_bind[zeile][46];
-                s47.Text = elec_bind[zeile][47];
-                s48.Text = elec_bind[zeile][48];
-                s49.Text = elec_bind[zeile][49];
-                s50.Text = elec_bind[zeile][50];
-                s51.Text = elec_bind[zeile][51];
-                s52.Text = elec_bind[zeile][52];
-                s53.Text = elec_bind[zeile][53];
-                s54.Text = elec_bind[zeile][54];
-                s55.Text = elec_bind[zeile][55];
-                s56.Text = elec_bind[zeile][56];
-                s57.Text = elec_bind[zeile][57];
-                s58.Text = elec_bind[zeile][58];
-                s59.Text = elec_bind[zeile][59];
+
+                count = 1;
+                foreach (System.Windows.Forms.Label label in eb)
+                {
+                    label.Text = elec_bind[zeile][count];
+                    count += 1;
+                }
             }
         }
 
+              
 
-
-        private void H_MouseDown(object sender, MouseEventArgs e)
-        {
-           set_element(sender, e);
-        }
-
-        private void He_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Li_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Be_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void B_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void C_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void N_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void O_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void F_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ne_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Na_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Mg_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Al_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Si_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void P_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void S_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cl_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ar_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void K_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ca_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Sc_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ti_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void V_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Mn_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Fe_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Co_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ni_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cu_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Zn_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ga_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ge_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void As_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Se_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Br_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Kr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Rb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Sr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Y_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Zr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Nb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Mo_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Tc_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ru_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Rh_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pd_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ag_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cd_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void In_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Sn_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Sb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Te_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void I_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Xe_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cs_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ba_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void La_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Hf_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ta_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void W_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Re_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Os_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ir_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pt_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Au_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Hg_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Tl_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Bi_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Po_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void At_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Rn_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Fr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ra_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ac_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ce_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Nd_MouseDown(object sender, MouseEventArgs e)
+        private void Global_Button_Click(object sender, MouseEventArgs e)
         {
             set_element(sender, e);
         }
 
-        private void Pm_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Sm_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Eu_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Gd_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Tb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Dy_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Ho_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Er_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Tm_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Yb_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Lu_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Th_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pa_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void U_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Rf_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Np_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Pu_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Am_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cm_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Bk_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Cf_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Es_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Fm_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Md_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void No_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
-
-        private void Lr_MouseDown(object sender, MouseEventArgs e)
-        {
-            set_element(sender, e);
-        }
+          
+        
 
 
 
@@ -1417,7 +865,7 @@ namespace XPS
         }
 
 
-
+ 
         //##########################################################################################################################################
 
     }
