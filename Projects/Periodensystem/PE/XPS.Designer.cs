@@ -379,7 +379,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lb_vset = new System.Windows.Forms.Label();
             this.lb_vmin = new System.Windows.Forms.Label();
             this.lb_vmax = new System.Windows.Forms.Label();
@@ -399,9 +399,42 @@
             this.label100 = new System.Windows.Forms.Label();
             this.label101 = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.textBox35 = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox37 = new System.Windows.Forms.TextBox();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.textBox39 = new System.Windows.Forms.TextBox();
+            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.textBox41 = new System.Windows.Forms.TextBox();
+            this.textBox42 = new System.Windows.Forms.TextBox();
+            this.textBox36 = new System.Windows.Forms.TextBox();
+            this.textBox51 = new System.Windows.Forms.TextBox();
+            this.textBox52 = new System.Windows.Forms.TextBox();
+            this.textBox53 = new System.Windows.Forms.TextBox();
+            this.textBox54 = new System.Windows.Forms.TextBox();
+            this.textBox55 = new System.Windows.Forms.TextBox();
+            this.textBox56 = new System.Windows.Forms.TextBox();
+            this.textBox57 = new System.Windows.Forms.TextBox();
+            this.textBox58 = new System.Windows.Forms.TextBox();
+            this.textBox59 = new System.Windows.Forms.TextBox();
+            this.textBox60 = new System.Windows.Forms.TextBox();
+            this.textBox61 = new System.Windows.Forms.TextBox();
+            this.textBox62 = new System.Windows.Forms.TextBox();
+            this.textBox63 = new System.Windows.Forms.TextBox();
+            this.textBox64 = new System.Windows.Forms.TextBox();
+            this.textBox65 = new System.Windows.Forms.TextBox();
+            this.textBox66 = new System.Windows.Forms.TextBox();
+            this.textBox67 = new System.Windows.Forms.TextBox();
+            this.textBox68 = new System.Windows.Forms.TextBox();
+            this.textBox69 = new System.Windows.Forms.TextBox();
+            this.textBox70 = new System.Windows.Forms.TextBox();
+            this.textBox71 = new System.Windows.Forms.TextBox();
+            this.textBox72 = new System.Windows.Forms.TextBox();
+            this.textBox73 = new System.Windows.Forms.TextBox();
+            this.textBox74 = new System.Windows.Forms.TextBox();
+            this.textBox75 = new System.Windows.Forms.TextBox();
+            this.textBox76 = new System.Windows.Forms.TextBox();
+            this.textBox77 = new System.Windows.Forms.TextBox();
+            this.textBox78 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -409,7 +442,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -3344,29 +3377,65 @@
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel2
+            // tableLayoutPanel3
             // 
-            resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.lb_vset, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.lb_vmin, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.lb_vmax, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lb_stepsize, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.lb_time, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lb_vmeas, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.lb_stat, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat1, 1, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat2, 2, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat3, 3, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat4, 4, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat5, 5, 7);
-            this.tableLayoutPanel2.Controls.Add(this.stat6, 6, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label81, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label98, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label99, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label100, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label101, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label102, 6, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
+            this.tableLayoutPanel3.Controls.Add(this.label102, 6, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label100, 4, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label99, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label98, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lb_vset, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.stat1, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.lb_vmin, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox35, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.lb_vmax, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label81, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.stat2, 2, 7);
+            this.tableLayoutPanel3.Controls.Add(this.lb_stepsize, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat3, 3, 7);
+            this.tableLayoutPanel3.Controls.Add(this.lb_time, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 7);
+            this.tableLayoutPanel3.Controls.Add(this.lb_vmeas, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 7);
+            this.tableLayoutPanel3.Controls.Add(this.lb_stat, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 7);
+            this.tableLayoutPanel3.Controls.Add(this.textBox37, 2, 6);
+            this.tableLayoutPanel3.Controls.Add(this.textBox38, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox39, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox40, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox41, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox42, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.label101, 5, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBox36, 2, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox51, 2, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox53, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox54, 2, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBox56, 3, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox52, 3, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox57, 2, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox58, 3, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox59, 3, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBox60, 3, 6);
+            this.tableLayoutPanel3.Controls.Add(this.textBox55, 4, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox61, 3, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox62, 4, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox63, 4, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox64, 4, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox65, 4, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBox66, 4, 6);
+            this.tableLayoutPanel3.Controls.Add(this.textBox67, 5, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox68, 5, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox69, 5, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox70, 5, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox71, 5, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBox72, 5, 6);
+            this.tableLayoutPanel3.Controls.Add(this.textBox73, 6, 1);
+            this.tableLayoutPanel3.Controls.Add(this.textBox74, 6, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBox75, 6, 3);
+            this.tableLayoutPanel3.Controls.Add(this.textBox76, 6, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBox77, 6, 5);
+            this.tableLayoutPanel3.Controls.Add(this.textBox78, 6, 6);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             // 
             // lb_vset
             // 
@@ -3469,28 +3538,190 @@
             resources.ApplyResources(this.label102, "label102");
             this.label102.Name = "label102";
             // 
-            // button2
-            // 
-            resources.ApplyResources(this.button2, "button2");
-            this.button2.Name = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // textBox35
             // 
             resources.ApplyResources(this.textBox35, "textBox35");
             this.textBox35.Name = "textBox35";
             // 
-            // tableLayoutPanel3
+            // textBox37
             // 
-            resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            resources.ApplyResources(this.textBox37, "textBox37");
+            this.textBox37.Name = "textBox37";
+            // 
+            // textBox38
+            // 
+            resources.ApplyResources(this.textBox38, "textBox38");
+            this.textBox38.Name = "textBox38";
+            // 
+            // textBox39
+            // 
+            resources.ApplyResources(this.textBox39, "textBox39");
+            this.textBox39.Name = "textBox39";
+            // 
+            // textBox40
+            // 
+            resources.ApplyResources(this.textBox40, "textBox40");
+            this.textBox40.Name = "textBox40";
+            // 
+            // textBox41
+            // 
+            resources.ApplyResources(this.textBox41, "textBox41");
+            this.textBox41.Name = "textBox41";
+            // 
+            // textBox42
+            // 
+            resources.ApplyResources(this.textBox42, "textBox42");
+            this.textBox42.Name = "textBox42";
+            // 
+            // textBox36
+            // 
+            resources.ApplyResources(this.textBox36, "textBox36");
+            this.textBox36.Name = "textBox36";
+            // 
+            // textBox51
+            // 
+            resources.ApplyResources(this.textBox51, "textBox51");
+            this.textBox51.Name = "textBox51";
+            // 
+            // textBox52
+            // 
+            resources.ApplyResources(this.textBox52, "textBox52");
+            this.textBox52.Name = "textBox52";
+            // 
+            // textBox53
+            // 
+            resources.ApplyResources(this.textBox53, "textBox53");
+            this.textBox53.Name = "textBox53";
+            // 
+            // textBox54
+            // 
+            resources.ApplyResources(this.textBox54, "textBox54");
+            this.textBox54.Name = "textBox54";
+            // 
+            // textBox55
+            // 
+            resources.ApplyResources(this.textBox55, "textBox55");
+            this.textBox55.Name = "textBox55";
+            // 
+            // textBox56
+            // 
+            resources.ApplyResources(this.textBox56, "textBox56");
+            this.textBox56.Name = "textBox56";
+            // 
+            // textBox57
+            // 
+            resources.ApplyResources(this.textBox57, "textBox57");
+            this.textBox57.Name = "textBox57";
+            // 
+            // textBox58
+            // 
+            resources.ApplyResources(this.textBox58, "textBox58");
+            this.textBox58.Name = "textBox58";
+            // 
+            // textBox59
+            // 
+            resources.ApplyResources(this.textBox59, "textBox59");
+            this.textBox59.Name = "textBox59";
+            // 
+            // textBox60
+            // 
+            resources.ApplyResources(this.textBox60, "textBox60");
+            this.textBox60.Name = "textBox60";
+            // 
+            // textBox61
+            // 
+            resources.ApplyResources(this.textBox61, "textBox61");
+            this.textBox61.Name = "textBox61";
+            // 
+            // textBox62
+            // 
+            resources.ApplyResources(this.textBox62, "textBox62");
+            this.textBox62.Name = "textBox62";
+            // 
+            // textBox63
+            // 
+            resources.ApplyResources(this.textBox63, "textBox63");
+            this.textBox63.Name = "textBox63";
+            // 
+            // textBox64
+            // 
+            resources.ApplyResources(this.textBox64, "textBox64");
+            this.textBox64.Name = "textBox64";
+            // 
+            // textBox65
+            // 
+            resources.ApplyResources(this.textBox65, "textBox65");
+            this.textBox65.Name = "textBox65";
+            // 
+            // textBox66
+            // 
+            resources.ApplyResources(this.textBox66, "textBox66");
+            this.textBox66.Name = "textBox66";
+            // 
+            // textBox67
+            // 
+            resources.ApplyResources(this.textBox67, "textBox67");
+            this.textBox67.Name = "textBox67";
+            // 
+            // textBox68
+            // 
+            resources.ApplyResources(this.textBox68, "textBox68");
+            this.textBox68.Name = "textBox68";
+            // 
+            // textBox69
+            // 
+            resources.ApplyResources(this.textBox69, "textBox69");
+            this.textBox69.Name = "textBox69";
+            // 
+            // textBox70
+            // 
+            resources.ApplyResources(this.textBox70, "textBox70");
+            this.textBox70.Name = "textBox70";
+            // 
+            // textBox71
+            // 
+            resources.ApplyResources(this.textBox71, "textBox71");
+            this.textBox71.Name = "textBox71";
+            // 
+            // textBox72
+            // 
+            resources.ApplyResources(this.textBox72, "textBox72");
+            this.textBox72.Name = "textBox72";
+            // 
+            // textBox73
+            // 
+            resources.ApplyResources(this.textBox73, "textBox73");
+            this.textBox73.Name = "textBox73";
+            // 
+            // textBox74
+            // 
+            resources.ApplyResources(this.textBox74, "textBox74");
+            this.textBox74.Name = "textBox74";
+            // 
+            // textBox75
+            // 
+            resources.ApplyResources(this.textBox75, "textBox75");
+            this.textBox75.Name = "textBox75";
+            // 
+            // textBox76
+            // 
+            resources.ApplyResources(this.textBox76, "textBox76");
+            this.textBox76.Name = "textBox76";
+            // 
+            // textBox77
+            // 
+            resources.ApplyResources(this.textBox77, "textBox77");
+            this.textBox77.Name = "textBox77";
+            // 
+            // textBox78
+            // 
+            resources.ApplyResources(this.textBox78, "textBox78");
+            this.textBox78.Name = "textBox78";
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.textBox35);
-            this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -3498,7 +3729,6 @@
             this.Controls.Add(this.label95);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.label97);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label93);
             this.Controls.Add(this.label92);
             this.Controls.Add(this.label91);
@@ -3595,8 +3825,8 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3953,7 +4183,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label lb_vset;
         private System.Windows.Forms.Label lb_vmin;
         private System.Windows.Forms.Label lb_vmax;
@@ -3974,8 +4203,42 @@
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label102;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.TextBox textBox37;
+        private System.Windows.Forms.TextBox textBox38;
+        private System.Windows.Forms.TextBox textBox39;
+        private System.Windows.Forms.TextBox textBox40;
+        private System.Windows.Forms.TextBox textBox41;
+        private System.Windows.Forms.TextBox textBox42;
+        private System.Windows.Forms.TextBox textBox36;
+        private System.Windows.Forms.TextBox textBox51;
+        private System.Windows.Forms.TextBox textBox53;
+        private System.Windows.Forms.TextBox textBox54;
+        private System.Windows.Forms.TextBox textBox56;
+        private System.Windows.Forms.TextBox textBox52;
+        private System.Windows.Forms.TextBox textBox57;
+        private System.Windows.Forms.TextBox textBox58;
+        private System.Windows.Forms.TextBox textBox59;
+        private System.Windows.Forms.TextBox textBox60;
+        private System.Windows.Forms.TextBox textBox55;
+        private System.Windows.Forms.TextBox textBox61;
+        private System.Windows.Forms.TextBox textBox62;
+        private System.Windows.Forms.TextBox textBox63;
+        private System.Windows.Forms.TextBox textBox64;
+        private System.Windows.Forms.TextBox textBox65;
+        private System.Windows.Forms.TextBox textBox66;
+        private System.Windows.Forms.TextBox textBox67;
+        private System.Windows.Forms.TextBox textBox68;
+        private System.Windows.Forms.TextBox textBox69;
+        private System.Windows.Forms.TextBox textBox70;
+        private System.Windows.Forms.TextBox textBox71;
+        private System.Windows.Forms.TextBox textBox72;
+        private System.Windows.Forms.TextBox textBox73;
+        private System.Windows.Forms.TextBox textBox74;
+        private System.Windows.Forms.TextBox textBox75;
+        private System.Windows.Forms.TextBox textBox76;
+        private System.Windows.Forms.TextBox textBox77;
+        private System.Windows.Forms.TextBox textBox78;
     }
 }
 
