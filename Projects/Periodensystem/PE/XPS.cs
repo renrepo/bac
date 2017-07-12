@@ -53,8 +53,13 @@ namespace XPS
         Dictionary<string, int> ch = new Dictionary<string, int>();
 
         TextBox[] vset;
-
-
+        TextBox[] vmin;
+        TextBox[] vmax;
+        TextBox[] vramp;
+        TextBox[] vstep;
+        TextBox[] vmeas;
+        Button[] reload;
+        CheckBox[] stat;
 
 
         public XPS()
@@ -144,14 +149,13 @@ namespace XPS
             }
 
             vset = new TextBox [] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
-            TextBox[] vmin = { ch1_vmin, ch2_vmin, ch3_vmin, ch4_vmin, ch5_vmin, ch6_vmin };
-            TextBox[] vmax = { ch1_vmax, ch2_vmax, ch3_vmax, ch4_vmax, ch5_vmax, ch6_vmax };
-            TextBox[] vstep = { ch1_step, ch2_step, ch3_step, ch4_step, ch5_step, ch6_step };
-            TextBox[] vramp = { ch1_ramp, ch2_ramp, ch3_ramp, ch4_ramp, ch5_ramp, ch6_ramp };
-            TextBox[] vmeas = { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
-            Button[] reload = { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
-
-            CheckBox[] stat = { stat1, stat2, stat3, stat4, stat5, stat6 };
+            vmin = new TextBox[]  { ch1_vmin, ch2_vmin, ch3_vmin, ch4_vmin, ch5_vmin, ch6_vmin };
+            vmax = new TextBox[] { ch1_vmax, ch2_vmax, ch3_vmax, ch4_vmax, ch5_vmax, ch6_vmax };
+            vstep = new TextBox[] { ch1_step, ch2_step, ch3_step, ch4_step, ch5_step, ch6_step };
+            vramp = new TextBox[] { ch1_ramp, ch2_ramp, ch3_ramp, ch4_ramp, ch5_ramp, ch6_ramp };
+            vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
+            reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
+            stat = new CheckBox [] { stat1, stat2, stat3, stat4, stat5, stat6 };
 
             ch.Add("btn_reload1", 0);
             ch.Add("btn_reload2", 1);
@@ -714,7 +718,6 @@ namespace XPS
                 c.BackColor = Color.LimeGreen;
                 c.Text = "On";
             }
-
             else
             {
                 c.BackColor = SystemColors.ControlLightLight;
@@ -724,10 +727,14 @@ namespace XPS
         
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
-            Button b = sender as Button;
-           
-            string vset_in = vset[ch[b.Name]].Text;
-            MessageBox.Show(vset_in);
+            Button b = sender as Button;          
+            bool Vset = float.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out float vset_in);
+            bool Vmin = float.TryParse(vmin[ch[b.Name]].Text.Replace(',', '.'), out float vmin_in);
+            bool Vmax = float.TryParse(vmax[ch[b.Name]].Text.Replace(',', '.'), out float vmax_in);
+            bool Vramp = float.TryParse(vramp[ch[b.Name]].Text.Replace(',', '.'), out float vramp_in);
+            bool Vstep = float.TryParse(vstep[ch[b.Name]].Text.Replace(',', '.'), out float vstep_in);
+
+            //MessageBox.Show(vset_in.ToString() + vmin_in.ToString() + vmax_in.ToString() + vramp_in.ToString() + vstep_in.ToString());
             
         }
     }

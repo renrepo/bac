@@ -9432,6 +9432,9 @@
   <data name="showdata.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="showdata.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
   <data name="showdata.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -9488,6 +9491,9 @@
   </data>
   <data name="safe_fig.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="safe_fig.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
   </data>
   <data name="safe_fig.Location" type="System.Drawing.Point, System.Drawing">
     <value>313, 71</value>
@@ -13224,6 +13230,51 @@
   <data name="&gt;&gt;label97.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 12</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>395, 311</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>276</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -13251,8 +13302,809 @@
   <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label102" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_stat" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.12406,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Absolute,28" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>387, 285</value>
+  </data>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Iseg Terminal</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>7</value>
+  </data>
+  <data name="&gt;&gt;label102.Name" xml:space="preserve">
+    <value>label102</value>
+  </data>
+  <data name="&gt;&gt;label102.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label102.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label102.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label100.Name" xml:space="preserve">
+    <value>label100</value>
+  </data>
+  <data name="&gt;&gt;label100.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label100.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label100.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label99.Name" xml:space="preserve">
+    <value>label99</value>
+  </data>
+  <data name="&gt;&gt;label99.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label99.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label99.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;label98.Name" xml:space="preserve">
+    <value>label98</value>
+  </data>
+  <data name="&gt;&gt;label98.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label98.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label98.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lb_vset.Name" xml:space="preserve">
+    <value>lb_vset</value>
+  </data>
+  <data name="&gt;&gt;lb_vset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_vset.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_vset.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lb_vmin.Name" xml:space="preserve">
+    <value>lb_vmin</value>
+  </data>
+  <data name="&gt;&gt;lb_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_vmin.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ch1_meas.Name" xml:space="preserve">
+    <value>ch1_meas</value>
+  </data>
+  <data name="&gt;&gt;ch1_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_meas.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lb_vmax.Name" xml:space="preserve">
+    <value>lb_vmax</value>
+  </data>
+  <data name="&gt;&gt;lb_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_vmax.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label81.Name" xml:space="preserve">
+    <value>label81</value>
+  </data>
+  <data name="&gt;&gt;label81.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label81.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label81.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lb_stepsize.Name" xml:space="preserve">
+    <value>lb_stepsize</value>
+  </data>
+  <data name="&gt;&gt;lb_stepsize.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_stepsize.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_stepsize.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lb_time.Name" xml:space="preserve">
+    <value>lb_time</value>
+  </data>
+  <data name="&gt;&gt;lb_time.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_time.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_time.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lb_vmeas.Name" xml:space="preserve">
+    <value>lb_vmeas</value>
+  </data>
+  <data name="&gt;&gt;lb_vmeas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_vmeas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_vmeas.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ch2_meas.Name" xml:space="preserve">
+    <value>ch2_meas</value>
+  </data>
+  <data name="&gt;&gt;ch2_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_meas.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ch1_v.Name" xml:space="preserve">
+    <value>ch1_v</value>
+  </data>
+  <data name="&gt;&gt;ch1_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_v.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmin.Name" xml:space="preserve">
+    <value>ch1_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmin.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmax.Name" xml:space="preserve">
+    <value>ch1_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_vmax.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ch1_step.Name" xml:space="preserve">
+    <value>ch1_step</value>
+  </data>
+  <data name="&gt;&gt;ch1_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_step.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ch1_ramp.Name" xml:space="preserve">
+    <value>ch1_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch1_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch1_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch1_ramp.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;label101.Name" xml:space="preserve">
+    <value>label101</value>
+  </data>
+  <data name="&gt;&gt;label101.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label101.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label101.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ch2_v.Name" xml:space="preserve">
+    <value>ch2_v</value>
+  </data>
+  <data name="&gt;&gt;ch2_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_v.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmin.Name" xml:space="preserve">
+    <value>ch2_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmin.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ch2_step.Name" xml:space="preserve">
+    <value>ch2_step</value>
+  </data>
+  <data name="&gt;&gt;ch2_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_step.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ch2_ramp.Name" xml:space="preserve">
+    <value>ch2_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch2_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_ramp.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmin.Name" xml:space="preserve">
+    <value>ch3_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmin.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmax.Name" xml:space="preserve">
+    <value>ch3_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_vmax.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmax.Name" xml:space="preserve">
+    <value>ch2_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch2_vmax.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;ch3_step.Name" xml:space="preserve">
+    <value>ch3_step</value>
+  </data>
+  <data name="&gt;&gt;ch3_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_step.ZOrder" xml:space="preserve">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ch3_ramp.Name" xml:space="preserve">
+    <value>ch3_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch3_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_ramp.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;ch3_meas.Name" xml:space="preserve">
+    <value>ch3_meas</value>
+  </data>
+  <data name="&gt;&gt;ch3_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_meas.ZOrder" xml:space="preserve">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ch4_v.Name" xml:space="preserve">
+    <value>ch4_v</value>
+  </data>
+  <data name="&gt;&gt;ch4_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_v.ZOrder" xml:space="preserve">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;ch3_v.Name" xml:space="preserve">
+    <value>ch3_v</value>
+  </data>
+  <data name="&gt;&gt;ch3_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch3_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch3_v.ZOrder" xml:space="preserve">
+    <value>30</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmin.Name" xml:space="preserve">
+    <value>ch4_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmin.ZOrder" xml:space="preserve">
+    <value>31</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmax.Name" xml:space="preserve">
+    <value>ch4_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_vmax.ZOrder" xml:space="preserve">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;ch4_step.Name" xml:space="preserve">
+    <value>ch4_step</value>
+  </data>
+  <data name="&gt;&gt;ch4_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_step.ZOrder" xml:space="preserve">
+    <value>33</value>
+  </data>
+  <data name="&gt;&gt;ch4_ramp.Name" xml:space="preserve">
+    <value>ch4_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch4_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_ramp.ZOrder" xml:space="preserve">
+    <value>34</value>
+  </data>
+  <data name="&gt;&gt;ch4_meas.Name" xml:space="preserve">
+    <value>ch4_meas</value>
+  </data>
+  <data name="&gt;&gt;ch4_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch4_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch4_meas.ZOrder" xml:space="preserve">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;ch5_v.Name" xml:space="preserve">
+    <value>ch5_v</value>
+  </data>
+  <data name="&gt;&gt;ch5_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_v.ZOrder" xml:space="preserve">
+    <value>36</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmin.Name" xml:space="preserve">
+    <value>ch5_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmin.ZOrder" xml:space="preserve">
+    <value>37</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmax.Name" xml:space="preserve">
+    <value>ch5_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_vmax.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;ch5_step.Name" xml:space="preserve">
+    <value>ch5_step</value>
+  </data>
+  <data name="&gt;&gt;ch5_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_step.ZOrder" xml:space="preserve">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ch5_ramp.Name" xml:space="preserve">
+    <value>ch5_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch5_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_ramp.ZOrder" xml:space="preserve">
+    <value>40</value>
+  </data>
+  <data name="&gt;&gt;ch5_meas.Name" xml:space="preserve">
+    <value>ch5_meas</value>
+  </data>
+  <data name="&gt;&gt;ch5_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch5_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch5_meas.ZOrder" xml:space="preserve">
+    <value>41</value>
+  </data>
+  <data name="&gt;&gt;ch6_v.Name" xml:space="preserve">
+    <value>ch6_v</value>
+  </data>
+  <data name="&gt;&gt;ch6_v.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_v.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_v.ZOrder" xml:space="preserve">
+    <value>42</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmin.Name" xml:space="preserve">
+    <value>ch6_vmin</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmin.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmin.ZOrder" xml:space="preserve">
+    <value>43</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmax.Name" xml:space="preserve">
+    <value>ch6_vmax</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmax.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_vmax.ZOrder" xml:space="preserve">
+    <value>44</value>
+  </data>
+  <data name="&gt;&gt;ch6_step.Name" xml:space="preserve">
+    <value>ch6_step</value>
+  </data>
+  <data name="&gt;&gt;ch6_step.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_step.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_step.ZOrder" xml:space="preserve">
+    <value>45</value>
+  </data>
+  <data name="&gt;&gt;ch6_ramp.Name" xml:space="preserve">
+    <value>ch6_ramp</value>
+  </data>
+  <data name="&gt;&gt;ch6_ramp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_ramp.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_ramp.ZOrder" xml:space="preserve">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;ch6_meas.Name" xml:space="preserve">
+    <value>ch6_meas</value>
+  </data>
+  <data name="&gt;&gt;ch6_meas.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ch6_meas.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;ch6_meas.ZOrder" xml:space="preserve">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;stat1.Name" xml:space="preserve">
+    <value>stat1</value>
+  </data>
+  <data name="&gt;&gt;stat1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat1.ZOrder" xml:space="preserve">
+    <value>48</value>
+  </data>
+  <data name="&gt;&gt;stat2.Name" xml:space="preserve">
+    <value>stat2</value>
+  </data>
+  <data name="&gt;&gt;stat2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat2.ZOrder" xml:space="preserve">
+    <value>49</value>
+  </data>
+  <data name="&gt;&gt;stat3.Name" xml:space="preserve">
+    <value>stat3</value>
+  </data>
+  <data name="&gt;&gt;stat3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat3.ZOrder" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;stat4.Name" xml:space="preserve">
+    <value>stat4</value>
+  </data>
+  <data name="&gt;&gt;stat4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat4.ZOrder" xml:space="preserve">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;stat5.Name" xml:space="preserve">
+    <value>stat5</value>
+  </data>
+  <data name="&gt;&gt;stat5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat5.ZOrder" xml:space="preserve">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;stat6.Name" xml:space="preserve">
+    <value>stat6</value>
+  </data>
+  <data name="&gt;&gt;stat6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;stat6.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;stat6.ZOrder" xml:space="preserve">
+    <value>53</value>
+  </data>
+  <data name="&gt;&gt;lb_stat.Name" xml:space="preserve">
+    <value>lb_stat</value>
+  </data>
+  <data name="&gt;&gt;lb_stat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lb_stat.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;lb_stat.ZOrder" xml:space="preserve">
+    <value>54</value>
+  </data>
+  <data name="&gt;&gt;btn_reload1.Name" xml:space="preserve">
+    <value>btn_reload1</value>
+  </data>
+  <data name="&gt;&gt;btn_reload1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload1.ZOrder" xml:space="preserve">
+    <value>55</value>
+  </data>
+  <data name="&gt;&gt;btn_reload2.Name" xml:space="preserve">
+    <value>btn_reload2</value>
+  </data>
+  <data name="&gt;&gt;btn_reload2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload2.ZOrder" xml:space="preserve">
+    <value>56</value>
+  </data>
+  <data name="&gt;&gt;btn_reload3.Name" xml:space="preserve">
+    <value>btn_reload3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload3.ZOrder" xml:space="preserve">
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;btn_reload4.Name" xml:space="preserve">
+    <value>btn_reload4</value>
+  </data>
+  <data name="&gt;&gt;btn_reload4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload4.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload4.ZOrder" xml:space="preserve">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;btn_reload5.Name" xml:space="preserve">
+    <value>btn_reload5</value>
+  </data>
+  <data name="&gt;&gt;btn_reload5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload5.ZOrder" xml:space="preserve">
+    <value>59</value>
+  </data>
+  <data name="&gt;&gt;btn_reload6.Name" xml:space="preserve">
+    <value>btn_reload6</value>
+  </data>
+  <data name="&gt;&gt;btn_reload6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reload6.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_reload6.ZOrder" xml:space="preserve">
+    <value>60</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-4, 72</value>
+  </data>
+  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>392, 213</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>275</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label102" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_stat" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.12406,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Absolute,28" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label102.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -13276,7 +14128,7 @@
     <value>CH 6</value>
   </data>
   <data name="label102.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label102.Name" xml:space="preserve">
     <value>label102</value>
@@ -13312,7 +14164,7 @@
     <value>CH 4</value>
   </data>
   <data name="label100.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label100.Name" xml:space="preserve">
     <value>label100</value>
@@ -13348,7 +14200,7 @@
     <value>CH 3</value>
   </data>
   <data name="label99.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label99.Name" xml:space="preserve">
     <value>label99</value>
@@ -13384,7 +14236,7 @@
     <value>CH 2</value>
   </data>
   <data name="label98.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label98.Name" xml:space="preserve">
     <value>label98</value>
@@ -13561,7 +14413,7 @@
     <value>CH 1</value>
   </data>
   <data name="label81.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label81.Name" xml:space="preserve">
     <value>label81</value>
@@ -13734,9 +14586,6 @@
   <data name="ch1_v.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="ch1_v.Text" xml:space="preserve">
-    <value>yfg</value>
-  </data>
   <data name="&gt;&gt;ch1_v.Name" xml:space="preserve">
     <value>ch1_v</value>
   </data>
@@ -13891,7 +14740,7 @@
     <value>CH 5</value>
   </data>
   <data name="label101.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>BottomCenter</value>
   </data>
   <data name="&gt;&gt;label101.Name" xml:space="preserve">
     <value>label101</value>
@@ -15269,81 +16118,6 @@
   </data>
   <data name="&gt;&gt;btn_reload6.ZOrder" xml:space="preserve">
     <value>60</value>
-  </data>
-  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-4, 72</value>
-  </data>
-  <data name="tableLayoutPanel3.RowCount" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>392, 213</value>
-  </data>
-  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
-    <value>275</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label102" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_stat" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.12406,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Percent,12.5,Absolute,28" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>387, 285</value>
-  </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Iseg Terminal</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 12</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 311</value>
-  </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>276</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
