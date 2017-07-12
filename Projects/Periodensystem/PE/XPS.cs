@@ -51,6 +51,8 @@ namespace XPS
         private string lastResourceString = null;
 
 
+
+
         public XPS()
         {
             InitializeComponent();
@@ -99,8 +101,6 @@ namespace XPS
         }
 
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             // StreamReader sr = new StreamReader(filePath);
@@ -109,10 +109,10 @@ namespace XPS
             fab = File.ReadLines(filePath2).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
             //MessageBox.Show(row[6][3]);
             var num = row.Count;
-            
+
             for (int i = 0; i < num; i++)
             {
-                dictionary.Add(row[i][1],row[i][0]);
+                dictionary.Add(row[i][1], row[i][0]);
             }
             create_graph(myPane);
 
@@ -128,110 +128,18 @@ namespace XPS
                 MessageBox.Show("Can't create Folder 'Logfile' on Desktop");
             }
 
-            H.MouseDown += Global_Button_Click;
-            He.MouseDown += Global_Button_Click;
-            Li.MouseDown += Global_Button_Click;
-            Be.MouseDown += Global_Button_Click;
-            B.MouseDown += Global_Button_Click;
-            C.MouseDown += Global_Button_Click;
-            N.MouseDown += Global_Button_Click;
-            O.MouseDown += Global_Button_Click;
-            F.MouseDown += Global_Button_Click;
-            Ne.MouseDown += Global_Button_Click;
-            Na.MouseDown += Global_Button_Click;
-            Mg.MouseDown += Global_Button_Click;
-            Al.MouseDown += Global_Button_Click;
-            Si.MouseDown += Global_Button_Click;
-            P.MouseDown += Global_Button_Click;
-            S.MouseDown += Global_Button_Click;
-            Cl.MouseDown += Global_Button_Click;
-            Ar.MouseDown += Global_Button_Click;
-            K.MouseDown += Global_Button_Click;
-            Ca.MouseDown += Global_Button_Click;
-            Sc.MouseDown += Global_Button_Click;
-            Ti.MouseDown += Global_Button_Click;
-            V.MouseDown += Global_Button_Click;
-            Cr.MouseDown += Global_Button_Click;
-            Mn.MouseDown += Global_Button_Click;
-            Fe.MouseDown += Global_Button_Click;
-            Co.MouseDown += Global_Button_Click;
-            Ni.MouseDown += Global_Button_Click;
-            Cu.MouseDown += Global_Button_Click;
-            Zn.MouseDown += Global_Button_Click;
-            Ga.MouseDown += Global_Button_Click;
-            Ge.MouseDown += Global_Button_Click;
-            As.MouseDown += Global_Button_Click;
-            Se.MouseDown += Global_Button_Click;
-            Br.MouseDown += Global_Button_Click;
-            Kr.MouseDown += Global_Button_Click;
-            Rb.MouseDown += Global_Button_Click;
-            Sr.MouseDown += Global_Button_Click;
-            Y.MouseDown += Global_Button_Click;
-            Zr.MouseDown += Global_Button_Click;
-            Nb.MouseDown += Global_Button_Click;
-            Mo.MouseDown += Global_Button_Click;
-            Tc.MouseDown += Global_Button_Click;
-            Ru.MouseDown += Global_Button_Click;
-            Rh.MouseDown += Global_Button_Click;
-            Pd.MouseDown += Global_Button_Click;
-            Ag.MouseDown += Global_Button_Click;
-            Cd.MouseDown += Global_Button_Click;
-            In.MouseDown += Global_Button_Click;
-            Sn.MouseDown += Global_Button_Click;
-            Sb.MouseDown += Global_Button_Click;
-            Te.MouseDown += Global_Button_Click;
-            I.MouseDown += Global_Button_Click;
-            Xe.MouseDown += Global_Button_Click;
-            Cs.MouseDown += Global_Button_Click;
-            Ba.MouseDown += Global_Button_Click;
-            La.MouseDown += Global_Button_Click;
-            Hf.MouseDown += Global_Button_Click;
-            Ta.MouseDown += Global_Button_Click;
-            W.MouseDown += Global_Button_Click;
-            Re.MouseDown += Global_Button_Click;
-            Os.MouseDown += Global_Button_Click;
-            Ir.MouseDown += Global_Button_Click;
-            Pt.MouseDown += Global_Button_Click;
-            Au.MouseDown += Global_Button_Click;
-            Hg.MouseDown += Global_Button_Click;
-            Tl.MouseDown += Global_Button_Click;
-            Pb.MouseDown += Global_Button_Click;
-            Bi.MouseDown += Global_Button_Click;
-            Po.MouseDown += Global_Button_Click;
-            At.MouseDown += Global_Button_Click;
-            Rn.MouseDown += Global_Button_Click;
-            Fr.MouseDown += Global_Button_Click;
-            Ra.MouseDown += Global_Button_Click;
-            Ac.MouseDown += Global_Button_Click;
-            Ce.MouseDown += Global_Button_Click;
-            Pr.MouseDown += Global_Button_Click;
-            Nd.MouseDown += Global_Button_Click;
-            Pm.MouseDown += Global_Button_Click;
-            Sm.MouseDown += Global_Button_Click;
-            Eu.MouseDown += Global_Button_Click;
-            Gd.MouseDown += Global_Button_Click;
-            Tb.MouseDown += Global_Button_Click;
-            Dy.MouseDown += Global_Button_Click;
-            Ho.MouseDown += Global_Button_Click;
-            Er.MouseDown += Global_Button_Click;
-            Tm.MouseDown += Global_Button_Click;
-            Yb.MouseDown += Global_Button_Click;
-            Lu.MouseDown += Global_Button_Click;
-            Th.MouseDown += Global_Button_Click;
-            Pa.MouseDown += Global_Button_Click;
-            U.MouseDown += Global_Button_Click;
-            Rf.MouseDown += Global_Button_Click;
-            Np.MouseDown += Global_Button_Click;
-            Pu.MouseDown += Global_Button_Click;
-            Am.MouseDown += Global_Button_Click;
-            Cm.MouseDown += Global_Button_Click;
-            Bk.MouseDown += Global_Button_Click;
-            Cf.MouseDown += Global_Button_Click;
-            Es.MouseDown += Global_Button_Click;
-            Fm.MouseDown += Global_Button_Click;
-            Md.MouseDown += Global_Button_Click;
-            No.MouseDown += Global_Button_Click;
-            Lr.MouseDown += Global_Button_Click;
+
+            System.Windows.Forms.Button[] but = {H,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
+                                                 Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
+                                                 Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Hf, Ta,
+                                                 W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb, Bi, Po, At, Rn, Fr, Ra, Ac, Ce, Pr, Nd,
+                                                 Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Th, Pa, U, Rf, Np, Pu, Am, Cm,
+                                                 Bk, Cf, Es, Fm, Md, No, Lr};
+            foreach (var item in but)
+            {
+                item.MouseDown += Global_Button_Click;
+            }
+
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
@@ -324,18 +232,6 @@ namespace XPS
         }
 
 
-
-        private void set_element(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender, yaxis);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
-            }
-        }
         string path2;
 
         int data_coutner = 0;
@@ -556,7 +452,14 @@ namespace XPS
 
         private void Global_Button_Click(object sender, MouseEventArgs e)
         {
-            set_element(sender, e);
+            if (e.Button == MouseButtons.Left)
+            {
+                colorchanger((Button)sender, yaxis);
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                labelchanger(sender);
+            }
         }
 
           
