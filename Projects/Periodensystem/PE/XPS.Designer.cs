@@ -3590,42 +3590,36 @@
             resources.ApplyResources(this.stat1, "stat1");
             this.stat1.Name = "stat1";
             this.stat1.UseVisualStyleBackColor = true;
-            this.stat1.CheckedChanged += new System.EventHandler(this.stat1_CheckedChanged);
             // 
             // stat2
             // 
             resources.ApplyResources(this.stat2, "stat2");
             this.stat2.Name = "stat2";
             this.stat2.UseVisualStyleBackColor = true;
-            this.stat2.CheckedChanged += new System.EventHandler(this.stat2_CheckedChanged);
             // 
             // stat3
             // 
             resources.ApplyResources(this.stat3, "stat3");
             this.stat3.Name = "stat3";
             this.stat3.UseVisualStyleBackColor = true;
-            this.stat3.CheckedChanged += new System.EventHandler(this.stat3_CheckedChanged);
             // 
             // stat4
             // 
             resources.ApplyResources(this.stat4, "stat4");
             this.stat4.Name = "stat4";
             this.stat4.UseVisualStyleBackColor = true;
-            this.stat4.CheckedChanged += new System.EventHandler(this.stat4_CheckedChanged);
             // 
             // stat5
             // 
             resources.ApplyResources(this.stat5, "stat5");
             this.stat5.Name = "stat5";
             this.stat5.UseVisualStyleBackColor = true;
-            this.stat5.CheckedChanged += new System.EventHandler(this.stat5_CheckedChanged);
             // 
             // stat6
             // 
             resources.ApplyResources(this.stat6, "stat6");
             this.stat6.Name = "stat6";
             this.stat6.UseVisualStyleBackColor = true;
-            this.stat6.CheckedChanged += new System.EventHandler(this.stat6_CheckedChanged);
             // 
             // lb_stat
             // 

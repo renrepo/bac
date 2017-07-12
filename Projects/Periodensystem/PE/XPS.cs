@@ -50,6 +50,10 @@ namespace XPS
         private MessageBasedSession iseg;
         private string lastResourceString = null;
 
+        Dictionary<string, int> ch = new Dictionary<string, int>();
+
+        TextBox[] vset;
+
 
 
 
@@ -83,7 +87,6 @@ namespace XPS
             Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-
 
         }
 
@@ -129,7 +132,7 @@ namespace XPS
             }
 
 
-            System.Windows.Forms.Button[] but = {H,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
+            Button [] but = {H,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
                                                  Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
                                                  Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Hf, Ta,
                                                  W, Re, Os, Ir, Pt, Au, Hg, Tl, Pb, Bi, Po, At, Rn, Fr, Ra, Ac, Ce, Pr, Nd,
@@ -140,6 +143,32 @@ namespace XPS
                 item.MouseDown += Global_Button_Click;
             }
 
+            vset = new TextBox [] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
+            TextBox[] vmin = { ch1_vmin, ch2_vmin, ch3_vmin, ch4_vmin, ch5_vmin, ch6_vmin };
+            TextBox[] vmax = { ch1_vmax, ch2_vmax, ch3_vmax, ch4_vmax, ch5_vmax, ch6_vmax };
+            TextBox[] vstep = { ch1_step, ch2_step, ch3_step, ch4_step, ch5_step, ch6_step };
+            TextBox[] vramp = { ch1_ramp, ch2_ramp, ch3_ramp, ch4_ramp, ch5_ramp, ch6_ramp };
+            TextBox[] vmeas = { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
+            Button[] reload = { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
+
+            CheckBox[] stat = { stat1, stat2, stat3, stat4, stat5, stat6 };
+
+            ch.Add("btn_reload1", 0);
+            ch.Add("btn_reload2", 1);
+            ch.Add("btn_reload3", 2);
+            ch.Add("btn_reload4", 3);
+            ch.Add("btn_reload5", 4);
+            ch.Add("btn_reload6", 5);
+
+            foreach (var item in reload)
+            {
+                item.MouseDown += Global_iseg_reload;
+            }
+
+            foreach (var item in stat)
+            {
+                item.MouseDown += Global_iseg_terminal;
+            }
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
@@ -462,9 +491,6 @@ namespace XPS
             }
         }
 
-          
-        
-
 
 
         private async void safe_fig_Click(object sender, EventArgs e)
@@ -606,11 +632,12 @@ namespace XPS
             {
                 // string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 string textToWrite = writeTextBox.Text + '\n';
+                //string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 iseg.RawIO.Write(textToWrite);
                 Thread.Sleep(5);
                 readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
                 Thread.Sleep(5);
-                readTextBox.Text = iseg.RawIO.ReadString();
+                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
                 // WARUM KLAPPT DAS NUR BEI ZUWEIMAL LESEN?
             }
             catch (Exception exp)
@@ -677,100 +704,32 @@ namespace XPS
             iseg.RawIO.Write(":VOLT ON,(@5)\n");
         }
 
-        private void stat1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat1.Checked)
-            {
-                stat1.BackColor = Color.LimeGreen;
-                //stat1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSeaGreen;
-                stat1.Text = "On";
-            }
-
-            else
-            {
-                stat1.BackColor = SystemColors.ControlLightLight;
-            }
-        }
-
-        private void stat2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat2.Checked)
-            {
-                stat2.BackColor = Color.LimeGreen;
-                stat2.Text = "On";
-            }
-
-            else
-            {
-                stat2.BackColor = SystemColors.ControlLightLight;
-                stat2.Text = "Off";
-            }
-        }
-
-        private void stat3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat3.Checked)
-            {
-                stat3.BackColor = Color.LimeGreen;
-                stat3.Text = "On";
-            }
-
-            else
-            {
-                stat3.BackColor = SystemColors.ControlLightLight;
-                stat3.Text = "Off";
-            }
-        }
-
-        private void stat4_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat4.Checked)
-            {
-                stat4.BackColor = Color.LimeGreen;
-                stat4.Text = "On";
-            }
-
-            else
-            {
-                stat4.BackColor = SystemColors.ControlLightLight;
-                stat4.Text = "Off";
-            }
-        }
-
-        private void stat5_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat5.Checked)
-            {
-                stat5.BackColor = Color.LimeGreen;
-                stat5.Text = "On";
-            }
-
-            else
-            {
-                stat5.BackColor = SystemColors.ControlLightLight;
-                stat5.Text = "Off";
-            }
-        }
-
-        private void stat6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (stat6.Checked)
-            {
-                stat6.BackColor = Color.LimeGreen;
-                stat6.Text = "On";
-            }
-
-            else
-            {
-                stat6.BackColor = SystemColors.ControlLightLight;
-                stat6.Text = "Off";
-            }
-        }
-
-
- 
         //##########################################################################################################################################
 
+        private void Global_iseg_terminal(object sender, MouseEventArgs e)
+        {
+            CheckBox c = sender as CheckBox;
+            if (!c.Checked)
+            {
+                c.BackColor = Color.LimeGreen;
+                c.Text = "On";
+            }
+
+            else
+            {
+                c.BackColor = SystemColors.ControlLightLight;
+                c.Text = "Off";
+            }
+        }
+        
+        private void Global_iseg_reload(object sender, MouseEventArgs e)
+        {
+            Button b = sender as Button;
+           
+            string vset_in = vset[ch[b.Name]].Text;
+            MessageBox.Show(vset_in);
+            
+        }
     }
 }
 
