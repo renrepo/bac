@@ -51,6 +51,7 @@ namespace XPS
         private string lastResourceString = null;
 
         Dictionary<string, int> ch = new Dictionary<string, int>();
+        Dictionary<string, int> th = new Dictionary<string, int>();
 
         TextBox[] vset;
         TextBox[] vmin;
@@ -164,6 +165,13 @@ namespace XPS
             ch.Add("btn_reload5", 4);
             ch.Add("btn_reload6", 5);
 
+            th.Add("stat1", 0);
+            th.Add("stat2", 1);
+            th.Add("stat3", 2);
+            th.Add("stat4", 3);
+            th.Add("stat5", 4);
+            th.Add("stat6", 5);
+
             foreach (var item in reload)
             {
                 item.MouseDown += Global_iseg_reload;
@@ -184,6 +192,11 @@ namespace XPS
         private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
         {
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        }
+
+        private void tableLayoutPanel3_Layout(object sender, LayoutEventArgs e)
+        {
+            tableLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
 
 
@@ -713,14 +726,20 @@ namespace XPS
         private void Global_iseg_terminal(object sender, MouseEventArgs e)
         {
             CheckBox c = sender as CheckBox;
-            if (!c.Checked)
+            if (c.Text == "Off")
             {
                 c.BackColor = Color.LimeGreen;
+                String str = String.Format(":VOLT ON,(@{0})\n", th[c.Name]);
+                iseg.RawIO.Write(str);
+                MessageBox.Show(str);
                 c.Text = "On";
             }
             else
             {
                 c.BackColor = SystemColors.ControlLightLight;
+                String str = String.Format(":VOLT OFF,(@{0})\n", th[c.Name]);
+                iseg.RawIO.Write(str);
+                MessageBox.Show(str);
                 c.Text = "Off";
             }
         }
@@ -733,9 +752,10 @@ namespace XPS
             bool Vmax = float.TryParse(vmax[ch[b.Name]].Text.Replace(',', '.'), out float vmax_in);
             bool Vramp = float.TryParse(vramp[ch[b.Name]].Text.Replace(',', '.'), out float vramp_in);
             bool Vstep = float.TryParse(vstep[ch[b.Name]].Text.Replace(',', '.'), out float vstep_in);
-
+            String str = String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name]); // 3 decimal places
+            iseg.RawIO.Write(str);
+            MessageBox.Show(str);
             //MessageBox.Show(vset_in.ToString() + vmin_in.ToString() + vmax_in.ToString() + vramp_in.ToString() + vstep_in.ToString());
-            
         }
     }
 }

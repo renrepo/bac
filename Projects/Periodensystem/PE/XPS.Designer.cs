@@ -272,10 +272,8 @@
             this.label75 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.label58 = new System.Windows.Forms.Label();
             this.fig_name = new System.Windows.Forms.TextBox();
             this.showdata = new System.Windows.Forms.Button();
-            this.label57 = new System.Windows.Forms.Label();
             this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -441,6 +439,13 @@
             this.btn_reload4 = new System.Windows.Forms.Button();
             this.btn_reload5 = new System.Windows.Forms.Button();
             this.btn_reload6 = new System.Windows.Forms.Button();
+            this.rs1 = new System.Windows.Forms.Button();
+            this.rs2 = new System.Windows.Forms.Button();
+            this.rs3 = new System.Windows.Forms.Button();
+            this.rs4 = new System.Windows.Forms.Button();
+            this.rs5 = new System.Windows.Forms.Button();
+            this.rs6 = new System.Windows.Forms.Button();
+            this.rs_all = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -2406,11 +2411,6 @@
             resources.ApplyResources(this.label73, "label73");
             this.label73.Name = "label73";
             // 
-            // label58
-            // 
-            resources.ApplyResources(this.label58, "label58");
-            this.label58.Name = "label58";
-            // 
             // fig_name
             // 
             resources.ApplyResources(this.fig_name, "fig_name");
@@ -2423,11 +2423,6 @@
             this.showdata.Name = "showdata";
             this.showdata.UseVisualStyleBackColor = true;
             this.showdata.Click += new System.EventHandler(this.showdata_Click);
-            // 
-            // label57
-            // 
-            resources.ApplyResources(this.label57, "label57");
-            this.label57.Name = "label57";
             // 
             // safe_fig
             // 
@@ -2446,12 +2441,10 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.safe_fig);
-            this.groupBox3.Controls.Add(this.label58);
             this.groupBox3.Controls.Add(this.showdata);
             this.groupBox3.Controls.Add(this.fig_name);
             this.groupBox3.Controls.Add(this.btn_can);
             this.groupBox3.Controls.Add(this.lb_perc_gauss);
-            this.groupBox3.Controls.Add(this.label57);
             this.groupBox3.Controls.Add(this.tb_safe);
             this.groupBox3.Controls.Add(this.btn_start);
             this.groupBox3.Controls.Add(this.tb_show);
@@ -3343,7 +3336,15 @@
             this.tableLayoutPanel3.Controls.Add(this.btn_reload4, 4, 7);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload5, 5, 7);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload6, 6, 7);
+            this.tableLayoutPanel3.Controls.Add(this.rs1, 1, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs2, 2, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs3, 3, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs4, 4, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs5, 5, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs6, 6, 9);
+            this.tableLayoutPanel3.Controls.Add(this.rs_all, 0, 9);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel3_Layout);
             // 
             // label102
             // 
@@ -3661,6 +3662,48 @@
             resources.ApplyResources(this.btn_reload6, "btn_reload6");
             this.btn_reload6.Name = "btn_reload6";
             this.btn_reload6.UseVisualStyleBackColor = true;
+            // 
+            // rs1
+            // 
+            resources.ApplyResources(this.rs1, "rs1");
+            this.rs1.Name = "rs1";
+            this.rs1.UseVisualStyleBackColor = true;
+            // 
+            // rs2
+            // 
+            resources.ApplyResources(this.rs2, "rs2");
+            this.rs2.Name = "rs2";
+            this.rs2.UseVisualStyleBackColor = true;
+            // 
+            // rs3
+            // 
+            resources.ApplyResources(this.rs3, "rs3");
+            this.rs3.Name = "rs3";
+            this.rs3.UseVisualStyleBackColor = true;
+            // 
+            // rs4
+            // 
+            resources.ApplyResources(this.rs4, "rs4");
+            this.rs4.Name = "rs4";
+            this.rs4.UseVisualStyleBackColor = true;
+            // 
+            // rs5
+            // 
+            resources.ApplyResources(this.rs5, "rs5");
+            this.rs5.Name = "rs5";
+            this.rs5.UseVisualStyleBackColor = true;
+            // 
+            // rs6
+            // 
+            resources.ApplyResources(this.rs6, "rs6");
+            this.rs6.Name = "rs6";
+            this.rs6.UseVisualStyleBackColor = true;
+            // 
+            // rs_all
+            // 
+            resources.ApplyResources(this.rs_all, "rs_all");
+            this.rs_all.Name = "rs_all";
+            this.rs_all.UseVisualStyleBackColor = true;
             // 
             // XPS
             // 
@@ -4023,9 +4066,7 @@
         private System.Windows.Forms.TextBox tb_safe;
         private System.Windows.Forms.Button safe_fig;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Button showdata;
-        private System.Windows.Forms.Label label58;
         private System.Windows.Forms.TextBox fig_name;
         private System.Windows.Forms.CheckBox Al_anode;
         private System.Windows.Forms.CheckBox Mg_anode;
@@ -4189,6 +4230,13 @@
         private System.Windows.Forms.Button btn_reload4;
         private System.Windows.Forms.Button btn_reload5;
         private System.Windows.Forms.Button btn_reload6;
+        private System.Windows.Forms.Button rs1;
+        private System.Windows.Forms.Button rs2;
+        private System.Windows.Forms.Button rs3;
+        private System.Windows.Forms.Button rs4;
+        private System.Windows.Forms.Button rs5;
+        private System.Windows.Forms.Button rs6;
+        private System.Windows.Forms.Button rs_all;
     }
 }
 
