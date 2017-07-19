@@ -52,6 +52,8 @@ namespace XPS
 
         Dictionary<string, int> ch = new Dictionary<string, int>();
         Dictionary<string, int> th = new Dictionary<string, int>();
+        Dictionary<string, int> rh = new Dictionary<string, int>();
+        Dictionary<string, int> ph = new Dictionary<string, int>();
 
         TextBox[] vset;
         TextBox[] vmin;
@@ -60,6 +62,7 @@ namespace XPS
         TextBox[] vstep;
         TextBox[] vmeas;
         Button[] reload;
+        Button[] reset;
         CheckBox[] stat;
 
 
@@ -156,6 +159,7 @@ namespace XPS
             vramp = new TextBox[] { ch1_ramp, ch2_ramp, ch3_ramp, ch4_ramp, ch5_ramp, ch6_ramp };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
+            reset = new Button[] { rs1,rs2,rs3,rs4,rs5,rs6 };
             stat = new CheckBox [] { stat1, stat2, stat3, stat4, stat5, stat6 };
 
             ch.Add("btn_reload1", 0);
@@ -172,6 +176,20 @@ namespace XPS
             th.Add("stat5", 4);
             th.Add("stat6", 5);
 
+            rh.Add("rs1", 0);
+            rh.Add("rs2", 1);
+            rh.Add("rs3", 2);
+            rh.Add("rs4", 3);
+            rh.Add("rs5", 4);
+            rh.Add("rs6", 5);
+
+            ph.Add("p1", 0);
+            ph.Add("p2", 1);
+            ph.Add("p3", 2);
+            ph.Add("p4", 3);
+            ph.Add("p5", 4);
+            ph.Add("p6", 5);
+
             foreach (var item in reload)
             {
                 item.MouseDown += Global_iseg_reload;
@@ -180,6 +198,11 @@ namespace XPS
             foreach (var item in stat)
             {
                 item.MouseDown += Global_iseg_terminal;
+            }
+
+            foreach (var item in reset)
+            {
+                item.MouseDown += Global_iseg_reset;
             }
         }
 
@@ -714,13 +737,6 @@ namespace XPS
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            iseg.RawIO.Write("*RST\n");
-            iseg.RawIO.Write(":VOLT 25.000,(@5)\n");
-            iseg.RawIO.Write(":VOLT ON,(@5)\n");
-        }
-
         //##########################################################################################################################################
 
         private void Global_iseg_terminal(object sender, MouseEventArgs e)
@@ -728,34 +744,66 @@ namespace XPS
             CheckBox c = sender as CheckBox;
             if (c.Text == "Off")
             {
-                c.BackColor = Color.LimeGreen;
-                String str = String.Format(":VOLT ON,(@{0})\n", th[c.Name]);
-                iseg.RawIO.Write(str);
-                MessageBox.Show(str);
+                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", th[c.Name]));
                 c.Text = "On";
+                c.BackColor = Color.LimeGreen;
             }
             else
             {
-                c.BackColor = SystemColors.ControlLightLight;
-                String str = String.Format(":VOLT OFF,(@{0})\n", th[c.Name]);
-                iseg.RawIO.Write(str);
-                MessageBox.Show(str);
+                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", th[c.Name]));
                 c.Text = "Off";
+                c.BackColor = SystemColors.ControlLightLight;
             }
         }
         
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
-            Button b = sender as Button;          
-            bool Vset = float.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out float vset_in);
-            bool Vmin = float.TryParse(vmin[ch[b.Name]].Text.Replace(',', '.'), out float vmin_in);
-            bool Vmax = float.TryParse(vmax[ch[b.Name]].Text.Replace(',', '.'), out float vmax_in);
-            bool Vramp = float.TryParse(vramp[ch[b.Name]].Text.Replace(',', '.'), out float vramp_in);
-            bool Vstep = float.TryParse(vstep[ch[b.Name]].Text.Replace(',', '.'), out float vstep_in);
-            String str = String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name]); // 3 decimal places
-            iseg.RawIO.Write(str);
-            MessageBox.Show(str);
-            //MessageBox.Show(vset_in.ToString() + vmin_in.ToString() + vmax_in.ToString() + vramp_in.ToString() + vstep_in.ToString());
+            Button b = sender as Button;
+
+            bool Vset = Decimal.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out decimal vset_in);
+            bool Vmin = Decimal.TryParse(vmin[ch[b.Name]].Text.Replace(',', '.'), out decimal vmin_in);
+            bool Vmax = Decimal.TryParse(vmax[ch[b.Name]].Text.Replace(',', '.'), out decimal vmax_in);
+            bool Vramp = Decimal.TryParse(vramp[ch[b.Name]].Text.Replace(',', '.'), out decimal vramp_in);
+            bool Vstep = Decimal.TryParse(vstep[ch[b.Name]].Text.Replace(',', '.'), out decimal vstep_in);
+
+            if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
+            {
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+            }
+
+            else if (!Vset && Vmin && Vmax && Vramp && Vstep )
+            {
+                
+            }
+
+            else
+            {
+                MessageBox.Show("Type in    Vset    or    Vmin + Vmax + Vramp + Vstep");
+            }
+        }
+
+        private void Global_iseg_reset(object sender, MouseEventArgs e)
+        {
+            Button r = sender as Button; // 3 decimal places
+            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", rh[r.Name]));
+            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", rh[r.Name]));
+            vset[rh[r.Name]].Text = "";
+            vmin[rh[r.Name]].Text = "";
+            vmax[rh[r.Name]].Text = "";
+            vstep[rh[r.Name]].Text = "";
+            vramp[rh[r.Name]].Text = "";
+            stat[rh[r.Name]].Text = "Off";
+            stat[rh[r.Name]].BackColor = SystemColors.ControlLightLight;
+        }
+
+        private void rs_all_Click(object sender, EventArgs e)
+        {
+            iseg.RawIO.Write(String.Format("*RST\n"));
+            for (int i = 0; i <= 5; i++)
+            {
+                stat[i].Text = "Off";
+                stat[i].BackColor = SystemColors.ControlLightLight;
+            }
         }
     }
 }

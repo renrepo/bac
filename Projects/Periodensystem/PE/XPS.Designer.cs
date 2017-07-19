@@ -294,7 +294,6 @@
             this.writeTextBox = new System.Windows.Forms.TextBox();
             this.readTextBox = new System.Windows.Forms.TextBox();
             this.closeSessionButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.s44 = new System.Windows.Forms.Label();
             this.s28 = new System.Windows.Forms.Label();
             this.s55 = new System.Windows.Forms.Label();
@@ -378,16 +377,17 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label102 = new System.Windows.Forms.Label();
             this.label100 = new System.Windows.Forms.Label();
-            this.label99 = new System.Windows.Forms.Label();
-            this.label98 = new System.Windows.Forms.Label();
             this.lb_vset = new System.Windows.Forms.Label();
+            this.label99 = new System.Windows.Forms.Label();
             this.lb_vmin = new System.Windows.Forms.Label();
+            this.label98 = new System.Windows.Forms.Label();
             this.ch1_meas = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
             this.lb_vmax = new System.Windows.Forms.Label();
-            this.label81 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
             this.lb_stepsize = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
             this.lb_time = new System.Windows.Forms.Label();
             this.lb_vmeas = new System.Windows.Forms.Label();
             this.ch2_meas = new System.Windows.Forms.TextBox();
@@ -396,7 +396,6 @@
             this.ch1_vmax = new System.Windows.Forms.TextBox();
             this.ch1_step = new System.Windows.Forms.TextBox();
             this.ch1_ramp = new System.Windows.Forms.TextBox();
-            this.label101 = new System.Windows.Forms.Label();
             this.ch2_v = new System.Windows.Forms.TextBox();
             this.ch2_vmin = new System.Windows.Forms.TextBox();
             this.ch2_step = new System.Windows.Forms.TextBox();
@@ -2615,13 +2614,6 @@
             this.closeSessionButton.Name = "closeSessionButton";
             this.closeSessionButton.Click += new System.EventHandler(this.closeSession_Click);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // s44
             // 
             resources.ApplyResources(this.s44, "s44");
@@ -3267,7 +3259,6 @@
             this.tabPage2.Controls.Add(this.queryButton);
             this.tabPage2.Controls.Add(this.readButton);
             this.tabPage2.Controls.Add(this.writeButton);
-            this.tabPage2.Controls.Add(this.button1);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -3275,16 +3266,17 @@
             // tableLayoutPanel3
             // 
             resources.ApplyResources(this.tableLayoutPanel3, "tableLayoutPanel3");
-            this.tableLayoutPanel3.Controls.Add(this.label102, 6, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label100, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label99, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label98, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label100, 6, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_vset, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label99, 5, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmin, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label98, 4, 0);
             this.tableLayoutPanel3.Controls.Add(this.ch1_meas, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.label58, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmax, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.label81, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.label57, 2, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_stepsize, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.label81, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_time, 0, 5);
             this.tableLayoutPanel3.Controls.Add(this.lb_vmeas, 0, 6);
             this.tableLayoutPanel3.Controls.Add(this.ch2_meas, 2, 6);
@@ -3293,7 +3285,6 @@
             this.tableLayoutPanel3.Controls.Add(this.ch1_vmax, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.ch1_step, 1, 4);
             this.tableLayoutPanel3.Controls.Add(this.ch1_ramp, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.label101, 5, 0);
             this.tableLayoutPanel3.Controls.Add(this.ch2_v, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.ch2_vmin, 2, 2);
             this.tableLayoutPanel3.Controls.Add(this.ch2_step, 2, 4);
@@ -3346,55 +3337,60 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel3_Layout);
             // 
-            // label102
-            // 
-            resources.ApplyResources(this.label102, "label102");
-            this.label102.Name = "label102";
-            // 
             // label100
             // 
             resources.ApplyResources(this.label100, "label100");
             this.label100.Name = "label100";
-            // 
-            // label99
-            // 
-            resources.ApplyResources(this.label99, "label99");
-            this.label99.Name = "label99";
-            // 
-            // label98
-            // 
-            resources.ApplyResources(this.label98, "label98");
-            this.label98.Name = "label98";
             // 
             // lb_vset
             // 
             resources.ApplyResources(this.lb_vset, "lb_vset");
             this.lb_vset.Name = "lb_vset";
             // 
+            // label99
+            // 
+            resources.ApplyResources(this.label99, "label99");
+            this.label99.Name = "label99";
+            // 
             // lb_vmin
             // 
             resources.ApplyResources(this.lb_vmin, "lb_vmin");
             this.lb_vmin.Name = "lb_vmin";
+            // 
+            // label98
+            // 
+            resources.ApplyResources(this.label98, "label98");
+            this.label98.Name = "label98";
             // 
             // ch1_meas
             // 
             resources.ApplyResources(this.ch1_meas, "ch1_meas");
             this.ch1_meas.Name = "ch1_meas";
             // 
+            // label58
+            // 
+            resources.ApplyResources(this.label58, "label58");
+            this.label58.Name = "label58";
+            // 
             // lb_vmax
             // 
             resources.ApplyResources(this.lb_vmax, "lb_vmax");
             this.lb_vmax.Name = "lb_vmax";
             // 
-            // label81
+            // label57
             // 
-            resources.ApplyResources(this.label81, "label81");
-            this.label81.Name = "label81";
+            resources.ApplyResources(this.label57, "label57");
+            this.label57.Name = "label57";
             // 
             // lb_stepsize
             // 
             resources.ApplyResources(this.lb_stepsize, "lb_stepsize");
             this.lb_stepsize.Name = "lb_stepsize";
+            // 
+            // label81
+            // 
+            resources.ApplyResources(this.label81, "label81");
+            this.label81.Name = "label81";
             // 
             // lb_time
             // 
@@ -3435,11 +3431,6 @@
             // 
             resources.ApplyResources(this.ch1_ramp, "ch1_ramp");
             this.ch1_ramp.Name = "ch1_ramp";
-            // 
-            // label101
-            // 
-            resources.ApplyResources(this.label101, "label101");
-            this.label101.Name = "label101";
             // 
             // ch2_v
             // 
@@ -3704,6 +3695,7 @@
             resources.ApplyResources(this.rs_all, "rs_all");
             this.rs_all.Name = "rs_all";
             this.rs_all.UseVisualStyleBackColor = true;
+            this.rs_all.Click += new System.EventHandler(this.rs_all_Click);
             // 
             // XPS
             // 
@@ -4081,7 +4073,6 @@
         private System.Windows.Forms.TextBox writeTextBox;
         private System.Windows.Forms.TextBox readTextBox;
         private System.Windows.Forms.Button closeSessionButton;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label s12;
         private System.Windows.Forms.Label s9;
         private System.Windows.Forms.Label s11;
@@ -4176,11 +4167,6 @@
         private System.Windows.Forms.Label lb_vmeas;
         private System.Windows.Forms.Label lb_stat;
         private System.Windows.Forms.Label label81;
-        private System.Windows.Forms.Label label98;
-        private System.Windows.Forms.Label label99;
-        private System.Windows.Forms.Label label100;
-        private System.Windows.Forms.Label label101;
-        private System.Windows.Forms.Label label102;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TextBox ch1_meas;
         private System.Windows.Forms.TextBox ch2_meas;
@@ -4237,6 +4223,11 @@
         private System.Windows.Forms.Button rs5;
         private System.Windows.Forms.Button rs6;
         private System.Windows.Forms.Button rs_all;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Label label98;
+        private System.Windows.Forms.Label label99;
+        private System.Windows.Forms.Label label100;
     }
 }
 
