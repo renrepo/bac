@@ -64,6 +64,7 @@ namespace XPS
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
+        BackgroundWorker[] bw_ramp;
 
 
         public XPS()
@@ -161,6 +162,7 @@ namespace XPS
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1,rs2,rs3,rs4,rs5,rs6 };
             stat = new CheckBox [] { stat1, stat2, stat3, stat4, stat5, stat6 };
+            bw_ramp = new BackgroundWorker[] {bw_1,bw_2,bw_3,bw_4,bw_5,bw_6};
 
             ch.Add("btn_reload1", 0);
             ch.Add("btn_reload2", 1);
@@ -362,7 +364,7 @@ namespace XPS
                 {
                     e.Cancel = true;
                     bW_data.ReportProgress(0);
-                    break; //warum? ist wichtig!
+                    break; //warum? ist wichtig! vllt um aus for-loop zu kommen
                 }
             }
             //safer.safe(path,list_gauss);
@@ -773,7 +775,7 @@ namespace XPS
 
             else if (!Vset && Vmin && Vmax && Vramp && Vstep )
             {
-                
+                bw_ramp[ch[b.Name]].RunWorkerAsync();
             }
 
             else

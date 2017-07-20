@@ -445,6 +445,12 @@
             this.rs5 = new System.Windows.Forms.Button();
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
+            this.bw_1 = new System.ComponentModel.BackgroundWorker();
+            this.bw_2 = new System.ComponentModel.BackgroundWorker();
+            this.bw_3 = new System.ComponentModel.BackgroundWorker();
+            this.bw_4 = new System.ComponentModel.BackgroundWorker();
+            this.bw_5 = new System.ComponentModel.BackgroundWorker();
+            this.bw_6 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -4228,6 +4234,12 @@
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.Label label100;
+        private System.ComponentModel.BackgroundWorker bw_1;
+        private System.ComponentModel.BackgroundWorker bw_2;
+        private System.ComponentModel.BackgroundWorker bw_3;
+        private System.ComponentModel.BackgroundWorker bw_4;
+        private System.ComponentModel.BackgroundWorker bw_5;
+        private System.ComponentModel.BackgroundWorker bw_6;
     }
 }
 
