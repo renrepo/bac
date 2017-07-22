@@ -445,12 +445,7 @@
             this.rs5 = new System.Windows.Forms.Button();
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
-            this.bw_1 = new System.ComponentModel.BackgroundWorker();
-            this.bw_2 = new System.ComponentModel.BackgroundWorker();
-            this.bw_3 = new System.ComponentModel.BackgroundWorker();
-            this.bw_4 = new System.ComponentModel.BackgroundWorker();
-            this.bw_5 = new System.ComponentModel.BackgroundWorker();
-            this.bw_6 = new System.ComponentModel.BackgroundWorker();
+            this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3703,6 +3698,12 @@
             this.rs_all.UseVisualStyleBackColor = true;
             this.rs_all.Click += new System.EventHandler(this.rs_all_Click);
             // 
+            // bw_iseg
+            // 
+            this.bw_iseg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_DoWork);
+            this.bw_iseg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_ProgressChanged);
+            this.bw_iseg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_RunWorkerCompleted);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -4234,12 +4235,7 @@
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.Label label100;
-        private System.ComponentModel.BackgroundWorker bw_1;
-        private System.ComponentModel.BackgroundWorker bw_2;
-        private System.ComponentModel.BackgroundWorker bw_3;
-        private System.ComponentModel.BackgroundWorker bw_4;
-        private System.ComponentModel.BackgroundWorker bw_5;
-        private System.ComponentModel.BackgroundWorker bw_6;
+        private System.ComponentModel.BackgroundWorker bw_iseg;
     }
 }
 

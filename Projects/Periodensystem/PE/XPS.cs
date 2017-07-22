@@ -64,7 +64,6 @@ namespace XPS
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
-        BackgroundWorker[] bw_ramp;
 
 
         public XPS()
@@ -162,7 +161,6 @@ namespace XPS
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1,rs2,rs3,rs4,rs5,rs6 };
             stat = new CheckBox [] { stat1, stat2, stat3, stat4, stat5, stat6 };
-            bw_ramp = new BackgroundWorker[] {bw_1,bw_2,bw_3,bw_4,bw_5,bw_6};
 
             ch.Add("btn_reload1", 0);
             ch.Add("btn_reload2", 1);
@@ -757,7 +755,8 @@ namespace XPS
                 c.BackColor = SystemColors.ControlLightLight;
             }
         }
-        
+
+
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
@@ -775,7 +774,14 @@ namespace XPS
 
             else if (!Vset && Vmin && Vmax && Vramp && Vstep )
             {
-                bw_ramp[ch[b.Name]].RunWorkerAsync();
+                if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+                {
+                    MessageBox.Show("Backgroundworker still busy!");
+                }
+                else
+                {
+                    bw_iseg.RunWorkerAsync();
+                }
             }
 
             else
@@ -787,6 +793,10 @@ namespace XPS
         private void Global_iseg_reset(object sender, MouseEventArgs e)
         {
             Button r = sender as Button; // 3 decimal places
+            if (vmin[rh[r.Name]].Text != "") // .IsBusy is true, if bW is running, otherwise false
+            {
+                bw_iseg.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+            }
             iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", rh[r.Name]));
             iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", rh[r.Name]));
             vset[rh[r.Name]].Text = "";
@@ -807,6 +817,57 @@ namespace XPS
                 stat[i].BackColor = SystemColors.ControlLightLight;
             }
         }
+
+
+        private void bw_iseg_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+            //bW_data.ReportProgress(100 * i / num_gauss, end);
+            //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+            for (int i = 0; i < 5; i++)
+            {
+                MessageBox.Show(i.ToString());
+                Thread.Sleep(500);
+            }
+
+            if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+            {
+                e.Cancel = true;
+                //bW_data.ReportProgress(0);
+            }
+            
+            //safer.safe(path,list_gauss);
+            e.Result = end; //stores the results of what has been done in bW
+        }
+
+
+        private void bw_iseg_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //progressBar1.Value = e.ProgressPercentage;
+            //lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
+            //tb_show.Text = Convert.ToString(e.UserState);
+        }
+
+
+        private void bw_iseg_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
+            if (e.Cancelled)
+            {
+                MessageBox.Show("Cancelled!!!");
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                MessageBox.Show("Error during asynchronous operation");
+            }
+
+            else
+            {
+                MessageBox.Show("Done!");
+            }
+        }
+
     }
 }
 
