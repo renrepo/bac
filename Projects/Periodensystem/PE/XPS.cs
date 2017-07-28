@@ -638,6 +638,8 @@ namespace XPS
                         {
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
+                            iseg.RawIO.Write(":SYS:USER:WRITE:VNOM 100 (@3)\n");
+                            iseg.RawIO.Write(":CONF:RAMP:VOLT 10%/s\n");
 
                             //SetupControlState(true);
                         }
@@ -770,6 +772,8 @@ namespace XPS
             if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
             {
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                iseg.RawIO.Write(":SYS:USER:WRITE:VNOM 100,(@3)\n");
+                iseg.RawIO.Write(":CONF:RAMP:VOLT 10%/s\n");
             }
 
             else if (!Vset && Vmin && Vmax && Vramp && Vstep )
