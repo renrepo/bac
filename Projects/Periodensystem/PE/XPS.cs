@@ -13,6 +13,7 @@ using ZedGraph;
 using System.Globalization;
 using System.Diagnostics;
 using NationalInstruments.Visa;
+using LabJack;
 
 namespace XPS
 {
@@ -64,7 +65,6 @@ namespace XPS
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
-
 
         public XPS()
         {
@@ -204,6 +204,18 @@ namespace XPS
             {
                 item.MouseDown += Global_iseg_reset;
             }
+
+            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
+            LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
+
+            if (!bw_pressure.IsBusy)
+            {
+                bw_pressure.RunWorkerAsync();
+            }
+            if (!bw_pressure2.IsBusy)
+            {
+                bw_pressure2.RunWorkerAsync();
+            }
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e)
@@ -227,7 +239,7 @@ namespace XPS
         public void colorchanger(object sender, YAxis ya)
         {
             Button btn = (Button)sender;
-           // var panel = sender as Control;
+            // var panel = sender as Control;
             //var thePanelName = btn.Name;
             string col = fab[btn.Name];
             int zeile = Convert.ToInt32(dictionary[btn.Name]) - 1;
@@ -758,7 +770,6 @@ namespace XPS
             }
         }
 
-
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
@@ -771,12 +782,12 @@ namespace XPS
 
             if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
             {
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
-                iseg.RawIO.Write(":SYS:USER:WRITE:VNOM 100,(@3)\n");
-                iseg.RawIO.Write(":CONF:RAMP:VOLT 10%/s\n");
+                //iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM 100,(@{0})\n", ch[b.Name]));
+                //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 0.01%/s\n"));
             }
 
-            else if (!Vset && Vmin && Vmax && Vramp && Vstep )
+            else if (Vmin)
             {
                 if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
                 {
@@ -828,10 +839,14 @@ namespace XPS
 
             //bW_data.ReportProgress(100 * i / num_gauss, end);
             //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-            for (int i = 0; i < 5; i++)
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", 18.000,2));
+            Thread.Sleep(8000);
+            decimal inc = 0.2m;
+            for (decimal i = 0; i < 10; i++)
             {
-                MessageBox.Show(i.ToString());
-                Thread.Sleep(500);
+                decimal v = 18.000m + i * inc;
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", v.ToString("0.000"), 2));
+                Thread.Sleep(1000);
             }
 
             if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
@@ -872,6 +887,95 @@ namespace XPS
             }
         }
 
+
+        string name = "AIN0";
+        string name2 = "AIN1";
+        double value = 0;
+        double value2 = 0;
+        int handle = 0;
+        int handle2 = 0;
+
+
+
+        private void bw_pressure_DoWork(object sender, DoWorkEventArgs e)
+        {
+            double pressure;
+            while (!bw_pressure.CancellationPending)
+            {
+                LJM.eReadName(handle, name, ref value);
+                Thread.Sleep(10);
+                pressure = Math.Pow(10,((Convert.ToDouble(value)-7.75))/0.75);
+                bw_pressure.ReportProgress(0, pressure.ToString("0.00E0"));
+                Thread.Sleep(1000);
+            }
+        }
+
+        private void bw_pressure_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            tb_pressure.Text = Convert.ToString(e.UserState);
+            int percentage = e.ProgressPercentage;
+        }
+
+        private void bw_pressure_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                tb_pressure.Text = "Stop!";
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                tb_show.Text = e.Error.Message;
+            }
+
+            else
+            {
+
+            }
+        }
+
+        private void btn_stop_pressure_Click(object sender, EventArgs e)
+        {
+            if (bw_pressure.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            {
+                bw_pressure.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+            }
+        }
+
+        private void bw_pressure2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!bw_pressure2.CancellationPending)
+            {
+                LJM.eReadName(handle2, name2, ref value2);
+                Thread.Sleep(10);
+                bw_pressure2.ReportProgress(0, value2.ToString("F4"));
+                Thread.Sleep(200);
+            }
+        }
+
+        private void bw_pressure2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            tb_pressure2.Text = Convert.ToString(e.UserState);
+            int percentage = e.ProgressPercentage;
+        }
+
+        private void bw_pressure2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                tb_pressure2.Text = "Stop!";
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                tb_show.Text = e.Error.Message;
+            }
+
+            else
+            {
+
+            }
+        }
     }
 }
 

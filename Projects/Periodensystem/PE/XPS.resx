@@ -8764,7 +8764,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label88.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="label87.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8794,7 +8794,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label87.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>11</value>
   </data>
   <data name="label86.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8824,7 +8824,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label86.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>13</value>
   </data>
   <data name="label85.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8854,7 +8854,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label85.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>15</value>
   </data>
   <data name="label84.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8884,7 +8884,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label84.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>17</value>
   </data>
   <data name="label83.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8914,7 +8914,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label83.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>19</value>
   </data>
   <data name="label82.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8941,7 +8941,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label82.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>21</value>
   </data>
   <data name="comboBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 33</value>
@@ -8965,7 +8965,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;comboBox2.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>23</value>
   </data>
   <data name="textBox50.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 190</value>
@@ -8986,7 +8986,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox50.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>25</value>
   </data>
   <data name="textBox49.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 164</value>
@@ -9007,7 +9007,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox49.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>27</value>
   </data>
   <data name="textBox48.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 138</value>
@@ -9028,7 +9028,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox48.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>29</value>
   </data>
   <data name="textBox47.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 112</value>
@@ -9049,7 +9049,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox47.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>31</value>
   </data>
   <data name="textBox46.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 86</value>
@@ -9070,7 +9070,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox46.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>32</value>
   </data>
   <data name="textBox45.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 60</value>
@@ -9091,7 +9091,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox45.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>30</value>
   </data>
   <data name="textBox44.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 7</value>
@@ -9112,7 +9112,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox44.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>28</value>
   </data>
   <data name="textBox43.Location" type="System.Drawing.Point, System.Drawing">
     <value>81, 7</value>
@@ -9136,7 +9136,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;textBox43.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>26</value>
   </data>
   <data name="label80.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9166,7 +9166,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label80.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>24</value>
   </data>
   <data name="label79.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9196,7 +9196,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label79.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>22</value>
   </data>
   <data name="label78.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9226,7 +9226,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label78.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>20</value>
   </data>
   <data name="label77.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9256,7 +9256,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label77.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>18</value>
   </data>
   <data name="label76.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9286,7 +9286,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label76.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>16</value>
   </data>
   <data name="label75.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9316,7 +9316,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label75.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>14</value>
   </data>
   <data name="label74.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9346,7 +9346,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label74.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>10</value>
   </data>
   <data name="label73.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9373,7 +9373,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;label73.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>12</value>
   </data>
   <data name="fig_name.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -9550,7 +9550,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;Al_anode.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="Mg_anode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9577,7 +9577,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;Mg_anode.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;label62.Name" xml:space="preserve">
     <value>label62</value>
@@ -9817,7 +9817,7 @@
     <value>57, 6</value>
   </data>
   <data name="openSessionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 72</value>
+    <value>239, 58</value>
   </data>
   <data name="openSessionButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 22</value>
@@ -9838,7 +9838,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;openSessionButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>9</value>
   </data>
   <data name="queryButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 4</value>
@@ -9997,7 +9997,7 @@
     <value>1</value>
   </data>
   <data name="closeSessionButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 100</value>
+    <value>239, 32</value>
   </data>
   <data name="closeSessionButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 22</value>
@@ -10018,7 +10018,7 @@
     <value>tabPage1</value>
   </data>
   <data name="&gt;&gt;closeSessionButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="s44.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -13164,50 +13164,125 @@
   <data name="&gt;&gt;label97.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+  <data name="label101.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label101.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 96</value>
+  </data>
+  <data name="label101.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="label101.TabIndex" type="System.Int32, mscorlib">
+    <value>278</value>
+  </data>
+  <data name="label101.Text" xml:space="preserve">
+    <value>Druck AK</value>
+  </data>
+  <data name="&gt;&gt;label101.Name" xml:space="preserve">
+    <value>label101</value>
+  </data>
+  <data name="&gt;&gt;label101.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label101.Parent" xml:space="preserve">
     <value>tabPage1</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;label101.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
+  <data name="tb_pressure2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 235</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tb_pressure2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
   </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="tb_pressure2.TabIndex" type="System.Int32, mscorlib">
+    <value>277</value>
   </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tb_pressure2.Name" xml:space="preserve">
+    <value>tb_pressure2</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure2.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 12</value>
+  <data name="btn_stop_pressure2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>235, 261</value>
   </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 328</value>
+  <data name="btn_stop_pressure2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
   </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+  <data name="btn_stop_pressure2.TabIndex" type="System.Int32, mscorlib">
     <value>276</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
+  <data name="btn_stop_pressure2.Text" xml:space="preserve">
+    <value>button1</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;btn_stop_pressure2.Name" xml:space="preserve">
+    <value>btn_stop_pressure2</value>
   </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
+  <data name="&gt;&gt;btn_stop_pressure2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;btn_stop_pressure2.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;btn_stop_pressure2.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btn_stop_pressure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 110</value>
+  </data>
+  <data name="btn_stop_pressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 23</value>
+  </data>
+  <data name="btn_stop_pressure.TabIndex" type="System.Int32, mscorlib">
+    <value>275</value>
+  </data>
+  <data name="btn_stop_pressure.Text" xml:space="preserve">
+    <value>stop pressure</value>
+  </data>
+  <data name="&gt;&gt;btn_stop_pressure.Name" xml:space="preserve">
+    <value>btn_stop_pressure</value>
+  </data>
+  <data name="&gt;&gt;btn_stop_pressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_stop_pressure.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;btn_stop_pressure.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tb_pressure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>253, 112</value>
+  </data>
+  <data name="tb_pressure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="tb_pressure.TabIndex" type="System.Int32, mscorlib">
+    <value>274</value>
+  </data>
+  <data name="tb_pressure.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Name" xml:space="preserve">
+    <value>tb_pressure</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -13276,6 +13351,27 @@
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 12</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 328</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>276</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
@@ -16401,6 +16497,12 @@
   <metadata name="bw_iseg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>402, 17</value>
   </metadata>
+  <metadata name="bw_pressure.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>497, 17</value>
+  </metadata>
+  <metadata name="bw_pressure2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>616, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -16444,6 +16546,18 @@
     <value>bw_iseg</value>
   </data>
   <data name="&gt;&gt;bw_iseg.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bw_pressure.Name" xml:space="preserve">
+    <value>bw_pressure</value>
+  </data>
+  <data name="&gt;&gt;bw_pressure.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bw_pressure2.Name" xml:space="preserve">
+    <value>bw_pressure2</value>
+  </data>
+  <data name="&gt;&gt;bw_pressure2.Type" xml:space="preserve">
     <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

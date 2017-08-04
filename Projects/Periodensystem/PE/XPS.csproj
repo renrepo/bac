@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Ivi.Visa.dll</HintPath>
     </Reference>
+    <Reference Include="LabJack.LJM, Version=1.14.0.0, Culture=neutral, PublicKeyToken=0316e29ba8d40ce0, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\LabJack.LJM.dll</HintPath>
+    </Reference>
     <Reference Include="NationalInstruments.Visa, Version=17.0.0.0, Culture=neutral, PublicKeyToken=2eaa5af0834e221d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\NationalInstruments.Visa.dll</HintPath>
