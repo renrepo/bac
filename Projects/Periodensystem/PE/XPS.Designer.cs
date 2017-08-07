@@ -375,9 +375,7 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tb_pressure2 = new System.Windows.Forms.TextBox();
-            this.btn_stop_pressure2 = new System.Windows.Forms.Button();
-            this.btn_stop_pressure = new System.Windows.Forms.Button();
+            this.label101 = new System.Windows.Forms.Label();
             this.tb_pressure = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -451,8 +449,7 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
-            this.bw_pressure2 = new System.ComponentModel.BackgroundWorker();
-            this.label101 = new System.Windows.Forms.Label();
+            this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3226,10 +3223,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cb_pressure);
             this.tabPage1.Controls.Add(this.label101);
-            this.tabPage1.Controls.Add(this.tb_pressure2);
-            this.tabPage1.Controls.Add(this.btn_stop_pressure2);
-            this.tabPage1.Controls.Add(this.btn_stop_pressure);
             this.tabPage1.Controls.Add(this.tb_pressure);
             this.tabPage1.Controls.Add(this.Al_anode);
             this.tabPage1.Controls.Add(this.label88);
@@ -3263,23 +3258,10 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tb_pressure2
+            // label101
             // 
-            resources.ApplyResources(this.tb_pressure2, "tb_pressure2");
-            this.tb_pressure2.Name = "tb_pressure2";
-            // 
-            // btn_stop_pressure2
-            // 
-            resources.ApplyResources(this.btn_stop_pressure2, "btn_stop_pressure2");
-            this.btn_stop_pressure2.Name = "btn_stop_pressure2";
-            this.btn_stop_pressure2.UseVisualStyleBackColor = true;
-            // 
-            // btn_stop_pressure
-            // 
-            resources.ApplyResources(this.btn_stop_pressure, "btn_stop_pressure");
-            this.btn_stop_pressure.Name = "btn_stop_pressure";
-            this.btn_stop_pressure.UseVisualStyleBackColor = true;
-            this.btn_stop_pressure.Click += new System.EventHandler(this.btn_stop_pressure_Click);
+            resources.ApplyResources(this.label101, "label101");
+            this.label101.Name = "label101";
             // 
             // tb_pressure
             // 
@@ -3749,18 +3731,14 @@
             this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
             this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
             // 
-            // bw_pressure2
+            // cb_pressure
             // 
-            this.bw_pressure2.WorkerReportsProgress = true;
-            this.bw_pressure2.WorkerSupportsCancellation = true;
-            this.bw_pressure2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_pressure2_DoWork);
-            this.bw_pressure2.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure2_ProgressChanged);
-            this.bw_pressure2.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure2_RunWorkerCompleted);
-            // 
-            // label101
-            // 
-            resources.ApplyResources(this.label101, "label101");
-            this.label101.Name = "label101";
+            resources.ApplyResources(this.cb_pressure, "cb_pressure");
+            this.cb_pressure.Checked = true;
+            this.cb_pressure.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pressure.Name = "cb_pressure";
+            this.cb_pressure.UseVisualStyleBackColor = true;
+            this.cb_pressure.CheckedChanged += new System.EventHandler(this.cb_pressure_CheckedChanged);
             // 
             // XPS
             // 
@@ -4296,11 +4274,8 @@
         private System.ComponentModel.BackgroundWorker bw_iseg;
         private System.ComponentModel.BackgroundWorker bw_pressure;
         private System.Windows.Forms.TextBox tb_pressure;
-        private System.Windows.Forms.Button btn_stop_pressure;
-        private System.Windows.Forms.TextBox tb_pressure2;
-        private System.Windows.Forms.Button btn_stop_pressure2;
-        private System.ComponentModel.BackgroundWorker bw_pressure2;
         private System.Windows.Forms.Label label101;
+        private System.Windows.Forms.CheckBox cb_pressure;
     }
 }
 

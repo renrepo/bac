@@ -66,6 +66,11 @@ namespace XPS
         Button[] reset;
         CheckBox[] stat;
 
+
+        string AIN0 = "AIN0";
+        double value = 0;
+        int handle = 0;
+
         public XPS()
         {
             InitializeComponent();
@@ -205,24 +210,18 @@ namespace XPS
                 item.MouseDown += Global_iseg_reset;
             }
 
+
+
             LJM.OpenS("ANY", "ANY", "ANY", ref handle);
-            LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
+
 
             if (!bw_pressure.IsBusy)
             {
                 bw_pressure.RunWorkerAsync();
             }
-            if (!bw_pressure2.IsBusy)
-            {
-                bw_pressure2.RunWorkerAsync();
-            }
         }
 
-        private void elementnames_Popup(object sender, PopupEventArgs e)
-        {
-        }
-
-
+        private void elementnames_Popup(object sender, PopupEventArgs e){}
 
         private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
         {
@@ -888,13 +887,6 @@ namespace XPS
         }
 
 
-        string name = "AIN0";
-        string name2 = "AIN1";
-        double value = 0;
-        double value2 = 0;
-        int handle = 0;
-        int handle2 = 0;
-
 
 
         private void bw_pressure_DoWork(object sender, DoWorkEventArgs e)
@@ -902,7 +894,7 @@ namespace XPS
             double pressure;
             while (!bw_pressure.CancellationPending)
             {
-                LJM.eReadName(handle, name, ref value);
+                LJM.eReadName(handle, AIN0, ref value);
                 Thread.Sleep(10);
                 pressure = Math.Pow(10,((Convert.ToDouble(value)-7.75))/0.75);
                 bw_pressure.ReportProgress(0, pressure.ToString("0.00E0"));
@@ -934,46 +926,18 @@ namespace XPS
             }
         }
 
-        private void btn_stop_pressure_Click(object sender, EventArgs e)
+        private void cb_pressure_CheckedChanged(object sender, EventArgs e)
         {
-            if (bw_pressure.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            if (cb_pressure.Checked)
             {
-                bw_pressure.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
-            }
-        }
-
-        private void bw_pressure2_DoWork(object sender, DoWorkEventArgs e)
-        {
-            while (!bw_pressure2.CancellationPending)
-            {
-                LJM.eReadName(handle2, name2, ref value2);
-                Thread.Sleep(10);
-                bw_pressure2.ReportProgress(0, value2.ToString("F4"));
-                Thread.Sleep(200);
-            }
-        }
-
-        private void bw_pressure2_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            tb_pressure2.Text = Convert.ToString(e.UserState);
-            int percentage = e.ProgressPercentage;
-        }
-
-        private void bw_pressure2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                tb_pressure2.Text = "Stop!";
-            }
-
-            else if (e.Error != null)
-            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
-                tb_show.Text = e.Error.Message;
+                bw_pressure.RunWorkerAsync();
+                cb_pressure.Text = "Hide";
             }
 
             else
             {
-
+                bw_pressure.CancelAsync();
+                cb_pressure.Text = "Show";
             }
         }
     }
