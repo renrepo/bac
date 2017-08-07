@@ -375,6 +375,7 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.label101 = new System.Windows.Forms.Label();
             this.tb_pressure = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -449,7 +450,6 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
-            this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3258,6 +3258,15 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cb_pressure
+            // 
+            resources.ApplyResources(this.cb_pressure, "cb_pressure");
+            this.cb_pressure.Checked = true;
+            this.cb_pressure.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_pressure.Name = "cb_pressure";
+            this.cb_pressure.UseVisualStyleBackColor = true;
+            this.cb_pressure.CheckedChanged += new System.EventHandler(this.cb_pressure_CheckedChanged);
+            // 
             // label101
             // 
             resources.ApplyResources(this.label101, "label101");
@@ -3730,15 +3739,6 @@
             this.bw_pressure.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_pressure_DoWork);
             this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
             this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
-            // 
-            // cb_pressure
-            // 
-            resources.ApplyResources(this.cb_pressure, "cb_pressure");
-            this.cb_pressure.Checked = true;
-            this.cb_pressure.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pressure.Name = "cb_pressure";
-            this.cb_pressure.UseVisualStyleBackColor = true;
-            this.cb_pressure.CheckedChanged += new System.EventHandler(this.cb_pressure_CheckedChanged);
             // 
             // XPS
             // 

@@ -43,6 +43,11 @@ namespace XPS
         int i;
         int end = 0;
         // bw-DoWork
+        int ch_num;
+        int vnom = 100;
+        int sleep_vset = 8000;
+        double perc_ramp = 10;
+
 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string now = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
@@ -649,8 +654,6 @@ namespace XPS
                         {
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
-                            iseg.RawIO.Write(":SYS:USER:WRITE:VNOM 100 (@3)\n");
-                            iseg.RawIO.Write(":CONF:RAMP:VOLT 10%/s\n");
 
                             //SetupControlState(true);
                         }
@@ -769,6 +772,11 @@ namespace XPS
             }
         }
 
+        double ramp_vmin;
+        double ramp_vmax;
+        double ramp_vstep;
+        int ramp_vramp; //das ist eine Zeit, vllt mal besser benennen IN MS!!!!!!!
+
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
@@ -781,12 +789,12 @@ namespace XPS
 
             if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
             {
-                //iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
                 //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM 100,(@{0})\n", ch[b.Name]));
                 //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 0.01%/s\n"));
             }
 
-            else if (Vmin)
+            else if (!Vset & Vmin & Vmax & Vramp & Vstep)
             {
                 if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
                 {
@@ -794,6 +802,14 @@ namespace XPS
                 }
                 else
                 {
+                    ch_num = ch[b.Name];
+                    ramp_vmin = Convert.ToDouble(vmin_in);
+                    ramp_vmax = Convert.ToDouble(vmax_in);
+                    ramp_vstep = Convert.ToDouble(vstep_in);
+                    ramp_vramp = Convert.ToInt32(vramp_in);
+                    iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM {0} (@{1})\n", vnom, ch_num));
+                    iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
+                    vmeas[ch_num].Enabled = true;
                     bw_iseg.RunWorkerAsync();
                 }
             }
@@ -838,15 +854,19 @@ namespace XPS
 
             //bW_data.ReportProgress(100 * i / num_gauss, end);
             //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", 18.000,2));
-            Thread.Sleep(8000);
-            decimal inc = 0.2m;
-            for (decimal i = 0; i < 10; i++)
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", ramp_vmin,ch_num));
+            Thread.Sleep(sleep_vset);
+            double v = ramp_vmin;
+            //hier kommt noch erste messung mit hin
+            while (v <= ramp_vmax)
             {
-                decimal v = 18.000m + i * inc;
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", v.ToString("0.000"), 2));
-                Thread.Sleep(1000);
+                v += ramp_vstep;
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", v.ToString("0.000"), ch_num));
+                //iseg.RawIO.Write(String.Format("MEAS:VOLT? (@{0})\n", ch_num));
+                //bw_iseg.ReportProgress(0, iseg.RawIO.ReadString());
+                Thread.Sleep(ramp_vramp);
             }
+            //evtl. am ende wieder auf ground ziehen!
 
             if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
             {
@@ -863,7 +883,7 @@ namespace XPS
         {
             //progressBar1.Value = e.ProgressPercentage;
             //lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
-            //tb_show.Text = Convert.ToString(e.UserState);
+            vmeas[ch_num].Text = Convert.ToString(e.UserState);
         }
 
 
@@ -931,13 +951,16 @@ namespace XPS
             if (cb_pressure.Checked)
             {
                 bw_pressure.RunWorkerAsync();
-                cb_pressure.Text = "Hide";
+                //cb_pressure.Text = "Hide";
+                tb_pressure.Enabled = true;
             }
 
             else
             {
                 bw_pressure.CancelAsync();
-                cb_pressure.Text = "Show";
+                //cb_pressure.Text = "Show";
+                tb_pressure.Text = "";
+                tb_pressure.Enabled = false;
             }
         }
     }
