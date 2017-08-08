@@ -654,6 +654,8 @@ namespace XPS
                         {
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
+                            iseg.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
+                            iseg.RawIO.Write("CURR:BOU 0.0001,(@0-5)\n");
 
                             //SetupControlState(true);
                         }
@@ -858,23 +860,21 @@ namespace XPS
             Thread.Sleep(sleep_vset);
             double v = ramp_vmin;
             //hier kommt noch erste messung mit hin
-            while (v <= ramp_vmax)
+            while (v <= (ramp_vmax-ramp_vstep))
             {
+                if (bw_iseg.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+                {
+                    e.Cancel = true;
+                    break; //warum? ist wichtig! vllt um aus for-loop zu kommen
+                }
                 v += ramp_vstep;
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", v.ToString("0.000"), ch_num));
                 //iseg.RawIO.Write(String.Format("MEAS:VOLT? (@{0})\n", ch_num));
                 //bw_iseg.ReportProgress(0, iseg.RawIO.ReadString());
+                bw_iseg.ReportProgress(0, (v+ramp_vstep).ToString("0.000"));
                 Thread.Sleep(ramp_vramp);
             }
             //evtl. am ende wieder auf ground ziehen!
-
-            if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
-            {
-                e.Cancel = true;
-                //bW_data.ReportProgress(0);
-            }
-            
-            //safer.safe(path,list_gauss);
             e.Result = end; //stores the results of what has been done in bW
         }
 
@@ -892,7 +892,9 @@ namespace XPS
             //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
             if (e.Cancelled)
             {
-                MessageBox.Show("Cancelled!!!");
+                vmeas[ch_num].Text = "";
+                vmeas[ch_num].Enabled = false;
+                MessageBox.Show("EMERGENCY STOP!!!");
             }
 
             else if (e.Error != null)
@@ -962,6 +964,37 @@ namespace XPS
                 tb_pressure.Text = "";
                 tb_pressure.Enabled = false;
             }
+        }
+
+        private void btn_emcy_Click(object sender, EventArgs e)
+        {
+            iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
+            bw_iseg.CancelAsync();
+
+            for (int i = 0; i <6 ; i++)
+            {
+                stat[i].Text = "Off";
+                stat[i].Enabled = false;
+                reload[i].Enabled = false;
+                reset[i].Enabled = false;
+                stat[i].BackColor = SystemColors.ControlLightLight;
+            }
+
+            (sender as Button).Enabled = false;
+        }
+
+        private void XPS_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                iseg.RawIO.Write("*RST\n");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can't reset Iseg HV Supply");
+            }
+
+         
         }
     }
 }

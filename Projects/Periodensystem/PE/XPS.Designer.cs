@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
+            System.Windows.Forms.Button btn_emcy;
             this.Y = new System.Windows.Forms.Button();
             this.Sc = new System.Windows.Forms.Button();
             this.Ra = new System.Windows.Forms.Button();
@@ -434,7 +435,6 @@
             this.stat4 = new System.Windows.Forms.CheckBox();
             this.stat5 = new System.Windows.Forms.CheckBox();
             this.stat6 = new System.Windows.Forms.CheckBox();
-            this.lb_stat = new System.Windows.Forms.Label();
             this.btn_reload1 = new System.Windows.Forms.Button();
             this.btn_reload2 = new System.Windows.Forms.Button();
             this.btn_reload3 = new System.Windows.Forms.Button();
@@ -450,6 +450,7 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
+            btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3347,7 +3348,6 @@
             this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 8);
             this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 8);
             this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 8);
-            this.tableLayoutPanel3.Controls.Add(this.lb_stat, 0, 8);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload1, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload2, 2, 7);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload3, 3, 7);
@@ -3361,6 +3361,7 @@
             this.tableLayoutPanel3.Controls.Add(this.rs5, 5, 9);
             this.tableLayoutPanel3.Controls.Add(this.rs6, 6, 9);
             this.tableLayoutPanel3.Controls.Add(this.rs_all, 0, 9);
+            this.tableLayoutPanel3.Controls.Add(btn_emcy, 0, 7);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel3_Layout);
             // 
@@ -3640,11 +3641,6 @@
             this.stat6.Name = "stat6";
             this.stat6.UseVisualStyleBackColor = true;
             // 
-            // lb_stat
-            // 
-            resources.ApplyResources(this.lb_stat, "lb_stat");
-            this.lb_stat.Name = "lb_stat";
-            // 
             // btn_reload1
             // 
             resources.ApplyResources(this.btn_reload1, "btn_reload1");
@@ -3740,6 +3736,14 @@
             this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
             this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
             // 
+            // btn_emcy
+            // 
+            resources.ApplyResources(btn_emcy, "btn_emcy");
+            btn_emcy.Name = "btn_emcy";
+            this.tableLayoutPanel3.SetRowSpan(btn_emcy, 2);
+            btn_emcy.UseVisualStyleBackColor = true;
+            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -3834,6 +3838,7 @@
             this.Controls.Add(this.s10);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "XPS";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XPS_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -4208,7 +4213,6 @@
         private System.Windows.Forms.Label lb_stepsize;
         private System.Windows.Forms.Label lb_time;
         private System.Windows.Forms.Label lb_vmeas;
-        private System.Windows.Forms.Label lb_stat;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TextBox ch1_meas;

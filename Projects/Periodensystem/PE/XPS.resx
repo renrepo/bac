@@ -13164,6 +13164,114 @@
   <data name="&gt;&gt;label97.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 12</value>
+  </data>
+  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 328</value>
+  </data>
+  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>276</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cb_pressure.Name" xml:space="preserve">
+    <value>cb_pressure</value>
+  </data>
+  <data name="&gt;&gt;cb_pressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_pressure.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;cb_pressure.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;label101.Name" xml:space="preserve">
+    <value>label101</value>
+  </data>
+  <data name="&gt;&gt;label101.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label101.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;label101.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Name" xml:space="preserve">
+    <value>tb_pressure</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tb_pressure.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 302</value>
+  </data>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cb_pressure.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -13239,33 +13347,51 @@
   <data name="&gt;&gt;tb_pressure.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>tabPage2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label58" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label57" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs1" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="rs2" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="rs3" Row="9" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="rs4" Row="9" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="rs5" Row="9" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="rs6" Row="9" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs_all" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_emcy" Row="7" RowSpan="2" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.578,Percent,13.55499,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Absolute,18,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.32076,Percent,13.20755,Percent,10.84906,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
     <value>391, 302</value>
   </data>
-  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tabPage1.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="tabPage2.Text" xml:space="preserve">
+    <value>Iseg Terminal</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
-    <value>tabPage1</value>
+  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
+    <value>tabPage2</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
     <value>tabControl1</value>
   </data>
-  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
+  <metadata name="btn_emcy.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
   <data name="tableLayoutPanel3.ColumnCount" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
@@ -13917,18 +14043,6 @@
   <data name="&gt;&gt;stat6.ZOrder" xml:space="preserve">
     <value>53</value>
   </data>
-  <data name="&gt;&gt;lb_stat.Name" xml:space="preserve">
-    <value>lb_stat</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.ZOrder" xml:space="preserve">
-    <value>54</value>
-  </data>
   <data name="&gt;&gt;btn_reload1.Name" xml:space="preserve">
     <value>btn_reload1</value>
   </data>
@@ -13939,7 +14053,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload1.ZOrder" xml:space="preserve">
-    <value>55</value>
+    <value>54</value>
   </data>
   <data name="&gt;&gt;btn_reload2.Name" xml:space="preserve">
     <value>btn_reload2</value>
@@ -13951,7 +14065,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload2.ZOrder" xml:space="preserve">
-    <value>56</value>
+    <value>55</value>
   </data>
   <data name="&gt;&gt;btn_reload3.Name" xml:space="preserve">
     <value>btn_reload3</value>
@@ -13963,7 +14077,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload3.ZOrder" xml:space="preserve">
-    <value>57</value>
+    <value>56</value>
   </data>
   <data name="&gt;&gt;btn_reload4.Name" xml:space="preserve">
     <value>btn_reload4</value>
@@ -13975,7 +14089,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload4.ZOrder" xml:space="preserve">
-    <value>58</value>
+    <value>57</value>
   </data>
   <data name="&gt;&gt;btn_reload5.Name" xml:space="preserve">
     <value>btn_reload5</value>
@@ -13987,7 +14101,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload5.ZOrder" xml:space="preserve">
-    <value>59</value>
+    <value>58</value>
   </data>
   <data name="&gt;&gt;btn_reload6.Name" xml:space="preserve">
     <value>btn_reload6</value>
@@ -13999,7 +14113,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload6.ZOrder" xml:space="preserve">
-    <value>60</value>
+    <value>59</value>
   </data>
   <data name="&gt;&gt;rs1.Name" xml:space="preserve">
     <value>rs1</value>
@@ -14011,7 +14125,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs1.ZOrder" xml:space="preserve">
-    <value>61</value>
+    <value>60</value>
   </data>
   <data name="&gt;&gt;rs2.Name" xml:space="preserve">
     <value>rs2</value>
@@ -14023,7 +14137,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs2.ZOrder" xml:space="preserve">
-    <value>62</value>
+    <value>61</value>
   </data>
   <data name="&gt;&gt;rs3.Name" xml:space="preserve">
     <value>rs3</value>
@@ -14035,7 +14149,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs3.ZOrder" xml:space="preserve">
-    <value>63</value>
+    <value>62</value>
   </data>
   <data name="&gt;&gt;rs4.Name" xml:space="preserve">
     <value>rs4</value>
@@ -14047,7 +14161,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs4.ZOrder" xml:space="preserve">
-    <value>64</value>
+    <value>63</value>
   </data>
   <data name="&gt;&gt;rs5.Name" xml:space="preserve">
     <value>rs5</value>
@@ -14059,7 +14173,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs5.ZOrder" xml:space="preserve">
-    <value>65</value>
+    <value>64</value>
   </data>
   <data name="&gt;&gt;rs6.Name" xml:space="preserve">
     <value>rs6</value>
@@ -14071,7 +14185,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs6.ZOrder" xml:space="preserve">
-    <value>66</value>
+    <value>65</value>
   </data>
   <data name="&gt;&gt;rs_all.Name" xml:space="preserve">
     <value>rs_all</value>
@@ -14083,6 +14197,18 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs_all.ZOrder" xml:space="preserve">
+    <value>66</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Name" xml:space="preserve">
+    <value>btn_emcy</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.ZOrder" xml:space="preserve">
     <value>67</value>
   </data>
   <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
@@ -14110,55 +14236,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel3.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label58" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label57" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_stat" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs1" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="rs2" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="rs3" Row="9" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="rs4" Row="9" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="rs5" Row="9" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="rs6" Row="9" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs_all" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.578,Percent,13.55499,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Absolute,18,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.32076,Percent,13.20755,Percent,10.84906" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="tabPage2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPage2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>391, 302</value>
-  </data>
-  <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tabPage2.Text" xml:space="preserve">
-    <value>Iseg Terminal</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Name" xml:space="preserve">
-    <value>tabPage2</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 12</value>
-  </data>
-  <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 328</value>
-  </data>
-  <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>276</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Name" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tabControl1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="label100" Row="0" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="lb_vset" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label99" Row="0" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmin" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label98" Row="0" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch1_meas" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label58" Row="0" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmax" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label57" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lb_stepsize" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label81" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lb_time" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_vmeas" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="ch2_meas" Row="6" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch1_v" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmin" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_vmax" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_step" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch1_ramp" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="ch2_v" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmin" Row="2" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_step" Row="4" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch2_ramp" Row="5" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmin" Row="2" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_vmax" Row="3" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch2_vmax" Row="3" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="ch3_step" Row="4" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_ramp" Row="5" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch3_meas" Row="6" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_v" Row="1" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch3_v" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmin" Row="2" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_vmax" Row="3" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_step" Row="4" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_ramp" Row="5" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch4_meas" Row="6" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="ch5_v" Row="1" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmin" Row="2" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_vmax" Row="3" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_step" Row="4" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_ramp" Row="5" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch5_meas" Row="6" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="ch6_v" Row="1" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmin" Row="2" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_vmax" Row="3" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_step" Row="4" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_ramp" Row="5" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="ch6_meas" Row="6" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="stat1" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="stat2" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="stat3" Row="8" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="stat4" Row="8" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="stat5" Row="8" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="stat6" Row="8" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload1" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload2" Row="7" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload3" Row="7" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload4" Row="7" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload5" Row="7" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="btn_reload6" Row="7" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs1" Row="9" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="rs2" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="rs3" Row="9" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="rs4" Row="9" RowSpan="1" Column="4" ColumnSpan="1" /&gt;&lt;Control Name="rs5" Row="9" RowSpan="1" Column="5" ColumnSpan="1" /&gt;&lt;Control Name="rs6" Row="9" RowSpan="1" Column="6" ColumnSpan="1" /&gt;&lt;Control Name="rs_all" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="btn_emcy" Row="7" RowSpan="2" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,14.578,Percent,13.55499,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266,Percent,14.31266" /&gt;&lt;Rows Styles="Absolute,18,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.11111,Percent,11.32076,Percent,13.20755,Percent,10.84906,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="label100.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -15990,42 +16068,6 @@
   <data name="&gt;&gt;stat6.ZOrder" xml:space="preserve">
     <value>53</value>
   </data>
-  <data name="lb_stat.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lb_stat.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="lb_stat.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="lb_stat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 179</value>
-  </data>
-  <data name="lb_stat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 27</value>
-  </data>
-  <data name="lb_stat.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="lb_stat.Text" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="lb_stat.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.Name" xml:space="preserve">
-    <value>lb_stat</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.Parent" xml:space="preserve">
-    <value>tableLayoutPanel3</value>
-  </data>
-  <data name="&gt;&gt;lb_stat.ZOrder" xml:space="preserve">
-    <value>54</value>
-  </data>
   <data name="btn_reload1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -16057,7 +16099,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload1.ZOrder" xml:space="preserve">
-    <value>55</value>
+    <value>54</value>
   </data>
   <data name="btn_reload2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16090,7 +16132,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload2.ZOrder" xml:space="preserve">
-    <value>56</value>
+    <value>55</value>
   </data>
   <data name="btn_reload3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16123,7 +16165,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload3.ZOrder" xml:space="preserve">
-    <value>57</value>
+    <value>56</value>
   </data>
   <data name="btn_reload4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16156,7 +16198,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload4.ZOrder" xml:space="preserve">
-    <value>58</value>
+    <value>57</value>
   </data>
   <data name="btn_reload5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16189,7 +16231,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload5.ZOrder" xml:space="preserve">
-    <value>59</value>
+    <value>58</value>
   </data>
   <data name="btn_reload6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16222,7 +16264,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;btn_reload6.ZOrder" xml:space="preserve">
-    <value>60</value>
+    <value>59</value>
   </data>
   <data name="rs1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16252,7 +16294,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs1.ZOrder" xml:space="preserve">
-    <value>61</value>
+    <value>60</value>
   </data>
   <data name="rs2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16282,7 +16324,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs2.ZOrder" xml:space="preserve">
-    <value>62</value>
+    <value>61</value>
   </data>
   <data name="rs3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16312,7 +16354,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs3.ZOrder" xml:space="preserve">
-    <value>63</value>
+    <value>62</value>
   </data>
   <data name="rs4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16342,7 +16384,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs4.ZOrder" xml:space="preserve">
-    <value>64</value>
+    <value>63</value>
   </data>
   <data name="rs5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16372,7 +16414,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs5.ZOrder" xml:space="preserve">
-    <value>65</value>
+    <value>64</value>
   </data>
   <data name="rs6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16402,7 +16444,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs6.ZOrder" xml:space="preserve">
-    <value>66</value>
+    <value>65</value>
   </data>
   <data name="rs_all.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -16432,7 +16474,7 @@
     <value>tableLayoutPanel3</value>
   </data>
   <data name="&gt;&gt;rs_all.ZOrder" xml:space="preserve">
-    <value>67</value>
+    <value>66</value>
   </data>
   <metadata name="bw_iseg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>402, 17</value>
@@ -16440,6 +16482,42 @@
   <metadata name="bw_pressure.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>497, 17</value>
   </metadata>
+  <metadata name="btn_emcy.GenerateMember" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="btn_emcy.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="btn_emcy.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="btn_emcy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 157</value>
+  </data>
+  <data name="btn_emcy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="btn_emcy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 48</value>
+  </data>
+  <data name="btn_emcy.TabIndex" type="System.Int32, mscorlib">
+    <value>296</value>
+  </data>
+  <data name="btn_emcy.Text" xml:space="preserve">
+    <value>EMCY. OFF</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Name" xml:space="preserve">
+    <value>btn_emcy</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;btn_emcy.ZOrder" xml:space="preserve">
+    <value>67</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
