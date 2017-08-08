@@ -73,6 +73,7 @@ namespace XPS
 
 
         string AIN0 = "AIN0";
+        //"CIO1";
         double value = 0;
         int handle = 0;
 
@@ -654,8 +655,11 @@ namespace XPS
                         {
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
+                            //iseg.RawIO.Write("CONF:HVMICC?\n");
                             iseg.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
-                            iseg.RawIO.Write("CURR:BOU 0.0001,(@0-5)\n");
+                            //iseg.RawIO.Write(":READ:VOLT:EMCY? (@0-5)\n");
+                            iseg.RawIO.Write(":CURR 0.001,(@0-5)\n"); // Strombegrenzung auf 0.1 mA
+                            //iseg.RawIO.Write(":READ:CURR? (@0-5)\n");
 
                             //SetupControlState(true);
                         }
@@ -777,6 +781,7 @@ namespace XPS
         double ramp_vmin;
         double ramp_vmax;
         double ramp_vstep;
+        int woistdierampe;
         int ramp_vramp; //das ist eine Zeit, vllt mal besser benennen IN MS!!!!!!!
 
         private void Global_iseg_reload(object sender, MouseEventArgs e)
@@ -798,6 +803,7 @@ namespace XPS
 
             else if (!Vset & Vmin & Vmax & Vramp & Vstep)
             {
+                woistdierampe = ch[b.Name];
                 if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
                 {
                     MessageBox.Show("Backgroundworker still busy!");
@@ -810,7 +816,9 @@ namespace XPS
                     ramp_vstep = Convert.ToDouble(vstep_in);
                     ramp_vramp = Convert.ToInt32(vramp_in);
                     iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM {0} (@{1})\n", vnom, ch_num));
+                    //iseg.RawIO.Write(String.Format(":READ:VOLT:NOM? (@{0})\n", ch_num)); 
                     iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
+                    //iseg.RawIO.Write(String.Format(":READ:RAMP:VOLT? (@{0})\n", ch_num));
                     vmeas[ch_num].Enabled = true;
                     bw_iseg.RunWorkerAsync();
                 }
@@ -825,7 +833,7 @@ namespace XPS
         private void Global_iseg_reset(object sender, MouseEventArgs e)
         {
             Button r = sender as Button; // 3 decimal places
-            if (vmin[rh[r.Name]].Text != "") // .IsBusy is true, if bW is running, otherwise false
+            if (bw_iseg.IsBusy & woistdierampe == rh[r.Name]) // .IsBusy is true, if bW is running, otherwise false
             {
                 bw_iseg.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
             }
@@ -836,15 +844,26 @@ namespace XPS
             vmax[rh[r.Name]].Text = "";
             vstep[rh[r.Name]].Text = "";
             vramp[rh[r.Name]].Text = "";
+            vmeas[rh[r.Name]].Text = "";
             stat[rh[r.Name]].Text = "Off";
             stat[rh[r.Name]].BackColor = SystemColors.ControlLightLight;
         }
 
         private void rs_all_Click(object sender, EventArgs e)
         {
+            if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
+            {
+                bw_iseg.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
+            }
             iseg.RawIO.Write(String.Format("*RST\n"));
             for (int i = 0; i <= 5; i++)
             {
+                vset[i].Text = "";
+                vmin[i].Text = "";
+                vmax[i].Text = "";
+                vstep[i].Text = "";
+                vramp[i].Text = "";
+                vmeas[i].Text = "";
                 stat[i].Text = "Off";
                 stat[i].BackColor = SystemColors.ControlLightLight;
             }
@@ -857,6 +876,7 @@ namespace XPS
             //bW_data.ReportProgress(100 * i / num_gauss, end);
             //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
             iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", ramp_vmin,ch_num));
+            //iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", ch_num));
             Thread.Sleep(sleep_vset);
             double v = ramp_vmin;
             //hier kommt noch erste messung mit hin
@@ -869,7 +889,8 @@ namespace XPS
                 }
                 v += ramp_vstep;
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", v.ToString("0.000"), ch_num));
-                //iseg.RawIO.Write(String.Format("MEAS:VOLT? (@{0})\n", ch_num));
+                //iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", ch_num));
+                //Thread.Sleep(100);
                 //bw_iseg.ReportProgress(0, iseg.RawIO.ReadString());
                 bw_iseg.ReportProgress(0, (v+ramp_vstep).ToString("0.000"));
                 Thread.Sleep(ramp_vramp);
@@ -894,7 +915,6 @@ namespace XPS
             {
                 vmeas[ch_num].Text = "";
                 vmeas[ch_num].Enabled = false;
-                MessageBox.Show("EMERGENCY STOP!!!");
             }
 
             else if (e.Error != null)
