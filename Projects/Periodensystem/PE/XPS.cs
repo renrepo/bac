@@ -223,7 +223,7 @@ namespace XPS
 
             if (!bw_pressure.IsBusy)
             {
-                bw_pressure.RunWorkerAsync();
+                //bw_pressure.RunWorkerAsync();
             }
         }
 
@@ -636,7 +636,7 @@ namespace XPS
             // ISEG TERMINAL
 
 
-        private void openSessionButton_Click(object sender, EventArgs e)
+        private async void openSessionButton_Click(object sender, EventArgs e)
         {
             using (SelectResource sr = new SelectResource())
             {
@@ -656,12 +656,21 @@ namespace XPS
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
                             //iseg.RawIO.Write("CONF:HVMICC?\n");
+                            await Task.Delay(20);
+                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            await Task.Delay(20);
                             iseg.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
                             //iseg.RawIO.Write(":READ:VOLT:EMCY? (@0-5)\n");
+                            await Task.Delay(20);
+                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            await Task.Delay(20);
                             iseg.RawIO.Write(":CURR 0.001,(@0-5)\n"); // Strombegrenzung auf 0.1 mA
                             //iseg.RawIO.Write(":READ:CURR? (@0-5)\n");
-
+                            await Task.Delay(20);
+                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            await Task.Delay(20);
                             //SetupControlState(true);
+                            bw_iseg_volts.RunWorkerAsync();
                         }
                         catch (InvalidCastException)
                         {
@@ -696,9 +705,9 @@ namespace XPS
                 string textToWrite = writeTextBox.Text + '\n';
                 //string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 iseg.RawIO.Write(textToWrite);
-                Thread.Sleep(5);
+                Thread.Sleep(20);
                 readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
-                Thread.Sleep(5);
+                Thread.Sleep(20);
                 readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
                 // WARUM KLAPPT DAS NUR BEI ZUWEIMAL LESEN?
             }
@@ -767,12 +776,14 @@ namespace XPS
             if (c.Text == "Off")
             {
                 iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", th[c.Name]));
+                readTextBox.Text = iseg.RawIO.ReadString();
                 c.Text = "On";
                 c.BackColor = Color.LimeGreen;
             }
             else
             {
                 iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", th[c.Name]));
+                readTextBox.Text = iseg.RawIO.ReadString();
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
             }
@@ -784,6 +795,9 @@ namespace XPS
         int woistdierampe;
         int ramp_vramp; //das ist eine Zeit, vllt mal besser benennen IN MS!!!!!!!
 
+        bool darfreloaden;
+        decimal vset_in;
+        int halter;
         private void Global_iseg_reload(object sender, MouseEventArgs e)
         {
             Button b = sender as Button;
@@ -796,7 +810,12 @@ namespace XPS
 
             if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
             {
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                darfreloaden = true;
+                halter = ch[b.Name];
+                //iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                //await Task.Delay(30);
+                //tb_iseg_read.Text = iseg.RawIO.ReadString();
+                //await Task.Delay(30);
                 //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM 100,(@{0})\n", ch[b.Name]));
                 //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 0.01%/s\n"));
             }
@@ -904,7 +923,7 @@ namespace XPS
         {
             //progressBar1.Value = e.ProgressPercentage;
             //lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
-            vmeas[ch_num].Text = Convert.ToString(e.UserState);
+            //vmeas[ch_num].Text = Convert.ToString(e.UserState);
         }
 
 
@@ -968,6 +987,74 @@ namespace XPS
             }
         }
 
+
+
+
+
+
+
+
+
+        int counter = -1;
+        string spannungen;
+
+        private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!bw_iseg_volts.CancellationPending)
+            {
+                counter += 1;
+                iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", 5));
+                Thread.Sleep(20);
+                spannungen = iseg.RawIO.ReadString();
+                Thread.Sleep(20);
+                spannungen = iseg.RawIO.ReadString();
+                Thread.Sleep(20);
+                double s =Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
+                bw_iseg_volts.ReportProgress(0, s.ToString("0.000"));
+                if (darfreloaden)
+                {
+                    iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), halter)); // 3 decimal places
+                    Thread.Sleep(20);
+                    spannungen = iseg.RawIO.ReadString();
+                    Thread.Sleep(20);
+                    darfreloaden = false;
+                }
+                Thread.Sleep(2);
+                Thread.Sleep(2);
+                Thread.Sleep(2);
+                if (counter > 4)
+                {
+                    counter = -1;
+                    Thread.Sleep(20);
+                }
+            }
+        }
+
+        private void bw_iseg_volts_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            vmeas[5].Text = Convert.ToString(e.UserState);
+            int percentage = e.ProgressPercentage;
+        }
+
+        private void bw_iseg_volts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void cb_pressure_CheckedChanged(object sender, EventArgs e)
         {
             if (cb_pressure.Checked)
@@ -1003,11 +1090,14 @@ namespace XPS
             (sender as Button).Enabled = false;
         }
 
-        private void XPS_FormClosing(object sender, FormClosingEventArgs e)
+        private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
                 iseg.RawIO.Write("*RST\n");
+                await Task.Delay(40);
+                tb_iseg_read.Text = iseg.RawIO.ReadString();
+                counter = -1;
             }
             catch (Exception)
             {

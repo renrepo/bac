@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
             System.Windows.Forms.Button btn_emcy;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
             this.Y = new System.Windows.Forms.Button();
             this.Sc = new System.Windows.Forms.Button();
             this.Ra = new System.Windows.Forms.Button();
@@ -450,6 +450,8 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
+            this.tb_iseg_read = new System.Windows.Forms.TextBox();
+            this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -460,6 +462,14 @@
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btn_emcy
+            // 
+            resources.ApplyResources(btn_emcy, "btn_emcy");
+            btn_emcy.Name = "btn_emcy";
+            this.tableLayoutPanel3.SetRowSpan(btn_emcy, 2);
+            btn_emcy.UseVisualStyleBackColor = true;
+            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
             // 
             // Y
             // 
@@ -3224,6 +3234,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tb_iseg_read);
             this.tabPage1.Controls.Add(this.cb_pressure);
             this.tabPage1.Controls.Add(this.label101);
             this.tabPage1.Controls.Add(this.tb_pressure);
@@ -3736,13 +3747,18 @@
             this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
             this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
             // 
-            // btn_emcy
+            // tb_iseg_read
             // 
-            resources.ApplyResources(btn_emcy, "btn_emcy");
-            btn_emcy.Name = "btn_emcy";
-            this.tableLayoutPanel3.SetRowSpan(btn_emcy, 2);
-            btn_emcy.UseVisualStyleBackColor = true;
-            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
+            resources.ApplyResources(this.tb_iseg_read, "tb_iseg_read");
+            this.tb_iseg_read.Name = "tb_iseg_read";
+            // 
+            // bw_iseg_volts
+            // 
+            this.bw_iseg_volts.WorkerReportsProgress = true;
+            this.bw_iseg_volts.WorkerSupportsCancellation = true;
+            this.bw_iseg_volts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_volts_DoWork);
+            this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
+            this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
             // 
             // XPS
             // 
@@ -4280,6 +4296,8 @@
         private System.Windows.Forms.TextBox tb_pressure;
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.CheckBox cb_pressure;
+        private System.Windows.Forms.TextBox tb_iseg_read;
+        private System.ComponentModel.BackgroundWorker bw_iseg_volts;
     }
 }
 
