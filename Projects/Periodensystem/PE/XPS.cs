@@ -74,8 +74,11 @@ namespace XPS
 
 
         string AIN0 = "AIN0";
-        //"CIO1";
+        string CIO1 = "CIO0";
         double value = 0;
+        double value2 = 0;
+        double value3 = 0;
+        int handle2 = 0;
         int handle = 0;
 
         ManualResetEvent _suspendEvent = new ManualResetEvent(true);
@@ -233,13 +236,15 @@ namespace XPS
                 item.MouseDown += Global_iseg_reset;
             }
 
-
+            LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
+            LJM.eWriteName(handle2, "DIO18", 0);
+            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
             if (!bw_pressure.IsBusy)
             {
                 bw_pressure.RunWorkerAsync();
             }
 
-            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
+           
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e){}
@@ -1004,9 +1009,9 @@ namespace XPS
             while (!bw_pressure.CancellationPending)
             {
                 LJM.eReadName(handle, AIN0, ref value);
-                Thread.Sleep(10);
+                Thread.Sleep(20);
                 pressure = Math.Pow(10,((Convert.ToDouble(value)-7.75))/0.75);
-                bw_pressure.ReportProgress(0, pressure.ToString("0.00E0"));
+                bw_pressure.ReportProgress(Convert.ToInt32(value2), pressure.ToString("0.00E0"));
                 Thread.Sleep(1000);
             }
         }
@@ -1014,7 +1019,7 @@ namespace XPS
         private void bw_pressure_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             tb_pressure.Text = Convert.ToString(e.UserState);
-            int percentage = e.ProgressPercentage;
+            //tb_counter.Text = e.ProgressPercentage.ToString();
         }
 
         private void bw_pressure_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -1178,6 +1183,8 @@ namespace XPS
                 await Task.Delay(10);
                 _suspendEvent.Set();
                 tb_iseg_read.Text = iseg.RawIO.ReadString();
+                bw_iseg_volts.CancelAsync();
+                LJM.CloseAll();
             }
             catch (Exception)
             {
@@ -1228,6 +1235,24 @@ namespace XPS
             {
                 Global_iseg_reload(btn_reload1, new EventArgs());
             }
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+            //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
+            //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
+            //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
+            //LJM.eWriteName(handle2, "FIO7", 0);
+            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+            //LJM.eWriteName()
+            LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
+            await Task.Delay(1000);
+            LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
+            //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
+            double erg = value3 - value2;
+            tb_counter.Text = erg.ToString();
+            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 0);
         }
     }
 }

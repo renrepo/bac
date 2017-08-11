@@ -376,6 +376,8 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tb_counter = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.tb_iseg_read = new System.Windows.Forms.TextBox();
             this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.label101 = new System.Windows.Forms.Label();
@@ -452,7 +454,6 @@
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3235,6 +3236,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tb_counter);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.tb_iseg_read);
             this.tabPage1.Controls.Add(this.cb_pressure);
@@ -3271,6 +3273,18 @@
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tb_counter
+            // 
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tb_iseg_read
             // 
@@ -3773,12 +3787,6 @@
             this.bw_iseg_volts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_volts_DoWork);
             this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
             this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // XPS
             // 
@@ -4319,6 +4327,7 @@
         private System.Windows.Forms.TextBox tb_iseg_read;
         private System.ComponentModel.BackgroundWorker bw_iseg_volts;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox tb_counter;
     }
 }
 
