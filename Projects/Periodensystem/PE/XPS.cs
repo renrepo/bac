@@ -60,6 +60,7 @@ namespace XPS
         Dictionary<string, int> th = new Dictionary<string, int>();
         Dictionary<string, int> rh = new Dictionary<string, int>();
         Dictionary<string, int> ph = new Dictionary<string, int>();
+        Dictionary<string, string> nocheins = new Dictionary<string, string>();
 
         TextBox[] vset;
         TextBox[] vmin;
@@ -76,6 +77,9 @@ namespace XPS
         //"CIO1";
         double value = 0;
         int handle = 0;
+
+        ManualResetEvent _suspendEvent = new ManualResetEvent(true);
+
 
         public XPS()
         {
@@ -180,6 +184,13 @@ namespace XPS
             ch.Add("btn_reload5", 4);
             ch.Add("btn_reload6", 5);
 
+            nocheins.Add("ch1_v","btn_reload1");
+            nocheins.Add("ch2_v","btn_reload2");
+            nocheins.Add("ch3_v","btn_reload3");
+            nocheins.Add("ch4_v","btn_reload4");
+            nocheins.Add("ch5_v","btn_reload5");
+            nocheins.Add("ch6_v","btn_reload6");
+
             th.Add("stat1", 0);
             th.Add("stat2", 1);
             th.Add("stat3", 2);
@@ -204,7 +215,13 @@ namespace XPS
             foreach (var item in reload)
             {
                 item.MouseDown += Global_iseg_reload;
+
             }
+
+            //foreach (var item in vset)
+            //{
+            //    item.KeyDown += Global_iseg_enter;
+            //}
 
             foreach (var item in stat)
             {
@@ -217,14 +234,12 @@ namespace XPS
             }
 
 
-
-            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
-
-
             if (!bw_pressure.IsBusy)
             {
-                //bw_pressure.RunWorkerAsync();
+                bw_pressure.RunWorkerAsync();
             }
+
+            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e){}
@@ -770,20 +785,30 @@ namespace XPS
 
         //##########################################################################################################################################
 
-        private void Global_iseg_terminal(object sender, MouseEventArgs e)
+        private async void Global_iseg_terminal(object sender, MouseEventArgs e)
         {
             CheckBox c = sender as CheckBox;
             if (c.Text == "Off")
             {
+                _suspendEvent.Reset();
+                await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", th[c.Name]));
+                await Task.Delay(10);
                 readTextBox.Text = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                _suspendEvent.Set();
                 c.Text = "On";
                 c.BackColor = Color.LimeGreen;
             }
             else
             {
+                _suspendEvent.Reset();
+                await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", th[c.Name]));
+                await Task.Delay(10);
                 readTextBox.Text = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                _suspendEvent.Set();
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
             }
@@ -795,10 +820,7 @@ namespace XPS
         int woistdierampe;
         int ramp_vramp; //das ist eine Zeit, vllt mal besser benennen IN MS!!!!!!!
 
-        bool darfreloaden;
-        decimal vset_in;
-        int halter;
-        private void Global_iseg_reload(object sender, MouseEventArgs e)
+        private async void Global_iseg_reload(object sender,EventArgs e)
         {
             Button b = sender as Button;
 
@@ -807,15 +829,15 @@ namespace XPS
             bool Vmax = Decimal.TryParse(vmax[ch[b.Name]].Text.Replace(',', '.'), out decimal vmax_in);
             bool Vramp = Decimal.TryParse(vramp[ch[b.Name]].Text.Replace(',', '.'), out decimal vramp_in);
             bool Vstep = Decimal.TryParse(vstep[ch[b.Name]].Text.Replace(',', '.'), out decimal vstep_in);
-
+            vset[ch[b.Name]].Text = vset_in.ToString("0.000");
             if (Vset &! Vmin &! Vmax &! Vramp &! Vstep)
             {
-                darfreloaden = true;
-                halter = ch[b.Name];
-                //iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
-                //await Task.Delay(30);
-                //tb_iseg_read.Text = iseg.RawIO.ReadString();
-                //await Task.Delay(30);
+                _suspendEvent.Reset();
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                await Task.Delay(10);
+                tb_iseg_read.Text = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                _suspendEvent.Set();
                 //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM 100,(@{0})\n", ch[b.Name]));
                 //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 0.01%/s\n"));
             }
@@ -849,15 +871,36 @@ namespace XPS
             }
         }
 
-        private void Global_iseg_reset(object sender, MouseEventArgs e)
+
+
+        //private void Global_iseg_enter(object sender, KeyEventArgs e)
+        //{
+        //    TextBox t = sender as TextBox;
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        Global_iseg_reload(nocheins[t.Name], new EventArgs());
+        //    }
+        //}
+
+
+
+        private async void Global_iseg_reset(object sender, MouseEventArgs e)
         {
             Button r = sender as Button; // 3 decimal places
+            _suspendEvent.Reset();
             if (bw_iseg.IsBusy & woistdierampe == rh[r.Name]) // .IsBusy is true, if bW is running, otherwise false
             {
                 bw_iseg.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
             }
             iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", rh[r.Name]));
+            await Task.Delay(10);
+            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            await Task.Delay(10);
             iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", rh[r.Name]));
+            await Task.Delay(10);
+            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            await Task.Delay(10);
+            _suspendEvent.Set();
             vset[rh[r.Name]].Text = "";
             vmin[rh[r.Name]].Text = "";
             vmax[rh[r.Name]].Text = "";
@@ -868,13 +911,18 @@ namespace XPS
             stat[rh[r.Name]].BackColor = SystemColors.ControlLightLight;
         }
 
-        private void rs_all_Click(object sender, EventArgs e)
+        private async void rs_all_Click(object sender, EventArgs e)
         {
+            _suspendEvent.Reset();
             if (bw_iseg.IsBusy) // .IsBusy is true, if bW is running, otherwise false
             {
                 bw_iseg.CancelAsync(); //cancels the background operation and sets CancellationPendiung to true!
             }
             iseg.RawIO.Write(String.Format("*RST\n"));
+            await Task.Delay(10);
+            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            await Task.Delay(10);
+            _suspendEvent.Set();
             for (int i = 0; i <= 5; i++)
             {
                 vset[i].Text = "";
@@ -993,36 +1041,61 @@ namespace XPS
 
 
 
+       
 
-
-        int counter = -1;
         string spannungen;
 
         private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
         {
-            while (!bw_iseg_volts.CancellationPending)
+            //while (!bw_iseg_volts.CancellationPending)
+            //{
+            //    _suspendEvent.WaitOne(Timeout.Infinite);
+            //    counter += 1;
+            //    iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
+            //    Thread.Sleep(20);
+            //    spannungen = iseg.RawIO.ReadString();
+            //    Thread.Sleep(10);
+            //    spannungen = iseg.RawIO.ReadString();
+            //    Thread.Sleep(10);
+            //    _suspendEvent.WaitOne(Timeout.Infinite);
+            //    double s =Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
+            //    bw_iseg_volts.ReportProgress(0, s.ToString("0.000"));
+            //    Thread.Sleep(2);
+            //    _suspendEvent.WaitOne(Timeout.Infinite);
+            //    Thread.Sleep(2);
+            //    Thread.Sleep(2);
+            //    if (counter > 4)
+            //    {
+            //        counter = -1;
+            //        Thread.Sleep(20);
+            //    }
+            //}
+            double s = 0;
+            for (int counter = 0;  counter < 6; counter++)
             {
-                counter += 1;
-                iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", 5));
+                Thread.Sleep(10);
+                iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
                 Thread.Sleep(20);
                 spannungen = iseg.RawIO.ReadString();
-                Thread.Sleep(20);
+                Thread.Sleep(10);
                 spannungen = iseg.RawIO.ReadString();
-                Thread.Sleep(20);
-                double s =Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
-                bw_iseg_volts.ReportProgress(0, s.ToString("0.000"));
-                if (darfreloaden)
+                Thread.Sleep(10);
+                _suspendEvent.WaitOne(Timeout.Infinite);
+                try
                 {
-                    iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), halter)); // 3 decimal places
-                    Thread.Sleep(20);
-                    spannungen = iseg.RawIO.ReadString();
-                    Thread.Sleep(20);
-                    darfreloaden = false;
+                    s = Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
                 }
+                catch (Exception)
+                {
+                    s = 0;
+                }
+                bw_iseg_volts.ReportProgress(counter, s.ToString("0.000"));
+                Thread.Sleep(2);
+                //_suspendEvent.WaitOne(Timeout.Infinite);
                 Thread.Sleep(2);
                 Thread.Sleep(2);
-                Thread.Sleep(2);
-                if (counter > 4)
+                _suspendEvent.WaitOne(Timeout.Infinite);
+                if (counter == 5)
                 {
                     counter = -1;
                     Thread.Sleep(20);
@@ -1032,7 +1105,7 @@ namespace XPS
 
         private void bw_iseg_volts_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            vmeas[5].Text = Convert.ToString(e.UserState);
+            vmeas[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
             int percentage = e.ProgressPercentage;
         }
 
@@ -1073,10 +1146,15 @@ namespace XPS
             }
         }
 
-        private void btn_emcy_Click(object sender, EventArgs e)
+        private async void btn_emcy_Click(object sender, EventArgs e)
         {
+            _suspendEvent.Reset();
+            await Task.Delay(10);
             iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
+            await Task.Delay(10);
+            tb_iseg_read.Text = iseg.RawIO.ReadString();
             bw_iseg.CancelAsync();
+            _suspendEvent.Set();
 
             for (int i = 0; i <6 ; i++)
             {
@@ -1094,10 +1172,12 @@ namespace XPS
         {
             try
             {
+                _suspendEvent.Reset();
+                await Task.Delay(10);
                 iseg.RawIO.Write("*RST\n");
-                await Task.Delay(40);
+                await Task.Delay(10);
+                _suspendEvent.Set();
                 tb_iseg_read.Text = iseg.RawIO.ReadString();
-                counter = -1;
             }
             catch (Exception)
             {
@@ -1105,6 +1185,49 @@ namespace XPS
             }
 
          
+        }
+
+        private void ch6_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload6, new EventArgs());
+            }
+        }
+        private void ch5_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload5, new EventArgs());
+            }
+        }
+        private void ch4_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload4, new EventArgs());
+            }
+        }
+        private void ch3_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload3, new EventArgs());
+            }
+        }
+        private void ch2_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload2, new EventArgs());
+            }
+        }
+        private void ch1_v_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Global_iseg_reload(btn_reload1, new EventArgs());
+            }
         }
     }
 }
@@ -1114,3 +1237,4 @@ namespace XPS
 
 //bugs:
 // - nach clear führt das abwählen von elementen zzu einem error (da ebtl. noch in liste gespeichert)
+// - close iseg HV

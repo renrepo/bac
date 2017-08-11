@@ -376,6 +376,7 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tb_iseg_read = new System.Windows.Forms.TextBox();
             this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.label101 = new System.Windows.Forms.Label();
             this.tb_pressure = new System.Windows.Forms.TextBox();
@@ -450,8 +451,8 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
-            this.tb_iseg_read = new System.Windows.Forms.TextBox();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
+            this.button1 = new System.Windows.Forms.Button();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3234,6 +3235,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.tb_iseg_read);
             this.tabPage1.Controls.Add(this.cb_pressure);
             this.tabPage1.Controls.Add(this.label101);
@@ -3269,6 +3271,11 @@
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tb_iseg_read
+            // 
+            resources.ApplyResources(this.tb_iseg_read, "tb_iseg_read");
+            this.tb_iseg_read.Name = "tb_iseg_read";
             // 
             // cb_pressure
             // 
@@ -3403,6 +3410,7 @@
             // 
             // ch1_meas
             // 
+            this.ch1_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch1_meas, "ch1_meas");
             this.ch1_meas.Name = "ch1_meas";
             // 
@@ -3443,6 +3451,7 @@
             // 
             // ch2_meas
             // 
+            this.ch2_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch2_meas, "ch2_meas");
             this.ch2_meas.Name = "ch2_meas";
             // 
@@ -3450,6 +3459,7 @@
             // 
             resources.ApplyResources(this.ch1_v, "ch1_v");
             this.ch1_v.Name = "ch1_v";
+            this.ch1_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch1_v_KeyDown);
             // 
             // ch1_vmin
             // 
@@ -3475,6 +3485,7 @@
             // 
             resources.ApplyResources(this.ch2_v, "ch2_v");
             this.ch2_v.Name = "ch2_v";
+            this.ch2_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch2_v_KeyDown);
             // 
             // ch2_vmin
             // 
@@ -3518,6 +3529,7 @@
             // 
             // ch3_meas
             // 
+            this.ch3_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch3_meas, "ch3_meas");
             this.ch3_meas.Name = "ch3_meas";
             // 
@@ -3525,11 +3537,13 @@
             // 
             resources.ApplyResources(this.ch4_v, "ch4_v");
             this.ch4_v.Name = "ch4_v";
+            this.ch4_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch4_v_KeyDown);
             // 
             // ch3_v
             // 
             resources.ApplyResources(this.ch3_v, "ch3_v");
             this.ch3_v.Name = "ch3_v";
+            this.ch3_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch3_v_KeyDown);
             // 
             // ch4_vmin
             // 
@@ -3553,6 +3567,7 @@
             // 
             // ch4_meas
             // 
+            this.ch4_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch4_meas, "ch4_meas");
             this.ch4_meas.Name = "ch4_meas";
             // 
@@ -3560,6 +3575,7 @@
             // 
             resources.ApplyResources(this.ch5_v, "ch5_v");
             this.ch5_v.Name = "ch5_v";
+            this.ch5_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch5_v_KeyDown);
             // 
             // ch5_vmin
             // 
@@ -3583,6 +3599,7 @@
             // 
             // ch5_meas
             // 
+            this.ch5_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch5_meas, "ch5_meas");
             this.ch5_meas.Name = "ch5_meas";
             // 
@@ -3590,6 +3607,7 @@
             // 
             resources.ApplyResources(this.ch6_v, "ch6_v");
             this.ch6_v.Name = "ch6_v";
+            this.ch6_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch6_v_KeyDown);
             // 
             // ch6_vmin
             // 
@@ -3613,6 +3631,7 @@
             // 
             // ch6_meas
             // 
+            this.ch6_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch6_meas, "ch6_meas");
             this.ch6_meas.Name = "ch6_meas";
             // 
@@ -3747,11 +3766,6 @@
             this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
             this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
             // 
-            // tb_iseg_read
-            // 
-            resources.ApplyResources(this.tb_iseg_read, "tb_iseg_read");
-            this.tb_iseg_read.Name = "tb_iseg_read";
-            // 
             // bw_iseg_volts
             // 
             this.bw_iseg_volts.WorkerReportsProgress = true;
@@ -3759,6 +3773,12 @@
             this.bw_iseg_volts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_volts_DoWork);
             this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
             this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // XPS
             // 
@@ -4298,6 +4318,7 @@
         private System.Windows.Forms.CheckBox cb_pressure;
         private System.Windows.Forms.TextBox tb_iseg_read;
         private System.ComponentModel.BackgroundWorker bw_iseg_volts;
+        private System.Windows.Forms.Button button1;
     }
 }
 
