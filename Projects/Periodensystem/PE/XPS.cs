@@ -44,6 +44,7 @@ namespace XPS
         int end = 0;
         // bw-DoWork
         int ch_num;
+        double max_curr = 0.0005;
         int vnom = 100;
         int sleep_vset = 8000;
         double perc_ramp = 10;
@@ -68,13 +69,13 @@ namespace XPS
         TextBox[] vramp;
         TextBox[] vstep;
         TextBox[] vmeas;
+        TextBox[] vmeas2;
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
 
 
         string AIN0 = "AIN0";
-        string CIO1 = "CIO0";
         double value = 0;
         double value2 = 0;
         double value3 = 0;
@@ -83,6 +84,7 @@ namespace XPS
 
         ManualResetEvent _suspendEvent = new ManualResetEvent(true);
 
+        string garbage;
 
         public XPS()
         {
@@ -176,6 +178,7 @@ namespace XPS
             vstep = new TextBox[] { ch1_step, ch2_step, ch3_step, ch4_step, ch5_step, ch6_step };
             vramp = new TextBox[] { ch1_ramp, ch2_ramp, ch3_ramp, ch4_ramp, ch5_ramp, ch6_ramp };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
+            vmeas2 = new TextBox[] { vm1, vm2, vm3, vm4, vm5, vm6 };
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1,rs2,rs3,rs4,rs5,rs6 };
             stat = new CheckBox [] { stat1, stat2, stat3, stat4, stat5, stat6 };
@@ -215,6 +218,14 @@ namespace XPS
             ph.Add("p5", 4);
             ph.Add("p6", 5);
 
+            tb_pressure.ReadOnly = true;
+            tb_counter.ReadOnly = true;
+            for (int i = 0; i < 6; i++)
+            {
+                vmeas[i].ReadOnly = true;
+                vmeas2[i].ReadOnly = true;
+            }
+
             foreach (var item in reload)
             {
                 item.MouseDown += Global_iseg_reload;
@@ -236,15 +247,21 @@ namespace XPS
                 item.MouseDown += Global_iseg_reset;
             }
 
-            LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
-            LJM.eWriteName(handle2, "DIO18", 0);
-            LJM.OpenS("ANY", "ANY", "ANY", ref handle);
-            if (!bw_pressure.IsBusy)
+            try
             {
-                bw_pressure.RunWorkerAsync();
-            }
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
+                LJM.eWriteName(handle2, "DIO18", 0);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle);
 
-           
+                if (!bw_pressure.IsBusy)
+                {
+                    bw_pressure.RunWorkerAsync();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can't open Labjack T7 device!");
+            }  
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e){}
@@ -257,6 +274,11 @@ namespace XPS
         private void tableLayoutPanel3_Layout(object sender, LayoutEventArgs e)
         {
             tableLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+        }
+
+        private void tableLayoutPanel4_Layout(object sender, LayoutEventArgs e)
+        {
+            tableLayoutPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
 
 
@@ -677,20 +699,32 @@ namespace XPS
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
                             //iseg.RawIO.Write("CONF:HVMICC?\n");
                             await Task.Delay(20);
-                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            garbage = iseg.RawIO.ReadString();
                             await Task.Delay(20);
                             iseg.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
                             //iseg.RawIO.Write(":READ:VOLT:EMCY? (@0-5)\n");
                             await Task.Delay(20);
-                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            garbage = iseg.RawIO.ReadString();
                             await Task.Delay(20);
-                            iseg.RawIO.Write(":CURR 0.001,(@0-5)\n"); // Strombegrenzung auf 0.1 mA
+                            iseg.RawIO.Write(String.Format(":CURR {0},(@0-5)\n", max_curr)); // Strombegrenzung auf 0.1 mA
                             //iseg.RawIO.Write(":READ:CURR? (@0-5)\n");
                             await Task.Delay(20);
-                            tb_iseg_read.Text = iseg.RawIO.ReadString();
+                            garbage = iseg.RawIO.ReadString();
                             await Task.Delay(20);
                             //SetupControlState(true);
                             bw_iseg_volts.RunWorkerAsync();
+                            for (int i = 0; i < 6; i++)
+                            {
+                                reset[i].Enabled = true;
+                                reload[i].Enabled = true;
+                                stat[i].Enabled = true;
+                                rs_all.Enabled = true;
+                                queryButton.Enabled = true;
+                                readButton.Enabled = true;
+                                writeButton.Enabled = true;
+                                clearButton.Enabled = true;
+                                //btn_emcy.Enabled = true;
+                            }
                         }
                         catch (InvalidCastException)
                         {
@@ -840,7 +874,7 @@ namespace XPS
                 _suspendEvent.Reset();
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
                 await Task.Delay(10);
-                tb_iseg_read.Text = iseg.RawIO.ReadString();
+                garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
                 _suspendEvent.Set();
                 //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM 100,(@{0})\n", ch[b.Name]));
@@ -899,11 +933,11 @@ namespace XPS
             }
             iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", rh[r.Name]));
             await Task.Delay(10);
-            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            garbage = iseg.RawIO.ReadString();
             await Task.Delay(10);
             iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", rh[r.Name]));
             await Task.Delay(10);
-            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            garbage = iseg.RawIO.ReadString();
             await Task.Delay(10);
             _suspendEvent.Set();
             vset[rh[r.Name]].Text = "";
@@ -925,7 +959,7 @@ namespace XPS
             }
             iseg.RawIO.Write(String.Format("*RST\n"));
             await Task.Delay(10);
-            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            garbage = iseg.RawIO.ReadString();
             await Task.Delay(10);
             _suspendEvent.Set();
             for (int i = 0; i <= 5; i++)
@@ -1052,33 +1086,14 @@ namespace XPS
 
         private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
         {
-            //while (!bw_iseg_volts.CancellationPending)
-            //{
-            //    _suspendEvent.WaitOne(Timeout.Infinite);
-            //    counter += 1;
-            //    iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
-            //    Thread.Sleep(20);
-            //    spannungen = iseg.RawIO.ReadString();
-            //    Thread.Sleep(10);
-            //    spannungen = iseg.RawIO.ReadString();
-            //    Thread.Sleep(10);
-            //    _suspendEvent.WaitOne(Timeout.Infinite);
-            //    double s =Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
-            //    bw_iseg_volts.ReportProgress(0, s.ToString("0.000"));
-            //    Thread.Sleep(2);
-            //    _suspendEvent.WaitOne(Timeout.Infinite);
-            //    Thread.Sleep(2);
-            //    Thread.Sleep(2);
-            //    if (counter > 4)
-            //    {
-            //        counter = -1;
-            //        Thread.Sleep(20);
-            //    }
-            //}
             double s = 0;
             for (int counter = 0;  counter < 6; counter++)
             {
-                Thread.Sleep(10);
+                if (bw_iseg_volts.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
+                {
+                    e.Cancel = true;
+                    break;
+                }
                 iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
                 Thread.Sleep(20);
                 spannungen = iseg.RawIO.ReadString();
@@ -1111,6 +1126,7 @@ namespace XPS
         private void bw_iseg_volts_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             vmeas[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
+            vmeas2[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
             int percentage = e.ProgressPercentage;
         }
 
@@ -1157,7 +1173,7 @@ namespace XPS
             await Task.Delay(10);
             iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
             await Task.Delay(10);
-            tb_iseg_read.Text = iseg.RawIO.ReadString();
+            garbage = iseg.RawIO.ReadString();
             bw_iseg.CancelAsync();
             _suspendEvent.Set();
 
@@ -1173,26 +1189,6 @@ namespace XPS
             (sender as Button).Enabled = false;
         }
 
-        private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                _suspendEvent.Reset();
-                await Task.Delay(10);
-                iseg.RawIO.Write("*RST\n");
-                await Task.Delay(10);
-                _suspendEvent.Set();
-                tb_iseg_read.Text = iseg.RawIO.ReadString();
-                bw_iseg_volts.CancelAsync();
-                LJM.CloseAll();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Can't reset Iseg HV Supply");
-            }
-
-         
-        }
 
         private void ch6_v_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1237,22 +1233,80 @@ namespace XPS
             }
         }
 
-        private async void button1_Click(object sender, EventArgs e)
+        private void tb_counter_ms_KeyDown(object sender, KeyEventArgs e)
         {
-            LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
-            //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
-            //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
-            //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
-            //LJM.eWriteName(handle2, "FIO7", 0);
-            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
-            //LJM.eWriteName()
-            LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
-            await Task.Delay(1000);
-            LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
-            //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
-            double erg = value3 - value2;
-            tb_counter.Text = erg.ToString();
-            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 0);
+            if (e.KeyCode == Keys.Enter)
+            {
+                btn_start_counter_Click(sender, new EventArgs());
+                tb_counter_ms.Text = ct.ToString();
+            }
+        }
+
+
+        int ct;
+        private async void btn_start_counter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ct = int.Parse(tb_counter_ms.Text);
+                tb_counter_ms.Text = ct.ToString();
+                LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+                //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
+                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
+                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
+                //LJM.eWriteName(handle2, "FIO7", 0);
+                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+                //LJM.eWriteName()
+                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
+                await Task.Delay(ct);
+                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
+                //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
+                double erg = value3 - value2;
+                tb_counter.Text = erg.ToString();
+                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 0);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer!");
+            }
+        }
+
+
+        private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                bw_iseg_volts.CancelAsync();
+
+                if (bw_iseg.IsBusy)
+                {
+                    bw_iseg.CancelAsync();
+                }
+                try
+                {
+                    iseg.RawIO.Write("*RST\n");
+                    garbage = iseg.RawIO.ReadString();
+                    iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
+                    garbage = iseg.RawIO.ReadString();
+                    await Task.Delay(50);
+                    iseg.Dispose();
+                }
+                catch (Exception)
+                {
+                }
+
+                if (bw_pressure.IsBusy)
+                {
+                    bw_pressure.CancelAsync();
+                }
+                LJM.CloseAll();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Problems with closing Iseg or Labjack T7 device!");
+            }
+
+
         }
     }
 }
