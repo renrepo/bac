@@ -20,6 +20,19 @@ namespace XPS
     public partial class XPS : Form
     {
 
+        double V_photon = 21.21;
+        double W_aus = 4.5;
+        double delta_v_channeltron = 2800;
+        double ri = 106;
+        double ra = 112;
+        double v_ana_min;
+        double v_ana_max;
+        double v_ana_bind;
+        double v_cem;
+        double delta_v;
+        double v_hem_in;
+        double v_hem_out;
+
         string filePath = Path.GetFullPath("Bindungsenergien.csv");
         string filePath2 = Path.GetFullPath("colors2.csv");
         string filePath3 = Path.GetFullPath("electronconfiguration.csv");
@@ -1307,6 +1320,37 @@ namespace XPS
             }
 
 
+        }
+       
+        private void btn_load_Click(object sender, EventArgs e)
+        {
+            double k = ra / ri - ri / ra;
+            bool V_pass = double.TryParse(tb_v_pass.Text.Replace(',', '.'), out double v_pass);
+            bool V_vor = double.TryParse(tb_v_vor.Text.Replace(',', '.'), out double v_vor);
+            bool V_bind = double.TryParse(tb_v_bind.Text.Replace(',', '.'), out double v_bind);
+
+            if (V_pass & V_vor & V_bind)
+            {
+                v_ana_min = v_vor - V_photon + W_aus + v_pass;
+                v_ana_max = v_vor + W_aus + v_pass;
+                v_ana_bind = v_ana_min + v_bind;
+                v_cem = v_ana_bind + delta_v_channeltron;
+                delta_v = v_pass * k;
+                //v_hem_in = v_ana_bind + delta_v / 2; // 50:50 spannungsteiler
+                //v_hem_out = v_ana_bind - delta_v / 2; // 50:50 spannungsteiler
+                v_hem_in = v_ana_bind + delta_v * 0.6;
+                v_hem_out = v_ana_bind - delta_v*0.4;
+                tb_ana_min.Text = v_ana_min.ToString("0.000");
+                tb_ana_max.Text = v_ana_max.ToString("0.000");
+                ch4_v.Text = v_ana_bind.ToString("0.000");
+                ch5_v.Text = v_cem.ToString("0.000");
+                ch1_v.Text = v_hem_in.ToString("0.000");
+                ch2_v.Text = v_hem_out.ToString("0.000");
+            }
+            else
+            {
+                MessageBox.Show("Type in V_pass, V_vor and E_bind");
+            }
         }
     }
 }
