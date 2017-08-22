@@ -394,12 +394,17 @@
             this.label106 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_counter_ms = new System.Windows.Forms.TextBox();
-            this.tb_counter = new System.Windows.Forms.TextBox();
-            this.btn_start_counter = new System.Windows.Forms.Button();
-            this.label108 = new System.Windows.Forms.Label();
             this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btn_load = new System.Windows.Forms.Button();
+            this.tb_ana_max = new System.Windows.Forms.TextBox();
+            this.tb_ana_min = new System.Windows.Forms.TextBox();
+            this.label111 = new System.Windows.Forms.Label();
+            this.label110 = new System.Windows.Forms.Label();
+            this.V_vor = new System.Windows.Forms.Label();
+            this.tb_v_bind = new System.Windows.Forms.TextBox();
+            this.tb_v_pass = new System.Windows.Forms.TextBox();
+            this.tb_v_vor = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
             this.lb_vset = new System.Windows.Forms.Label();
@@ -468,18 +473,18 @@
             this.rs5 = new System.Windows.Forms.Button();
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
+            this.tb_counter_ms = new System.Windows.Forms.TextBox();
+            this.tb_counter = new System.Windows.Forms.TextBox();
+            this.btn_start_counter = new System.Windows.Forms.Button();
+            this.label108 = new System.Windows.Forms.Label();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
-            this.tb_v_vor = new System.Windows.Forms.TextBox();
-            this.tb_v_pass = new System.Windows.Forms.TextBox();
-            this.tb_v_bind = new System.Windows.Forms.TextBox();
-            this.V_vor = new System.Windows.Forms.Label();
-            this.label110 = new System.Windows.Forms.Label();
-            this.label111 = new System.Windows.Forms.Label();
-            this.tb_ana_min = new System.Windows.Forms.TextBox();
-            this.tb_ana_max = new System.Windows.Forms.TextBox();
-            this.btn_load = new System.Windows.Forms.Button();
+            this.bt_rampe = new System.Windows.Forms.Button();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
+            this.tb_rampe_bis = new System.Windows.Forms.TextBox();
+            this.btn_rampe = new System.Windows.Forms.Button();
+            this.tbn_rampe = new System.Windows.Forms.TextBox();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -490,7 +495,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -3414,36 +3418,8 @@
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.tb_counter_ms, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.tb_counter, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btn_start_counter, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label108, 0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel4_Layout);
-            // 
-            // tb_counter_ms
-            // 
-            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
-            this.tb_counter_ms.Name = "tb_counter_ms";
-            this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
-            // 
-            // tb_counter
-            // 
-            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_counter, "tb_counter");
-            this.tb_counter.Name = "tb_counter";
-            // 
-            // btn_start_counter
-            // 
-            resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
-            this.btn_start_counter.Name = "btn_start_counter";
-            this.btn_start_counter.UseVisualStyleBackColor = true;
-            this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
-            // 
-            // label108
-            // 
-            resources.ApplyResources(this.label108, "label108");
-            this.label108.Name = "label108";
             // 
             // cb_pressure
             // 
@@ -3475,6 +3451,54 @@
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btn_load
+            // 
+            resources.ApplyResources(this.btn_load, "btn_load");
+            this.btn_load.Name = "btn_load";
+            this.btn_load.UseVisualStyleBackColor = true;
+            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
+            // 
+            // tb_ana_max
+            // 
+            resources.ApplyResources(this.tb_ana_max, "tb_ana_max");
+            this.tb_ana_max.Name = "tb_ana_max";
+            // 
+            // tb_ana_min
+            // 
+            resources.ApplyResources(this.tb_ana_min, "tb_ana_min");
+            this.tb_ana_min.Name = "tb_ana_min";
+            // 
+            // label111
+            // 
+            resources.ApplyResources(this.label111, "label111");
+            this.label111.Name = "label111";
+            // 
+            // label110
+            // 
+            resources.ApplyResources(this.label110, "label110");
+            this.label110.Name = "label110";
+            // 
+            // V_vor
+            // 
+            resources.ApplyResources(this.V_vor, "V_vor");
+            this.V_vor.Name = "V_vor";
+            this.V_vor.UseMnemonic = false;
+            // 
+            // tb_v_bind
+            // 
+            resources.ApplyResources(this.tb_v_bind, "tb_v_bind");
+            this.tb_v_bind.Name = "tb_v_bind";
+            // 
+            // tb_v_pass
+            // 
+            resources.ApplyResources(this.tb_v_pass, "tb_v_pass");
+            this.tb_v_pass.Name = "tb_v_pass";
+            // 
+            // tb_v_vor
+            // 
+            resources.ApplyResources(this.tb_v_vor, "tb_v_vor");
+            this.tb_v_vor.Name = "tb_v_vor";
             // 
             // tableLayoutPanel3
             // 
@@ -3917,6 +3941,30 @@
             this.rs_all.UseVisualStyleBackColor = true;
             this.rs_all.Click += new System.EventHandler(this.rs_all_Click);
             // 
+            // tb_counter_ms
+            // 
+            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
+            this.tb_counter_ms.Name = "tb_counter_ms";
+            this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
+            // 
+            // tb_counter
+            // 
+            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            // 
+            // btn_start_counter
+            // 
+            resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
+            this.btn_start_counter.Name = "btn_start_counter";
+            this.btn_start_counter.UseVisualStyleBackColor = true;
+            this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
+            // 
+            // label108
+            // 
+            resources.ApplyResources(this.label108, "label108");
+            this.label108.Name = "label108";
+            // 
             // bw_iseg
             // 
             this.bw_iseg.WorkerReportsProgress = true;
@@ -3941,59 +3989,49 @@
             this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
             this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
             // 
-            // tb_v_vor
+            // bt_rampe
             // 
-            resources.ApplyResources(this.tb_v_vor, "tb_v_vor");
-            this.tb_v_vor.Name = "tb_v_vor";
+            resources.ApplyResources(this.bt_rampe, "bt_rampe");
+            this.bt_rampe.Name = "bt_rampe";
+            this.bt_rampe.UseVisualStyleBackColor = true;
+            this.bt_rampe.Click += new System.EventHandler(this.bt_rampe_Click);
             // 
-            // tb_v_pass
+            // tb_rampe
             // 
-            resources.ApplyResources(this.tb_v_pass, "tb_v_pass");
-            this.tb_v_pass.Name = "tb_v_pass";
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
             // 
-            // tb_v_bind
+            // tb_rampe_bis
             // 
-            resources.ApplyResources(this.tb_v_bind, "tb_v_bind");
-            this.tb_v_bind.Name = "tb_v_bind";
+            resources.ApplyResources(this.tb_rampe_bis, "tb_rampe_bis");
+            this.tb_rampe_bis.Name = "tb_rampe_bis";
             // 
-            // V_vor
+            // btn_rampe
             // 
-            resources.ApplyResources(this.V_vor, "V_vor");
-            this.V_vor.Name = "V_vor";
-            this.V_vor.UseMnemonic = false;
+            resources.ApplyResources(this.btn_rampe, "btn_rampe");
+            this.btn_rampe.Name = "btn_rampe";
+            this.btn_rampe.UseVisualStyleBackColor = true;
+            this.btn_rampe.Click += new System.EventHandler(this.btn_rampe_Click);
             // 
-            // label110
+            // tbn_rampe
             // 
-            resources.ApplyResources(this.label110, "label110");
-            this.label110.Name = "label110";
-            // 
-            // label111
-            // 
-            resources.ApplyResources(this.label111, "label111");
-            this.label111.Name = "label111";
-            // 
-            // tb_ana_min
-            // 
-            resources.ApplyResources(this.tb_ana_min, "tb_ana_min");
-            this.tb_ana_min.Name = "tb_ana_min";
-            // 
-            // tb_ana_max
-            // 
-            resources.ApplyResources(this.tb_ana_max, "tb_ana_max");
-            this.tb_ana_max.Name = "tb_ana_max";
-            // 
-            // btn_load
-            // 
-            resources.ApplyResources(this.btn_load, "btn_load");
-            this.btn_load.Name = "btn_load";
-            this.btn_load.UseVisualStyleBackColor = true;
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
+            resources.ApplyResources(this.tbn_rampe, "tbn_rampe");
+            this.tbn_rampe.Name = "tbn_rampe";
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbn_rampe);
+            this.Controls.Add(this.btn_rampe);
+            this.Controls.Add(this.tb_rampe_bis);
+            this.Controls.Add(this.tb_rampe);
+            this.Controls.Add(this.bt_rampe);
+            this.Controls.Add(this.label108);
+            this.Controls.Add(this.tb_counter_ms);
+            this.Controls.Add(this.tb_counter);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.btn_start_counter);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
             this.Controls.Add(this.label96);
@@ -4100,8 +4138,6 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -4562,6 +4598,11 @@
         private System.Windows.Forms.TextBox tb_v_bind;
         private System.Windows.Forms.TextBox tb_v_pass;
         private System.Windows.Forms.TextBox tb_v_vor;
+        private System.Windows.Forms.Button bt_rampe;
+        private System.Windows.Forms.TextBox tb_rampe;
+        private System.Windows.Forms.TextBox tb_rampe_bis;
+        private System.Windows.Forms.Button btn_rampe;
+        private System.Windows.Forms.TextBox tbn_rampe;
     }
 }
 

@@ -57,10 +57,10 @@ namespace XPS
         int end = 0;
         // bw-DoWork
         int ch_num;
-        double max_curr = 0.0005;
-        int vnom = 100;
+        double max_curr = 0.003;
+        int vnom = 4000;
         int sleep_vset = 8000;
-        double perc_ramp = 10;
+        double perc_ramp = 40.000;
 
 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -89,11 +89,16 @@ namespace XPS
 
 
         string AIN0 = "AIN0";
+        string AIN2 = "AIN2";
+        double v_labjack = 0;
         double value = 0;
         double value2 = 0;
         double value3 = 0;
+        double vlens;
+        int handle3 = 0;
         int handle2 = 0;
         int handle = 0;
+        int handle4 = 0;
 
         ManualResetEvent _suspendEvent = new ManualResetEvent(true);
 
@@ -262,9 +267,12 @@ namespace XPS
 
             try
             {
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle3);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
-                LJM.eWriteName(handle2, "DIO18", 0);
+               // LJM.eWriteName(handle2, "DIO18", 0);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle);
+                // LJM.eWriteName(handle2, "DIO18", 1);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle4);
 
                 if (!bw_pressure.IsBusy)
                 {
@@ -396,7 +404,8 @@ namespace XPS
                     file.WriteLine("#XPS-spectrum" + Environment.NewLine);
                     file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
                     file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
-                    file.WriteLine("#E_b \t counts");                   
+                    //file.WriteLine("#E_b \t counts");     
+                    file.WriteLine("#V_iseg \t V_Labjack \t iseg-labjack");
                 }
 
                 bW_data.RunWorkerAsync(); //run bW if it is not still running
@@ -414,22 +423,49 @@ namespace XPS
             }                      
         }
 
-
+        double spannung;
+        double spannung2;
+        double j = 0;
+        double sc = 0;
+        double diff = 0;
 
         private void bW_data_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (i = 0; i <= num_gauss; i++) 
+            for (i = 0; i <= 1000; i++) 
             {
-                end += i;
-                values.Add(end + "\t" + 2 * end);
-                bW_data.ReportProgress(100 * i / num_gauss, end);
-                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
-                using (var file = new StreamWriter(path2 +  "data" + data_coutner + ".txt", true))
-                {
-                    file.WriteLine(i.ToString("000") + "\t" + end.ToString("00000"));
-                }
-                Thread.Sleep(500);
 
+                LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+                //LJM.eWriteName()
+                LJM.eReadName(handle4, "AIN2", ref vlens);
+                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
+                Thread.Sleep(250);
+                sc = vlens;
+                LJM.eReadName(handle4, "AIN2", ref vlens);
+                sc += vlens;
+                Thread.Sleep(250);
+                LJM.eReadName(handle4, "AIN2", ref vlens);
+                sc += vlens;
+                Thread.Sleep(250);
+                LJM.eReadName(handle4, "AIN2", ref vlens);
+                sc += vlens;
+                Thread.Sleep(250);
+                LJM.eReadName(handle4, "AIN2", ref vlens);
+                sc += vlens;
+                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
+                //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
+                double erg = value3 - value2;
+                spannung2 = erg;
+                spannung = sc/(0.1962*5);
+                bW_data.ReportProgress(i / 900, spannung2.ToString("00000"));
+                values.Add(spannung + "\t" + spannung2);
+                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+                using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
+                {
+                    file.WriteLine(spannung.ToString("0.000") + "\t" + spannung2.ToString("00000") + "\t");
+                }
+                Thread.Sleep(10);
+                sc = 0;
                 if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
                 {
                     e.Cancel = true;
@@ -438,18 +474,18 @@ namespace XPS
                 }
             }
             //safer.safe(path,list_gauss);
-            e.Result = end; //stores the results of what has been done in bW
+            e.Result = spannung2; //stores the results of what has been done in bW
         }
 
         private void bW_data_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
             lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
-            tb_show.Text = Convert.ToString(e.UserState);
+            tb_counter.Text = Convert.ToString(e.UserState);
             // x = e.ProgressPercentage
             //list1.Add(i, Convert.ToDouble(e.UserState));
-            list1.Add(i, end);
-            myCurve.AddPoint(i, end);
+            list1.Add(spannung, spannung2);
+            myCurve.AddPoint(spannung, spannung2);
 
             zedGraphControl1.Invalidate();
             zedGraphControl1.AxisChange();
@@ -719,8 +755,26 @@ namespace XPS
                             await Task.Delay(20);
                             garbage = iseg.RawIO.ReadString();
                             await Task.Delay(20);
+                            iseg.RawIO.Write("*RST\n");
+                            //iseg.RawIO.Write(":READ:VOLT:EMCY? (@0-5)\n");
+                            await Task.Delay(20);
+                            garbage = iseg.RawIO.ReadString();
+                            await Task.Delay(20);
                             iseg.RawIO.Write(String.Format(":CURR {0},(@0-5)\n", max_curr)); // Strombegrenzung auf 0.1 mA
                             //iseg.RawIO.Write(":READ:CURR? (@0-5)\n");
+                            await Task.Delay(20);
+                            garbage = iseg.RawIO.ReadString();
+                            await Task.Delay(20);
+                            //iseg.RawIO.Write(String.Format(":SYS:USER:CONF 520048\n"));
+                            //await Task.Delay(20);
+                            //garbage = iseg.RawIO.ReadString();
+                            //await Task.Delay(20);
+                            //iseg.RawIO.Write(String.Format(":SYS:USER:WRITE:VNOM {0}, (@5)\n", vnom));
+                            //await Task.Delay(20);
+                            //garbage = iseg.RawIO.ReadString();
+                            //await Task.Delay(20);
+                            //iseg.RawIO.Write(String.Format(":READ:VOLT:NOM? (@{0})\n", ch_num)); 
+                            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
                             await Task.Delay(20);
                             garbage = iseg.RawIO.ReadString();
                             await Task.Delay(20);
@@ -1256,32 +1310,35 @@ namespace XPS
         }
 
 
-        int ct;
+        int ct = 2000;
         private async void btn_start_counter_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ct = int.Parse(tb_counter_ms.Text);
-                tb_counter_ms.Text = ct.ToString();
-                LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
-                //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
-                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
-                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
-                //LJM.eWriteName(handle2, "FIO7", 0);
-                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
-                //LJM.eWriteName()
-                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
-                await Task.Delay(ct);
-                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
-                //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
-                double erg = value3 - value2;
-                tb_counter.Text = erg.ToString();
-                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 0);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Type in Integer!");
-            }
+            //while (true)
+            //{
+                try
+                {
+                    //ct = int.Parse(tb_counter_ms.Text);
+                    tb_counter_ms.Text = ct.ToString();
+                    LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+                    //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
+                    //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
+                    //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
+                    //LJM.eWriteName(handle2, "FIO7", 0);
+                    LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+                    //LJM.eWriteName()
+                    LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
+                    await Task.Delay(ct);
+                    LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
+                    //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
+                    double erg = value3 - value2;
+                    tb_counter.Text = erg.ToString();
+                    //LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 0);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Type in Integer!");
+                }
+            //}
         }
 
 
@@ -1297,6 +1354,10 @@ namespace XPS
                 }
                 try
                 {
+                    iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
+                    await Task.Delay(20);
+                    garbage = iseg.RawIO.ReadString();
+                    await Task.Delay(20);
                     iseg.RawIO.Write("*RST\n");
                     garbage = iseg.RawIO.ReadString();
                     iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
@@ -1352,6 +1413,33 @@ namespace XPS
                 MessageBox.Show("Type in V_pass, V_vor and E_bind");
             }
         }
+
+        private async void bt_rampe_Click(object sender, EventArgs e)
+        {
+            //iseg.RawIO.Write(String.Format(":READ:VOLT:NOM? (@{0})\n", ch_num)); 
+            string wert = tb_rampe.Text;
+            string rampe_bis = tb_rampe_bis.Text;
+            _suspendEvent.Reset();
+            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", wert));
+            await Task.Delay(20);
+            garbage = iseg.RawIO.ReadString();
+            await Task.Delay(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", rampe_bis));
+            await Task.Delay(20);
+            garbage = iseg.RawIO.ReadString();
+            await Task.Delay(20);
+            _suspendEvent.Set();
+        }
+
+        private async void btn_rampe_Click(object sender, EventArgs e)
+        {
+            _suspendEvent.Reset();
+            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 40.000%/s\n"));
+            await Task.Delay(20);
+            garbage = iseg.RawIO.ReadString();
+            await Task.Delay(20);
+            _suspendEvent.Set();
+        }
     }
 }
 
@@ -1361,3 +1449,62 @@ namespace XPS
 //bugs:
 // - nach clear führt das abwählen von elementen zzu einem error (da ebtl. noch in liste gespeichert)
 // - close iseg HV
+
+
+    // TESTEN OB ISEG MANUELL NE RAMPE FAHREN KANN
+//j = i;
+//spannung = -45.000 + j;
+////end += i;
+//_suspendEvent.Reset();
+//iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", spannung.ToString("0.000"), 5)); // 3 decimal places
+//Thread.Sleep(10000);
+//garbage = iseg.RawIO.ReadString();
+//Thread.Sleep(50);
+//_suspendEvent.Set();
+//LJM.eReadName(handle3, "AIN9", ref v_labjack);
+//Thread.Sleep(50);
+//sc += v_labjack;
+//LJM.eReadName(handle3, "AIN9", ref v_labjack);
+//Thread.Sleep(50);
+//sc += v_labjack;
+//LJM.eReadName(handle3, "AIN9", ref v_labjack);
+//Thread.Sleep(50);
+//sc += v_labjack;
+//spannung2 = sc / (3*0.2040);
+//bW_data.ReportProgress(i/900, spannung2.ToString("0.000"));
+//Thread.Sleep(10);
+//sc = 0;
+//diff = spannung - spannung2;
+//values.Add(spannung + "\t" + spannung2);
+////safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+//using (var file = new StreamWriter(path2 +  "data" + data_coutner + ".txt", true))
+//{
+//    file.WriteLine(spannung.ToString("0.000") + "\t" + spannung2.ToString("0.000") + "\t" + diff.ToString("0.000"));
+//}
+//Thread.Sleep(10);
+//diff = 0;
+
+
+    // COUNTER IN DAUERSCHLEIFE
+//                {
+//                spannung = i*10;
+//                //end += i;
+//                //ct = int.Parse(tb_counter_ms.Text);
+//                //tb_counter_ms.Text = ct.ToString();
+//                LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+//                //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
+//                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_A", 2);
+//                //LJM.eWriteName(handle2, "DIO18_EF_CONFIG_B", 100);
+//                //LJM.eWriteName(handle2, "FIO7", 0);
+//                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+//                //LJM.eWriteName()
+//                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
+//                Thread.Sleep(1000);
+//                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
+//                //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
+//                double erg = value3 - value2;
+//spannung2 = erg;
+//                bW_data.ReportProgress(i / 900, spannung2.ToString("00000"));
+//                values.Add(spannung + "\t" + spannung2);
+//                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+//                using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
