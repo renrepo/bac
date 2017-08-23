@@ -448,18 +448,18 @@ namespace XPS
                     //file.WriteLine("#E_b \t counts");    
                     file.WriteLine("" + Environment.NewLine);
                     file.WriteLine("" + Environment.NewLine);
-                    file.WriteLine("#Counter \t E_kin \t Int.Count \t V_analy. \t V_hemi \t V_hemo \t V_lens");
+                    file.WriteLine("#E_kin \t Counts \t Int.Count \t V_ana. \t V_hemi \t V_hemo \t V_lens");
                     file.WriteLine("" + Environment.NewLine);
                 }
 
                 double k = ra / ri - ri / ra;
                 v_analyser_min = vpass - V_photon + vbias;          //hier sollte kein elektron mehr im channeltron ankommen
                 v_hemo_min = v_analyser_min - (vpass * k *0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
-                v_hemi_min = v_analyser_min +  vpass;               //liegt entsprechung die Spannungdifferenz drüber
+                v_hemi_min = v_analyser_min +  vpass*k;               //liegt entsprechung die Spannungdifferenz drüber
 
                 v_analyser_max = vpass;          //hier sollte auch das langsamste Elektron ankommen
                 v_hemo_max = v_analyser_max - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
-                v_hemi_max = v_analyser_max + vpass;
+                v_hemi_max = v_analyser_max + vpass*k;
 
                 v_channeltron_out_min = v_analyser_min + 3000;
                 v_channeltron_out_max = v_analyser_max + 3000;
@@ -578,7 +578,7 @@ namespace XPS
 
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
-                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + intcounter.ToString("0000000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
+                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + intcounter.ToString("0000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
                         + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + "\t");
                 }
 
@@ -633,6 +633,15 @@ namespace XPS
             //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
             if (e.Cancelled)
             {
+                iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));
+                Thread.Sleep(20);
+                garbage = iseg.RawIO.ReadString();
+                Thread.Sleep(20);
+                iseg.RawIO.Write(String.Format(":VOLT OFF,(@0-5)\n"));
+                Thread.Sleep(20);
+                readTextBox.Text = iseg.RawIO.ReadString();
+                Thread.Sleep(20);
+
                 tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
