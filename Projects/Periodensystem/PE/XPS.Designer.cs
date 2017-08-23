@@ -250,36 +250,23 @@
             this.bW_data = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
             this.label84 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox50 = new System.Windows.Forms.TextBox();
-            this.textBox49 = new System.Windows.Forms.TextBox();
-            this.textBox48 = new System.Windows.Forms.TextBox();
-            this.textBox47 = new System.Windows.Forms.TextBox();
-            this.textBox46 = new System.Windows.Forms.TextBox();
-            this.textBox45 = new System.Windows.Forms.TextBox();
-            this.textBox44 = new System.Windows.Forms.TextBox();
-            this.textBox43 = new System.Windows.Forms.TextBox();
+            this.tb_meastime = new System.Windows.Forms.TextBox();
+            this.tb_counttime = new System.Windows.Forms.TextBox();
+            this.tb_slope = new System.Windows.Forms.TextBox();
+            this.tb_stepwidth = new System.Windows.Forms.TextBox();
             this.label80 = new System.Windows.Forms.Label();
-            this.label79 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.label74 = new System.Windows.Forms.Label();
-            this.label73 = new System.Windows.Forms.Label();
             this.fig_name = new System.Windows.Forms.TextBox();
             this.showdata = new System.Windows.Forms.Button();
             this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.Al_anode = new System.Windows.Forms.CheckBox();
-            this.Mg_anode = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label62 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
@@ -377,6 +364,14 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tb_v_lens = new System.Windows.Forms.TextBox();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.tb_bias = new System.Windows.Forms.TextBox();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label79 = new System.Windows.Forms.Label();
+            this.tb_pass = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tb_pressure = new System.Windows.Forms.TextBox();
@@ -394,6 +389,8 @@
             this.label106 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_counter = new System.Windows.Forms.TextBox();
+            this.label108 = new System.Windows.Forms.Label();
             this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btn_load = new System.Windows.Forms.Button();
@@ -474,9 +471,7 @@
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
-            this.tb_counter = new System.Windows.Forms.TextBox();
             this.btn_start_counter = new System.Windows.Forms.Button();
-            this.label108 = new System.Windows.Forms.Label();
             this.bw_iseg = new System.ComponentModel.BackgroundWorker();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
@@ -495,6 +490,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.SuspendLayout();
@@ -2346,11 +2342,6 @@
             resources.ApplyResources(this.label88, "label88");
             this.label88.Name = "label88";
             // 
-            // label87
-            // 
-            resources.ApplyResources(this.label87, "label87");
-            this.label87.Name = "label87";
-            // 
             // label86
             // 
             resources.ApplyResources(this.label86, "label86");
@@ -2371,66 +2362,34 @@
             resources.ApplyResources(this.label83, "label83");
             this.label83.Name = "label83";
             // 
-            // label82
+            // tb_meastime
             // 
-            resources.ApplyResources(this.label82, "label82");
-            this.label82.Name = "label82";
+            resources.ApplyResources(this.tb_meastime, "tb_meastime");
+            this.tb_meastime.Name = "tb_meastime";
+            this.tb_meastime.ReadOnly = true;
             // 
-            // comboBox2
+            // tb_counttime
             // 
-            this.comboBox2.FormattingEnabled = true;
-            resources.ApplyResources(this.comboBox2, "comboBox2");
-            this.comboBox2.Name = "comboBox2";
+            resources.ApplyResources(this.tb_counttime, "tb_counttime");
+            this.tb_counttime.Name = "tb_counttime";
+            this.tb_counttime.TextChanged += new System.EventHandler(this.tb_counttime_TextChanged);
             // 
-            // textBox50
+            // tb_slope
             // 
-            resources.ApplyResources(this.textBox50, "textBox50");
-            this.textBox50.Name = "textBox50";
+            resources.ApplyResources(this.tb_slope, "tb_slope");
+            this.tb_slope.Name = "tb_slope";
+            this.tb_slope.ReadOnly = true;
             // 
-            // textBox49
+            // tb_stepwidth
             // 
-            resources.ApplyResources(this.textBox49, "textBox49");
-            this.textBox49.Name = "textBox49";
-            // 
-            // textBox48
-            // 
-            resources.ApplyResources(this.textBox48, "textBox48");
-            this.textBox48.Name = "textBox48";
-            // 
-            // textBox47
-            // 
-            resources.ApplyResources(this.textBox47, "textBox47");
-            this.textBox47.Name = "textBox47";
-            // 
-            // textBox46
-            // 
-            resources.ApplyResources(this.textBox46, "textBox46");
-            this.textBox46.Name = "textBox46";
-            // 
-            // textBox45
-            // 
-            resources.ApplyResources(this.textBox45, "textBox45");
-            this.textBox45.Name = "textBox45";
-            // 
-            // textBox44
-            // 
-            resources.ApplyResources(this.textBox44, "textBox44");
-            this.textBox44.Name = "textBox44";
-            // 
-            // textBox43
-            // 
-            resources.ApplyResources(this.textBox43, "textBox43");
-            this.textBox43.Name = "textBox43";
+            resources.ApplyResources(this.tb_stepwidth, "tb_stepwidth");
+            this.tb_stepwidth.Name = "tb_stepwidth";
+            this.tb_stepwidth.TextChanged += new System.EventHandler(this.tb_stepwidth_TextChanged);
             // 
             // label80
             // 
             resources.ApplyResources(this.label80, "label80");
             this.label80.Name = "label80";
-            // 
-            // label79
-            // 
-            resources.ApplyResources(this.label79, "label79");
-            this.label79.Name = "label79";
             // 
             // label78
             // 
@@ -2446,21 +2405,6 @@
             // 
             resources.ApplyResources(this.label76, "label76");
             this.label76.Name = "label76";
-            // 
-            // label75
-            // 
-            resources.ApplyResources(this.label75, "label75");
-            this.label75.Name = "label75";
-            // 
-            // label74
-            // 
-            resources.ApplyResources(this.label74, "label74");
-            this.label74.Name = "label74";
-            // 
-            // label73
-            // 
-            resources.ApplyResources(this.label73, "label73");
-            this.label73.Name = "label73";
             // 
             // fig_name
             // 
@@ -2504,23 +2448,6 @@
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
-            // 
-            // Al_anode
-            // 
-            resources.ApplyResources(this.Al_anode, "Al_anode");
-            this.Al_anode.BackColor = System.Drawing.Color.LightCoral;
-            this.Al_anode.Name = "Al_anode";
-            this.Al_anode.UseVisualStyleBackColor = false;
-            this.Al_anode.CheckedChanged += new System.EventHandler(this.Al_anode_CheckedChanged);
-            // 
-            // Mg_anode
-            // 
-            resources.ApplyResources(this.Mg_anode, "Mg_anode");
-            this.Mg_anode.BackColor = System.Drawing.Color.LightCoral;
-            this.Mg_anode.ForeColor = System.Drawing.Color.Black;
-            this.Mg_anode.Name = "Mg_anode";
-            this.Mg_anode.UseVisualStyleBackColor = false;
-            this.Mg_anode.CheckedChanged += new System.EventHandler(this.Mg_anode_CheckedChanged);
             // 
             // groupBox4
             // 
@@ -3281,35 +3208,73 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.tb_v_lens);
+            this.groupBox2.Controls.Add(this.label75);
+            this.groupBox2.Controls.Add(this.label82);
+            this.groupBox2.Controls.Add(this.tb_bias);
+            this.groupBox2.Controls.Add(this.label74);
+            this.groupBox2.Controls.Add(this.label79);
+            this.groupBox2.Controls.Add(this.tb_pass);
             this.groupBox2.Controls.Add(this.label73);
-            this.groupBox2.Controls.Add(this.textBox46);
-            this.groupBox2.Controls.Add(this.textBox47);
-            this.groupBox2.Controls.Add(this.textBox45);
-            this.groupBox2.Controls.Add(this.textBox48);
-            this.groupBox2.Controls.Add(this.textBox44);
-            this.groupBox2.Controls.Add(this.textBox49);
-            this.groupBox2.Controls.Add(this.textBox43);
-            this.groupBox2.Controls.Add(this.Al_anode);
-            this.groupBox2.Controls.Add(this.textBox50);
+            this.groupBox2.Controls.Add(this.tb_stepwidth);
+            this.groupBox2.Controls.Add(this.tb_slope);
+            this.groupBox2.Controls.Add(this.tb_counttime);
+            this.groupBox2.Controls.Add(this.tb_meastime);
             this.groupBox2.Controls.Add(this.label88);
             this.groupBox2.Controls.Add(this.label80);
-            this.groupBox2.Controls.Add(this.Mg_anode);
-            this.groupBox2.Controls.Add(this.comboBox2);
-            this.groupBox2.Controls.Add(this.label79);
-            this.groupBox2.Controls.Add(this.label82);
-            this.groupBox2.Controls.Add(this.label74);
             this.groupBox2.Controls.Add(this.label78);
-            this.groupBox2.Controls.Add(this.label87);
             this.groupBox2.Controls.Add(this.label83);
             this.groupBox2.Controls.Add(this.label77);
             this.groupBox2.Controls.Add(this.label86);
             this.groupBox2.Controls.Add(this.label84);
-            this.groupBox2.Controls.Add(this.label75);
             this.groupBox2.Controls.Add(this.label76);
             this.groupBox2.Controls.Add(this.label85);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // tb_v_lens
+            // 
+            resources.ApplyResources(this.tb_v_lens, "tb_v_lens");
+            this.tb_v_lens.Name = "tb_v_lens";
+            this.tb_v_lens.TextChanged += new System.EventHandler(this.tb_v_lens_TextChanged);
+            // 
+            // label75
+            // 
+            resources.ApplyResources(this.label75, "label75");
+            this.label75.Name = "label75";
+            // 
+            // label82
+            // 
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
+            // 
+            // tb_bias
+            // 
+            resources.ApplyResources(this.tb_bias, "tb_bias");
+            this.tb_bias.Name = "tb_bias";
+            this.tb_bias.TextChanged += new System.EventHandler(this.tb_bias_TextChanged);
+            // 
+            // label74
+            // 
+            resources.ApplyResources(this.label74, "label74");
+            this.label74.Name = "label74";
+            // 
+            // label79
+            // 
+            resources.ApplyResources(this.label79, "label79");
+            this.label79.Name = "label79";
+            // 
+            // tb_pass
+            // 
+            resources.ApplyResources(this.tb_pass, "tb_pass");
+            this.tb_pass.Name = "tb_pass";
+            this.tb_pass.TextChanged += new System.EventHandler(this.tb_pass_TextChanged);
+            // 
+            // label73
+            // 
+            resources.ApplyResources(this.label73, "label73");
+            this.label73.Name = "label73";
             // 
             // groupBox1
             // 
@@ -3418,8 +3383,21 @@
             // tableLayoutPanel4
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.tb_counter, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label108, 0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel4_Layout);
+            // 
+            // tb_counter
+            // 
+            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            // 
+            // label108
+            // 
+            resources.ApplyResources(this.label108, "label108");
+            this.label108.Name = "label108";
             // 
             // cb_pressure
             // 
@@ -3947,23 +3925,12 @@
             this.tb_counter_ms.Name = "tb_counter_ms";
             this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
             // 
-            // tb_counter
-            // 
-            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_counter, "tb_counter");
-            this.tb_counter.Name = "tb_counter";
-            // 
             // btn_start_counter
             // 
             resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
             this.btn_start_counter.Name = "btn_start_counter";
             this.btn_start_counter.UseVisualStyleBackColor = true;
             this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
-            // 
-            // label108
-            // 
-            resources.ApplyResources(this.label108, "label108");
-            this.label108.Name = "label108";
             // 
             // bw_iseg
             // 
@@ -4027,9 +3994,7 @@
             this.Controls.Add(this.tb_rampe_bis);
             this.Controls.Add(this.tb_rampe);
             this.Controls.Add(this.bt_rampe);
-            this.Controls.Add(this.label108);
             this.Controls.Add(this.tb_counter_ms);
-            this.Controls.Add(this.tb_counter);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btn_start_counter);
             this.Controls.Add(this.label68);
@@ -4138,6 +4103,8 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
@@ -4367,37 +4334,24 @@
         private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.TextBox textBox49;
-        private System.Windows.Forms.TextBox textBox48;
-        private System.Windows.Forms.TextBox textBox47;
-        private System.Windows.Forms.TextBox textBox46;
-        private System.Windows.Forms.TextBox textBox45;
-        private System.Windows.Forms.TextBox textBox44;
-        private System.Windows.Forms.TextBox textBox43;
+        private System.Windows.Forms.TextBox tb_counttime;
+        private System.Windows.Forms.TextBox tb_slope;
+        private System.Windows.Forms.TextBox tb_stepwidth;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label88;
-        private System.Windows.Forms.Label label87;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.Label label85;
         private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label83;
-        private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox50;
+        private System.Windows.Forms.TextBox tb_meastime;
         private System.Windows.Forms.TextBox tb_safe;
         private System.Windows.Forms.Button safe_fig;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button showdata;
         private System.Windows.Forms.TextBox fig_name;
-        private System.Windows.Forms.CheckBox Al_anode;
-        private System.Windows.Forms.CheckBox Mg_anode;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -4603,6 +4557,14 @@
         private System.Windows.Forms.TextBox tb_rampe_bis;
         private System.Windows.Forms.Button btn_rampe;
         private System.Windows.Forms.TextBox tbn_rampe;
+        private System.Windows.Forms.TextBox tb_bias;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label79;
+        private System.Windows.Forms.TextBox tb_pass;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.TextBox tb_v_lens;
+        private System.Windows.Forms.Label label75;
+        private System.Windows.Forms.Label label82;
     }
 }
 

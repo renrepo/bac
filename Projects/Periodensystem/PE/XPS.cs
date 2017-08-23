@@ -89,16 +89,24 @@ namespace XPS
 
 
         string AIN0 = "AIN0";
-        string AIN2 = "AIN2";
-        double v_labjack = 0;
         double value = 0;
         double value2 = 0;
         double value3 = 0;
-        double vlens;
         int handle3 = 0;
         int handle2 = 0;
         int handle = 0;
         int handle4 = 0;
+
+        int handle_v_hemi = 0;
+        int handle_v_hemo = 0;
+        int handle_v_analyser = 0;
+        int handle_v_lens = 0;
+        double LJ_analyser = 0;
+        double LJ_hemi = 0;
+        double LJ_hemo = 0;
+        double LJ_lens = 0;
+        double intcounter = 0;
+
 
         ManualResetEvent _suspendEvent = new ManualResetEvent(true);
 
@@ -269,10 +277,13 @@ namespace XPS
             {
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle3);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle2);
-               // LJM.eWriteName(handle2, "DIO18", 0);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle);
-                // LJM.eWriteName(handle2, "DIO18", 1);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle4);
+
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemi);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemo);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_analyser);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_lens);
 
                 if (!bw_pressure.IsBusy)
                 {
@@ -282,7 +293,9 @@ namespace XPS
             catch (Exception)
             {
                 MessageBox.Show("Can't open Labjack T7 device!");
-            }  
+            }
+
+            k = ra / ri - ri / ra;
         }
 
         private void elementnames_Popup(object sender, PopupEventArgs e){}
@@ -385,14 +398,32 @@ namespace XPS
 
         int data_coutner = 0;
 
-        private void btn_start_Click(object sender, EventArgs e)
+
+        double vpass;
+        double vbias;
+        double vstepsize;
+        double tcount;
+        int tcount2;
+        double vLens;
+        double slope;
+        double overalltime;
+        double slop;
+        double v_analyser_min;
+        double v_channeltron_out_min;
+        double v_hemo_min;
+        double v_hemi_min;
+        double v_analyser_max;
+        double v_channeltron_out_max;
+        double v_hemo_max;
+        double v_hemi_max;
+
+        private async void btn_start_Click(object sender, EventArgs e)
         {
             if (!bW_data.IsBusy)
             {
                 end = 0;
-                string source;
-                if (Al_anode.Checked){source = "Aluminium";}
-                else {source = "Magnesium";}
+                //if (Al_anode.Checked){source = "Aluminium";}
+                //else {source = "Magnesium";}
                 myCurve = myPane.AddCurve("",
                 list1, Color.Black, SymbolType.None);
                 curr_time = now;
@@ -401,20 +432,92 @@ namespace XPS
                 path2 = dl.FullName;
                 using (var file = new StreamWriter(path2  +"data" + data_coutner + ".txt", true))
                 {
-                    file.WriteLine("#XPS-spectrum" + Environment.NewLine);
+                    file.WriteLine("#UPS-spectrum" + Environment.NewLine);
                     file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
-                    file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
-                    //file.WriteLine("#E_b \t counts");     
-                    file.WriteLine("#V_iseg \t V_Labjack \t iseg-labjack");
+                    file.WriteLine("" + Environment.NewLine);
+                    file.WriteLine("#AK pressure: \t{0} \t{1}", tb_pressure.Text, "mbar");
+                    file.WriteLine("#Pass energy: \t{0} \t{1}", vpass.ToString("0.0"), "eV");
+                    file.WriteLine("#Voltage bias: \t{0} \t{1}", vbias.ToString("0.0"), "V");
+                    file.WriteLine("#Voltage lenses: \t{0} \t{1}", vLens.ToString("0.0"), "V");
+                    file.WriteLine("#Step width: \t{0} \t{1}", vstepsize.ToString("0.0"), "meV");
+                    file.WriteLine("#Counttime: \t{0} \t{1}",tcount.ToString("0.0"), "ms");
+                    file.WriteLine("" + Environment.NewLine);
+                    file.WriteLine("#Slope: \t{0} \t{1}", slope.ToString("0.000"), "V");
+                    file.WriteLine("#Counttime: \t{0} \t{1}", tcount.ToString("0.0"), "ms");
+                    //file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
+                    //file.WriteLine("#E_b \t counts");    
+                    file.WriteLine("" + Environment.NewLine);
+                    file.WriteLine("" + Environment.NewLine);
+                    file.WriteLine("#Counter \t E_kin \t Int.Count \t V_analy. \t V_hemi \t V_hemo \t V_lens");
+                    file.WriteLine("" + Environment.NewLine);
                 }
+
+                double k = ra / ri - ri / ra;
+                v_analyser_min = vpass - V_photon + vbias;          //hier sollte kein elektron mehr im channeltron ankommen
+                v_hemo_min = v_analyser_min - (vpass * k *0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
+                v_hemi_min = v_analyser_min +  vpass;               //liegt entsprechung die Spannungdifferenz drüber
+
+                v_analyser_max = vpass;          //hier sollte auch das langsamste Elektron ankommen
+                v_hemo_max = v_analyser_max - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
+                v_hemi_max = v_analyser_max + vpass;
+
+                v_channeltron_out_min = v_analyser_min + 3000;
+                v_channeltron_out_max = v_analyser_max + 3000;
+
+                    // startspannungen setzen
+
+                _suspendEvent.Reset();
+                iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));     // Rampe auf 400 V/s
+                await Task.Delay(20);
+                garbage = iseg.RawIO.ReadString();
+                await Task.Delay(20);
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_min.ToString("0.000"))); 
+                await Task.Delay(10);
+                garbage = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000"))); 
+                await Task.Delay(10);
+                garbage = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens.ToString("0.000")));
+                await Task.Delay(10);
+                garbage = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")));
+                await Task.Delay(10);
+                garbage = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT ON,(@0-2,4)\n"));
+                await Task.Delay(10);
+                readTextBox.Text = iseg.RawIO.ReadString();
+                await Task.Delay(10);
+                
+
+                for (int i = 0; i < 12; i++)             //warten bis sich Spannungen gesetzt haben
+                {
+                    LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
+                    LJM.eReadName(handle_v_analyser, "AIN2", ref LJ_hemi);
+                    LJM.eReadName(handle_v_analyser, "AIN1", ref LJ_hemo);
+                    LJM.eReadName(handle_v_analyser, "AIN0", ref LJ_lens);
+                    LJ_analyser2 = LJ_analyser / 0.1956;
+                    LJ_hemi2 = LJ_hemi / 0.1962;
+                    LJ_hemo2 = LJ_hemo / 0.1960;
+                    LJ_lens2 = LJ_lens / 0.1962;
+                    vm1.Text = LJ_hemi2.ToString("0.000");
+                    vm2.Text = LJ_hemo2.ToString("0.000");
+                    vm3.Text = LJ_lens2.ToString("0.000");
+                    vm4.Text = LJ_analyser2.ToString("0.000");
+                    vm5.Text = v_channeltron_out_max.ToString("0.000");
+
+                    await Task.Delay(1000);
+                    _suspendEvent.Set();
+                }       
 
                 bW_data.RunWorkerAsync(); //run bW if it is not still running
                 btn_start.Enabled = false;
                 btn_can.Enabled = true;
                 tb_show.Enabled = true;
                 tb_safe.Enabled = false;
-                Mg_anode.Enabled = false;
-                Al_anode.Enabled = false;
             }
 
             else
@@ -423,69 +526,103 @@ namespace XPS
             }                      
         }
 
-        double spannung;
-        double spannung2;
-        double j = 0;
         double sc = 0;
-        double diff = 0;
+        double oldcounter = 0;
+        double LJ_analyser2 = 0;
+        double LJ_hemi2 = 0;
+        double LJ_hemo2 = 0;
+        double LJ_lens2 = 0;
+        double k;
+        double E_pass;
+        double E_kin;
 
         private void bW_data_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (i = 0; i <= 1000; i++) 
-            {
+            _suspendEvent.Reset();
+            Stopwatch sw = new Stopwatch();
+            LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
+            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", slop * 0.001));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
 
-                LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
-                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
-                //LJM.eWriteName()
-                LJM.eReadName(handle4, "AIN2", ref vlens);
-                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
-                Thread.Sleep(250);
-                sc = vlens;
-                LJM.eReadName(handle4, "AIN2", ref vlens);
-                sc += vlens;
-                Thread.Sleep(250);
-                LJM.eReadName(handle4, "AIN2", ref vlens);
-                sc += vlens;
-                Thread.Sleep(250);
-                LJM.eReadName(handle4, "AIN2", ref vlens);
-                sc += vlens;
-                Thread.Sleep(250);
-                LJM.eReadName(handle4, "AIN2", ref vlens);
-                sc += vlens;
-                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
-                //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
-                double erg = value3 - value2;
-                spannung2 = erg;
-                spannung = sc/(0.1962*5);
-                bW_data.ReportProgress(i / 900, spannung2.ToString("00000"));
-                values.Add(spannung + "\t" + spannung2);
-                //safer.safe_line(path + @"\gauss", end.ToString("000000000"));
+            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+            while (true)
+            {
+                sw.Start();
+                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref intcounter);
+                LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
+                LJM.eReadName(handle_v_analyser, "AIN2", ref LJ_hemi);
+                LJM.eReadName(handle_v_analyser, "AIN1", ref LJ_hemo);
+                LJM.eReadName(handle_v_analyser, "AIN0", ref LJ_lens);
+                //Thread.Sleep(tcount2);
+                sc = intcounter - oldcounter;
+                LJ_analyser2 = LJ_analyser / 0.1956;
+                LJ_hemi2 = LJ_hemi / 0.1962;
+                LJ_hemo2 = LJ_hemo / 0.1960;
+                LJ_lens2 = LJ_lens / 0.1962;
+
+                E_pass = (LJ_hemi2 - LJ_hemo2) / k;
+                E_kin = E_pass - LJ_analyser2 - vbias;          // denn für detektierte e- gilt: 0 = Vbias + Ekin^0 + V_ana^0 - V_pass (^0: bezogen auf 0V)
+
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
-                    file.WriteLine(spannung.ToString("0.000") + "\t" + spannung2.ToString("00000") + "\t");
+                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + intcounter.ToString("0000000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
+                        + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + "\t");
                 }
-                Thread.Sleep(10);
-                sc = 0;
+
+
+                bW_data.ReportProgress(i / 900, sc.ToString("00000"));
+
+                values.Add(E_kin + "\t" + sc);
+
+                oldcounter = intcounter;
+
                 if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
                 {
                     e.Cancel = true;
                     bW_data.ReportProgress(0);
                     break; //warum? ist wichtig! vllt um aus for-loop zu kommen
                 }
+
+                while (sw.ElapsedMilliseconds < tcount2)
+                {
+                    Thread.Sleep(1);
+                }
+                sw.Reset();
+
             }
             //safer.safe(path,list_gauss);
-            e.Result = spannung2; //stores the results of what has been done in bW
+            e.Result = sc; //stores the results of what has been done in bW
+            LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
+            _suspendEvent.Set();
         }
 
         private void bW_data_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
-            lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
+            vm1.Text = LJ_hemi2.ToString("0.000");
+            vm2.Text = LJ_hemo2.ToString("0.000");
+            vm3.Text = LJ_lens2.ToString("0.000");
+            vm4.Text = LJ_analyser2.ToString("0.000");
+            vm5.Text = v_channeltron_out_max.ToString("0.000");
+            //lb_perc_gauss.Text = e.ProgressPercentage.ToString() + " %";
             tb_counter.Text = Convert.ToString(e.UserState);
             // x = e.ProgressPercentage
             //list1.Add(i, Convert.ToDouble(e.UserState));
-            list1.Add(spannung, spannung2);
-            myCurve.AddPoint(spannung, spannung2);
+            list1.Add(E_kin, sc);
+            myCurve.AddPoint(E_kin, sc);
 
             zedGraphControl1.Invalidate();
             zedGraphControl1.AxisChange();
@@ -558,8 +695,8 @@ namespace XPS
                 safe_fig.Enabled = false;
                 tb_safe.Enabled = true;
                 fig_name.Enabled = false;
-                if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
-                    else { Al_anode.Enabled = true;}
+                //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
+                //    else { Al_anode.Enabled = true;}
                 fig_name.Clear();
                 zedGraphControl1.GraphPane.CurveList.Clear();
                 zedGraphControl1.GraphPane.GraphObjList.Clear();
@@ -663,7 +800,7 @@ namespace XPS
         private void tb_safe_TextChanged(object sender, EventArgs e)
         {
             tb_safe.BackColor = Color.LightGray;
-            enable_start();
+            btn_start.Enabled = true;
         }
 
 
@@ -682,44 +819,44 @@ namespace XPS
 
 
 
-        private void Mg_anode_CheckedChanged(object sender, EventArgs e)
-        {
-            Mg_anode.BackColor = SystemColors.Control;
-            Al_anode.BackColor = SystemColors.Control;
-            if (Mg_anode.Checked)
-            {
-                Al_anode.Enabled = false;
-            }
+        //private void Mg_anode_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    Mg_anode.BackColor = SystemColors.Control;
+        //    Al_anode.BackColor = SystemColors.Control;
+        //    if (Mg_anode.Checked)
+        //    {
+        //        Al_anode.Enabled = false;
+        //    }
 
-            else
-            {
-                Al_anode.Enabled = true;
-            }
-            enable_start();
-        }
+        //    else
+        //    {
+        //        Al_anode.Enabled = true;
+        //    }
+        //    enable_start();
+        //}
 
 
 
-        private void Al_anode_CheckedChanged(object sender, EventArgs e)
-        {
-            Al_anode.BackColor = SystemColors.Control;
-            Mg_anode.BackColor = SystemColors.Control;
-            if (Al_anode.Checked)
-            {
-                Mg_anode.Enabled = false;
-            }
+        //private void Al_anode_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    Al_anode.BackColor = SystemColors.Control;
+        //    Mg_anode.BackColor = SystemColors.Control;
+        //    if (Al_anode.Checked)
+        //    {
+        //        Mg_anode.Enabled = false;
+        //    }
 
-            else
-            {
-                Mg_anode.Enabled = true;
-            }
-            enable_start();
-        }
+        //    else
+        //    {
+        //        Mg_anode.Enabled = true;
+        //    }
+        //    enable_start();
+        //}
 
-        private void enable_start ()
-        {
-            btn_start.Enabled = tb_safe.Text != string.Empty && (Al_anode.Checked || Mg_anode.Checked);
-        }
+        //private void enable_start ()
+        //{
+        //    btn_start.Enabled = tb_safe.Text != string.Empty && (Al_anode.Checked || Mg_anode.Checked);
+        //}
 
 
 
@@ -1161,15 +1298,16 @@ namespace XPS
                     e.Cancel = true;
                     break;
                 }
-                iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
-                Thread.Sleep(20);
-                spannungen = iseg.RawIO.ReadString();
-                Thread.Sleep(10);
-                spannungen = iseg.RawIO.ReadString();
-                Thread.Sleep(10);
-                _suspendEvent.WaitOne(Timeout.Infinite);
+
                 try
                 {
+                    iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
+                    Thread.Sleep(20);
+                    spannungen = iseg.RawIO.ReadString();
+                    Thread.Sleep(10);
+                    spannungen = iseg.RawIO.ReadString();
+                    Thread.Sleep(10);
+                    _suspendEvent.WaitOne(Timeout.Infinite);
                     s = Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
                 }
                 catch (Exception)
@@ -1193,7 +1331,7 @@ namespace XPS
         private void bw_iseg_volts_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             vmeas[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
-            vmeas2[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
+            //vmeas2[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
             int percentage = e.ProgressPercentage;
         }
 
@@ -1310,14 +1448,14 @@ namespace XPS
         }
 
 
-        int ct = 2000;
+        int ct;
         private async void btn_start_counter_Click(object sender, EventArgs e)
         {
             //while (true)
             //{
                 try
                 {
-                    //ct = int.Parse(tb_counter_ms.Text);
+                    ct = int.Parse(tb_counter_ms.Text);
                     tb_counter_ms.Text = ct.ToString();
                     LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
                     //LJM.eWriteName(handle2, "DIO18_EF_OPTIONS", 1);
@@ -1385,10 +1523,11 @@ namespace XPS
        
         private void btn_load_Click(object sender, EventArgs e)
         {
-            double k = ra / ri - ri / ra;
             bool V_pass = double.TryParse(tb_v_pass.Text.Replace(',', '.'), out double v_pass);
             bool V_vor = double.TryParse(tb_v_vor.Text.Replace(',', '.'), out double v_vor);
             bool V_bind = double.TryParse(tb_v_bind.Text.Replace(',', '.'), out double v_bind);
+
+            double k = ra / ri - ri / ra;
 
             if (V_pass & V_vor & V_bind)
             {
@@ -1439,6 +1578,70 @@ namespace XPS
             garbage = iseg.RawIO.ReadString();
             await Task.Delay(20);
             _suspendEvent.Set();
+        }
+
+        private void enable_start ()
+        {
+            btn_start.Enabled = false;
+            //btn_start.Enabled = (tb_pass.Text != string.Empty && tb_bias.Text != string.Empty && tb_stepwidth.Text != string.Empty && tb_counttime.Text != string.Empty);
+            //if (tb_pass.Text != string.Empty && tb_bias.Text != string.Empty && tb_stepwidth.Text != string.Empty && tb_counttime.Text != string.Empty)
+            if (!String.IsNullOrWhiteSpace(tb_v_lens.Text) && !String.IsNullOrWhiteSpace(tb_pass.Text) && !String.IsNullOrWhiteSpace(tb_bias.Text) && !String.IsNullOrWhiteSpace(tb_stepwidth.Text) && !String.IsNullOrWhiteSpace(tb_counttime.Text))
+            {
+                bool VPASS = Double.TryParse(tb_pass.Text, out vpass);
+                bool VBIAS = Double.TryParse(tb_bias.Text, out vbias);
+                bool VSTEP = Double.TryParse(tb_stepwidth.Text, out vstepsize);
+                bool VCOUNT = Double.TryParse(tb_counttime.Text, out tcount);
+                bool VLENS = Double.TryParse(tb_v_lens.Text, out vLens);
+
+                if (VPASS & VBIAS & VSTEP & VCOUNT & VLENS)
+                {
+
+                    slop = Math.Truncate(vstepsize * 1000 / (tcount*40)); // multiples of 40 mV/s
+                    slope = (slop * 40)/1000;
+                    tb_slope.Text = slope.ToString("0.000");
+                    if (slop > 0)
+                    {
+                        btn_start.Enabled = true;
+                        tcount2 = Convert.ToInt16(tcount);
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Only integers allowed");
+                }
+            }
+            else
+            {
+                btn_start.Enabled = false;
+                tb_slope.Text = "";
+                tb_meastime.Text = "";
+            }
+        }
+
+        private void tb_pass_TextChanged(object sender, EventArgs e)
+        {
+            enable_start();
+        }
+
+        private void tb_bias_TextChanged(object sender, EventArgs e)
+        {
+            enable_start();
+        }
+
+        private void tb_stepwidth_TextChanged(object sender, EventArgs e)
+        {
+            enable_start();
+        }
+
+        private void tb_counttime_TextChanged(object sender, EventArgs e)
+        {
+            enable_start();
+        }
+
+        private void tb_v_lens_TextChanged(object sender, EventArgs e)
+        {
+            enable_start();
         }
     }
 }
