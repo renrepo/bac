@@ -480,6 +480,7 @@
             this.tb_rampe_bis = new System.Windows.Forms.TextBox();
             this.btn_rampe = new System.Windows.Forms.Button();
             this.tbn_rampe = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3197,6 +3198,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.cb_pressure);
@@ -3985,6 +3987,13 @@
             resources.ApplyResources(this.tbn_rampe, "tbn_rampe");
             this.tbn_rampe.Name = "tbn_rampe";
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -4565,6 +4574,7 @@
         private System.Windows.Forms.TextBox tb_v_lens;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -453,11 +453,11 @@ namespace XPS
                 }
 
                 double k = ra / ri - ri / ra;
-                v_analyser_min = vpass - V_photon + vbias;          //hier sollte kein elektron mehr im channeltron ankommen
+                v_analyser_min = vpass - V_photon + vbias - 15;          //hier sollte kein elektron mehr im channeltron ankommen
                 v_hemo_min = v_analyser_min - (vpass * k *0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
                 v_hemi_min = v_analyser_min +  vpass*k;               //liegt entsprechung die Spannungdifferenz drüber
 
-                v_analyser_max = vpass;          //hier sollte auch das langsamste Elektron ankommen
+                v_analyser_max = vpass +vbias;          //hier sollte auch das langsamste Elektron ankommen
                 v_hemo_max = v_analyser_max - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
                 v_hemi_max = v_analyser_max + vpass*k;
 
@@ -498,7 +498,7 @@ namespace XPS
                     LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                     LJM.eReadName(handle_v_analyser, "AIN2", ref LJ_hemi);
                     LJM.eReadName(handle_v_analyser, "AIN1", ref LJ_hemo);
-                    LJM.eReadName(handle_v_analyser, "AIN0", ref LJ_lens);
+                    LJM.eReadName(handle_v_analyser, "AIN4", ref LJ_lens);
                     LJ_analyser2 = LJ_analyser / 0.1956;
                     LJ_hemi2 = LJ_hemi / 0.1962;
                     LJ_hemo2 = LJ_hemo / 0.1960;
@@ -563,11 +563,11 @@ namespace XPS
                 sw.Start();
                 LJM.eReadName(handle2, "DIO18_EF_READ_A", ref intcounter);
                 LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
-                LJM.eReadName(handle_v_analyser, "AIN2", ref LJ_hemi);
-                LJM.eReadName(handle_v_analyser, "AIN1", ref LJ_hemo);
-                LJM.eReadName(handle_v_analyser, "AIN0", ref LJ_lens);
+                LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
+                LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
+                LJM.eReadName(handle_v_lens, "AIN0", ref LJ_lens);
                 //Thread.Sleep(tcount2);
-                sc = intcounter - oldcounter;
+                sc = (intcounter - oldcounter)*1000/tcount;       //auf sekunde normieren
                 LJ_analyser2 = LJ_analyser / 0.1956;
                 LJ_hemi2 = LJ_hemi / 0.1962;
                 LJ_hemo2 = LJ_hemo / 0.1960;
@@ -578,7 +578,7 @@ namespace XPS
 
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
-                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + intcounter.ToString("0000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
+                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + (intcounter*1000/tcount).ToString("00000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
                         + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + "\t");
                 }
 
@@ -593,6 +593,7 @@ namespace XPS
                 {
                     e.Cancel = true;
                     bW_data.ReportProgress(0);
+                    LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
                     break; //warum? ist wichtig! vllt um aus for-loop zu kommen
                 }
 
@@ -652,6 +653,8 @@ namespace XPS
                 showdata.Enabled = true;
                 fig_name.Enabled = true;
                 data_coutner += 1;
+                sc = 0;
+                intcounter = 0;
             }
 
             else if (e.Error != null)
@@ -1630,25 +1633,30 @@ namespace XPS
 
         private void tb_pass_TextChanged(object sender, EventArgs e)
         {
-            enable_start();
+            //enable_start();
         }
 
         private void tb_bias_TextChanged(object sender, EventArgs e)
         {
-            enable_start();
+            //enable_start();
         }
 
         private void tb_stepwidth_TextChanged(object sender, EventArgs e)
         {
-            enable_start();
+            //enable_start();
         }
 
         private void tb_counttime_TextChanged(object sender, EventArgs e)
         {
-            enable_start();
+            //enable_start();
         }
 
         private void tb_v_lens_TextChanged(object sender, EventArgs e)
+        {
+            //enable_start();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
             enable_start();
         }
