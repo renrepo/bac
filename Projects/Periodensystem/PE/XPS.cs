@@ -417,6 +417,8 @@ namespace XPS
         double v_hemo_max;
         double v_hemi_max;
 
+        double v_analyser_max2;
+
         private async void btn_start_Click(object sender, EventArgs e)
         {
             if (!bW_data.IsBusy)
@@ -428,7 +430,7 @@ namespace XPS
                 list1, Color.Black, SymbolType.None);
                 curr_time = now;
                 string u = tb_safe.Text + curr_time;
-                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + tb_safe.Text + "_" + curr_time + "\\"));
+                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + curr_time + "_" + tb_safe.Text + "\\"));
                 path2 = dl.FullName;
                 using (var file = new StreamWriter(path2  +"data" + data_coutner + ".txt", true))
                 {
@@ -454,17 +456,20 @@ namespace XPS
 
                 double k = ra / ri - ri / ra;
                 v_analyser_min = vpass - V_photon + vbias - 15;          //hier sollte kein elektron mehr im channeltron ankommen
-                v_hemo_min = v_analyser_min - (vpass * k *0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
-                v_hemi_min = v_analyser_min +  vpass*k;               //liegt entsprechung die Spannungdifferenz drüber
+                //v_analyser_min = vpass - V_photon + vbias - 5;
+                v_hemo_min = v_analyser_min - (vpass * k *0.3991) + 2.23;  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
+                v_hemi_min = v_hemo_min +  vpass*k;               //liegt entsprechung die Spannungdifferenz drüber
 
-                v_analyser_max = vpass +vbias;          //hier sollte auch das langsamste Elektron ankommen
-                v_hemo_max = v_analyser_max - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
+                // v_analyser_max = vpass +vbias;          //hier sollte auch das langsamste Elektron ankommen
+                v_analyser_max = v_analyser_min + V_photon + 5;
+                v_hemo_max = v_analyser_max - (vpass * k * 0.3991) + 2.23;  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
                 v_hemi_max = v_analyser_max + vpass*k;
 
                 v_channeltron_out_min = v_analyser_min + 3000;
                 v_channeltron_out_max = v_analyser_max + 3000;
-
-                    // startspannungen setzen
+                double  v_analyser_min2 = v_analyser_min +3.35;
+                v_analyser_max2 = v_analyser_max  + 3.35;
+                // startspannungen setzen
 
                 _suspendEvent.Reset();
                 iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));     // Rampe auf 400 V/s
@@ -479,6 +484,10 @@ namespace XPS
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
+                //iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", v_analyser_min2.ToString("0.000")));
+                //await Task.Delay(10);
+                //garbage = iseg.RawIO.ReadString();
+                //await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens.ToString("0.000")));
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
@@ -487,7 +496,7 @@ namespace XPS
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT ON,(@0-2,4)\n"));
+                iseg.RawIO.Write(String.Format(":VOLT ON,(@0-5)\n"));
                 await Task.Delay(10);
                 readTextBox.Text = iseg.RawIO.ReadString();
                 await Task.Delay(10);
@@ -499,9 +508,11 @@ namespace XPS
                     LJM.eReadName(handle_v_analyser, "AIN2", ref LJ_hemi);
                     LJM.eReadName(handle_v_analyser, "AIN1", ref LJ_hemo);
                     LJM.eReadName(handle_v_analyser, "AIN4", ref LJ_lens);
-                    LJ_analyser2 = LJ_analyser / 0.1956;
+                    //LJ_analyser2 = LJ_analyser / 0.1956;
+                    //LJ_analyser2 = LJ_analyser / 0.204;
                     LJ_hemi2 = LJ_hemi / 0.1962;
                     LJ_hemo2 = LJ_hemo / 0.1960;
+                    LJ_analyser2 = LJ_hemo2 + (vpass * k * 0.3991);
                     LJ_lens2 = LJ_lens / 0.1962;
                     vm1.Text = LJ_hemi2.ToString("0.000");
                     vm2.Text = LJ_hemo2.ToString("0.000");
@@ -553,6 +564,10 @@ namespace XPS
             Thread.Sleep(20);
             garbage = iseg.RawIO.ReadString();
             Thread.Sleep(20);
+            //iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", v_analyser_max2.ToString("0.000")));
+            //Thread.Sleep(20);
+            //garbage = iseg.RawIO.ReadString();
+            //Thread.Sleep(20);
             iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")));
             Thread.Sleep(20);
             garbage = iseg.RawIO.ReadString();
@@ -565,21 +580,22 @@ namespace XPS
                 LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                 LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
                 LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
-                LJM.eReadName(handle_v_lens, "AIN0", ref LJ_lens);
+                LJM.eReadName(handle_v_lens, "AIN4", ref LJ_lens);
                 //Thread.Sleep(tcount2);
                 sc = (intcounter - oldcounter)*1000/tcount;       //auf sekunde normieren
-                LJ_analyser2 = LJ_analyser / 0.1956;
+                //LJ_analyser2 = LJ_analyser / 0.1956;
                 LJ_hemi2 = LJ_hemi / 0.1962;
                 LJ_hemo2 = LJ_hemo / 0.1960;
+                LJ_analyser2 = LJ_hemo2 + (vpass * k * 0.3991);
                 LJ_lens2 = LJ_lens / 0.1962;
 
                 E_pass = (LJ_hemi2 - LJ_hemo2) / k;
-                E_kin = E_pass - LJ_analyser2 - vbias;          // denn für detektierte e- gilt: 0 = Vbias + Ekin^0 + V_ana^0 - V_pass (^0: bezogen auf 0V)
-
+                //E_kin = E_pass - LJ_analyser2 - vbias;          // denn für detektierte e- gilt: 0 = Vbias + Ekin^0 + V_ana^0 - V_pass (^0: bezogen auf 0V)
+                E_kin = vbias - LJ_analyser2 + E_pass;          // ohne berücksichtigung de raustrittsarbeit
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
                     file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + (intcounter*1000/tcount).ToString("00000000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
-                        + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + "\t");
+                        + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + (LJ_hemo2-LJ_hemi2).ToString("0.000") + "\t");
                 }
 
 
@@ -718,7 +734,7 @@ namespace XPS
                 myPane.AddYAxis("counts");
                 progressBar1.Value = 0;
                 create_graph(myPane);
-                                                      zedGraphControl1.AxisChange();
+                zedGraphControl1.AxisChange();
                 zedGraphControl1.Refresh();
             }
         }
