@@ -363,6 +363,7 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tb_v_lens = new System.Windows.Forms.TextBox();
             this.label75 = new System.Windows.Forms.Label();
@@ -480,7 +481,6 @@
             this.tb_rampe_bis = new System.Windows.Forms.TextBox();
             this.btn_rampe = new System.Windows.Forms.Button();
             this.tbn_rampe = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -3208,6 +3208,13 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tb_v_lens);
@@ -3986,13 +3993,6 @@
             // 
             resources.ApplyResources(this.tbn_rampe, "tbn_rampe");
             this.tbn_rampe.Name = "tbn_rampe";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // XPS
             // 
