@@ -486,7 +486,7 @@ namespace XPS
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", v_analyser_min.ToString("0.000")));
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", v_analyser_min.ToString("0.000")));
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
@@ -595,9 +595,9 @@ namespace XPS
         {
             LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
             _suspendEvent.Reset();
-            for (int i = 0; i < 30*5; i++)
+            for (int i = 0; i < 30*1000/ vstepsize; i++)
             {
-                double inkrement = 0.2*i;
+                double inkrement = vstepsize *i/1000;
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
                 Thread.Sleep(10);
                 garbage = iseg.RawIO.ReadString();
@@ -606,7 +606,11 @@ namespace XPS
                 Thread.Sleep(10);
                 garbage = iseg.RawIO.ReadString();
                 Thread.Sleep(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
+                Thread.Sleep(10);
+                garbage = iseg.RawIO.ReadString();
+                Thread.Sleep(10);
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", (v_channeltron_out_min + inkrement).ToString("0.000")));
                 Thread.Sleep(10);
                 garbage = iseg.RawIO.ReadString();
                 Thread.Sleep(8000);
@@ -632,7 +636,7 @@ namespace XPS
                     if (Math.Abs(LJ_hemo2 - (v_hemo_min_korr + inkrement)) > abweichung)
                     {
                         v_hemo_min_korr = 2 * (v_hemo_min_korr + inkrement) - LJ_hemo2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemo_min_korr.ToString("0.000")));
+                        iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min_korr.ToString("0.000")));
                         Thread.Sleep(10);
                         garbage = iseg.RawIO.ReadString();
                         Thread.Sleep(10);
@@ -641,7 +645,7 @@ namespace XPS
                     if (Math.Abs(LJ_analyser2 - (v_analyser_min_korr + inkrement)) > abweichung)
                     {
                         v_analyser_min_korr = 2 * (v_analyser_min_korr + inkrement) - LJ_analyser2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_analyser_min_korr.ToString("0.000")));
+                        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", v_analyser_min_korr.ToString("0.000")));
                         Thread.Sleep(10);
                         garbage = iseg.RawIO.ReadString();
                         Thread.Sleep(10);
