@@ -417,7 +417,7 @@ namespace XPS
         double v_hemo_max;
         double v_hemi_max;
 
-        double abweichung = 0.08;
+        double abweichung = 0.06;
         double v_hemi_min_korr;
         double v_hemo_min_korr;
         double v_analyser_min_korr;
@@ -433,9 +433,9 @@ namespace XPS
                 list1, Color.Black, SymbolType.None);
                 curr_time = now;
                 string u = tb_safe.Text + curr_time;
-                DirectoryInfo dl =  Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + curr_time + "_" + tb_safe.Text + "\\"));
+                DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_XPS\", " " + curr_time + "_" + tb_safe.Text + "\\"));
                 path2 = dl.FullName;
-                using (var file = new StreamWriter(path2  +"data" + data_coutner + ".txt", true))
+                using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
                     file.WriteLine("#UPS-spectrum" + Environment.NewLine);
                     file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
@@ -445,7 +445,7 @@ namespace XPS
                     file.WriteLine("#Voltage bias: \t{0} \t{1}", vbias.ToString("0.0"), "V");
                     file.WriteLine("#Voltage lenses: \t{0} \t{1}", vLens.ToString("0.0"), "V");
                     file.WriteLine("#Step width: \t{0} \t{1}", vstepsize.ToString("0.0"), "meV");
-                    file.WriteLine("#Counttime: \t{0} \t{1}",tcount.ToString("0.0"), "ms");
+                    file.WriteLine("#Counttime: \t{0} \t{1}", tcount.ToString("0.0"), "ms");
                     file.WriteLine("" + Environment.NewLine);
                     file.WriteLine("#Slope: \t{0} \t{1}", slope.ToString("0.000"), "V");
                     file.WriteLine("#Counttime: \t{0} \t{1}", tcount.ToString("0.0"), "ms");
@@ -458,15 +458,15 @@ namespace XPS
                 }
 
                 double k = ra / ri - ri / ra;
-                v_analyser_min = vpass - V_photon + vbias - 10;          //hier sollte kein elektron mehr im channeltron ankommen
+                v_analyser_min = vpass - V_photon + vbias - 15;          //hier sollte kein elektron mehr im channeltron ankommen
                 //v_analyser_min = vpass - V_photon + vbias - 5;
-                v_hemo_min = v_analyser_min - (vpass * k *0.4);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
-                v_hemi_min = v_hemo_min +  vpass*k;               //liegt entsprechung die Spannungdifferenz drüber
+                v_hemo_min = v_analyser_min - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
+                v_hemi_min = v_hemo_min + vpass * k;               //liegt entsprechung die Spannungdifferenz drüber
 
                 // v_analyser_max = vpass +vbias;          //hier sollte auch das langsamste Elektron ankommen
                 v_analyser_max = v_analyser_min + V_photon + 5;
                 v_hemo_max = v_analyser_max - (vpass * k * 0.3991);  //äußere hemispährenspannung aus passenergie nach spannugnsteiler (3.885M, 5.58M,269.5k))
-                v_hemi_max = v_analyser_max + vpass*k;
+                v_hemi_max = v_analyser_max + vpass * k;
 
                 v_channeltron_out_min = v_analyser_min + 3000;
                 v_channeltron_out_max = v_analyser_max + 3000;
@@ -478,19 +478,20 @@ namespace XPS
                 await Task.Delay(20);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(20);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_min.ToString("0.000"))); 
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_min.ToString("0.000")));
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000"))); 
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000")));
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", v_analyser_min.ToString("0.000")));
-                await Task.Delay(10);
-                garbage = iseg.RawIO.ReadString();
-                await Task.Delay(10);
+                //iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", v_analyser_min2.ToString("0.000")));
+                //await Task.Delay(10);
+                //garbage = iseg.RawIO.ReadString();
+                //await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens.ToString("0.000")));
+                //iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", (v_hemi_min+5).ToString("0.000")));
                 await Task.Delay(10);
                 garbage = iseg.RawIO.ReadString();
                 await Task.Delay(10);
@@ -502,7 +503,7 @@ namespace XPS
                 await Task.Delay(10);
                 readTextBox.Text = iseg.RawIO.ReadString();
                 await Task.Delay(10);
-                
+
 
                 for (int i = 0; i < 12; i++)             //warten bis sich Spannungen gesetzt haben
                 {
@@ -514,7 +515,7 @@ namespace XPS
                     //LJ_analyser2 = LJ_analyser / 0.204;
                     LJ_hemi2 = LJ_hemi / 0.1962;
                     LJ_hemo2 = LJ_hemo / 0.1960;
-                    LJ_analyser2 = LJ_analyser/0.196;
+                    LJ_analyser2 = LJ_analyser / 0.196;
                     LJ_lens2 = LJ_lens / 0.1962;
                     vm1.Text = LJ_hemi2.ToString("0.000");
                     vm2.Text = LJ_hemo2.ToString("0.000");
@@ -523,10 +524,10 @@ namespace XPS
                     vm5.Text = v_channeltron_out_max.ToString("0.000");
 
                     await Task.Delay(1000);
-                    
+
                 }
 
-                while (Math.Abs(LJ_hemi2- v_hemi_min) > abweichung || Math.Abs(LJ_hemo2 - v_hemo_min) > abweichung || Math.Abs(LJ_analyser2 - v_analyser_min) > abweichung)
+                while (Math.Abs(LJ_hemi2 - v_hemi_min) > abweichung || Math.Abs(LJ_hemo2 - v_hemo_min) > abweichung)
                 {
                     if (Math.Abs(LJ_hemi2 - v_hemi_min) > abweichung)
                     {
@@ -546,14 +547,6 @@ namespace XPS
                         await Task.Delay(10);
                     }
 
-                    if (Math.Abs(LJ_analyser2 - v_analyser_min) > abweichung)
-                    {
-                        v_analyser_min_korr = v_analyser_min - (LJ_analyser2 - v_analyser_min);
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", v_analyser_min_korr.ToString("0.000")));
-                        await Task.Delay(10);
-                        garbage = iseg.RawIO.ReadString();
-                        await Task.Delay(10);
-                    }
 
                     await Task.Delay(8000);
 
@@ -580,9 +573,9 @@ namespace XPS
             }
 
             else
-	        {
-                    MessageBox.Show("BW busy!");
-            }                      
+            {
+                MessageBox.Show("BW busy!");
+            }
         }
 
         double sc = 0;
@@ -598,115 +591,54 @@ namespace XPS
 
         private void bW_data_DoWork(object sender, DoWorkEventArgs e)
         {
+            Stopwatch sw = new Stopwatch();
             LJM.eWriteName(handle2, "DIO18_EF_INDEX", 7);
-            _suspendEvent.Reset();
-            for (int i = 0; i < 30*1000/vstepsize; i++)
-            {
-                double inkrement = vstepsize *i/1000;
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
-                Thread.Sleep(10);
-                garbage = iseg.RawIO.ReadString();
-                Thread.Sleep(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", (v_hemo_min_korr + inkrement).ToString("0.000")));
-                Thread.Sleep(10);
-                garbage = iseg.RawIO.ReadString();
-                Thread.Sleep(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
-                Thread.Sleep(10);
-                garbage = iseg.RawIO.ReadString();
-                Thread.Sleep(10);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", (v_channeltron_out_min + inkrement).ToString("0.000")));
-                Thread.Sleep(10);
-                garbage = iseg.RawIO.ReadString();
-                Thread.Sleep(4000);
+            //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", slop * 0.001));
+            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.0004));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
+            Thread.Sleep(20);
+            //iseg.RawIO.Write(String.Format(":VOLT {0},(@5)\n", v_analyser_max2.ToString("0.000")));
+            //Thread.Sleep(20);
+            //garbage = iseg.RawIO.ReadString();
+            //Thread.Sleep(20);
+            iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")));
+            Thread.Sleep(20);
+            garbage = iseg.RawIO.ReadString();
 
+            LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
+            while (true)
+            {
+                sw.Start();
+                LJM.eReadName(handle2, "DIO18_EF_READ_A", ref intcounter);
                 LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                 LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
                 LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
+                LJM.eReadName(handle_v_lens, "AIN4", ref LJ_lens);
+                //Thread.Sleep(tcount2);
+                sc = (intcounter - oldcounter) * 1000 / tcount;       //auf sekunde normieren
+                                                                      //LJ_analyser2 = LJ_analyser / 0.1956;
                 LJ_hemi2 = LJ_hemi / 0.1962;
                 LJ_hemo2 = LJ_hemo / 0.1960;
-                LJ_analyser2 = LJ_analyser / 0.196;
+                LJ_analyser2 = LJ_hemo2 + (vpass * k * 0.3991);
+                LJ_lens2 = LJ_lens / 0.1962;
 
-                while (Math.Abs(LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung || Math.Abs(LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung || Math.Abs(LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
-                {
-                    if ((LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung)
-                    {
-                        v_hemi_min_korr -= abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    if ((LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung)
-                    {
-                        v_hemo_min_korr -= abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", (v_hemo_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    if ((LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
-                    {
-                        v_analyser_min_korr -= abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    if ((LJ_hemi2 - (v_hemi_min + inkrement)) < -abweichung)
-                    {
-                        v_hemi_min_korr += abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    if ((LJ_hemo2 - (v_hemo_min + inkrement)) < -abweichung)
-                    {
-                        v_hemo_min_korr += abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", (v_hemo_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    if ((LJ_analyser2 - (v_analyser_min + inkrement)) < -abweichung)
-                    {
-                        v_analyser_min_korr += abweichung/2;
-                        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
-                        Thread.Sleep(10);
-                        garbage = iseg.RawIO.ReadString();
-                        Thread.Sleep(10);
-                    }
-
-                    Thread.Sleep(4000);
-
-                    LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
-                    LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
-                    LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
-
-                    LJ_hemi2 = LJ_hemi / 0.1962;
-                    LJ_hemo2 = LJ_hemo / 0.1960;
-                    LJ_analyser2 = LJ_analyser / 0.196;
-
-                }
-
-                LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
-                Thread.Sleep(tcount2);
-                LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref cnt);
-                sc = cnt * 1000 / tcount;
                 E_pass = (LJ_hemi2 - LJ_hemo2) / k;
                 //E_kin = E_pass - LJ_analyser2 - vbias;          // denn für detektierte e- gilt: 0 = Vbias + Ekin^0 + V_ana^0 - V_pass (^0: bezogen auf 0V)
                 E_kin = vbias - LJ_analyser2 + E_pass;          // ohne berücksichtigung de raustrittsarbeit
                 using (var file = new StreamWriter(path2 + "data" + data_coutner + ".txt", true))
                 {
-                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t"  + LJ_analyser2.ToString("0.000") + "\t"
+                    file.WriteLine(E_kin.ToString("0.000") + "\t" + sc.ToString("00000") + "\t" + LJ_analyser2.ToString("0.000") + "\t"
                         + LJ_hemi2.ToString("0.000") + "\t" + LJ_hemo2.ToString("0.000") + "\t" + LJ_lens2.ToString("0.000") + (LJ_hemo2 - LJ_hemi2).ToString("0.000") + "\t"
-                        + ((LJ_hemo2 - LJ_analyser2)/ (LJ_hemi2 - LJ_hemo2)).ToString("0.000") + "\t");
+                        + ((LJ_hemo2 - LJ_analyser2) / (LJ_hemi2 - LJ_hemo2)).ToString("0.000") + "\t");
                 }
 
 
@@ -714,19 +646,25 @@ namespace XPS
 
                 values.Add(E_kin + "\t" + sc);
 
+                oldcounter = intcounter;
 
                 if (bW_data.CancellationPending) // condition is true, if gauss is cancelled (CancelAsync())            
                 {
                     e.Cancel = true;
                     bW_data.ReportProgress(0);
-                    LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref cnt);
+                    LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
                     break; //warum? ist wichtig! vllt um aus for-loop zu kommen
                 }
+
+                while (sw.ElapsedMilliseconds < tcount2)
+                {
+                    Thread.Sleep(1);
+                }
+                sw.Reset();
             }
             //safer.safe(path,list_gauss);
             e.Result = sc; //stores the results of what has been done in bW
-            LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref cnt);
-            _suspendEvent.Set();
+            LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
         }
 
         private void bW_data_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -767,8 +705,8 @@ namespace XPS
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
-              //  zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
-               // safe_fig.Enabled = true;
+                //  zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
+                // safe_fig.Enabled = true;
                 showdata.Enabled = true;
                 fig_name.Enabled = true;
                 data_coutner += 1;
@@ -789,10 +727,10 @@ namespace XPS
                 fig_name.Enabled = true;
                 // safe_fig.Enabled = true;
                 showdata.Enabled = true;
-               // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
+                // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path2, "plot" + data_coutner + ".png"));
                 data_coutner += 1;
             }
-           
+
         }
 
 
@@ -1596,7 +1534,7 @@ namespace XPS
                     LJM.eWriteName(handle2, "DIO18_EF_ENABLE", 1);
                     //LJM.eWriteName()
                     LJM.eReadName(handle2, "DIO18_EF_READ_A", ref value2);
-                    await Task.Delay(ct);
+                    await Task.Delay(1000);
                     LJM.eReadName(handle2, "DIO18_EF_READ_A_AND_RESET", ref value3);
                     //  LJM.eWriteName(handle2, "DIO18_EF_READ", ref value2);
                     double erg = value3 - value2;
@@ -2163,31 +2101,31 @@ namespace XPS
 
 
 
-                //    while (Math.Abs(LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung || Math.Abs(LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung || Math.Abs(LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
-                //{
-                //    if (Math.Abs(LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung)
-                //    {
-                //        v_hemi_min_korr = v_hemi_min_korr - (LJ_hemi2 - (v_hemi_min + inkrement));
-                //        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
-                //        Thread.Sleep(10);
-                //        garbage = iseg.RawIO.ReadString();
-                //        Thread.Sleep(10);
-                //    }
+//    while (Math.Abs(LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung || Math.Abs(LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung || Math.Abs(LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
+//{
+//    if (Math.Abs(LJ_hemi2 - (v_hemi_min + inkrement)) > abweichung)
+//    {
+//        v_hemi_min_korr = v_hemi_min_korr - (LJ_hemi2 - (v_hemi_min + inkrement));
+//        iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", (v_hemi_min_korr + inkrement).ToString("0.000")));
+//        Thread.Sleep(10);
+//        garbage = iseg.RawIO.ReadString();
+//        Thread.Sleep(10);
+//    }
 
-                //    if (Math.Abs(LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung)
-                //    {
-                //        v_hemo_min_korr = v_hemo_min_korr - (LJ_hemo2 - (v_hemo_min + inkrement));
-                //        iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", (v_hemo_min_korr + inkrement).ToString("0.000")));
-                //        Thread.Sleep(10);
-                //        garbage = iseg.RawIO.ReadString();
-                //        Thread.Sleep(10);
-                //    }
+//    if (Math.Abs(LJ_hemo2 - (v_hemo_min + inkrement)) > abweichung)
+//    {
+//        v_hemo_min_korr = v_hemo_min_korr - (LJ_hemo2 - (v_hemo_min + inkrement));
+//        iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", (v_hemo_min_korr + inkrement).ToString("0.000")));
+//        Thread.Sleep(10);
+//        garbage = iseg.RawIO.ReadString();
+//        Thread.Sleep(10);
+//    }
 
-                //    if (Math.Abs(LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
-                //    {
-                //        v_analyser_min_korr = v_analyser_min_korr - (LJ_analyser2 - (v_analyser_min + inkrement));
-                //        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
-                //        Thread.Sleep(10);
-                //        garbage = iseg.RawIO.ReadString();
-                //        Thread.Sleep(10);
-                //    }
+//    if (Math.Abs(LJ_analyser2 - (v_analyser_min + inkrement)) > abweichung)
+//    {
+//        v_analyser_min_korr = v_analyser_min_korr - (LJ_analyser2 - (v_analyser_min + inkrement));
+//        iseg.RawIO.Write(String.Format(":VOLT {0},(@3)\n", (v_analyser_min_korr + inkrement).ToString("0.000")));
+//        Thread.Sleep(10);
+//        garbage = iseg.RawIO.ReadString();
+//        Thread.Sleep(10);
+//    }
