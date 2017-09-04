@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.Button btn_emcy;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
+            System.Windows.Forms.Button btn_emcy;
             this.Y = new System.Windows.Forms.Button();
             this.Sc = new System.Windows.Forms.Button();
             this.Ra = new System.Windows.Forms.Button();
@@ -252,13 +252,8 @@
             this.label88 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.tb_meastime = new System.Windows.Forms.TextBox();
-            this.tb_counttime = new System.Windows.Forms.TextBox();
             this.tb_slope = new System.Windows.Forms.TextBox();
-            this.tb_stepwidth = new System.Windows.Forms.TextBox();
-            this.label80 = new System.Windows.Forms.Label();
             this.label78 = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
@@ -363,94 +358,52 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tb_v_lens = new System.Windows.Forms.TextBox();
             this.label75 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
-            this.tb_bias = new System.Windows.Forms.TextBox();
             this.label74 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
-            this.tb_pass = new System.Windows.Forms.TextBox();
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_pressure = new System.Windows.Forms.TextBox();
             this.vm1 = new System.Windows.Forms.TextBox();
+            this.tb_pressure = new System.Windows.Forms.TextBox();
             this.vm2 = new System.Windows.Forms.TextBox();
             this.vm3 = new System.Windows.Forms.TextBox();
             this.vm4 = new System.Windows.Forms.TextBox();
             this.vm5 = new System.Windows.Forms.TextBox();
-            this.vm6 = new System.Windows.Forms.TextBox();
             this.label101 = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
             this.label103 = new System.Windows.Forms.Label();
             this.label104 = new System.Windows.Forms.Label();
             this.label105 = new System.Windows.Forms.Label();
-            this.label106 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tb_counter = new System.Windows.Forms.TextBox();
+            this.tb_counter_ms = new System.Windows.Forms.TextBox();
+            this.btn_start_counter = new System.Windows.Forms.Button();
             this.label108 = new System.Windows.Forms.Label();
-            this.cb_pressure = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btn_load = new System.Windows.Forms.Button();
-            this.tb_ana_max = new System.Windows.Forms.TextBox();
-            this.tb_ana_min = new System.Windows.Forms.TextBox();
-            this.label111 = new System.Windows.Forms.Label();
-            this.label110 = new System.Windows.Forms.Label();
-            this.V_vor = new System.Windows.Forms.Label();
-            this.tb_v_bind = new System.Windows.Forms.TextBox();
-            this.tb_v_pass = new System.Windows.Forms.TextBox();
-            this.tb_v_vor = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
             this.lb_vset = new System.Windows.Forms.Label();
             this.label99 = new System.Windows.Forms.Label();
-            this.lb_vmin = new System.Windows.Forms.Label();
             this.label98 = new System.Windows.Forms.Label();
             this.ch1_meas = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.lb_vmax = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
-            this.lb_stepsize = new System.Windows.Forms.Label();
             this.label81 = new System.Windows.Forms.Label();
-            this.lb_time = new System.Windows.Forms.Label();
             this.lb_vmeas = new System.Windows.Forms.Label();
             this.ch2_meas = new System.Windows.Forms.TextBox();
             this.ch1_v = new System.Windows.Forms.TextBox();
-            this.ch1_vmin = new System.Windows.Forms.TextBox();
-            this.ch1_vmax = new System.Windows.Forms.TextBox();
-            this.ch1_step = new System.Windows.Forms.TextBox();
-            this.ch1_ramp = new System.Windows.Forms.TextBox();
             this.ch2_v = new System.Windows.Forms.TextBox();
-            this.ch2_vmin = new System.Windows.Forms.TextBox();
-            this.ch2_step = new System.Windows.Forms.TextBox();
-            this.ch2_ramp = new System.Windows.Forms.TextBox();
-            this.ch3_vmin = new System.Windows.Forms.TextBox();
-            this.ch3_vmax = new System.Windows.Forms.TextBox();
-            this.ch2_vmax = new System.Windows.Forms.TextBox();
-            this.ch3_step = new System.Windows.Forms.TextBox();
-            this.ch3_ramp = new System.Windows.Forms.TextBox();
             this.ch3_meas = new System.Windows.Forms.TextBox();
             this.ch4_v = new System.Windows.Forms.TextBox();
             this.ch3_v = new System.Windows.Forms.TextBox();
-            this.ch4_vmin = new System.Windows.Forms.TextBox();
-            this.ch4_vmax = new System.Windows.Forms.TextBox();
-            this.ch4_step = new System.Windows.Forms.TextBox();
-            this.ch4_ramp = new System.Windows.Forms.TextBox();
             this.ch4_meas = new System.Windows.Forms.TextBox();
             this.ch5_v = new System.Windows.Forms.TextBox();
-            this.ch5_vmin = new System.Windows.Forms.TextBox();
-            this.ch5_vmax = new System.Windows.Forms.TextBox();
-            this.ch5_step = new System.Windows.Forms.TextBox();
-            this.ch5_ramp = new System.Windows.Forms.TextBox();
             this.ch5_meas = new System.Windows.Forms.TextBox();
             this.ch6_v = new System.Windows.Forms.TextBox();
-            this.ch6_vmin = new System.Windows.Forms.TextBox();
-            this.ch6_vmax = new System.Windows.Forms.TextBox();
-            this.ch6_step = new System.Windows.Forms.TextBox();
-            this.ch6_ramp = new System.Windows.Forms.TextBox();
             this.ch6_meas = new System.Windows.Forms.TextBox();
             this.stat1 = new System.Windows.Forms.CheckBox();
             this.stat2 = new System.Windows.Forms.CheckBox();
@@ -471,16 +424,16 @@
             this.rs5 = new System.Windows.Forms.Button();
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
-            this.tb_counter_ms = new System.Windows.Forms.TextBox();
-            this.btn_start_counter = new System.Windows.Forms.Button();
-            this.bw_iseg = new System.ComponentModel.BackgroundWorker();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
-            this.bt_rampe = new System.Windows.Forms.Button();
-            this.tb_rampe = new System.Windows.Forms.TextBox();
-            this.tb_rampe_bis = new System.Windows.Forms.TextBox();
-            this.btn_rampe = new System.Windows.Forms.Button();
-            this.tbn_rampe = new System.Windows.Forms.TextBox();
+            this.cb_pass = new System.Windows.Forms.ComboBox();
+            this.cb_stepwidth = new System.Windows.Forms.ComboBox();
+            this.cb_counttime = new System.Windows.Forms.ComboBox();
+            this.stat_all = new System.Windows.Forms.Button();
+            this.btn_reload_all = new System.Windows.Forms.Button();
+            this.cb_bias = new System.Windows.Forms.ComboBox();
+            this.cb_v_lens = new System.Windows.Forms.ComboBox();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -494,15 +447,8 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_emcy
-            // 
-            resources.ApplyResources(btn_emcy, "btn_emcy");
-            btn_emcy.Name = "btn_emcy";
-            this.tableLayoutPanel3.SetRowSpan(btn_emcy, 2);
-            btn_emcy.UseVisualStyleBackColor = true;
-            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
             // 
             // Y
             // 
@@ -2353,44 +2299,16 @@
             resources.ApplyResources(this.label85, "label85");
             this.label85.Name = "label85";
             // 
-            // label84
-            // 
-            resources.ApplyResources(this.label84, "label84");
-            this.label84.Name = "label84";
-            // 
             // label83
             // 
             resources.ApplyResources(this.label83, "label83");
             this.label83.Name = "label83";
-            // 
-            // tb_meastime
-            // 
-            resources.ApplyResources(this.tb_meastime, "tb_meastime");
-            this.tb_meastime.Name = "tb_meastime";
-            this.tb_meastime.ReadOnly = true;
-            // 
-            // tb_counttime
-            // 
-            resources.ApplyResources(this.tb_counttime, "tb_counttime");
-            this.tb_counttime.Name = "tb_counttime";
-            this.tb_counttime.TextChanged += new System.EventHandler(this.tb_counttime_TextChanged);
             // 
             // tb_slope
             // 
             resources.ApplyResources(this.tb_slope, "tb_slope");
             this.tb_slope.Name = "tb_slope";
             this.tb_slope.ReadOnly = true;
-            // 
-            // tb_stepwidth
-            // 
-            resources.ApplyResources(this.tb_stepwidth, "tb_stepwidth");
-            this.tb_stepwidth.Name = "tb_stepwidth";
-            this.tb_stepwidth.TextChanged += new System.EventHandler(this.tb_stepwidth_TextChanged);
-            // 
-            // label80
-            // 
-            resources.ApplyResources(this.label80, "label80");
-            this.label80.Name = "label80";
             // 
             // label78
             // 
@@ -2443,9 +2361,9 @@
             this.groupBox3.Controls.Add(this.lb_perc_gauss);
             this.groupBox3.Controls.Add(this.tb_safe);
             this.groupBox3.Controls.Add(this.btn_start);
-            this.groupBox3.Controls.Add(this.tb_show);
             this.groupBox3.Controls.Add(this.btn_clear);
             this.groupBox3.Controls.Add(this.progressBar1);
+            this.groupBox3.Controls.Add(btn_emcy);
             resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
@@ -3192,61 +3110,45 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.cb_pressure);
+            this.tabPage1.Controls.Add(this.tableLayoutPanel4);
             this.tabPage1.Controls.Add(this.closeSessionButton);
             this.tabPage1.Controls.Add(this.openSessionButton);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tb_v_lens);
+            this.groupBox2.Controls.Add(this.cb_v_lens);
+            this.groupBox2.Controls.Add(this.cb_bias);
+            this.groupBox2.Controls.Add(this.cb_counttime);
+            this.groupBox2.Controls.Add(this.cb_stepwidth);
+            this.groupBox2.Controls.Add(this.cb_pass);
             this.groupBox2.Controls.Add(this.label75);
             this.groupBox2.Controls.Add(this.label82);
-            this.groupBox2.Controls.Add(this.tb_bias);
+            this.groupBox2.Controls.Add(this.tb_slope);
             this.groupBox2.Controls.Add(this.label74);
             this.groupBox2.Controls.Add(this.label79);
-            this.groupBox2.Controls.Add(this.tb_pass);
             this.groupBox2.Controls.Add(this.label73);
-            this.groupBox2.Controls.Add(this.tb_stepwidth);
-            this.groupBox2.Controls.Add(this.tb_slope);
-            this.groupBox2.Controls.Add(this.tb_counttime);
-            this.groupBox2.Controls.Add(this.tb_meastime);
-            this.groupBox2.Controls.Add(this.label88);
-            this.groupBox2.Controls.Add(this.label80);
             this.groupBox2.Controls.Add(this.label78);
             this.groupBox2.Controls.Add(this.label83);
-            this.groupBox2.Controls.Add(this.label77);
             this.groupBox2.Controls.Add(this.label86);
-            this.groupBox2.Controls.Add(this.label84);
             this.groupBox2.Controls.Add(this.label76);
             this.groupBox2.Controls.Add(this.label85);
+            this.groupBox2.Controls.Add(this.label88);
+            this.groupBox2.Controls.Add(this.label77);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
-            // 
-            // tb_v_lens
-            // 
-            resources.ApplyResources(this.tb_v_lens, "tb_v_lens");
-            this.tb_v_lens.Name = "tb_v_lens";
-            this.tb_v_lens.TextChanged += new System.EventHandler(this.tb_v_lens_TextChanged);
             // 
             // label75
             // 
@@ -3258,12 +3160,6 @@
             resources.ApplyResources(this.label82, "label82");
             this.label82.Name = "label82";
             // 
-            // tb_bias
-            // 
-            resources.ApplyResources(this.tb_bias, "tb_bias");
-            this.tb_bias.Name = "tb_bias";
-            this.tb_bias.TextChanged += new System.EventHandler(this.tb_bias_TextChanged);
-            // 
             // label74
             // 
             resources.ApplyResources(this.label74, "label74");
@@ -3274,12 +3170,6 @@
             resources.ApplyResources(this.label79, "label79");
             this.label79.Name = "label79";
             // 
-            // tb_pass
-            // 
-            resources.ApplyResources(this.tb_pass, "tb_pass");
-            this.tb_pass.Name = "tb_pass";
-            this.tb_pass.TextChanged += new System.EventHandler(this.tb_pass_TextChanged);
-            // 
             // label73
             // 
             resources.ApplyResources(this.label73, "label73");
@@ -3288,7 +3178,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
-            this.groupBox1.Controls.Add(this.tableLayoutPanel4);
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
@@ -3296,63 +3185,61 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.tb_pressure, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.vm1, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tb_pressure, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.vm2, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.vm3, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.vm4, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.vm5, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.vm6, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.label101);
             this.tableLayoutPanel2.Controls.Add(this.label102, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label103, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.label104, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.label105, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label106, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label107, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label107, 0, 5);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            // 
-            // tb_pressure
-            // 
-            this.tb_pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_pressure, "tb_pressure");
-            this.tb_pressure.Name = "tb_pressure";
             // 
             // vm1
             // 
             this.vm1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm1, "vm1");
             this.vm1.Name = "vm1";
+            this.vm1.ReadOnly = true;
+            // 
+            // tb_pressure
+            // 
+            this.tb_pressure.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_pressure, "tb_pressure");
+            this.tb_pressure.Name = "tb_pressure";
+            this.tb_pressure.ReadOnly = true;
             // 
             // vm2
             // 
             this.vm2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm2, "vm2");
             this.vm2.Name = "vm2";
+            this.vm2.ReadOnly = true;
             // 
             // vm3
             // 
             this.vm3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm3, "vm3");
             this.vm3.Name = "vm3";
+            this.vm3.ReadOnly = true;
             // 
             // vm4
             // 
             this.vm4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm4, "vm4");
             this.vm4.Name = "vm4";
+            this.vm4.ReadOnly = true;
             // 
             // vm5
             // 
             this.vm5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm5, "vm5");
             this.vm5.Name = "vm5";
-            // 
-            // vm6
-            // 
-            this.vm6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.vm6, "vm6");
-            this.vm6.Name = "vm6";
+            this.vm5.ReadOnly = true;
             // 
             // label101
             // 
@@ -3379,11 +3266,6 @@
             resources.ApplyResources(this.label105, "label105");
             this.label105.Name = "label105";
             // 
-            // label106
-            // 
-            resources.ApplyResources(this.label106, "label106");
-            this.label106.Name = "label106";
-            // 
             // label107
             // 
             resources.ApplyResources(this.label107, "label107");
@@ -3393,6 +3275,8 @@
             // 
             resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
             this.tableLayoutPanel4.Controls.Add(this.tb_counter, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tb_counter_ms, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.btn_start_counter, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.label108, 0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel4_Layout);
@@ -3402,90 +3286,32 @@
             this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.tb_counter, "tb_counter");
             this.tb_counter.Name = "tb_counter";
+            this.tb_counter.ReadOnly = true;
+            // 
+            // tb_counter_ms
+            // 
+            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
+            this.tb_counter_ms.Name = "tb_counter_ms";
+            this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
+            // 
+            // btn_start_counter
+            // 
+            resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
+            this.btn_start_counter.Name = "btn_start_counter";
+            this.btn_start_counter.UseVisualStyleBackColor = true;
+            this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
             // 
             // label108
             // 
             resources.ApplyResources(this.label108, "label108");
             this.label108.Name = "label108";
             // 
-            // cb_pressure
-            // 
-            resources.ApplyResources(this.cb_pressure, "cb_pressure");
-            this.cb_pressure.Checked = true;
-            this.cb_pressure.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_pressure.Name = "cb_pressure";
-            this.cb_pressure.UseVisualStyleBackColor = true;
-            this.cb_pressure.CheckedChanged += new System.EventHandler(this.cb_pressure_CheckedChanged);
-            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btn_load);
-            this.tabPage2.Controls.Add(this.tb_ana_max);
-            this.tabPage2.Controls.Add(this.tb_ana_min);
-            this.tabPage2.Controls.Add(this.label111);
-            this.tabPage2.Controls.Add(this.label110);
-            this.tabPage2.Controls.Add(this.V_vor);
-            this.tabPage2.Controls.Add(this.tb_v_bind);
-            this.tabPage2.Controls.Add(this.tb_v_pass);
-            this.tabPage2.Controls.Add(this.tb_v_vor);
             this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            this.tabPage2.Controls.Add(this.readTextBox);
-            this.tabPage2.Controls.Add(this.clearButton);
-            this.tabPage2.Controls.Add(this.writeTextBox);
-            this.tabPage2.Controls.Add(this.queryButton);
-            this.tabPage2.Controls.Add(this.readButton);
-            this.tabPage2.Controls.Add(this.writeButton);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // btn_load
-            // 
-            resources.ApplyResources(this.btn_load, "btn_load");
-            this.btn_load.Name = "btn_load";
-            this.btn_load.UseVisualStyleBackColor = true;
-            this.btn_load.Click += new System.EventHandler(this.btn_load_Click);
-            // 
-            // tb_ana_max
-            // 
-            resources.ApplyResources(this.tb_ana_max, "tb_ana_max");
-            this.tb_ana_max.Name = "tb_ana_max";
-            // 
-            // tb_ana_min
-            // 
-            resources.ApplyResources(this.tb_ana_min, "tb_ana_min");
-            this.tb_ana_min.Name = "tb_ana_min";
-            // 
-            // label111
-            // 
-            resources.ApplyResources(this.label111, "label111");
-            this.label111.Name = "label111";
-            // 
-            // label110
-            // 
-            resources.ApplyResources(this.label110, "label110");
-            this.label110.Name = "label110";
-            // 
-            // V_vor
-            // 
-            resources.ApplyResources(this.V_vor, "V_vor");
-            this.V_vor.Name = "V_vor";
-            this.V_vor.UseMnemonic = false;
-            // 
-            // tb_v_bind
-            // 
-            resources.ApplyResources(this.tb_v_bind, "tb_v_bind");
-            this.tb_v_bind.Name = "tb_v_bind";
-            // 
-            // tb_v_pass
-            // 
-            resources.ApplyResources(this.tb_v_pass, "tb_v_pass");
-            this.tb_v_pass.Name = "tb_v_pass";
-            // 
-            // tb_v_vor
-            // 
-            resources.ApplyResources(this.tb_v_vor, "tb_v_vor");
-            this.tb_v_vor.Name = "tb_v_vor";
             // 
             // tableLayoutPanel3
             // 
@@ -3493,71 +3319,44 @@
             this.tableLayoutPanel3.Controls.Add(this.label100, 6, 0);
             this.tableLayoutPanel3.Controls.Add(this.lb_vset, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.label99, 5, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lb_vmin, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.label98, 4, 0);
-            this.tableLayoutPanel3.Controls.Add(this.ch1_meas, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch1_meas, 1, 2);
             this.tableLayoutPanel3.Controls.Add(this.label58, 3, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lb_vmax, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label57, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lb_stepsize, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.label81, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lb_time, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.lb_vmeas, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.ch2_meas, 2, 6);
+            this.tableLayoutPanel3.Controls.Add(this.lb_vmeas, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.ch2_meas, 2, 2);
             this.tableLayoutPanel3.Controls.Add(this.ch1_v, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ch1_vmin, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch1_vmax, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch1_step, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch1_ramp, 1, 5);
             this.tableLayoutPanel3.Controls.Add(this.ch2_v, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ch2_vmin, 2, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch2_step, 2, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch2_ramp, 2, 5);
-            this.tableLayoutPanel3.Controls.Add(this.ch3_vmin, 3, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch3_vmax, 3, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch2_vmax, 2, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch3_step, 3, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch3_ramp, 3, 5);
-            this.tableLayoutPanel3.Controls.Add(this.ch3_meas, 3, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch3_meas, 3, 2);
             this.tableLayoutPanel3.Controls.Add(this.ch4_v, 4, 1);
             this.tableLayoutPanel3.Controls.Add(this.ch3_v, 3, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ch4_vmin, 4, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch4_vmax, 4, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch4_step, 4, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch4_ramp, 4, 5);
-            this.tableLayoutPanel3.Controls.Add(this.ch4_meas, 4, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch4_meas, 4, 2);
             this.tableLayoutPanel3.Controls.Add(this.ch5_v, 5, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ch5_vmin, 5, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch5_vmax, 5, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch5_step, 5, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch5_ramp, 5, 5);
-            this.tableLayoutPanel3.Controls.Add(this.ch5_meas, 5, 6);
+            this.tableLayoutPanel3.Controls.Add(this.ch5_meas, 5, 2);
             this.tableLayoutPanel3.Controls.Add(this.ch6_v, 6, 1);
-            this.tableLayoutPanel3.Controls.Add(this.ch6_vmin, 6, 2);
-            this.tableLayoutPanel3.Controls.Add(this.ch6_vmax, 6, 3);
-            this.tableLayoutPanel3.Controls.Add(this.ch6_step, 6, 4);
-            this.tableLayoutPanel3.Controls.Add(this.ch6_ramp, 6, 5);
-            this.tableLayoutPanel3.Controls.Add(this.ch6_meas, 6, 6);
-            this.tableLayoutPanel3.Controls.Add(this.stat1, 1, 8);
-            this.tableLayoutPanel3.Controls.Add(this.stat2, 2, 8);
-            this.tableLayoutPanel3.Controls.Add(this.stat3, 3, 8);
-            this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 8);
-            this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 8);
-            this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 8);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload1, 1, 7);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload2, 2, 7);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload3, 3, 7);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload4, 4, 7);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload5, 5, 7);
-            this.tableLayoutPanel3.Controls.Add(this.btn_reload6, 6, 7);
-            this.tableLayoutPanel3.Controls.Add(this.rs1, 1, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs2, 2, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs3, 3, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs4, 4, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs5, 5, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs6, 6, 9);
-            this.tableLayoutPanel3.Controls.Add(this.rs_all, 0, 9);
-            this.tableLayoutPanel3.Controls.Add(btn_emcy, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.ch6_meas, 6, 2);
+            this.tableLayoutPanel3.Controls.Add(this.stat1, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat2, 2, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat3, 3, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat4, 4, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat5, 5, 4);
+            this.tableLayoutPanel3.Controls.Add(this.stat6, 6, 4);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload1, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload2, 2, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload3, 3, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload4, 4, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload5, 5, 3);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload6, 6, 3);
+            this.tableLayoutPanel3.Controls.Add(this.rs1, 1, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs2, 2, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs3, 3, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs4, 4, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs5, 5, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs6, 6, 5);
+            this.tableLayoutPanel3.Controls.Add(this.rs_all, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.stat_all, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.btn_reload_all, 0, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel3_Layout);
             // 
@@ -3576,11 +3375,6 @@
             resources.ApplyResources(this.label99, "label99");
             this.label99.Name = "label99";
             // 
-            // lb_vmin
-            // 
-            resources.ApplyResources(this.lb_vmin, "lb_vmin");
-            this.lb_vmin.Name = "lb_vmin";
-            // 
             // label98
             // 
             resources.ApplyResources(this.label98, "label98");
@@ -3591,36 +3385,22 @@
             this.ch1_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch1_meas, "ch1_meas");
             this.ch1_meas.Name = "ch1_meas";
+            this.ch1_meas.ReadOnly = true;
             // 
             // label58
             // 
             resources.ApplyResources(this.label58, "label58");
             this.label58.Name = "label58";
             // 
-            // lb_vmax
-            // 
-            resources.ApplyResources(this.lb_vmax, "lb_vmax");
-            this.lb_vmax.Name = "lb_vmax";
-            // 
             // label57
             // 
             resources.ApplyResources(this.label57, "label57");
             this.label57.Name = "label57";
             // 
-            // lb_stepsize
-            // 
-            resources.ApplyResources(this.lb_stepsize, "lb_stepsize");
-            this.lb_stepsize.Name = "lb_stepsize";
-            // 
             // label81
             // 
             resources.ApplyResources(this.label81, "label81");
             this.label81.Name = "label81";
-            // 
-            // lb_time
-            // 
-            resources.ApplyResources(this.lb_time, "lb_time");
-            this.lb_time.Name = "lb_time";
             // 
             // lb_vmeas
             // 
@@ -3632,6 +3412,7 @@
             this.ch2_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch2_meas, "ch2_meas");
             this.ch2_meas.Name = "ch2_meas";
+            this.ch2_meas.ReadOnly = true;
             // 
             // ch1_v
             // 
@@ -3639,77 +3420,18 @@
             this.ch1_v.Name = "ch1_v";
             this.ch1_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch1_v_KeyDown);
             // 
-            // ch1_vmin
-            // 
-            resources.ApplyResources(this.ch1_vmin, "ch1_vmin");
-            this.ch1_vmin.Name = "ch1_vmin";
-            // 
-            // ch1_vmax
-            // 
-            resources.ApplyResources(this.ch1_vmax, "ch1_vmax");
-            this.ch1_vmax.Name = "ch1_vmax";
-            // 
-            // ch1_step
-            // 
-            resources.ApplyResources(this.ch1_step, "ch1_step");
-            this.ch1_step.Name = "ch1_step";
-            // 
-            // ch1_ramp
-            // 
-            resources.ApplyResources(this.ch1_ramp, "ch1_ramp");
-            this.ch1_ramp.Name = "ch1_ramp";
-            // 
             // ch2_v
             // 
             resources.ApplyResources(this.ch2_v, "ch2_v");
             this.ch2_v.Name = "ch2_v";
             this.ch2_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch2_v_KeyDown);
             // 
-            // ch2_vmin
-            // 
-            resources.ApplyResources(this.ch2_vmin, "ch2_vmin");
-            this.ch2_vmin.Name = "ch2_vmin";
-            // 
-            // ch2_step
-            // 
-            resources.ApplyResources(this.ch2_step, "ch2_step");
-            this.ch2_step.Name = "ch2_step";
-            // 
-            // ch2_ramp
-            // 
-            resources.ApplyResources(this.ch2_ramp, "ch2_ramp");
-            this.ch2_ramp.Name = "ch2_ramp";
-            // 
-            // ch3_vmin
-            // 
-            resources.ApplyResources(this.ch3_vmin, "ch3_vmin");
-            this.ch3_vmin.Name = "ch3_vmin";
-            // 
-            // ch3_vmax
-            // 
-            resources.ApplyResources(this.ch3_vmax, "ch3_vmax");
-            this.ch3_vmax.Name = "ch3_vmax";
-            // 
-            // ch2_vmax
-            // 
-            resources.ApplyResources(this.ch2_vmax, "ch2_vmax");
-            this.ch2_vmax.Name = "ch2_vmax";
-            // 
-            // ch3_step
-            // 
-            resources.ApplyResources(this.ch3_step, "ch3_step");
-            this.ch3_step.Name = "ch3_step";
-            // 
-            // ch3_ramp
-            // 
-            resources.ApplyResources(this.ch3_ramp, "ch3_ramp");
-            this.ch3_ramp.Name = "ch3_ramp";
-            // 
             // ch3_meas
             // 
             this.ch3_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch3_meas, "ch3_meas");
             this.ch3_meas.Name = "ch3_meas";
+            this.ch3_meas.ReadOnly = true;
             // 
             // ch4_v
             // 
@@ -3723,31 +3445,12 @@
             this.ch3_v.Name = "ch3_v";
             this.ch3_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch3_v_KeyDown);
             // 
-            // ch4_vmin
-            // 
-            resources.ApplyResources(this.ch4_vmin, "ch4_vmin");
-            this.ch4_vmin.Name = "ch4_vmin";
-            // 
-            // ch4_vmax
-            // 
-            resources.ApplyResources(this.ch4_vmax, "ch4_vmax");
-            this.ch4_vmax.Name = "ch4_vmax";
-            // 
-            // ch4_step
-            // 
-            resources.ApplyResources(this.ch4_step, "ch4_step");
-            this.ch4_step.Name = "ch4_step";
-            // 
-            // ch4_ramp
-            // 
-            resources.ApplyResources(this.ch4_ramp, "ch4_ramp");
-            this.ch4_ramp.Name = "ch4_ramp";
-            // 
             // ch4_meas
             // 
             this.ch4_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch4_meas, "ch4_meas");
             this.ch4_meas.Name = "ch4_meas";
+            this.ch4_meas.ReadOnly = true;
             // 
             // ch5_v
             // 
@@ -3755,31 +3458,12 @@
             this.ch5_v.Name = "ch5_v";
             this.ch5_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch5_v_KeyDown);
             // 
-            // ch5_vmin
-            // 
-            resources.ApplyResources(this.ch5_vmin, "ch5_vmin");
-            this.ch5_vmin.Name = "ch5_vmin";
-            // 
-            // ch5_vmax
-            // 
-            resources.ApplyResources(this.ch5_vmax, "ch5_vmax");
-            this.ch5_vmax.Name = "ch5_vmax";
-            // 
-            // ch5_step
-            // 
-            resources.ApplyResources(this.ch5_step, "ch5_step");
-            this.ch5_step.Name = "ch5_step";
-            // 
-            // ch5_ramp
-            // 
-            resources.ApplyResources(this.ch5_ramp, "ch5_ramp");
-            this.ch5_ramp.Name = "ch5_ramp";
-            // 
             // ch5_meas
             // 
             this.ch5_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch5_meas, "ch5_meas");
             this.ch5_meas.Name = "ch5_meas";
+            this.ch5_meas.ReadOnly = true;
             // 
             // ch6_v
             // 
@@ -3787,31 +3471,12 @@
             this.ch6_v.Name = "ch6_v";
             this.ch6_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch6_v_KeyDown);
             // 
-            // ch6_vmin
-            // 
-            resources.ApplyResources(this.ch6_vmin, "ch6_vmin");
-            this.ch6_vmin.Name = "ch6_vmin";
-            // 
-            // ch6_vmax
-            // 
-            resources.ApplyResources(this.ch6_vmax, "ch6_vmax");
-            this.ch6_vmax.Name = "ch6_vmax";
-            // 
-            // ch6_step
-            // 
-            resources.ApplyResources(this.ch6_step, "ch6_step");
-            this.ch6_step.Name = "ch6_step";
-            // 
-            // ch6_ramp
-            // 
-            resources.ApplyResources(this.ch6_ramp, "ch6_ramp");
-            this.ch6_ramp.Name = "ch6_ramp";
-            // 
             // ch6_meas
             // 
             this.ch6_meas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.ch6_meas, "ch6_meas");
             this.ch6_meas.Name = "ch6_meas";
+            this.ch6_meas.ReadOnly = true;
             // 
             // stat1
             // 
@@ -3928,26 +3593,17 @@
             this.rs_all.UseVisualStyleBackColor = true;
             this.rs_all.Click += new System.EventHandler(this.rs_all_Click);
             // 
-            // tb_counter_ms
+            // tabPage3
             // 
-            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
-            this.tb_counter_ms.Name = "tb_counter_ms";
-            this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
-            // 
-            // btn_start_counter
-            // 
-            resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
-            this.btn_start_counter.Name = "btn_start_counter";
-            this.btn_start_counter.UseVisualStyleBackColor = true;
-            this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
-            // 
-            // bw_iseg
-            // 
-            this.bw_iseg.WorkerReportsProgress = true;
-            this.bw_iseg.WorkerSupportsCancellation = true;
-            this.bw_iseg.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_DoWork);
-            this.bw_iseg.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_ProgressChanged);
-            this.bw_iseg.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_RunWorkerCompleted);
+            this.tabPage3.Controls.Add(this.writeTextBox);
+            this.tabPage3.Controls.Add(this.writeButton);
+            this.tabPage3.Controls.Add(this.readButton);
+            this.tabPage3.Controls.Add(this.queryButton);
+            this.tabPage3.Controls.Add(this.clearButton);
+            this.tabPage3.Controls.Add(this.readTextBox);
+            resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // bw_pressure
             // 
@@ -3965,50 +3621,105 @@
             this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
             this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
             // 
-            // bt_rampe
+            // btn_emcy
             // 
-            resources.ApplyResources(this.bt_rampe, "bt_rampe");
-            this.bt_rampe.Name = "bt_rampe";
-            this.bt_rampe.UseVisualStyleBackColor = true;
-            this.bt_rampe.Click += new System.EventHandler(this.bt_rampe_Click);
+            resources.ApplyResources(btn_emcy, "btn_emcy");
+            btn_emcy.Name = "btn_emcy";
+            btn_emcy.UseVisualStyleBackColor = true;
+            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
             // 
-            // tb_rampe
+            // cb_pass
             // 
-            resources.ApplyResources(this.tb_rampe, "tb_rampe");
-            this.tb_rampe.Name = "tb_rampe";
+            this.cb_pass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_pass.FormattingEnabled = true;
+            this.cb_pass.Items.AddRange(new object[] {
+            resources.GetString("cb_pass.Items"),
+            resources.GetString("cb_pass.Items1"),
+            resources.GetString("cb_pass.Items2"),
+            resources.GetString("cb_pass.Items3"),
+            resources.GetString("cb_pass.Items4")});
+            resources.ApplyResources(this.cb_pass, "cb_pass");
+            this.cb_pass.Name = "cb_pass";
             // 
-            // tb_rampe_bis
+            // cb_stepwidth
             // 
-            resources.ApplyResources(this.tb_rampe_bis, "tb_rampe_bis");
-            this.tb_rampe_bis.Name = "tb_rampe_bis";
+            this.cb_stepwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_stepwidth.FormattingEnabled = true;
+            this.cb_stepwidth.Items.AddRange(new object[] {
+            resources.GetString("cb_stepwidth.Items"),
+            resources.GetString("cb_stepwidth.Items1"),
+            resources.GetString("cb_stepwidth.Items2"),
+            resources.GetString("cb_stepwidth.Items3"),
+            resources.GetString("cb_stepwidth.Items4"),
+            resources.GetString("cb_stepwidth.Items5"),
+            resources.GetString("cb_stepwidth.Items6")});
+            resources.ApplyResources(this.cb_stepwidth, "cb_stepwidth");
+            this.cb_stepwidth.Name = "cb_stepwidth";
+            this.cb_stepwidth.SelectedValueChanged += new System.EventHandler(this.cb_stepwidth_SelectedValueChanged);
             // 
-            // btn_rampe
+            // cb_counttime
             // 
-            resources.ApplyResources(this.btn_rampe, "btn_rampe");
-            this.btn_rampe.Name = "btn_rampe";
-            this.btn_rampe.UseVisualStyleBackColor = true;
-            this.btn_rampe.Click += new System.EventHandler(this.btn_rampe_Click);
+            this.cb_counttime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_counttime.FormattingEnabled = true;
+            this.cb_counttime.Items.AddRange(new object[] {
+            resources.GetString("cb_counttime.Items"),
+            resources.GetString("cb_counttime.Items1"),
+            resources.GetString("cb_counttime.Items2"),
+            resources.GetString("cb_counttime.Items3")});
+            resources.ApplyResources(this.cb_counttime, "cb_counttime");
+            this.cb_counttime.Name = "cb_counttime";
+            this.cb_counttime.SelectedValueChanged += new System.EventHandler(this.cb_counttime_SelectedValueChanged);
             // 
-            // tbn_rampe
+            // stat_all
             // 
-            resources.ApplyResources(this.tbn_rampe, "tbn_rampe");
-            this.tbn_rampe.Name = "tbn_rampe";
+            resources.ApplyResources(this.stat_all, "stat_all");
+            this.stat_all.Name = "stat_all";
+            this.stat_all.UseVisualStyleBackColor = true;
+            this.stat_all.Click += new System.EventHandler(this.stat_all_Click);
+            // 
+            // btn_reload_all
+            // 
+            resources.ApplyResources(this.btn_reload_all, "btn_reload_all");
+            this.btn_reload_all.Name = "btn_reload_all";
+            this.btn_reload_all.UseVisualStyleBackColor = true;
+            this.btn_reload_all.Click += new System.EventHandler(this.btn_reload_all_Click);
+            // 
+            // cb_bias
+            // 
+            this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_bias.FormattingEnabled = true;
+            this.cb_bias.Items.AddRange(new object[] {
+            resources.GetString("cb_bias.Items"),
+            resources.GetString("cb_bias.Items1"),
+            resources.GetString("cb_bias.Items2"),
+            resources.GetString("cb_bias.Items3"),
+            resources.GetString("cb_bias.Items4")});
+            resources.ApplyResources(this.cb_bias, "cb_bias");
+            this.cb_bias.Name = "cb_bias";
+            // 
+            // cb_v_lens
+            // 
+            this.cb_v_lens.BackColor = System.Drawing.SystemColors.Window;
+            this.cb_v_lens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_v_lens.FormattingEnabled = true;
+            this.cb_v_lens.Items.AddRange(new object[] {
+            resources.GetString("cb_v_lens.Items"),
+            resources.GetString("cb_v_lens.Items1"),
+            resources.GetString("cb_v_lens.Items2"),
+            resources.GetString("cb_v_lens.Items3"),
+            resources.GetString("cb_v_lens.Items4")});
+            resources.ApplyResources(this.cb_v_lens, "cb_v_lens");
+            this.cb_v_lens.Name = "cb_v_lens";
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tbn_rampe);
-            this.Controls.Add(this.btn_rampe);
-            this.Controls.Add(this.tb_rampe_bis);
-            this.Controls.Add(this.tb_rampe);
-            this.Controls.Add(this.bt_rampe);
-            this.Controls.Add(this.tb_counter_ms);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.btn_start_counter);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
             this.Controls.Add(this.label96);
+            this.Controls.Add(this.tb_show);
             this.Controls.Add(this.label95);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.label97);
@@ -4106,7 +3817,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -4115,9 +3825,10 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4343,19 +4054,14 @@
         private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.TextBox tb_counttime;
         private System.Windows.Forms.TextBox tb_slope;
-        private System.Windows.Forms.TextBox tb_stepwidth;
-        private System.Windows.Forms.Label label80;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.Label label85;
-        private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label83;
-        private System.Windows.Forms.TextBox tb_meastime;
         private System.Windows.Forms.TextBox tb_safe;
         private System.Windows.Forms.Button safe_fig;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -4459,48 +4165,20 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label lb_vset;
-        private System.Windows.Forms.Label lb_vmin;
-        private System.Windows.Forms.Label lb_vmax;
-        private System.Windows.Forms.Label lb_stepsize;
-        private System.Windows.Forms.Label lb_time;
         private System.Windows.Forms.Label lb_vmeas;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TextBox ch1_meas;
         private System.Windows.Forms.TextBox ch2_meas;
         private System.Windows.Forms.TextBox ch1_v;
-        private System.Windows.Forms.TextBox ch1_vmin;
-        private System.Windows.Forms.TextBox ch1_vmax;
-        private System.Windows.Forms.TextBox ch1_step;
-        private System.Windows.Forms.TextBox ch1_ramp;
         private System.Windows.Forms.TextBox ch2_v;
-        private System.Windows.Forms.TextBox ch2_vmin;
-        private System.Windows.Forms.TextBox ch2_step;
-        private System.Windows.Forms.TextBox ch2_ramp;
-        private System.Windows.Forms.TextBox ch3_vmin;
-        private System.Windows.Forms.TextBox ch3_vmax;
-        private System.Windows.Forms.TextBox ch2_vmax;
-        private System.Windows.Forms.TextBox ch3_step;
-        private System.Windows.Forms.TextBox ch3_ramp;
         private System.Windows.Forms.TextBox ch3_meas;
         private System.Windows.Forms.TextBox ch4_v;
         private System.Windows.Forms.TextBox ch3_v;
-        private System.Windows.Forms.TextBox ch4_vmin;
-        private System.Windows.Forms.TextBox ch4_vmax;
-        private System.Windows.Forms.TextBox ch4_step;
-        private System.Windows.Forms.TextBox ch4_ramp;
         private System.Windows.Forms.TextBox ch4_meas;
         private System.Windows.Forms.TextBox ch5_v;
-        private System.Windows.Forms.TextBox ch5_vmin;
-        private System.Windows.Forms.TextBox ch5_vmax;
-        private System.Windows.Forms.TextBox ch5_step;
-        private System.Windows.Forms.TextBox ch5_ramp;
         private System.Windows.Forms.TextBox ch5_meas;
         private System.Windows.Forms.TextBox ch6_v;
-        private System.Windows.Forms.TextBox ch6_vmin;
-        private System.Windows.Forms.TextBox ch6_vmax;
-        private System.Windows.Forms.TextBox ch6_step;
-        private System.Windows.Forms.TextBox ch6_ramp;
         private System.Windows.Forms.TextBox ch6_meas;
         private System.Windows.Forms.CheckBox stat1;
         private System.Windows.Forms.CheckBox stat2;
@@ -4526,10 +4204,8 @@
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.Label label100;
-        private System.ComponentModel.BackgroundWorker bw_iseg;
         private System.ComponentModel.BackgroundWorker bw_pressure;
         private System.Windows.Forms.TextBox tb_pressure;
-        private System.Windows.Forms.CheckBox cb_pressure;
         private System.ComponentModel.BackgroundWorker bw_iseg_volts;
         private System.Windows.Forms.Button btn_start_counter;
         private System.Windows.Forms.TextBox tb_counter;
@@ -4541,7 +4217,6 @@
         private System.Windows.Forms.TextBox vm3;
         private System.Windows.Forms.TextBox vm4;
         private System.Windows.Forms.TextBox vm5;
-        private System.Windows.Forms.TextBox vm6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TextBox tb_counter_ms;
         private System.Windows.Forms.Label label101;
@@ -4549,32 +4224,21 @@
         private System.Windows.Forms.Label label103;
         private System.Windows.Forms.Label label104;
         private System.Windows.Forms.Label label105;
-        private System.Windows.Forms.Label label106;
         private System.Windows.Forms.Label label107;
         private System.Windows.Forms.Label label108;
-        private System.Windows.Forms.Button btn_load;
-        private System.Windows.Forms.TextBox tb_ana_max;
-        private System.Windows.Forms.TextBox tb_ana_min;
-        private System.Windows.Forms.Label label111;
-        private System.Windows.Forms.Label label110;
-        private System.Windows.Forms.Label V_vor;
-        private System.Windows.Forms.TextBox tb_v_bind;
-        private System.Windows.Forms.TextBox tb_v_pass;
-        private System.Windows.Forms.TextBox tb_v_vor;
-        private System.Windows.Forms.Button bt_rampe;
-        private System.Windows.Forms.TextBox tb_rampe;
-        private System.Windows.Forms.TextBox tb_rampe_bis;
-        private System.Windows.Forms.Button btn_rampe;
-        private System.Windows.Forms.TextBox tbn_rampe;
-        private System.Windows.Forms.TextBox tb_bias;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label79;
-        private System.Windows.Forms.TextBox tb_pass;
         private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.TextBox tb_v_lens;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label82;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ComboBox cb_pass;
+        private System.Windows.Forms.ComboBox cb_counttime;
+        private System.Windows.Forms.ComboBox cb_stepwidth;
+        private System.Windows.Forms.Button stat_all;
+        private System.Windows.Forms.Button btn_reload_all;
+        private System.Windows.Forms.ComboBox cb_v_lens;
+        private System.Windows.Forms.ComboBox cb_bias;
     }
 }
 
