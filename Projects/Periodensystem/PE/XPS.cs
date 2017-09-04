@@ -25,7 +25,7 @@ namespace XPS
         double ri = 106;                    // Radius inner hemisphere in mm
         double ra = 112;                    // Radius outer hemisphere in mm
         double delta_channeltron = 3000;    // voltage drop over channeltron in V
-        double deviation = 0.06;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
+        double deviation = 0.08;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
         string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
 
@@ -171,6 +171,7 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemo);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_analyser);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_lens);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
 
                 if (!bw_pressure.IsBusy)
                 {
@@ -241,6 +242,8 @@ namespace XPS
             cb_counttime.SelectedIndex = 1;
             cb_stepwidth.SelectedIndex = 3;
             cb_v_lens.SelectedIndex = 2;
+
+            k = ra / ri - ri / ra;
         }
 
 
@@ -655,7 +658,7 @@ namespace XPS
                     LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                     LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
                     LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
-                    LJM.eReadName(handle_v_lens, "AIN4", ref LJ_lens);
+                    LJM.eReadName(handle_v_lens, "AIN6", ref LJ_lens);
                     //LJ_analyser2 = LJ_analyser / 0.1956;
                     //LJ_analyser2 = LJ_analyser / 0.204;
                     LJ_hemi2 = LJ_hemi / 0.1962;
@@ -755,7 +758,7 @@ namespace XPS
                 LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                 LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
                 LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
-                LJM.eReadName(handle_v_lens, "AIN4", ref LJ_lens);
+                LJM.eReadName(handle_v_lens, "AIN6", ref LJ_lens);
                 sc = (intcounter - oldcounter) * 1000 / tcount;       //auf sekunde normieren
                                                                       //LJ_analyser2 = LJ_analyser / 0.1956;
                 LJ_hemi2 = LJ_hemi / 0.1962;

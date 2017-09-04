@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
             System.Windows.Forms.Button btn_emcy;
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XPS));
             this.Y = new System.Windows.Forms.Button();
             this.Sc = new System.Windows.Forms.Button();
             this.Ra = new System.Windows.Forms.Button();
@@ -359,6 +359,11 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_v_lens = new System.Windows.Forms.ComboBox();
+            this.cb_bias = new System.Windows.Forms.ComboBox();
+            this.cb_counttime = new System.Windows.Forms.ComboBox();
+            this.cb_stepwidth = new System.Windows.Forms.ComboBox();
+            this.cb_pass = new System.Windows.Forms.ComboBox();
             this.label75 = new System.Windows.Forms.Label();
             this.label82 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
@@ -424,16 +429,11 @@
             this.rs5 = new System.Windows.Forms.Button();
             this.rs6 = new System.Windows.Forms.Button();
             this.rs_all = new System.Windows.Forms.Button();
+            this.stat_all = new System.Windows.Forms.Button();
+            this.btn_reload_all = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
-            this.cb_pass = new System.Windows.Forms.ComboBox();
-            this.cb_stepwidth = new System.Windows.Forms.ComboBox();
-            this.cb_counttime = new System.Windows.Forms.ComboBox();
-            this.stat_all = new System.Windows.Forms.Button();
-            this.btn_reload_all = new System.Windows.Forms.Button();
-            this.cb_bias = new System.Windows.Forms.ComboBox();
-            this.cb_v_lens = new System.Windows.Forms.ComboBox();
             btn_emcy = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -449,6 +449,13 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // btn_emcy
+            // 
+            resources.ApplyResources(btn_emcy, "btn_emcy");
+            btn_emcy.Name = "btn_emcy";
+            btn_emcy.UseVisualStyleBackColor = true;
+            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
             // 
             // Y
             // 
@@ -3150,6 +3157,75 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // cb_v_lens
+            // 
+            this.cb_v_lens.BackColor = System.Drawing.SystemColors.Window;
+            this.cb_v_lens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_v_lens.FormattingEnabled = true;
+            this.cb_v_lens.Items.AddRange(new object[] {
+            resources.GetString("cb_v_lens.Items"),
+            resources.GetString("cb_v_lens.Items1"),
+            resources.GetString("cb_v_lens.Items2"),
+            resources.GetString("cb_v_lens.Items3"),
+            resources.GetString("cb_v_lens.Items4")});
+            resources.ApplyResources(this.cb_v_lens, "cb_v_lens");
+            this.cb_v_lens.Name = "cb_v_lens";
+            // 
+            // cb_bias
+            // 
+            this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_bias.FormattingEnabled = true;
+            this.cb_bias.Items.AddRange(new object[] {
+            resources.GetString("cb_bias.Items"),
+            resources.GetString("cb_bias.Items1"),
+            resources.GetString("cb_bias.Items2"),
+            resources.GetString("cb_bias.Items3"),
+            resources.GetString("cb_bias.Items4")});
+            resources.ApplyResources(this.cb_bias, "cb_bias");
+            this.cb_bias.Name = "cb_bias";
+            // 
+            // cb_counttime
+            // 
+            this.cb_counttime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_counttime.FormattingEnabled = true;
+            this.cb_counttime.Items.AddRange(new object[] {
+            resources.GetString("cb_counttime.Items"),
+            resources.GetString("cb_counttime.Items1"),
+            resources.GetString("cb_counttime.Items2"),
+            resources.GetString("cb_counttime.Items3")});
+            resources.ApplyResources(this.cb_counttime, "cb_counttime");
+            this.cb_counttime.Name = "cb_counttime";
+            this.cb_counttime.SelectedValueChanged += new System.EventHandler(this.cb_counttime_SelectedValueChanged);
+            // 
+            // cb_stepwidth
+            // 
+            this.cb_stepwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_stepwidth.FormattingEnabled = true;
+            this.cb_stepwidth.Items.AddRange(new object[] {
+            resources.GetString("cb_stepwidth.Items"),
+            resources.GetString("cb_stepwidth.Items1"),
+            resources.GetString("cb_stepwidth.Items2"),
+            resources.GetString("cb_stepwidth.Items3"),
+            resources.GetString("cb_stepwidth.Items4"),
+            resources.GetString("cb_stepwidth.Items5"),
+            resources.GetString("cb_stepwidth.Items6")});
+            resources.ApplyResources(this.cb_stepwidth, "cb_stepwidth");
+            this.cb_stepwidth.Name = "cb_stepwidth";
+            this.cb_stepwidth.SelectedValueChanged += new System.EventHandler(this.cb_stepwidth_SelectedValueChanged);
+            // 
+            // cb_pass
+            // 
+            this.cb_pass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_pass.FormattingEnabled = true;
+            this.cb_pass.Items.AddRange(new object[] {
+            resources.GetString("cb_pass.Items"),
+            resources.GetString("cb_pass.Items1"),
+            resources.GetString("cb_pass.Items2"),
+            resources.GetString("cb_pass.Items3"),
+            resources.GetString("cb_pass.Items4")});
+            resources.ApplyResources(this.cb_pass, "cb_pass");
+            this.cb_pass.Name = "cb_pass";
+            // 
             // label75
             // 
             resources.ApplyResources(this.label75, "label75");
@@ -3593,6 +3669,20 @@
             this.rs_all.UseVisualStyleBackColor = true;
             this.rs_all.Click += new System.EventHandler(this.rs_all_Click);
             // 
+            // stat_all
+            // 
+            resources.ApplyResources(this.stat_all, "stat_all");
+            this.stat_all.Name = "stat_all";
+            this.stat_all.UseVisualStyleBackColor = true;
+            this.stat_all.Click += new System.EventHandler(this.stat_all_Click);
+            // 
+            // btn_reload_all
+            // 
+            resources.ApplyResources(this.btn_reload_all, "btn_reload_all");
+            this.btn_reload_all.Name = "btn_reload_all";
+            this.btn_reload_all.UseVisualStyleBackColor = true;
+            this.btn_reload_all.Click += new System.EventHandler(this.btn_reload_all_Click);
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.writeTextBox);
@@ -3620,96 +3710,6 @@
             this.bw_iseg_volts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_volts_DoWork);
             this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
             this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
-            // 
-            // btn_emcy
-            // 
-            resources.ApplyResources(btn_emcy, "btn_emcy");
-            btn_emcy.Name = "btn_emcy";
-            btn_emcy.UseVisualStyleBackColor = true;
-            btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
-            // 
-            // cb_pass
-            // 
-            this.cb_pass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_pass.FormattingEnabled = true;
-            this.cb_pass.Items.AddRange(new object[] {
-            resources.GetString("cb_pass.Items"),
-            resources.GetString("cb_pass.Items1"),
-            resources.GetString("cb_pass.Items2"),
-            resources.GetString("cb_pass.Items3"),
-            resources.GetString("cb_pass.Items4")});
-            resources.ApplyResources(this.cb_pass, "cb_pass");
-            this.cb_pass.Name = "cb_pass";
-            // 
-            // cb_stepwidth
-            // 
-            this.cb_stepwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_stepwidth.FormattingEnabled = true;
-            this.cb_stepwidth.Items.AddRange(new object[] {
-            resources.GetString("cb_stepwidth.Items"),
-            resources.GetString("cb_stepwidth.Items1"),
-            resources.GetString("cb_stepwidth.Items2"),
-            resources.GetString("cb_stepwidth.Items3"),
-            resources.GetString("cb_stepwidth.Items4"),
-            resources.GetString("cb_stepwidth.Items5"),
-            resources.GetString("cb_stepwidth.Items6")});
-            resources.ApplyResources(this.cb_stepwidth, "cb_stepwidth");
-            this.cb_stepwidth.Name = "cb_stepwidth";
-            this.cb_stepwidth.SelectedValueChanged += new System.EventHandler(this.cb_stepwidth_SelectedValueChanged);
-            // 
-            // cb_counttime
-            // 
-            this.cb_counttime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_counttime.FormattingEnabled = true;
-            this.cb_counttime.Items.AddRange(new object[] {
-            resources.GetString("cb_counttime.Items"),
-            resources.GetString("cb_counttime.Items1"),
-            resources.GetString("cb_counttime.Items2"),
-            resources.GetString("cb_counttime.Items3")});
-            resources.ApplyResources(this.cb_counttime, "cb_counttime");
-            this.cb_counttime.Name = "cb_counttime";
-            this.cb_counttime.SelectedValueChanged += new System.EventHandler(this.cb_counttime_SelectedValueChanged);
-            // 
-            // stat_all
-            // 
-            resources.ApplyResources(this.stat_all, "stat_all");
-            this.stat_all.Name = "stat_all";
-            this.stat_all.UseVisualStyleBackColor = true;
-            this.stat_all.Click += new System.EventHandler(this.stat_all_Click);
-            // 
-            // btn_reload_all
-            // 
-            resources.ApplyResources(this.btn_reload_all, "btn_reload_all");
-            this.btn_reload_all.Name = "btn_reload_all";
-            this.btn_reload_all.UseVisualStyleBackColor = true;
-            this.btn_reload_all.Click += new System.EventHandler(this.btn_reload_all_Click);
-            // 
-            // cb_bias
-            // 
-            this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_bias.FormattingEnabled = true;
-            this.cb_bias.Items.AddRange(new object[] {
-            resources.GetString("cb_bias.Items"),
-            resources.GetString("cb_bias.Items1"),
-            resources.GetString("cb_bias.Items2"),
-            resources.GetString("cb_bias.Items3"),
-            resources.GetString("cb_bias.Items4")});
-            resources.ApplyResources(this.cb_bias, "cb_bias");
-            this.cb_bias.Name = "cb_bias";
-            // 
-            // cb_v_lens
-            // 
-            this.cb_v_lens.BackColor = System.Drawing.SystemColors.Window;
-            this.cb_v_lens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_v_lens.FormattingEnabled = true;
-            this.cb_v_lens.Items.AddRange(new object[] {
-            resources.GetString("cb_v_lens.Items"),
-            resources.GetString("cb_v_lens.Items1"),
-            resources.GetString("cb_v_lens.Items2"),
-            resources.GetString("cb_v_lens.Items3"),
-            resources.GetString("cb_v_lens.Items4")});
-            resources.ApplyResources(this.cb_v_lens, "cb_v_lens");
-            this.cb_v_lens.Name = "cb_v_lens";
             // 
             // XPS
             // 
