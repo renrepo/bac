@@ -100,6 +100,7 @@ namespace XPS
         CheckBox[] stat;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private MessageBasedSession iseg;           // Iseg-HV session
+        bool start_ok = false;
 
 
 
@@ -140,7 +141,6 @@ namespace XPS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            btn_start.Enabled = true;
             // read files with bindung energies, colors and electron configuration
             row = File.ReadAllLines(path_bindungenergies).Select(l => l.Split(',').ToList()).ToList();
             elec_bind = File.ReadAllLines(path_electronconfig).Select(l => l.Split(',').ToList()).ToList();
@@ -180,7 +180,7 @@ namespace XPS
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't open Labjack T7 device!");
+                AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
             }
 
             Button [] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
@@ -237,9 +237,9 @@ namespace XPS
             ch.Add("rs5", 4);
             ch.Add("rs6", 5);
 
-            cb_pass.SelectedIndex = 1;
+            cb_pass.SelectedIndex = 4;
             cb_bias.SelectedIndex = 4;
-            cb_counttime.SelectedIndex = 1;
+            cb_counttime.SelectedIndex = 0;
             cb_stepwidth.SelectedIndex = 3;
             cb_v_lens.SelectedIndex = 2;
 
@@ -270,11 +270,6 @@ namespace XPS
         private void tableLayoutPanel3_Layout(object sender, LayoutEventArgs e)
         {
             tableLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        }
-
-        private void tableLayoutPanel4_Layout(object sender, LayoutEventArgs e)
-        {
-            tableLayoutPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
         }
 
 
@@ -452,7 +447,7 @@ namespace XPS
                     {
                         try
                         {
-                            Thread.Sleep(1999);
+                            start_ok = true;
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
                             await_time(20);
@@ -474,7 +469,7 @@ namespace XPS
                                 readButton.Enabled = true;
                                 writeButton.Enabled = true;
                                 clearButton.Enabled = true;
-                                //btn_emcy.Enabled = true;
+                                btn_emcy.Enabled = true;
                             }
                         }
                         catch (InvalidCastException)
@@ -717,6 +712,8 @@ namespace XPS
                 btn_can.Enabled = true;
                 tb_show.Enabled = true;
                 tb_safe.Enabled = false;
+                cb_cnt_inf.Enabled = false;
+                btn_start_counter.Enabled = false;
             }
 
             else
@@ -854,6 +851,8 @@ namespace XPS
                 showdata.Enabled = true;
                 // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "plot" + data_coutner + ".png"));
             }
+            cb_cnt_inf.Enabled = true;
+            btn_start_counter.Enabled = true;
             _suspend_background_measurement.Set();
         }
 
@@ -921,15 +920,6 @@ namespace XPS
         {
             Process.Start("notepad.exe", path_logfile + "data.txt");
         }
-
-
-
-        private void tb_safe_TextChanged(object sender, EventArgs e)
-        {
-            tb_safe.BackColor = Color.LightGray;
-            btn_start.Enabled = true;
-        }
-
 
 
         private void fig_name_TextChanged(object sender, EventArgs e)
@@ -1153,27 +1143,6 @@ namespace XPS
         private void bw_iseg_volts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {}
 
 
-        private async void btn_emcy_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            await Task.Delay(10);
-            iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
-            await_time(20);
-            _suspend_background_measurement.Set();
-
-            for (int i = 0; i < 6; i++)
-            {
-                stat[i].Text = "Off";
-                stat[i].Enabled = false;
-                reload[i].Enabled = false;
-                reset[i].Enabled = false;
-                stat[i].BackColor = SystemColors.ControlLightLight;
-            }
-
-            btn_start.Enabled = false;
-        }
-
-
         private void ch6_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -1230,32 +1199,32 @@ namespace XPS
         int ct;
         private async void btn_start_counter_Click(object sender, EventArgs e)
         {
-            //while (true)
-            //{
-                try
-                {
-                    ct = int.Parse(tb_counter_ms.Text);
-                    tb_counter_ms.Text = ct.ToString();
-                    LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_OPTIONS", 1);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_A", 2);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_B", 100);
-                    //LJM.eWriteName(handle_count, "FIO7", 0);
-                    LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
-                    //LJM.eWriteName()
-                    LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
-                    await Task.Delay(1000);
-                    LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
-                    //  LJM.eWriteName(handle_count, "DIO18_EF_READ", ref cnt_before);
-                    double erg = cnt_after - cnt_before;
-                    tb_counter.Text = erg.ToString();
-                    //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 0);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Type in Integer!");
-                }
-            //}
+            try
+            {
+                cb_cnt_inf.Enabled = false;
+                ct = int.Parse(tb_counter_ms.Text);
+                tb_counter_ms.Text = ct.ToString();
+                LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                //LJM.eWriteName(handle_count, "DIO18_EF_OPTIONS", 1);
+                //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_A", 2);
+                //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_B", 100);
+                //LJM.eWriteName(handle_count, "FIO7", 0);
+                LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                //LJM.eWriteName()
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                await Task.Delay(ct);
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                //  LJM.eWriteName(handle_count, "DIO18_EF_READ", ref cnt_before);
+                double erg = cnt_after - cnt_before;
+                tb_counter.Text = erg.ToString();
+                //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 0);
+                cb_cnt_inf.Enabled = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer!");
+                cb_cnt_inf.Enabled = true;
+            }
         }
 
 
@@ -1273,7 +1242,7 @@ namespace XPS
             }
             catch (Exception)
             {
-                MessageBox.Show("Problems with closing Iseg device!");
+                AutoClosingMessageBox.Show("Problems with closing Iseg device!", "Info", 500);
             }
 
             try
@@ -1283,9 +1252,8 @@ namespace XPS
             }
             catch (Exception)
             {
-                MessageBox.Show("Problems with closing Labjack device!");
+                AutoClosingMessageBox.Show("Problems with closing Labjack device!", "Info", 500);
             }
-
 
         }
        
@@ -1303,8 +1271,8 @@ namespace XPS
 
             slop = Math.Truncate(vstepsize * 1000 / (tcount*4)); // multiples of 4 mV/s
             slope = (slop * 4)/1000;
-            tb_slope.Text = (slope*1000).ToString("0.0");
-            if (slop > 0)
+            tb_slope.Text = (slope*1000).ToString();
+            if (slop > 0 & start_ok)
             {
                 btn_start.Enabled = true;
             }
@@ -1318,6 +1286,142 @@ namespace XPS
         private void cb_stepwidth_SelectedValueChanged(object sender, EventArgs e)
         {
             enable_start();
+        }
+
+
+        public class AutoClosingMessageBox
+        {
+            //https://stackoverflow.com/questions/14522540/close-a-messagebox-after-several-seconds
+            System.Threading.Timer _timeoutTimer;
+            string _caption;
+            AutoClosingMessageBox(string text, string caption, int timeout)
+            {
+                _caption = caption;
+                _timeoutTimer = new System.Threading.Timer(OnTimerElapsed,
+                    null, timeout, System.Threading.Timeout.Infinite);
+                using (_timeoutTimer)
+                    MessageBox.Show(text, caption);
+            }
+            public static void Show(string text, string caption, int timeout)
+            {
+                new AutoClosingMessageBox(text, caption, timeout);
+            }
+            void OnTimerElapsed(object state)
+            {
+                IntPtr mbWnd = FindWindow("#32770", _caption); // lpClassName is #32770 for MessageBox
+                if (mbWnd != IntPtr.Zero)
+                    SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                _timeoutTimer.Dispose();
+            }
+            const int WM_CLOSE = 0x0010;
+            [System.Runtime.InteropServices.DllImport("user32.dll", SetLastError = true)]
+            static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+            [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Auto)]
+            static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+        }
+
+        private async void btn_emcy_Click(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await Task.Delay(10);
+            iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
+            await_time(20);
+            _suspend_background_measurement.Set();
+
+            for (int i = 0; i < 6; i++)
+            {
+                stat[i].Text = "Off";
+                stat[i].Enabled = false;
+                reload[i].Enabled = false;
+                reset[i].Enabled = false;
+                stat[i].BackColor = SystemColors.ControlLightLight;
+            }
+
+            btn_start.Enabled = false;
+        }
+
+        private void btn_scpi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(@"C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\SCPI.pdf");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Cant find path to PDF!");
+            }
+        }
+
+
+        private void bw_counter_DoWork(object sender, DoWorkEventArgs e)
+        {
+            while (!bw_counter.CancellationPending)
+            {
+                try
+                {
+                    ct = int.Parse(tb_counter_ms.Text);
+                    tb_counter_ms.Text = ct.ToString();
+                    LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                    //LJM.eWriteName(handle_count, "DIO18_EF_OPTIONS", 1);
+                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_A", 2);
+                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_B", 100);
+                    //LJM.eWriteName(handle_count, "FIO7", 0);
+                    LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                    //LJM.eWriteName()
+                    LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                    Thread.Sleep(ct);
+                    LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                    //  LJM.eWriteName(handle_count, "DIO18_EF_READ", ref cnt_before);
+                    double erg = cnt_after - cnt_before;
+                    tb_counter.Text = erg.ToString();
+                    //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 0);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Type in Integer!");
+                }
+            }
+        }
+
+        private void bw_counter_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            tb_counter.Text = Convert.ToString(e.UserState);
+            //tb_counter.Text = e.ProgressPercentage.ToString();
+        }
+
+        private void bw_counter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                tb_counter.Text = "Stop!";
+            }
+
+            else if (e.Error != null)
+            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
+                tb_counter.Text = e.Error.Message;
+            }
+
+            else
+            {
+
+            }
+            btn_start_counter.Enabled = true;
+            cb_cnt_inf.Text = "Inf";
+        }
+
+        private void cb_cnt_inf_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (cb_cnt_inf.Checked)
+            {
+                bw_counter.RunWorkerAsync();
+                btn_start_counter.Enabled = false;
+                cb_cnt_inf.Text = "end";
+            }
+
+            if (!cb_cnt_inf.Checked)
+            {
+                bw_counter.CancelAsync();
+            }
         }
     }
 }

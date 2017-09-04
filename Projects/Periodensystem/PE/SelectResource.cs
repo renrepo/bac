@@ -153,10 +153,17 @@ namespace XPS
             // requires additional VISA .NET implementations.
             using (var rmSession = new ResourceManager())
             {
-                var resources = rmSession.Find("(ASRL|GPIB|TCPIP|USB)?*");
-                foreach (string s in resources)
+                try
                 {
-                    availableResourcesListBox.Items.Add(s);
+                    var resources = rmSession.Find("(ASRL|GPIB|TCPIP|USB)?*");
+                    foreach (string s in resources)
+                    {
+                        availableResourcesListBox.Items.Add(s);
+                    }
+                }
+                catch (System.Exception)
+                {
+                    MessageBox.Show("Can't find Iseg device!");
                 }
             }
         }

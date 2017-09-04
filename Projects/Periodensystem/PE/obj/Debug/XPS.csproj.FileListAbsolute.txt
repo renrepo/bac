@@ -3,7 +3,6 @@ C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.exe
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.pdb
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.dll
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.Web.dll
-C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csprojResolveAssemblyReference.cache
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Resources.resources
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.GenerateResource.Cache
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
@@ -30,3 +29,4 @@ C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.PE.exe
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.SelectResource.resources
 C:\Users\Rene\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\LabJack.LJM.dll
 C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\LabJack.LJM.dll
+C:\Users\Test\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csprojResolveAssemblyReference.cache
