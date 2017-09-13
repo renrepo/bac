@@ -363,7 +363,6 @@
             this.btn_start_counter = new System.Windows.Forms.Button();
             this.label80 = new System.Windows.Forms.Label();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
-            this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_v_lens = new System.Windows.Forms.ComboBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
@@ -434,9 +433,21 @@
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
+            this.tb_counter = new System.Windows.Forms.TextBox();
             this.bw_pressure = new System.ComponentModel.BackgroundWorker();
             this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
             this.bw_counter = new System.ComponentModel.BackgroundWorker();
+            this.btn_plus = new System.Windows.Forms.Button();
+            this.btn_minus = new System.Windows.Forms.Button();
+            this.btn_plusplus = new System.Windows.Forms.Button();
+            this.btn_minusminus = new System.Windows.Forms.Button();
+            this.btn_spann = new System.Windows.Forms.Button();
+            this.tb_spann = new System.Windows.Forms.TextBox();
+            this.btn_hemi = new System.Windows.Forms.Button();
+            this.btn_homo = new System.Windows.Forms.Button();
+            this.tb_hemi = new System.Windows.Forms.TextBox();
+            this.tb_homo = new System.Windows.Forms.TextBox();
+            this.bw_lens = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3141,7 +3152,6 @@
             this.groupBox5.Controls.Add(this.btn_start_counter);
             this.groupBox5.Controls.Add(this.label80);
             this.groupBox5.Controls.Add(this.tb_counter_ms);
-            this.groupBox5.Controls.Add(this.tb_counter);
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
@@ -3170,13 +3180,6 @@
             resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
             this.tb_counter_ms.Name = "tb_counter_ms";
             this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
-            // 
-            // tb_counter
-            // 
-            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_counter, "tb_counter");
-            this.tb_counter.Name = "tb_counter";
-            this.tb_counter.ReadOnly = true;
             // 
             // groupBox2
             // 
@@ -3212,7 +3215,10 @@
             resources.GetString("cb_v_lens.Items1"),
             resources.GetString("cb_v_lens.Items2"),
             resources.GetString("cb_v_lens.Items3"),
-            resources.GetString("cb_v_lens.Items4")});
+            resources.GetString("cb_v_lens.Items4"),
+            resources.GetString("cb_v_lens.Items5"),
+            resources.GetString("cb_v_lens.Items6"),
+            resources.GetString("cb_v_lens.Items7")});
             resources.ApplyResources(this.cb_v_lens, "cb_v_lens");
             this.cb_v_lens.Name = "cb_v_lens";
             // 
@@ -3233,7 +3239,11 @@
             resources.GetString("cb_bias.Items9"),
             resources.GetString("cb_bias.Items10"),
             resources.GetString("cb_bias.Items11"),
-            resources.GetString("cb_bias.Items12")});
+            resources.GetString("cb_bias.Items12"),
+            resources.GetString("cb_bias.Items13"),
+            resources.GetString("cb_bias.Items14"),
+            resources.GetString("cb_bias.Items15"),
+            resources.GetString("cb_bias.Items16")});
             resources.ApplyResources(this.cb_bias, "cb_bias");
             this.cb_bias.Name = "cb_bias";
             // 
@@ -3245,7 +3255,8 @@
             resources.GetString("cb_counttime.Items"),
             resources.GetString("cb_counttime.Items1"),
             resources.GetString("cb_counttime.Items2"),
-            resources.GetString("cb_counttime.Items3")});
+            resources.GetString("cb_counttime.Items3"),
+            resources.GetString("cb_counttime.Items4")});
             resources.ApplyResources(this.cb_counttime, "cb_counttime");
             this.cb_counttime.Name = "cb_counttime";
             this.cb_counttime.SelectedValueChanged += new System.EventHandler(this.cb_counttime_SelectedValueChanged);
@@ -3732,6 +3743,13 @@
             this.btn_scpi.UseVisualStyleBackColor = true;
             this.btn_scpi.Click += new System.EventHandler(this.btn_scpi_Click);
             // 
+            // tb_counter
+            // 
+            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            this.tb_counter.ReadOnly = true;
+            // 
             // bw_pressure
             // 
             this.bw_pressure.WorkerReportsProgress = true;
@@ -3756,10 +3774,93 @@
             this.bw_counter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_counter_ProgressChanged);
             this.bw_counter.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_counter_RunWorkerCompleted);
             // 
+            // btn_plus
+            // 
+            resources.ApplyResources(this.btn_plus, "btn_plus");
+            this.btn_plus.Name = "btn_plus";
+            this.btn_plus.UseVisualStyleBackColor = true;
+            this.btn_plus.Click += new System.EventHandler(this.btn_plus_Click);
+            // 
+            // btn_minus
+            // 
+            resources.ApplyResources(this.btn_minus, "btn_minus");
+            this.btn_minus.Name = "btn_minus";
+            this.btn_minus.UseVisualStyleBackColor = true;
+            this.btn_minus.Click += new System.EventHandler(this.btn_minus_Click);
+            // 
+            // btn_plusplus
+            // 
+            resources.ApplyResources(this.btn_plusplus, "btn_plusplus");
+            this.btn_plusplus.Name = "btn_plusplus";
+            this.btn_plusplus.UseVisualStyleBackColor = true;
+            this.btn_plusplus.Click += new System.EventHandler(this.btn_plusplus_Click);
+            // 
+            // btn_minusminus
+            // 
+            resources.ApplyResources(this.btn_minusminus, "btn_minusminus");
+            this.btn_minusminus.Name = "btn_minusminus";
+            this.btn_minusminus.UseVisualStyleBackColor = true;
+            this.btn_minusminus.Click += new System.EventHandler(this.btn_minusminus_Click);
+            // 
+            // btn_spann
+            // 
+            resources.ApplyResources(this.btn_spann, "btn_spann");
+            this.btn_spann.Name = "btn_spann";
+            this.btn_spann.UseVisualStyleBackColor = true;
+            this.btn_spann.Click += new System.EventHandler(this.btn_spann_Click);
+            // 
+            // tb_spann
+            // 
+            resources.ApplyResources(this.tb_spann, "tb_spann");
+            this.tb_spann.Name = "tb_spann";
+            // 
+            // btn_hemi
+            // 
+            resources.ApplyResources(this.btn_hemi, "btn_hemi");
+            this.btn_hemi.Name = "btn_hemi";
+            this.btn_hemi.UseVisualStyleBackColor = true;
+            this.btn_hemi.Click += new System.EventHandler(this.btn_hemi_Click);
+            // 
+            // btn_homo
+            // 
+            resources.ApplyResources(this.btn_homo, "btn_homo");
+            this.btn_homo.Name = "btn_homo";
+            this.btn_homo.UseVisualStyleBackColor = true;
+            this.btn_homo.Click += new System.EventHandler(this.btn_homo_Click);
+            // 
+            // tb_hemi
+            // 
+            resources.ApplyResources(this.tb_hemi, "tb_hemi");
+            this.tb_hemi.Name = "tb_hemi";
+            // 
+            // tb_homo
+            // 
+            resources.ApplyResources(this.tb_homo, "tb_homo");
+            this.tb_homo.Name = "tb_homo";
+            // 
+            // bw_lens
+            // 
+            this.bw_lens.WorkerReportsProgress = true;
+            this.bw_lens.WorkerSupportsCancellation = true;
+            this.bw_lens.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_lens_DoWork);
+            this.bw_lens.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_lens_ProgressChanged);
+            this.bw_lens.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_lens_RunWorkerCompleted);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tb_homo);
+            this.Controls.Add(this.tb_hemi);
+            this.Controls.Add(this.btn_homo);
+            this.Controls.Add(this.btn_hemi);
+            this.Controls.Add(this.tb_counter);
+            this.Controls.Add(this.tb_spann);
+            this.Controls.Add(this.btn_spann);
+            this.Controls.Add(this.btn_minusminus);
+            this.Controls.Add(this.btn_plusplus);
+            this.Controls.Add(this.btn_minus);
+            this.Controls.Add(this.btn_plus);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -4288,6 +4389,17 @@
         private System.Windows.Forms.Label label80;
         private System.Windows.Forms.CheckBox cb_cnt_inf;
         private System.ComponentModel.BackgroundWorker bw_counter;
+        private System.Windows.Forms.Button btn_plus;
+        private System.Windows.Forms.Button btn_minus;
+        private System.Windows.Forms.Button btn_plusplus;
+        private System.Windows.Forms.Button btn_minusminus;
+        private System.Windows.Forms.Button btn_spann;
+        private System.Windows.Forms.TextBox tb_spann;
+        private System.Windows.Forms.Button btn_hemi;
+        private System.Windows.Forms.Button btn_homo;
+        private System.Windows.Forms.TextBox tb_hemi;
+        private System.Windows.Forms.TextBox tb_homo;
+        private System.ComponentModel.BackgroundWorker bw_lens;
     }
 }
 
