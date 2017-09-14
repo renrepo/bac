@@ -29,11 +29,11 @@ namespace XPS
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
         string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
         double spannungsteiler = 10.9404;
-        double vor = 10;
+        double vor = 16;
         double nach = 5;
         double slope_korr = 0.613;      // ergibt sich aus Plot vhemi gegen vlens bei maxmalen zählraten
         //double slope_korr = 1;
-        double offset = - 15.85;
+        double offset = - 48.85;
         //double offset = 20;
 
 
