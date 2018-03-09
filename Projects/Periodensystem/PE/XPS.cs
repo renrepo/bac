@@ -44,6 +44,7 @@ namespace XPS
         int handle_v_analyser = 0;
         int handle_v_lens = 0;
         int handle_count = 0;
+        int handle_DAC = 0;
         double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
         double cnt_before = 0;              // coutner reading befor and after delay
         double cnt_after = 0;
@@ -107,7 +108,8 @@ namespace XPS
         Button[] reset;
         CheckBox[] stat;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
-        private MessageBasedSession iseg;           // Iseg-HV session
+        private MessageBasedSession iseg;           // Iseg-HV session 6 Chanel HV
+        private MessageBasedSession Xray_HV;
         bool start_ok = false;
 
 
@@ -180,6 +182,7 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_analyser);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_lens);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
 
                 if (!bw_pressure.IsBusy)
                 {
@@ -436,6 +439,7 @@ namespace XPS
             }
         }
 
+
         private void sleep_time(int delay)
         {
             try
@@ -450,6 +454,61 @@ namespace XPS
             }
         }
 
+
+        //################################################################################################################################################################
+        // Open Iseg X-Ray Power Supply
+
+
+        private async void openSessionButton_Xray_Click(object sender, EventArgs e)
+        {
+            using (SelectResource sr = new SelectResource())
+            {
+                if (lastResourceString != null)
+                {
+                    sr.ResourceName = lastResourceString;
+                }
+                DialogResult result = sr.ShowDialog(this);
+                if (result == DialogResult.OK)
+                {
+                    lastResourceString = sr.ResourceName;
+                    Cursor.Current = Cursors.WaitCursor;
+                    using (var rmSession = new ResourceManager())
+                    {
+                        try
+                        {
+                            Xray_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
+                            //Xray_HV.RawIO.Write("CONF:HVMICC HV_OK\n");
+                            //Xray_HV.FormattedIO.Write("CONF:HVMICC HV_OK\n");
+                            //await_time(20);
+                            //Xray_HV.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
+                            // (20);
+                            Xray_HV.RawIO.Write("*RST\n");
+                            //await_time2(20);
+                            Xray_HV.RawIO.Write(":VOLT 100,(@0)\n");
+                            //await_time2(20);
+                            Xray_HV.RawIO.Write(":VOLT ON,(@0)\n");
+                            //await_time2(20);
+                            //await_time(20);
+
+                            //start_ok = true;
+                            //enable_start();
+                        }
+                        catch (InvalidCastException)
+                        {
+                            MessageBox.Show("Resource selected must be a message-based session");
+                        }
+                        catch (Exception exp)
+                        {
+                            MessageBox.Show(exp.Message);
+                        }
+                        finally
+                        {
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+        }
 
         //################################################################################################################################################################
         // Open Iseg Device and Iseg Terminal
@@ -1641,6 +1700,14 @@ namespace XPS
         private void bw_lens_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        double value = 0;
+
+        private void btn_dac_Click(object sender, EventArgs e)
+        {
+            value = Convert.ToDouble(tb_dac.Text);
+            LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
     }
 }

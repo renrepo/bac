@@ -448,6 +448,9 @@
             this.tb_hemi = new System.Windows.Forms.TextBox();
             this.tb_homo = new System.Windows.Forms.TextBox();
             this.bw_lens = new System.ComponentModel.BackgroundWorker();
+            this.openSessionButton_Xray = new System.Windows.Forms.Button();
+            this.btn_dac = new System.Windows.Forms.Button();
+            this.tb_dac = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3846,10 +3849,32 @@
             this.bw_lens.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_lens_ProgressChanged);
             this.bw_lens.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_lens_RunWorkerCompleted);
             // 
+            // openSessionButton_Xray
+            // 
+            resources.ApplyResources(this.openSessionButton_Xray, "openSessionButton_Xray");
+            this.openSessionButton_Xray.Name = "openSessionButton_Xray";
+            this.openSessionButton_Xray.UseVisualStyleBackColor = true;
+            this.openSessionButton_Xray.Click += new System.EventHandler(this.openSessionButton_Xray_Click);
+            // 
+            // btn_dac
+            // 
+            resources.ApplyResources(this.btn_dac, "btn_dac");
+            this.btn_dac.Name = "btn_dac";
+            this.btn_dac.UseVisualStyleBackColor = true;
+            this.btn_dac.Click += new System.EventHandler(this.btn_dac_Click);
+            // 
+            // tb_dac
+            // 
+            resources.ApplyResources(this.tb_dac, "tb_dac");
+            this.tb_dac.Name = "tb_dac";
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tb_dac);
+            this.Controls.Add(this.btn_dac);
+            this.Controls.Add(this.openSessionButton_Xray);
             this.Controls.Add(this.tb_homo);
             this.Controls.Add(this.tb_hemi);
             this.Controls.Add(this.btn_homo);
@@ -4400,6 +4425,9 @@
         private System.Windows.Forms.TextBox tb_hemi;
         private System.Windows.Forms.TextBox tb_homo;
         private System.ComponentModel.BackgroundWorker bw_lens;
+        private System.Windows.Forms.Button openSessionButton_Xray;
+        private System.Windows.Forms.Button btn_dac;
+        private System.Windows.Forms.TextBox tb_dac;
     }
 }
 
