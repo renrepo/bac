@@ -15214,7 +15214,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;openSessionButton_Xray.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btn_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 525</value>
@@ -15238,7 +15238,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btn_dac.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>19, 554</value>
@@ -15259,7 +15259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

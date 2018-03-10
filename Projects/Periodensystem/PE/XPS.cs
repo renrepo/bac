@@ -120,6 +120,7 @@ namespace XPS
         {
             InitializeComponent();
             myPane = zedGraphControl1.GraphPane;
+
             Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
             Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
             Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
@@ -151,17 +152,21 @@ namespace XPS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // draw coordinate system
+            create_graph(myPane);
+
             // read files with bindung energies, colors and electron configuration
             row = File.ReadAllLines(path_bindungenergies).Select(l => l.Split(',').ToList()).ToList();
             elec_bind = File.ReadAllLines(path_electronconfig).Select(l => l.Split(',').ToList()).ToList();
             color_dict = File.ReadLines(path_colors).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
 
+            //Dict with entries "element name" and "atomic number"
             for (int i = 0; i < row.Count; i++)
             {
                 binding_energies_dict.Add(row[i][1], row[i][0]);
             }
-            create_graph(myPane);
 
+            //create dictionary for logfiles
             try
             {
                 if (!Directory.Exists(path + @"\Logfiles_PES"))
@@ -175,7 +180,7 @@ namespace XPS
             }
 
             try
-            {   // Open Labjack sessions
+            {   // Open Labjack sessions for voltage/counts measurements and so on
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_count);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemi);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemo);
@@ -184,6 +189,8 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
 
+                // backgroundworker for pressure measurement at Ionivac-device mounted on analyser chamber.
+                // pressure value updates every second
                 if (!bw_pressure.IsBusy)
                 {
                     bw_pressure.RunWorkerAsync();
@@ -194,6 +201,7 @@ namespace XPS
                 AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
             }
 
+            //buttons for interactive periodic table
             Button [] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
                              Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
                              Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe, Cs, Ba, La, Hf, Ta,
@@ -201,6 +209,7 @@ namespace XPS
                              Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Th, Pa, U, Rf, Np, Pu, Am, Cm,
                              Bk, Cf, Es, Fm, Md, No, Lr};
 
+            // textboxes and buttons for the "Iseg Control" panel (controlling of the 6-chanel-HV-device)
             vset = new TextBox[] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
             vmeas2 = new TextBox[] { vm1, vm2, vm3, vm4, vm5 };
@@ -208,10 +217,14 @@ namespace XPS
             reset = new Button[] { rs1, rs2, rs3, rs4, rs5, rs6 };
             stat = new CheckBox[] { stat1, stat2, stat3, stat4, stat5, stat6 };
 
+
+            // click-event for buttons in the periodic table will call the "Global_Button_Click"-method
             foreach (var item in but)
             {
                 item.MouseDown += Global_Button_Click;
             }
+
+            //same as above for the stuff in the "Iseg ControL" tab
             foreach (var item in stat)
             {
                 item.MouseDown += Global_iseg_terminal;
@@ -225,7 +238,6 @@ namespace XPS
             foreach (var item in reload)
             {
                 item.MouseDown += Global_iseg_reload;
-
             }
 
 
@@ -258,6 +270,94 @@ namespace XPS
 
             enable_start();
             stop = false;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void Global_Button_Click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                colorchanger((Button)sender, yaxis);
+            }
+            if (e.Button == MouseButtons.Right)
+            {
+                labelchanger(sender);
+            }
+        }
+
+
+        private async void Global_iseg_terminal(object sender, MouseEventArgs e)
+        {
+            CheckBox c = sender as CheckBox;
+            if (c.Text == "Off")
+            {
+                _suspend_background_measurement.Reset();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", ch[c.Name]));
+                await_time(20);
+                _suspend_background_measurement.Set();
+                c.Text = "On";
+                c.BackColor = Color.LimeGreen;
+            }
+            else
+            {
+                _suspend_background_measurement.Reset();
+                await Task.Delay(10);
+                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[c.Name]));
+                await_time(20);
+                _suspend_background_measurement.Set();
+                c.Text = "Off";
+                c.BackColor = SystemColors.ControlLightLight;
+            }
+        }
+
+
+        private async void Global_iseg_reload(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            bool Vset = Decimal.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out decimal vset_in);
+            vset[ch[b.Name]].Text = vset_in.ToString("0.000");
+            if (Vset)
+            {
+                _suspend_background_measurement.Reset();
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                await_time(20);
+                _suspend_background_measurement.Set();
+            }
+
+            else
+            {
+                MessageBox.Show("Type in Vset (float)");
+            }
+        }
+
+
+        private async void Global_iseg_reset(object sender, MouseEventArgs e)
+        {
+            Button r = sender as Button; // 3 decimal places
+            _suspend_background_measurement.Reset();
+            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[r.Name]));
+            await_time(20);
+            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", ch[r.Name]));
+            await_time(20);
+            _suspend_background_measurement.Set();
+            vset[ch[r.Name]].Text = "";
+            vmeas[ch[r.Name]].Text = "";
+            stat[ch[r.Name]].Text = "Off";
+            stat[ch[r.Name]].BackColor = SystemColors.ControlLightLight;
         }
 
 
@@ -408,19 +508,6 @@ namespace XPS
                     label.Text = elec_bind[current_line][count];
                     count += 1;
                 }
-            }
-        }
-
-
-        private void Global_Button_Click(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                colorchanger((Button)sender, yaxis);
-            }
-            if (e.Button == MouseButtons.Right)
-            {
-                labelchanger(sender);
             }
         }
 
@@ -1126,68 +1213,6 @@ namespace XPS
         }
 
         //####################################################################################################################################### 
-
-
-        private async void Global_iseg_terminal(object sender, MouseEventArgs e)
-        {
-            CheckBox c = sender as CheckBox;
-            if (c.Text == "Off")
-            {
-                _suspend_background_measurement.Reset();
-                await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", ch[c.Name]));
-                await_time(20);
-                _suspend_background_measurement.Set();
-                c.Text = "On";
-                c.BackColor = Color.LimeGreen;
-            }
-            else
-            {
-                _suspend_background_measurement.Reset();
-                await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[c.Name]));
-                await_time(20);
-                _suspend_background_measurement.Set();
-                c.Text = "Off";
-                c.BackColor = SystemColors.ControlLightLight;
-            }
-        }
-
-
-        private async void Global_iseg_reload(object sender,EventArgs e)
-        {
-            Button b = sender as Button;
-            bool Vset = Decimal.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out decimal vset_in);
-            vset[ch[b.Name]].Text = vset_in.ToString("0.000");
-            if (Vset)
-            {
-                _suspend_background_measurement.Reset();
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
-                await_time(20);
-                _suspend_background_measurement.Set();
-            }
-
-            else
-            {
-                MessageBox.Show("Type in Vset (float)");
-            }
-        }
-
-
-        private async void Global_iseg_reset(object sender, MouseEventArgs e)
-        {
-            Button r = sender as Button; // 3 decimal places
-            _suspend_background_measurement.Reset();
-            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[r.Name]));
-            await_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", ch[r.Name]));
-            await_time(20);
-            _suspend_background_measurement.Set();
-            vset[ch[r.Name]].Text = "";
-            vmeas[ch[r.Name]].Text = "";
-            stat[ch[r.Name]].Text = "Off";
-            stat[ch[r.Name]].BackColor = SystemColors.ControlLightLight;
-        }
 
 
         private async void btn_reload_all_Click(object sender, EventArgs e)
