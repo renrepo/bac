@@ -111,7 +111,10 @@ namespace XPS
         private MessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
         bool start_ok = false;
-        bool stop = false;
+        bool stop = false;      // Interrupt "btn_start_Click"-method
+
+
+
 
 
 
@@ -149,6 +152,13 @@ namespace XPS
             No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
         }
+
+
+
+
+
+
+
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -219,26 +229,26 @@ namespace XPS
             stat = new CheckBox[] { stat1, stat2, stat3, stat4, stat5, stat6 };
 
 
-            // click-event for buttons in the periodic table will call the "Global_Button_Click"-method
+            // click-event for buttons in the periodic table will call the "global_element_click"-method
             foreach (var item in but)
             {
-                item.MouseDown += Global_Button_Click;
+                item.MouseDown += global_element_click;
             }
 
             //same as above but for the stuff in the "Iseg ControL" tab
             foreach (var item in stat)
             {
-                item.MouseDown += Global_iseg_terminal;
+                item.MouseDown += Global_DPS_on_off_switch;
             }
 
             foreach (var item in reset)
             {
-                item.MouseDown += Global_iseg_reset;
+                item.MouseDown += Global_DPS_reset;
             }
 
             foreach (var item in reload)
             {
-                item.MouseDown += Global_iseg_reload;
+                item.MouseDown += Global_DPS_reload_volt;
             }
 
 
@@ -266,56 +276,71 @@ namespace XPS
 
 
 
+        //##################################################################################################################################################################
 
 
+        // default settings
+        private void create_graph(GraphPane myPane)
+        {
+            myPane.Title.Text = "UPS/XPS";
+            myPane.Title.FontSpec.Size = 13;
+            myPane.TitleGap = 1.6f;
+            myPane.XAxis.Title.Text = "Kinetic energy (+ offset) [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 11;
+            myPane.YAxis.Title.Text = "counts";
+            myPane.YAxis.Title.FontSpec.Size = 11;
+            myPane.Fill.Color = Color.LightGray;
+        }
 
 
-        private void Global_Button_Click(object sender, MouseEventArgs e)
+        // right-click on a button in the periodic table: display binding energies and electronic configuration of the selected element
+        // left-click: draw energy-lines of the selected elements into the plot
+        private void global_element_click(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                colorchanger((Button)sender, yaxis);
+                draw_energy_lines((Button)sender, yaxis);
             }
             if (e.Button == MouseButtons.Right)
             {
-                labelchanger(sender);
+                electronic_configuration(sender);
             }
         }
 
 
-        private async void Global_iseg_terminal(object sender, MouseEventArgs e)
+        // switch on/off one of the six Iseg DPS HV-modules in "Iseg Control" tab
+        private async void Global_DPS_on_off_switch(object sender, MouseEventArgs e)
         {
             CheckBox c = sender as CheckBox;
             int chanel = Convert.ToInt16(c.Tag);
+            _suspend_background_measurement.Reset();
+            await Task.Delay(10);
+
             if (c.Text == "Off")
             {
-                _suspend_background_measurement.Reset();
-                await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", chanel));
-                await_time(20);
-                _suspend_background_measurement.Set();
                 c.Text = "On";
                 c.BackColor = Color.LimeGreen;
             }
+
             else
             {
-                _suspend_background_measurement.Reset();
-                await Task.Delay(10);
                 iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", chanel));
-                await_time(20);
-                _suspend_background_measurement.Set();
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
             }
+            await_time(20);
+            _suspend_background_measurement.Set();
         }
 
 
-        private async void Global_iseg_reload(object sender, EventArgs e)
+        // apply/reload voltage on an Iseg DPS HV-module in "Iseg Control"
+        private async void Global_DPS_reload_volt(object sender, EventArgs e)
         {
             Button b = sender as Button;
             int chanel = Convert.ToInt16(b.Tag);
             bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(',', '.'), out decimal vset_in);
-            vset[chanel].Text = vset_in.ToString("0.000");
+            //vset[chanel].Text = vset_in.ToString("0.000");
             if (Vset)
             {
                 _suspend_background_measurement.Reset();
@@ -331,7 +356,8 @@ namespace XPS
         }
 
 
-        private async void Global_iseg_reset(object sender, MouseEventArgs e)
+        // switch off voltage at Iseg DPS HV-chanel in "Iseg Control" tab
+        private async void Global_DPS_reset(object sender, MouseEventArgs e)
         {
             Button r = sender as Button; // 3 decimal places
             int chanel = Convert.ToInt16(r.Tag);
@@ -348,19 +374,6 @@ namespace XPS
         }
 
 
-        private void create_graph(GraphPane myPane)
-        {
-            myPane.Title.Text = "UPS/XPS";
-            myPane.Title.FontSpec.Size = 13;
-            myPane.TitleGap = 1.6f;
-            myPane.XAxis.Title.Text = "Kinetic energy (+ offset) [eV]";
-            myPane.XAxis.Title.FontSpec.Size = 11;
-            myPane.YAxis.Title.Text = "counts";
-            myPane.YAxis.Title.FontSpec.Size = 11;
-            myPane.Fill.Color = Color.LightGray;
-        }
-
-
         private void elementnames_Popup(object sender, PopupEventArgs e){}
 
         private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
@@ -374,7 +387,7 @@ namespace XPS
         }
 
 
-        public void colorchanger(object sender, YAxis ya)       // Function for interactive periodic table
+        public void draw_energy_lines(object sender, YAxis ya)       // Function for interactive periodic table
         {
             Button btn = (Button)sender;
             // var panel = sender as Control;
@@ -450,7 +463,7 @@ namespace XPS
             }
         }
 
-        public void labelchanger(object sender)         // Function for electronic configuration plot
+        public void electronic_configuration(object sender)         // Function for electronic configuration plot
         {
             var panel = sender as Control;
             //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
@@ -1349,42 +1362,42 @@ namespace XPS
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload6, new EventArgs());
+                Global_DPS_reload_volt(btn_reload6, new EventArgs());
             }
         }
         private void ch5_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload5, new EventArgs());
+                Global_DPS_reload_volt(btn_reload5, new EventArgs());
             }
         }
         private void ch4_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload4, new EventArgs());
+                Global_DPS_reload_volt(btn_reload4, new EventArgs());
             }
         }
         private void ch3_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload3, new EventArgs());
+                Global_DPS_reload_volt(btn_reload3, new EventArgs());
             }
         }
         private void ch2_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload2, new EventArgs());
+                Global_DPS_reload_volt(btn_reload2, new EventArgs());
             }
         }
         private void ch1_v_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                Global_iseg_reload(btn_reload1, new EventArgs());
+                Global_DPS_reload_volt(btn_reload1, new EventArgs());
             }
         }
 
