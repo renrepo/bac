@@ -96,7 +96,6 @@ namespace XPS
         PointPairList values_to_plot = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
-        Dictionary<string, int> ch = new Dictionary<string, int>();
         GraphPane myPane;
         LineItem myCurve;
         TextObj pane_labs;
@@ -109,8 +108,10 @@ namespace XPS
         CheckBox[] stat;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private MessageBasedSession iseg;           // Iseg-HV session 6 Chanel HV
-        private MessageBasedSession Xray_HV;
+        private MessageBasedSession Xray_HV;        // Iseg X-Ray HV session
+
         bool start_ok = false;
+        bool stop = false;
 
 
 
@@ -224,7 +225,7 @@ namespace XPS
                 item.MouseDown += Global_Button_Click;
             }
 
-            //same as above for the stuff in the "Iseg ControL" tab
+            //same as above but for the stuff in the "Iseg ControL" tab
             foreach (var item in stat)
             {
                 item.MouseDown += Global_iseg_terminal;
@@ -241,35 +242,18 @@ namespace XPS
             }
 
 
-            ch.Add("btn_reload1", 0);
-            ch.Add("btn_reload2", 1);
-            ch.Add("btn_reload3", 2);
-            ch.Add("btn_reload4", 3);
-            ch.Add("btn_reload5", 4);
-            ch.Add("btn_reload6", 5);
-            ch.Add("stat1", 0);
-            ch.Add("stat2", 1);
-            ch.Add("stat3", 2);
-            ch.Add("stat4", 3);
-            ch.Add("stat5", 4);
-            ch.Add("stat6", 5);
-            ch.Add("rs1", 0);
-            ch.Add("rs2", 1);
-            ch.Add("rs3", 2);
-            ch.Add("rs4", 3);
-            ch.Add("rs5", 4);
-            ch.Add("rs6", 5);
-
+            // default values shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 3;
             cb_bias.SelectedIndex = 3;
             cb_counttime.SelectedIndex = 1;
             cb_stepwidth.SelectedIndex = 1;
             cb_v_lens.SelectedIndex = 2;
 
+            // proportionality between the voltage applied to the hemispheres and the pass energy
             k = ra / ri - ri / ra;
 
+            // WHY?????????????????????????????????????????????????????????
             enable_start();
-            stop = false;
         }
 
 
@@ -302,11 +286,12 @@ namespace XPS
         private async void Global_iseg_terminal(object sender, MouseEventArgs e)
         {
             CheckBox c = sender as CheckBox;
+            int chanel = Convert.ToInt16(c.Tag);
             if (c.Text == "Off")
             {
                 _suspend_background_measurement.Reset();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", ch[c.Name]));
+                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", chanel));
                 await_time(20);
                 _suspend_background_measurement.Set();
                 c.Text = "On";
@@ -316,7 +301,7 @@ namespace XPS
             {
                 _suspend_background_measurement.Reset();
                 await Task.Delay(10);
-                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[c.Name]));
+                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", chanel));
                 await_time(20);
                 _suspend_background_measurement.Set();
                 c.Text = "Off";
@@ -328,12 +313,13 @@ namespace XPS
         private async void Global_iseg_reload(object sender, EventArgs e)
         {
             Button b = sender as Button;
-            bool Vset = Decimal.TryParse(vset[ch[b.Name]].Text.Replace(',', '.'), out decimal vset_in);
-            vset[ch[b.Name]].Text = vset_in.ToString("0.000");
+            int chanel = Convert.ToInt16(b.Tag);
+            bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(',', '.'), out decimal vset_in);
+            vset[chanel].Text = vset_in.ToString("0.000");
             if (Vset)
             {
                 _suspend_background_measurement.Reset();
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), ch[b.Name])); // 3 decimal places
+                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel)); // 3 decimal places
                 await_time(20);
                 _suspend_background_measurement.Set();
             }
@@ -348,16 +334,17 @@ namespace XPS
         private async void Global_iseg_reset(object sender, MouseEventArgs e)
         {
             Button r = sender as Button; // 3 decimal places
+            int chanel = Convert.ToInt16(r.Tag);
             _suspend_background_measurement.Reset();
-            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", ch[r.Name]));
+            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", chanel));
             await_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", ch[r.Name]));
+            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", chanel));
             await_time(20);
             _suspend_background_measurement.Set();
-            vset[ch[r.Name]].Text = "";
-            vmeas[ch[r.Name]].Text = "";
-            stat[ch[r.Name]].Text = "Off";
-            stat[ch[r.Name]].BackColor = SystemColors.ControlLightLight;
+            vset[chanel].Text = "";
+            vmeas[chanel].Text = "";
+            stat[chanel].Text = "Off";
+            stat[chanel].BackColor = SystemColors.ControlLightLight;
         }
 
 
@@ -1133,7 +1120,6 @@ namespace XPS
             _suspend_background_measurement.Set();
         }
 
-        bool stop = false;
 
         private void btn_can_Click(object sender, EventArgs e)
         {
@@ -1732,6 +1718,7 @@ namespace XPS
         private void btn_dac_Click(object sender, EventArgs e)
         {
             value = Convert.ToDouble(tb_dac.Text);
+            tb_dac.Text = stat1.Tag.ToString();
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
     }

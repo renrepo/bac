@@ -3601,108 +3601,126 @@
             // 
             resources.ApplyResources(this.stat1, "stat1");
             this.stat1.Name = "stat1";
+            this.stat1.Tag = "0";
             this.stat1.UseVisualStyleBackColor = true;
             // 
             // stat2
             // 
             resources.ApplyResources(this.stat2, "stat2");
             this.stat2.Name = "stat2";
+            this.stat2.Tag = "1";
             this.stat2.UseVisualStyleBackColor = true;
             // 
             // stat3
             // 
             resources.ApplyResources(this.stat3, "stat3");
             this.stat3.Name = "stat3";
+            this.stat3.Tag = "2";
             this.stat3.UseVisualStyleBackColor = true;
             // 
             // stat4
             // 
             resources.ApplyResources(this.stat4, "stat4");
             this.stat4.Name = "stat4";
+            this.stat4.Tag = "3";
             this.stat4.UseVisualStyleBackColor = true;
             // 
             // stat5
             // 
             resources.ApplyResources(this.stat5, "stat5");
             this.stat5.Name = "stat5";
+            this.stat5.Tag = "4";
             this.stat5.UseVisualStyleBackColor = true;
             // 
             // stat6
             // 
             resources.ApplyResources(this.stat6, "stat6");
             this.stat6.Name = "stat6";
+            this.stat6.Tag = "5";
             this.stat6.UseVisualStyleBackColor = true;
             // 
             // btn_reload1
             // 
             resources.ApplyResources(this.btn_reload1, "btn_reload1");
             this.btn_reload1.Name = "btn_reload1";
+            this.btn_reload1.Tag = "0";
             this.btn_reload1.UseVisualStyleBackColor = true;
             // 
             // btn_reload2
             // 
             resources.ApplyResources(this.btn_reload2, "btn_reload2");
             this.btn_reload2.Name = "btn_reload2";
+            this.btn_reload2.Tag = "1";
             this.btn_reload2.UseVisualStyleBackColor = true;
             // 
             // btn_reload3
             // 
             resources.ApplyResources(this.btn_reload3, "btn_reload3");
             this.btn_reload3.Name = "btn_reload3";
+            this.btn_reload3.Tag = "2";
             this.btn_reload3.UseVisualStyleBackColor = true;
             // 
             // btn_reload4
             // 
             resources.ApplyResources(this.btn_reload4, "btn_reload4");
             this.btn_reload4.Name = "btn_reload4";
+            this.btn_reload4.Tag = "3";
             this.btn_reload4.UseVisualStyleBackColor = true;
             // 
             // btn_reload5
             // 
             resources.ApplyResources(this.btn_reload5, "btn_reload5");
             this.btn_reload5.Name = "btn_reload5";
+            this.btn_reload5.Tag = "4";
             this.btn_reload5.UseVisualStyleBackColor = true;
             // 
             // btn_reload6
             // 
             resources.ApplyResources(this.btn_reload6, "btn_reload6");
             this.btn_reload6.Name = "btn_reload6";
+            this.btn_reload6.Tag = "5";
             this.btn_reload6.UseVisualStyleBackColor = true;
             // 
             // rs1
             // 
             resources.ApplyResources(this.rs1, "rs1");
             this.rs1.Name = "rs1";
+            this.rs1.Tag = "0";
             this.rs1.UseVisualStyleBackColor = true;
             // 
             // rs2
             // 
             resources.ApplyResources(this.rs2, "rs2");
             this.rs2.Name = "rs2";
+            this.rs2.Tag = "1";
             this.rs2.UseVisualStyleBackColor = true;
             // 
             // rs3
             // 
             resources.ApplyResources(this.rs3, "rs3");
             this.rs3.Name = "rs3";
+            this.rs3.Tag = "2";
             this.rs3.UseVisualStyleBackColor = true;
             // 
             // rs4
             // 
             resources.ApplyResources(this.rs4, "rs4");
             this.rs4.Name = "rs4";
+            this.rs4.Tag = "3";
             this.rs4.UseVisualStyleBackColor = true;
             // 
             // rs5
             // 
             resources.ApplyResources(this.rs5, "rs5");
             this.rs5.Name = "rs5";
+            this.rs5.Tag = "4";
             this.rs5.UseVisualStyleBackColor = true;
             // 
             // rs6
             // 
             resources.ApplyResources(this.rs6, "rs6");
             this.rs6.Name = "rs6";
+            this.rs6.Tag = "5";
             this.rs6.UseVisualStyleBackColor = true;
             // 
             // rs_all
