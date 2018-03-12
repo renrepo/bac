@@ -1,4 +1,11 @@
-﻿using System;
+﻿/***
+ * CONTROL SOFTWARE ESCA LAB 5
+ * Author: Rene Wabnitz
+ * Email: 1410255@uni-wuppertal.de
+ * Bergische Universität Wuppertal
+***/
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
@@ -14,6 +21,21 @@ using System.Globalization;
 using System.Diagnostics;
 using NationalInstruments.Visa;
 using LabJack;
+
+
+/***
+ * General stuff:
+ * #################################
+ * prefix lb...label
+ * prefix tb...textbox
+ * prefix btn... button
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+***/
 
 namespace XPS
 {
@@ -80,7 +102,7 @@ namespace XPS
 
         string garbage;                     // need to read back each comment send to Iseg device
         string path_logfile;
-        string path_bindungenergies = Path.GetFullPath("Bindungsenergien.csv");
+        string path_binding_energies = Path.GetFullPath("Bindungsenergien.csv");
         string path_colors = Path.GetFullPath("colors2.csv");
         string path_electronconfig = Path.GetFullPath("electronconfiguration.csv");
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -89,8 +111,8 @@ namespace XPS
         private string lastResourceString = null;
         string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
             "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
-            "O5","P1","P2","P3"};
-        List<List<string>> row = new List<List<string>>();
+            "O5","P1","P2","P3"};       // name of energy-lines corresponding to electron binding energies in "Bindungsenergien.csv"
+        List<List<string>> table_binding_energies = new List<List<string>>();
         List<List<string>> elec_bind = new List<List<string>>();
         List<string> display_labels = new List<string>();
         PointPairList values_to_plot = new PointPairList();
@@ -106,6 +128,8 @@ namespace XPS
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
+        System.Windows.Forms.Label[] lb_list_binding_energies;
+        System.Windows.Forms.Label[] lb_list_orbital_structure;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private MessageBasedSession iseg;           // Iseg-HV session 6 Chanel HV
         private MessageBasedSession Xray_HV;        // Iseg X-Ray HV session
@@ -113,8 +137,7 @@ namespace XPS
         bool start_ok = false;
         bool stop = false;      // Interrupt "btn_start_Click"-method
 
-
-
+        Task wait = Task.Delay(20);
 
 
 
@@ -123,8 +146,11 @@ namespace XPS
         public XPS()
         {
             InitializeComponent();
+
+            // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
 
+            // formatting stuff for some buttons
             Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
             Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
             Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
@@ -151,6 +177,18 @@ namespace XPS
             Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
             Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
+
+            // border for the periodic table
+            tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+
+
+            // display bindung energies in "Bindung energies" block & show oribital structure of an element
+            lb_list_binding_energies = new System.Windows.Forms.Label [] {label4,label6,label8,label10,label12,label14,label16,label18,label20,label22,
+                                                   label24,label26,label28,label30,label32,label34,label36,label38,label40,label42,
+                                                    label44,label46,label48,label50};
+            lb_list_orbital_structure = new System.Windows.Forms.Label[] {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,
+                                                   s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34,s35,s36,s37,s38,s39,s40,s41,s42,
+                                                   s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59};
         }
 
 
@@ -165,16 +203,17 @@ namespace XPS
         {
             // draw coordinate system
             create_graph(myPane);
-
-            // read files with bindung energies, colors and electron configuration
-            row = File.ReadAllLines(path_bindungenergies).Select(l => l.Split(',').ToList()).ToList();
+            // table_binding_energies: line=all elements in periodic table; column: 1) atomic number 2) element name 3)-x)electron binding energy
+            // source: http://xdb.lbl.gov/Section1/Table_1-1.pdf
+            table_binding_energies = File.ReadAllLines(path_binding_energies).Select(l => l.Split(',').ToList()).ToList();
             elec_bind = File.ReadAllLines(path_electronconfig).Select(l => l.Split(',').ToList()).ToList();
+            // different linecolors for different elements the plot 
             color_dict = File.ReadLines(path_colors).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
 
             //Dict with entries "element name" and "atomic number"
-            for (int i = 0; i < row.Count; i++)
+            for (int i = 0; i < table_binding_energies.Count; i++)
             {
-                binding_energies_dict.Add(row[i][1], row[i][0]);
+                binding_energies_dict.Add(table_binding_energies[i][1], table_binding_energies[i][0]);
             }
 
             //create dictionary for logfiles
@@ -212,6 +251,7 @@ namespace XPS
                 AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
             }
 
+
             //buttons for interactive periodic table
             Button [] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
                              Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
@@ -235,24 +275,26 @@ namespace XPS
                 item.MouseDown += global_element_click;
             }
 
-            //same as above but for the stuff in the "Iseg ControL" tab
+            //same as above but for the on/off switches in "Iseg ControL" tab
             foreach (var item in stat)
             {
                 item.MouseDown += Global_DPS_on_off_switch;
             }
 
+            // reset buttons (turn off HV-chanel and reset)
             foreach (var item in reset)
             {
                 item.MouseDown += Global_DPS_reset;
             }
 
+            // read in the new voltage-values but not turn on the HV-chanel
             foreach (var item in reload)
             {
                 item.MouseDown += Global_DPS_reload_volt;
             }
 
 
-            // default values shown in the "XPS and UPS settings"
+            // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 3;
             cb_bias.SelectedIndex = 3;
             cb_counttime.SelectedIndex = 1;
@@ -303,9 +345,13 @@ namespace XPS
             }
             if (e.Button == MouseButtons.Right)
             {
-                electronic_configuration(sender);
+                electron_configuration((Button)sender);
             }
         }
+
+
+        // displays elementname and atomic number if cursor rollover buttons in periodic table
+        private void elementnames_Popup(object sender, PopupEventArgs e) { }
 
 
         // switch on/off one of the six Iseg DPS HV-modules in "Iseg Control" tab
@@ -314,27 +360,26 @@ namespace XPS
             CheckBox c = sender as CheckBox;
             int chanel = Convert.ToInt16(c.Tag);
             _suspend_background_measurement.Reset();
-            await Task.Delay(10);
+            //await Task.Delay(10);
 
             if (c.Text == "Off")
             {
-                iseg.RawIO.Write(String.Format(":VOLT ON,(@{0})\n", chanel));
+                write_to_DPS(String.Format(":VOLT ON,(@{0})\n", chanel));
                 c.Text = "On";
                 c.BackColor = Color.LimeGreen;
             }
 
             else
             {
-                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", chanel));
+                write_to_DPS(String.Format(":VOLT OFF,(@{0})\n", chanel));
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
             }
-            await_time(20);
             _suspend_background_measurement.Set();
         }
 
 
-        // apply/reload voltage on an Iseg DPS HV-module in "Iseg Control"
+        // apply/reload voltage on an Iseg DPS HV-module in "Iseg Control" tab
         private async void Global_DPS_reload_volt(object sender, EventArgs e)
         {
             Button b = sender as Button;
@@ -344,8 +389,7 @@ namespace XPS
             if (Vset)
             {
                 _suspend_background_measurement.Reset();
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel)); // 3 decimal places
-                await_time(20);
+                write_to_DPS(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel)); // 3 decimal places
                 _suspend_background_measurement.Set();
             }
 
@@ -362,10 +406,8 @@ namespace XPS
             Button r = sender as Button; // 3 decimal places
             int chanel = Convert.ToInt16(r.Tag);
             _suspend_background_measurement.Reset();
-            iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", chanel));
-            await_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT 0.000,(@{0})\n", chanel));
-            await_time(20);
+            write_to_DPS(String.Format(":VOLT OFF,(@{0})\n", chanel));
+            write_to_DPS(String.Format(":VOLT 0.000,(@{0})\n", chanel));        
             _suspend_background_measurement.Set();
             vset[chanel].Text = "";
             vmeas[chanel].Text = "";
@@ -374,28 +416,18 @@ namespace XPS
         }
 
 
-        private void elementnames_Popup(object sender, PopupEventArgs e){}
-
-        private void tableLayoutPanel1_Layout(object sender, LayoutEventArgs e)
-        {
-            tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        }
-
-        private void tableLayoutPanel3_Layout(object sender, LayoutEventArgs e)
-        {
-            tableLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-        }
-
-
-        public void draw_energy_lines(object sender, YAxis ya)       // Function for interactive periodic table
+        // this method changes the apparence/color of a button in the periodic table when pressed.
+        // Additionally the corresponding energy-lines and some more infomation were plottet in the graph
+        public void draw_energy_lines(object sender, YAxis ya)
         {
             Button btn = (Button)sender;
-            // var panel = sender as Control;
-            //var thePanelName = btn.Name;
+            // different colors for different elements
             string col = color_dict[btn.Name];
+            // current_line is equal to the atomic number of the selected element
             int current_line = Convert.ToInt32(binding_energies_dict[btn.Name]) - 1;
             float value;
 
+            // button not left-klicked
             if (btn.ForeColor == Color.DimGray)
             {
                 btn.Font = new Font("Arial", 12, FontStyle.Bold);
@@ -405,12 +437,14 @@ namespace XPS
 
                 for (int i = 2; i <= 25; i++)
                 {
-                    bool result = float.TryParse(row[current_line][i], out value);
+                    bool result = float.TryParse(table_binding_energies[current_line][i], out value);
 
+                    // beginning at K1s shell (i=2), check weather there are more electron binding energies for the selected element (i>2)
                     if (result)
                     {
-                        pane_labs = new TextObj((row[current_line][i] + "\n" + row[current_line][1] + " " + scores[i]), float.Parse(row[current_line][i], CultureInfo.InvariantCulture), -0.05,
-                            CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
+                        // print out information at the top of a line in the graph (element name, electron binding energy, K/L/M-line)
+                        pane_labs = new TextObj((table_binding_energies[current_line][i] + "\n" + table_binding_energies[current_line][1] + " " + scores[i]), 
+                            float.Parse(table_binding_energies[current_line][i], CultureInfo.InvariantCulture), -0.05, CoordType.XScaleYChartFraction, AlignH.Center, AlignV.Center);
                         pane_labs.FontSpec.Size = 10f;
                         pane_labs.FontSpec.Angle = 40;
                         pane_labs.FontSpec.Fill.Color = Color.Transparent;
@@ -420,6 +454,7 @@ namespace XPS
                         myPane.GraphObjList.Add(pane_labs);
                         display_labels.Add(btn.Name);
 
+                        // formatting for the energy-lines shown in the graph when an element is selected
                         ya = new YAxis();                        
                         ya.Scale.IsVisible = false;
                         ya.Scale.LabelGap = 0f;
@@ -432,7 +467,7 @@ namespace XPS
                         ya.Scale.Mag = 0;
                         ya.MajorTic.IsAllTics = false;
                         ya.MinorTic.IsAllTics = false;                      
-                        ya.Cross = Double.Parse(row[current_line][i], CultureInfo.InvariantCulture);
+                        ya.Cross = Double.Parse(table_binding_energies[current_line][i], CultureInfo.InvariantCulture);
                         ya.IsVisible = true;
                         ya.MajorGrid.IsZeroLine = false;
                         // hides xaxis
@@ -442,6 +477,7 @@ namespace XPS
                 zedGraphControl1.Refresh();
             }
 
+            // button already left-klicked
             else
             {
                 btn.ForeColor = Color.DimGray;
@@ -449,6 +485,7 @@ namespace XPS
                 btn.FlatAppearance.BorderSize = 1;
                 btn.FlatAppearance.BorderColor = Color.DimGray;
 
+                // erease energy-lines and displayed information
                 int laenge = display_labels.Count - 1;
                 for (int y = laenge; y >= 0; y--)
                 {
@@ -463,68 +500,85 @@ namespace XPS
             }
         }
 
-        public void electronic_configuration(object sender)         // Function for electronic configuration plot
+
+        // Function for electronic configuration plot
+        public void electron_configuration(object sender)
         {
-            var panel = sender as Control;
-            //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname
-            int current_line = Convert.ToInt32(binding_energies_dict[panel.Name]) - 1;
+            Button btn = (Button)sender;
+            // current_line is equal to the atomic number of the selected element
+            int current_line = Convert.ToInt32(binding_energies_dict[btn.Name]) - 1;
 
-            System.Windows.Forms.Label[] li = {label4,label6,label8,label10,label12,label14,label16,label18,label20,label22,
-                                                   label24,label26,label28,label30,label32,label34,label36,label38,label40,label42,
-                                                    label44,label46,label48,label50};
-            System.Windows.Forms.Label[] eb = {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,
-                                                   s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34,s35,s36,s37,s38,s39,s40,s41,s42,
-                                                   s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59};
-
-            if (label51.Text == elementnames.GetToolTip(panel))
+            // button not right-klicked
+            if (lb_element_name.Text == "")
             {
-                foreach (System.Windows.Forms.Label label in li)
+                // display electron binding energies of an element in the "Binding Energies"-box
+                // startvalue i=2 because binding energy starts at column 2 in "table_binding_energies"
+                for (int i = 2; i <= lb_list_binding_energies.Count(); i++)
+                {
+                    lb_list_binding_energies[i-2].Text = table_binding_energies[current_line][i];
+                }
+
+                // display orbital configuration of the element
+                for (int i = 1; i <= lb_list_orbital_structure.Count(); i++)
+                {
+                    lb_list_orbital_structure[i-1].Text = elec_bind[current_line][i];
+                }
+
+                lb_element_name.Text = elementnames.GetToolTip(btn);
+                lb_atomic_number.Text = binding_energies_dict[btn.Name];
+            }
+
+            // button already right-klicked: clear all labels
+            else
+            {
+                foreach (var label in lb_list_binding_energies)
                 {
                     label.Text = "";
                 }
-                label51.Text = "";
-                label52.Text = "";
 
-                foreach (System.Windows.Forms.Label label in eb)
+                foreach (var label in lb_list_orbital_structure)
                 {
                     label.Text = "--";
                 }
-            }
 
-            else
-            {
-                int count = 2;
-                foreach (System.Windows.Forms.Label label in li)
-                {
-                    label.Text = row[current_line][count];
-                    count += 1;
-                }
-                label51.Text = elementnames.GetToolTip(panel);
-                label52.Text = binding_energies_dict[panel.Name];
-
-                count = 1;
-                foreach (System.Windows.Forms.Label label in eb)
-                {
-                    label.Text = elec_bind[current_line][count];
-                    count += 1;
-                }
+                lb_element_name.Text = "";
+                lb_atomic_number.Text = "";
             }
         }
 
 
-        private async void await_time(int delay)
+        // write SCPI-command to Iseg DPS HV-device. wait 20ms after sending and receiving commands.
+        // If there is no readback after a command was send to the device there may be future issues 
+        // regarding readbacks.
+        // "async"-methods prevent the user interface to freeze while "await wait" is called within the method.
+        private async void write_to_DPS(string command)
         {
             try
             {
-                await Task.Delay(delay);
+                iseg.RawIO.Write(command);
+                await wait;
                 garbage = iseg.RawIO.ReadString();
-                await Task.Delay(delay);
+                await wait;
             }
+
             catch (Exception)
             {
-                AutoClosingMessageBox.Show("Problems with await_time function", "Info", 500);
+                MessageBox.Show("Can't write to Iseg DPS");
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         private void sleep_time(int delay)
@@ -566,7 +620,6 @@ namespace XPS
                             Xray_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             //Xray_HV.RawIO.Write("CONF:HVMICC HV_OK\n");
                             //Xray_HV.FormattedIO.Write("CONF:HVMICC HV_OK\n");
-                            //await_time(20);
                             //Xray_HV.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
                             // (20);
                             Xray_HV.RawIO.Write("*RST\n");
@@ -575,7 +628,6 @@ namespace XPS
                             //await_time2(20);
                             Xray_HV.RawIO.Write(":VOLT ON,(@0)\n");
                             //await_time2(20);
-                            //await_time(20);
 
                             //start_ok = true;
                             //enable_start();
@@ -619,14 +671,10 @@ namespace XPS
                         try
                         {
                             iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
-                            iseg.RawIO.Write("CONF:HVMICC HV_OK\n");
-                            await_time(20);
-                            iseg.RawIO.Write(":VOLT EMCY CLR,(@0-5)\n");
-                            await_time(20);
-                            iseg.RawIO.Write("*RST\n");
-                            await_time(20);
-                            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
-                            await_time(20);
+                            write_to_DPS("CONF:HVMICC HV_OK\n");
+                            write_to_DPS(":VOLT EMCY CLR,(@0-5)\n");
+                            write_to_DPS("*RST\n");
+                            write_to_DPS(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
                             //SetupControlState(true);
                             bw_iseg_volts.RunWorkerAsync();
                             for (int i = 0; i < 6; i++)
@@ -665,7 +713,7 @@ namespace XPS
         {
             try
             {
-                iseg.RawIO.Write("*RST\n");
+                write_to_DPS("*RST\n");
                 iseg.Dispose();
             }
             catch (Exception)
@@ -684,7 +732,7 @@ namespace XPS
                 // string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 string textToWrite = writeTextBox.Text + '\n';
                 //string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                iseg.RawIO.Write(textToWrite);
+                write_to_DPS(textToWrite);
                 await Task.Delay(20);
                 readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
                 await Task.Delay(20);
@@ -707,7 +755,7 @@ namespace XPS
             try
             {
                 string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                iseg.RawIO.Write(textToWrite);
+                write_to_DPS(textToWrite);
             }
             catch (Exception exp)
             {
@@ -821,25 +869,18 @@ namespace XPS
                 }
 
                 _suspend_background_measurement.Reset();
-                iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));     // Rampe auf 400 V/s
-                await_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_min.ToString("0.000")));
-                await_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000")));
-                await_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens_min.ToString("0.000")));
-                await_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")));
-                await_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT ON,(@0-5)\n"));
-                await_time(20);
+                write_to_DPS(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));     // Rampe auf 400 V/s
+                write_to_DPS(String.Format(":VOLT {0},(@0)\n", v_hemi_min.ToString("0.000")));
+                write_to_DPS(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000")));
+                write_to_DPS(String.Format(":VOLT {0},(@2)\n", vLens_min.ToString("0.000")));
+                write_to_DPS(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")));
+                write_to_DPS(String.Format(":VOLT ON,(@0-5)\n"));
 
                 int j = 0;
 
                 if (stop)
                 {
-                    iseg.RawIO.Write(String.Format("*RST\n"));
-                    await_time(20);
+                    write_to_DPS(String.Format("*RST\n"));
                     stop = false;
                     return;
                 }
@@ -876,8 +917,7 @@ namespace XPS
                     j = 0;
                     if (stop)
                     {
-                        iseg.RawIO.Write(String.Format("*RST\n"));
-                        await_time(20);
+                        write_to_DPS(String.Format("*RST\n"));
                         stop = false;
                         return;
                     }
@@ -891,8 +931,7 @@ namespace XPS
                         v_hemi_min_korr = v_hemi_min - (LJ_hemi2*spannungsteiler/2 - v_hemi_min);
                         if (Math.Abs(v_hemi_min_korr) < 500)
                         {
-                            iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_min_korr.ToString("0.000")));
-                            await_time(10);
+                            write_to_DPS(String.Format(":VOLT {0},(@0)\n", v_hemi_min_korr.ToString("0.000")));
                         }
                     }
 
@@ -901,8 +940,7 @@ namespace XPS
                         v_hemo_min_korr = v_hemo_min - (LJ_hemo2*spannungsteiler/2 - v_hemo_min);
                         if (Math.Abs(v_hemi_min_korr) < 500)
                         {
-                            iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_min_korr.ToString("0.000")));
-                            await_time(10);
+                            write_to_DPS(String.Format(":VOLT {0},(@1)\n", v_hemo_min_korr.ToString("0.000")));
                         }
                     }
 
@@ -911,8 +949,7 @@ namespace XPS
                     //    vLens_min_korr = vLens_min - (LJ_lens2 * spannungsteiler / 2 - vLens_min);
                     //    if (Math.Abs(vLens_min_korr) < 500)
                     //    {
-                    //        iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens_min_korr.ToString("0.000")));
-                    //        await_time(10);
+                    //        write_to_DPS(String.Format(":VOLT {0},(@2)\n", vLens_min_korr.ToString("0.000")));
                     //    }
                     //}
 
@@ -948,8 +985,7 @@ namespace XPS
 
                     if (stop)
                     {
-                        iseg.RawIO.Write(String.Format("*RST\n"));
-                        await_time(20);
+                        write_to_DPS(String.Format("*RST\n"));
                         stop = false;
                         return;
                     }
@@ -985,17 +1021,12 @@ namespace XPS
             LJ_lens2 = 0;
             Stopwatch sw = new Stopwatch();
             LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
-            iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", slop * 0.01));
-            //iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.0004));
-            sleep_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@0)\n", v_hemi_max.ToString("0.000")));
-            sleep_time(5);
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")));
-            sleep_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", vLens_max.ToString("0.000")));
-            sleep_time(20);
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")));
-            sleep_time(20);
+            write_to_DPS(String.Format(":CONF:RAMP:VOLT {0}%/s\n", slop * 0.01));
+            //write_to_DPS(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.0004));
+            write_to_DPS(String.Format(":VOLT {0},(@0)\n", v_hemi_max.ToString("0.000")));
+            write_to_DPS(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")));
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", vLens_max.ToString("0.000")));
+            write_to_DPS(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")));
             //bw_lens.RunWorkerAsync();
             LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
             while (true)
@@ -1049,7 +1080,7 @@ namespace XPS
                         + E_pass.ToString("0.000") + "\t" +((LJ_hemo2 - LJ_analyser2) / (LJ_hemi2 - LJ_hemo2)).ToString("0.000") + "\t" + ms.ToString("0.000") + "\t" + (LJ_lens2 / 3).ToString("0.000") + "\t"
                         + ((LJ_hemi2*0.612/3 - 4.017)-LJ_lens2 / 3).ToString("0.000"));
                 }
-                //iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", ((LJ_hemi2 / 3) * 6.707 - 42.134).ToString("0.000")));
+                //write_to_DPS(String.Format(":VOLT {0},(@2)\n", ((LJ_hemi2 / 3) * 6.707 - 42.134).ToString("0.000")));
                 bW_data.ReportProgress(0, ((intcounter - sc) * 1000 / ms).ToString("00000"));
 
 
@@ -1070,7 +1101,6 @@ namespace XPS
 
         private void bW_data_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-                //sleep_time(20);
             progressBar1.Value = e.ProgressPercentage;
             vm1.Text = (LJ_hemi2/3).ToString("0.000");
             vm2.Text = (LJ_hemo2/3).ToString("0.000");
@@ -1094,10 +1124,8 @@ namespace XPS
             //Ereignis! occures when bW operation has completed, has been cancelled or has raised an exception
             if (e.Cancelled)
             {
-                iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));
-                sleep_time(20);
-                iseg.RawIO.Write(String.Format(":VOLT OFF,(@0-5)\n"));
-                sleep_time(20);
+                write_to_DPS(String.Format(":CONF:RAMP:VOLT 10.000%/s\n"));
+                write_to_DPS(String.Format(":VOLT OFF,(@0-5)\n"));
 
                 tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data"  + ".txt", true))
@@ -1223,8 +1251,7 @@ namespace XPS
                 vset[i].Text = vset_in.ToString("0.000");
                 if (Vset)
                 {
-                    iseg.RawIO.Write(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), i)); // 3 decimal places
-                    await_time(20);                   
+                    write_to_DPS(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), i)); // 3 decimal places              
                 }
 
                 else
@@ -1240,8 +1267,7 @@ namespace XPS
         private async void rs_all_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
-            iseg.RawIO.Write(String.Format("*RST\n"));
-            await_time(20);
+            write_to_DPS(String.Format("*RST\n"));
             _suspend_background_measurement.Set();
             for (int i = 0; i <= 5; i++)
             {
@@ -1258,8 +1284,7 @@ namespace XPS
             _suspend_background_measurement.Reset();
             for (int i = 0; i <= 5; i++)
             {
-                iseg.RawIO.Write(String.Format(":VOLT OFF,(@{0})\n", i));
-                await_time(20);
+                write_to_DPS(String.Format(":VOLT OFF,(@{0})\n", i));
                 stat[i].Text = "Off";
                 stat[i].BackColor = SystemColors.ControlLightLight;
             }
@@ -1321,7 +1346,7 @@ namespace XPS
 
                 try
                 {
-                    iseg.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", counter));
+                    write_to_DPS(String.Format(":MEAS:VOLT? (@{0})\n", counter));
                     Thread.Sleep(20);
                     spannungen = iseg.RawIO.ReadString();
                     Thread.Sleep(10);
@@ -1448,10 +1473,8 @@ namespace XPS
             try
             {
                 _suspend_background_measurement.Reset();
-                iseg.RawIO.Write(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
-                await_time(20);
-                iseg.RawIO.Write("*RST\n");
-                await_time(20);
+                write_to_DPS(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp));
+                write_to_DPS("*RST\n");
                 bw_iseg_volts.CancelAsync();
                 iseg.Dispose();
             }
@@ -1542,8 +1565,7 @@ namespace XPS
         {
             _suspend_background_measurement.Reset();
             await Task.Delay(10);
-            iseg.RawIO.Write(":VOLT EMCY OFF, (@0-5)\n");
-            await_time(20);
+            write_to_DPS(":VOLT EMCY OFF, (@0-5)\n");
             _suspend_background_measurement.Set();
 
             for (int i = 0; i < 6; i++)
@@ -1642,47 +1664,43 @@ namespace XPS
         }
 
         double aktuell;
-        private void btn_plus_Click(object sender, EventArgs e)
+        private async void btn_plus_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
             aktuell = Convert.ToDouble(ch3_v.Text);
             aktuell += 0.250;
             ch3_v.Text = aktuell.ToString("0.000");
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", aktuell));
-            await_time(20);
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", aktuell));
             _suspend_background_measurement.Set();
         }
 
-        private void btn_minus_Click(object sender, EventArgs e)
+        private async void btn_minus_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
             aktuell = Convert.ToDouble(ch3_v.Text);
             aktuell -= 0.250;
             ch3_v.Text = aktuell.ToString("0.000");
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", aktuell));
-            await_time(20);
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", aktuell));
             _suspend_background_measurement.Set();
         }
 
-        private void btn_plusplus_Click(object sender, EventArgs e)
+        private async void btn_plusplus_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
             aktuell = Convert.ToDouble(ch3_v.Text);
             aktuell += 2;
             ch3_v.Text = aktuell.ToString("0.000");
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", aktuell));
-            await_time(20);
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", aktuell));
             _suspend_background_measurement.Set();
         }
 
-        private void btn_minusminus_Click(object sender, EventArgs e)
+        private async void btn_minusminus_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
             aktuell = Convert.ToDouble(ch3_v.Text);
             aktuell -= 2;
             ch3_v.Text = aktuell.ToString("0.000");
-            iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", aktuell));
-            await_time(20);
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", aktuell));
             _suspend_background_measurement.Set();
         }
 
@@ -1710,8 +1728,7 @@ namespace XPS
             while (!bw_lens.CancellationPending)
             {
                 lensvalue = Convert.ToDouble(vm1.Text) * 6.707 - 44.134;
-                iseg.RawIO.Write(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")));
-                sleep_time(20);
+                write_to_DPS(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")));
                 Thread.Sleep(800);
             }
         }
@@ -1734,6 +1751,12 @@ namespace XPS
             tb_dac.Text = stat1.Tag.ToString();
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            double lensvalue = 0.12254234213;
+            write_to_DPS(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")));
+        }
     }
 }
 
@@ -1741,3 +1764,7 @@ namespace XPS
 //bugs:
 // - nach clear führt das abwählen von elementen zzu einem error (da ebtl. noch in liste gespeichert)
 // - close iseg HV
+
+
+//links:
+// //https://stackoverflow.com/questions/8000957/mouseenter-mouseleave-objectname

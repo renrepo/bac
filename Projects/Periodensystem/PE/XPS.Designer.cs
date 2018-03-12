@@ -187,9 +187,9 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
+            this.lb_element_name = new System.Windows.Forms.Label();
             this.label56 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
+            this.lb_atomic_number = new System.Windows.Forms.Label();
             this.label55 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -451,6 +451,7 @@
             this.openSessionButton_Xray = new System.Windows.Forms.Button();
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -1690,7 +1691,6 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox26, 3, 9);
             this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel1_Layout);
             // 
             // textBox19
             // 
@@ -1951,20 +1951,20 @@
             resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
             // 
-            // label51
+            // lb_element_name
             // 
-            resources.ApplyResources(this.label51, "label51");
-            this.label51.Name = "label51";
+            resources.ApplyResources(this.lb_element_name, "lb_element_name");
+            this.lb_element_name.Name = "lb_element_name";
             // 
             // label56
             // 
             resources.ApplyResources(this.label56, "label56");
             this.label56.Name = "label56";
             // 
-            // label52
+            // lb_atomic_number
             // 
-            resources.ApplyResources(this.label52, "label52");
-            this.label52.Name = "label52";
+            resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
+            this.lb_atomic_number.Name = "lb_atomic_number";
             // 
             // label55
             // 
@@ -3477,7 +3477,6 @@
             this.tableLayoutPanel3.Controls.Add(this.stat_all, 0, 4);
             this.tableLayoutPanel3.Controls.Add(this.btn_reload_all, 0, 3);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.Layout += new System.Windows.Forms.LayoutEventHandler(this.tableLayoutPanel3_Layout);
             // 
             // label100
             // 
@@ -3886,10 +3885,18 @@
             resources.ApplyResources(this.tb_dac, "tb_dac");
             this.tb_dac.Name = "tb_dac";
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.tb_dac);
             this.Controls.Add(this.btn_dac);
             this.Controls.Add(this.openSessionButton_Xray);
@@ -3927,10 +3934,10 @@
             this.Controls.Add(this.label63);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.s44);
-            this.Controls.Add(this.label52);
+            this.Controls.Add(this.lb_atomic_number);
             this.Controls.Add(this.s28);
             this.Controls.Add(this.s55);
-            this.Controls.Add(this.label51);
+            this.Controls.Add(this.lb_element_name);
             this.Controls.Add(this.s39);
             this.Controls.Add(this.label56);
             this.Controls.Add(this.s23);
@@ -4211,8 +4218,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label lb_element_name;
+        private System.Windows.Forms.Label lb_atomic_number;
         private ZedGraph.ZedGraphControl zedGraphControl1;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label48;
@@ -4446,6 +4453,7 @@
         private System.Windows.Forms.Button openSessionButton_Xray;
         private System.Windows.Forms.Button btn_dac;
         private System.Windows.Forms.TextBox tb_dac;
+        private System.Windows.Forms.Button button1;
     }
 }
 
