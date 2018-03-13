@@ -137,7 +137,7 @@ namespace XPS
         bool start_ok = false;
         bool stop = false;      // Interrupt "btn_start_Click"-method
 
-        Task wait = Task.Delay(20);
+        Task wait = Task.Delay(200);
 
 
 
@@ -556,30 +556,35 @@ namespace XPS
         {
             if (device == "DPS")
             {
+                iseg.RawIO.Write(command);
+                await wait;
+                /***
                 try
                 {
-                    iseg.RawIO.Write(command);
-                    await wait;
                     garbage = iseg.RawIO.ReadString();
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Can't write to Iseg DPS");
+                    //MessageBox.Show("Can't write to Iseg DPS");
                 }
+                ***/
             }
 
             if (device == "XRAY")
             {
+                Xray_HV.RawIO.Write(command);
+                await wait;
+
+                
                 try
                 {
-                    Xray_HV.RawIO.Write(command);
-                    await wait;
                     garbage = Xray_HV.RawIO.ReadString();
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
+                    //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
                 }
+                
             }
 
             await wait;
@@ -612,14 +617,14 @@ namespace XPS
         //#############################################################################################################################
         // Open Iseg DPS 6-Chanel HV device & Iseg X-Ray Power Supply
 
-        /***
+        
         private async void openSessionButton_Click(object sender, EventArgs e)
         {
             using (ResourceManager rm = new ResourceManager())
             {
                 try
                 {
-                    iseg = (MessageBasedSession)rm.Open("adress");
+                    iseg = (MessageBasedSession)rm.Open("TCPIP0::132.195.109.144::10001::SOCKET");
                     await write_to_Iseg("CONF:HVMICC HV_OK\n","DPS");
                     await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n","DPS");
                     await write_to_Iseg("*RST\n","DPS");
@@ -650,20 +655,40 @@ namespace XPS
                 }
             }            
         }
-        ***/
+        
 
 
-        /***
+        
         private async void openSessionButton_Xray_Click(object sender, EventArgs e)
         {
             using (var rm = new ResourceManager())
             {
                 try
                 {
-                    Xray_HV = (MessageBasedSession)rm.Open("adress2");
-                    await write_to_Iseg("*RST\n","XRAY");
-                    await write_to_Iseg(":VOLT 100,(@0)\n","XRAY");
-                  //await write_to_Iseg(":VOLT ON,(@0)\n","XRAY");
+                    Xray_HV = (MessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
+                    //await write_to_Iseg("*RST\n","XRAY");
+                    //await write_to_Iseg(":VOLT 100,(@0)\n","XRAY");
+                    Xray_HV.RawIO.Write("*RST\n");
+                    await wait;
+                    try
+                    {
+                        garbage = Xray_HV.RawIO.ReadString();
+                    }
+                    catch (Exception)
+                    {
+                        //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
+                    }
+                    Xray_HV.RawIO.Write(":VOLT 100,(@0)\n");
+                    await wait; //macht nicht was es soll (<1ms). klappt nur wenn await Task.Delay(200) direkt angegeben!!!!
+                    try
+                    {
+                        garbage = Xray_HV.RawIO.ReadString();
+                    }
+                    catch (Exception)
+                    {
+                        //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
+                    }
+                    await wait;
                 }
                 catch (Exception exp)
                 {
@@ -675,9 +700,9 @@ namespace XPS
                 }
             }
         }
-        ***/
+        
 
-
+        /***
         private async void openSessionButton_Xray_Click(object sender, EventArgs e)
         {
             using (SelectResource sr = new SelectResource())
@@ -697,7 +722,7 @@ namespace XPS
                         {
                             Xray_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             await write_to_Iseg("*RST\n", "XRAY");
-                            await write_to_Iseg(":VOLT 100,(@0)\n", "XRAY");
+                            await write_to_Iseg(":VOLT 200,(@0)\n", "XRAY");
                         }
                         catch (InvalidCastException)
                         {
@@ -715,8 +740,8 @@ namespace XPS
                 }
             }
         }
-
-
+        
+        
         private async void openSessionButton_Click(object sender, EventArgs e)
         {
             using (SelectResource sr = new SelectResource())
@@ -772,7 +797,7 @@ namespace XPS
                 }
             }
         }
-
+        ***/
 
 
 
