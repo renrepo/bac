@@ -569,7 +569,7 @@ namespace XPS
         }
 
 
-        // same as above. should be replaced in the near futur (together with background worker) by async/await
+        // same as above. should be replaced by async/await in the near futur (together with background worker)
         private void write_to_DPS_sync(string command)
         {
             try
@@ -594,6 +594,12 @@ namespace XPS
         //################################################################################################################################################################
         // Open Iseg X-Ray Power Supply
 
+
+        private async void openSessionButton_Click(object sender, EventArgs e)
+        {
+            ResourceManager dps = new ResourceManager();
+            
+        }
 
         private async void openSessionButton_Xray_Click(object sender, EventArgs e)
         {
