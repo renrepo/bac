@@ -557,8 +557,8 @@ namespace XPS
             if (device == "DPS")
             {
                 iseg.RawIO.Write(command);
-                await wait;
-                /***
+                await Task.Delay(20);
+                
                 try
                 {
                     garbage = iseg.RawIO.ReadString();
@@ -566,16 +566,14 @@ namespace XPS
                 catch (Exception)
                 {
                     //MessageBox.Show("Can't write to Iseg DPS");
-                }
-                ***/
+                }               
             }
 
             if (device == "XRAY")
             {
                 Xray_HV.RawIO.Write(command);
-                await wait;
+                await Task.Delay(20);
 
-                
                 try
                 {
                     garbage = Xray_HV.RawIO.ReadString();
@@ -584,10 +582,9 @@ namespace XPS
                 {
                     //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
                 }
-                
             }
 
-            await wait;
+            await Task.Delay(20);
             return 1;
         }
 
@@ -666,29 +663,8 @@ namespace XPS
                 try
                 {
                     Xray_HV = (MessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
-                    //await write_to_Iseg("*RST\n","XRAY");
-                    //await write_to_Iseg(":VOLT 100,(@0)\n","XRAY");
-                    Xray_HV.RawIO.Write("*RST\n");
-                    await wait;
-                    try
-                    {
-                        garbage = Xray_HV.RawIO.ReadString();
-                    }
-                    catch (Exception)
-                    {
-                        //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
-                    }
-                    Xray_HV.RawIO.Write(":VOLT 100,(@0)\n");
-                    await wait; //macht nicht was es soll (<1ms). klappt nur wenn await Task.Delay(200) direkt angegeben!!!!
-                    try
-                    {
-                        garbage = Xray_HV.RawIO.ReadString();
-                    }
-                    catch (Exception)
-                    {
-                        //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
-                    }
-                    await wait;
+                    await write_to_Iseg("*RST\n","XRAY");
+                    await write_to_Iseg(":VOLT 100,(@0)\n","XRAY");
                 }
                 catch (Exception exp)
                 {
