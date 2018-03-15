@@ -68,6 +68,7 @@ namespace XPS
         int handle_v_lens = 0;
         int handle_count = 0;
         int handle_DAC = 0;
+        int handle_DAC2 = 0;
         double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
         double cnt_before = 0;              // coutner reading befor and after delay
         double cnt_after = 0;
@@ -132,7 +133,7 @@ namespace XPS
         System.Windows.Forms.Label[] lb_list_binding_energies;
         System.Windows.Forms.Label[] lb_list_orbital_structure;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
-        private MessageBasedSession iseg;           // Iseg-HV session 6 Chanel HV
+        private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
         bool start_ok = false;
@@ -146,8 +147,6 @@ namespace XPS
         {
             InitializeComponent();
 
-            // no timeout-error when reading back from Iseg-device
-            ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
 
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
@@ -240,6 +239,7 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_lens);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC2);
 
                 // backgroundworker for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
@@ -556,67 +556,102 @@ namespace XPS
         // further information re "async/await" see https://stackoverflow.com/questions/14455293/how-and-when-to-use-async-and-await
         private async Task<int> write_to_Iseg(string command, string device)
         {
-            if (device == "DPS")
+            try
             {
-                iseg.RawIO.Write(command);
-                await Task.Delay(20);
-                
-                try
+                if (device == "DPS")
                 {
-                    read_iseg = iseg.RawIO.ReadString();
+                    DPS_HV.RawIO.Write(command);
                 }
-                catch (Exception)
+
+                if (device == "XRAY")
                 {
-                    //MessageBox.Show("Can't write to Iseg DPS");
-                }               
+                    Xray_HV.RawIO.Write(command);
+                }
+
+                await Task.Delay(20);
             }
-
-            if (device == "XRAY")
+            catch (Exception)
             {
-                Xray_HV.RawIO.Write(command);
-                await Task.Delay(20);
-
-                try
+                if (device == "DPS")
                 {
-                    read_iseg = Xray_HV.RawIO.ReadString();
+                    MessageBox.Show("Can't write to Iseg DPS");
                 }
-                catch (Exception)
+
+                if (device == "XRAY")
                 {
-                    //MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
+                    MessageBox.Show("Can't write to Iseg X-Ray Power Supply");
                 }
             }
 
-            await Task.Delay(20);
             return 1;
         }
 
 
-        // same as above. should be replaced by async/await in the near futur (together with background worker)
-        private void write_to_DPS_sync(string command)
+
+        private async Task<string> read_from_Iseg(string command, string device)
         {
+            read_iseg = null;
+
             try
             {
-                iseg.RawIO.Write(command);
-                Thread.Sleep(20);
-                read_iseg = iseg.RawIO.ReadString();
-                Thread.Sleep(20);
-            }
+                if (device == "DPS")
+                {
+                    DPS_HV.RawIO.Write(command);
+                    await Task.Delay(20);
+                    read_iseg = DPS_HV.RawIO.ReadString();
+                }
 
+                if (device == "XRAY")
+                {
+                    Xray_HV.RawIO.Write(command);
+                    await Task.Delay(20);
+                    read_iseg = Xray_HV.RawIO.ReadString();
+                }
+
+                await Task.Delay(40);
+            }
             catch (Exception)
             {
-                MessageBox.Show("Can't write to Iseg DPS");
+                if (device == "DPS")
+                {
+                    MessageBox.Show("Can't write/read to/from Iseg DPS");
+                }
+
+                if (device == "XRAY")
+                {
+                    MessageBox.Show("Can't write/read to/from Iseg X-Ray Power Supply");
+                }
             }
+
+            return read_iseg;
         }
 
 
 
+        // same as above. should be replaced by async/await in the near futur (together with background worker)
+        private string write_to_DPS_sync(string command)
+        {
+            try
+            {
+                DPS_HV.RawIO.Write(command);
+                Thread.Sleep(20);
+                read_iseg = DPS_HV.RawIO.ReadString();
+                Thread.Sleep(40);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Backgroundworker DPS voltage measurement failed");
+            }
+
+            return read_iseg;
+        }
 
 
 
         //#############################################################################################################################
         // Open Iseg DPS 6-Chanel HV device & Iseg X-Ray Power Supply
 
-        
+
         private async void openSessionButton_Click(object sender, EventArgs e)
         {
 
@@ -624,12 +659,15 @@ namespace XPS
             {
                 try
                 {
-                    iseg = (MessageBasedSession)rm.Open("TCPIP0::132.195.109.144::10001::SOCKET");
+                    DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.144::10001::SOCKET");
+                    // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
+                    //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
+                    ((INativeVisaSession)DPS_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
                     await write_to_Iseg("CONF:HVMICC HV_OK\n","DPS");
                     await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n","DPS");
                     await write_to_Iseg("*RST\n","DPS");
                     await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
-                    bw_iseg_volts.RunWorkerAsync();
+                    //bw_iseg_volts.RunWorkerAsync();
                     for (int i = 0; i < 6; i++)
                     {
                         reset[i].Enabled = true;
@@ -664,8 +702,10 @@ namespace XPS
                 try
                 {
                     Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
+                    // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
+                    //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
+                    ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
                     await write_to_Iseg("*RST\n", "XRAY");
-                    await write_to_Iseg(":VOLT 100,(@0)\n", "XRAY");
                 }
                 catch (Exception exp)
                 {
@@ -677,7 +717,34 @@ namespace XPS
                 }
             }
         }
-        
+
+
+        private async void close_Xray_HV_session_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await write_to_Iseg("*RST\n", "XRAY");
+                Xray_HV.Dispose();
+            }
+            catch (Exception)
+            {
+                AutoClosingMessageBox.Show("Can not close Iseg Xray HV", "Info", 500);
+            }
+        }
+
+
+        private async void close_DPS_HV_session_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await write_to_Iseg("*RST\n", "DAP");
+                DPS_HV.Dispose();
+            }
+            catch (Exception)
+            {
+                AutoClosingMessageBox.Show("Can not close Iseg DPS HV", "info", 500);
+            }
+        }
 
         /***
         private async void openSessionButton_Xray_Click(object sender, EventArgs e)
@@ -736,7 +803,7 @@ namespace XPS
                     {
                         try
                         {
-                            iseg = (MessageBasedSession)rmSession.Open(sr.ResourceName);
+                            DPS_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
                             await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
                             await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
                             await write_to_Iseg("*RST\n", "DPS");
@@ -795,22 +862,6 @@ namespace XPS
 
 
 
-
-
-
-        private async void closeSession_Click(object sender, System.EventArgs e)
-        {
-            try
-            {
-                await write_to_Iseg("*RST\n", "DPS");
-                iseg.Dispose();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Can not close Iseg-Hv");
-            }
-        }
-
         private async void query_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
@@ -823,9 +874,9 @@ namespace XPS
                 //string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
                 await write_to_Iseg(textToWrite, "DPS");
                 await Task.Delay(20);
-                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
+                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
                 await Task.Delay(20);
-                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
+                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
             }
             catch (Exception exp)
             {
@@ -860,7 +911,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                readTextBox.Text = InsertCommonEscapeSequences(iseg.RawIO.ReadString());
+                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
             }
             catch (Exception exp)
             {
@@ -1420,6 +1471,17 @@ namespace XPS
 
        
 
+
+
+
+
+
+
+
+
+
+
+
         string spannungen;
 
         private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
@@ -1437,9 +1499,9 @@ namespace XPS
                 {
                     write_to_DPS_sync(String.Format(":MEAS:VOLT? (@{0})\n", counter));
                     Thread.Sleep(20);
-                    spannungen = iseg.RawIO.ReadString();
+                    spannungen = DPS_HV.RawIO.ReadString();
                     Thread.Sleep(10);
-                    spannungen = iseg.RawIO.ReadString();
+                    spannungen = DPS_HV.RawIO.ReadString();
                     Thread.Sleep(10);
                     _suspend_background_measurement.WaitOne(Timeout.Infinite);
                     s = Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
@@ -1470,6 +1532,16 @@ namespace XPS
         }
 
         private void bw_iseg_volts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {}
+
+
+
+
+
+
+
+
+
+
 
 
         private void ch6_v_KeyDown(object sender, KeyEventArgs e)
@@ -1565,7 +1637,7 @@ namespace XPS
                 await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp), "DPS");
                 await write_to_Iseg("*RST\n", "DPS");
                 bw_iseg_volts.CancelAsync();
-                iseg.Dispose();
+                DPS_HV.Dispose();
             }
             catch (Exception)
             {
@@ -1833,11 +1905,11 @@ namespace XPS
         }
 
         double value = 0;
+        double value2 = 0;
 
         private void btn_dac_Click(object sender, EventArgs e)
         {
             value = Convert.ToDouble(tb_dac.Text);
-            tb_dac.Text = stat1.Tag.ToString();
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
 
@@ -1845,6 +1917,12 @@ namespace XPS
         {
             double lensvalue = 0.12254234213;
             await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")), "DPS");
+        }
+
+        private void btn_ref_Click(object sender, EventArgs e)
+        {
+            value2 = Convert.ToDouble(tb_ref.Text);
+            LJM.eWriteName(handle_DAC2, "TDAC1", value2);
         }
     }
 }

@@ -276,7 +276,7 @@
             this.clearButton = new System.Windows.Forms.Button();
             this.writeTextBox = new System.Windows.Forms.TextBox();
             this.readTextBox = new System.Windows.Forms.TextBox();
-            this.closeSessionButton = new System.Windows.Forms.Button();
+            this.close_DPS_HV_session = new System.Windows.Forms.Button();
             this.s44 = new System.Windows.Forms.Label();
             this.s28 = new System.Windows.Forms.Label();
             this.s55 = new System.Windows.Forms.Label();
@@ -452,6 +452,9 @@
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.btn_ref = new System.Windows.Forms.Button();
+            this.tb_ref = new System.Windows.Forms.TextBox();
+            this.close_Xray_HV_session = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -2529,11 +2532,11 @@
             this.readTextBox.ReadOnly = true;
             this.readTextBox.TabStop = false;
             // 
-            // closeSessionButton
+            // close_DPS_HV_session
             // 
-            resources.ApplyResources(this.closeSessionButton, "closeSessionButton");
-            this.closeSessionButton.Name = "closeSessionButton";
-            this.closeSessionButton.Click += new System.EventHandler(this.closeSession_Click);
+            resources.ApplyResources(this.close_DPS_HV_session, "close_DPS_HV_session");
+            this.close_DPS_HV_session.Name = "close_DPS_HV_session";
+            this.close_DPS_HV_session.Click += new System.EventHandler(this.close_DPS_HV_session_Click);
             // 
             // s44
             // 
@@ -3143,7 +3146,7 @@
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.closeSessionButton);
+            this.tabPage1.Controls.Add(this.close_DPS_HV_session);
             this.tabPage1.Controls.Add(this.openSessionButton);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
@@ -3892,10 +3895,32 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btn_ref
+            // 
+            resources.ApplyResources(this.btn_ref, "btn_ref");
+            this.btn_ref.Name = "btn_ref";
+            this.btn_ref.UseVisualStyleBackColor = true;
+            this.btn_ref.Click += new System.EventHandler(this.btn_ref_Click);
+            // 
+            // tb_ref
+            // 
+            resources.ApplyResources(this.tb_ref, "tb_ref");
+            this.tb_ref.Name = "tb_ref";
+            // 
+            // close_Xray_HV_session
+            // 
+            resources.ApplyResources(this.close_Xray_HV_session, "close_Xray_HV_session");
+            this.close_Xray_HV_session.Name = "close_Xray_HV_session";
+            this.close_Xray_HV_session.UseVisualStyleBackColor = true;
+            this.close_Xray_HV_session.Click += new System.EventHandler(this.close_Xray_HV_session_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.close_Xray_HV_session);
+            this.Controls.Add(this.tb_ref);
+            this.Controls.Add(this.btn_ref);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tb_dac);
             this.Controls.Add(this.btn_dac);
@@ -4273,7 +4298,7 @@
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.TextBox writeTextBox;
         private System.Windows.Forms.TextBox readTextBox;
-        private System.Windows.Forms.Button closeSessionButton;
+        private System.Windows.Forms.Button close_DPS_HV_session;
         private System.Windows.Forms.Label s12;
         private System.Windows.Forms.Label s9;
         private System.Windows.Forms.Label s11;
@@ -4454,6 +4479,9 @@
         private System.Windows.Forms.Button btn_dac;
         private System.Windows.Forms.TextBox tb_dac;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ref;
+        private System.Windows.Forms.TextBox tb_ref;
+        private System.Windows.Forms.Button close_Xray_HV_session;
     }
 }
 
