@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Diagnostics;
 using NationalInstruments.Visa;
 using LabJack;
+using Ivi.Visa;
 
 
 /***
@@ -100,7 +101,7 @@ namespace XPS
         double v_hemo_min_korr;
         double vLens_min_korr;
 
-        string garbage;                     // need to read back each comment send to Iseg device
+        string read_iseg;                     // need to read back each comment send to Iseg device
         string path_logfile;
         string path_binding_energies = Path.GetFullPath("Bindungsenergien.csv");
         string path_colors = Path.GetFullPath("colors2.csv");
@@ -132,12 +133,10 @@ namespace XPS
         System.Windows.Forms.Label[] lb_list_orbital_structure;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private MessageBasedSession iseg;           // Iseg-HV session 6 Chanel HV
-        private MessageBasedSession Xray_HV;        // Iseg X-Ray HV session
+        private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
         bool start_ok = false;
         bool stop = false;      // Interrupt "btn_start_Click"-method
-
-        Task wait = Task.Delay(200);
 
 
 
@@ -146,6 +145,9 @@ namespace XPS
         public XPS()
         {
             InitializeComponent();
+
+            // no timeout-error when reading back from Iseg-device
+            ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
 
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
@@ -561,7 +563,7 @@ namespace XPS
                 
                 try
                 {
-                    garbage = iseg.RawIO.ReadString();
+                    read_iseg = iseg.RawIO.ReadString();
                 }
                 catch (Exception)
                 {
@@ -576,7 +578,7 @@ namespace XPS
 
                 try
                 {
-                    garbage = Xray_HV.RawIO.ReadString();
+                    read_iseg = Xray_HV.RawIO.ReadString();
                 }
                 catch (Exception)
                 {
@@ -596,7 +598,7 @@ namespace XPS
             {
                 iseg.RawIO.Write(command);
                 Thread.Sleep(20);
-                garbage = iseg.RawIO.ReadString();
+                read_iseg = iseg.RawIO.ReadString();
                 Thread.Sleep(20);
             }
 
@@ -617,6 +619,7 @@ namespace XPS
         
         private async void openSessionButton_Click(object sender, EventArgs e)
         {
+
             using (ResourceManager rm = new ResourceManager())
             {
                 try
@@ -652,19 +655,17 @@ namespace XPS
                 }
             }            
         }
-        
 
 
-        
         private async void openSessionButton_Xray_Click(object sender, EventArgs e)
         {
             using (var rm = new ResourceManager())
             {
                 try
                 {
-                    Xray_HV = (MessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
-                    await write_to_Iseg("*RST\n","XRAY");
-                    await write_to_Iseg(":VOLT 100,(@0)\n","XRAY");
+                    Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
+                    await write_to_Iseg("*RST\n", "XRAY");
+                    await write_to_Iseg(":VOLT 100,(@0)\n", "XRAY");
                 }
                 catch (Exception exp)
                 {
