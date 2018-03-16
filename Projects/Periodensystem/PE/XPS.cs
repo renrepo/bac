@@ -140,6 +140,8 @@ namespace XPS
 
         bool start_ok = false;
         bool stop = false;      // Interrupt "btn_start_Click"-method
+        bool DPS_HV_is_open = false;
+        bool Xray_HV_is_open = false;
 
 
 
@@ -204,6 +206,8 @@ namespace XPS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // dot instead of comma (very important for voltage input values!)
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             // draw coordinate system
             create_graph(myPane);
             // table_binding_energies: line=all elements in periodic table; column: 1) atomic number 2) element name 3)-x)electron binding energy
@@ -252,12 +256,13 @@ namespace XPS
                     bw_pressure.RunWorkerAsync();
                 }
                 ***/
+
+                // NEEDS TO BE TESTED!
+                background_meas_pressure_labjack();
             }
             catch (Exception)
             {
                 AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
-                // NEEDS TO BE TESTED!
-                //background_meas_pressure_labjack();
             }
 
 
@@ -393,7 +398,7 @@ namespace XPS
         {
             Button b = sender as Button;
             int chanel = Convert.ToInt16(b.Tag);
-            bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(',', '.'), out decimal vset_in);
+            bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(",","."), out decimal vset_in);
             //vset[chanel].Text = vset_in.ToString("0.000");
             if (Vset)
             {
@@ -597,7 +602,7 @@ namespace XPS
 
         private async Task<string> read_from_Iseg(string command, string device)
         {
-            read_iseg = null;
+            read_iseg = "";
 
             try
             {
@@ -666,6 +671,7 @@ namespace XPS
                 try
                 {
                     DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.144::10001::SOCKET");
+                    DPS_HV_is_open = false;
                     // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
                     //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
                     ((INativeVisaSession)DPS_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
@@ -688,7 +694,7 @@ namespace XPS
                     btn_emcy.Enabled = true;
                     start_ok = true;
                     enable_start();
-                    //background_meas_volt_DPS();
+                    background_meas_volt_DPS();
                 }
                 catch (Exception exp)
                 {
@@ -697,7 +703,6 @@ namespace XPS
                 finally
                 {
                     Cursor.Current = Cursors.Default;
-                    background_meas_volt_DPS();
                 }
             }            
         }
@@ -710,6 +715,7 @@ namespace XPS
                 try
                 {
                     Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
+                    Xray_HV_is_open = true;
                     // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
                     //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
                     ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
@@ -733,6 +739,7 @@ namespace XPS
             {
                 await write_to_Iseg("*RST\n", "XRAY");
                 Xray_HV.Dispose();
+                Xray_HV_is_open = false;
             }
             catch (Exception)
             {
@@ -745,8 +752,9 @@ namespace XPS
         {
             try
             {
-                await write_to_Iseg("*RST\n", "DAP");
+                await write_to_Iseg("*RST\n", "DPS");
                 DPS_HV.Dispose();
+                DPS_HV_is_open = false;
             }
             catch (Exception)
             {
@@ -1389,7 +1397,7 @@ namespace XPS
 
         //####################################################################################################################################### 
 
-
+        // 16.03.18 tested --OK (kommentare einfügen und ggf. kürzen)
         private async void btn_reload_all_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
@@ -1426,7 +1434,7 @@ namespace XPS
             }
         }
 
-
+        // 16.03.18 tested --OK (kommentare einfügen und ggf. kürzen)
         private async void stat_all_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
@@ -1481,7 +1489,7 @@ namespace XPS
 
 
 
-
+        // tested 16.03 -- OK!
         private async void background_meas_pressure_labjack()
         {
             double pressure;
@@ -1506,7 +1514,7 @@ namespace XPS
                             progress.Report(pressure.ToString("0.00E0"));
                             token.ThrowIfCancellationRequested();
                         }
-                        Thread.Sleep(500);
+                        Thread.Sleep(2000);
                     }
                 });
                 MessageBox.Show("Completed!");
@@ -1547,40 +1555,42 @@ namespace XPS
 
 
 
-
+        //tested 16.03.18 --OK
         private async void background_meas_volt_DPS()
         {
             _cts_volt_dps = new CancellationTokenSource();
             var token = _cts_volt_dps.Token;
             int result = 0;
             int i = -1;
-            var progressHandler = new Progress<double>(value =>
+            var progressHandler2 = new Progress<string>(value =>
             {
-                vmeas[result].Text = value.ToString("0.000");
+                vmeas[result].Text = value;
             });
-            var progress = progressHandler as IProgress<double>;
-            string readback = null;
+            var progress = progressHandler2 as IProgress<string>;
+            string readback = "";
             try
             {
-                while (true)
+
+                await Task.Run(() =>
                 {
-                    result = await Task.Run(() =>
+                    while (true)
                     {
                         ++i;
                         if (i == 6)
                         {
                             i = 0;
                         }
-                        readback = read_from_Iseg(String.Format(":MEAS:VOLT? (@{0})\n", i), "DPS").Result;
-                        progress.Report(Double.Parse(readback.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float));
-                        //readback = i.ToString();
-                        //progress.Report(i);
-                        token.ThrowIfCancellationRequested();
+                        DPS_HV.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", i));
+                        Thread.Sleep(50);
+                        readback = DPS_HV.RawIO.ReadString();
+                        progress.Report(readback.Replace("V\r\n", "").ToString());
+                        //progress.Report(i.ToString());
+                        result = i;
                         _suspend_background_measurement.WaitOne(Timeout.Infinite);
-                        Thread.Sleep(500);
-                        return i;
-                    });
-                }
+                        token.ThrowIfCancellationRequested();
+                        Thread.Sleep(100);
+                    }
+                });
                 //MessageBox.Show("Completed!");
             }
             catch (OperationCanceledException)
@@ -1593,7 +1603,7 @@ namespace XPS
 
 
 
-
+        /***
         string spannungen;
 
         private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
@@ -1645,8 +1655,8 @@ namespace XPS
 
         private void bw_iseg_volts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {}
 
-
-
+    
+         ***/
 
 
 
@@ -1743,23 +1753,33 @@ namespace XPS
 
         private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            if (_cts_pressure_labjack != null)
+            {
+                _cts_pressure_labjack.Cancel();
+            }
+
+            if (_cts_volt_dps != null)
+            {
+                _cts_volt_dps.Cancel();
+            }
+
+            if (DPS_HV_is_open)
             {
                 _suspend_background_measurement.Reset();
+                //bw_iseg_volts.CancelAsync();
                 await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp), "DPS");
                 await write_to_Iseg("*RST\n", "DPS");
-                bw_iseg_volts.CancelAsync();
                 DPS_HV.Dispose();
             }
-            catch (Exception)
+
+            if (Xray_HV_is_open)
             {
-                AutoClosingMessageBox.Show("Problems with closing Iseg device!", "Info", 500);
+                await write_to_Iseg("*RST\n", "XRAY");
+                Xray_HV.Dispose();
             }
 
             try
             {
-                //bw_lens.CancelAsync();
-                bw_pressure.CancelAsync();
                 LJM.CloseAll();
             }
             catch (Exception)
@@ -2021,7 +2041,7 @@ namespace XPS
 
         private void btn_dac_Click(object sender, EventArgs e)
         {
-            value = Convert.ToDouble(tb_dac.Text);
+            value = Convert.ToDouble(tb_dac.Text.Replace(",","."));
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
 
@@ -2033,7 +2053,7 @@ namespace XPS
 
         private void btn_ref_Click(object sender, EventArgs e)
         {
-            value2 = Convert.ToDouble(tb_ref.Text);
+            value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
             LJM.eWriteName(handle_DAC2, "TDAC1", value2);
         }
     }

@@ -3776,14 +3776,6 @@
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
             // 
-            // bw_iseg_volts
-            // 
-            this.bw_iseg_volts.WorkerReportsProgress = true;
-            this.bw_iseg_volts.WorkerSupportsCancellation = true;
-            this.bw_iseg_volts.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_iseg_volts_DoWork);
-            this.bw_iseg_volts.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_iseg_volts_ProgressChanged);
-            this.bw_iseg_volts.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_iseg_volts_RunWorkerCompleted);
-            // 
             // bw_counter
             // 
             this.bw_counter.WorkerReportsProgress = true;
