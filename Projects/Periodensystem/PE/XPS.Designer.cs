@@ -455,6 +455,9 @@
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
             this.close_Xray_HV_session = new System.Windows.Forms.Button();
+            this.btn_cancel_ak_pressure = new System.Windows.Forms.Button();
+            this.btn_pause = new System.Windows.Forms.Button();
+            this.btn_unpause = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3773,14 +3776,6 @@
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
             // 
-            // bw_pressure
-            // 
-            this.bw_pressure.WorkerReportsProgress = true;
-            this.bw_pressure.WorkerSupportsCancellation = true;
-            this.bw_pressure.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_pressure_DoWork);
-            this.bw_pressure.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_pressure_ProgressChanged);
-            this.bw_pressure.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_pressure_RunWorkerCompleted);
-            // 
             // bw_iseg_volts
             // 
             this.bw_iseg_volts.WorkerReportsProgress = true;
@@ -3914,10 +3909,34 @@
             this.close_Xray_HV_session.UseVisualStyleBackColor = true;
             this.close_Xray_HV_session.Click += new System.EventHandler(this.close_Xray_HV_session_Click);
             // 
+            // btn_cancel_ak_pressure
+            // 
+            resources.ApplyResources(this.btn_cancel_ak_pressure, "btn_cancel_ak_pressure");
+            this.btn_cancel_ak_pressure.Name = "btn_cancel_ak_pressure";
+            this.btn_cancel_ak_pressure.UseVisualStyleBackColor = true;
+            this.btn_cancel_ak_pressure.Click += new System.EventHandler(this.btn_cancel_ak_pressure_Click);
+            // 
+            // btn_pause
+            // 
+            resources.ApplyResources(this.btn_pause, "btn_pause");
+            this.btn_pause.Name = "btn_pause";
+            this.btn_pause.UseVisualStyleBackColor = true;
+            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
+            // 
+            // btn_unpause
+            // 
+            resources.ApplyResources(this.btn_unpause, "btn_unpause");
+            this.btn_unpause.Name = "btn_unpause";
+            this.btn_unpause.UseVisualStyleBackColor = true;
+            this.btn_unpause.Click += new System.EventHandler(this.btn_unpause_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_unpause);
+            this.Controls.Add(this.btn_pause);
+            this.Controls.Add(this.btn_cancel_ak_pressure);
             this.Controls.Add(this.close_Xray_HV_session);
             this.Controls.Add(this.tb_ref);
             this.Controls.Add(this.btn_ref);
@@ -4482,6 +4501,9 @@
         private System.Windows.Forms.Button btn_ref;
         private System.Windows.Forms.TextBox tb_ref;
         private System.Windows.Forms.Button close_Xray_HV_session;
+        private System.Windows.Forms.Button btn_cancel_ak_pressure;
+        private System.Windows.Forms.Button btn_pause;
+        private System.Windows.Forms.Button btn_unpause;
     }
 }
 

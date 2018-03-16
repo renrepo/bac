@@ -133,6 +133,8 @@ namespace XPS
         System.Windows.Forms.Label[] lb_list_binding_energies;
         System.Windows.Forms.Label[] lb_list_orbital_structure;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
+        private CancellationTokenSource _cts_pressure_labjack;           // Cancellation of Labjack pressure background measurement 
+        private CancellationTokenSource _cts_volt_dps;           // Cancellation of Iseg DPS voltage background measurement 
         private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
@@ -243,14 +245,19 @@ namespace XPS
 
                 // backgroundworker for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
+
+                /***
                 if (!bw_pressure.IsBusy)
                 {
                     bw_pressure.RunWorkerAsync();
                 }
+                ***/
             }
             catch (Exception)
             {
                 AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
+                // NEEDS TO BE TESTED!
+                //background_meas_pressure_labjack();
             }
 
 
@@ -622,7 +629,6 @@ namespace XPS
                     MessageBox.Show("Can't write/read to/from Iseg X-Ray Power Supply");
                 }
             }
-
             return read_iseg;
         }
 
@@ -682,6 +688,7 @@ namespace XPS
                     btn_emcy.Enabled = true;
                     start_ok = true;
                     enable_start();
+                    //background_meas_volt_DPS();
                 }
                 catch (Exception exp)
                 {
@@ -690,6 +697,7 @@ namespace XPS
                 finally
                 {
                     Cursor.Current = Cursors.Default;
+                    background_meas_volt_DPS();
                 }
             }            
         }
@@ -1432,6 +1440,12 @@ namespace XPS
         }
 
 
+
+
+
+
+        /***
+
         private void bw_pressure_DoWork(object sender, DoWorkEventArgs e)
         {
             double pressure;
@@ -1444,38 +1458,136 @@ namespace XPS
                 Thread.Sleep(1000);
             }
         }
-
         private void bw_pressure_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             tb_pressure.Text = Convert.ToString(e.UserState);
             //tb_counter.Text = e.ProgressPercentage.ToString();
         }
-
         private void bw_pressure_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled)
             {
                 tb_pressure.Text = "Stop!";
             }
-
             else if (e.Error != null)
             {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
                 tb_show.Text = e.Error.Message;
             }
-
             else
-            {
+            {  }
+        }
 
+    ***/
+
+
+
+
+        private async void background_meas_pressure_labjack()
+        {
+            double pressure;
+            _cts_pressure_labjack = new CancellationTokenSource();
+            var token = _cts_pressure_labjack.Token;
+            var progressHandler = new Progress<string>(value =>
+            {
+                tb_pressure.Text = value;
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
+            {
+                await Task.Run(() =>
+                {
+                    
+                    while (true)
+                    {
+                        LJM.eReadName(handle_pressure, pressure_pin, ref ionivac_v_out);
+                        pressure = Math.Pow(10, ((Convert.ToDouble(ionivac_v_out) - 7.75)) / 0.75);
+                        if (progress != null)
+                        {
+                            progress.Report(pressure.ToString("0.00E0"));
+                            token.ThrowIfCancellationRequested();
+                        }
+                        Thread.Sleep(500);
+                    }
+                });
+                MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                tb_pressure.Text = "can";
             }
         }
 
-       
+
+        private void btn_cancel_ak_pressure_Click(object sender, EventArgs e)
+        {
+            if (_cts_pressure_labjack != null)
+            {
+                _cts_pressure_labjack.Cancel();
+            }
+
+            if (_cts_volt_dps != null)
+            {
+                _cts_volt_dps.Cancel();
+            }
+        }
+
+
+        private void btn_unpause_Click(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Set();
+        }
+
+        private void btn_pause_Click(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+        }
 
 
 
 
 
 
+
+        private async void background_meas_volt_DPS()
+        {
+            _cts_volt_dps = new CancellationTokenSource();
+            var token = _cts_volt_dps.Token;
+            int result = 0;
+            int i = -1;
+            var progressHandler = new Progress<double>(value =>
+            {
+                vmeas[result].Text = value.ToString("0.000");
+            });
+            var progress = progressHandler as IProgress<double>;
+            string readback = null;
+            try
+            {
+                while (true)
+                {
+                    result = await Task.Run(() =>
+                    {
+                        ++i;
+                        if (i == 6)
+                        {
+                            i = 0;
+                        }
+                        readback = read_from_Iseg(String.Format(":MEAS:VOLT? (@{0})\n", i), "DPS").Result;
+                        progress.Report(Double.Parse(readback.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float));
+                        //readback = i.ToString();
+                        //progress.Report(i);
+                        token.ThrowIfCancellationRequested();
+                        _suspend_background_measurement.WaitOne(Timeout.Infinite);
+                        Thread.Sleep(500);
+                        return i;
+                    });
+                }
+                //MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                MessageBox.Show("Problem with background measurement of Iseg DPS voltages");
+            }
+        }
 
 
 
