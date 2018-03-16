@@ -762,102 +762,7 @@ namespace XPS
             }
         }
 
-        /***
-        private async void openSessionButton_Xray_Click(object sender, EventArgs e)
-        {
-            using (SelectResource sr = new SelectResource())
-            {
-                if (lastResourceString != null)
-                {
-                    sr.ResourceName = lastResourceString;
-                }
-                DialogResult result = sr.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    lastResourceString = sr.ResourceName;
-                    Cursor.Current = Cursors.WaitCursor;
-                    using (var rmSession = new ResourceManager())
-                    {
-                        try
-                        {
-                            Xray_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
-                            await write_to_Iseg("*RST\n", "XRAY");
-                            await write_to_Iseg(":VOLT 200,(@0)\n", "XRAY");
-                        }
-                        catch (InvalidCastException)
-                        {
-                            MessageBox.Show("Resource selected must be a message-based session");
-                        }
-                        catch (Exception exp)
-                        {
-                            MessageBox.Show(exp.Message);
-                        }
-                        finally
-                        {
-                            Cursor.Current = Cursors.Default;
-                        }
-                    }
-                }
-            }
-        }
         
-        
-        private async void openSessionButton_Click(object sender, EventArgs e)
-        {
-            using (SelectResource sr = new SelectResource())
-            {
-                if (lastResourceString != null)
-                {
-                    sr.ResourceName = lastResourceString;
-                }
-                DialogResult result = sr.ShowDialog(this);
-                if (result == DialogResult.OK)
-                {
-                    lastResourceString = sr.ResourceName;
-                    Cursor.Current = Cursors.WaitCursor;
-                    using (var rmSession = new ResourceManager())
-                    {
-                        try
-                        {
-                            DPS_HV = (MessageBasedSession)rmSession.Open(sr.ResourceName);
-                            await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
-                            await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
-                            await write_to_Iseg("*RST\n", "DPS");
-                            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp), "DPS");
-                            //SetupControlState(true);
-                            bw_iseg_volts.RunWorkerAsync();
-                            for (int i = 0; i < 6; i++)
-                            {
-                                reset[i].Enabled = true;
-                                reload[i].Enabled = true;
-                                stat[i].Enabled = true;
-                                rs_all.Enabled = true;
-                                queryButton.Enabled = true;
-                                readButton.Enabled = true;
-                                writeButton.Enabled = true;
-                                clearButton.Enabled = true;
-                                btn_emcy.Enabled = true;
-                            }
-                            start_ok = true;
-                            enable_start();
-                        }
-                        catch (InvalidCastException)
-                        {
-                            MessageBox.Show("Resource selected must be a message-based session");
-                        }
-                        catch (Exception exp)
-                        {
-                            MessageBox.Show(exp.Message);
-                        }
-                        finally
-                        {
-                            Cursor.Current = Cursors.Default;
-                        }
-                    }
-                }
-            }
-        }
-        ***/
 
 
 
@@ -1452,41 +1357,6 @@ namespace XPS
 
 
 
-        /***
-
-        private void bw_pressure_DoWork(object sender, DoWorkEventArgs e)
-        {
-            double pressure;
-            while (!bw_pressure.CancellationPending)
-            {
-                LJM.eReadName(handle_pressure, pressure_pin, ref ionivac_v_out);
-                Thread.Sleep(20);
-                pressure = Math.Pow(10,((Convert.ToDouble(ionivac_v_out) -7.75))/0.75);
-                bw_pressure.ReportProgress(0, pressure.ToString("0.00E0"));
-                Thread.Sleep(1000);
-            }
-        }
-        private void bw_pressure_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            tb_pressure.Text = Convert.ToString(e.UserState);
-            //tb_counter.Text = e.ProgressPercentage.ToString();
-        }
-        private void bw_pressure_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                tb_pressure.Text = "Stop!";
-            }
-            else if (e.Error != null)
-            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
-                tb_show.Text = e.Error.Message;
-            }
-            else
-            {  }
-        }
-
-    ***/
-
 
 
         // tested 16.03 -- OK!
@@ -1603,60 +1473,7 @@ namespace XPS
 
 
 
-        /***
-        string spannungen;
-
-        private void bw_iseg_volts_DoWork(object sender, DoWorkEventArgs e)
-        {
-            double s = 0;
-            for (int counter = 0;  counter < 6; counter++)
-            {
-                if (bw_iseg_volts.CancellationPending)        
-                {
-                    e.Cancel = true;
-                    break;
-                }
-
-                try
-                {
-                    write_to_DPS_sync(String.Format(":MEAS:VOLT? (@{0})\n", counter));
-                    Thread.Sleep(20);
-                    spannungen = DPS_HV.RawIO.ReadString();
-                    Thread.Sleep(10);
-                    spannungen = DPS_HV.RawIO.ReadString();
-                    Thread.Sleep(10);
-                    _suspend_background_measurement.WaitOne(Timeout.Infinite);
-                    s = Double.Parse(spannungen.Replace("V\r\n", ""), System.Globalization.NumberStyles.Float);
-                }
-                catch (Exception)
-                {
-                    s = 0;
-                }
-                bw_iseg_volts.ReportProgress(counter, s.ToString("0.000"));
-                Thread.Sleep(2);
-                //_suspend_background_measurement.WaitOne(Timeout.Infinite);
-                Thread.Sleep(2);
-                Thread.Sleep(2);
-                _suspend_background_measurement.WaitOne(Timeout.Infinite);
-                if (counter == 5)
-                {
-                    counter = -1;
-                    Thread.Sleep(20);
-                }
-            }
-        }
-
-        private void bw_iseg_volts_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            vmeas[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
-            //vmeas2[e.ProgressPercentage].Text = Convert.ToString(e.UserState);
-            int percentage = e.ProgressPercentage;
-        }
-
-        private void bw_iseg_volts_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {}
-
-    
-         ***/
+       
 
 
 
