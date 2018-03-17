@@ -358,8 +358,6 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cb_cnt_inf = new System.Windows.Forms.CheckBox();
-            this.btn_start_counter = new System.Windows.Forms.Button();
             this.label80 = new System.Windows.Forms.Label();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -433,30 +431,16 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tb_counter = new System.Windows.Forms.TextBox();
-            this.bw_pressure = new System.ComponentModel.BackgroundWorker();
-            this.bw_iseg_volts = new System.ComponentModel.BackgroundWorker();
-            this.bw_counter = new System.ComponentModel.BackgroundWorker();
-            this.btn_plus = new System.Windows.Forms.Button();
-            this.btn_minus = new System.Windows.Forms.Button();
-            this.btn_plusplus = new System.Windows.Forms.Button();
-            this.btn_minusminus = new System.Windows.Forms.Button();
-            this.btn_spann = new System.Windows.Forms.Button();
-            this.tb_spann = new System.Windows.Forms.TextBox();
-            this.btn_hemi = new System.Windows.Forms.Button();
-            this.btn_homo = new System.Windows.Forms.Button();
-            this.tb_hemi = new System.Windows.Forms.TextBox();
-            this.tb_homo = new System.Windows.Forms.TextBox();
-            this.bw_lens = new System.ComponentModel.BackgroundWorker();
             this.openSessionButton_Xray = new System.Windows.Forms.Button();
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
             this.close_Xray_HV_session = new System.Windows.Forms.Button();
             this.btn_cancel_ak_pressure = new System.Windows.Forms.Button();
             this.btn_pause = new System.Windows.Forms.Button();
             this.btn_unpause = new System.Windows.Forms.Button();
+            this.cb_counter = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3150,27 +3134,13 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.cb_cnt_inf);
-            this.groupBox5.Controls.Add(this.btn_start_counter);
             this.groupBox5.Controls.Add(this.label80);
+            this.groupBox5.Controls.Add(this.cb_counter);
             this.groupBox5.Controls.Add(this.tb_counter_ms);
+            this.groupBox5.Controls.Add(this.tb_counter);
             resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
-            // 
-            // cb_cnt_inf
-            // 
-            resources.ApplyResources(this.cb_cnt_inf, "cb_cnt_inf");
-            this.cb_cnt_inf.Name = "cb_cnt_inf";
-            this.cb_cnt_inf.UseVisualStyleBackColor = true;
-            this.cb_cnt_inf.CheckStateChanged += new System.EventHandler(this.cb_cnt_inf_CheckStateChanged);
-            // 
-            // btn_start_counter
-            // 
-            resources.ApplyResources(this.btn_start_counter, "btn_start_counter");
-            this.btn_start_counter.Name = "btn_start_counter";
-            this.btn_start_counter.UseVisualStyleBackColor = true;
-            this.btn_start_counter.Click += new System.EventHandler(this.btn_start_counter_Click);
             // 
             // label80
             // 
@@ -3178,11 +3148,13 @@
             this.label80.Name = "label80";
             // 
             // tb_counter_ms
-            // 
+            //
+            /***
             resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
             this.tb_counter_ms.Name = "tb_counter_ms";
             this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
             // 
+            ***/
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cb_v_lens);
@@ -3768,86 +3740,6 @@
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
             // 
-            // bw_counter
-            // 
-            this.bw_counter.WorkerReportsProgress = true;
-            this.bw_counter.WorkerSupportsCancellation = true;
-            this.bw_counter.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_counter_DoWork);
-            this.bw_counter.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_counter_ProgressChanged);
-            this.bw_counter.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_counter_RunWorkerCompleted);
-            // 
-            // btn_plus
-            // 
-            resources.ApplyResources(this.btn_plus, "btn_plus");
-            this.btn_plus.Name = "btn_plus";
-            this.btn_plus.UseVisualStyleBackColor = true;
-            this.btn_plus.Click += new System.EventHandler(this.btn_plus_Click);
-            // 
-            // btn_minus
-            // 
-            resources.ApplyResources(this.btn_minus, "btn_minus");
-            this.btn_minus.Name = "btn_minus";
-            this.btn_minus.UseVisualStyleBackColor = true;
-            this.btn_minus.Click += new System.EventHandler(this.btn_minus_Click);
-            // 
-            // btn_plusplus
-            // 
-            resources.ApplyResources(this.btn_plusplus, "btn_plusplus");
-            this.btn_plusplus.Name = "btn_plusplus";
-            this.btn_plusplus.UseVisualStyleBackColor = true;
-            this.btn_plusplus.Click += new System.EventHandler(this.btn_plusplus_Click);
-            // 
-            // btn_minusminus
-            // 
-            resources.ApplyResources(this.btn_minusminus, "btn_minusminus");
-            this.btn_minusminus.Name = "btn_minusminus";
-            this.btn_minusminus.UseVisualStyleBackColor = true;
-            this.btn_minusminus.Click += new System.EventHandler(this.btn_minusminus_Click);
-            // 
-            // btn_spann
-            // 
-            resources.ApplyResources(this.btn_spann, "btn_spann");
-            this.btn_spann.Name = "btn_spann";
-            this.btn_spann.UseVisualStyleBackColor = true;
-            this.btn_spann.Click += new System.EventHandler(this.btn_spann_Click);
-            // 
-            // tb_spann
-            // 
-            resources.ApplyResources(this.tb_spann, "tb_spann");
-            this.tb_spann.Name = "tb_spann";
-            // 
-            // btn_hemi
-            // 
-            resources.ApplyResources(this.btn_hemi, "btn_hemi");
-            this.btn_hemi.Name = "btn_hemi";
-            this.btn_hemi.UseVisualStyleBackColor = true;
-            this.btn_hemi.Click += new System.EventHandler(this.btn_hemi_Click);
-            // 
-            // btn_homo
-            // 
-            resources.ApplyResources(this.btn_homo, "btn_homo");
-            this.btn_homo.Name = "btn_homo";
-            this.btn_homo.UseVisualStyleBackColor = true;
-            this.btn_homo.Click += new System.EventHandler(this.btn_homo_Click);
-            // 
-            // tb_hemi
-            // 
-            resources.ApplyResources(this.tb_hemi, "tb_hemi");
-            this.tb_hemi.Name = "tb_hemi";
-            // 
-            // tb_homo
-            // 
-            resources.ApplyResources(this.tb_homo, "tb_homo");
-            this.tb_homo.Name = "tb_homo";
-            // 
-            // bw_lens
-            // 
-            this.bw_lens.WorkerReportsProgress = true;
-            this.bw_lens.WorkerSupportsCancellation = true;
-            this.bw_lens.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bw_lens_DoWork);
-            this.bw_lens.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bw_lens_ProgressChanged);
-            this.bw_lens.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bw_lens_RunWorkerCompleted);
-            // 
             // openSessionButton_Xray
             // 
             resources.ApplyResources(this.openSessionButton_Xray, "openSessionButton_Xray");
@@ -3866,13 +3758,6 @@
             // 
             resources.ApplyResources(this.tb_dac, "tb_dac");
             this.tb_dac.Name = "tb_dac";
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_ref
             // 
@@ -3914,6 +3799,13 @@
             this.btn_unpause.UseVisualStyleBackColor = true;
             this.btn_unpause.Click += new System.EventHandler(this.btn_unpause_Click);
             // 
+            // cb_counter
+            // 
+            resources.ApplyResources(this.cb_counter, "cb_counter");
+            this.cb_counter.Name = "cb_counter";
+            this.cb_counter.UseVisualStyleBackColor = true;
+            this.cb_counter.CheckedChanged += new System.EventHandler(this.cb_counter_CheckedChanged);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -3924,21 +3816,9 @@
             this.Controls.Add(this.close_Xray_HV_session);
             this.Controls.Add(this.tb_ref);
             this.Controls.Add(this.btn_ref);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.tb_dac);
             this.Controls.Add(this.btn_dac);
             this.Controls.Add(this.openSessionButton_Xray);
-            this.Controls.Add(this.tb_homo);
-            this.Controls.Add(this.tb_hemi);
-            this.Controls.Add(this.btn_homo);
-            this.Controls.Add(this.btn_hemi);
-            this.Controls.Add(this.tb_counter);
-            this.Controls.Add(this.tb_spann);
-            this.Controls.Add(this.btn_spann);
-            this.Controls.Add(this.btn_minusminus);
-            this.Controls.Add(this.btn_plusplus);
-            this.Controls.Add(this.btn_minus);
-            this.Controls.Add(this.btn_plus);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -4427,10 +4307,7 @@
         private System.Windows.Forms.Label label98;
         private System.Windows.Forms.Label label99;
         private System.Windows.Forms.Label label100;
-        private System.ComponentModel.BackgroundWorker bw_pressure;
         private System.Windows.Forms.TextBox tb_pressure;
-        private System.ComponentModel.BackgroundWorker bw_iseg_volts;
-        private System.Windows.Forms.Button btn_start_counter;
         private System.Windows.Forms.TextBox tb_counter;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -4464,29 +4341,16 @@
         private System.Windows.Forms.Button btn_scpi;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.CheckBox cb_cnt_inf;
-        private System.ComponentModel.BackgroundWorker bw_counter;
-        private System.Windows.Forms.Button btn_plus;
-        private System.Windows.Forms.Button btn_minus;
-        private System.Windows.Forms.Button btn_plusplus;
-        private System.Windows.Forms.Button btn_minusminus;
-        private System.Windows.Forms.Button btn_spann;
-        private System.Windows.Forms.TextBox tb_spann;
-        private System.Windows.Forms.Button btn_hemi;
-        private System.Windows.Forms.Button btn_homo;
-        private System.Windows.Forms.TextBox tb_hemi;
-        private System.Windows.Forms.TextBox tb_homo;
-        private System.ComponentModel.BackgroundWorker bw_lens;
         private System.Windows.Forms.Button openSessionButton_Xray;
         private System.Windows.Forms.Button btn_dac;
         private System.Windows.Forms.TextBox tb_dac;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_ref;
         private System.Windows.Forms.TextBox tb_ref;
         private System.Windows.Forms.Button close_Xray_HV_session;
         private System.Windows.Forms.Button btn_cancel_ak_pressure;
         private System.Windows.Forms.Button btn_pause;
         private System.Windows.Forms.Button btn_unpause;
+        private System.Windows.Forms.CheckBox cb_counter;
     }
 }
 

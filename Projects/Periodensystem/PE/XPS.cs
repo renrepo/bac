@@ -139,6 +139,7 @@ namespace XPS
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private CancellationTokenSource _cts_pressure_labjack;           // Cancellation of Labjack pressure background measurement 
         private CancellationTokenSource _cts_volt_dps;           // Cancellation of Iseg DPS voltage background measurement 
+        private CancellationTokenSource _cts_counter_labjack;           // Cancellation of Labjack Counter background measurement 
         private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
@@ -1071,8 +1072,6 @@ namespace XPS
                 btn_can.Enabled = true;
                 tb_show.Enabled = true;
                 tb_safe.Enabled = false;
-                cb_cnt_inf.Enabled = false;
-                btn_start_counter.Enabled = false;
             }
 
             else
@@ -1231,8 +1230,6 @@ namespace XPS
                 showdata.Enabled = true;
                 // zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "plot" + data_coutner + ".png"));
             }
-            cb_cnt_inf.Enabled = true;
-            btn_start_counter.Enabled = true;
             _suspend_background_measurement.Set();
         }
 
@@ -1534,46 +1531,7 @@ namespace XPS
 
 
 
-        private void tb_counter_ms_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                btn_start_counter_Click(sender, new EventArgs());
-                tb_counter_ms.Text = ct.ToString();
-            }
-        }
 
-
-        int ct;
-        private async void btn_start_counter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                cb_cnt_inf.Enabled = false;
-                ct = int.Parse(tb_counter_ms.Text);
-                tb_counter_ms.Text = ct.ToString();
-                LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
-                //LJM.eWriteName(handle_count, "DIO18_EF_OPTIONS", 1);
-                //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_A", 2);
-                //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_B", 100);
-                //LJM.eWriteName(handle_count, "FIO7", 0);
-                LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
-                //LJM.eWriteName()
-                LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
-                await Task.Delay(ct);
-                LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
-                //  LJM.eWriteName(handle_count, "DIO18_EF_READ", ref cnt_before);
-                double erg = cnt_after - cnt_before;
-                tb_counter.Text = erg.ToString();
-                //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 0);
-                cb_cnt_inf.Enabled = true;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Type in Integer!");
-                cb_cnt_inf.Enabled = true;
-            }
-        }
 
 
         private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
@@ -1586,6 +1544,11 @@ namespace XPS
             if (_cts_volt_dps != null)
             {
                 _cts_volt_dps.Cancel();
+            }
+
+            if (_cts_counter_labjack != null)
+            {
+                _cts_counter_labjack.Cancel();
             }
 
             if (DPS_HV_is_open)
@@ -1613,6 +1576,7 @@ namespace XPS
             }
 
             start_ok = false;
+            Thread.Sleep(1000);
 
         }
        
@@ -1711,155 +1675,79 @@ namespace XPS
         }
 
 
-        private void bw_counter_DoWork(object sender, DoWorkEventArgs e)
+
+
+        private void cb_counter_CheckedChanged(object sender, EventArgs e)
         {
-            while (!bw_counter.CancellationPending)
+            CheckBox c = sender as CheckBox;
+
+            if (c.Text == "Off")
             {
-                try
-                {
-                    ct = int.Parse(tb_counter_ms.Text);
-                    LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_OPTIONS", 1);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_A", 2);
-                    //LJM.eWriteName(handle_count, "DIO18_EF_CONFIG_B", 100);
-                    //LJM.eWriteName(handle_count, "FIO7", 0);
-                    LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
-                    //LJM.eWriteName()
-                    LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
-                    Thread.Sleep(ct);
-                    LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
-                    //  LJM.eWriteName(handle_count, "DIO18_EF_READ", ref cnt_before);
-                    double erg = cnt_after - cnt_before;
-                    bw_counter.ReportProgress(0, erg.ToString());
-                    //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 0);
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Type in Integer!");
-                }
-            }
-        }
-
-        private void bw_counter_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            tb_counter.Text = Convert.ToString(e.UserState);
-            //tb_counter.Text = e.ProgressPercentage.ToString();
-        }
-
-        private void bw_counter_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            if (e.Cancelled)
-            {
-                tb_counter.Text = "Stop!";
-            }
-
-            else if (e.Error != null)
-            {  // an exception instance, if an error occurs during asynchronous operation, otherwise null
-                tb_counter.Text = e.Error.Message;
+                c.Text = "On";
+                c.BackColor = Color.LimeGreen;
+                background_counter_labjack();
             }
 
             else
             {
-
+                c.Text = "Off";
+                c.BackColor = SystemColors.ControlLightLight;
+                if (_cts_counter_labjack != null)
+                {
+                    _cts_counter_labjack.Cancel();
+                }
             }
-            btn_start_counter.Enabled = true;
-            cb_cnt_inf.Text = "Inf";
         }
 
-        private void cb_cnt_inf_CheckStateChanged(object sender, EventArgs e)
+
+        private async void background_counter_labjack()
         {
-            if (cb_cnt_inf.Checked)
+            _cts_counter_labjack = new CancellationTokenSource();
+            var token = _cts_counter_labjack.Token;
+            var progressHandler = new Progress<string>(value =>
             {
-                bw_counter.RunWorkerAsync();
-                btn_start_counter.Enabled = false;
-                cb_cnt_inf.Text = "end";
-            }
-
-            if (!cb_cnt_inf.Checked)
+                tb_counter.Text = value;
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
             {
-                bw_counter.CancelAsync();
+                tb_counter_ms.ReadOnly = true;
+                int ct = int.Parse(tb_counter_ms.Text);
+                double erg = 0;
+                Stopwatch sw = new Stopwatch();
+
+                await Task.Run(() =>
+                {
+
+                    while (true)
+                    {
+                        //LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                        //LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                        sw.Start();
+                        //LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                        Thread.Sleep(ct);
+                        sw.Stop();
+                        //LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                        //erg = (cnt_after - cnt_before) / sw.Elapsed.TotalSeconds;
+                        erg = sw.Elapsed.TotalMilliseconds;
+                        sw.Reset();
+                        if (progress != null)
+                        {
+                            progress.Report(erg.ToString("N3"));    //no decimal placed
+                            token.ThrowIfCancellationRequested();
+                        }
+                    }
+                });
+                //MessageBox.Show("Completed!");
             }
-        }
-
-        double aktuell;
-        private async void btn_plus_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            aktuell = Convert.ToDouble(ch3_v.Text);
-            aktuell += 0.250;
-            ch3_v.Text = aktuell.ToString("0.000");
-            await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", aktuell), "DPS");
-            _suspend_background_measurement.Set();
-        }
-
-        private async void btn_minus_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            aktuell = Convert.ToDouble(ch3_v.Text);
-            aktuell -= 0.250;
-            ch3_v.Text = aktuell.ToString("0.000");
-            await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", aktuell), "DPS");
-            _suspend_background_measurement.Set();
-        }
-
-        private async void btn_plusplus_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            aktuell = Convert.ToDouble(ch3_v.Text);
-            aktuell += 2;
-            ch3_v.Text = aktuell.ToString("0.000");
-            await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", aktuell), "DPS");
-            _suspend_background_measurement.Set();
-        }
-
-        private async void btn_minusminus_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            aktuell = Convert.ToDouble(ch3_v.Text);
-            aktuell -= 2;
-            ch3_v.Text = aktuell.ToString("0.000");
-            await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", aktuell), "DPS");
-            _suspend_background_measurement.Set();
-        }
-
-        private void btn_spann_Click(object sender, EventArgs e)
-        {
-            LJM.eReadName(handle_v_lens, "AIN6", ref LJ_lens);
-            tb_spann.Text = (Convert.ToDouble(LJ_lens) * 5.03).ToString("0.000");
-        }
-
-        private void btn_hemi_Click(object sender, EventArgs e)
-        {
-            LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
-            tb_hemi.Text = (Convert.ToDouble(LJ_hemi) * 5.03).ToString("0.000");
-        }
-
-        private void btn_homo_Click(object sender, EventArgs e)
-        {
-            LJM.eReadName(handle_v_hemo, "AIN1", ref LJ_hemo);
-            tb_homo.Text = (Convert.ToDouble(LJ_hemo) * 5.03).ToString("0.000");
-        }
-
-        private void bw_lens_DoWork(object sender, DoWorkEventArgs e)
-        {
-            double lensvalue;
-            while (!bw_lens.CancellationPending)
+            catch (OperationCanceledException)
             {
-                lensvalue = Convert.ToDouble(vm1.Text) * 6.707 - 44.134;
-                write_to_DPS_sync(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")));
-                Thread.Sleep(800);
+                //MessageBox.Show("Can't start background-counter");
+                tb_counter.Text = String.Empty;
+                tb_counter_ms.ReadOnly = false;
             }
         }
-
-        private void bw_lens_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void bw_lens_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-        }
+      
 
         double value = 0;
         double value2 = 0;
@@ -1870,17 +1758,13 @@ namespace XPS
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
 
-        private async void button1_Click(object sender, EventArgs e)
-        {
-            double lensvalue = 0.12254234213;
-            await write_to_Iseg(String.Format(":VOLT {0},(@2)\n", lensvalue.ToString("0.000")), "DPS");
-        }
 
         private void btn_ref_Click(object sender, EventArgs e)
         {
             value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
             LJM.eWriteName(handle_DAC2, "TDAC1", value2);
         }
+
     }
 }
 
@@ -1901,4 +1785,7 @@ namespace XPS
  * replace/remove write_to_dps_async
  * key down kram
  * iseg terminal
+ * open iseg devices (ip as string)
+ * background counter catch (was wenn parse nicht geht? was wenn abbruch?)
+ * counter labjack
  ***/
