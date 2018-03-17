@@ -42,6 +42,10 @@ namespace XPS
 {
     public partial class XPS : Form
     {
+        // IP adress Iseg-devices (ethernet connection)
+        string ip_dps = "132.195.109.144";
+        string ip_xray = "132.195.109.241";
+
         // General settings
         double V_photon = 21.21;            // Energiey HeI-line
         double W_aus = 4.5;                 // workfunction spectrometer
@@ -307,6 +311,14 @@ namespace XPS
                 item.MouseDown += Global_DPS_reload_volt;
             }
 
+            // raises event if key is pressed within vset textboxes in "iseg control"
+            // (goal: if enter-key pressed --> call reload method)
+            //https://stackoverflow.com/questions/3752451/enter-key-pressed-event-handler
+            foreach (var item in vset)
+            {
+                item.KeyDown += new KeyEventHandler(tb_KeyDown);
+            }
+
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 3;
@@ -410,6 +422,18 @@ namespace XPS
             else
             {
                 MessageBox.Show("Type in Vset (float)");
+            }
+        }
+
+
+        // call "Global_DPS_reload_volt" if enter-key is pressed in vset-textbox in "iseg control"
+        private void tb_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (e.KeyCode == Keys.Enter)
+            {
+                // first argument: button corresponding to textbox
+                Global_DPS_reload_volt(reload[Convert.ToInt16(tb.Tag)], new EventArgs());
             }
         }
 
@@ -670,7 +694,7 @@ namespace XPS
             {
                 try
                 {
-                    DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.144::10001::SOCKET");
+                    DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::" + ip_dps +"::10001::SOCKET");
                     DPS_HV_is_open = false;
                     // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
                     //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
@@ -678,7 +702,7 @@ namespace XPS
                     await write_to_Iseg("CONF:HVMICC HV_OK\n","DPS");
                     await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n","DPS");
                     await write_to_Iseg("*RST\n","DPS");
-                    await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
+                    //await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
                     //bw_iseg_volts.RunWorkerAsync();
                     for (int i = 0; i < 6; i++)
                     {
@@ -688,7 +712,6 @@ namespace XPS
                     }
                     rs_all.Enabled = true;
                     queryButton.Enabled = true;
-                    readButton.Enabled = true;
                     writeButton.Enabled = true;
                     clearButton.Enabled = true;
                     btn_emcy.Enabled = true;
@@ -714,7 +737,7 @@ namespace XPS
             {
                 try
                 {
-                    Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::132.195.109.241::10001::SOCKET");
+                    Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::"+ ip_xray + "::10001::SOCKET");
                     Xray_HV_is_open = true;
                     // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
                     //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
@@ -762,25 +785,25 @@ namespace XPS
             }
         }
 
-        
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private async void write_Click(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+                await write_to_Iseg(ReplaceCommonEscapeSequences(writeTextBox.Text + "\n"), "DPS");
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                _suspend_background_measurement.Set();
+            }
+        }
 
 
         private async void query_Click(object sender, EventArgs e)
@@ -790,14 +813,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                // string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                string textToWrite = writeTextBox.Text + '\n';
-                //string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                await write_to_Iseg(textToWrite, "DPS");
-                await Task.Delay(20);
-                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
-                await Task.Delay(20);
-                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
+                readTextBox.Text = await read_from_Iseg(writeTextBox.Text + '\n', "DPS");
             }
             catch (Exception exp)
             {
@@ -806,44 +822,10 @@ namespace XPS
             finally
             {
                 Cursor.Current = Cursors.Default;
+                _suspend_background_measurement.Set();
             }
-            _suspend_background_measurement.Set();
         }
 
-        private async void write_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            try
-            {
-                string textToWrite = ReplaceCommonEscapeSequences(writeTextBox.Text);
-                await write_to_Iseg(textToWrite, "DPS");
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-            _suspend_background_measurement.Set();
-        }
-
-        private void read_Click(object sender, EventArgs e)
-        {
-            _suspend_background_measurement.Reset();
-            readTextBox.Text = String.Empty;
-            Cursor.Current = Cursors.WaitCursor;
-            try
-            {
-                readTextBox.Text = InsertCommonEscapeSequences(DPS_HV.RawIO.ReadString());
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-            }
-            _suspend_background_measurement.Set();
-        }
 
         private void clear_Click(object sender, EventArgs e)
         {
@@ -859,6 +841,38 @@ namespace XPS
         {
             return s.Replace("\n", "\\n").Replace("\r", "\\r");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //###########################################################################################################################################
@@ -1300,6 +1314,36 @@ namespace XPS
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //####################################################################################################################################### 
 
         // 16.03.18 tested --OK (kommentare einfügen und ggf. kürzen)
@@ -1450,15 +1494,17 @@ namespace XPS
                         {
                             i = 0;
                         }
+                        // call of read_from_iseg not possible because this part has to run synchronously
                         DPS_HV.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", i));
                         Thread.Sleep(50);
                         readback = DPS_HV.RawIO.ReadString();
                         progress.Report(readback.Replace("V\r\n", "").ToString());
                         //progress.Report(i.ToString());
                         result = i;
+                        // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                         _suspend_background_measurement.WaitOne(Timeout.Infinite);
                         token.ThrowIfCancellationRequested();
-                        Thread.Sleep(100);
+                        Thread.Sleep(50);
                     }
                 });
                 //MessageBox.Show("Completed!");
@@ -1473,7 +1519,6 @@ namespace XPS
 
 
 
-       
 
 
 
@@ -1483,48 +1528,11 @@ namespace XPS
 
 
 
-        private void ch6_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload6, new EventArgs());
-            }
-        }
-        private void ch5_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload5, new EventArgs());
-            }
-        }
-        private void ch4_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload4, new EventArgs());
-            }
-        }
-        private void ch3_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload3, new EventArgs());
-            }
-        }
-        private void ch2_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload2, new EventArgs());
-            }
-        }
-        private void ch1_v_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                Global_DPS_reload_volt(btn_reload1, new EventArgs());
-            }
-        }
+     
+
+
+
+
 
         private void tb_counter_ms_KeyDown(object sender, KeyEventArgs e)
         {
@@ -1888,4 +1896,9 @@ namespace XPS
 
 
 // TODO:
-// replace bachgroundworker with Task/async
+/*** 
+ * replace bachgroundworker with Task/async
+ * replace/remove write_to_dps_async
+ * key down kram
+ * iseg terminal
+ ***/

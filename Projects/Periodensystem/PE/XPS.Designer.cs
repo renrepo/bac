@@ -272,7 +272,6 @@
             this.openSessionButton = new System.Windows.Forms.Button();
             this.queryButton = new System.Windows.Forms.Button();
             this.writeButton = new System.Windows.Forms.Button();
-            this.readButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.writeTextBox = new System.Windows.Forms.TextBox();
             this.readTextBox = new System.Windows.Forms.TextBox();
@@ -2511,12 +2510,6 @@
             this.writeButton.Name = "writeButton";
             this.writeButton.Click += new System.EventHandler(this.write_Click);
             // 
-            // readButton
-            // 
-            resources.ApplyResources(this.readButton, "readButton");
-            this.readButton.Name = "readButton";
-            this.readButton.Click += new System.EventHandler(this.read_Click);
-            // 
             // clearButton
             // 
             resources.ApplyResources(this.clearButton, "clearButton");
@@ -3542,13 +3535,13 @@
             // 
             resources.ApplyResources(this.ch1_v, "ch1_v");
             this.ch1_v.Name = "ch1_v";
-            this.ch1_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch1_v_KeyDown);
+            this.ch1_v.Tag = "0";
             // 
             // ch2_v
             // 
             resources.ApplyResources(this.ch2_v, "ch2_v");
             this.ch2_v.Name = "ch2_v";
-            this.ch2_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch2_v_KeyDown);
+            this.ch2_v.Tag = "1";
             // 
             // ch3_meas
             // 
@@ -3561,13 +3554,13 @@
             // 
             resources.ApplyResources(this.ch4_v, "ch4_v");
             this.ch4_v.Name = "ch4_v";
-            this.ch4_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch4_v_KeyDown);
+            this.ch4_v.Tag = "3";
             // 
             // ch3_v
             // 
             resources.ApplyResources(this.ch3_v, "ch3_v");
             this.ch3_v.Name = "ch3_v";
-            this.ch3_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch3_v_KeyDown);
+            this.ch3_v.Tag = "2";
             // 
             // ch4_meas
             // 
@@ -3580,7 +3573,7 @@
             // 
             resources.ApplyResources(this.ch5_v, "ch5_v");
             this.ch5_v.Name = "ch5_v";
-            this.ch5_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch5_v_KeyDown);
+            this.ch5_v.Tag = "4";
             // 
             // ch5_meas
             // 
@@ -3593,7 +3586,7 @@
             // 
             resources.ApplyResources(this.ch6_v, "ch6_v");
             this.ch6_v.Name = "ch6_v";
-            this.ch6_v.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ch6_v_KeyDown);
+            this.ch6_v.Tag = "5";
             // 
             // ch6_meas
             // 
@@ -3754,7 +3747,6 @@
             this.tabPage3.Controls.Add(this.btn_scpi);
             this.tabPage3.Controls.Add(this.writeTextBox);
             this.tabPage3.Controls.Add(this.writeButton);
-            this.tabPage3.Controls.Add(this.readButton);
             this.tabPage3.Controls.Add(this.queryButton);
             this.tabPage3.Controls.Add(this.clearButton);
             this.tabPage3.Controls.Add(this.readTextBox);
@@ -4305,7 +4297,6 @@
         private System.Windows.Forms.Button openSessionButton;
         private System.Windows.Forms.Button queryButton;
         private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.Button readButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.TextBox writeTextBox;
         private System.Windows.Forms.TextBox readTextBox;
