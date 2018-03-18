@@ -641,63 +641,46 @@ namespace XPS
 
 
         //#############################################################################################################################
-        // Open Iseg DPS 6-Chanel HV device & Iseg X-Ray Power Supply
-        private async void openSessionButton_Click(object sender, EventArgs e)
-        {
 
-            using (ResourceManager rm = new ResourceManager())
+        private async void Iseg_Xray_session_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox c = sender as CheckBox;
+            Cursor.Current = Cursors.WaitCursor;
+            if (c.Text == "Iseg Xray disconnected")
             {
-                try
+                using (var rm = new ResourceManager())
                 {
-                    DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::" + ip_dps +"::10001::SOCKET");
-                    DPS_HV_is_open = false;
-                    // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
-                    //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
-                    ((INativeVisaSession)DPS_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
-                    await write_to_Iseg("CONF:HVMICC HV_OK\n","DPS");
-                    await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n","DPS");
-                    await write_to_Iseg("*RST\n","DPS");
-                    //await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
-                    //bw_iseg_volts.RunWorkerAsync();
-                    for (int i = 0; i < 6; i++)
+                    try
                     {
-                        reset[i].Enabled = true;
-                        reload[i].Enabled = true;
-                        stat[i].Enabled = true;
+                        Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::" + ip_xray + "::10001::SOCKET");
+                        Xray_HV_is_open = true;
+                        // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
+                        //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
+                        ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
+                        await write_to_Iseg("*RST\n", "XRAY");
+                        c.Text = "Iseg Xray connected";
+                        c.BackColor = Color.LightGreen;
                     }
-                    rs_all.Enabled = true;
-                    queryButton.Enabled = true;
-                    writeButton.Enabled = true;
-                    clearButton.Enabled = true;
-                    btn_emcy.Enabled = true;
-                    start_ok = true;
-                    enable_start();
-                    background_meas_volt_DPS();
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show(exp.Message);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
                 }
-                catch (Exception exp)
-                {
-                    MessageBox.Show(exp.Message);
-                }
-                finally
-                {
-                    Cursor.Current = Cursors.Default;
-                }
-            }            
-        }
+            }
 
-
-        private async void openSessionButton_Xray_Click(object sender, EventArgs e)
-        {
-            using (var rm = new ResourceManager())
+            else
             {
                 try
                 {
-                    Xray_HV = (IMessageBasedSession)rm.Open("TCPIP0::"+ ip_xray + "::10001::SOCKET");
-                    Xray_HV_is_open = true;
-                    // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
-                    //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
-                    ((INativeVisaSession)Xray_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
                     await write_to_Iseg("*RST\n", "XRAY");
+                    Xray_HV.Dispose();
+                    Xray_HV_is_open = false;
+                    c.Text = "Iseg Xray disconnected";
+                    c.BackColor = Color.Lavender;
                 }
                 catch (Exception exp)
                 {
@@ -711,32 +694,71 @@ namespace XPS
         }
 
 
-        private async void close_Xray_HV_session_Click(object sender, EventArgs e)
+        private async void Iseg_DPS_session_CheckedChanged(object sender, EventArgs e)
         {
-            try
+            CheckBox c = sender as CheckBox;
+            Cursor.Current = Cursors.WaitCursor;
+            if (c.Text == "Iseg DPS disconnected")
             {
-                await write_to_Iseg("*RST\n", "XRAY");
-                Xray_HV.Dispose();
-                Xray_HV_is_open = false;
+                using (ResourceManager rm = new ResourceManager())
+                {
+                    try
+                    {
+                        DPS_HV = (IMessageBasedSession)rm.Open("TCPIP0::" + ip_dps + "::10001::SOCKET");
+                        DPS_HV_is_open = false;
+                        // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
+                        //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
+                        ((INativeVisaSession)DPS_HV).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
+                        await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
+                        await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
+                        await write_to_Iseg("*RST\n", "DPS");
+                        //await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
+                        for (int i = 0; i < 6; i++)
+                        {
+                            reset[i].Enabled = true;
+                            reload[i].Enabled = true;
+                            stat[i].Enabled = true;
+                        }
+                        rs_all.Enabled = true;
+                        queryButton.Enabled = true;
+                        writeButton.Enabled = true;
+                        clearButton.Enabled = true;
+                        btn_emcy.Enabled = true;
+                        start_ok = true;
+                        enable_start();
+                        background_meas_volt_DPS();
+                        c.Text = "Iseg DPS connected";
+                        c.BackColor = Color.LightGreen;
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show(exp.Message);
+                    }
+                    finally
+                    {
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
             }
-            catch (Exception)
-            {
-                AutoClosingMessageBox.Show("Can not close Iseg Xray HV", "Info", 500);
-            }
-        }
 
-
-        private async void close_DPS_HV_session_Click(object sender, EventArgs e)
-        {
-            try
+            else
             {
-                await write_to_Iseg("*RST\n", "DPS");
-                DPS_HV.Dispose();
-                DPS_HV_is_open = false;
-            }
-            catch (Exception)
-            {
-                AutoClosingMessageBox.Show("Can not close Iseg DPS HV", "info", 500);
+                try
+                {
+                    await write_to_Iseg("*RST\n", "DPS");
+                    DPS_HV.Dispose();
+                    DPS_HV_is_open = false;
+                    c.Text = "Iseg DPS disconnected";
+                    c.BackColor = Color.Lavender;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
             }
         }
 
@@ -764,7 +786,6 @@ namespace XPS
         private async void query_Click(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
-            readTextBox.Text = String.Empty;
             Cursor.Current = Cursors.WaitCursor;
             try
             {
@@ -1616,6 +1637,7 @@ namespace XPS
  * open iseg devices (ip as string)
  * background counter catch (was wenn parse nicht geht? was wenn abbruch?)
  * counter labjack
+ * ISeg DPS/Xray open checkchanged + backgroundcolor (silver)
  ***/
 
 /***

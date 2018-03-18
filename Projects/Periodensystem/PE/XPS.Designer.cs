@@ -269,13 +269,11 @@
             this.label59 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.openSessionButton = new System.Windows.Forms.Button();
             this.queryButton = new System.Windows.Forms.Button();
             this.writeButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.writeTextBox = new System.Windows.Forms.TextBox();
             this.readTextBox = new System.Windows.Forms.TextBox();
-            this.close_DPS_HV_session = new System.Windows.Forms.Button();
             this.s44 = new System.Windows.Forms.Label();
             this.s28 = new System.Windows.Forms.Label();
             this.s55 = new System.Windows.Forms.Label();
@@ -432,16 +430,14 @@
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
-            this.openSessionButton_Xray = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.close_Xray_HV_session = new System.Windows.Forms.Button();
-            this.btn_cancel_ak_pressure = new System.Windows.Forms.Button();
-            this.btn_pause = new System.Windows.Forms.Button();
-            this.btn_unpause = new System.Windows.Forms.Button();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.Iseg_DPS_session = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.Iseg_Xray_session = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -456,6 +452,7 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -2478,12 +2475,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // openSessionButton
-            // 
-            resources.ApplyResources(this.openSessionButton, "openSessionButton");
-            this.openSessionButton.Name = "openSessionButton";
-            this.openSessionButton.Click += new System.EventHandler(this.openSessionButton_Click);
-            // 
             // queryButton
             // 
             resources.ApplyResources(this.queryButton, "queryButton");
@@ -2513,12 +2504,6 @@
             this.readTextBox.Name = "readTextBox";
             this.readTextBox.ReadOnly = true;
             this.readTextBox.TabStop = false;
-            // 
-            // close_DPS_HV_session
-            // 
-            resources.ApplyResources(this.close_DPS_HV_session, "close_DPS_HV_session");
-            this.close_DPS_HV_session.Name = "close_DPS_HV_session";
-            this.close_DPS_HV_session.Click += new System.EventHandler(this.close_DPS_HV_session_Click);
             // 
             // s44
             // 
@@ -3126,11 +3111,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.tableLayoutPanel4);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.close_DPS_HV_session);
-            this.tabPage1.Controls.Add(this.openSessionButton);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -3747,12 +3731,15 @@
             this.btn_scpi.UseVisualStyleBackColor = true;
             this.btn_scpi.Click += new System.EventHandler(this.btn_scpi_Click);
             // 
-            // openSessionButton_Xray
+            // tabPage4
             // 
-            resources.ApplyResources(this.openSessionButton_Xray, "openSessionButton_Xray");
-            this.openSessionButton_Xray.Name = "openSessionButton_Xray";
-            this.openSessionButton_Xray.UseVisualStyleBackColor = true;
-            this.openSessionButton_Xray.Click += new System.EventHandler(this.openSessionButton_Xray_Click);
+            this.tabPage4.Controls.Add(this.btn_dac);
+            this.tabPage4.Controls.Add(this.tb_dac);
+            this.tabPage4.Controls.Add(this.btn_ref);
+            this.tabPage4.Controls.Add(this.tb_ref);
+            resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // btn_dac
             // 
@@ -3778,50 +3765,33 @@
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
             // 
-            // close_Xray_HV_session
+            // Iseg_DPS_session
             // 
-            resources.ApplyResources(this.close_Xray_HV_session, "close_Xray_HV_session");
-            this.close_Xray_HV_session.Name = "close_Xray_HV_session";
-            this.close_Xray_HV_session.UseVisualStyleBackColor = true;
-            this.close_Xray_HV_session.Click += new System.EventHandler(this.close_Xray_HV_session_Click);
+            resources.ApplyResources(this.Iseg_DPS_session, "Iseg_DPS_session");
+            this.Iseg_DPS_session.BackColor = System.Drawing.Color.Silver;
+            this.Iseg_DPS_session.Name = "Iseg_DPS_session";
+            this.Iseg_DPS_session.UseVisualStyleBackColor = false;
+            this.Iseg_DPS_session.CheckedChanged += new System.EventHandler(this.Iseg_DPS_session_CheckedChanged);
             // 
-            // btn_cancel_ak_pressure
+            // tableLayoutPanel4
             // 
-            resources.ApplyResources(this.btn_cancel_ak_pressure, "btn_cancel_ak_pressure");
-            this.btn_cancel_ak_pressure.Name = "btn_cancel_ak_pressure";
-            this.btn_cancel_ak_pressure.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.Iseg_Xray_session, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.Iseg_DPS_session, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             // 
-            // btn_pause
+            // Iseg_Xray_session
             // 
-            resources.ApplyResources(this.btn_pause, "btn_pause");
-            this.btn_pause.Name = "btn_pause";
-            this.btn_pause.UseVisualStyleBackColor = true;
-            // 
-            // btn_unpause
-            // 
-            resources.ApplyResources(this.btn_unpause, "btn_unpause");
-            this.btn_unpause.Name = "btn_unpause";
-            this.btn_unpause.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.btn_dac);
-            this.tabPage4.Controls.Add(this.tb_dac);
-            this.tabPage4.Controls.Add(this.btn_ref);
-            this.tabPage4.Controls.Add(this.tb_ref);
-            this.tabPage4.Controls.Add(this.close_Xray_HV_session);
-            this.tabPage4.Controls.Add(this.openSessionButton_Xray);
-            resources.ApplyResources(this.tabPage4, "tabPage4");
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.Iseg_Xray_session, "Iseg_Xray_session");
+            this.Iseg_Xray_session.BackColor = System.Drawing.Color.Silver;
+            this.Iseg_Xray_session.Name = "Iseg_Xray_session";
+            this.Iseg_Xray_session.UseVisualStyleBackColor = false;
+            this.Iseg_Xray_session.CheckedChanged += new System.EventHandler(this.Iseg_Xray_session_CheckedChanged);
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btn_unpause);
-            this.Controls.Add(this.btn_pause);
-            this.Controls.Add(this.btn_cancel_ak_pressure);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -3938,6 +3908,8 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4179,13 +4151,11 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Button openSessionButton;
         private System.Windows.Forms.Button queryButton;
         private System.Windows.Forms.Button writeButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.TextBox writeTextBox;
         private System.Windows.Forms.TextBox readTextBox;
-        private System.Windows.Forms.Button close_DPS_HV_session;
         private System.Windows.Forms.Label s12;
         private System.Windows.Forms.Label s9;
         private System.Windows.Forms.Label s11;
@@ -4346,17 +4316,15 @@
         private System.Windows.Forms.Button btn_scpi;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label80;
-        private System.Windows.Forms.Button openSessionButton_Xray;
         private System.Windows.Forms.Button btn_dac;
         private System.Windows.Forms.TextBox tb_dac;
         private System.Windows.Forms.Button btn_ref;
         private System.Windows.Forms.TextBox tb_ref;
-        private System.Windows.Forms.Button close_Xray_HV_session;
-        private System.Windows.Forms.Button btn_cancel_ak_pressure;
-        private System.Windows.Forms.Button btn_pause;
-        private System.Windows.Forms.Button btn_unpause;
         private System.Windows.Forms.CheckBox cb_counter;
         private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.CheckBox Iseg_DPS_session;
+        private System.Windows.Forms.CheckBox Iseg_Xray_session;
     }
 }
 
