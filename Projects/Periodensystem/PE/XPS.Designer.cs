@@ -359,7 +359,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label80 = new System.Windows.Forms.Label();
+            this.cb_counter = new System.Windows.Forms.CheckBox();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
+            this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_v_lens = new System.Windows.Forms.ComboBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
@@ -430,7 +432,6 @@
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
-            this.tb_counter = new System.Windows.Forms.TextBox();
             this.openSessionButton_Xray = new System.Windows.Forms.Button();
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
@@ -440,7 +441,7 @@
             this.btn_cancel_ak_pressure = new System.Windows.Forms.Button();
             this.btn_pause = new System.Windows.Forms.Button();
             this.btn_unpause = new System.Windows.Forms.Button();
-            this.cb_counter = new System.Windows.Forms.CheckBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -454,6 +455,7 @@
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -3117,6 +3119,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -3147,14 +3150,25 @@
             resources.ApplyResources(this.label80, "label80");
             this.label80.Name = "label80";
             // 
+            // cb_counter
+            // 
+            resources.ApplyResources(this.cb_counter, "cb_counter");
+            this.cb_counter.Name = "cb_counter";
+            this.cb_counter.UseVisualStyleBackColor = true;
+            this.cb_counter.CheckedChanged += new System.EventHandler(this.cb_counter_CheckedChanged);
+            // 
             // tb_counter_ms
-            //
-            /***
+            // 
             resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
             this.tb_counter_ms.Name = "tb_counter_ms";
-            this.tb_counter_ms.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_counter_ms_KeyDown);
             // 
-            ***/
+            // tb_counter
+            // 
+            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            this.tb_counter.ReadOnly = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cb_v_lens);
@@ -3733,13 +3747,6 @@
             this.btn_scpi.UseVisualStyleBackColor = true;
             this.btn_scpi.Click += new System.EventHandler(this.btn_scpi_Click);
             // 
-            // tb_counter
-            // 
-            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_counter, "tb_counter");
-            this.tb_counter.Name = "tb_counter";
-            this.tb_counter.ReadOnly = true;
-            // 
             // openSessionButton_Xray
             // 
             resources.ApplyResources(this.openSessionButton_Xray, "openSessionButton_Xray");
@@ -3783,28 +3790,30 @@
             resources.ApplyResources(this.btn_cancel_ak_pressure, "btn_cancel_ak_pressure");
             this.btn_cancel_ak_pressure.Name = "btn_cancel_ak_pressure";
             this.btn_cancel_ak_pressure.UseVisualStyleBackColor = true;
-            this.btn_cancel_ak_pressure.Click += new System.EventHandler(this.btn_cancel_ak_pressure_Click);
             // 
             // btn_pause
             // 
             resources.ApplyResources(this.btn_pause, "btn_pause");
             this.btn_pause.Name = "btn_pause";
             this.btn_pause.UseVisualStyleBackColor = true;
-            this.btn_pause.Click += new System.EventHandler(this.btn_pause_Click);
             // 
             // btn_unpause
             // 
             resources.ApplyResources(this.btn_unpause, "btn_unpause");
             this.btn_unpause.Name = "btn_unpause";
             this.btn_unpause.UseVisualStyleBackColor = true;
-            this.btn_unpause.Click += new System.EventHandler(this.btn_unpause_Click);
             // 
-            // cb_counter
+            // tabPage4
             // 
-            resources.ApplyResources(this.cb_counter, "cb_counter");
-            this.cb_counter.Name = "cb_counter";
-            this.cb_counter.UseVisualStyleBackColor = true;
-            this.cb_counter.CheckedChanged += new System.EventHandler(this.cb_counter_CheckedChanged);
+            this.tabPage4.Controls.Add(this.btn_dac);
+            this.tabPage4.Controls.Add(this.tb_dac);
+            this.tabPage4.Controls.Add(this.btn_ref);
+            this.tabPage4.Controls.Add(this.tb_ref);
+            this.tabPage4.Controls.Add(this.close_Xray_HV_session);
+            this.tabPage4.Controls.Add(this.openSessionButton_Xray);
+            resources.ApplyResources(this.tabPage4, "tabPage4");
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // XPS
             // 
@@ -3813,12 +3822,6 @@
             this.Controls.Add(this.btn_unpause);
             this.Controls.Add(this.btn_pause);
             this.Controls.Add(this.btn_cancel_ak_pressure);
-            this.Controls.Add(this.close_Xray_HV_session);
-            this.Controls.Add(this.tb_ref);
-            this.Controls.Add(this.btn_ref);
-            this.Controls.Add(this.tb_dac);
-            this.Controls.Add(this.btn_dac);
-            this.Controls.Add(this.openSessionButton_Xray);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -3933,6 +3936,8 @@
             this.tableLayoutPanel3.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4351,6 +4356,7 @@
         private System.Windows.Forms.Button btn_pause;
         private System.Windows.Forms.Button btn_unpause;
         private System.Windows.Forms.CheckBox cb_counter;
+        private System.Windows.Forms.TabPage tabPage4;
     }
 }
 
