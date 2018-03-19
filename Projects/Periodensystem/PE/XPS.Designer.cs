@@ -438,6 +438,10 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
+            this.btn_read_adc2 = new System.Windows.Forms.Button();
+            this.tb_adc2 = new System.Windows.Forms.TextBox();
+            this.btn_rampe = new System.Windows.Forms.Button();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3756,6 +3760,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.tb_rampe);
+            this.tabPage4.Controls.Add(this.btn_rampe);
+            this.tabPage4.Controls.Add(this.tb_adc2);
+            this.tabPage4.Controls.Add(this.btn_read_adc2);
             this.tabPage4.Controls.Add(this.btn_dac);
             this.tabPage4.Controls.Add(this.tb_dac);
             this.tabPage4.Controls.Add(this.btn_ref);
@@ -3787,6 +3795,30 @@
             // 
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
+            // 
+            // btn_read_adc2
+            // 
+            resources.ApplyResources(this.btn_read_adc2, "btn_read_adc2");
+            this.btn_read_adc2.Name = "btn_read_adc2";
+            this.btn_read_adc2.UseVisualStyleBackColor = true;
+            this.btn_read_adc2.Click += new System.EventHandler(this.btn_read_adc2_Click);
+            // 
+            // tb_adc2
+            // 
+            resources.ApplyResources(this.tb_adc2, "tb_adc2");
+            this.tb_adc2.Name = "tb_adc2";
+            // 
+            // btn_rampe
+            // 
+            resources.ApplyResources(this.btn_rampe, "btn_rampe");
+            this.btn_rampe.Name = "btn_rampe";
+            this.btn_rampe.UseVisualStyleBackColor = true;
+            this.btn_rampe.Click += new System.EventHandler(this.btn_rampe_Click);
+            // 
+            // tb_rampe
+            // 
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
             // 
             // XPS
             // 
@@ -4325,6 +4357,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.CheckBox Iseg_DPS_session;
         private System.Windows.Forms.CheckBox Iseg_Xray_session;
+        private System.Windows.Forms.TextBox tb_adc2;
+        private System.Windows.Forms.Button btn_read_adc2;
+        private System.Windows.Forms.TextBox tb_rampe;
+        private System.Windows.Forms.Button btn_rampe;
     }
 }
 

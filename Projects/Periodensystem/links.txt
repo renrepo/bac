@@ -1,2 +1,17 @@
 http://www.ni.com/tutorial/2739/en/
 http://www.ni.com/tutorial/3325/en/
+
+
+Anfrage Amptek 19.03.2018
+Hello,
+our research group is interested in a new amplifier for a (Xray/ultraviolet) photoelectron spectrometer. 
+We're using a CEM (Photonis X919VL) at ~3000V anode voltage which is connected via a high voltage decoupling capacitor 
+to the input pin of the amplifier. Downstream of the amplifier a counting unit is installed to count 
+incoming photoelectrons. At peaks the counting rate reaches up to ~1e6 cps.
+Since the currently used amplifier is about 30 years old and no longer working well we need to replace it.
+Can you submit me an offer? How long are your delivery times? As far as I can see, the charge sensitive 
+preamplifier & discriminator A121 (together with the PC121 test board) will meet our requirements.
+
+Thanks in advance and best regards from Germany,
+
+Rene Wabnitz

@@ -71,6 +71,7 @@ namespace XPS
         int handle_count = 0;
         int handle_DAC = 0;
         int handle_DAC2 = 0;
+        int handle_adc = 0;
         double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
         double cnt_before = 0;              // coutner reading befor and after delay
         double cnt_after = 0;
@@ -82,6 +83,7 @@ namespace XPS
         double LJ_hemi2 = 0;
         double LJ_hemo2 = 0;
         double LJ_lens2 = 0;
+        double adc = 0;
 
         // Voltage setting stuff
         double vpass;
@@ -238,6 +240,7 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC2);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc);
 
                 // backgroundtask for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
@@ -380,12 +383,18 @@ namespace XPS
             Button b = sender as Button;
             int chanel = Convert.ToInt16(b.Tag);
             bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(",","."), out decimal vset_in);
-            //vset[chanel].Text = vset_in.ToString("0.000");
+            vset[chanel].Text = vset_in.ToString("0.000"); //necessary because otherwise "vset_in" would bei "20\r\n40" if first 20 and then 40 typed in
             if (Vset)
             {
-                _suspend_background_measurement.Reset();
-                await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel), "DPS"); // 3 decimal places
-                _suspend_background_measurement.Set();
+                try
+                {
+                    _suspend_background_measurement.Reset();
+                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel), "DPS"); // 3 decimal places
+                    _suspend_background_measurement.Set();
+                }
+                catch (Exception)
+                {
+                }
             }
 
             else
@@ -745,6 +754,10 @@ namespace XPS
             {
                 try
                 {
+                    if (_cts_volt_dps != null)
+                    {
+                        _cts_volt_dps.Cancel();
+                    }
                     await write_to_Iseg("*RST\n", "DPS");
                     DPS_HV.Dispose();
                     DPS_HV_is_open = false;
@@ -1328,15 +1341,15 @@ namespace XPS
                     {
                         LJM.eReadName(handle_pressure, pressure_pin, ref ionivac_v_out);
                         pressure = Math.Pow(10, ((Convert.ToDouble(ionivac_v_out) - 7.75)) / 0.75);
+                        Thread.Sleep(2000);
                         if (progress != null)
                         {
                             progress.Report(pressure.ToString("0.00E0"));
                             token.ThrowIfCancellationRequested();
                         }
-                        Thread.Sleep(2000);
                     }
                 });
-                MessageBox.Show("Completed!");
+                //MessageBox.Show("Completed!");
             }
             catch (OperationCanceledException)
             {
@@ -1372,8 +1385,14 @@ namespace XPS
                         // call of read_from_iseg not possible because this part has to run synchronously
                         DPS_HV.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", i));
                         Thread.Sleep(50);
-                        readback = DPS_HV.RawIO.ReadString();
-                        progress.Report(readback.Replace("V\r\n", "").ToString());
+                        //otherwise problems when closing DPS-session
+                        try
+                        {
+                            readback = DPS_HV.RawIO.ReadString();
+                        }
+                        catch (Exception)
+                        {}
+                        progress.Report(readback.Replace("V\r\n", ""));
                         //progress.Report(i.ToString());
                         result = i;
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
@@ -1386,7 +1405,7 @@ namespace XPS
             }
             catch (OperationCanceledException)
             {
-                MessageBox.Show("Problem with background measurement of Iseg DPS voltages");
+                AutoClosingMessageBox.Show("Problem with background measurement of Iseg DPS voltages", "Info", 500);
             }
         }
 
@@ -1534,19 +1553,17 @@ namespace XPS
 
             if (c.Text == "Off")
             {
-                c.Text = "On";
-                c.BackColor = Color.LimeGreen;
                 background_counter_labjack();
             }
 
             else
             {
-                c.Text = "Off";
-                c.BackColor = SystemColors.ControlLightLight;
                 if (_cts_counter_labjack != null)
                 {
                     _cts_counter_labjack.Cancel();
                 }
+                c.Text = "Off";
+                c.BackColor = SystemColors.ControlLightLight;
             }
         }
 
@@ -1562,11 +1579,12 @@ namespace XPS
             var progress = progressHandler as IProgress<string>;
             try
             {
-                tb_counter_ms.ReadOnly = true;
                 int ct = int.Parse(tb_counter_ms.Text);
                 double erg = 0;
                 Stopwatch sw = new Stopwatch();
-
+                cb_counter.Text = "On";
+                cb_counter.BackColor = Color.LightGreen;
+                tb_counter_ms.ReadOnly = true;
                 await Task.Run(() =>
                 {
                     while (true)
@@ -1582,7 +1600,7 @@ namespace XPS
                         sw.Reset();
                         if (progress != null)
                         {
-                            progress.Report(erg.ToString("N3"));    //no decimal placed
+                            progress.Report(erg.ToString("N0"));    //no decimal placed
                             token.ThrowIfCancellationRequested();
                         }
                     }
@@ -1591,13 +1609,13 @@ namespace XPS
             }
             catch (OperationCanceledException)
             {
-                MessageBox.Show("Can't start background-counter");
+                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
                 tb_counter.Text = String.Empty;
                 tb_counter_ms.ReadOnly = false;
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't open Labjack device!");
+                MessageBox.Show("Type in Integer");
             }
         }
       
@@ -1613,6 +1631,24 @@ namespace XPS
         {
             double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
             LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+        }
+
+        private void btn_read_adc2_Click(object sender, EventArgs e)
+        {
+            LJM.eReadName(handle_adc, "AIN2", ref adc);
+            tb_adc2.Text = adc.ToString("0.000");
+        }
+
+        private async void btn_rampe_Click(object sender, EventArgs e)
+        {
+            LJM.eWriteName(handle_DAC2, "TDAC1", 0.02);
+
+            for (int i = 0; i < 1600; i++)
+            {
+                LJM.eWriteName(handle_DAC, "TDAC0", i * 5.0 / 1000.0);
+                tb_rampe.Text = (i * 5.0 / 1000.0).ToString("0.000");
+                await Task.Delay(250);
+            }
         }
     }
 }
@@ -1630,14 +1666,15 @@ namespace XPS
 
 // TODO:
 /*** 
- * replace bachgroundworker with Task/async
+ * +++ replace bachgroundworker with Task/async
  * replace/remove write_to_dps_async
- * key down kram
- * iseg terminal
- * open iseg devices (ip as string)
- * background counter catch (was wenn parse nicht geht? was wenn abbruch?)
- * counter labjack
+ * +++ key down kram
+ * --- iseg terminal
+ * +++ open iseg devices (ip as string)
+ * background counter catch was wenn abbruch?
+ * +++ counter labjack
  * ISeg DPS/Xray open checkchanged + backgroundcolor (silver)
+ * background volt measurement DPS 4 decimals instead of 3 (problems with string conversion)
  ***/
 
 /***
