@@ -355,6 +355,9 @@
             this.label97 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.Iseg_Xray_session = new System.Windows.Forms.CheckBox();
+            this.Iseg_DPS_session = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label80 = new System.Windows.Forms.Label();
             this.cb_counter = new System.Windows.Forms.CheckBox();
@@ -435,15 +438,13 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.Iseg_DPS_session = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.Iseg_Xray_session = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -452,7 +453,6 @@
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -3119,6 +3119,29 @@
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel4
+            // 
+            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
+            this.tableLayoutPanel4.Controls.Add(this.Iseg_Xray_session, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.Iseg_DPS_session, 0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            // 
+            // Iseg_Xray_session
+            // 
+            resources.ApplyResources(this.Iseg_Xray_session, "Iseg_Xray_session");
+            this.Iseg_Xray_session.BackColor = System.Drawing.Color.Silver;
+            this.Iseg_Xray_session.Name = "Iseg_Xray_session";
+            this.Iseg_Xray_session.UseVisualStyleBackColor = false;
+            this.Iseg_Xray_session.CheckedChanged += new System.EventHandler(this.Iseg_Xray_session_CheckedChanged);
+            // 
+            // Iseg_DPS_session
+            // 
+            resources.ApplyResources(this.Iseg_DPS_session, "Iseg_DPS_session");
+            this.Iseg_DPS_session.BackColor = System.Drawing.Color.Silver;
+            this.Iseg_DPS_session.Name = "Iseg_DPS_session";
+            this.Iseg_DPS_session.UseVisualStyleBackColor = false;
+            this.Iseg_DPS_session.CheckedChanged += new System.EventHandler(this.Iseg_DPS_session_CheckedChanged);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label80);
@@ -3765,29 +3788,6 @@
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
             // 
-            // Iseg_DPS_session
-            // 
-            resources.ApplyResources(this.Iseg_DPS_session, "Iseg_DPS_session");
-            this.Iseg_DPS_session.BackColor = System.Drawing.Color.Silver;
-            this.Iseg_DPS_session.Name = "Iseg_DPS_session";
-            this.Iseg_DPS_session.UseVisualStyleBackColor = false;
-            this.Iseg_DPS_session.CheckedChanged += new System.EventHandler(this.Iseg_DPS_session_CheckedChanged);
-            // 
-            // tableLayoutPanel4
-            // 
-            resources.ApplyResources(this.tableLayoutPanel4, "tableLayoutPanel4");
-            this.tableLayoutPanel4.Controls.Add(this.Iseg_Xray_session, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.Iseg_DPS_session, 0, 0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            // 
-            // Iseg_Xray_session
-            // 
-            resources.ApplyResources(this.Iseg_Xray_session, "Iseg_Xray_session");
-            this.Iseg_Xray_session.BackColor = System.Drawing.Color.Silver;
-            this.Iseg_Xray_session.Name = "Iseg_Xray_session";
-            this.Iseg_Xray_session.UseVisualStyleBackColor = false;
-            this.Iseg_Xray_session.CheckedChanged += new System.EventHandler(this.Iseg_Xray_session_CheckedChanged);
-            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -3894,6 +3894,8 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -3908,8 +3910,6 @@
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
