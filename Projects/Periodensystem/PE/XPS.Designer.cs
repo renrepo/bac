@@ -434,14 +434,18 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
+            this.btn_rampe = new System.Windows.Forms.Button();
+            this.tb_adc2 = new System.Windows.Forms.TextBox();
+            this.btn_read_adc2 = new System.Windows.Forms.Button();
             this.btn_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.btn_read_adc2 = new System.Windows.Forms.Button();
-            this.tb_adc2 = new System.Windows.Forms.TextBox();
-            this.btn_rampe = new System.Windows.Forms.Button();
-            this.tb_rampe = new System.Windows.Forms.TextBox();
+            this.tb_hem_in = new System.Windows.Forms.TextBox();
+            this.tb_hem_out = new System.Windows.Forms.TextBox();
+            this.Hem_in = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3760,6 +3764,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label52);
+            this.tabPage4.Controls.Add(this.Hem_in);
+            this.tabPage4.Controls.Add(this.tb_hem_out);
+            this.tabPage4.Controls.Add(this.tb_hem_in);
             this.tabPage4.Controls.Add(this.tb_rampe);
             this.tabPage4.Controls.Add(this.btn_rampe);
             this.tabPage4.Controls.Add(this.tb_adc2);
@@ -3771,6 +3779,30 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // tb_rampe
+            // 
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
+            // 
+            // btn_rampe
+            // 
+            resources.ApplyResources(this.btn_rampe, "btn_rampe");
+            this.btn_rampe.Name = "btn_rampe";
+            this.btn_rampe.UseVisualStyleBackColor = true;
+            this.btn_rampe.Click += new System.EventHandler(this.btn_rampe_Click);
+            // 
+            // tb_adc2
+            // 
+            resources.ApplyResources(this.tb_adc2, "tb_adc2");
+            this.tb_adc2.Name = "tb_adc2";
+            // 
+            // btn_read_adc2
+            // 
+            resources.ApplyResources(this.btn_read_adc2, "btn_read_adc2");
+            this.btn_read_adc2.Name = "btn_read_adc2";
+            this.btn_read_adc2.UseVisualStyleBackColor = true;
+            this.btn_read_adc2.Click += new System.EventHandler(this.btn_read_adc2_Click);
             // 
             // btn_dac
             // 
@@ -3796,29 +3828,25 @@
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
             // 
-            // btn_read_adc2
+            // tb_hem_in
             // 
-            resources.ApplyResources(this.btn_read_adc2, "btn_read_adc2");
-            this.btn_read_adc2.Name = "btn_read_adc2";
-            this.btn_read_adc2.UseVisualStyleBackColor = true;
-            this.btn_read_adc2.Click += new System.EventHandler(this.btn_read_adc2_Click);
+            resources.ApplyResources(this.tb_hem_in, "tb_hem_in");
+            this.tb_hem_in.Name = "tb_hem_in";
             // 
-            // tb_adc2
+            // tb_hem_out
             // 
-            resources.ApplyResources(this.tb_adc2, "tb_adc2");
-            this.tb_adc2.Name = "tb_adc2";
+            resources.ApplyResources(this.tb_hem_out, "tb_hem_out");
+            this.tb_hem_out.Name = "tb_hem_out";
             // 
-            // btn_rampe
+            // Hem_in
             // 
-            resources.ApplyResources(this.btn_rampe, "btn_rampe");
-            this.btn_rampe.Name = "btn_rampe";
-            this.btn_rampe.UseVisualStyleBackColor = true;
-            this.btn_rampe.Click += new System.EventHandler(this.btn_rampe_Click);
+            resources.ApplyResources(this.Hem_in, "Hem_in");
+            this.Hem_in.Name = "Hem_in";
             // 
-            // tb_rampe
+            // label52
             // 
-            resources.ApplyResources(this.tb_rampe, "tb_rampe");
-            this.tb_rampe.Name = "tb_rampe";
+            resources.ApplyResources(this.label52, "label52");
+            this.label52.Name = "label52";
             // 
             // XPS
             // 
@@ -4361,6 +4389,10 @@
         private System.Windows.Forms.Button btn_read_adc2;
         private System.Windows.Forms.TextBox tb_rampe;
         private System.Windows.Forms.Button btn_rampe;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Label Hem_in;
+        private System.Windows.Forms.TextBox tb_hem_out;
+        private System.Windows.Forms.TextBox tb_hem_in;
     }
 }
 

@@ -14934,6 +14934,102 @@
   <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="label52.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label52.Location" type="System.Drawing.Point, System.Drawing">
+    <value>93, 99</value>
+  </data>
+  <data name="label52.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="label52.TabIndex" type="System.Int32, mscorlib">
+    <value>300</value>
+  </data>
+  <data name="label52.Text" xml:space="preserve">
+    <value>Hem_out</value>
+  </data>
+  <data name="&gt;&gt;label52.Name" xml:space="preserve">
+    <value>label52</value>
+  </data>
+  <data name="&gt;&gt;label52.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label52.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;label52.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Hem_in.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Hem_in.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 99</value>
+  </data>
+  <data name="Hem_in.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="Hem_in.TabIndex" type="System.Int32, mscorlib">
+    <value>299</value>
+  </data>
+  <data name="Hem_in.Text" xml:space="preserve">
+    <value>Hem_in</value>
+  </data>
+  <data name="&gt;&gt;Hem_in.Name" xml:space="preserve">
+    <value>Hem_in</value>
+  </data>
+  <data name="&gt;&gt;Hem_in.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Hem_in.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;Hem_in.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tb_hem_out.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 76</value>
+  </data>
+  <data name="tb_hem_out.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="tb_hem_out.TabIndex" type="System.Int32, mscorlib">
+    <value>298</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_out.Name" xml:space="preserve">
+    <value>tb_hem_out</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_out.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_out.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_out.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tb_hem_in.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 76</value>
+  </data>
+  <data name="tb_hem_in.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 20</value>
+  </data>
+  <data name="tb_hem_in.TabIndex" type="System.Int32, mscorlib">
+    <value>297</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_in.Name" xml:space="preserve">
+    <value>tb_hem_in</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_in.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_in.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;tb_hem_in.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="tb_rampe.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 49</value>
   </data>
@@ -14953,7 +15049,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_rampe.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>4</value>
   </data>
   <data name="btn_rampe.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 20</value>
@@ -14977,7 +15073,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_rampe.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="tb_adc2.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 49</value>
@@ -14998,7 +15094,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_adc2.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="btn_read_adc2.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 20</value>
@@ -15022,7 +15118,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_read_adc2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="btn_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 20</value>
@@ -15046,7 +15142,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_dac.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>8</value>
   </data>
   <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 49</value>
@@ -15067,7 +15163,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="btn_ref.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 20</value>
@@ -15091,7 +15187,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_ref.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="tb_ref.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 49</value>
@@ -15112,7 +15208,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_ref.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>11</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

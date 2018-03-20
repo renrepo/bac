@@ -1626,7 +1626,6 @@ namespace XPS
             LJM.eWriteName(handle_DAC, "TDAC0", value);
         }
 
-
         private void btn_ref_Click(object sender, EventArgs e)
         {
             double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
@@ -1643,11 +1642,17 @@ namespace XPS
         {
             LJM.eWriteName(handle_DAC2, "TDAC1", 0.02);
 
-            for (int i = 0; i < 1600; i++)
+            for (int i = 0; i < 8000; i++)
             {
-                LJM.eWriteName(handle_DAC, "TDAC0", i * 5.0 / 1000.0);
-                tb_rampe.Text = (i * 5.0 / 1000.0).ToString("0.000");
-                await Task.Delay(250);
+                LJM.eWriteName(handle_DAC, "TDAC0", i * 1.0 / 1000.0);
+                LJM.eWriteName(handle_DAC, "TDAC1", 1.0);
+                tb_rampe.Text = (i * 1.0 / 1000.0).ToString("0.000");
+                await Task.Delay(500);
+                LJM.eReadName(handle_v_hemi, "AIN3", ref LJ_hemi);
+                LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
+                tb_hem_in.Text = (LJ_hemi*5.03318).ToString("0.000");
+                tb_hem_out.Text = (LJ_hemo*5.03054).ToString("0.000");
+                await Task.Delay(500);
             }
         }
     }
