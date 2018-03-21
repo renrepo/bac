@@ -1624,6 +1624,7 @@ namespace XPS
         {
             double value = Convert.ToDouble(tb_dac.Text.Replace(",","."));
             LJM.eWriteName(handle_DAC, "TDAC0", value);
+            LJM.eWriteName(handle_DAC, "DAC0", 1.000);
         }
 
         private void btn_ref_Click(object sender, EventArgs e)
