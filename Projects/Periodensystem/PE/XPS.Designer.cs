@@ -434,6 +434,10 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label52 = new System.Windows.Forms.Label();
+            this.Hem_in = new System.Windows.Forms.Label();
+            this.tb_hem_out = new System.Windows.Forms.TextBox();
+            this.tb_hem_in = new System.Windows.Forms.TextBox();
             this.tb_rampe = new System.Windows.Forms.TextBox();
             this.btn_rampe = new System.Windows.Forms.Button();
             this.tb_adc2 = new System.Windows.Forms.TextBox();
@@ -442,10 +446,6 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.tb_hem_in = new System.Windows.Forms.TextBox();
-            this.tb_hem_out = new System.Windows.Forms.TextBox();
-            this.Hem_in = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -2283,14 +2283,6 @@
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // bW_data
-            // 
-            this.bW_data.WorkerReportsProgress = true;
-            this.bW_data.WorkerSupportsCancellation = true;
-            this.bW_data.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bW_data_DoWork);
-            this.bW_data.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bW_data_ProgressChanged);
-            this.bW_data.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bW_data_RunWorkerCompleted);
-            // 
             // lb_perc_gauss
             // 
             resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
@@ -3780,6 +3772,26 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label52
+            // 
+            resources.ApplyResources(this.label52, "label52");
+            this.label52.Name = "label52";
+            // 
+            // Hem_in
+            // 
+            resources.ApplyResources(this.Hem_in, "Hem_in");
+            this.Hem_in.Name = "Hem_in";
+            // 
+            // tb_hem_out
+            // 
+            resources.ApplyResources(this.tb_hem_out, "tb_hem_out");
+            this.tb_hem_out.Name = "tb_hem_out";
+            // 
+            // tb_hem_in
+            // 
+            resources.ApplyResources(this.tb_hem_in, "tb_hem_in");
+            this.tb_hem_in.Name = "tb_hem_in";
+            // 
             // tb_rampe
             // 
             resources.ApplyResources(this.tb_rampe, "tb_rampe");
@@ -3827,26 +3839,6 @@
             // 
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
-            // 
-            // tb_hem_in
-            // 
-            resources.ApplyResources(this.tb_hem_in, "tb_hem_in");
-            this.tb_hem_in.Name = "tb_hem_in";
-            // 
-            // tb_hem_out
-            // 
-            resources.ApplyResources(this.tb_hem_out, "tb_hem_out");
-            this.tb_hem_out.Name = "tb_hem_out";
-            // 
-            // Hem_in
-            // 
-            resources.ApplyResources(this.Hem_in, "Hem_in");
-            this.Hem_in.Name = "Hem_in";
-            // 
-            // label52
-            // 
-            resources.ApplyResources(this.label52, "label52");
-            this.label52.Name = "label52";
             // 
             // XPS
             // 
