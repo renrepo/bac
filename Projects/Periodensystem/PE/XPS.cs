@@ -50,7 +50,7 @@ namespace XPS
         double V_photon = 21.21;            // Energiey HeI-line
         double ri = 106;                    // Radius inner hemisphere in mm
         double ra = 112;                    // Radius outer hemisphere in mm
-        double deviation = 0.002;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
+        double deviation = 0.001;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
         string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
         double spannungsteiler = 10.9404;
@@ -1052,7 +1052,7 @@ namespace XPS
                             integrated_LJ_hemo += LJ_hemo* 5.03318;
                             integrated_LJ_analyser += LJ_analyser*5.03182;
                             ++num_meas;
-                            Thread.Sleep(1);
+                            Thread.Sleep(30);
                         }
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
                         ticks = sw.ElapsedTicks;
@@ -1066,7 +1066,8 @@ namespace XPS
                         v_hemi = integrated_LJ_hemi / num_meas;
                         v_hemo = integrated_LJ_hemo / num_meas;
                         v_analyser = integrated_LJ_analyser / num_meas;
-                        counts = (intcounter - sc) / elapsed_seconds;
+                        //counts = (intcounter - sc) / elapsed_seconds;
+                        counts = elapsed_seconds*1000;
                         E_pass = (v_hemi-v_hemo)/k;
                         // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
                         E_kin = E_pass - v_analyser + vbias + workfunction;
