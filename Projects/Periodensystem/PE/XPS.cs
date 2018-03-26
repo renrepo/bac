@@ -50,11 +50,11 @@ namespace XPS
         double V_photon = 21.21;            // Energiey HeI-line
         double ri = 106;                    // Radius inner hemisphere in mm
         double ra = 112;                    // Radius outer hemisphere in mm
-        double deviation = 0.005;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
+        double deviation = 0.002;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
         string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
         double spannungsteiler = 10.9404;
-        double vchanneltron = 3000;          // voltage drop over channeltron
+        double vchanneltron = 30;          // voltage drop over channeltron
         double vor = 16;
         double nach = 5;
         double slope_korr = 0.613;      // ergibt sich aus Plot vhemi gegen vlens bei maxmalen zählraten
@@ -878,7 +878,8 @@ namespace XPS
 
 
         double LJ_hemi_corr;
-        long ticks;
+        double LJ_hemo_corr;
+        double ticks;
 
         double v_hemi = 0;
         double v_hemo = 0;
@@ -972,7 +973,6 @@ namespace XPS
 
 
             // set initial voltages (roughly)
-            _suspend_background_measurement.Reset();
             LJM.eWriteName(handle_DAC, "TDAC0", v_hemi_min/5.0);
             LJM.eWriteName(handle_DAC2, "TDAC1", vpass * k);
             _suspend_background_measurement.Reset();
@@ -980,28 +980,30 @@ namespace XPS
             await write_to_Iseg(String.Format(":VOLT ON,(@4)\n"), "DPS");
             _suspend_background_measurement.Set();
 
-            LJM.eReadName(handle_DAC, "AIN2", ref LJ_hemi);
+            LJM.eReadName(handle_DAC, "AIN1", ref LJ_hemi);
             double dev_hemi = LJ_hemi - v_hemi_min / 5.03054;
+            LJ_hemi_corr = LJ_hemi;
 
             while (Math.Abs(dev_hemi) > deviation)
             {
-                LJ_hemi_corr = 2.0 * v_hemi_min / 5.03054 - LJ_hemi;
+                LJ_hemi_corr = LJ_hemi_corr - dev_hemi;
                 LJM.eWriteName(handle_DAC, "TDAC0", LJ_hemi_corr);
                 await Task.Delay(10);
-                LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
+                LJM.eReadName(handle_v_hemi, "AIN1", ref LJ_hemi);
                 dev_hemi = LJ_hemi - v_hemi_min / 5.03054;
             }
 
-            LJM.eReadName(handle_DAC2, "AIN3", ref LJ_hemo);
+            LJM.eReadName(handle_DAC2, "AIN2", ref LJ_hemo);
             double dev_hemo = LJ_hemo - v_hemo_min / 5.03318;
+            LJ_hemo_corr = vpass * k;
 
             while (Math.Abs(dev_hemo) > deviation)
             {
-                double v_hemo_corr = 2*v_hemo_min / 5.03318 - LJ_hemo;
-                LJM.eWriteName(handle_DAC2, "TDAC1", v_hemo_corr);
+                LJ_hemo_corr = LJ_hemo_corr + dev_hemo;
+                LJM.eWriteName(handle_DAC2, "TDAC1", LJ_hemo_corr);
                 await Task.Delay(10);
-                LJM.eReadName(handle_v_hemo, "AIN3", ref LJ_hemo);
-                dev_hemo = LJ_hemo - v_hemo_min / 5.03318;
+                LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
+                dev_hemo = LJ_hemo* 5.03318 - v_hemo_min;
             }
 
             token.ThrowIfCancellationRequested();
@@ -1041,29 +1043,31 @@ namespace XPS
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
                         sc = intcounter;
 
-                        while (sw.Elapsed.Milliseconds < tcount)
+                        while (sw.ElapsedMilliseconds < tcount)
                         {
-                            LJM.eReadName(handle_v_hemi, "AIN2", ref LJ_hemi);
-                            LJM.eReadName(handle_v_hemo, "AIN3", ref LJ_hemo);
-                            LJM.eReadName(handle_v_analyser, "AIN4", ref LJ_analyser);
+                            LJM.eReadName(handle_v_hemi, "AIN1", ref LJ_hemi);
+                            LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
+                            LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
                             integrated_LJ_hemi += LJ_hemi* 5.03054;
                             integrated_LJ_hemo += LJ_hemo* 5.03318;
                             integrated_LJ_analyser += LJ_analyser*5.03182;
                             ++num_meas;
+                            Thread.Sleep(1);
                         }
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
                         ticks = sw.ElapsedTicks;
                         elapsed_seconds = ticks / Stopwatch.Frequency;
+                        sw.Stop();
                         sw.Reset();
 
-                        LJM.eWriteName(handle_DAC, "TDAC0", LJ_hemi_corr + vstepsize*inc/5.0 );
+                        LJM.eWriteName(handle_DAC, "TDAC0", LJ_hemi_corr + vstepsize*inc/5.0/1000 );
                         ++inc;
 
                         v_hemi = integrated_LJ_hemi / num_meas;
                         v_hemo = integrated_LJ_hemo / num_meas;
                         v_analyser = integrated_LJ_analyser / num_meas;
                         counts = (intcounter - sc) / elapsed_seconds;
-                        E_pass = v_hemi-v_hemo;
+                        E_pass = (v_hemi-v_hemo)/k;
                         // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
                         E_kin = E_pass - v_analyser + vbias + workfunction;
 
@@ -1086,6 +1090,8 @@ namespace XPS
                         //_suspend_background_measurement.WaitOne(Timeout.Infinite);
                     }
                 });
+                LJM.eWriteName(handle_DAC, "TDAC0", 0.0);
+                LJM.eWriteName(handle_DAC2, "TDAC1", 0.0);
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
                 fig_name.Enabled = true;
@@ -1101,6 +1107,8 @@ namespace XPS
                 await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
                 await write_to_Iseg(String.Format("*RST\n"), "DPS");
                 _suspend_background_measurement.Set();
+                LJM.eWriteName(handle_DAC, "TDAC0", 0.0);
+                LJM.eWriteName(handle_DAC2, "TDAC1", 0.0);
                 tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -1110,7 +1118,7 @@ namespace XPS
                 fig_name.Enabled = true;
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
-                AutoClosingMessageBox.Show("Problem with background measurement of Iseg DPS voltages", "Info", 500);
+                //AutoClosingMessageBox.Show("Problem with background measurement of Iseg DPS voltages", "Info", 500);
             }
         }
 
@@ -1540,41 +1548,33 @@ namespace XPS
             ***/
 
             private void btn_clear_Click(object sender, EventArgs e)
-        {
-            if (_cts_UPS != null)
             {
-                MessageBox.Show("Still taking UPS spectrum!");
-            }
-
-            else
+            take_UPS_spec = false;
+            foreach (var item in vm)
             {
-                take_UPS_spec = false;
-                foreach (var item in vm)
-                {
-                    item.Text = String.Empty;
-                }
-                tb_show.Text = string.Empty;
-                lb_perc_gauss.Text = "%";
-                btn_start.Enabled = true;
-                btn_clear.Enabled = false;
-                showdata.Enabled = false;
-                safe_fig.Enabled = false;
-                tb_safe.Enabled = true;
-                fig_name.Enabled = false;
-                //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
-                //    else { Al_anode.Enabled = true;}
-                fig_name.Clear();
-                zedGraphControl1.GraphPane.CurveList.Clear();
-                zedGraphControl1.GraphPane.GraphObjList.Clear();
-                values_to_plot.Clear();
-                display_labels.Clear();
-                myPane.YAxisList.Clear();
-                myPane.AddYAxis("counts");
-                progressBar1.Value = 0;
-                create_graph(myPane);
-                zedGraphControl1.AxisChange();
-                zedGraphControl1.Refresh();
+                item.Text = String.Empty;
             }
+            tb_show.Text = string.Empty;
+            lb_perc_gauss.Text = "%";
+            btn_start.Enabled = true;
+            btn_clear.Enabled = false;
+            showdata.Enabled = false;
+            safe_fig.Enabled = false;
+            tb_safe.Enabled = true;
+            fig_name.Enabled = false;
+            //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
+            //    else { Al_anode.Enabled = true;}
+            fig_name.Clear();
+            zedGraphControl1.GraphPane.CurveList.Clear();
+            zedGraphControl1.GraphPane.GraphObjList.Clear();
+            values_to_plot.Clear();
+            display_labels.Clear();
+            myPane.YAxisList.Clear();
+            myPane.AddYAxis("counts");
+            progressBar1.Value = 0;
+            create_graph(myPane);
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Refresh();
         }        
 
 
