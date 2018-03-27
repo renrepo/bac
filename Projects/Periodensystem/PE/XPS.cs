@@ -886,7 +886,7 @@ namespace XPS
         double v_analyser = 0;
 
         double k;
-        double E_pass;
+        double E_pass =15;
         double E_kin;
         double sc = 0;    
 
@@ -902,8 +902,8 @@ namespace XPS
                 //vm3.Text = (LJ_lens2 / 3).ToString("0.000");
                 vm4.Text = v_analyser.ToString("0.000");
                 vm5.Text = v_channeltron_out_min.ToString("0.000");
-                values_to_plot.Add(E_kin, Convert.ToDouble(value));
-                myCurve.AddPoint(E_kin, Convert.ToDouble(value));
+                values_to_plot.Add(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
+                myCurve.AddPoint(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
                 zedGraphControl1.Invalidate();
                 zedGraphControl1.AxisChange();
             });
@@ -946,7 +946,7 @@ namespace XPS
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("" + Environment.NewLine);
-                file.WriteLine("#E_k \t cps \t Ana \t Hemi \t Hemo \t EP \t Mt + \t + meas");
+                file.WriteLine("#E_k \t cps \t Ana \t Hemi \t Hemo \t EP \t Mt \t 0.4 \t corr");
                 file.WriteLine("" + Environment.NewLine);
             }
 
@@ -974,12 +974,12 @@ namespace XPS
 
             // set initial voltages (roughly)
             LJM.eWriteName(handle_DAC, "TDAC0", v_hemi_min/5.0);
-            LJM.eWriteName(handle_DAC2, "TDAC1", vpass * k);
+            LJM.eWriteName(handle_DAC2, "TDAC1", v_hemo_min / 5.09577);
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
             await write_to_Iseg(String.Format(":VOLT ON,(@4)\n"), "DPS");
             _suspend_background_measurement.Set();
-
+            Thread.Sleep(30);
             LJM.eReadName(handle_DAC, "AIN1", ref LJ_hemi);
             double dev_hemi = LJ_hemi - v_hemi_min / 5.03054;
             LJ_hemi_corr = LJ_hemi;
@@ -995,15 +995,15 @@ namespace XPS
 
             LJM.eReadName(handle_DAC2, "AIN2", ref LJ_hemo);
             double dev_hemo = LJ_hemo - v_hemo_min / 5.03318;
-            LJ_hemo_corr = vpass * k;
+            LJ_hemo_corr = LJ_hemo;
 
             while (Math.Abs(dev_hemo) > deviation)
             {
-                LJ_hemo_corr = LJ_hemo_corr + dev_hemo;
+                LJ_hemo_corr = LJ_hemo_corr - dev_hemo;
                 LJM.eWriteName(handle_DAC2, "TDAC1", LJ_hemo_corr);
                 await Task.Delay(10);
                 LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                dev_hemo = LJ_hemo* 5.03318 - v_hemo_min;
+                dev_hemo = LJ_hemo - v_hemo_min / 5.03318;
             }
 
             token.ThrowIfCancellationRequested();
@@ -1026,6 +1026,9 @@ namespace XPS
 
             int inc = 1;
 
+            double corr = 0;
+            double corr2 = 0;
+
             token.ThrowIfCancellationRequested();
 
             try
@@ -1039,50 +1042,61 @@ namespace XPS
                         integrated_LJ_analyser = 0;
                         int num_meas = 0;
                         token.ThrowIfCancellationRequested();
+
+                        while (num_meas <= 4)
+                        {
+                            LJM.eReadName(handle_v_hemi, "AIN1", ref LJ_hemi);
+                            integrated_LJ_hemi += LJ_hemi * 5.03054;
+                            LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
+                            integrated_LJ_hemo += LJ_hemo * 5.03318;
+                            LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
+                            integrated_LJ_analyser += LJ_analyser * 5.03182;
+                            ++num_meas;
+                        }
+
                         sw.Start();
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
                         sc = intcounter;
 
-                        while (sw.ElapsedMilliseconds < tcount)
-                        {
-                            LJM.eReadName(handle_v_hemi, "AIN1", ref LJ_hemi);
-                            LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                            LJM.eReadName(handle_v_analyser, "AIN3", ref LJ_analyser);
-                            integrated_LJ_hemi += LJ_hemi* 5.03054;
-                            integrated_LJ_hemo += LJ_hemo* 5.03318;
-                            integrated_LJ_analyser += LJ_analyser*5.03182;
-                            ++num_meas;
-                            Thread.Sleep(30);
-                        }
-                        LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
-                        ticks = sw.ElapsedTicks;
-                        elapsed_seconds = ticks / Stopwatch.Frequency;
-                        sw.Stop();
-                        sw.Reset();
-
-                        LJM.eWriteName(handle_DAC, "TDAC0", LJ_hemi_corr + vstepsize*inc/5.0/1000 );
-                        ++inc;
-
                         v_hemi = integrated_LJ_hemi / num_meas;
                         v_hemo = integrated_LJ_hemo / num_meas;
                         v_analyser = integrated_LJ_analyser / num_meas;
+
+                        corr += (v_hemi - v_hemo) / k - vpass;
+                        E_pass = (v_hemi - v_hemo) / k;
+
+                        while (sw.ElapsedMilliseconds < tcount)
+                        {
+                            Thread.Sleep(1);
+                        }
+                        LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
+                        ticks = sw.ElapsedTicks;
+                        sw.Stop();
+                        elapsed_seconds = ticks / Stopwatch.Frequency;
+                        sw.Reset();
+
+
+
+                        LJM.eWriteName(handle_DAC, "TDAC0", LJ_hemi_corr + vstepsize * inc / 5.09577 / 1000 - corr * k / 5.09577 / 2);
+                        LJM.eWriteName(handle_DAC2, "TDAC1", LJ_hemo_corr + vstepsize * inc / 5.09577 / 1000 + corr * k / 5.09577 / 2);
+                        ++inc;
                         //counts = (intcounter - sc) / elapsed_seconds;
                         counts = elapsed_seconds*1000;
-                        E_pass = (v_hemi-v_hemo)/k;
                         // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
                         E_kin = E_pass - v_analyser + vbias + workfunction;
 
                         using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                         {
                             file.WriteLine(
-                                E_kin.ToString("0.000") + "\t" + 
-                                counts.ToString("000000") + "\t" + 
+                                E_kin.ToString("0.000") + "\t" +
+                                counts.ToString("000000") + "\t" +
                                 v_analyser.ToString("0.000") + "\t" +
-                                v_hemi.ToString("0.000") + "\t" + 
-                                v_hemo.ToString("0.000") + "\t" + 
-                                E_pass.ToString("0.000") + "\t" + 
+                                v_hemi.ToString("0.000") + "\t" +
+                                v_hemo.ToString("0.000") + "\t" +
+                                E_pass.ToString("0.000") + "\t" +
                                 (elapsed_seconds * 1000).ToString("000") + "\t" +
-                                num_meas.ToString("00")
+                                ((v_hemi-v_analyser)/(v_hemi - v_hemo)).ToString("0.000") + "\t" +
+                                corr.ToString("0.00")
                                 );
                         }
                         progress.Report(counts.ToString("000000"));
@@ -1999,7 +2013,7 @@ namespace XPS
 
         private void btn_read_adc2_Click(object sender, EventArgs e)
         {
-            LJM.eReadName(handle_adc, "AIN2", ref adc);
+            LJM.eReadName(handle_adc, "AIN3", ref adc);
             tb_adc2.Text = adc.ToString("0.000");
         }
 
