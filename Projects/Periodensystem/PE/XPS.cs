@@ -72,6 +72,8 @@ namespace XPS
         int handle_count = 0;
         int handle_DAC = 0;
         int handle_DAC2 = 0;
+        int handle_V_minus = 0;
+        int handle_schwelle = 0;
         int handle_adc = 0;
         double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
         double cnt_before = 0;              // coutner reading befor and after delay
@@ -88,6 +90,8 @@ namespace XPS
         double adc = 0;
 
         // Voltage setting stuff
+        double V_minus = -0.3;
+        double schwelle = -0.02;
         double vpass;
         double vbias;
         double vstepsize;
@@ -245,11 +249,15 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC2);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_schwelle);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_V_minus);
 
                 // backgroundtask for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
                 background_meas_pressure_labjack();
                 labjack_connected = true;
+                LJM.eWriteName(handle_schwelle, "DAC0", schwelle);
+                LJM.eWriteName(handle_DAC2, "TDAC1", V_minus);
             }
             catch (Exception)
             {
@@ -740,6 +748,7 @@ namespace XPS
                         background_meas_volt_DPS();
                         c.Text = "Iseg DPS connected";
                         c.BackColor = Color.LightGreen;
+                        btn_start.Enabled = true;
                     }
                     catch (Exception exp)
                     {
@@ -832,26 +841,6 @@ namespace XPS
         {
             return s.Replace("\n", "\\n").Replace("\r", "\\r");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -970,10 +959,10 @@ namespace XPS
             // set initial voltages (roughly)
             LJM.eWriteName(handle_DAC, "TDAC0", v_hemi_min/5.0);
             LJM.eWriteName(handle_DAC2, "TDAC1", v_hemo_min / 5.09577);
-            _suspend_background_measurement.Reset();
-            await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
-            await write_to_Iseg(String.Format(":VOLT ON,(@4)\n"), "DPS");
-            _suspend_background_measurement.Set();
+            //_suspend_background_measurement.Reset();
+            //await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
+            //await write_to_Iseg(String.Format(":VOLT ON,(@4)\n"), "DPS");
+            //_suspend_background_measurement.Set();
             Thread.Sleep(30);
             LJM.eReadName(handle_DAC, "AIN1", ref LJ_hemi);
             double dev_hemi = LJ_hemi - v_hemi_min / 5.03054;
@@ -1056,7 +1045,7 @@ namespace XPS
                         v_hemo = integrated_LJ_hemo / num_meas;
                         v_analyser = integrated_LJ_analyser / num_meas;
                         E_pass = (v_hemi - v_hemo) / k;
-                        corr += E_pass / k - vpass;
+                        corr += E_pass - vpass;
 
                         while (sw.ElapsedMilliseconds < tcount)
                         {
@@ -1558,10 +1547,16 @@ namespace XPS
             LJM.eWriteName(handle_DAC, "DAC0", 1.000);
         }
 
-        private void btn_ref_Click(object sender, EventArgs e)
+        private async void btn_ref_Click(object sender, EventArgs e)
         {
-            double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
-            LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+            while (true)
+            {
+               // double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
+                //LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+                LJM.eWriteName(handle_schwelle, "DAC0", 0.0);
+                LJM.eWriteName(handle_schwelle, "DAC0", 0.3);
+            }
+
         }
 
         private void btn_read_adc2_Click(object sender, EventArgs e)
