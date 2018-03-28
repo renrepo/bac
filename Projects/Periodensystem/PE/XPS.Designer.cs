@@ -246,7 +246,6 @@
             this.tb_show = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.bW_data = new System.ComponentModel.BackgroundWorker();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
@@ -3254,7 +3253,6 @@
             resources.GetString("cb_counttime.Items4")});
             resources.ApplyResources(this.cb_counttime, "cb_counttime");
             this.cb_counttime.Name = "cb_counttime";
-            this.cb_counttime.SelectedValueChanged += new System.EventHandler(this.cb_counttime_SelectedValueChanged);
             // 
             // cb_stepwidth
             // 
@@ -3270,7 +3268,6 @@
             resources.GetString("cb_stepwidth.Items6")});
             resources.ApplyResources(this.cb_stepwidth, "cb_stepwidth");
             this.cb_stepwidth.Name = "cb_stepwidth";
-            this.cb_stepwidth.SelectedValueChanged += new System.EventHandler(this.cb_stepwidth_SelectedValueChanged);
             // 
             // cb_pass
             // 
@@ -4178,7 +4175,6 @@
         private System.Windows.Forms.TextBox tb_show;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btn_clear;
-        private System.ComponentModel.BackgroundWorker bW_data;
         private System.Windows.Forms.Label lb_perc_gauss;
         private System.Windows.Forms.TextBox textBox28;
         private System.Windows.Forms.TextBox textBox29;
