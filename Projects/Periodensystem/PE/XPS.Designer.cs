@@ -445,6 +445,8 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
+            this.btn_schwelle = new System.Windows.Forms.Button();
+            this.tb_schwelle = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3753,6 +3755,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.tb_schwelle);
+            this.tabPage4.Controls.Add(this.btn_schwelle);
             this.tabPage4.Controls.Add(this.label52);
             this.tabPage4.Controls.Add(this.Hem_in);
             this.tabPage4.Controls.Add(this.tb_hem_out);
@@ -3836,6 +3840,18 @@
             // 
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
+            // 
+            // btn_schwelle
+            // 
+            resources.ApplyResources(this.btn_schwelle, "btn_schwelle");
+            this.btn_schwelle.Name = "btn_schwelle";
+            this.btn_schwelle.UseVisualStyleBackColor = true;
+            this.btn_schwelle.Click += new System.EventHandler(this.btn_schwelle_Click);
+            // 
+            // tb_schwelle
+            // 
+            resources.ApplyResources(this.tb_schwelle, "tb_schwelle");
+            this.tb_schwelle.Name = "tb_schwelle";
             // 
             // XPS
             // 
@@ -4381,6 +4397,8 @@
         private System.Windows.Forms.Label Hem_in;
         private System.Windows.Forms.TextBox tb_hem_out;
         private System.Windows.Forms.TextBox tb_hem_in;
+        private System.Windows.Forms.TextBox tb_schwelle;
+        private System.Windows.Forms.Button btn_schwelle;
     }
 }
 

@@ -90,7 +90,7 @@ namespace XPS
         double adc = 0;
 
         // Voltage setting stuff
-        double V_minus = -0.3;
+        double V_minus = -0.2;
         double schwelle = -0.02;
         double vpass;
         double vbias;
@@ -256,8 +256,8 @@ namespace XPS
                 // pressure value updates every second
                 background_meas_pressure_labjack();
                 labjack_connected = true;
-                LJM.eWriteName(handle_schwelle, "DAC0", schwelle);
-                LJM.eWriteName(handle_DAC2, "TDAC1", V_minus);
+                LJM.eWriteName(handle_schwelle, "TDAC2", schwelle);
+                LJM.eWriteName(handle_DAC2, "TDAC3", V_minus);
             }
             catch (Exception)
             {
@@ -1551,10 +1551,10 @@ namespace XPS
         {
             while (true)
             {
-               // double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
-                //LJM.eWriteName(handle_DAC2, "TDAC1", value2);
-                LJM.eWriteName(handle_schwelle, "DAC0", 0.0);
-                LJM.eWriteName(handle_schwelle, "DAC0", 0.3);
+                double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
+                LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+                //LJM.eWriteName(handle_schwelle, "TDAC2", 0.0);
+                //LJM.eWriteName(handle_schwelle, "TDAC2", 0.3);
             }
 
         }
@@ -1581,6 +1581,12 @@ namespace XPS
                 tb_hem_out.Text = (LJ_hemo*5.03054).ToString("0.000");
                 await Task.Delay(500);
             }
+        }
+
+        private void btn_schwelle_Click(object sender, EventArgs e)
+        {
+            double value2 = Convert.ToDouble(tb_schwelle.Text.Replace(",", "."));
+            LJM.eWriteName(handle_schwelle, "TDAC2", value2);
         }
     }
 }
