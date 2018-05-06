@@ -1,6 +1,6 @@
 #include <analogShield.h>
  
-float n = 4096;
+double n = 1024;
 unsigned int datar0;
 unsigned int datar1;
 unsigned int datar2;
@@ -100,10 +100,10 @@ void loop() {
       val2 += analog.read(2);
       val3 += analog.read(3);
       }
-      Serial.println(val0/n);
-      Serial.println(val1/n);
-      Serial.println(val2/n);
-      Serial.println(val3/n);
+      Serial.println(val0);
+      Serial.println(val1);
+      Serial.println(val2);
+      Serial.println(val3);
       val0 = 0;
       val1 = 0;
       val2 = 0;
