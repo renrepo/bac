@@ -22,6 +22,8 @@ using System.Diagnostics;
 using NationalInstruments.Visa;
 using LabJack;
 using Ivi.Visa;
+using ArduinoDriver;
+using ArduinoUploader;
 
 
 /***
@@ -38,14 +40,15 @@ using Ivi.Visa;
  * 
 ***/
 
+
 namespace XPS
 {
     public partial class XPS : Form
     {
+
         // IP adress Iseg-devices (ethernet connection)
         string ip_dps = "132.195.109.144";
         string ip_xray = "132.195.109.241";
-
         // General settings
         double V_photon = 21.21;            // Energiey HeI-line
         double ri = 106;                    // Radius inner hemisphere in mm
@@ -154,13 +157,20 @@ namespace XPS
         bool labjack_connected = false;
         bool take_UPS_spec = false;     // true if UPS spectra is taken
 
-
+       
 
         public XPS()
         {
             InitializeComponent();
-
-
+            var driver = new ArduinoDriver(ArduinoModel.UnoR3, true);
+            var uploader = new ArduinoSketchUploader(
+            new ArduinoSketchUploaderOptions()
+            {
+                FileName = @"C:\MyHexFiles\UnoHexFile.ino.hex",
+                PortName = "COM3",
+                ArduinoModel = ArduinoModel.UnoR3
+            });
+            uploader.UploadSketch();
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
 
@@ -1587,6 +1597,11 @@ namespace XPS
         {
             double value2 = Convert.ToDouble(tb_schwelle.Text.Replace(",", "."));
             LJM.eWriteName(handle_schwelle, "TDAC2", value2);
+        }
+
+        private void btn_ardu_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

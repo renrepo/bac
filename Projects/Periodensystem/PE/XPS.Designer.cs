@@ -433,6 +433,9 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_ardu = new System.Windows.Forms.Button();
+            this.tb_schwelle = new System.Windows.Forms.TextBox();
+            this.btn_schwelle = new System.Windows.Forms.Button();
             this.label52 = new System.Windows.Forms.Label();
             this.Hem_in = new System.Windows.Forms.Label();
             this.tb_hem_out = new System.Windows.Forms.TextBox();
@@ -445,8 +448,6 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.btn_schwelle = new System.Windows.Forms.Button();
-            this.tb_schwelle = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3755,6 +3756,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_ardu);
             this.tabPage4.Controls.Add(this.tb_schwelle);
             this.tabPage4.Controls.Add(this.btn_schwelle);
             this.tabPage4.Controls.Add(this.label52);
@@ -3772,6 +3774,25 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_ardu
+            // 
+            resources.ApplyResources(this.btn_ardu, "btn_ardu");
+            this.btn_ardu.Name = "btn_ardu";
+            this.btn_ardu.UseVisualStyleBackColor = true;
+            this.btn_ardu.Click += new System.EventHandler(this.btn_ardu_Click);
+            // 
+            // tb_schwelle
+            // 
+            resources.ApplyResources(this.tb_schwelle, "tb_schwelle");
+            this.tb_schwelle.Name = "tb_schwelle";
+            // 
+            // btn_schwelle
+            // 
+            resources.ApplyResources(this.btn_schwelle, "btn_schwelle");
+            this.btn_schwelle.Name = "btn_schwelle";
+            this.btn_schwelle.UseVisualStyleBackColor = true;
+            this.btn_schwelle.Click += new System.EventHandler(this.btn_schwelle_Click);
             // 
             // label52
             // 
@@ -3840,18 +3861,6 @@
             // 
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
-            // 
-            // btn_schwelle
-            // 
-            resources.ApplyResources(this.btn_schwelle, "btn_schwelle");
-            this.btn_schwelle.Name = "btn_schwelle";
-            this.btn_schwelle.UseVisualStyleBackColor = true;
-            this.btn_schwelle.Click += new System.EventHandler(this.btn_schwelle_Click);
-            // 
-            // tb_schwelle
-            // 
-            resources.ApplyResources(this.tb_schwelle, "tb_schwelle");
-            this.tb_schwelle.Name = "tb_schwelle";
             // 
             // XPS
             // 
@@ -4399,6 +4408,7 @@
         private System.Windows.Forms.TextBox tb_hem_in;
         private System.Windows.Forms.TextBox tb_schwelle;
         private System.Windows.Forms.Button btn_schwelle;
+        private System.Windows.Forms.Button btn_ardu;
     }
 }
 
