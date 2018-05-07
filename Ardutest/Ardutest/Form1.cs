@@ -37,7 +37,7 @@ namespace Ardutest
             InitializeComponent();
             myport = new SerialPort();
             myport.BaudRate = 115200;
-            myport.PortName = "COM3";
+            myport.PortName = "COM6";
 
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -53,7 +53,7 @@ namespace Ardutest
             new ArduinoSketchUploaderOptions()
             {
                 FileName = @"C:\Users\Rene\Desktop\testsketch.ino",
-                PortName = "COM3",
+                PortName = "COM6",
                 ArduinoModel = ArduinoUploader.Hardware.ArduinoModel.UnoR3
             });
 
@@ -74,7 +74,7 @@ namespace Ardutest
 
         private void button1_Click(object sender, EventArgs e)
         {
-            double n = 1024;
+            double n = 16;
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "1024" + "\\"));

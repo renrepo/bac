@@ -1,6 +1,6 @@
 #include <analogShield.h>
  
-double n = 1024;
+double n = 16;
 unsigned int datar0;
 unsigned int datar1;
 unsigned int datar2;

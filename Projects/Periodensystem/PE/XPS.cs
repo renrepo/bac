@@ -162,15 +162,6 @@ namespace XPS
         public XPS()
         {
             InitializeComponent();
-            var driver = new ArduinoDriver(ArduinoModel.UnoR3, true);
-            var uploader = new ArduinoSketchUploader(
-            new ArduinoSketchUploaderOptions()
-            {
-                FileName = @"C:\MyHexFiles\UnoHexFile.ino.hex",
-                PortName = "COM3",
-                ArduinoModel = ArduinoModel.UnoR3
-            });
-            uploader.UploadSketch();
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
 
