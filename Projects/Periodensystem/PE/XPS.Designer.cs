@@ -448,6 +448,7 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
+            this.btn_st = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3756,6 +3757,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_st);
             this.tabPage4.Controls.Add(this.btn_ardu);
             this.tabPage4.Controls.Add(this.tb_schwelle);
             this.tabPage4.Controls.Add(this.btn_schwelle);
@@ -3861,6 +3863,13 @@
             // 
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
+            // 
+            // btn_st
+            // 
+            resources.ApplyResources(this.btn_st, "btn_st");
+            this.btn_st.Name = "btn_st";
+            this.btn_st.UseVisualStyleBackColor = true;
+            this.btn_st.Click += new System.EventHandler(this.btn_st_Click);
             // 
             // XPS
             // 
@@ -4409,6 +4418,7 @@
         private System.Windows.Forms.TextBox tb_schwelle;
         private System.Windows.Forms.Button btn_schwelle;
         private System.Windows.Forms.Button btn_ardu;
+        private System.Windows.Forms.Button btn_st;
     }
 }
 

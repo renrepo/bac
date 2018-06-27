@@ -257,8 +257,8 @@ namespace XPS
                 // pressure value updates every second
                 background_meas_pressure_labjack();
                 labjack_connected = true;
-                LJM.eWriteName(handle_schwelle, "TDAC2", schwelle);
-                LJM.eWriteName(handle_DAC2, "TDAC3", V_minus);
+               //  LJM.eWriteName(handle_schwelle, "TDAC2", schwelle);
+               // LJM.eWriteName(handle_DAC2, "TDAC3", V_minus);
             }
             catch (Exception)
             {
@@ -1544,8 +1544,8 @@ namespace XPS
         private void btn_dac_Click(object sender, EventArgs e)
         {
             double value = Convert.ToDouble(tb_dac.Text.Replace(",","."));
-            LJM.eWriteName(handle_DAC, "TDAC0", value);
-            LJM.eWriteName(handle_DAC, "DAC0", 1.000);
+           // LJM.eWriteName(handle_DAC, "TDAC0", value);
+            LJM.eWriteName(handle_DAC, "DAC0", value);
         }
 
         private async void btn_ref_Click(object sender, EventArgs e)
@@ -1593,6 +1593,51 @@ namespace XPS
         private void btn_ardu_Click(object sender, EventArgs e)
         {
            
+        }
+
+
+        Stopwatch sw = new Stopwatch();
+        string name = "200ms4";
+        int sleeptime = 200;
+
+
+        private void btn_st_Click(object sender, EventArgs e)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "2MHz" + "\\"));
+            string path_logfile = dl.FullName;
+
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            {
+                file.WriteLine(
+                    "#counts" + "\n"
+                    );
+            }
+
+            double erg = 0;
+            double time = 0;
+
+            for (int i = 0; i < 10000; i++)
+            {
+                LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                sw.Start();
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                Thread.Sleep(sleeptime);
+                sw.Stop();
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                time = sw.Elapsed.TotalSeconds;
+                erg = (cnt_after - cnt_before) / time;
+                //erg = i;
+                sw.Reset();
+                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                {
+                    file.WriteLine(
+                        erg.ToString("0000000") + "\t" +
+                        time.ToString("0.000000") + "\n"
+                        );
+                }
+            }
         }
     }
 }
