@@ -1,6 +1,6 @@
 #include <analogShield.h>
  
-double n = 16;
+double n = 4;
 unsigned int datar0;
 unsigned int datar1;
 unsigned int datar2;
@@ -28,10 +28,10 @@ void loop() {
   {  
     case 'O': 
     {
-      unsigned int data0 = 65000;
-      unsigned int data1 = 65000;
-      unsigned int data2 = 65000;
-      unsigned int data3 = 65000;
+      unsigned int data0 = 0;
+      unsigned int data1 = 30000;
+      unsigned int data2 = 45000;
+      unsigned int data3 = 60000;
       analog.write(data0,data1,data2,data3,true);
       break; 
     } 

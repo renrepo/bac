@@ -147,6 +147,7 @@ namespace XPS
         private CancellationTokenSource _cts_volt_dps;           // Cancellation of Iseg DPS voltage background measurement 
         private CancellationTokenSource _cts_counter_labjack;           // Cancellation of Labjack Counter background measurement 
         private CancellationTokenSource _cts_UPS;           // Cancellation of UPS spectra
+        private CancellationTokenSource _cts_voltagemonitor;
         private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
@@ -733,7 +734,7 @@ namespace XPS
                         await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
                         await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
                         await write_to_Iseg("*RST\n", "DPS");
-                        //await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp),"DPS");
+                        await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.05),"DPS"); ///////////////////////////////////////////////////////////////////////rampe
                         for (int i = 0; i < 6; i++)
                         {
                             reset[i].Enabled = true;
@@ -1560,11 +1561,100 @@ namespace XPS
 
         }
 
-        private void btn_read_adc2_Click(object sender, EventArgs e)
+
+        private void btn_stop_adc_Click(object sender, EventArgs e)
         {
-            LJM.eReadName(handle_adc, "AIN3", ref adc);
-            tb_adc2.Text = adc.ToString("0.000");
+            if (_cts_voltagemonitor != null)
+            {
+                _cts_voltagemonitor.Cancel();
+            }
         }
+
+
+        private async void btn_read_adc2_Click(object sender, EventArgs e)
+        {
+            LJM.eWriteName(handle_adc, "AIN2_RESOLUTION_INDEX",8);
+            Thread.Sleep(10);
+            double adc_cum = 0;
+            double time = 0;
+            double erg = 0;
+            int j = 0;
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "voltagemonitor" + "\\"));
+            string path_logfile = dl.FullName;
+
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            {
+                file.WriteLine(
+                    "#Voltage" + "\t" + "time[ms]" + "\n"
+                    );
+            }
+
+            _cts_voltagemonitor = new CancellationTokenSource();
+            var token = _cts_voltagemonitor.Token;
+            var progressHandler = new Progress<string>(value =>
+            {
+                tb_adc2.Text = value;
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
+            {
+                int ct = int.Parse(tb_counter_ms.Text);
+                Stopwatch sw = new Stopwatch();
+                cb_counter.Text = "On";
+                cb_counter.BackColor = Color.LightGreen;
+                tb_counter_ms.ReadOnly = true;
+                await Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        adc_cum = 0;
+                        sw.Start();
+                        while(j < 4)
+                        {
+                            LJM.eReadName(handle_adc, "AIN2", ref adc);
+                            adc_cum += adc;
+                            j += 1;
+                        }
+                        j = 0;
+                        //tb_adc2.Text = (adc_cum * 56.55 / 4).ToString("0.000");
+                        //sw.Stop();
+                        //time = sw.Elapsed.TotalSeconds;
+                        time = sw.Elapsed.Milliseconds;
+                        //sw.Reset();
+                        erg = adc_cum * 56.55 / 4;
+                        using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                        {
+                            file.WriteLine(
+                                erg.ToString("0000.00") + "\t" +
+                                time.ToString("0000.0000") + "\n"
+                                );
+                        }
+                        if (progress != null)
+                        {
+                            //progress.Report(erg.ToString("0000.00"));
+                            progress.Report(time.ToString("00.00"));
+                            token.ThrowIfCancellationRequested();
+                        }
+                        sw.Reset();
+                    }
+                });
+                //MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
+                tb_adc2.Text = String.Empty;
+                sw.Stop();
+                sw.Reset();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer");
+            }
+        }
+
 
         private async void btn_rampe_Click(object sender, EventArgs e)
         {
@@ -1597,7 +1687,7 @@ namespace XPS
 
 
         Stopwatch sw = new Stopwatch();
-        string name = "200ms4";
+        string name = "test";
         int sleeptime = 200;
 
 
@@ -1639,6 +1729,8 @@ namespace XPS
                 }
             }
         }
+
+        
     }
 }
 

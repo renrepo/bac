@@ -72,9 +72,9 @@ namespace Ardutest
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_read_adc_Click(object sender, EventArgs e)
         {
-            double n = 16;
+            double n = 4;
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "1024" + "\\"));
@@ -93,35 +93,34 @@ namespace Ardutest
             double time = 0;
             myport.Open();
 
-            for (int i = 0; i < 10000; i++)
+            
+            sw.Start();
+            myport.WriteLine("a");
+            read = Convert.ToDouble(myport.ReadLine());
+            read1 = Convert.ToDouble(myport.ReadLine());
+            read2 = Convert.ToDouble(myport.ReadLine());
+            read3 = Convert.ToDouble(myport.ReadLine());
+            time = sw.Elapsed.TotalMilliseconds;
+
+
+
+            textBox2.Text = time.ToString();
+            textBox1.Text = (read / n/ 655.35).ToString();
+            textBox3.Text = (read1 / n/ 655.35).ToString();
+            textBox4.Text = (read2 / n/ 655.35).ToString();
+            textBox5.Text = (read3 / n/ 655.35).ToString();
+            sw.Reset();
+            using (var file = new StreamWriter(path_logfile + n + ".txt", true))
             {
-                sw.Start();
-                myport.WriteLine("a");
-                read = Convert.ToDouble(myport.ReadLine());
-                read1 = Convert.ToDouble(myport.ReadLine());
-                read2 = Convert.ToDouble(myport.ReadLine());
-                read3 = Convert.ToDouble(myport.ReadLine());
-                time = sw.Elapsed.TotalMilliseconds;
-
-
-
-                textBox2.Text = time.ToString();
-                textBox1.Text = (read / n).ToString();
-                textBox3.Text = (read1 / n).ToString();
-                textBox4.Text = (read2 / n).ToString();
-                textBox5.Text = (read3 / n).ToString();
-                sw.Reset();
-                using (var file = new StreamWriter(path_logfile + n + ".txt", true))
-                {
-                    file.WriteLine(
-                        (read / n).ToString("00000.0000") + "\t" +
-                        (read1 / n).ToString("00000.0000") + "\t" +
-                        (read2 / n).ToString("00000.0000") + "\t" +
-                        (read3 / n).ToString("00000.0000") + "\t" +
-                        (time*1000).ToString("000000") + "\t"
-                        );
-                }
+                file.WriteLine(
+                    (read / n).ToString("00000.0000") + "\t" +
+                    (read1 / n).ToString("00000.0000") + "\t" +
+                    (read2 / n).ToString("00000.0000") + "\t" +
+                    (read3 / n).ToString("00000.0000") + "\t" +
+                    (time*1000).ToString("000000") + "\t"
+                    );
             }
+            
             myport.Close();
         }
     }

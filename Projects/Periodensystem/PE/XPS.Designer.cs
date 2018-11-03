@@ -433,6 +433,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_st = new System.Windows.Forms.Button();
             this.btn_ardu = new System.Windows.Forms.Button();
             this.tb_schwelle = new System.Windows.Forms.TextBox();
             this.btn_schwelle = new System.Windows.Forms.Button();
@@ -448,7 +449,7 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.btn_st = new System.Windows.Forms.Button();
+            this.btn_stop_adc = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3757,6 +3758,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_stop_adc);
             this.tabPage4.Controls.Add(this.btn_st);
             this.tabPage4.Controls.Add(this.btn_ardu);
             this.tabPage4.Controls.Add(this.tb_schwelle);
@@ -3776,6 +3778,13 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_st
+            // 
+            resources.ApplyResources(this.btn_st, "btn_st");
+            this.btn_st.Name = "btn_st";
+            this.btn_st.UseVisualStyleBackColor = true;
+            this.btn_st.Click += new System.EventHandler(this.btn_st_Click);
             // 
             // btn_ardu
             // 
@@ -3864,12 +3873,12 @@
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
             // 
-            // btn_st
+            // btn_stop_adc
             // 
-            resources.ApplyResources(this.btn_st, "btn_st");
-            this.btn_st.Name = "btn_st";
-            this.btn_st.UseVisualStyleBackColor = true;
-            this.btn_st.Click += new System.EventHandler(this.btn_st_Click);
+            resources.ApplyResources(this.btn_stop_adc, "btn_stop_adc");
+            this.btn_stop_adc.Name = "btn_stop_adc";
+            this.btn_stop_adc.UseVisualStyleBackColor = true;
+            this.btn_stop_adc.Click += new System.EventHandler(this.btn_stop_adc_Click);
             // 
             // XPS
             // 
@@ -4419,6 +4428,7 @@
         private System.Windows.Forms.Button btn_schwelle;
         private System.Windows.Forms.Button btn_ardu;
         private System.Windows.Forms.Button btn_st;
+        private System.Windows.Forms.Button btn_stop_adc;
     }
 }
 
