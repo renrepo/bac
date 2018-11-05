@@ -247,13 +247,10 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_clear = new System.Windows.Forms.Button();
             this.lb_perc_gauss = new System.Windows.Forms.Label();
-            this.label88 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.tb_slope = new System.Windows.Forms.TextBox();
             this.label78 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.fig_name = new System.Windows.Forms.TextBox();
             this.showdata = new System.Windows.Forms.Button();
@@ -387,6 +384,30 @@
             this.label104 = new System.Windows.Forms.Label();
             this.label105 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.cb_select = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label51 = new System.Windows.Forms.Label();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.textBox36 = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBox37 = new System.Windows.Forms.TextBox();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.textBox39 = new System.Windows.Forms.TextBox();
+            this.label110 = new System.Windows.Forms.Label();
+            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.label84 = new System.Windows.Forms.Label();
+            this.textBox41 = new System.Windows.Forms.TextBox();
+            this.textBox42 = new System.Windows.Forms.TextBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.label106 = new System.Windows.Forms.Label();
+            this.label108 = new System.Windows.Forms.Label();
+            this.label109 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
@@ -433,6 +454,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_stop_adc = new System.Windows.Forms.Button();
             this.btn_st = new System.Windows.Forms.Button();
             this.btn_ardu = new System.Windows.Forms.Button();
             this.tb_schwelle = new System.Windows.Forms.TextBox();
@@ -449,7 +471,7 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
-            this.btn_stop_adc = new System.Windows.Forms.Button();
+            this.btn_test_XPS = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -461,6 +483,11 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -2292,11 +2319,6 @@
             resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
             this.lb_perc_gauss.Name = "lb_perc_gauss";
             // 
-            // label88
-            // 
-            resources.ApplyResources(this.label88, "label88");
-            this.label88.Name = "label88";
-            // 
             // label86
             // 
             resources.ApplyResources(this.label86, "label86");
@@ -2312,21 +2334,10 @@
             resources.ApplyResources(this.label83, "label83");
             this.label83.Name = "label83";
             // 
-            // tb_slope
-            // 
-            resources.ApplyResources(this.tb_slope, "tb_slope");
-            this.tb_slope.Name = "tb_slope";
-            this.tb_slope.ReadOnly = true;
-            // 
             // label78
             // 
             resources.ApplyResources(this.label78, "label78");
             this.label78.Name = "label78";
-            // 
-            // label77
-            // 
-            resources.ApplyResources(this.label77, "label77");
-            this.label77.Name = "label77";
             // 
             // label76
             // 
@@ -3106,6 +3117,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
@@ -3182,6 +3194,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cb_select);
             this.groupBox2.Controls.Add(this.cb_v_lens);
             this.groupBox2.Controls.Add(this.cb_bias);
             this.groupBox2.Controls.Add(this.cb_counttime);
@@ -3189,7 +3202,6 @@
             this.groupBox2.Controls.Add(this.cb_pass);
             this.groupBox2.Controls.Add(this.label75);
             this.groupBox2.Controls.Add(this.label82);
-            this.groupBox2.Controls.Add(this.tb_slope);
             this.groupBox2.Controls.Add(this.label74);
             this.groupBox2.Controls.Add(this.label79);
             this.groupBox2.Controls.Add(this.label73);
@@ -3198,8 +3210,6 @@
             this.groupBox2.Controls.Add(this.label86);
             this.groupBox2.Controls.Add(this.label76);
             this.groupBox2.Controls.Add(this.label85);
-            this.groupBox2.Controls.Add(this.label88);
-            this.groupBox2.Controls.Add(this.label77);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
@@ -3418,6 +3428,176 @@
             // 
             resources.ApplyResources(this.label107, "label107");
             this.label107.Name = "label107";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.tableLayoutPanel5);
+            this.tabPage5.Controls.Add(this.groupBox6);
+            this.tabPage5.Controls.Add(this.groupBox7);
+            resources.ApplyResources(this.tabPage5, "tabPage5");
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // cb_select
+            // 
+            this.cb_select.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cb_select.Items.AddRange(new object[] {
+            resources.GetString("cb_select.Items"),
+            resources.GetString("cb_select.Items1"),
+            resources.GetString("cb_select.Items2")});
+            resources.ApplyResources(this.cb_select, "cb_select");
+            this.cb_select.Name = "cb_select";
+            this.cb_select.SelectedIndexChanged += new System.EventHandler(this.cb_select_SelectedIndexChanged);
+            // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.checkBox1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.checkBox2, 0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.BackColor = System.Drawing.Color.Silver;
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = false;
+            // 
+            // checkBox2
+            // 
+            resources.ApplyResources(this.checkBox2, "checkBox2");
+            this.checkBox2.BackColor = System.Drawing.Color.Silver;
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.UseVisualStyleBackColor = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label51);
+            this.groupBox6.Controls.Add(this.checkBox3);
+            this.groupBox6.Controls.Add(this.textBox35);
+            this.groupBox6.Controls.Add(this.textBox36);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // label51
+            // 
+            resources.ApplyResources(this.label51, "label51");
+            this.label51.Name = "label51";
+            // 
+            // checkBox3
+            // 
+            resources.ApplyResources(this.checkBox3, "checkBox3");
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // textBox35
+            // 
+            resources.ApplyResources(this.textBox35, "textBox35");
+            this.textBox35.Name = "textBox35";
+            // 
+            // textBox36
+            // 
+            this.textBox36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox36, "textBox36");
+            this.textBox36.Name = "textBox36";
+            this.textBox36.ReadOnly = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.tableLayoutPanel6);
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
+            // tableLayoutPanel6
+            // 
+            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+            this.tableLayoutPanel6.Controls.Add(this.textBox37, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.textBox38, 1, 5);
+            this.tableLayoutPanel6.Controls.Add(this.textBox39, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label110, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.textBox40, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label84, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.textBox41, 1, 3);
+            this.tableLayoutPanel6.Controls.Add(this.textBox42, 1, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label87, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label106, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label108, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label109, 0, 3);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            // 
+            // textBox37
+            // 
+            this.textBox37.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox37, "textBox37");
+            this.textBox37.Name = "textBox37";
+            this.textBox37.ReadOnly = true;
+            // 
+            // textBox38
+            // 
+            this.textBox38.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox38, "textBox38");
+            this.textBox38.Name = "textBox38";
+            this.textBox38.ReadOnly = true;
+            // 
+            // textBox39
+            // 
+            this.textBox39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox39, "textBox39");
+            this.textBox39.Name = "textBox39";
+            this.textBox39.ReadOnly = true;
+            // 
+            // label110
+            // 
+            resources.ApplyResources(this.label110, "label110");
+            this.label110.Name = "label110";
+            // 
+            // textBox40
+            // 
+            this.textBox40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox40, "textBox40");
+            this.textBox40.Name = "textBox40";
+            this.textBox40.ReadOnly = true;
+            // 
+            // label84
+            // 
+            resources.ApplyResources(this.label84, "label84");
+            this.label84.Name = "label84";
+            // 
+            // textBox41
+            // 
+            this.textBox41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox41, "textBox41");
+            this.textBox41.Name = "textBox41";
+            this.textBox41.ReadOnly = true;
+            // 
+            // textBox42
+            // 
+            this.textBox42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.textBox42, "textBox42");
+            this.textBox42.Name = "textBox42";
+            this.textBox42.ReadOnly = true;
+            // 
+            // label87
+            // 
+            resources.ApplyResources(this.label87, "label87");
+            this.label87.Name = "label87";
+            // 
+            // label106
+            // 
+            resources.ApplyResources(this.label106, "label106");
+            this.label106.Name = "label106";
+            // 
+            // label108
+            // 
+            resources.ApplyResources(this.label108, "label108");
+            this.label108.Name = "label108";
+            // 
+            // label109
+            // 
+            resources.ApplyResources(this.label109, "label109");
+            this.label109.Name = "label109";
             // 
             // tabPage2
             // 
@@ -3779,6 +3959,13 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // btn_stop_adc
+            // 
+            resources.ApplyResources(this.btn_stop_adc, "btn_stop_adc");
+            this.btn_stop_adc.Name = "btn_stop_adc";
+            this.btn_stop_adc.UseVisualStyleBackColor = true;
+            this.btn_stop_adc.Click += new System.EventHandler(this.btn_stop_adc_Click);
+            // 
             // btn_st
             // 
             resources.ApplyResources(this.btn_st, "btn_st");
@@ -3873,17 +4060,18 @@
             resources.ApplyResources(this.tb_ref, "tb_ref");
             this.tb_ref.Name = "tb_ref";
             // 
-            // btn_stop_adc
+            // btn_test_XPS
             // 
-            resources.ApplyResources(this.btn_stop_adc, "btn_stop_adc");
-            this.btn_stop_adc.Name = "btn_stop_adc";
-            this.btn_stop_adc.UseVisualStyleBackColor = true;
-            this.btn_stop_adc.Click += new System.EventHandler(this.btn_stop_adc_Click);
+            resources.ApplyResources(this.btn_test_XPS, "btn_test_XPS");
+            this.btn_test_XPS.Name = "btn_test_XPS";
+            this.btn_test_XPS.UseVisualStyleBackColor = true;
+            this.btn_test_XPS.Click += new System.EventHandler(this.btn_test_XPS_Click);
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_test_XPS);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -3995,6 +4183,14 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -4226,11 +4422,8 @@
         private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.TextBox textBox34;
-        private System.Windows.Forms.TextBox tb_slope;
         private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.Label label88;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.Label label85;
         private System.Windows.Forms.Label label83;
@@ -4429,6 +4622,31 @@
         private System.Windows.Forms.Button btn_ardu;
         private System.Windows.Forms.Button btn_st;
         private System.Windows.Forms.Button btn_stop_adc;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.TextBox textBox36;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TextBox textBox37;
+        private System.Windows.Forms.TextBox textBox38;
+        private System.Windows.Forms.TextBox textBox39;
+        private System.Windows.Forms.Label label110;
+        private System.Windows.Forms.TextBox textBox40;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.TextBox textBox41;
+        private System.Windows.Forms.TextBox textBox42;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label label106;
+        private System.Windows.Forms.Label label108;
+        private System.Windows.Forms.Label label109;
+        private System.Windows.Forms.ComboBox cb_select;
+        private System.Windows.Forms.Button btn_test_XPS;
     }
 }
 
