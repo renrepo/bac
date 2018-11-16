@@ -81,7 +81,6 @@ C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\bin\Debug\System.Threading.ThreadPoo
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\bin\Debug\NLog.xml
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\bin\Debug\RJCP.SerialPortStream.pdb
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\bin\Debug\RJCP.SerialPortStream.xml
-C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.csprojResolveAssemblyReference.cache
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.Form1.resources
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.Properties.Resources.resources
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.csproj.GenerateResource.cache
@@ -89,3 +88,4 @@ C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.csproj.CoreCompil
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.csproj.CopyComplete
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.exe
 C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.pdb
+C:\Users\Rene\Desktop\bac\Ardutest\Ardutest\obj\Debug\Ardutest.csprojAssemblyReference.cache

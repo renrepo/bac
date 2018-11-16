@@ -360,6 +360,7 @@
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_select = new System.Windows.Forms.ComboBox();
             this.cb_v_lens = new System.Windows.Forms.ComboBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
             this.cb_counttime = new System.Windows.Forms.ComboBox();
@@ -385,7 +386,6 @@
             this.label105 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.cb_select = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -3214,6 +3214,17 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // cb_select
+            // 
+            this.cb_select.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.cb_select.Items.AddRange(new object[] {
+            resources.GetString("cb_select.Items"),
+            resources.GetString("cb_select.Items1"),
+            resources.GetString("cb_select.Items2")});
+            resources.ApplyResources(this.cb_select, "cb_select");
+            this.cb_select.Name = "cb_select";
+            this.cb_select.SelectedIndexChanged += new System.EventHandler(this.cb_select_SelectedIndexChanged);
+            // 
             // cb_v_lens
             // 
             this.cb_v_lens.BackColor = System.Drawing.SystemColors.Window;
@@ -3437,17 +3448,6 @@
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // cb_select
-            // 
-            this.cb_select.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.cb_select.Items.AddRange(new object[] {
-            resources.GetString("cb_select.Items"),
-            resources.GetString("cb_select.Items1"),
-            resources.GetString("cb_select.Items2")});
-            resources.ApplyResources(this.cb_select, "cb_select");
-            this.cb_select.Name = "cb_select";
-            this.cb_select.SelectedIndexChanged += new System.EventHandler(this.cb_select_SelectedIndexChanged);
             // 
             // tableLayoutPanel5
             // 

@@ -54,10 +54,10 @@ namespace XPS
         double E_HeI = 21.21;               // Energy HeI-line
         double E_Al_Ka = 1486.7;            // Energy Al K_alpha photon
         double E_Mg_Ka = 1253.6;            // Energy Mg K_alpha photon
-        //double ri = 106;                    // Radius inner hemisphere in mm
-        double ri = 92.075;
-        //double ra = 112;                    // Radius outer hemisphere in mm
-        double ra = 111.125;
+        double ri = 109-10;                    // Radius inner hemisphere in mm
+        //double ri = 92.075;
+        double ra = 109+10;                    // Radius outer hemisphere in mm
+        //double ra = 111.125;
         double deviation = 0.001;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
         string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
@@ -81,7 +81,8 @@ namespace XPS
         int handle_DAC2 = 0;
         int handle_V_minus = 0;
         int handle_schwelle = 0;
-        int handle_adc = 0;
+        int handle_adc1 = 0;
+        int handle_adc2 = 0;
         double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
         double cnt_before = 0;              // coutner reading befor and after delay
         double cnt_after = 0;
@@ -94,7 +95,9 @@ namespace XPS
         double LJ_hemi2 = 0;
         double LJ_hemo2 = 0;
         double LJ_lens2 = 0;
-        double adc = 0;
+        double adc1 = 0;
+        double adc2 = 0;
+        double v_zdiode = 10;               //selected z-diode
 
         // Voltage setting stuff
         double V_minus = -0.2;
@@ -257,7 +260,8 @@ namespace XPS
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC2);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc1);
+                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc2);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_schwelle);
                 LJM.OpenS("ANY", "ANY", "ANY", ref handle_V_minus);
 
@@ -403,13 +407,13 @@ namespace XPS
             Button b = sender as Button;
             int chanel = Convert.ToInt16(b.Tag);
             bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(",","."), out decimal vset_in);
-            vset[chanel].Text = vset_in.ToString("0.000"); //necessary because otherwise "vset_in" would bei "20\r\n40" if first 20 and then 40 typed in
+            vset[chanel].Text = vset_in.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture); //necessary because otherwise "vset_in" would bei "20\r\n40" if first 20 and then 40 typed in
             if (Vset)
             {
                 try
                 {
                     _suspend_background_measurement.Reset();
-                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), chanel), "DPS"); // 3 decimal places
+                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.0"), chanel), "DPS"); // 1 decimal places
                     _suspend_background_measurement.Set();
                 }
                 catch (Exception)
@@ -443,7 +447,7 @@ namespace XPS
             int chanel = Convert.ToInt16(r.Tag);
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", chanel), "DPS");
-            await write_to_Iseg(String.Format(":VOLT 0.000,(@{0})\n", chanel), "DPS");        
+            await write_to_Iseg(String.Format(":VOLT 0.0,(@{0})\n", chanel), "DPS");        
             _suspend_background_measurement.Set();
             vset[chanel].Text = string.Empty;
             vmeas[chanel].Text = string.Empty;
@@ -741,7 +745,7 @@ namespace XPS
                         await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
                         await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
                         await write_to_Iseg("*RST\n", "DPS");
-                        await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.05),"DPS"); ///////////////////////////////////////////////////////////////////////rampe
+                        await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.1),"DPS"); ///////////////////////////////////////////////////////////////////////rampe
                         for (int i = 0; i < 6; i++)
                         {
                             reset[i].Enabled = true;
@@ -1214,10 +1218,10 @@ namespace XPS
             for (int i = 0; i <= 5; i++)
             {
                 bool Vset = Decimal.TryParse(vset[i].Text.Replace(',', '.'), out decimal vset_in);
-                vset[i].Text = vset_in.ToString("0.000");
+                vset[i].Text = vset_in.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
                 if (Vset)
                 {
-                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.000"), i), "DPS"); // 3 decimal places              
+                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.0"), i), "DPS"); // 3 decimal places              
                 }
 
                 else
@@ -1304,7 +1308,7 @@ namespace XPS
             int i = -1;
             var progressHandler2 = new Progress<string>(value =>
             {
-                vmeas[result].Text = value;
+                vmeas[result].Text = value.Substring(0,7);
 
                 if (take_UPS_spec && result == 4)
                 {
@@ -1581,21 +1585,24 @@ namespace XPS
 
         private async void btn_read_adc2_Click(object sender, EventArgs e)
         {
-            LJM.eWriteName(handle_adc, "AIN2_RESOLUTION_INDEX",8);
+            LJM.eWriteName(handle_adc1, "AIN2_RESOLUTION_INDEX",8);
+            LJM.eWriteName(handle_adc2, "AIN0_RESOLUTION_INDEX", 8);
             Thread.Sleep(10);
-            double adc_cum = 0;
+            double adc_cum_1 = 0;
+            double adc_cum_2 = 0;
             double time = 0;
-            double erg = 0;
+            double erg1 = 0; // Hemo
+            double erg2 = 0; // Hemi
             int j = 0;
 
             string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "voltagemonitor" + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "ADC" + "\\"));
             string path_logfile = dl.FullName;
 
             using (var file = new StreamWriter(path_logfile + name + ".txt", true))
             {
                 file.WriteLine(
-                    "#Voltage" + "\t" + "time[ms]" + "\n"
+                    "#Hemo" + "\t" + "Hemi" + "\t" + "Diff" + "\t" + "time[ms]" + "\n"
                     );
             }
 
@@ -1617,32 +1624,39 @@ namespace XPS
                 {
                     while (true)
                     {
-                        adc_cum = 0;
+                        adc_cum_1 = 0;
+                        adc_cum_2 = 0;
                         sw.Start();
                         while(j < 4)
                         {
-                            LJM.eReadName(handle_adc, "AIN2", ref adc);
-                            adc_cum += adc;
+                            LJM.eReadName(handle_adc1, "AIN2", ref adc1);
+                            LJM.eReadName(handle_adc2, "AIN0", ref adc2);
+                            adc_cum_1 += adc1;
+                            adc_cum_2 += adc2;
                             j += 1;
                         }
                         j = 0;
                         //tb_adc2.Text = (adc_cum * 56.55 / 4).ToString("0.000");
                         //sw.Stop();
-                        //time = sw.Elapsed.TotalSeconds;
-                        time = sw.Elapsed.Milliseconds;
+                        time = sw.Elapsed.TotalSeconds;
+                        //time = sw.Elapsed.Milliseconds;
                         //sw.Reset();
-                        erg = adc_cum * 56.55 / 4;
+                        //erg = adc_cum * 152.4 / 4;
+                        erg1 = adc_cum_1 * 153.05 / 4;
+                        erg2 = adc_cum_2 * 153.11 / 4;
                         using (var file = new StreamWriter(path_logfile + name + ".txt", true))
                         {
                             file.WriteLine(
-                                erg.ToString("0000.00") + "\t" +
+                                erg1.ToString("0000.00") + "\t" +
+                                erg2.ToString("0000.00") + "\t" +
+                                (erg2-erg1).ToString("00.000") + "\t" +
                                 time.ToString("0000.0000") + "\n"
                                 );
                         }
                         if (progress != null)
                         {
                             //progress.Report(erg.ToString("0000.00"));
-                            progress.Report(time.ToString("00.00"));
+                            progress.Report(erg1.ToString("0000.0"));
                             token.ThrowIfCancellationRequested();
                         }
                         sw.Reset();
@@ -1780,10 +1794,10 @@ namespace XPS
             var progressHandler = new Progress<string>(value =>
             {
                 tb_counter.Text = value;
-                vm1.Text = v_hemi.ToString("0.000");
-                vm2.Text = v_hemo.ToString("0.000");
+                vm1.Text = v_hemi.ToString("0.0");
+                vm2.Text = v_hemo.ToString("0.0");
                 //vm3.Text = (LJ_lens2 / 3).ToString("0.000");
-                vm4.Text = v_analyser.ToString("0.000");
+                vm4.Text = v_analyser.ToString("0.0");
                 //vm5.Text = v_channeltron_out_min.ToString("0.000");
                 values_to_plot.Add(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
                 myCurve.AddPoint(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
@@ -1799,7 +1813,6 @@ namespace XPS
             //vstepsize = Convert.ToDouble(cb_stepwidth.SelectedItem);
             tcount = Convert.ToDouble(cb_counttime.SelectedItem);
             vLens = Convert.ToDouble(cb_v_lens.SelectedItem);
-            double v_zdiode = 10;
 
             btn_can.Enabled = true;
 
@@ -1830,7 +1843,7 @@ namespace XPS
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("" + Environment.NewLine);
-                file.WriteLine("#E_k \t cps \t Ana \t Hemi \t Hemo \t EP \t Mt \t 0.4 \t corr");
+                file.WriteLine("#E_k \t cps \t Ana \t Hemi \t Hemo \t EP \t Mt");
                 file.WriteLine("" + Environment.NewLine);
             }
 
@@ -1860,7 +1873,7 @@ namespace XPS
 
             // set initial voltages (roughly)
             _suspend_background_measurement.Reset();
-            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 1.0), "DPS");
+            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 10), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000")), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@3)\n", v_stabi_min.ToString("0.000")), "DPS");
@@ -1869,7 +1882,7 @@ namespace XPS
             await write_to_Iseg(String.Format(":VOLT ON,(@3)\n"), "DPS");
             _suspend_background_measurement.Set();
 
-            Thread.Sleep(20);
+            await Task.Delay(10000);
             
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.05), "DPS");
@@ -1905,7 +1918,7 @@ namespace XPS
                 _suspend_background_measurement.Set();
        
                 LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                v_hemo = LJ_hemo * 150;
+                v_hemo = LJ_hemo * 159.8;
 
                 await Task.Run(() =>
                 {
@@ -1918,15 +1931,15 @@ namespace XPS
                         while (num_meas < 4)
                         {
                             LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                            integrated_LJ_hemo += LJ_hemo * 150;
+                            integrated_LJ_hemo += LJ_hemo * 159.8;
                             ++num_meas;
                         }
 
-                        sw.Start();
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
+                        sw.Start(); // start/stop stopwatch before or after Labjack-readout!
                         sc = intcounter;
                         v_hemo = (integrated_LJ_hemo + LJ_old)/ (2*num_meas);
-                        v_hemi = v_hemo - v_zdiode;
+                        v_hemi = v_hemo + v_zdiode;
                         E_pass = v_zdiode / k;
                         v_analyser = v_hemo + v_zdiode * 0.4;
                         LJ_old = integrated_LJ_hemo;
@@ -1952,13 +1965,13 @@ namespace XPS
                         using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                         {
                             file.WriteLine(
-                                E_kin.ToString("0.000") + "\t" +
-                                counts.ToString("000000") + "\t" +
-                                v_analyser.ToString("0.000") + "\t" +
-                                v_hemi.ToString("0.000") + "\t" +
-                                v_hemo.ToString("0.000") + "\t" +
-                                E_pass.ToString("0.000") + "\t" +
-                                (elapsed_seconds * 1000).ToString("000")
+                                E_kin.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                counts.ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                v_analyser.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                v_hemi.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                v_hemo.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                E_pass.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                (elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                 );
                         }
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
