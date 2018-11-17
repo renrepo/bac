@@ -15591,6 +15591,60 @@
   <data name="&gt;&gt;tabPage3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="btn_hv_2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_hv_2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 141</value>
+  </data>
+  <data name="btn_hv_2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btn_hv_2.TabIndex" type="System.Int32, mscorlib">
+    <value>307</value>
+  </data>
+  <data name="btn_hv_2.Text" xml:space="preserve">
+    <value>Xray Hv on 2</value>
+  </data>
+  <data name="&gt;&gt;btn_hv_2.Name" xml:space="preserve">
+    <value>btn_hv_2</value>
+  </data>
+  <data name="&gt;&gt;btn_hv_2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_hv_2.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;btn_hv_2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btn_hv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_hv.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 115</value>
+  </data>
+  <data name="btn_hv.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btn_hv.TabIndex" type="System.Int32, mscorlib">
+    <value>306</value>
+  </data>
+  <data name="btn_hv.Text" xml:space="preserve">
+    <value>Xray Hv on</value>
+  </data>
+  <data name="&gt;&gt;btn_hv.Name" xml:space="preserve">
+    <value>btn_hv</value>
+  </data>
+  <data name="&gt;&gt;btn_hv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_hv.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;btn_hv.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="btn_stop_adc.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 76</value>
   </data>
@@ -15613,7 +15667,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_stop_adc.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="btn_st.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -15640,10 +15694,10 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_st.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="btn_ardu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 130</value>
+    <value>6, 129</value>
   </data>
   <data name="btn_ardu.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -15664,10 +15718,10 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_ardu.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="tb_schwelle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 143</value>
+    <value>91, 144</value>
   </data>
   <data name="tb_schwelle.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -15685,10 +15739,10 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_schwelle.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="btn_schwelle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 114</value>
+    <value>90, 115</value>
   </data>
   <data name="btn_schwelle.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -15709,7 +15763,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_schwelle.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="label52.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -15736,7 +15790,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;label52.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="Hem_in.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -15763,7 +15817,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;Hem_in.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="tb_hem_out.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 76</value>
@@ -15784,7 +15838,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_hem_out.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="tb_hem_in.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 76</value>
@@ -15805,7 +15859,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_hem_in.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="tb_rampe.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 49</value>
@@ -15826,7 +15880,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_rampe.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="btn_rampe.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 20</value>
@@ -15850,7 +15904,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_rampe.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="tb_adc2.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 49</value>
@@ -15871,7 +15925,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_adc2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="btn_read_adc2.Location" type="System.Drawing.Point, System.Drawing">
     <value>177, 20</value>
@@ -15895,7 +15949,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_read_adc2.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="btn_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 20</value>
@@ -15919,7 +15973,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_dac.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 49</value>
@@ -15940,7 +15994,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="btn_ref.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 20</value>
@@ -15964,7 +16018,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_ref.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="tb_ref.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 49</value>
@@ -15985,7 +16039,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_ref.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

@@ -47,27 +47,30 @@ namespace XPS
     {
 
         // IP adress Iseg-devices (ethernet connection)
-        string ip_dps = "132.195.109.144";
-        string ip_xray = "132.195.109.241";
+        string ip_dps;
+        string ip_xray;
+
         // General settings
         double V_photon;
-        double E_HeI = 21.21;               // Energy HeI-line
-        double E_Al_Ka = 1486.7;            // Energy Al K_alpha photon
-        double E_Mg_Ka = 1253.6;            // Energy Mg K_alpha photon
-        double ri = 109-10;                    // Radius inner hemisphere in mm
+
+        double E_HeI;               // Energy HeI-line
+        double E_Al_Ka ;            // Energy Al K_alpha photon
+        double E_Mg_Ka ;            // Energy Mg K_alpha photon
+        double ri;                    // Radius inner hemisphere in mm
         //double ri = 92.075;
-        double ra = 109+10;                    // Radius outer hemisphere in mm
+        double ra;                    // Radius outer hemisphere in mm
         //double ra = 111.125;
         double deviation = 0.001;            // maximim voltage deviation (in V) at the beginng of the voltage ramp
         double perc_ramp = 40.000;          // voltage ramp in percent of 4000 V/s (4000 = Vnominal)
-        string pressure_pin = "AIN0";       // Analog Input Pin of Ionivac
-        double vchanneltron = 2800;          // voltage drop over channeltron
+        string pressure_pin = string.Empty;       // Analog Input Pin of Ionivac
+        double vchanneltron;          // voltage drop over channeltron
         double vor = 16;
         double nach = 5;
         double slope_korr = 0.613;      // ergibt sich aus Plot vhemi gegen vlens bei maxmalen zählraten
         double offset = - 48.85;
         double workfunction = 0;
-        //double offset = 20;
+        double v_stabi_volt;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
+                                                 //double offset = 20;
 
 
         // Labjack stuff
@@ -116,12 +119,20 @@ namespace XPS
         double v_analyser_max;
         double v_stabi_min;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
         double v_stabi_max;
-        double v_stabi_volt = 1500;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
         double v_channeltron_out_max;
         double v_hemo_max;
         double v_hemi_max;
         double v_hemi_min_korr;
         double v_hemo_min_korr;
+        double v_pass_meas = 0;
+
+
+        // Emission current regulation
+        double fil_curr_max = 0;
+        double fil_curr_min = 0;
+        double K_P = 0;
+        double K_I = 0;
+        double K_D = 0;
 
         string read_iseg;                     // need to read back each comment send to Iseg device
         string path_logfile;
@@ -139,6 +150,7 @@ namespace XPS
         PointPairList values_to_plot = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
+        Dictionary<string, string> dic = new Dictionary<string, string>();
         GraphPane myPane;
         LineItem myCurve;
         TextObj pane_labs;
@@ -168,10 +180,39 @@ namespace XPS
         bool labjack_connected = false;
         bool take_UPS_spec = false;     // true if UPS spectra is taken
 
-       
+
+
+
 
         public XPS()
         {
+            // dot instead of comma (very important for voltage input values!)
+            Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+            //try
+            // {
+            var dic = File.ReadAllLines("settings.txt")
+              .Select(l => l.Split(new[] { '=' }))
+              .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
+            //}
+            //catch (Exception)
+            //{
+              //  AutoClosingMessageBox.Show("Can't read settings.txt", "Info", 2000);
+                //XPS_FormClosing();
+            //}
+
+
+            Double.TryParse(dic["E_Photon_Aluminium_Ka_emission_line_[eV]"], out E_Al_Ka);
+            Double.TryParse(dic["E_Photon_Magnesium_Ka_emission_line_[eV]"], out E_Mg_Ka);
+            Double.TryParse(dic["E_Photon_HeI_emission_line_[eV]"], out E_HeI);
+            Double.TryParse(dic["r_inner_hemisphere_[mm]"], out ri);
+            Double.TryParse(dic["r_outer_hemisphere_[mm]"], out ra);
+            Double.TryParse(dic["V_channeltron_voltagedrop_[V]"], out vchanneltron);
+            Double.TryParse(dic["V_across_z-Diode_circuitry_[V]"], out v_stabi_volt);
+            pressure_pin = dic["LJ_T7_input_ADC_pressure_analyser_chamber"];
+            ip_dps = dic["IP_Iseg_DPS"];
+            ip_xray = dic["IP_Iseg_H150666"];
+            
+
             InitializeComponent();
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
@@ -215,11 +256,14 @@ namespace XPS
             lb_list_orbital_structure = new System.Windows.Forms.Label[] {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,
                                                    s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34,s35,s36,s37,s38,s39,s40,s41,s42,
                                                    s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59};
+
+         
         }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             // draw coordinate system
@@ -252,18 +296,18 @@ namespace XPS
 
             try
             {   // Open Labjack sessions for voltage/counts measurements and so on
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_count);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemi);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_hemo);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_analyser);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_v_lens);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_pressure);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_DAC2);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc1);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_adc2);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_schwelle);
-                LJM.OpenS("ANY", "ANY", "ANY", ref handle_V_minus);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_count);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_v_hemi);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_v_hemo);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_v_analyser);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_v_lens);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_pressure);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_DAC);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_DAC2);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_adc1);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_adc2);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_schwelle);
+                //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_V_minus);
 
                 // backgroundtask for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
@@ -745,7 +789,7 @@ namespace XPS
                         await write_to_Iseg("CONF:HVMICC HV_OK\n", "DPS");
                         await write_to_Iseg(":VOLT EMCY CLR,(@0-5)\n", "DPS");
                         await write_to_Iseg("*RST\n", "DPS");
-                        await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.1),"DPS"); ///////////////////////////////////////////////////////////////////////rampe
+                        await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 4),"DPS"); ///////////////////////////////////////////////////////////////////////rampe
                         for (int i = 0; i < 6; i++)
                         {
                             reset[i].Enabled = true;
@@ -1308,7 +1352,8 @@ namespace XPS
             int i = -1;
             var progressHandler2 = new Progress<string>(value =>
             {
-                vmeas[result].Text = value.Substring(0,7);
+                //vmeas[result].Text = value.Substring(0,7);
+                vmeas[result].Text = String.Format("{0:.##}", value);
 
                 if (take_UPS_spec && result == 4)
                 {
@@ -1317,6 +1362,7 @@ namespace XPS
             });
             var progress = progressHandler2 as IProgress<string>;
             string readback = string.Empty;
+            //double readback = 0;
             try
             {
                 await Task.Run(() =>
@@ -1334,10 +1380,17 @@ namespace XPS
                         //otherwise problems when closing DPS-session
                         try
                         {
-                            readback = DPS_HV.RawIO.ReadString();
+                            readback = (DPS_HV.RawIO.ReadString().Replace("V\r\n", ""));
+                            readback = readback.Replace(".", ",");
+                            readback = ((Double.Parse(readback) * 1).ToString("0.00"));
+                            if (readback.Substring(readback.Length - 2,2) == "E3")
+                            {
+                                readback = readback.Replace("E3", "");
+                                readback = ((Double.Parse(readback)*1000.0).ToString("0.00"));
+                            }
                         }
                         catch (Exception){}
-                        progress.Report(readback.Replace("V\r\n", ""));
+                        progress.Report(readback);
                         //progress.Report(i.ToString());
                         result = i;
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
@@ -1540,6 +1593,45 @@ namespace XPS
 
 
 
+        private async void  set_K_P(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await write_to_Iseg(String.Format(":CONF:FILA:EMI:P {0}\n", K_P.ToString("0.00")), "XRAY");
+            _suspend_background_measurement.Set();
+        }
+
+
+        private async void set_K_I(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await write_to_Iseg(String.Format(":CONF:FILA:EMI:I {0}\n", K_I.ToString("0.00")), "XRAY");
+            _suspend_background_measurement.Set();
+        }
+
+
+        private async void set_K_D(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await write_to_Iseg(String.Format(":CONF:FILA:EMI:D {0}\n", K_D.ToString("0.00")), "XRAY");
+            _suspend_background_measurement.Set();
+        }
+
+
+        private async void filament_current_min(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await write_to_Iseg(String.Format(":CONF:FILA:CURR:MIN {0}\n", fil_curr_min.ToString("0.00")), "XRAY");
+            _suspend_background_measurement.Set();
+        }
+
+
+        private async void filament_current_max(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Reset();
+            await write_to_Iseg(String.Format(":CONF:FILA:CURR:MAX {0}\n", fil_curr_max.ToString("0.00")), "XRAY");
+            _suspend_background_measurement.Set();
+        }
+
 
 
 
@@ -1561,7 +1653,7 @@ namespace XPS
             LJM.eWriteName(handle_DAC, "DAC0", value);
         }
 
-        private async void btn_ref_Click(object sender, EventArgs e)
+        private void btn_ref_Click(object sender, EventArgs e)
         {
             while (true)
             {
@@ -1799,8 +1891,8 @@ namespace XPS
                 //vm3.Text = (LJ_lens2 / 3).ToString("0.000");
                 vm4.Text = v_analyser.ToString("0.0");
                 //vm5.Text = v_channeltron_out_min.ToString("0.000");
-                values_to_plot.Add(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
-                myCurve.AddPoint(E_kin, Convert.ToDouble((v_hemi - v_hemo) / k));
+                values_to_plot.Add(E_kin, Convert.ToDouble(E_pass));
+                myCurve.AddPoint(E_kin, Convert.ToDouble(E_pass));
                 zedGraphControl1.Invalidate();
                 zedGraphControl1.AxisChange();
             });
@@ -1843,7 +1935,7 @@ namespace XPS
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("" + Environment.NewLine);
-                file.WriteLine("#E_k \t cps \t Ana \t Hemi \t Hemo \t EP \t Mt");
+                file.WriteLine("#E_k \t cps \t Analyser \t V_hemi \t V_hemo \t E_Pass \t t_meas");
                 file.WriteLine("" + Environment.NewLine);
             }
 
@@ -1873,19 +1965,19 @@ namespace XPS
 
             // set initial voltages (roughly)
             _suspend_background_measurement.Reset();
-            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 10), "DPS");
+            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 5), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@1)\n", v_hemo_min.ToString("0.000")), "DPS");
-            await write_to_Iseg(String.Format(":VOLT {0},(@3)\n", v_stabi_min.ToString("0.000")), "DPS");
+            await write_to_Iseg(String.Format(":VOLT {0},(@5)\n", v_stabi_min.ToString("0.000")), "DPS");
             await write_to_Iseg(String.Format(":VOLT ON,(@4)\n"), "DPS");
             await write_to_Iseg(String.Format(":VOLT ON,(@1)\n"), "DPS");
-            await write_to_Iseg(String.Format(":VOLT ON,(@3)\n"), "DPS");
+            await write_to_Iseg(String.Format(":VOLT ON,(@5)\n"), "DPS");
             _suspend_background_measurement.Set();
 
-            await Task.Delay(10000);
+            await Task.Delay(30000);
             
             _suspend_background_measurement.Reset();
-            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.05), "DPS");
+            await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.1), "DPS");
             _suspend_background_measurement.Set();
 
 
@@ -1902,10 +1994,12 @@ namespace XPS
             LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
 
             double integrated_LJ_hemo = 0;
+            double integrated_LJ_hemi = 0;
 
             double elapsed_seconds = 0;
             double counts = 0;
-            double LJ_old = 0;
+            double LJ_old_hemo = 0;
+            double LJ_old_hemi = 0;
 
             token.ThrowIfCancellationRequested();
 
@@ -1913,36 +2007,41 @@ namespace XPS
             {
                 _suspend_background_measurement.Reset();
                 await write_to_Iseg(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")), "DPS");
-                await write_to_Iseg(String.Format(":VOLT {0},(@3)\n", v_stabi_max.ToString("0.000")), "DPS");
+                await write_to_Iseg(String.Format(":VOLT {0},(@5)\n", v_stabi_max.ToString("0.000")), "DPS");
                 await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")), "DPS");
                 _suspend_background_measurement.Set();
        
                 LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                v_hemo = LJ_hemo * 159.8;
+                v_hemo = LJ_hemo * 153.05;
 
                 await Task.Run(() =>
                 {
                     while (v_hemo < v_hemo_max)
                     {
                         integrated_LJ_hemo = 0;
+                        integrated_LJ_hemi = 0;
                         int num_meas = 0;
                         token.ThrowIfCancellationRequested();
 
                         while (num_meas < 4)
                         {
                             LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
-                            integrated_LJ_hemo += LJ_hemo * 159.8;
+                            integrated_LJ_hemo += LJ_hemo * 153.05;
+                            LJM.eReadName(handle_v_hemi, "AIN0", ref LJ_hemi);
+                            integrated_LJ_hemi += LJ_hemi * 153.11;
                             ++num_meas;
                         }
 
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
                         sw.Start(); // start/stop stopwatch before or after Labjack-readout!
                         sc = intcounter;
-                        v_hemo = (integrated_LJ_hemo + LJ_old)/ (2*num_meas);
-                        v_hemi = v_hemo + v_zdiode;
-                        E_pass = v_zdiode / k;
-                        v_analyser = v_hemo + v_zdiode * 0.4;
-                        LJ_old = integrated_LJ_hemo;
+                        v_hemo = (integrated_LJ_hemo + LJ_old_hemo)/ (2*num_meas);
+                        v_hemi = (integrated_LJ_hemi + LJ_old_hemi)/ (2 * num_meas);
+                        E_pass = (v_hemi - v_hemo) / k;
+                        v_pass_meas = (v_hemi - v_hemo);
+                        v_analyser = v_hemo + v_pass_meas * 0.4;
+                        LJ_old_hemo = integrated_LJ_hemo;
+                        LJ_old_hemi = integrated_LJ_hemi;
 
                         // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
                         E_kin = E_pass - v_analyser + vbias + workfunction;
@@ -1971,6 +2070,7 @@ namespace XPS
                                 v_hemi.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                 v_hemo.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                 E_pass.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                v_pass_meas.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                 (elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                 );
                         }
@@ -1992,9 +2092,10 @@ namespace XPS
             catch (OperationCanceledException)
             {
                 _suspend_background_measurement.Reset();
+                await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 10), "DPS");
                 await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
                 await write_to_Iseg(String.Format(":VOLT OFF,(@1)\n"), "DPS");
-                await write_to_Iseg(String.Format(":VOLT OFF,(@3)\n"), "DPS");
+                await write_to_Iseg(String.Format(":VOLT OFF,(@5)\n"), "DPS");
                 await write_to_Iseg(String.Format("*RST\n"), "DPS");
                 _suspend_background_measurement.Set();
                 tb_show.Text = "Stop!";
@@ -2015,6 +2116,16 @@ namespace XPS
             take_UPS_spec = true;
             //take_UPS_spectra();
             take_XPS_spectra();
+        }
+
+        private async void btn_hv_Click(object sender, EventArgs e)
+        {
+            await write_to_Iseg(String.Format(":VOLT 300.89, (@0)\n"), "XRAY");
+        }
+
+        private async void btn_hv_2_Click(object sender, EventArgs e)
+        {
+            await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
         }
     }
 }
