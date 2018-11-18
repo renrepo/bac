@@ -438,7 +438,7 @@ namespace XPS
 
             else
             {   //1qa
-                DPS.channel_off(chanel);
+                await DPS.channel_off(chanel);
                 //await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", chanel), "DPS");
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
