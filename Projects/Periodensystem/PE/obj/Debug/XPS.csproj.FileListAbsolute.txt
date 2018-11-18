@@ -74,10 +74,16 @@ C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\RJCP.SerialPortS
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\RJCP.SerialPortStream.xml
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csprojAssemblyReference.cache
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.SelectResource.resources
-C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.XPS.resources
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.Properties.Resources.resources
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.GenerateResource.cache
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.CoreCompileInputs.cache
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.CopyComplete
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Dynamic.dll
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Scripting.dll
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Scripting.Metadata.dll
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Dynamic.xml
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Scripting.xml
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Microsoft.Scripting.Metadata.xml
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.XPS.resources

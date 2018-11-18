@@ -454,6 +454,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_hv_2 = new System.Windows.Forms.Button();
+            this.btn_hv = new System.Windows.Forms.Button();
             this.btn_stop_adc = new System.Windows.Forms.Button();
             this.btn_st = new System.Windows.Forms.Button();
             this.btn_ardu = new System.Windows.Forms.Button();
@@ -472,8 +474,6 @@
             this.btn_ref = new System.Windows.Forms.Button();
             this.tb_ref = new System.Windows.Forms.TextBox();
             this.btn_test_XPS = new System.Windows.Forms.Button();
-            this.btn_hv = new System.Windows.Forms.Button();
-            this.btn_hv_2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3963,6 +3963,20 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // btn_hv_2
+            // 
+            resources.ApplyResources(this.btn_hv_2, "btn_hv_2");
+            this.btn_hv_2.Name = "btn_hv_2";
+            this.btn_hv_2.UseVisualStyleBackColor = true;
+            this.btn_hv_2.Click += new System.EventHandler(this.btn_hv_2_Click);
+            // 
+            // btn_hv
+            // 
+            resources.ApplyResources(this.btn_hv, "btn_hv");
+            this.btn_hv.Name = "btn_hv";
+            this.btn_hv.UseVisualStyleBackColor = true;
+            this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
+            // 
             // btn_stop_adc
             // 
             resources.ApplyResources(this.btn_stop_adc, "btn_stop_adc");
@@ -4070,20 +4084,6 @@
             this.btn_test_XPS.Name = "btn_test_XPS";
             this.btn_test_XPS.UseVisualStyleBackColor = true;
             this.btn_test_XPS.Click += new System.EventHandler(this.btn_test_XPS_Click);
-            // 
-            // btn_hv
-            // 
-            resources.ApplyResources(this.btn_hv, "btn_hv");
-            this.btn_hv.Name = "btn_hv";
-            this.btn_hv.UseVisualStyleBackColor = true;
-            this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
-            // 
-            // btn_hv_2
-            // 
-            resources.ApplyResources(this.btn_hv_2, "btn_hv_2");
-            this.btn_hv_2.Name = "btn_hv_2";
-            this.btn_hv_2.UseVisualStyleBackColor = true;
-            this.btn_hv_2.Click += new System.EventHandler(this.btn_hv_2_Click);
             // 
             // XPS
             // 

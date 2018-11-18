@@ -24,6 +24,7 @@ using LabJack;
 using Ivi.Visa;
 using ArduinoDriver;
 using ArduinoUploader;
+using PE;
 
 
 /***
@@ -45,6 +46,11 @@ namespace XPS
 {
     public partial class XPS : Form
     {
+
+
+        HV_device DPS = new HV_device("132.195.109.144");
+        HV_device H150666 = new HV_device("132.195.109.241");
+
 
         // IP adress Iseg-devices (ethernet connection)
         string ip_dps;
@@ -78,11 +84,9 @@ namespace XPS
         int handle_v_hemi = 0;
         int handle_v_hemo = 0;
         int handle_v_analyser = 0;
-        int handle_v_lens = 0;
         int handle_count = 0;
         int handle_DAC = 0;
         int handle_DAC2 = 0;
-        int handle_V_minus = 0;
         int handle_schwelle = 0;
         int handle_adc1 = 0;
         int handle_adc2 = 0;
@@ -100,7 +104,6 @@ namespace XPS
         double LJ_lens2 = 0;
         double adc1 = 0;
         double adc2 = 0;
-        double v_zdiode = 10;               //selected z-diode
 
         // Voltage setting stuff
         double V_minus = -0.2;
@@ -128,8 +131,6 @@ namespace XPS
 
 
         // Emission current regulation
-        double fil_curr_max = 0;
-        double fil_curr_min = 0;
         double K_P = 0;
         double K_I = 0;
         double K_D = 0;
@@ -170,8 +171,9 @@ namespace XPS
         private CancellationTokenSource _cts_counter_labjack;           // Cancellation of Labjack Counter background measurement 
         private CancellationTokenSource _cts_UPS;           // Cancellation of UPS spectra
         private CancellationTokenSource _cts_voltagemonitor;
-        private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
-        private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
+        //1qa
+        //private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
+        //private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
         bool start_ok = false;
         bool stop = false;      // Interrupt "btn_start_Click"-method
@@ -179,9 +181,6 @@ namespace XPS
         bool Xray_HV_is_open = false;
         bool labjack_connected = false;
         bool take_UPS_spec = false;     // true if UPS spectra is taken
-
-
-
 
 
         public XPS()
@@ -430,14 +429,17 @@ namespace XPS
 
             if (c.Text == "Off")
             {
-                await write_to_Iseg(String.Format(":VOLT ON,(@{0})\n", chanel), "DPS");
+                ///1qa
+                await DPS.channel_on(chanel);
+                //await write_to_Iseg(String.Format(":VOLT ON,(@{0})\n", chanel), "DPS");
                 c.Text = "On";
                 c.BackColor = Color.LimeGreen;
             }
 
             else
-            {
-                await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", chanel), "DPS");
+            {   //1qa
+                DPS.channel_off(chanel);
+                //await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", chanel), "DPS");
                 c.Text = "Off";
                 c.BackColor = SystemColors.ControlLightLight;
             }
@@ -450,15 +452,19 @@ namespace XPS
         {
             Button b = sender as Button;
             int chanel = Convert.ToInt16(b.Tag);
-            bool Vset = Decimal.TryParse(vset[chanel].Text.Replace(",","."), out decimal vset_in);
+            bool Vset = Double.TryParse(vset[chanel].Text.Replace(",","."), out double vset_in);
             vset[chanel].Text = vset_in.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture); //necessary because otherwise "vset_in" would bei "20\r\n40" if first 20 and then 40 typed in
             if (Vset)
             {
                 try
                 {
+                    /***
+                    1qa
                     _suspend_background_measurement.Reset();
                     await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.0"), chanel), "DPS"); // 1 decimal places
                     _suspend_background_measurement.Set();
+                    ***/
+                    await DPS.set_voltage(vset_in,chanel);
                 }
                 catch (Exception)
                 {
@@ -489,10 +495,14 @@ namespace XPS
         {
             Button r = sender as Button; // 3 decimal places
             int chanel = Convert.ToInt16(r.Tag);
+            /***1qa
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", chanel), "DPS");
             await write_to_Iseg(String.Format(":VOLT 0.0,(@{0})\n", chanel), "DPS");        
             _suspend_background_measurement.Set();
+            ***/
+            await DPS.channel_off(chanel);
+            await DPS.reset_channels();
             vset[chanel].Text = string.Empty;
             vmeas[chanel].Text = string.Empty;
             stat[chanel].Text = "Off";
@@ -630,7 +640,7 @@ namespace XPS
             }
         }
 
-
+        /***1qa
         // write SCPI-command to Iseg HV-device. wait 20ms after sending and receiving commands.
         // If there is no readback after a command was send to the device there may be future issues 
         // regarding readbacks.
@@ -697,25 +707,8 @@ namespace XPS
             }
             return read_iseg;
         }
-
-
-        // same as above. should be replaced by async/await in the near futur (together with background worker)
-        private string write_to_DPS_sync(string command)
-        {
-            try
-            {
-                DPS_HV.RawIO.Write(command);
-                Thread.Sleep(20);
-                read_iseg = DPS_HV.RawIO.ReadString();
-                Thread.Sleep(40);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Backgroundworker DPS voltage measurement failed");
-            }
-            return read_iseg;
-        }
-
+        ***/
+            
 
         //#############################################################################################################################
 
@@ -725,6 +718,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             if (c.Text == "Iseg Xray disconnected")
             {
+                /***1qa
                 using (var rm = new ResourceManager())
                 {
                     try
@@ -747,14 +741,38 @@ namespace XPS
                         Cursor.Current = Cursors.Default;
                     }
                 }
+                ***/
+                HV_device H150666 = new HV_device("132.195.109.241");
+                await H150666.reset_channels();
+                c.Text = "Iseg Xray connected";
+                c.BackColor = Color.LightGreen;
+                Xray_HV_is_open = true;
             }
 
             else
             {
+                /***1qa
                 try
                 {
                     await write_to_Iseg("*RST\n", "XRAY");
                     Xray_HV.Dispose();
+                    Xray_HV_is_open = false;
+                    c.Text = "Iseg Xray disconnected";
+                    c.BackColor = Color.Lavender;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+                ***/
+
+                try
+                {
+                    await H150666.dispose();
                     Xray_HV_is_open = false;
                     c.Text = "Iseg Xray disconnected";
                     c.BackColor = Color.Lavender;
@@ -777,6 +795,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             if (c.Text == "Iseg DPS disconnected")
             {
+                /***1qa
                 using (ResourceManager rm = new ResourceManager())
                 {
                     try
@@ -816,6 +835,33 @@ namespace XPS
                         Cursor.Current = Cursors.Default;
                     }
                 }
+                ***/
+
+                HV_device DPS = new HV_device("132.195.109.144");
+                DPS_HV_is_open = true;
+                await DPS.check_dps();
+                await DPS.clear_emergency();
+                await DPS.reset_channels();
+                await DPS.voltage_ramp(4);
+
+                for (int i = 0; i < 6; i++)
+                {
+                    reset[i].Enabled = true;
+                    reload[i].Enabled = true;
+                    stat[i].Enabled = true;
+                }
+                rs_all.Enabled = true;
+                queryButton.Enabled = true;
+                writeButton.Enabled = true;
+                clearButton.Enabled = true;
+                btn_emcy.Enabled = true;
+                start_ok = true;
+                background_meas_volt_DPS();
+                c.Text = "Iseg DPS connected";
+                c.BackColor = Color.LightGreen;
+                btn_start.Enabled = true;
+
+
             }
 
             else
@@ -826,8 +872,10 @@ namespace XPS
                     {
                         _cts_volt_dps.Cancel();
                     }
-                    await write_to_Iseg("*RST\n", "DPS");
-                    DPS_HV.Dispose();
+                    //1qa
+                    //await write_to_Iseg("*RST\n", "DPS");
+                    //DPS_HV.Dispose();
+                    await DPS.dispose();
                     DPS_HV_is_open = false;
                     c.Text = "Iseg DPS disconnected";
                     c.BackColor = Color.Lavender;
@@ -850,7 +898,9 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                await write_to_Iseg(ReplaceCommonEscapeSequences(writeTextBox.Text + "\n"), "DPS");
+                //1qa
+                //await write_to_Iseg(ReplaceCommonEscapeSequences(writeTextBox.Text + "\n"), "DPS");
+
             }
             catch (Exception exp)
             {
@@ -870,7 +920,7 @@ namespace XPS
             Cursor.Current = Cursors.WaitCursor;
             try
             {
-                readTextBox.Text = await read_from_Iseg(writeTextBox.Text + '\n', "DPS");
+                //readTextBox.Text = await read_from_Iseg(writeTextBox.Text + '\n', "DPS");
             }
             catch (Exception exp)
             {
@@ -1150,15 +1200,22 @@ namespace XPS
                 fig_name.Enabled = true;
                 showdata.Enabled = true;
                 _suspend_background_measurement.Reset();
-                await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
-                await write_to_Iseg(String.Format("*RST\n"), "DPS");
+                //1qa
+                //await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
+                //await write_to_Iseg(String.Format("*RST\n"), "DPS");
+                await DPS.channel_off(4);
+                await DPS.reset_channels();
+
                 _suspend_background_measurement.Set();
             }
             catch (OperationCanceledException)
             {
                 _suspend_background_measurement.Reset();
-                await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
-                await write_to_Iseg(String.Format("*RST\n"), "DPS");
+                //1qa
+                //await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
+                //await write_to_Iseg(String.Format("*RST\n"), "DPS");
+                await DPS.channel_off(4);
+                await DPS.reset_channels();
                 _suspend_background_measurement.Set();
                 LJM.eWriteName(handle_DAC, "TDAC0", 0.0);
                 LJM.eWriteName(handle_DAC2, "TDAC1", 0.0);
@@ -1261,11 +1318,13 @@ namespace XPS
             _suspend_background_measurement.Reset();
             for (int i = 0; i <= 5; i++)
             {
-                bool Vset = Decimal.TryParse(vset[i].Text.Replace(',', '.'), out decimal vset_in);
+                bool Vset = Double.TryParse(vset[i].Text.Replace(',', '.'), out double vset_in);
                 vset[i].Text = vset_in.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture);
                 if (Vset)
                 {
-                    await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.0"), i), "DPS"); // 3 decimal places              
+                    //1qa
+                    // await write_to_Iseg(String.Format(":VOLT {0},(@{1})\n", vset_in.ToString("0.0"), i), "DPS"); // 3 decimal places      
+                    await DPS.set_voltage(vset_in,i);
                 }
 
                 else
@@ -1280,9 +1339,11 @@ namespace XPS
 
         private async void rs_all_Click(object sender, EventArgs e)
         {
-            _suspend_background_measurement.Reset();
-            await write_to_Iseg(String.Format("*RST\n"), "DPS");
-            _suspend_background_measurement.Set();
+            //1qa
+            //_suspend_background_measurement.Reset();
+            //await write_to_Iseg(String.Format("*RST\n"), "DPS");
+            //_suspend_background_measurement.Set();
+            await DPS.reset_channels();
             for (int i = 0; i <= 5; i++)
             {
                 vset[i].Text = string.Empty;
@@ -1299,7 +1360,9 @@ namespace XPS
             _suspend_background_measurement.Reset();
             for (int i = 0; i <= 5; i++)
             {
-                await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", i), "DPS");
+                //1qa
+                //await write_to_Iseg(String.Format(":VOLT OFF,(@{0})\n", i), "DPS");
+                await DPS.channel_off(i);
                 stat[i].Text = "Off";
                 stat[i].BackColor = SystemColors.ControlLightLight;
             }
@@ -1374,13 +1437,16 @@ namespace XPS
                         {
                             i = 0;
                         }
-                        // call of read_from_iseg() not possible because this part has to run synchronously
-                        DPS_HV.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", i));
+                        //1qa call of read_from_iseg() not possible because this part has to run synchronously
+                        //DPS_HV.RawIO.Write(String.Format(":MEAS:VOLT? (@{0})\n", i));
+                        DPS.raw_write_syn(String.Format(":MEAS:VOLT? (@{0})\n", i));
                         Thread.Sleep(50);
                         //otherwise problems when closing DPS-session
                         try
                         {
-                            readback = (DPS_HV.RawIO.ReadString().Replace("V\r\n", ""));
+                            //1qa
+                            //readback = (DPS_HV.RawIO.ReadString().Replace("V\r\n", ""));
+                            readback = (DPS.raw_read_syn().Replace("V\r\n", ""));
                             readback = readback.Replace(".", ",");
                             readback = ((Double.Parse(readback) * 1).ToString("0.00"));
                             if (readback.Substring(readback.Length - 2,2) == "E3")
@@ -1433,16 +1499,20 @@ namespace XPS
             if (DPS_HV_is_open)
             {
                 _suspend_background_measurement.Reset();
-                //bw_iseg_volts.CancelAsync();
-                await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp), "DPS");
-                await write_to_Iseg("*RST\n", "DPS");
-                DPS_HV.Dispose();
+                // 1qa bw_iseg_volts.CancelAsync();
+                //await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", perc_ramp), "DPS");
+                //await write_to_Iseg("*RST\n", "DPS");
+                //DPS_HV.Dispose();
+                await DPS.dispose();
             }
 
             if (Xray_HV_is_open)
             {
-                await write_to_Iseg("*RST\n", "XRAY");
-                Xray_HV.Dispose();
+                //1qa
+                //await write_to_Iseg("*RST\n", "XRAY");
+                //Xray_HV.Dispose();
+                await H150666.reset_channels();
+                await H150666.dispose();
             }
 
             if (labjack_connected)
@@ -1490,9 +1560,11 @@ namespace XPS
 
         private async void btn_emcy_Click(object sender, EventArgs e)
         {
-            _suspend_background_measurement.Reset();
-            await write_to_Iseg(":VOLT EMCY OFF, (@0-5)\n", "DPS");
-            _suspend_background_measurement.Set();
+            //1qa
+            //_suspend_background_measurement.Reset();
+            //await write_to_Iseg(":VOLT EMCY OFF, (@0-5)\n", "DPS");
+            //_suspend_background_measurement.Set();
+            await DPS.emergency_off();
 
             for (int i = 0; i < 6; i++)
             {
@@ -1592,7 +1664,7 @@ namespace XPS
         }
 
 
-
+        /***
         private async void  set_K_P(object sender, EventArgs e)
         {
             _suspend_background_measurement.Reset();
@@ -1632,7 +1704,7 @@ namespace XPS
             _suspend_background_measurement.Set();
         }
 
-
+        ***/
 
 
 
@@ -1893,6 +1965,8 @@ namespace XPS
                 //vm5.Text = v_channeltron_out_min.ToString("0.000");
                 values_to_plot.Add(E_kin, Convert.ToDouble(E_pass));
                 myCurve.AddPoint(E_kin, Convert.ToDouble(E_pass));
+                //values_to_plot.Add(ctner, Convert.ToDouble(value));
+                //myCurve.AddPoint(ctner, Convert.ToDouble(value));
                 zedGraphControl1.Invalidate();
                 zedGraphControl1.AxisChange();
             });
@@ -1964,6 +2038,7 @@ namespace XPS
 
 
             // set initial voltages (roughly)
+            /*** 1qa
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 5), "DPS");
             await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_min.ToString("0.000")), "DPS");
@@ -1979,6 +2054,20 @@ namespace XPS
             _suspend_background_measurement.Reset();
             await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 0.1), "DPS");
             _suspend_background_measurement.Set();
+
+    ***/
+            await DPS.voltage_ramp(5);
+            await DPS.set_voltage(v_channeltron_out_min,4);
+            await DPS.set_voltage(v_hemo_min,1);
+            await DPS.set_voltage(v_stabi_min,5);
+            await DPS.channel_on(4);
+            await DPS.channel_on(1);
+            await DPS.channel_on(5);
+
+            await Task.Delay(30000);
+
+            await DPS.voltage_ramp(0.1);
+
 
 
 
@@ -2005,24 +2094,34 @@ namespace XPS
 
             try
             {
+                /*** 1qa
                 _suspend_background_measurement.Reset();
                 await write_to_Iseg(String.Format(":VOLT {0},(@1)\n", v_hemo_max.ToString("0.000")), "DPS");
                 await write_to_Iseg(String.Format(":VOLT {0},(@5)\n", v_stabi_max.ToString("0.000")), "DPS");
                 await write_to_Iseg(String.Format(":VOLT {0},(@4)\n", v_channeltron_out_max.ToString("0.000")), "DPS");
                 _suspend_background_measurement.Set();
        
+                ***/
+
+                await DPS.set_voltage(v_hemo_max,1);
+                await DPS.set_voltage(v_stabi_max, 5);
+                await DPS.set_voltage(v_channeltron_out_max, 4);
+
                 LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
+                
                 v_hemo = LJ_hemo * 153.05;
+                
 
                 await Task.Run(() =>
                 {
                     while (v_hemo < v_hemo_max)
-                    {
+                    {                                           
                         integrated_LJ_hemo = 0;
                         integrated_LJ_hemi = 0;
                         int num_meas = 0;
                         token.ThrowIfCancellationRequested();
 
+                        
                         while (num_meas < 4)
                         {
                             LJM.eReadName(handle_v_hemo, "AIN2", ref LJ_hemo);
@@ -2033,6 +2132,7 @@ namespace XPS
                         }
 
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref intcounter);
+                        
                         sw.Start(); // start/stop stopwatch before or after Labjack-readout!
                         sc = intcounter;
                         v_hemo = (integrated_LJ_hemo + LJ_old_hemo)/ (2*num_meas);
@@ -2076,6 +2176,7 @@ namespace XPS
                         }
                         LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
                         progress.Report(counts.ToString("000000"));
+                        //progress.Report((elapsed_seconds * 10000).ToString("000000"));
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                         //_suspend_background_measurement.WaitOne(Timeout.Infinite);
                     }
@@ -2084,13 +2185,19 @@ namespace XPS
                 btn_clear.Enabled = true;
                 fig_name.Enabled = true;
                 showdata.Enabled = true;
+                /*** 1qa
                 _suspend_background_measurement.Reset();
                 await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
                 await write_to_Iseg(String.Format("*RST\n"), "DPS");
                 _suspend_background_measurement.Set();
+                ***/
+
+                await DPS.channel_off(4);
+                await DPS.reset_channels();
             }
             catch (OperationCanceledException)
             {
+                /*** 1qa
                 _suspend_background_measurement.Reset();
                 await write_to_Iseg(String.Format(":CONF:RAMP:VOLT {0}%/s\n", 10), "DPS");
                 await write_to_Iseg(String.Format(":VOLT OFF,(@4)\n"), "DPS");
@@ -2098,6 +2205,13 @@ namespace XPS
                 await write_to_Iseg(String.Format(":VOLT OFF,(@5)\n"), "DPS");
                 await write_to_Iseg(String.Format("*RST\n"), "DPS");
                 _suspend_background_measurement.Set();
+                ***/
+
+                await DPS.voltage_ramp(5);
+                await DPS.channel_off(4);
+                await DPS.channel_off(1);
+                await DPS.channel_off(5);
+
                 tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -2120,12 +2234,14 @@ namespace XPS
 
         private async void btn_hv_Click(object sender, EventArgs e)
         {
-            await write_to_Iseg(String.Format(":VOLT 300.89, (@0)\n"), "XRAY");
+            await H150666.set_voltage(389.2,0);
+            
         }
 
         private async void btn_hv_2_Click(object sender, EventArgs e)
         {
-            await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
+            //await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
+            await DPS.channel_on(4);
         }
     }
 }
@@ -2187,4 +2303,17 @@ namespace XPS
  * Metallbox (Amptex verstärker)
  * Potis
  * M3.5 Senkkopf
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * Write_Click usw in class aufnehmen
     ***/
