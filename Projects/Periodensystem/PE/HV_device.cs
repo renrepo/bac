@@ -7,43 +7,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using NationalInstruments.Visa;
 using Ivi.Visa;
+using XPS;
 
-namespace PE
+namespace XPS
 {
- 
+    
+
+
     class HV_device
     {
         private string IP_adress;
-        ManualResetEvent _suspend_background_measurement;
+        public bool Is_session_open { get; set; }
+        ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         Ivi.Visa.IMessageBasedSession session;
 
-        public HV_device(string IP)
+        public HV_device()
         {  //Parameterized constructor
-            _suspend_background_measurement = new ManualResetEvent(true);
-            IP_adress = IP;
 
-            using (var rm = new ResourceManager())
-            {
-                try
-                {
-                    session = (IMessageBasedSession)rm.Open("TCPIP0::" + IP_adress + "::10001::SOCKET");
-                    //Xray_HV_is_open = true;
-                    // no timeout-error when reading back from Iseg-device after query (e.g. ":MEAS:VOLT? (@0)\n") was send 
-                    //(if no query was send, a readback will take about 2000ms (default timeout) and give a "null"-result)
-                    ((INativeVisaSession)session).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
-                    //Iseg_DPS_session.Text = "Iseg Xray connected";
-                    //c.BackColor = Color.LightGreen;
-                }
-                catch (Exception exp)
-                {
-                    MessageBox.Show("Unable to Open Device at IP-adress " + IP_adress + " !");
-                }
-                finally
-                {
-                    Cursor.Current = Cursors.Default;
-                }
-            }
         }
+
+        //~HV_device() { }
+        
+         
+            
 
          public async Task<int> write_to_iseg(string command)
         {
@@ -66,10 +52,30 @@ namespace PE
         }
 
 
+        public async Task<int> open_session(string IP)
+        {
+            IP_adress = IP;
+            using (var rm = new ResourceManager())
+            {
+
+               session = (IMessageBasedSession)rm.Open("TCPIP0::" + IP_adress + "::10001::SOCKET");
+               ((INativeVisaSession)session).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
+               Is_session_open = true;
+            }
+            return 1;
+        }
+
 
         public async Task<int> reset_channels()
         {
             await write_to_iseg("*RST\n");
+            return 1;
+        }
+
+
+        public async Task<int> clear()
+        {
+            await write_to_iseg("*CLS\n");
             return 1;
         }
 
@@ -95,6 +101,20 @@ namespace PE
         }
 
 
+        public async Task<int> set_current(double current, int channel)
+        {
+            await write_to_iseg(":CURR " + current.ToString() + ",(@" + channel.ToString() + ")\n");
+            return 1;
+        }
+
+
+        public async Task<int> limit_current(double current)
+        {
+            await write_to_iseg(":CURR:LIM " + current.ToString() + "\n");
+            return 1;
+        }
+
+
         public async Task<int> emergency_off()
         {
             await write_to_iseg(":VOLT EMCY OFF\n");
@@ -104,9 +124,17 @@ namespace PE
 
         public async Task<int> voltage_ramp(double percent)
         {
-            await write_to_iseg(":CONF:RAMP:VOLT " + percent.ToString() + "}%/s\n");
+            await write_to_iseg(":CONF:RAMP:VOLT " + percent.ToString() + "%/s\n");
             return 1;
         }
+
+
+        public async Task<int> current_ramp(double percent)
+        {
+            await write_to_iseg(":CONF:RAMP:CURR " + percent.ToString() + "%/s\n");
+            return 1;
+        }
+
 
         public async Task<int> check_dps()
         {
@@ -126,6 +154,13 @@ namespace PE
         public async Task<string> read_voltage(int channel)
         {
             string reading = await read_iseg(":MEAS:VOLT? (@" + channel.ToString() + ")\n");
+            return reading;
+        }
+
+
+        public async Task<string> read_current(int channel)
+        {
+            string reading = await read_iseg(":MEAS:CURR? (@" + channel.ToString() + ")\n");
             return reading;
         }
 
@@ -166,6 +201,8 @@ namespace PE
 
 
 
+
+
         public async Task<int> waiter()
         {
             await Task.Delay(10000);
@@ -173,9 +210,9 @@ namespace PE
         }
 
 
-        public void raw_write_syn(string command)
+        public void raw_read_syn(int channel)
         {
-            session.RawIO.Write(command);
+            session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString()  + ")\n"));
         }
 
 
@@ -193,10 +230,12 @@ namespace PE
         }
 
 
-
         //public double getVolume()
         //{
         //    return length * breadth * height;
         //}
     }
+
+
+
 }
