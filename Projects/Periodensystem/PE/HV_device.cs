@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Threading;
 using System.Threading.Tasks;
 using NationalInstruments.Visa;
 using Ivi.Visa;
-using XPS;
+
+
+
+
 
 namespace XPS
 {
     
-
-
     class HV_device
     {
         private string IP_adress;
         public bool Is_session_open { get; set; }
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         Ivi.Visa.IMessageBasedSession session;
+
 
         public HV_device()
         {  //Parameterized constructor
@@ -31,11 +29,11 @@ namespace XPS
          
             
 
-         public async Task<int> write_to_iseg(string command)
+        public async Task<int> write_to_iseg(string command)
         {
             _suspend_background_measurement.Reset();
             session.RawIO.Write(String.Format(command));
-            await Task.Delay(10);
+            await Task.Delay(25);
             _suspend_background_measurement.Set();
             return 1;
         }
@@ -45,8 +43,9 @@ namespace XPS
             string reading = string.Empty;
             _suspend_background_measurement.Reset();
             session.RawIO.Write(String.Format(command));
-            await Task.Delay(10);
+            await Task.Delay(25);
             reading = session.RawIO.ReadString();
+            await Task.Delay(25);
             _suspend_background_measurement.Set();
             return reading;
         }
@@ -60,7 +59,10 @@ namespace XPS
 
                session = (IMessageBasedSession)rm.Open("TCPIP0::" + IP_adress + "::10001::SOCKET");
                ((INativeVisaSession)session).SetAttributeBoolean(NativeVisaAttribute.SuppressEndEnabled, false);
-               Is_session_open = true;
+                await Task.Delay(50);
+                Is_session_open = true;
+                await clear();
+                await reset_channels();
             }
             return 1;
         }
@@ -115,9 +117,9 @@ namespace XPS
         }
 
 
-        public async Task<int> emergency_off()
+        public async Task<int> emergency_off(int channel)
         {
-            await write_to_iseg(":VOLT EMCY OFF\n");
+            await write_to_iseg(":VOLT EMCY OFF,(@" + channel.ToString() + ")\n");
             return 1;
         }
 
@@ -200,25 +202,28 @@ namespace XPS
         }
 
 
-
-
-
-        public async Task<int> waiter()
-        {
-            await Task.Delay(10000);
-            return 1;
-        }
-
-
         public void raw_read_syn(int channel)
         {
-            session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString()  + ")\n"));
+            try
+            {
+                session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString() + ")\n"));
+            }
+            catch (Exception)
+            {
+            }
         }
 
 
         public string raw_read_syn()
         {
-            return session.RawIO.ReadString();
+            try
+            {
+                return session.RawIO.ReadString();
+            }
+            catch (Exception)
+            {
+                return String.Empty;
+            }
         }
 
 
@@ -226,6 +231,7 @@ namespace XPS
         {
             await reset_channels();
             session.Dispose();
+            Is_session_open = false;
             return 1;
         }
 
