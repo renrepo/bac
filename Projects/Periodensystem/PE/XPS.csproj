@@ -45,9 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\Ivi.Visa.dll</HintPath>
     </Reference>
-    <Reference Include="LabJack.LJM, Version=1.14.0.0, Culture=neutral, PublicKeyToken=0316e29ba8d40ce0, processorArchitecture=MSIL">
+    <Reference Include="LabJack.LJM, Version=1.17.0.0, Culture=neutral, PublicKeyToken=0316e29ba8d40ce0, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\LabJack.LJM.dll</HintPath>
+      <HintPath>bin\Debug\LabJack.LJM.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Dynamic, Version=1.2.2.0, Culture=neutral, PublicKeyToken=7f709c5b713576e1, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicLanguageRuntime.1.2.2\lib\net45\Microsoft.Dynamic.dll</HintPath>

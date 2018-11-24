@@ -3,7 +3,9 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Threading;
 using LabJack;
-
+using System.Drawing;
+using System.Diagnostics;
+using ZedGraph;
 
 
 
@@ -160,6 +162,67 @@ namespace XPS
             }
         }
 
+
+        private async void background_counter_labjack()
+        {
+            myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
+            int number = 0;
+            _cts_counter_labjack = new CancellationTokenSource();
+            var token = _cts_counter_labjack.Token;
+            var progressHandler = new Progress<string>(value =>
+            {
+                tb_counter.Text = value;
+                values_to_plot.Add(number, Double.Parse(value));
+                myCurve.AddPoint(number, Double.Parse(value));
+                //values_to_plot.Add(ctner, Convert.ToDouble(value));
+                //myCurve.AddPoint(ctner, Convert.ToDouble(value));
+                zedGraphControl1.Invalidate();
+                zedGraphControl1.AxisChange();
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
+            {
+                int ct = int.Parse(tb_counter_ms.Text);
+                double erg = 0;
+                Stopwatch sw = new Stopwatch();
+                cb_counter.Text = "On";
+                cb_counter.BackColor = Color.LightGreen;
+                tb_counter_ms.ReadOnly = true;
+                await Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                        LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                        sw.Start();
+                        LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                        Thread.Sleep(ct);
+                        sw.Stop();
+                        LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                        erg = (cnt_after - cnt_before) / sw.Elapsed.TotalSeconds;
+                        sw.Reset();
+                        if (progress != null)
+                        {
+                            //progress.Report(erg.ToString("N0"));    //no decimal placed
+                            progress.Report(erg.ToString("0000000"));
+                            token.ThrowIfCancellationRequested();
+                        }
+                        number += 1;
+                    }
+                });
+                //MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
+                tb_counter.Text = String.Empty;
+                tb_counter_ms.ReadOnly = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer");
+            }
+        }
     }
 
 }

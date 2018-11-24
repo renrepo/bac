@@ -340,13 +340,13 @@
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_stream_read = new System.Windows.Forms.Button();
             this.btn_hv_2 = new System.Windows.Forms.Button();
             this.btn_hv = new System.Windows.Forms.Button();
             this.btn_stop_adc = new System.Windows.Forms.Button();
             this.btn_st = new System.Windows.Forms.Button();
             this.tb_hem_out = new System.Windows.Forms.TextBox();
             this.tb_hem_in = new System.Windows.Forms.TextBox();
-            this.tb_rampe = new System.Windows.Forms.TextBox();
             this.tb_adc2 = new System.Windows.Forms.TextBox();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.tb_ref = new System.Windows.Forms.TextBox();
@@ -354,6 +354,7 @@
             this.btn_read_adc2 = new System.Windows.Forms.Button();
             this.btn_dac = new System.Windows.Forms.Button();
             this.btn_ref = new System.Windows.Forms.Button();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.btn_scpi = new System.Windows.Forms.Button();
             this.writeTextBox = new System.Windows.Forms.TextBox();
@@ -3031,13 +3032,13 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_stream_read);
             this.tabPage4.Controls.Add(this.btn_hv_2);
             this.tabPage4.Controls.Add(this.btn_hv);
             this.tabPage4.Controls.Add(this.btn_stop_adc);
             this.tabPage4.Controls.Add(this.btn_st);
             this.tabPage4.Controls.Add(this.tb_hem_out);
             this.tabPage4.Controls.Add(this.tb_hem_in);
-            this.tabPage4.Controls.Add(this.tb_rampe);
             this.tabPage4.Controls.Add(this.tb_adc2);
             this.tabPage4.Controls.Add(this.tb_dac);
             this.tabPage4.Controls.Add(this.tb_ref);
@@ -3048,6 +3049,13 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_stream_read
+            // 
+            resources.ApplyResources(this.btn_stream_read, "btn_stream_read");
+            this.btn_stream_read.Name = "btn_stream_read";
+            this.btn_stream_read.UseVisualStyleBackColor = true;
+            this.btn_stream_read.Click += new System.EventHandler(this.btn_stream_read_Click);
             // 
             // btn_hv_2
             // 
@@ -3086,11 +3094,6 @@
             // 
             resources.ApplyResources(this.tb_hem_in, "tb_hem_in");
             this.tb_hem_in.Name = "tb_hem_in";
-            // 
-            // tb_rampe
-            // 
-            resources.ApplyResources(this.tb_rampe, "tb_rampe");
-            this.tb_rampe.Name = "tb_rampe";
             // 
             // tb_adc2
             // 
@@ -3134,6 +3137,11 @@
             this.btn_ref.Name = "btn_ref";
             this.btn_ref.UseVisualStyleBackColor = true;
             this.btn_ref.Click += new System.EventHandler(this.btn_ref_Click);
+            // 
+            // tb_rampe
+            // 
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
             // 
             // tabPage3
             // 
@@ -3877,6 +3885,7 @@
             this.Controls.Add(this.label96);
             this.Controls.Add(this.tb_show);
             this.Controls.Add(this.label95);
+            this.Controls.Add(this.tb_rampe);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.label97);
             this.Controls.Add(this.label93);
@@ -4413,6 +4422,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.TextBox tb_flow;
+        private System.Windows.Forms.Button btn_stream_read;
     }
 }
 

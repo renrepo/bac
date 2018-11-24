@@ -85,7 +85,8 @@ namespace XPS
         // Labjack stuff
         int handle_pressure_ak = 0;            // Labjack threads
         int handle_pressure_pk = 0; 
-        int handle_pressure_sk = 0;            
+        int handle_pressure_sk = 0;
+        int handle_stream = 0;
         int handle_flow = 0;
         int handle_hemi = 0;
         int handle_hemo = 0;
@@ -311,24 +312,37 @@ namespace XPS
                 //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_DAC2);
                 LJM.OpenS("T7", "Ethernet", "ANY", ref handle_adc1);
                 LJM.OpenS("T7", "Ethernet", "ANY", ref handle_adc2);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_stream);
                 //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_schwelle);
                 //LJM.OpenS("T7", "Ethernet", "ANY", ref handle_V_minus);
 
                 // backgroundtask for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
-                background_meas_pressure_labjack();
+                //background_meas_pressure_labjack();
                 // cooling flow measurement, update every second
-                background_meas_flow_labjack();
+         //       background_meas_flow_labjack();
                 //labjack_connected = true;
                //  LJM.eWriteName(handle_schwelle, "TDAC2", schwelle);
                // LJM.eWriteName(handle_DAC2, "TDAC3", V_minus);
             }
+
             catch (Exception)
             {
                 AutoClosingMessageBox.Show("Can't open Labjack T7 device!", "Info", 500);
             }
 
 
+
+
+
+
+
+
+
+
+
+
+            LJM.OpenS("T7", "ANY", "ANY", ref handle_stream);
 
             //buttons for interactive periodic table
             Button [] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
@@ -351,8 +365,8 @@ namespace XPS
 
             // Try to Open DPS and H150666 HV devices while startup of software
             // IMPORTANT: textboxes have to be created before éxecuting the code below!!!
-            Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
-            Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
+            //Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
+            //Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
 
 
             // click-event for buttons in the periodic table will call the "global_element_click"-method
@@ -1272,6 +1286,7 @@ namespace XPS
 
             if (labjack_connected)
             {
+                LJMError = LJM.eStreamStop(handle_stream);
                 LJM.CloseAll();
             }
             Thread.Sleep(1000);
@@ -1362,66 +1377,20 @@ namespace XPS
         }
 
 
-        private async void background_counter_labjack()
-        {
-            _cts_counter_labjack = new CancellationTokenSource();
-            var token = _cts_counter_labjack.Token;
-            var progressHandler = new Progress<string>(value =>
-            {
-                tb_counter.Text = value;
-            });
-            var progress = progressHandler as IProgress<string>;
-            try
-            {
-                int ct = int.Parse(tb_counter_ms.Text);
-                double erg = 0;
-                Stopwatch sw = new Stopwatch();
-                cb_counter.Text = "On";
-                cb_counter.BackColor = Color.LightGreen;
-                tb_counter_ms.ReadOnly = true;
-                await Task.Run(() =>
-                {
-                    while (true)
-                    {
-                        LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
-                        LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
-                        sw.Start();
-                        LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
-                        Thread.Sleep(ct);
-                        sw.Stop();
-                        LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
-                        erg = (cnt_after - cnt_before) / sw.Elapsed.TotalSeconds;
-                        sw.Reset();
-                        if (progress != null)
-                        {
-                            progress.Report(erg.ToString("N0"));    //no decimal placed
-                            token.ThrowIfCancellationRequested();
-                        }
-                    }
-                });
-                //MessageBox.Show("Completed!");
-            }
-            catch (OperationCanceledException)
-            {
-                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
-                tb_counter.Text = String.Empty;
-                tb_counter_ms.ReadOnly = false;
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Type in Integer");
-            }
-        }
-
 
 
         //#########################################################################################################################
         // TEST PANEL
-        private void btn_dac_Click(object sender, EventArgs e)
+        private async void btn_dac_Click(object sender, EventArgs e)
         {
-            double value = Convert.ToDouble(tb_dac.Text.Replace(",","."));
-           // LJM.eWriteName(handle_DAC, "TDAC0", value);
-            LJM.eWriteName(handle_DAC, "DAC0", value);
+            try
+            {
+                LJMError = LJM.eStreamStop(handle_stream);
+                await DPS.voltage_ramp(5);
+            }
+            catch (Exception)
+            {
+            }
         }
 
         private void btn_ref_Click(object sender, EventArgs e)
@@ -1899,8 +1868,171 @@ namespace XPS
             //await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
             await H150666.channel_off(1);
         }
+
+        LJM.LJMERROR LJMError = 0;
+
+        private async void btn_stream_read_Click(object sender, EventArgs e)
+        {
+            double time = 0;
+            double time2 = 0;
+            double time3 = 0;
+            double time4 = 0;
+            double ct1 = 0;
+            double ct2 = 0;
+            double ct3 = 0;
+            double ct4 = 0;
+
+
+            int samples_per_second = 5;
+            int samples_for_mean = 4;
+
+
+            int counter_LSB = 3036;
+            int MSB = 4899;
+            int Core_Timer = 61520;
+            int AIN0_hemo = 0;
+            int counter_flow_LSB = 3034;
+            int AIN5_PAK = 4;
+            string ErrorString = String.Empty;
+            int numAddresses = 8;
+            double scanRate = samples_per_second*samples_for_mean;
+            int scansPerRead = Convert.ToInt32(scanRate);
+
+            //int[] aScanList = new int[] { 3019, 4899, 61520, 4899 };
+            //int[] aScanList = new int[] { 3036, 4899, 61520, 4899 };
+            double[] array_counts = new double [Convert.ToInt32(scanRate)];
+            double[] array_time = new double[Convert.ToInt32(scanRate)];
+            double[] array_v_hemo = new double[Convert.ToInt32(scanRate)];
+            double[] array_PAK = new double[Convert.ToInt32(scanRate)];
+            double[] array_flow = new double[Convert.ToInt32(scanRate)];
+            int[] aScanList = new int[] {
+                AIN0_hemo, MSB,
+                counter_LSB, MSB,
+                //Core_Timer, MSB,
+                AIN5_PAK, MSB,
+                counter_flow_LSB, MSB};
+            int DeviceScanBacklog = 0;
+            int LJMScanBacklog = 0;
+            int data_length = numAddresses * scansPerRead;
+            double[] aData = new double[data_length];
+
+            curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
+            string u = tb_safe.Text + curr_time;
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "_" + "Pulse_Generator" + "\\"));
+            path_logfile = dl.FullName;
+            using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+            {
+                file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
+                file.WriteLine("" + Environment.NewLine);
+                file.WriteLine("#Counts");
+                file.WriteLine("" + Environment.NewLine);
+            }
+
+            LJM.eWriteName(handle_stream, "DIO18_EF_INDEX", 7);
+            LJM.eWriteName(handle_stream, "DIO18_EF_ENABLE", 1);
+            LJM.eWriteName(handle_stream, "STREAM_RESOLUTION_INDEX",8);
+            LJM.eStreamStart(handle_stream, scansPerRead, numAddresses, aScanList, ref scanRate);
+            //LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, initScanRate, aData);
+            myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
+            int number = 1;
+            _cts_counter_labjack = new CancellationTokenSource();
+            var token = _cts_counter_labjack.Token;
+            var progressHandler = new Progress<string>(value =>
+            {
+                tb_rampe.Text = value;
+                zedGraphControl1.Invalidate();
+                zedGraphControl1.AxisChange();
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
+            {
+                int ct = int.Parse(tb_counter_ms.Text);
+                double mean_array_v_hemo = 0;
+                double mean_flow = 0;
+                double mean_PAK = 0;
+                double mean_counts = 0;
+                double oldtime = 0;
+                double ctn_old;
+                await Task.Run(() =>
+                {
+                while (true)
+                {
+                    //LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, initScanRate, aData);
+                    LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
+                    //LJM.eReadName(handle_stream, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
+                    //ct1 = (aData[data_length- 5] - aData[2] + (aData[data_length - 4] - aData[3]) * 65356) * samples_per_second;
+                    ctn_old = (aData[2] + aData[3] * 65356);
+                        for (int i = 0; i < scanRate; i++)
+                        {
+                            mean_array_v_hemo += aData[numAddresses * i];
+                            //array_v_hemo[i] = aData[numAddresses*i];
+                            //mean_counts += aData[numAddresses*(i+1) + 2] + aData[numAddresses*(i+1) + 3] * 65356 - (aData[numAddresses * i + 2] + aData[numAddresses * i + 3] * 65356);
+                            //array_time[i] = (aData[numAddresses + 4] + aData[numAddresses + 5] * 65356 - oldtime)/40000;
+                            mean_PAK += aData[numAddresses*i + 4];
+                            mean_flow += (aData[numAddresses*i + 6] + aData[numAddresses*i + 7] * 65356)*samples_per_second / 750 * 60;
+                            //oldtime += 1;   
+                            //mean_array_v_hemo += array_v_hemo[i];
+                            if ((i+1) % (samples_for_mean) == 0)
+                            {
+                                mean_counts = ((aData[numAddresses * i + 2] + aData[numAddresses * i + 3] * 65356) - ctn_old) * samples_per_second;
+                                mean_array_v_hemo = mean_array_v_hemo / samples_for_mean * 153.05;
+                                oldtime += 1;
+                                values_to_plot.Add(oldtime, mean_counts);
+                                myCurve.AddPoint(oldtime, mean_counts);
+                                mean_array_v_hemo = 0;
+                                ctn_old = mean_counts;
+                            }
+
+                        }
+
+                        //LJM.ErrorToString(1, ref ErrorString);
+                        //LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
+                        //time = (aData[7] * 65536 + aData[6] - (aData[3] * 65536 + aData[2])) / 40000;
+                        //ct1 = (aData[5] * 65536 + aData[4] - (aData[1] * 65536 + aData[0])) * 5;
+                        //time2 = (aData[11] * 65536 + aData[10] - (aData[7] * 65536 + aData[6])) / 40000;
+                        //ct2 = (aData[9] * 65536 + aData[8] - (aData[5] * 65536 + aData[4])) * 5;
+                        //time3 = (aData[15] * 65536 + aData[14] - (aData[11] * 65536 + aData[10])) / 40000;
+                        //ct3 = (aData[13] * 65536 + aData[12] - (aData[9] * 65536 + aData[8])) * 5;
+                        //time4 = (aData[19] * 65536 + aData[18] - (aData[15] * 65536 + aData[14])) / 40000;
+                        //ct4 = (aData[17] * 65536 + aData[16] - (aData[13] * 65536 + aData[12])) * 5;
+                        //string Data = String.Join(",", aData.Select(p => p.ToString()).ToArray());
+                        if (progress != null)
+                        {
+                            //progress.Report(erg.ToString("N0"));    //no decimal placed
+                            progress.Report(aData[0].ToString() + "    " + aData[1].ToString() + "    " + aData[0].ToString() + "    " + time4.ToString());
+                            token.ThrowIfCancellationRequested();
+                        }
+                        number += 4;
+                        using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                        {
+                            file.WriteLine(ct1.ToString("0000000"));
+                            file.WriteLine(ct2.ToString("0000000"));
+                            file.WriteLine(ct3.ToString("0000000"));
+                            file.WriteLine(ct4.ToString("0000000"));
+                        }
+                    }
+                });
+                //MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
+                LJMError = LJM.eStreamStop(handle_stream);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer");
+            }
+
+        }
     }
 }
+
+
+
+
+
+
 
 
 
@@ -1918,4 +2050,6 @@ namespace XPS
 // TODO:
 /*** 
 --- read_raw_sync zweifach
+--- resolution index adc? nur 16 bit?
+--- overflow counter mit if verhindern
  ***/

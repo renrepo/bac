@@ -62,7 +62,6 @@ C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\PE.pdb
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ArduinoDriver.dll
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ArduinoUploader.dll
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\Ivi.Visa.dll
-C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\LabJack.LJM.dll
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\NationalInstruments.Visa.dll
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\NLog.dll
 C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\RJCP.SerialPortStream.dll
