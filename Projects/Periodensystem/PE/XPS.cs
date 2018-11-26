@@ -1385,20 +1385,22 @@ namespace XPS
         {
             try
             {
+                LJM.eWriteName(handle_stream, "DAC0", 1.0020000);
                 LJMError = LJM.eStreamStop(handle_stream);
-                await DPS.voltage_ramp(5);
+                
             }
             catch (Exception)
             {
             }
         }
 
-        private void btn_ref_Click(object sender, EventArgs e)
+        private async void btn_ref_Click(object sender, EventArgs e)
         {
             while (true)
             {
-                double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
-                LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+                //double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
+                //LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+                await DPS.voltage_ramp(0.0010);
                 //LJM.eWriteName(handle_schwelle, "TDAC2", 0.0);
                 //LJM.eWriteName(handle_schwelle, "TDAC2", 0.3);
             }
@@ -1884,7 +1886,7 @@ namespace XPS
 
 
             int samples_per_second = 5;
-            int samples_for_mean = 4;
+            int samples_for_mean = 32;
 
 
             int counter_LSB = 3036;
@@ -1894,7 +1896,7 @@ namespace XPS
             int counter_flow_LSB = 3034;
             int AIN5_PAK = 4;
             string ErrorString = String.Empty;
-            int numAddresses = 8;
+            int numAddresses = 10;
             double scanRate = samples_per_second*samples_for_mean;
             int scansPerRead = Convert.ToInt32(scanRate);
 
@@ -1910,7 +1912,8 @@ namespace XPS
                 counter_LSB, MSB,
                 //Core_Timer, MSB,
                 AIN5_PAK, MSB,
-                counter_flow_LSB, MSB};
+                counter_flow_LSB, MSB,
+                AIN0_hemo, MSB,};
             int DeviceScanBacklog = 0;
             int LJMScanBacklog = 0;
             int data_length = numAddresses * scansPerRead;
@@ -1976,9 +1979,10 @@ namespace XPS
                             {
                                 mean_counts = ((aData[numAddresses * i + 2] + aData[numAddresses * i + 3] * 65356) - ctn_old) * samples_per_second;
                                 mean_array_v_hemo = mean_array_v_hemo / samples_for_mean * 153.05;
+                                //mean_array_v_hemo = mean_array_v_hemo / samples_for_mean;
                                 oldtime += 1;
-                                values_to_plot.Add(oldtime, mean_counts);
-                                myCurve.AddPoint(oldtime, mean_counts);
+                                values_to_plot.Add(oldtime, mean_array_v_hemo);
+                                myCurve.AddPoint(oldtime, mean_array_v_hemo);
                                 mean_array_v_hemo = 0;
                                 ctn_old = mean_counts;
                             }
