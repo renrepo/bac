@@ -1981,8 +1981,8 @@ namespace XPS
                                 mean_array_v_hemo = mean_array_v_hemo / samples_for_mean * 153.05;
                                 //mean_array_v_hemo = mean_array_v_hemo / samples_for_mean;
                                 oldtime += 1;
-                                values_to_plot.Add(oldtime, mean_array_v_hemo);
-                                myCurve.AddPoint(oldtime, mean_array_v_hemo);
+                                values_to_plot.Add(oldtime, mean_counts);
+                                myCurve.AddPoint(oldtime, mean_counts);
                                 mean_array_v_hemo = 0;
                                 ctn_old = mean_counts;
                             }
