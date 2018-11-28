@@ -340,6 +340,8 @@
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_reload_fil_curr = new System.Windows.Forms.Button();
+            this.tb_fil_curr = new System.Windows.Forms.TextBox();
             this.btn_stream_read = new System.Windows.Forms.Button();
             this.btn_hv_2 = new System.Windows.Forms.Button();
             this.btn_hv = new System.Windows.Forms.Button();
@@ -448,8 +450,12 @@
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tb_fil_curr = new System.Windows.Forms.TextBox();
-            this.btn_reload_fil_curr = new System.Windows.Forms.Button();
+            this.btn_hv_reload = new System.Windows.Forms.Button();
+            this.btn_hv_on = new System.Windows.Forms.Button();
+            this.btn_hv_off = new System.Windows.Forms.Button();
+            this.tb_hv = new System.Windows.Forms.TextBox();
+            this.tb_emi = new System.Windows.Forms.TextBox();
+            this.btn_emi = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3034,6 +3040,12 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_emi);
+            this.tabPage4.Controls.Add(this.tb_emi);
+            this.tabPage4.Controls.Add(this.tb_hv);
+            this.tabPage4.Controls.Add(this.btn_hv_off);
+            this.tabPage4.Controls.Add(this.btn_hv_on);
+            this.tabPage4.Controls.Add(this.btn_hv_reload);
             this.tabPage4.Controls.Add(this.btn_reload_fil_curr);
             this.tabPage4.Controls.Add(this.tb_fil_curr);
             this.tabPage4.Controls.Add(this.btn_stream_read);
@@ -3053,6 +3065,18 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_reload_fil_curr
+            // 
+            resources.ApplyResources(this.btn_reload_fil_curr, "btn_reload_fil_curr");
+            this.btn_reload_fil_curr.Name = "btn_reload_fil_curr";
+            this.btn_reload_fil_curr.UseVisualStyleBackColor = true;
+            this.btn_reload_fil_curr.Click += new System.EventHandler(this.btn_reload_fil_curr_Click);
+            // 
+            // tb_fil_curr
+            // 
+            resources.ApplyResources(this.tb_fil_curr, "tb_fil_curr");
+            this.tb_fil_curr.Name = "tb_fil_curr";
             // 
             // btn_stream_read
             // 
@@ -3879,17 +3903,43 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
-            // tb_fil_curr
+            // btn_hv_reload
             // 
-            resources.ApplyResources(this.tb_fil_curr, "tb_fil_curr");
-            this.tb_fil_curr.Name = "tb_fil_curr";
+            resources.ApplyResources(this.btn_hv_reload, "btn_hv_reload");
+            this.btn_hv_reload.Name = "btn_hv_reload";
+            this.btn_hv_reload.UseVisualStyleBackColor = true;
+            this.btn_hv_reload.Click += new System.EventHandler(this.btn_hv_reload_Click);
             // 
-            // btn_reload_fil_curr
+            // btn_hv_on
             // 
-            resources.ApplyResources(this.btn_reload_fil_curr, "btn_reload_fil_curr");
-            this.btn_reload_fil_curr.Name = "btn_reload_fil_curr";
-            this.btn_reload_fil_curr.UseVisualStyleBackColor = true;
-            this.btn_reload_fil_curr.Click += new System.EventHandler(this.btn_reload_fil_curr_Click);
+            resources.ApplyResources(this.btn_hv_on, "btn_hv_on");
+            this.btn_hv_on.Name = "btn_hv_on";
+            this.btn_hv_on.UseVisualStyleBackColor = true;
+            this.btn_hv_on.Click += new System.EventHandler(this.btn_hv_on_Click);
+            // 
+            // btn_hv_off
+            // 
+            resources.ApplyResources(this.btn_hv_off, "btn_hv_off");
+            this.btn_hv_off.Name = "btn_hv_off";
+            this.btn_hv_off.UseVisualStyleBackColor = true;
+            this.btn_hv_off.Click += new System.EventHandler(this.btn_hv_off_Click);
+            // 
+            // tb_hv
+            // 
+            resources.ApplyResources(this.tb_hv, "tb_hv");
+            this.tb_hv.Name = "tb_hv";
+            // 
+            // tb_emi
+            // 
+            resources.ApplyResources(this.tb_emi, "tb_emi");
+            this.tb_emi.Name = "tb_emi";
+            // 
+            // btn_emi
+            // 
+            resources.ApplyResources(this.btn_emi, "btn_emi");
+            this.btn_emi.Name = "btn_emi";
+            this.btn_emi.UseVisualStyleBackColor = true;
+            this.btn_emi.Click += new System.EventHandler(this.btn_emi_Click);
             // 
             // XPS
             // 
@@ -4441,6 +4491,12 @@
         private System.Windows.Forms.Button btn_stream_read;
         private System.Windows.Forms.Button btn_reload_fil_curr;
         private System.Windows.Forms.TextBox tb_fil_curr;
+        private System.Windows.Forms.TextBox tb_hv;
+        private System.Windows.Forms.Button btn_hv_off;
+        private System.Windows.Forms.Button btn_hv_on;
+        private System.Windows.Forms.Button btn_hv_reload;
+        private System.Windows.Forms.Button btn_emi;
+        private System.Windows.Forms.TextBox tb_emi;
     }
 }
 
