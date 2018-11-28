@@ -338,12 +338,6 @@ namespace XPS
 
 
 
-
-
-
-
-            LJM.OpenS("T7", "ANY", "ANY", ref handle_stream);
-
             //buttons for interactive periodic table
             Button [] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
                              Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
@@ -1859,9 +1853,17 @@ namespace XPS
             }
         }
 
+
+
+
+
+        private async void btn_reload_fil_curr_Click(object sender, EventArgs e)
+        {
+            await H150666.set_current(Double.Parse(tb_fil_curr.Text), 1);
+        }
+
         private async void btn_hv_Click(object sender, EventArgs e)
         {
-            await H150666.set_current(0.5,1);
             await H150666.channel_on(1);
         }
 
@@ -1870,6 +1872,11 @@ namespace XPS
             //await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
             await H150666.channel_off(1);
         }
+
+
+
+
+
 
         LJM.LJMERROR LJMError = 0;
 
@@ -1886,7 +1893,7 @@ namespace XPS
 
 
             int samples_per_second = 5;
-            int samples_for_mean = 32;
+            int samples_for_mean = 4;
 
 
             int counter_LSB = 3036;
@@ -1897,12 +1904,14 @@ namespace XPS
             int AIN5_PAK = 4;
             string ErrorString = String.Empty;
             int numAddresses = 10;
-            double scanRate = samples_per_second*samples_for_mean;
-            int scansPerRead = Convert.ToInt32(scanRate);
+            //double scanRate = samples_per_second*samples_for_mean;
+            double scanRate = samples_per_second * (samples_for_mean);
+            int scansPerRead = Convert.ToInt32(samples_for_mean);
 
             //int[] aScanList = new int[] { 3019, 4899, 61520, 4899 };
             //int[] aScanList = new int[] { 3036, 4899, 61520, 4899 };
-            double[] array_counts = new double [Convert.ToInt32(scanRate)];
+            double[] array_counts = new double [Convert.ToInt32(samples_per_second)];
+            double[] countrate = new double[Convert.ToInt32(samples_per_second)];
             double[] array_time = new double[Convert.ToInt32(scanRate)];
             double[] array_v_hemo = new double[Convert.ToInt32(scanRate)];
             double[] array_PAK = new double[Convert.ToInt32(scanRate)];
@@ -1910,14 +1919,15 @@ namespace XPS
             int[] aScanList = new int[] {
                 AIN0_hemo, MSB,
                 counter_LSB, MSB,
-                //Core_Timer, MSB,
-                AIN5_PAK, MSB,
+                Core_Timer, MSB,
+                //AIN5_PAK, MSB,
                 counter_flow_LSB, MSB,
-                AIN0_hemo, MSB,};
+                AIN0_hemo, MSB};
             int DeviceScanBacklog = 0;
             int LJMScanBacklog = 0;
             int data_length = numAddresses * scansPerRead;
             double[] aData = new double[data_length];
+            double[] store = new double[data_length];
 
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
@@ -1954,41 +1964,40 @@ namespace XPS
                 double mean_flow = 0;
                 double mean_PAK = 0;
                 double mean_counts = 0;
+                double mean_counts_v = 0;
                 double oldtime = 0;
-                double ctn_old;
+                double ctn_old = 0;
+                int inc = 0;
                 await Task.Run(() =>
                 {
-                while (true)
-                {
-                    //LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, initScanRate, aData);
-                    LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
-                    //LJM.eReadName(handle_stream, "DIO18_EF_READ_A_AND_RESET", ref intcounter);
-                    //ct1 = (aData[data_length- 5] - aData[2] + (aData[data_length - 4] - aData[3]) * 65356) * samples_per_second;
-                    ctn_old = (aData[2] + aData[3] * 65356);
-                        for (int i = 0; i < scanRate; i++)
-                        {
-                            mean_array_v_hemo += aData[numAddresses * i];
-                            //array_v_hemo[i] = aData[numAddresses*i];
-                            //mean_counts += aData[numAddresses*(i+1) + 2] + aData[numAddresses*(i+1) + 3] * 65356 - (aData[numAddresses * i + 2] + aData[numAddresses * i + 3] * 65356);
-                            //array_time[i] = (aData[numAddresses + 4] + aData[numAddresses + 5] * 65356 - oldtime)/40000;
-                            mean_PAK += aData[numAddresses*i + 4];
-                            mean_flow += (aData[numAddresses*i + 6] + aData[numAddresses*i + 7] * 65356)*samples_per_second / 750 * 60;
-                            //oldtime += 1;   
-                            //mean_array_v_hemo += array_v_hemo[i];
-                            if ((i+1) % (samples_for_mean) == 0)
-                            {
-                                mean_counts = ((aData[numAddresses * i + 2] + aData[numAddresses * i + 3] * 65356) - ctn_old) * samples_per_second;
-                                mean_array_v_hemo = mean_array_v_hemo / samples_for_mean * 153.05;
-                                //mean_array_v_hemo = mean_array_v_hemo / samples_for_mean;
-                                oldtime += 1;
-                                values_to_plot.Add(oldtime, mean_counts);
-                                myCurve.AddPoint(oldtime, mean_counts);
-                                mean_array_v_hemo = 0;
-                                ctn_old = mean_counts;
-                            }
+                    //LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
+                    //ctn_old = aData[data_length - 8] + aData[data_length - 7] * 65356;
+                    ctn_old = 0;
+                    while (true)
+                    {
 
+                        LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
+
+
+                        //array_counts[i-1] = (aData[inc] - aData[inc - numAddresses*(samples_for_mean-1)]   +   (aData[inc + 1] - aData[inc - numAddresses * (samples_for_mean - 1) + 1]) * 65536);
+                        ctn_old = (aData[data_length - 8] + aData[data_length - 7] * 65536 - (aData[inc + 2] + aData[inc + 3] * 65536)) * samples_per_second * samples_for_mean / (samples_for_mean - 1);
+                        //array_counts[i - 1] = (aData[inc + 2] + aData[inc + 3] * 65536 - ctn_old) / 40000000;
+                        //ctn_old = aData[inc] + aData[inc + 1] * 65356;
+                        //ctn_old = aData[inc + 2] + aData[inc + 3] * 65536;
+                        oldtime += 1;
+                        values_to_plot.Add(oldtime, ctn_old);
+                        myCurve.AddPoint(oldtime, ctn_old);
+                        using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                        {
+                            file.WriteLine(ctn_old.ToString("0000000"));
+                            file.WriteLine(oldtime.ToString("0000000"));
                         }
 
+
+
+
+                        //-aData[numAddresses * (i - samples_for_mean + 1) + 2]
+                        //- aData[numAddresses * (i - samples_for_mean + 1) + 3]
                         //LJM.ErrorToString(1, ref ErrorString);
                         //LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
                         //time = (aData[7] * 65536 + aData[6] - (aData[3] * 65536 + aData[2])) / 40000;
@@ -2003,17 +2012,15 @@ namespace XPS
                         if (progress != null)
                         {
                             //progress.Report(erg.ToString("N0"));    //no decimal placed
-                            progress.Report(aData[0].ToString() + "    " + aData[1].ToString() + "    " + aData[0].ToString() + "    " + time4.ToString());
+                            progress.Report(mean_counts.ToString());
                             token.ThrowIfCancellationRequested();
                         }
                         number += 4;
-                        using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
-                        {
-                            file.WriteLine(ct1.ToString("0000000"));
-                            file.WriteLine(ct2.ToString("0000000"));
-                            file.WriteLine(ct3.ToString("0000000"));
-                            file.WriteLine(ct4.ToString("0000000"));
-                        }
+                        //using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                       // {
+                         //   file.WriteLine(ctn_old.ToString("0000000"));
+                         //   file.WriteLine(oldtime.ToString("0000000"));
+                       // }
                     }
                 });
                 //MessageBox.Show("Completed!");
@@ -2029,6 +2036,8 @@ namespace XPS
             }
 
         }
+
+        
     }
 }
 
