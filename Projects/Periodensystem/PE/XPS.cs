@@ -1882,16 +1882,6 @@ namespace XPS
 
         private async void btn_stream_read_Click(object sender, EventArgs e)
         {
-            double time = 0;
-            double time2 = 0;
-            double time3 = 0;
-            double time4 = 0;
-            double ct1 = 0;
-            double ct2 = 0;
-            double ct3 = 0;
-            double ct4 = 0;
-
-
             int samples_per_second = 5;
             int samples_for_mean = 16;
 
@@ -1902,15 +1892,12 @@ namespace XPS
             int AIN0_hemo = 0;
             int counter_flow_LSB = 3034;
             int AIN5_PAK = 4;
-            string ErrorString = String.Empty;
             int numAddresses = 7;
-            //double scanRate = samples_per_second*samples_for_mean;
-            double scanRate = samples_per_second * (samples_for_mean);
+            double scanRate = samples_per_second * samples_for_mean;
             int scansPerRead = Convert.ToInt32(scanRate);
 
-            //int[] aScanList = new int[] { 3019, 4899, 61520, 4899 };
-            //int[] aScanList = new int[] { 3036, 4899, 61520, 4899 };
-            double[] array_counts = new double[Convert.ToInt32(samples_per_second)];
+
+            double[] array_ctn = new double[Convert.ToInt32(samples_per_second)];
             double[] countrate = new double[Convert.ToInt32(samples_per_second)];
             double[] array_time = new double[Convert.ToInt32(scanRate)];
             double[] array_v_hemo = new double[Convert.ToInt32(scanRate)];
@@ -1946,7 +1933,7 @@ namespace XPS
             LJM.eStreamStart(handle_stream, scansPerRead, numAddresses, aScanList, ref scanRate);
             //LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, initScanRate, aData);
             myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
-            int number = 1;
+
             _cts_counter_labjack = new CancellationTokenSource();
             var token = _cts_counter_labjack.Token;
             var progressHandler = new Progress<string>(value =>
@@ -1962,20 +1949,23 @@ namespace XPS
                 double mean_array_v_hemo = 0;
                 double mean_flow = 0;
                 double mean_PAK = 0;
-                double mean_counts = 0;
                 double mean_counts_v = 0;
                 double oldtime = 0;
+                double ctn = 0;
                 double ctn_old = 0;
-                double cts = 0;
-                double t = 0;
+                double ctn_now = 0;
+                double t_now;
                 double t_old = 0;
+                double mean_volt_hemo = 0;
                 int inc = 0;
+                int l = 0;
                 await Task.Run(() =>
                 {
                     LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
                     //ctn_old = aData[data_length - 8] + aData[data_length - 7] * 65536;
                     ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
                     t_old = aData[data_length - 4] + aData[data_length - 3] * 65536;
+                    mean_volt_hemo = aData[data_length - numAddresses];
                     while (true)
                     {
 
@@ -1984,52 +1974,48 @@ namespace XPS
                         for (int i = 1; i <= samples_per_second; i++)
                         {
                             inc = (i * samples_for_mean - 1) * numAddresses;
-                            t = (aData[inc + 3] + aData[inc + 4] * 65536 - t_old) / 40000000;
-                            cts = (aData[inc + 1] + aData[inc + 2] * 65536 - ctn_old) / t;                           
-                            ctn_old = aData[inc + 1] + aData[inc + 2] * 65536;
-                            t_old = aData[inc + 3] + aData[inc + 4] * 65536;
-                            oldtime += 1;
-                            values_to_plot.Add(oldtime, cts);
-                            myCurve.AddPoint(oldtime, cts);
-                        }
+                            t_now = aData[inc + 3] + aData[inc + 4] * 65536;
+                            ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
 
-                        //array_counts[i-1] = (aData[inc] - aData[inc - numAddresses*(samples_for_mean-1)]   +   (aData[inc + 1] - aData[inc - numAddresses * (samples_for_mean - 1) + 1]) * 65536);
-                        //cts = (aData[data_length - 8] + aData[data_length - 7] * 65536 - (aData[inc + 2] + aData[inc + 3] * 65536)) * samples_per_second * samples_for_mean / (samples_for_mean - 1);
-                        //array_counts[i - 1] = (aData[inc + 2] + aData[inc + 3] * 65536 - ctn_old) / 40000000;
-                        //ctn_old = aData[inc] + aData[inc + 1] * 65356;
-                        //ctn_old = aData[inc + 2] + aData[inc + 3] * 65536;
-                        //oldtime += 1;
-                        // values_to_plot.Add(oldtime, ctn_old);
-                        // myCurve.AddPoint(oldtime, ctn_old);
+                            ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
+
+                            ctn_old = ctn_now;
+                            t_old = t_now;
+
+
+                            while (l <= i*samples_for_mean - 1)
+                            {
+                                mean_volt_hemo += aData[l * numAddresses + 0];
+                                l++;
+                            }
+
+                            l--;
+                            mean_volt_hemo /= (samples_for_mean + 1);
+
+                            oldtime += 1;
+                            values_to_plot.Add(oldtime, mean_volt_hemo);
+                            myCurve.AddPoint(oldtime, mean_volt_hemo);
+
+                            mean_volt_hemo = 0;
+                        }
+                        l = 0;
+                        mean_volt_hemo = aData[data_length - numAddresses];
+
                         using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                         {
                             file.WriteLine(ctn_old.ToString("0000000"));
                             file.WriteLine(oldtime.ToString("0000000"));
                         }
 
-
-
-
-                        //-aData[numAddresses * (i - samples_for_mean + 1) + 2]
-                        //- aData[numAddresses * (i - samples_for_mean + 1) + 3]
-                        //LJM.ErrorToString(1, ref ErrorString);
-                        //LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
-                        //time = (aData[7] * 65536 + aData[6] - (aData[3] * 65536 + aData[2])) / 40000;
-                        //ct1 = (aData[5] * 65536 + aData[4] - (aData[1] * 65536 + aData[0])) * 5;
-                        //time2 = (aData[11] * 65536 + aData[10] - (aData[7] * 65536 + aData[6])) / 40000;
-                        //ct2 = (aData[9] * 65536 + aData[8] - (aData[5] * 65536 + aData[4])) * 5;
-                        //time3 = (aData[15] * 65536 + aData[14] - (aData[11] * 65536 + aData[10])) / 40000;
-                        //ct3 = (aData[13] * 65536 + aData[12] - (aData[9] * 65536 + aData[8])) * 5;
-                        //time4 = (aData[19] * 65536 + aData[18] - (aData[15] * 65536 + aData[14])) / 40000;
-                        //ct4 = (aData[17] * 65536 + aData[16] - (aData[13] * 65536 + aData[12])) * 5;
-                        //string Data = String.Join(",", aData.Select(p => p.ToString()).ToArray());
                         if (progress != null)
                         {
                             //progress.Report(erg.ToString("N0"));    //no decimal placed
-                            progress.Report(mean_counts.ToString());
+                            progress.Report(oldtime.ToString());
                             token.ThrowIfCancellationRequested();
                         }
+
                     }
+
                 });
                 //MessageBox.Show("Completed!");
             }
@@ -2065,7 +2051,7 @@ namespace XPS
         {
             await H150666.filament_current_min(3);
             await H150666.filament_current_max(5);
-            await H150666.set_K_P(0.5);
+            await H150666.set_K_P(5);
             await H150666.set_K_I(1);
             await H150666.set_K_D(0);
             //await H150666.set_voltage(Double.Parse(tb_hv.Text), 0);
