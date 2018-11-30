@@ -1983,8 +1983,8 @@ namespace XPS
                             mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1) * 153.05;
 
                             oldtime += 1;
-                            values_to_plot.Add(oldtime, mean_volt_hemo);
-                            myCurve.AddPoint(oldtime, mean_volt_hemo);
+                            values_to_plot.Add(oldtime, ctn);
+                            myCurve.AddPoint(oldtime, ctn);
 
                             mean_volt_hemo = 0;
                         }
@@ -2040,14 +2040,29 @@ namespace XPS
 
         private async void btn_emi_Click(object sender, EventArgs e)
         {
-            await H150666.filament_current_min(3);
-            await H150666.filament_current_max(5);
-            await H150666.set_K_P(5);
+            await H150666.set_current(0.5,1);
+            await Task.Delay(4000);
+            await H150666.set_current(1, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(1.5, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(2, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(2.5, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(3.0, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(3.5, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(4.0, 1);
+            await H150666.filament_current_min(4.0);
+            await H150666.filament_current_max(4.8);
+            await H150666.set_K_P(20);
             await H150666.set_K_I(1);
             await H150666.set_K_D(0);
             //await H150666.set_voltage(Double.Parse(tb_hv.Text), 0);
             //await H150666.channel_on(0);
-            await H150666.set_current(0.001, 2);
+            await H150666.set_current(0.004, 2);
             await H150666.channel_on(2);
 
         }
