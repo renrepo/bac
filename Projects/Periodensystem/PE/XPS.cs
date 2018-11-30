@@ -1637,10 +1637,10 @@ namespace XPS
             var progressHandler = new Progress<string>(value =>
             {
                 tb_counter.Text = value;
-                vm1.Text = mean_volt_hemo.ToString("0.0");
+                //vm1.Text = mean_volt_hemo.ToString("0.0");
                 //vm2.Text = v_hemo.ToString("0.0");
                 //vm3.Text = (LJ_lens2 / 3).ToString("0.000");
-                vm4.Text = v_analyser.ToString("0.0");
+                //vm4.Text = v_analyser.ToString("0.0");
                 //vm5.Text = v_channeltron_out_min.ToString("0.000");
                 //values_to_plot.Add(E_kin, Convert.ToDouble(E_pass));
                 //myCurve.AddPoint(E_kin, Convert.ToDouble(E_pass));
@@ -1652,7 +1652,7 @@ namespace XPS
             var progress = progressHandler as IProgress<string>;
 
             int samples_per_second = 5;
-            int samples_for_mean = 16;
+            int samples_for_mean = 4;
 
             int counter_LSB = 3036;
             int MSB = 4899;
@@ -1774,6 +1774,7 @@ namespace XPS
                 double ctn_now = 0;
                 double t_now;
                 double t_old = 0;
+                double hemo_check = 0;
                 
 
                 await DPS.set_voltage(v_hemo_max,0);
@@ -1788,8 +1789,9 @@ namespace XPS
                     ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
                     t_old = aData[data_length - 4] + aData[data_length - 3] * 65536;
                     mean_volt_hemo = aData[data_length - numAddresses];
+                    hemo_check = aData[data_length - numAddresses];
 
-                    while (v_hemo < v_hemo_max)
+                    while (hemo_check < v_hemo_max)
                     {
                         LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
 
@@ -1820,7 +1822,7 @@ namespace XPS
                             myCurve.AddPoint(mean_volt_hemo, ctn);
                             //E_pass = (v_hemi - v_hemo) / k;
                             E_pass = v_pass_meas / k;
-                            v_analyser = v_hemo + v_pass_meas * 0.4;
+                            v_analyser = mean_volt_hemo + v_pass_meas * 0.4;
                             // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
                             E_kin = E_pass - v_analyser + vbias + workfunction;
 
@@ -1837,9 +1839,10 @@ namespace XPS
                                     //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                     );
                             }
-
-                            progress.Report(ctn.ToString("000000"));
+                            hemo_check = mean_volt_hemo / (samples_for_mean + 1) * 153.05;
+                            //progress.Report(ctn.ToString("000000"));
                             mean_volt_hemo = 0;
+                            
                         }
 
                         l = 0;
@@ -1847,7 +1850,7 @@ namespace XPS
 
                         token.ThrowIfCancellationRequested();
                                     
-                        //progress.Report(counts.ToString("000000"));
+                        progress.Report(ctn.ToString("000000"));
                         //progress.Report((elapsed_seconds * 10000).ToString("000000"));
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                         //_suspend_background_measurement.WaitOne(Timeout.Infinite);
@@ -1859,6 +1862,7 @@ namespace XPS
                 showdata.Enabled = true;
                 await DPS.channel_off(4);
                 await DPS.reset_channels();
+                LJM.eStreamStop(handle_stream);
             }
             catch (OperationCanceledException)
             {
@@ -1866,7 +1870,7 @@ namespace XPS
                 await DPS.channel_off(4);
                 await DPS.channel_off(0);
                 await DPS.channel_off(5);
-
+                LJM.eStreamStop(handle_stream);
                 tb_show.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -2057,6 +2061,7 @@ namespace XPS
 
         private async void btn_hv_on_Click(object sender, EventArgs e)
         {
+            //await H150666.limit_current(100);
             await H150666.channel_on(0);
         }
 
@@ -2076,13 +2081,7 @@ namespace XPS
             await H150666.set_current(2, 1);
             await Task.Delay(4000);
             await H150666.set_current(2.5, 1);
-            await Task.Delay(4000);
-            await H150666.set_current(3.0, 1);
-            await Task.Delay(4000);
-            await H150666.set_current(3.5, 1);
-            await Task.Delay(4000);
-            await H150666.set_current(4.0, 1);
-            await H150666.filament_current_min(4.0);
+            await H150666.filament_current_min(2.5);
             await H150666.filament_current_max(4.8);
             await H150666.set_K_P(20);
             await H150666.set_K_I(1);
