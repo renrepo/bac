@@ -1885,7 +1885,6 @@ namespace XPS
             int samples_per_second = 5;
             int samples_for_mean = 16;
 
-
             int counter_LSB = 3036;
             int MSB = 4899;
             int Core_Timer = 61520;
@@ -1896,13 +1895,6 @@ namespace XPS
             double scanRate = samples_per_second * samples_for_mean;
             int scansPerRead = Convert.ToInt32(scanRate);
 
-
-            double[] array_ctn = new double[Convert.ToInt32(samples_per_second)];
-            double[] countrate = new double[Convert.ToInt32(samples_per_second)];
-            double[] array_time = new double[Convert.ToInt32(scanRate)];
-            double[] array_v_hemo = new double[Convert.ToInt32(scanRate)];
-            double[] array_PAK = new double[Convert.ToInt32(scanRate)];
-            double[] array_flow = new double[Convert.ToInt32(scanRate)];
             int[] aScanList = new int[] {
                 AIN0_hemo,
                 counter_LSB, MSB,
@@ -1913,7 +1905,7 @@ namespace XPS
             int LJMScanBacklog = 0;
             int data_length = numAddresses * scansPerRead;
             double[] aData = new double[data_length];
-            double[] store = new double[data_length];
+
 
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
@@ -1931,7 +1923,7 @@ namespace XPS
             LJM.eWriteName(handle_stream, "DIO18_EF_ENABLE", 1);
             LJM.eWriteName(handle_stream, "STREAM_RESOLUTION_INDEX", 8);
             LJM.eStreamStart(handle_stream, scansPerRead, numAddresses, aScanList, ref scanRate);
-            //LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, initScanRate, aData);
+
             myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
 
             _cts_counter_labjack = new CancellationTokenSource();
@@ -1945,11 +1937,6 @@ namespace XPS
             var progress = progressHandler as IProgress<string>;
             try
             {
-                int ct = int.Parse(tb_counter_ms.Text);
-                double mean_array_v_hemo = 0;
-                double mean_flow = 0;
-                double mean_PAK = 0;
-                double mean_counts_v = 0;
                 double oldtime = 0;
                 double ctn = 0;
                 double ctn_old = 0;
@@ -1957,23 +1944,26 @@ namespace XPS
                 double t_now;
                 double t_old = 0;
                 double mean_volt_hemo = 0;
-                int inc = 0;
-                int l = 0;
+
+
                 await Task.Run(() =>
                 {
-                    LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
-                    //ctn_old = aData[data_length - 8] + aData[data_length - 7] * 65536;
+                    int inc = 0;
+                    int l = 0;
+                    LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
                     ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
                     t_old = aData[data_length - 4] + aData[data_length - 3] * 65536;
                     mean_volt_hemo = aData[data_length - numAddresses];
+
                     while (true)
                     {
 
-                        LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
+                        LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
 
                         for (int i = 1; i <= samples_per_second; i++)
                         {
                             inc = (i * samples_for_mean - 1) * numAddresses;
+
                             t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                             ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
 
@@ -1990,7 +1980,7 @@ namespace XPS
                             }
 
                             l--;
-                            mean_volt_hemo /= (samples_for_mean + 1);
+                            mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1) * 153.05;
 
                             oldtime += 1;
                             values_to_plot.Add(oldtime, mean_volt_hemo);
@@ -1998,6 +1988,7 @@ namespace XPS
 
                             mean_volt_hemo = 0;
                         }
+
                         l = 0;
                         mean_volt_hemo = aData[data_length - numAddresses];
 
