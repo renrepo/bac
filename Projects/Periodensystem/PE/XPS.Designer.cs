@@ -340,6 +340,7 @@
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_arc = new System.Windows.Forms.Button();
             this.btn_emi = new System.Windows.Forms.Button();
             this.tb_emi = new System.Windows.Forms.TextBox();
             this.tb_hv = new System.Windows.Forms.TextBox();
@@ -456,7 +457,6 @@
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.btn_arc = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3068,6 +3068,13 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // btn_arc
+            // 
+            resources.ApplyResources(this.btn_arc, "btn_arc");
+            this.btn_arc.Name = "btn_arc";
+            this.btn_arc.UseVisualStyleBackColor = true;
+            this.btn_arc.Click += new System.EventHandler(this.btn_arc_Click);
+            // 
             // btn_emi
             // 
             resources.ApplyResources(this.btn_emi, "btn_emi");
@@ -3942,13 +3949,6 @@
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            // 
-            // btn_arc
-            // 
-            resources.ApplyResources(this.btn_arc, "btn_arc");
-            this.btn_arc.Name = "btn_arc";
-            this.btn_arc.UseVisualStyleBackColor = true;
-            this.btn_arc.Click += new System.EventHandler(this.btn_arc_Click);
             // 
             // XPS
             // 

@@ -177,6 +177,13 @@ namespace XPS
         }
 
 
+        public async Task<int> select_cathode(double cathode)
+        {
+            await write_to_iseg(":CONFIGURE:OUTPUT " + cathode.ToString() + ", (@1)\n");
+            return 1;
+        }
+
+
         public async Task<int> set_K_P(double K_P)
         {
             await write_to_iseg(":CONF:FILA:EMI:P "+ K_P.ToString() + "\n");

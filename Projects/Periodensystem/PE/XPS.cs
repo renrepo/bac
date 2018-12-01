@@ -1895,6 +1895,7 @@ namespace XPS
 
         private async void btn_hv_Click(object sender, EventArgs e)
         {
+            await H150666.select_cathode(1);
             await H150666.channel_on(1);
         }
 
@@ -2081,14 +2082,20 @@ namespace XPS
             await H150666.set_current(2, 1);
             await Task.Delay(4000);
             await H150666.set_current(2.5, 1);
-            await H150666.filament_current_min(2.5);
+            await Task.Delay(4000);
+            await H150666.set_current(3.0, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(3.5, 1);
+            await Task.Delay(4000);
+            await H150666.set_current(4, 1);
+            await H150666.filament_current_min(4.0);
             await H150666.filament_current_max(4.8);
             await H150666.set_K_P(20);
             await H150666.set_K_I(1);
             await H150666.set_K_D(0);
             //await H150666.set_voltage(Double.Parse(tb_hv.Text), 0);
             //await H150666.channel_on(0);
-            await H150666.set_current(0.004, 2);
+            await H150666.set_current(0.0003, 2);
             await H150666.channel_on(2);
 
         }
