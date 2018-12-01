@@ -456,6 +456,7 @@
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.btn_arc = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3040,6 +3041,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_arc);
             this.tabPage4.Controls.Add(this.btn_emi);
             this.tabPage4.Controls.Add(this.tb_emi);
             this.tabPage4.Controls.Add(this.tb_hv);
@@ -3941,6 +3943,13 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
+            // btn_arc
+            // 
+            resources.ApplyResources(this.btn_arc, "btn_arc");
+            this.btn_arc.Name = "btn_arc";
+            this.btn_arc.UseVisualStyleBackColor = true;
+            this.btn_arc.Click += new System.EventHandler(this.btn_arc_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -4497,6 +4506,7 @@
         private System.Windows.Forms.Button btn_hv_reload;
         private System.Windows.Forms.Button btn_emi;
         private System.Windows.Forms.TextBox tb_emi;
+        private System.Windows.Forms.Button btn_arc;
     }
 }
 

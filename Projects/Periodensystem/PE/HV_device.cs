@@ -167,6 +167,16 @@ namespace XPS
         }
 
 
+        public async Task<string> read_arc()
+        {
+            session.RawIO.Write(String.Format("IDN?\n"));
+            await Task.Delay(25);
+            //session.RawIO.Write(String.Format(":CONF:ARC:CONT?\n"));
+            string reading = session.RawIO.ReadString();
+            return reading;
+        }
+
+
         public async Task<int> set_K_P(double K_P)
         {
             await write_to_iseg(":CONF:FILA:EMI:P "+ K_P.ToString() + "\n");

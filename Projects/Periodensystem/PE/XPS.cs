@@ -2092,6 +2092,11 @@ namespace XPS
             await H150666.channel_on(2);
 
         }
+
+        private async void btn_arc_Click(object sender, EventArgs e)
+        {
+            tb_hem_out.Text = H150666.read_arc().ToString();
+        }
     }
 }
 
