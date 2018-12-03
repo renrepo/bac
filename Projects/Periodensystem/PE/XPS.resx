@@ -11842,7 +11842,7 @@
     <value>NoControl</value>
   </data>
   <data name="btn_arc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>23, 149</value>
+    <value>9, 134</value>
   </data>
   <data name="btn_arc.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 20</value>
@@ -12153,60 +12153,6 @@
   <data name="&gt;&gt;btn_hv.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="btn_stop_adc.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_stop_adc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 64</value>
-  </data>
-  <data name="btn_stop_adc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_stop_adc.TabIndex" type="System.Int32, mscorlib">
-    <value>305</value>
-  </data>
-  <data name="btn_stop_adc.Text" xml:space="preserve">
-    <value>Stop ADC</value>
-  </data>
-  <data name="&gt;&gt;btn_stop_adc.Name" xml:space="preserve">
-    <value>btn_stop_adc</value>
-  </data>
-  <data name="&gt;&gt;btn_stop_adc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_stop_adc.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;btn_stop_adc.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="btn_st.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_st.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 49</value>
-  </data>
-  <data name="btn_st.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 23</value>
-  </data>
-  <data name="btn_st.TabIndex" type="System.Int32, mscorlib">
-    <value>304</value>
-  </data>
-  <data name="btn_st.Text" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="&gt;&gt;btn_st.Name" xml:space="preserve">
-    <value>btn_st</value>
-  </data>
-  <data name="&gt;&gt;btn_st.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_st.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;btn_st.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="tb_hem_out.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 76</value>
   </data>
@@ -12226,145 +12172,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;tb_hem_out.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="tb_hem_in.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 76</value>
-  </data>
-  <data name="tb_hem_in.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 20</value>
-  </data>
-  <data name="tb_hem_in.TabIndex" type="System.Int32, mscorlib">
-    <value>297</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_in.Name" xml:space="preserve">
-    <value>tb_hem_in</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_in.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_in.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_in.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="tb_adc2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 49</value>
-  </data>
-  <data name="tb_adc2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="tb_adc2.TabIndex" type="System.Int32, mscorlib">
-    <value>294</value>
-  </data>
-  <data name="&gt;&gt;tb_adc2.Name" xml:space="preserve">
-    <value>tb_adc2</value>
-  </data>
-  <data name="&gt;&gt;tb_adc2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_adc2.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;tb_adc2.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 49</value>
-  </data>
-  <data name="tb_dac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="tb_dac.TabIndex" type="System.Int32, mscorlib">
-    <value>289</value>
-  </data>
-  <data name="&gt;&gt;tb_dac.Name" xml:space="preserve">
-    <value>tb_dac</value>
-  </data>
-  <data name="&gt;&gt;tb_dac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_dac.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="tb_ref.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 49</value>
-  </data>
-  <data name="tb_ref.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="tb_ref.TabIndex" type="System.Int32, mscorlib">
-    <value>292</value>
-  </data>
-  <data name="&gt;&gt;tb_ref.Name" xml:space="preserve">
-    <value>tb_ref</value>
-  </data>
-  <data name="&gt;&gt;tb_ref.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_ref.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;tb_ref.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="btn_rampe.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_rampe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 20</value>
-  </data>
-  <data name="btn_rampe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="btn_rampe.TabIndex" type="System.Int32, mscorlib">
-    <value>295</value>
-  </data>
-  <data name="btn_rampe.Text" xml:space="preserve">
-    <value>rampe</value>
-  </data>
-  <data name="&gt;&gt;btn_rampe.Name" xml:space="preserve">
-    <value>btn_rampe</value>
-  </data>
-  <data name="&gt;&gt;btn_rampe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_rampe.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;btn_rampe.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="btn_read_adc2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_read_adc2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 20</value>
-  </data>
-  <data name="btn_read_adc2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_read_adc2.TabIndex" type="System.Int32, mscorlib">
-    <value>293</value>
-  </data>
-  <data name="btn_read_adc2.Text" xml:space="preserve">
-    <value>read ADC</value>
-  </data>
-  <data name="&gt;&gt;btn_read_adc2.Name" xml:space="preserve">
-    <value>btn_read_adc2</value>
-  </data>
-  <data name="&gt;&gt;btn_read_adc2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_read_adc2.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;btn_read_adc2.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>12</value>
   </data>
   <data name="btn_dac.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -12391,34 +12199,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;btn_dac.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
-  <data name="btn_ref.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_ref.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 20</value>
-  </data>
-  <data name="btn_ref.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_ref.TabIndex" type="System.Int32, mscorlib">
-    <value>291</value>
-  </data>
-  <data name="btn_ref.Text" xml:space="preserve">
-    <value>Set Ref</value>
-  </data>
-  <data name="&gt;&gt;btn_ref.Name" xml:space="preserve">
-    <value>btn_ref</value>
-  </data>
-  <data name="&gt;&gt;btn_ref.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_ref.Parent" xml:space="preserve">
-    <value>tabPage4</value>
-  </data>
-  <data name="&gt;&gt;btn_ref.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>13</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

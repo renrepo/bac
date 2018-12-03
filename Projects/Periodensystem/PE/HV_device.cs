@@ -167,11 +167,11 @@ namespace XPS
         }
 
 
-        public async Task<string> read_arc()
+        public string read_arc()
         {
-            session.RawIO.Write(String.Format("IDN?\n"));
-            await Task.Delay(25);
-            //session.RawIO.Write(String.Format(":CONF:ARC:CONT?\n"));
+            //session.RawIO.Write(String.Format("*IDN?\n"));
+            //Task.Delay(25);
+            session.RawIO.Write(String.Format(":CONF:ARC:RAMP?\n"));
             string reading = session.RawIO.ReadString();
             return reading;
         }
