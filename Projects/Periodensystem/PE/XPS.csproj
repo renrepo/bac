@@ -96,6 +96,9 @@
     <Compile Include="Background_stuff.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CodeFile1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HV_device.cs" />
     <Compile Include="SelectResource.cs">
       <SubType>Form</SubType>
