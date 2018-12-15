@@ -96,7 +96,7 @@
     <Compile Include="Background_stuff.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CodeFile1.cs">
+    <Compile Include="Periodic_Table.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HV_device.cs" />

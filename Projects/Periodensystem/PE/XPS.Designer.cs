@@ -340,13 +340,33 @@
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.btn_arc = new System.Windows.Forms.Button();
+            this.label109 = new System.Windows.Forms.Label();
+            this.label88 = new System.Windows.Forms.Label();
+            this.tb_volt_ramp = new System.Windows.Forms.TextBox();
+            this.tb_curr_ramp = new System.Windows.Forms.TextBox();
+            this.label108 = new System.Windows.Forms.Label();
+            this.label106 = new System.Windows.Forms.Label();
+            this.K_P = new System.Windows.Forms.Label();
+            this.tb_KD = new System.Windows.Forms.TextBox();
+            this.tb_KI = new System.Windows.Forms.TextBox();
+            this.tb_KP = new System.Windows.Forms.TextBox();
+            this.label87 = new System.Windows.Forms.Label();
+            this.tb_Imax = new System.Windows.Forms.TextBox();
+            this.label84 = new System.Windows.Forms.Label();
+            this.tb_Imin = new System.Windows.Forms.TextBox();
+            this.label77 = new System.Windows.Forms.Label();
+            this.tb_anode_voltage = new System.Windows.Forms.TextBox();
+            this.btn_emi_off = new System.Windows.Forms.Button();
+            this.label52 = new System.Windows.Forms.Label();
+            this.btn_hv_reset = new System.Windows.Forms.Button();
+            this.btn_hv_ramp = new System.Windows.Forms.Button();
             this.btn_emi = new System.Windows.Forms.Button();
             this.tb_emi = new System.Windows.Forms.TextBox();
             this.tb_hv = new System.Windows.Forms.TextBox();
             this.btn_hv_off = new System.Windows.Forms.Button();
             this.btn_hv_on = new System.Windows.Forms.Button();
             this.btn_hv_reload = new System.Windows.Forms.Button();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
             this.btn_reload_fil_curr = new System.Windows.Forms.Button();
             this.tb_fil_curr = new System.Windows.Forms.TextBox();
             this.btn_stream_read = new System.Windows.Forms.Button();
@@ -354,14 +374,6 @@
             this.btn_hv = new System.Windows.Forms.Button();
             this.tb_hem_out = new System.Windows.Forms.TextBox();
             this.btn_dac = new System.Windows.Forms.Button();
-            this.tb_rampe = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btn_scpi = new System.Windows.Forms.Button();
-            this.writeTextBox = new System.Windows.Forms.TextBox();
-            this.readTextBox = new System.Windows.Forms.TextBox();
-            this.writeButton = new System.Windows.Forms.Button();
-            this.queryButton = new System.Windows.Forms.Button();
-            this.clearButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
@@ -415,14 +427,12 @@
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tb_prevolt = new System.Windows.Forms.TextBox();
+            this.cb_samp_ev = new System.Windows.Forms.ComboBox();
             this.cb_select = new System.Windows.Forms.ComboBox();
-            this.cb_v_lens = new System.Windows.Forms.ComboBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
-            this.cb_counttime = new System.Windows.Forms.ComboBox();
-            this.cb_stepwidth = new System.Windows.Forms.ComboBox();
             this.cb_pass = new System.Windows.Forms.ComboBox();
             this.label75 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
             this.label74 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
@@ -453,7 +463,6 @@
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -3032,13 +3041,33 @@
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.btn_arc);
+            this.tabPage4.Controls.Add(this.label109);
+            this.tabPage4.Controls.Add(this.label88);
+            this.tabPage4.Controls.Add(this.tb_volt_ramp);
+            this.tabPage4.Controls.Add(this.tb_curr_ramp);
+            this.tabPage4.Controls.Add(this.label108);
+            this.tabPage4.Controls.Add(this.label106);
+            this.tabPage4.Controls.Add(this.K_P);
+            this.tabPage4.Controls.Add(this.tb_KD);
+            this.tabPage4.Controls.Add(this.tb_KI);
+            this.tabPage4.Controls.Add(this.tb_KP);
+            this.tabPage4.Controls.Add(this.label87);
+            this.tabPage4.Controls.Add(this.tb_Imax);
+            this.tabPage4.Controls.Add(this.label84);
+            this.tabPage4.Controls.Add(this.tb_Imin);
+            this.tabPage4.Controls.Add(this.label77);
+            this.tabPage4.Controls.Add(this.tb_anode_voltage);
+            this.tabPage4.Controls.Add(this.btn_emi_off);
+            this.tabPage4.Controls.Add(this.label52);
+            this.tabPage4.Controls.Add(this.btn_hv_reset);
+            this.tabPage4.Controls.Add(this.btn_hv_ramp);
             this.tabPage4.Controls.Add(this.btn_emi);
             this.tabPage4.Controls.Add(this.tb_emi);
             this.tabPage4.Controls.Add(this.tb_hv);
             this.tabPage4.Controls.Add(this.btn_hv_off);
             this.tabPage4.Controls.Add(this.btn_hv_on);
             this.tabPage4.Controls.Add(this.btn_hv_reload);
+            this.tabPage4.Controls.Add(this.tb_rampe);
             this.tabPage4.Controls.Add(this.btn_reload_fil_curr);
             this.tabPage4.Controls.Add(this.tb_fil_curr);
             this.tabPage4.Controls.Add(this.btn_stream_read);
@@ -3050,12 +3079,112 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // btn_arc
+            // label109
             // 
-            resources.ApplyResources(this.btn_arc, "btn_arc");
-            this.btn_arc.Name = "btn_arc";
-            this.btn_arc.UseVisualStyleBackColor = true;
-            this.btn_arc.Click += new System.EventHandler(this.btn_arc_Click);
+            resources.ApplyResources(this.label109, "label109");
+            this.label109.Name = "label109";
+            // 
+            // label88
+            // 
+            resources.ApplyResources(this.label88, "label88");
+            this.label88.Name = "label88";
+            // 
+            // tb_volt_ramp
+            // 
+            resources.ApplyResources(this.tb_volt_ramp, "tb_volt_ramp");
+            this.tb_volt_ramp.Name = "tb_volt_ramp";
+            // 
+            // tb_curr_ramp
+            // 
+            resources.ApplyResources(this.tb_curr_ramp, "tb_curr_ramp");
+            this.tb_curr_ramp.Name = "tb_curr_ramp";
+            // 
+            // label108
+            // 
+            resources.ApplyResources(this.label108, "label108");
+            this.label108.Name = "label108";
+            // 
+            // label106
+            // 
+            resources.ApplyResources(this.label106, "label106");
+            this.label106.Name = "label106";
+            // 
+            // K_P
+            // 
+            resources.ApplyResources(this.K_P, "K_P");
+            this.K_P.Name = "K_P";
+            // 
+            // tb_KD
+            // 
+            resources.ApplyResources(this.tb_KD, "tb_KD");
+            this.tb_KD.Name = "tb_KD";
+            // 
+            // tb_KI
+            // 
+            resources.ApplyResources(this.tb_KI, "tb_KI");
+            this.tb_KI.Name = "tb_KI";
+            // 
+            // tb_KP
+            // 
+            resources.ApplyResources(this.tb_KP, "tb_KP");
+            this.tb_KP.Name = "tb_KP";
+            // 
+            // label87
+            // 
+            resources.ApplyResources(this.label87, "label87");
+            this.label87.Name = "label87";
+            // 
+            // tb_Imax
+            // 
+            resources.ApplyResources(this.tb_Imax, "tb_Imax");
+            this.tb_Imax.Name = "tb_Imax";
+            // 
+            // label84
+            // 
+            resources.ApplyResources(this.label84, "label84");
+            this.label84.Name = "label84";
+            // 
+            // tb_Imin
+            // 
+            resources.ApplyResources(this.tb_Imin, "tb_Imin");
+            this.tb_Imin.Name = "tb_Imin";
+            this.tb_Imin.TextChanged += new System.EventHandler(this.tb_Imin_TextChanged);
+            // 
+            // label77
+            // 
+            resources.ApplyResources(this.label77, "label77");
+            this.label77.Name = "label77";
+            // 
+            // tb_anode_voltage
+            // 
+            resources.ApplyResources(this.tb_anode_voltage, "tb_anode_voltage");
+            this.tb_anode_voltage.Name = "tb_anode_voltage";
+            // 
+            // btn_emi_off
+            // 
+            resources.ApplyResources(this.btn_emi_off, "btn_emi_off");
+            this.btn_emi_off.Name = "btn_emi_off";
+            this.btn_emi_off.UseVisualStyleBackColor = true;
+            this.btn_emi_off.Click += new System.EventHandler(this.btn_emi_off_Click);
+            // 
+            // label52
+            // 
+            resources.ApplyResources(this.label52, "label52");
+            this.label52.Name = "label52";
+            // 
+            // btn_hv_reset
+            // 
+            resources.ApplyResources(this.btn_hv_reset, "btn_hv_reset");
+            this.btn_hv_reset.Name = "btn_hv_reset";
+            this.btn_hv_reset.UseVisualStyleBackColor = true;
+            this.btn_hv_reset.Click += new System.EventHandler(this.btn_hv_reset_Click);
+            // 
+            // btn_hv_ramp
+            // 
+            resources.ApplyResources(this.btn_hv_ramp, "btn_hv_ramp");
+            this.btn_hv_ramp.Name = "btn_hv_ramp";
+            this.btn_hv_ramp.UseVisualStyleBackColor = true;
+            this.btn_hv_ramp.Click += new System.EventHandler(this.btn_hv_ramp_Click);
             // 
             // btn_emi
             // 
@@ -3094,6 +3223,11 @@
             this.btn_hv_reload.Name = "btn_hv_reload";
             this.btn_hv_reload.UseVisualStyleBackColor = true;
             this.btn_hv_reload.Click += new System.EventHandler(this.btn_hv_reload_Click);
+            // 
+            // tb_rampe
+            // 
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
             // 
             // btn_reload_fil_curr
             // 
@@ -3139,60 +3273,6 @@
             this.btn_dac.Name = "btn_dac";
             this.btn_dac.UseVisualStyleBackColor = true;
             this.btn_dac.Click += new System.EventHandler(this.btn_dac_Click);
-            // 
-            // tb_rampe
-            // 
-            resources.ApplyResources(this.tb_rampe, "tb_rampe");
-            this.tb_rampe.Name = "tb_rampe";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.btn_scpi);
-            this.tabPage3.Controls.Add(this.writeTextBox);
-            this.tabPage3.Controls.Add(this.readTextBox);
-            this.tabPage3.Controls.Add(this.writeButton);
-            this.tabPage3.Controls.Add(this.queryButton);
-            this.tabPage3.Controls.Add(this.clearButton);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btn_scpi
-            // 
-            resources.ApplyResources(this.btn_scpi, "btn_scpi");
-            this.btn_scpi.Name = "btn_scpi";
-            this.btn_scpi.UseVisualStyleBackColor = true;
-            this.btn_scpi.Click += new System.EventHandler(this.btn_scpi_Click);
-            // 
-            // writeTextBox
-            // 
-            resources.ApplyResources(this.writeTextBox, "writeTextBox");
-            this.writeTextBox.Name = "writeTextBox";
-            // 
-            // readTextBox
-            // 
-            resources.ApplyResources(this.readTextBox, "readTextBox");
-            this.readTextBox.Name = "readTextBox";
-            this.readTextBox.ReadOnly = true;
-            this.readTextBox.TabStop = false;
-            // 
-            // writeButton
-            // 
-            resources.ApplyResources(this.writeButton, "writeButton");
-            this.writeButton.Name = "writeButton";
-            this.writeButton.Click += new System.EventHandler(this.write_Click);
-            // 
-            // queryButton
-            // 
-            resources.ApplyResources(this.queryButton, "queryButton");
-            this.queryButton.Name = "queryButton";
-            this.queryButton.Click += new System.EventHandler(this.query_Click);
-            // 
-            // clearButton
-            // 
-            resources.ApplyResources(this.clearButton, "clearButton");
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Click += new System.EventHandler(this.clear_Click);
             // 
             // tabPage2
             // 
@@ -3582,14 +3662,12 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.tb_prevolt);
+            this.groupBox2.Controls.Add(this.cb_samp_ev);
             this.groupBox2.Controls.Add(this.cb_select);
-            this.groupBox2.Controls.Add(this.cb_v_lens);
             this.groupBox2.Controls.Add(this.cb_bias);
-            this.groupBox2.Controls.Add(this.cb_counttime);
-            this.groupBox2.Controls.Add(this.cb_stepwidth);
             this.groupBox2.Controls.Add(this.cb_pass);
             this.groupBox2.Controls.Add(this.label75);
-            this.groupBox2.Controls.Add(this.label82);
             this.groupBox2.Controls.Add(this.label74);
             this.groupBox2.Controls.Add(this.label79);
             this.groupBox2.Controls.Add(this.label73);
@@ -3602,6 +3680,26 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // tb_prevolt
+            // 
+            resources.ApplyResources(this.tb_prevolt, "tb_prevolt");
+            this.tb_prevolt.Name = "tb_prevolt";
+            // 
+            // cb_samp_ev
+            // 
+            this.cb_samp_ev.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_samp_ev.FormattingEnabled = true;
+            this.cb_samp_ev.Items.AddRange(new object[] {
+            resources.GetString("cb_samp_ev.Items"),
+            resources.GetString("cb_samp_ev.Items1"),
+            resources.GetString("cb_samp_ev.Items2"),
+            resources.GetString("cb_samp_ev.Items3"),
+            resources.GetString("cb_samp_ev.Items4"),
+            resources.GetString("cb_samp_ev.Items5"),
+            resources.GetString("cb_samp_ev.Items6")});
+            resources.ApplyResources(this.cb_samp_ev, "cb_samp_ev");
+            this.cb_samp_ev.Name = "cb_samp_ev";
+            // 
             // cb_select
             // 
             this.cb_select.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
@@ -3613,75 +3711,14 @@
             this.cb_select.Name = "cb_select";
             this.cb_select.SelectedIndexChanged += new System.EventHandler(this.cb_select_SelectedIndexChanged);
             // 
-            // cb_v_lens
-            // 
-            this.cb_v_lens.BackColor = System.Drawing.SystemColors.Window;
-            this.cb_v_lens.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_v_lens.FormattingEnabled = true;
-            this.cb_v_lens.Items.AddRange(new object[] {
-            resources.GetString("cb_v_lens.Items"),
-            resources.GetString("cb_v_lens.Items1"),
-            resources.GetString("cb_v_lens.Items2"),
-            resources.GetString("cb_v_lens.Items3"),
-            resources.GetString("cb_v_lens.Items4"),
-            resources.GetString("cb_v_lens.Items5"),
-            resources.GetString("cb_v_lens.Items6"),
-            resources.GetString("cb_v_lens.Items7")});
-            resources.ApplyResources(this.cb_v_lens, "cb_v_lens");
-            this.cb_v_lens.Name = "cb_v_lens";
-            // 
             // cb_bias
             // 
             this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_bias.FormattingEnabled = true;
             this.cb_bias.Items.AddRange(new object[] {
-            resources.GetString("cb_bias.Items"),
-            resources.GetString("cb_bias.Items1"),
-            resources.GetString("cb_bias.Items2"),
-            resources.GetString("cb_bias.Items3"),
-            resources.GetString("cb_bias.Items4"),
-            resources.GetString("cb_bias.Items5"),
-            resources.GetString("cb_bias.Items6"),
-            resources.GetString("cb_bias.Items7"),
-            resources.GetString("cb_bias.Items8"),
-            resources.GetString("cb_bias.Items9"),
-            resources.GetString("cb_bias.Items10"),
-            resources.GetString("cb_bias.Items11"),
-            resources.GetString("cb_bias.Items12"),
-            resources.GetString("cb_bias.Items13"),
-            resources.GetString("cb_bias.Items14"),
-            resources.GetString("cb_bias.Items15"),
-            resources.GetString("cb_bias.Items16")});
+            resources.GetString("cb_bias.Items")});
             resources.ApplyResources(this.cb_bias, "cb_bias");
             this.cb_bias.Name = "cb_bias";
-            // 
-            // cb_counttime
-            // 
-            this.cb_counttime.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_counttime.FormattingEnabled = true;
-            this.cb_counttime.Items.AddRange(new object[] {
-            resources.GetString("cb_counttime.Items"),
-            resources.GetString("cb_counttime.Items1"),
-            resources.GetString("cb_counttime.Items2"),
-            resources.GetString("cb_counttime.Items3"),
-            resources.GetString("cb_counttime.Items4")});
-            resources.ApplyResources(this.cb_counttime, "cb_counttime");
-            this.cb_counttime.Name = "cb_counttime";
-            // 
-            // cb_stepwidth
-            // 
-            this.cb_stepwidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_stepwidth.FormattingEnabled = true;
-            this.cb_stepwidth.Items.AddRange(new object[] {
-            resources.GetString("cb_stepwidth.Items"),
-            resources.GetString("cb_stepwidth.Items1"),
-            resources.GetString("cb_stepwidth.Items2"),
-            resources.GetString("cb_stepwidth.Items3"),
-            resources.GetString("cb_stepwidth.Items4"),
-            resources.GetString("cb_stepwidth.Items5"),
-            resources.GetString("cb_stepwidth.Items6")});
-            resources.ApplyResources(this.cb_stepwidth, "cb_stepwidth");
-            this.cb_stepwidth.Name = "cb_stepwidth";
             // 
             // cb_pass
             // 
@@ -3690,20 +3727,7 @@
             this.cb_pass.Items.AddRange(new object[] {
             resources.GetString("cb_pass.Items"),
             resources.GetString("cb_pass.Items1"),
-            resources.GetString("cb_pass.Items2"),
-            resources.GetString("cb_pass.Items3"),
-            resources.GetString("cb_pass.Items4"),
-            resources.GetString("cb_pass.Items5"),
-            resources.GetString("cb_pass.Items6"),
-            resources.GetString("cb_pass.Items7"),
-            resources.GetString("cb_pass.Items8"),
-            resources.GetString("cb_pass.Items9"),
-            resources.GetString("cb_pass.Items10"),
-            resources.GetString("cb_pass.Items11"),
-            resources.GetString("cb_pass.Items12"),
-            resources.GetString("cb_pass.Items13"),
-            resources.GetString("cb_pass.Items14"),
-            resources.GetString("cb_pass.Items15")});
+            resources.GetString("cb_pass.Items2")});
             resources.ApplyResources(this.cb_pass, "cb_pass");
             this.cb_pass.Name = "cb_pass";
             // 
@@ -3711,11 +3735,6 @@
             // 
             resources.ApplyResources(this.label75, "label75");
             this.label75.Name = "label75";
-            // 
-            // label82
-            // 
-            resources.ApplyResources(this.label82, "label82");
-            this.label82.Name = "label82";
             // 
             // label74
             // 
@@ -3871,7 +3890,6 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
@@ -3887,7 +3905,6 @@
             this.Controls.Add(this.label96);
             this.Controls.Add(this.tb_show);
             this.Controls.Add(this.label95);
-            this.Controls.Add(this.tb_rampe);
             this.Controls.Add(this.label94);
             this.Controls.Add(this.label97);
             this.Controls.Add(this.label93);
@@ -3984,8 +4001,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -4322,13 +4337,6 @@
         private System.Windows.Forms.TextBox tb_hem_out;
         private System.Windows.Forms.TextBox tb_rampe;
         private System.Windows.Forms.Button btn_dac;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button btn_scpi;
-        private System.Windows.Forms.TextBox writeTextBox;
-        private System.Windows.Forms.TextBox readTextBox;
-        private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.Button queryButton;
-        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label100;
@@ -4383,13 +4391,9 @@
         private System.Windows.Forms.TextBox tb_counter;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cb_select;
-        private System.Windows.Forms.ComboBox cb_v_lens;
         private System.Windows.Forms.ComboBox cb_bias;
-        private System.Windows.Forms.ComboBox cb_counttime;
-        private System.Windows.Forms.ComboBox cb_stepwidth;
         private System.Windows.Forms.ComboBox cb_pass;
         private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label82;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Label label73;
@@ -4424,7 +4428,28 @@
         private System.Windows.Forms.Button btn_hv_reload;
         private System.Windows.Forms.Button btn_emi;
         private System.Windows.Forms.TextBox tb_emi;
-        private System.Windows.Forms.Button btn_arc;
+        private System.Windows.Forms.Button btn_hv_ramp;
+        private System.Windows.Forms.Button btn_hv_reset;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Button btn_emi_off;
+        private System.Windows.Forms.Label label77;
+        private System.Windows.Forms.TextBox tb_anode_voltage;
+        private System.Windows.Forms.Label label108;
+        private System.Windows.Forms.Label label106;
+        private System.Windows.Forms.Label K_P;
+        private System.Windows.Forms.TextBox tb_KD;
+        private System.Windows.Forms.TextBox tb_KI;
+        private System.Windows.Forms.TextBox tb_KP;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.TextBox tb_Imax;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.TextBox tb_Imin;
+        private System.Windows.Forms.Label label109;
+        private System.Windows.Forms.Label label88;
+        private System.Windows.Forms.TextBox tb_volt_ramp;
+        private System.Windows.Forms.TextBox tb_curr_ramp;
+        private System.Windows.Forms.ComboBox cb_samp_ev;
+        private System.Windows.Forms.TextBox tb_prevolt;
     }
 }
 
