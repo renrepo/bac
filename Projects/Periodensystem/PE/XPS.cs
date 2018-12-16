@@ -1271,6 +1271,8 @@ namespace XPS
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0"), "Samples/eV");
                 file.WriteLine("#Counttime: \t{0} \t{1}", vchanneltron, "V");
+                file.WriteLine("#Counttime: \t{0} \t{1}", tb_pressure.Text, "mbar");
+                file.WriteLine("#Counttime: \t{0} \t{1}", tb_flow.Text, "l/min");
                 //file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
@@ -1373,12 +1375,16 @@ namespace XPS
 
                             t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                             ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
-
-                            ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
-
+                            if (ctn_now < ctn_old)
+                            {
+                                ctn = (ctn_now  + ctn_old - 4294967295) / (t_now - t_old) * 40000000;
+                            }
+                            else
+                            {
+                                ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
+                            }
                             ctn_old = ctn_now;
                             t_old = t_now;
-
 
                             while (l <= i * samples_for_mean - 1)
                             {
