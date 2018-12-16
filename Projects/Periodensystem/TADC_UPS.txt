@@ -1,0 +1,179 @@
+private async void btn_ref_Click(object sender, EventArgs e)
+        {
+            while (true)
+            {
+                //double value2 = Convert.ToDouble(tb_ref.Text.Replace(",", "."));
+                //LJM.eWriteName(handle_DAC2, "TDAC1", value2);
+                await DPS.voltage_ramp(0.0010);
+                //LJM.eWriteName(handle_schwelle, "TDAC2", 0.0);
+                //LJM.eWriteName(handle_schwelle, "TDAC2", 0.3);
+            }
+
+        }
+
+
+        private void btn_stop_adc_Click(object sender, EventArgs e)
+        {
+            if (_cts_voltagemonitor != null)
+            {
+                _cts_voltagemonitor.Cancel();
+            }
+        }
+
+
+        private async void btn_read_adc2_Click(object sender, EventArgs e)
+        {
+            LJM.eWriteName(handle_adc1, "AIN2_RESOLUTION_INDEX",8);
+            LJM.eWriteName(handle_adc2, "AIN0_RESOLUTION_INDEX", 8);
+            Thread.Sleep(10);
+            double adc_cum_1 = 0;
+            double adc_cum_2 = 0;
+            double time = 0;
+            double erg1 = 0; // Hemo
+            double erg2 = 0; // Hemi
+            int j = 0;
+
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "ADC" + "\\"));
+            string path_logfile = dl.FullName;
+
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            {
+                file.WriteLine(
+                    "#Hemo" + "\t" + "Hemi" + "\t" + "Diff" + "\t" + "time[ms]" + "\n"
+                    );
+            }
+
+            _cts_voltagemonitor = new CancellationTokenSource();
+            var token = _cts_voltagemonitor.Token;
+            var progressHandler = new Progress<string>(value =>
+            {
+                tb_adc2.Text = value;
+            });
+            var progress = progressHandler as IProgress<string>;
+            try
+            {
+                int ct = int.Parse(tb_counter_ms.Text);
+                Stopwatch sw = new Stopwatch();
+                cb_counter.Text = "On";
+                cb_counter.BackColor = Color.LightGreen;
+                tb_counter_ms.ReadOnly = true;
+                await Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        adc_cum_1 = 0;
+                        adc_cum_2 = 0;
+                        sw.Start();
+                        while(j < 4)
+                        {
+                            LJM.eReadName(handle_adc1, "AIN2", ref adc1);
+                            LJM.eReadName(handle_adc2, "AIN0", ref adc2);
+                            adc_cum_1 += adc1;
+                            adc_cum_2 += adc2;
+                            j += 1;
+                        }
+                        j = 0;
+                        //tb_adc2.Text = (adc_cum * 56.55 / 4).ToString("0.000");
+                        //sw.Stop();
+                        time = sw.Elapsed.TotalSeconds;
+                        //time = sw.Elapsed.Milliseconds;
+                        //sw.Reset();
+                        //erg = adc_cum * 152.4 / 4;
+                        erg1 = adc_cum_1 * 153.05 / 4;
+                        erg2 = adc_cum_2 * 153.11 / 4;
+                        using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                        {
+                            file.WriteLine(
+                                erg1.ToString("0000.00") + "\t" +
+                                erg2.ToString("0000.00") + "\t" +
+                                (erg2-erg1).ToString("00.000") + "\t" +
+                                time.ToString("0000.0000") + "\n"
+                                );
+                        }
+                        if (progress != null)
+                        {
+                            //progress.Report(erg.ToString("0000.00"));
+                            progress.Report(erg1.ToString("0000.0"));
+                            token.ThrowIfCancellationRequested();
+                        }
+                        sw.Reset();
+                    }
+                });
+                //MessageBox.Show("Completed!");
+            }
+            catch (OperationCanceledException)
+            {
+                //AutoClosingMessageBox.Show("Switched off counter!", "Info", 500);
+                tb_adc2.Text = String.Empty;
+                sw.Stop();
+                sw.Reset();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Type in Integer");
+            }
+        }
+
+
+        private async void btn_rampe_Click(object sender, EventArgs e)
+        {
+            LJM.eWriteName(handle_DAC2, "TDAC1", 0.02);
+
+            for (int i = 0; i < 8000; i++)
+            {
+                LJM.eWriteName(handle_DAC, "TDAC0", i * 1.0 / 1000.0);
+                LJM.eWriteName(handle_DAC, "TDAC1", 1.0);
+                tb_rampe.Text = (i * 1.0 / 1000.0).ToString("0.000");
+                await Task.Delay(500);
+                LJM.eReadName(handle_hemi, pin_hemi, ref LJ_hemi);
+                LJM.eReadName(handle_hemo, pin_hemo, ref LJ_hemo);
+                tb_hem_in.Text = (LJ_hemi*5.03318).ToString("0.000");
+                tb_hem_out.Text = (LJ_hemo*5.03054).ToString("0.000");
+                await Task.Delay(500);
+            }
+        }
+
+
+        Stopwatch sw = new Stopwatch();
+        string name = "test";
+        int sleeptime = 200;
+
+        private void btn_st_Click(object sender, EventArgs e)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + "2MHz" + "\\"));
+            string path_logfile = dl.FullName;
+
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            {
+                file.WriteLine(
+                    "#counts" + "\n"
+                    );
+            }
+
+            double erg = 0;
+            double time = 0;
+
+            for (int i = 0; i < 10000; i++)
+            {
+                LJM.eWriteName(handle_count, "DIO18_EF_INDEX", 7);
+                LJM.eWriteName(handle_count, "DIO18_EF_ENABLE", 1);
+                sw.Start();
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A", ref cnt_before);
+                Thread.Sleep(sleeptime);
+                sw.Stop();
+                LJM.eReadName(handle_count, "DIO18_EF_READ_A_AND_RESET", ref cnt_after);
+                time = sw.Elapsed.TotalSeconds;
+                erg = (cnt_after - cnt_before) / time;
+                //erg = i;
+                sw.Reset();
+                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                {
+                    file.WriteLine(
+                        erg.ToString("0000000") + "\t" +
+                        time.ToString("0.000000") + "\n"
+                        );
+                }
+            }
+        }
