@@ -468,6 +468,7 @@
             this.label82 = new System.Windows.Forms.Label();
             this.btn_set_E_B = new System.Windows.Forms.Button();
             this.btn_Set_E_B_off = new System.Windows.Forms.Button();
+            this.tb_slit = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3761,7 +3762,8 @@
             this.cb_pass.Items.AddRange(new object[] {
             resources.GetString("cb_pass.Items"),
             resources.GetString("cb_pass.Items1"),
-            resources.GetString("cb_pass.Items2")});
+            resources.GetString("cb_pass.Items2"),
+            resources.GetString("cb_pass.Items3")});
             resources.ApplyResources(this.cb_pass, "cb_pass");
             this.cb_pass.Name = "cb_pass";
             // 
@@ -3965,10 +3967,16 @@
             this.btn_Set_E_B_off.UseVisualStyleBackColor = true;
             this.btn_Set_E_B_off.Click += new System.EventHandler(this.btn_Set_E_B_off_Click);
             // 
+            // tb_slit
+            // 
+            resources.ApplyResources(this.tb_slit, "tb_slit");
+            this.tb_slit.Name = "tb_slit";
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tb_slit);
             this.Controls.Add(this.btn_Set_E_B_off);
             this.Controls.Add(this.btn_set_E_B);
             this.Controls.Add(this.btn_reload_dac);
@@ -4538,6 +4546,7 @@
         private System.Windows.Forms.Label label110;
         private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.Label label111;
+        private System.Windows.Forms.TextBox tb_slit;
     }
 }
 

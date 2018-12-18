@@ -350,7 +350,7 @@ namespace XPS
 
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
-            cb_pass.SelectedIndex = 2;
+            cb_pass.SelectedIndex = 3;
             cb_bias.SelectedIndex = 0;
             cb_select.SelectedIndex = 0;
             //cb_counttime.SelectedIndex = 1;
@@ -1274,6 +1274,7 @@ namespace XPS
                 file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0000"), "\t Samples/eV");
                 file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
                 file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
+                file.WriteLine("#Slit: \t{0} \t{1}", tb_slit.Text, "");
                 //file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
