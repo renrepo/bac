@@ -1746,22 +1746,43 @@ namespace XPS
             await DPS.voltage_ramp(10);
             await DPS.set_voltage(set_voltage_channeltron, 4);
             await DPS.set_voltage(set_voltage_hemo, 0);
+            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
             await DPS.set_voltage(set_voltage_Stabi, 5);
             await DPS.channel_on(4);
             await DPS.channel_on(0);
             await DPS.channel_on(5);
+            await DPS.channel_on(2);
         }
 
         private async void btn_Set_E_B_off_Click(object sender, EventArgs e)
         {
+            await DPS.channel_off(2);
             await DPS.reset_channels();
         }
 
         private async void btn_load_lens_Click(object sender, EventArgs e)
         {
-            await DPS.voltage_ramp(20);
+            curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
+            string u = tb_safe.Text + curr_time;
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "_LENS" + "\\"));
+            path_logfile = dl.FullName;
+
+            await DPS.voltage_ramp(1);
             await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
             await DPS.channel_on(2);
+            while (true)
+            {
+                using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                {
+                    file.WriteLine(
+                        ch3_meas.Text + "\t" +
+                        tb_counter.Text
+                        //v_pass_meas.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture)
+                        //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
+                        );
+                }
+                await Task.Delay(500);
+            }
         }
     }
 }
