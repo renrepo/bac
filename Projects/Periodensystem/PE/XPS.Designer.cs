@@ -468,6 +468,7 @@
             this.label82 = new System.Windows.Forms.Label();
             this.btn_set_E_B = new System.Windows.Forms.Button();
             this.btn_Set_E_B_off = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3965,10 +3966,17 @@
             this.btn_Set_E_B_off.UseVisualStyleBackColor = true;
             this.btn_Set_E_B_off.Click += new System.EventHandler(this.btn_Set_E_B_off_Click);
             // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Set_E_B_off);
             this.Controls.Add(this.btn_set_E_B);
             this.Controls.Add(this.btn_reload_dac);
@@ -4538,6 +4546,7 @@
         private System.Windows.Forms.Label label110;
         private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.Label label111;
+        private System.Windows.Forms.Button button1;
     }
 }
 
