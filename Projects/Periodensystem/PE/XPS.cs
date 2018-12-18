@@ -275,6 +275,7 @@ namespace XPS
                 LJM.OpenS("T7", "Ethernet", "ANY", ref handle_hemo);
                 LJM.OpenS("T7", "Ethernet", "ANY", ref handle_pressure_ak);
                 LJM.OpenS("T7", "Ethernet", "ANY", ref handle_stream);
+                LJM.OpenS("T7", "Ethernet", "ANY", ref handle_DAC2);
 
                 // backgroundtask for pressure measurement at Ionivac-device mounted on analyser chamber.
                 // pressure value updates every second
@@ -1202,11 +1203,11 @@ namespace XPS
             var progressHandler = new Progress<string>(value =>
             {
                 tb_counter.Text = value;
-                //vm1.Text = mean_volt_hemo.ToString("0.0");
-                //vm2.Text = v_hemo.ToString("0.0");
-                //vm3.Text = (LJ_lens2 / 3).ToString("0.000");
-                //vm4.Text = v_analyser.ToString("0.0");
-                //vm5.Text = v_channeltron_out_min.ToString("0.000");
+                vm1.Text = ch1_meas.Text;
+                vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
+                vm3.Text = ch3_meas.Text;
+                vm4.Text = ch6_meas.Text;
+                vm5.Text = ch5_meas.Text;
                 //values_to_plot.Add(E_kin, Convert.ToDouble(E_pass));
                 //myCurve.AddPoint(E_kin, Convert.ToDouble(E_pass));
                 //values_to_plot.Add(ctner, Convert.ToDouble(value));
@@ -1256,23 +1257,23 @@ namespace XPS
             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
             {
                 file.WriteLine("#XPS-spectrum" + Environment.NewLine);
-                file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss"));
+                file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
                 file.WriteLine("" + Environment.NewLine);
-                file.WriteLine("#AK pressure: \t{0} \t{1}", tb_pressure.Text, "mbar");
-                file.WriteLine("#Pass energy: \t{0} \t{1}", vpass.ToString("0.0"), "eV");
-                file.WriteLine("#Volt. bias: \t{0} \t{1}", vbias.ToString("0.0"), "V");
-                file.WriteLine("#Photon Energy: \t{0} \t{1}", V_photon.ToString("0.0"), "V");
-                file.WriteLine("#I_Emission: \t{0} \t{1}", tb_emi.Text, "mA");
-                file.WriteLine("#Counttime: \t{0} \t{1}", tb_anode_voltage.Text , "ms");
-                file.WriteLine("#Vor: \t{0} \t{1}", tb_prevolt.Text, "V");
-                file.WriteLine("#Nach: \t{0} \t{1}", workfunction, "eV");
-                file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "1/s");
-                file.WriteLine("#Prevolt: \t{0} \t{1}", tb_prevolt.Text, "V");
-                file.WriteLine("" + Environment.NewLine);
-                file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0"), "Samples/eV");
-                file.WriteLine("#Counttime: \t{0} \t{1}", vchanneltron, "V");
-                file.WriteLine("#Counttime: \t{0} \t{1}", tb_pressure.Text, "mbar");
-                file.WriteLine("#Counttime: \t{0} \t{1}", tb_flow.Text, "l/min");
+                file.WriteLine("#AK pressure: \t{0} \t{1}", tb_pressure.Text, " mbar");
+                file.WriteLine("#Pass energy: \t{0} \t{1}", vpass.ToString("0.0"), "\t eV");
+                file.WriteLine("#Volt. bias: \t{0} \t{1}", vbias.ToString("0.0"), "\t V");
+                file.WriteLine("#E_Photon: \t{0} \t{1}", V_photon.ToString("0.0"), "\t V");
+                file.WriteLine("#I_Emission: \t{0} \t{1}", tb_emi.Text, "\t mA");
+                file.WriteLine("#Counttime: \t{0} \t{1}", tb_anode_voltage.Text , "\t ms");
+                file.WriteLine("#Prevoltage: \t{0} \t{1}", tb_prevolt.Text, "\t V");
+                file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
+                file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
+                file.WriteLine("#TDAC: \t{0} \t{1}", tb_dac, "\t V");
+                file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens, "\t V");
+                //file.WriteLine("" + Environment.NewLine);
+                file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0000"), "\t Samples/eV");
+                file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
+                file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
                 //file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
@@ -1283,7 +1284,7 @@ namespace XPS
             token.ThrowIfCancellationRequested();
             // E_Analyser = E_pass - E_Photon = (U_Analyser - U_bias)*e; Electrons with E=E_photon barely can reach the chaneltron
             // neglected the work function of the electron (which would add +V_work to v_analyser_min)
-            v_analyser_min = (vpass - V_photon + vbias) -50 + Convert.ToDouble(tb_prevolt.Text) ; //-50V extra
+            v_analyser_min = (vpass - V_photon + vbias) + Convert.ToDouble(tb_prevolt.Text) ; //-50V extra
             // corresponding minimum voltage of the outer/inner hemisphere; here "k" is estimated and yet not known exactly!
             v_hemo_min = (v_analyser_min - (vpass * k * 0.4));
             v_stabi_min = v_hemo_min + v_stabi_volt;
@@ -1304,7 +1305,7 @@ namespace XPS
 
             token.ThrowIfCancellationRequested();
 
-            await DPS.voltage_ramp(8);
+            await DPS.voltage_ramp(10);
             await DPS.set_voltage(v_channeltron_out_min,4);
             await DPS.set_voltage(v_hemo_min,0);
             //await DPS.set_voltage(1500,2);
@@ -1313,7 +1314,7 @@ namespace XPS
             await DPS.channel_on(0);
             await DPS.channel_on(5);
 
-            await Task.Delay(12000);
+            await Task.Delay(10000);
 
             await DPS.voltage_ramp(voltramp);
 
@@ -1375,14 +1376,14 @@ namespace XPS
 
                             t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                             ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
-                            if (ctn_now < ctn_old)
-                            {
-                                ctn = (ctn_now  + ctn_old - 4294967295) / (t_now - t_old) * 40000000;
-                            }
-                            else
-                            {
-                                ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
-                            }
+                            //if (t_now < t_old)
+                            //{
+                            //    ctn = (ctn_now  - ctn_old) / (t_now + t_old - 4294967295) * 40000000;
+                            //}
+                            //else
+                            //{
+                            ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
+                            //}
                             ctn_old = ctn_now;
                             t_old = t_now;
 
@@ -1411,12 +1412,12 @@ namespace XPS
                             {
                                 file.WriteLine(
                                     E_B.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                                    ctn.ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                    ctn.ToString("0.00000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     E_kin.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     //v_analyser.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     //v_hemi.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                    t_now.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     mean_volt_hemo.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture)
-                                    //E_pass.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture)
                                     //v_pass_meas.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture)
                                     //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                     );
@@ -1726,6 +1727,41 @@ namespace XPS
         private void tb_Imin_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_reload_dac_Click(object sender, EventArgs e)
+        {
+            double value2 = Convert.ToDouble(tb_dac.Text.Replace(",", "."));
+            LJM.eWriteName(handle_DAC2, "TDAC0", value2);
+        }
+
+        private async void btn_set_E_B_Click(object sender, EventArgs e)
+        {
+            vpass = Convert.ToDouble(cb_pass.SelectedItem);
+            vbias = Convert.ToDouble(cb_bias.SelectedItem);
+            double set_voltage_hemo = -V_photon + vbias + vpass / k + workfunction + Convert.ToDouble(tb_set_E_B.Text) - vpass * 0.4;
+            double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + 2600;
+            double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
+
+            await DPS.voltage_ramp(10);
+            await DPS.set_voltage(set_voltage_channeltron, 4);
+            await DPS.set_voltage(set_voltage_hemo, 0);
+            await DPS.set_voltage(set_voltage_Stabi, 5);
+            await DPS.channel_on(4);
+            await DPS.channel_on(0);
+            await DPS.channel_on(5);
+        }
+
+        private async void btn_Set_E_B_off_Click(object sender, EventArgs e)
+        {
+            await DPS.reset_channels();
+        }
+
+        private async void btn_load_lens_Click(object sender, EventArgs e)
+        {
+            await DPS.voltage_ramp(20);
+            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
+            await DPS.channel_on(2);
         }
     }
 }

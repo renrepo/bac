@@ -427,6 +427,10 @@
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label111 = new System.Windows.Forms.Label();
+            this.btn_load_lens = new System.Windows.Forms.Button();
+            this.label110 = new System.Windows.Forms.Label();
+            this.tb_lens = new System.Windows.Forms.TextBox();
             this.tb_prevolt = new System.Windows.Forms.TextBox();
             this.cb_samp_ev = new System.Windows.Forms.ComboBox();
             this.cb_select = new System.Windows.Forms.ComboBox();
@@ -436,9 +440,7 @@
             this.label74 = new System.Windows.Forms.Label();
             this.label79 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.label78 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
-            this.label86 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.label85 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -457,7 +459,15 @@
             this.label105 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
+            this.btn_reload_dac = new System.Windows.Forms.Button();
+            this.tb_dac = new System.Windows.Forms.TextBox();
+            this.label86 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tb_set_E_B = new System.Windows.Forms.TextBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label82 = new System.Windows.Forms.Label();
+            this.btn_set_E_B = new System.Windows.Forms.Button();
+            this.btn_Set_E_B_off = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3662,6 +3672,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label111);
+            this.groupBox2.Controls.Add(this.btn_load_lens);
+            this.groupBox2.Controls.Add(this.label110);
+            this.groupBox2.Controls.Add(this.tb_lens);
             this.groupBox2.Controls.Add(this.tb_prevolt);
             this.groupBox2.Controls.Add(this.cb_samp_ev);
             this.groupBox2.Controls.Add(this.cb_select);
@@ -3671,14 +3685,34 @@
             this.groupBox2.Controls.Add(this.label74);
             this.groupBox2.Controls.Add(this.label79);
             this.groupBox2.Controls.Add(this.label73);
-            this.groupBox2.Controls.Add(this.label78);
             this.groupBox2.Controls.Add(this.label83);
-            this.groupBox2.Controls.Add(this.label86);
             this.groupBox2.Controls.Add(this.label76);
             this.groupBox2.Controls.Add(this.label85);
             resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
+            // 
+            // label111
+            // 
+            resources.ApplyResources(this.label111, "label111");
+            this.label111.Name = "label111";
+            // 
+            // btn_load_lens
+            // 
+            resources.ApplyResources(this.btn_load_lens, "btn_load_lens");
+            this.btn_load_lens.Name = "btn_load_lens";
+            this.btn_load_lens.UseVisualStyleBackColor = true;
+            this.btn_load_lens.Click += new System.EventHandler(this.btn_load_lens_Click);
+            // 
+            // label110
+            // 
+            resources.ApplyResources(this.label110, "label110");
+            this.label110.Name = "label110";
+            // 
+            // tb_lens
+            // 
+            resources.ApplyResources(this.tb_lens, "tb_lens");
+            this.tb_lens.Name = "tb_lens";
             // 
             // tb_prevolt
             // 
@@ -3751,20 +3785,10 @@
             resources.ApplyResources(this.label73, "label73");
             this.label73.Name = "label73";
             // 
-            // label78
-            // 
-            resources.ApplyResources(this.label78, "label78");
-            this.label78.Name = "label78";
-            // 
             // label83
             // 
             resources.ApplyResources(this.label83, "label83");
             this.label83.Name = "label83";
-            // 
-            // label86
-            // 
-            resources.ApplyResources(this.label86, "label86");
-            this.label86.Name = "label86";
             // 
             // label76
             // 
@@ -3886,6 +3910,23 @@
             this.tb_flow.Name = "tb_flow";
             this.tb_flow.ReadOnly = true;
             // 
+            // btn_reload_dac
+            // 
+            resources.ApplyResources(this.btn_reload_dac, "btn_reload_dac");
+            this.btn_reload_dac.Name = "btn_reload_dac";
+            this.btn_reload_dac.UseVisualStyleBackColor = true;
+            this.btn_reload_dac.Click += new System.EventHandler(this.btn_reload_dac_Click);
+            // 
+            // tb_dac
+            // 
+            resources.ApplyResources(this.tb_dac, "tb_dac");
+            this.tb_dac.Name = "tb_dac";
+            // 
+            // label86
+            // 
+            resources.ApplyResources(this.label86, "label86");
+            this.label86.Name = "label86";
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -3895,10 +3936,46 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
+            // tb_set_E_B
+            // 
+            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
+            this.tb_set_E_B.Name = "tb_set_E_B";
+            // 
+            // label78
+            // 
+            resources.ApplyResources(this.label78, "label78");
+            this.label78.Name = "label78";
+            // 
+            // label82
+            // 
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
+            // 
+            // btn_set_E_B
+            // 
+            resources.ApplyResources(this.btn_set_E_B, "btn_set_E_B");
+            this.btn_set_E_B.Name = "btn_set_E_B";
+            this.btn_set_E_B.UseVisualStyleBackColor = true;
+            this.btn_set_E_B.Click += new System.EventHandler(this.btn_set_E_B_Click);
+            // 
+            // btn_Set_E_B_off
+            // 
+            resources.ApplyResources(this.btn_Set_E_B_off, "btn_Set_E_B_off");
+            this.btn_Set_E_B_off.Name = "btn_Set_E_B_off";
+            this.btn_Set_E_B_off.UseVisualStyleBackColor = true;
+            this.btn_Set_E_B_off.Click += new System.EventHandler(this.btn_Set_E_B_off_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_Set_E_B_off);
+            this.Controls.Add(this.btn_set_E_B);
+            this.Controls.Add(this.btn_reload_dac);
+            this.Controls.Add(this.label82);
+            this.Controls.Add(this.tb_dac);
+            this.Controls.Add(this.label78);
+            this.Controls.Add(this.tb_set_E_B);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label68);
             this.Controls.Add(this.label67);
@@ -3906,6 +3983,7 @@
             this.Controls.Add(this.tb_show);
             this.Controls.Add(this.label95);
             this.Controls.Add(this.label94);
+            this.Controls.Add(this.label86);
             this.Controls.Add(this.label97);
             this.Controls.Add(this.label93);
             this.Controls.Add(this.label92);
@@ -4397,7 +4475,6 @@
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.Label label76;
@@ -4450,6 +4527,17 @@
         private System.Windows.Forms.TextBox tb_curr_ramp;
         private System.Windows.Forms.ComboBox cb_samp_ev;
         private System.Windows.Forms.TextBox tb_prevolt;
+        private System.Windows.Forms.Button btn_reload_dac;
+        private System.Windows.Forms.TextBox tb_dac;
+        private System.Windows.Forms.TextBox tb_set_E_B;
+        private System.Windows.Forms.Label label78;
+        private System.Windows.Forms.Label label82;
+        private System.Windows.Forms.Button btn_set_E_B;
+        private System.Windows.Forms.Button btn_Set_E_B_off;
+        private System.Windows.Forms.Button btn_load_lens;
+        private System.Windows.Forms.Label label110;
+        private System.Windows.Forms.TextBox tb_lens;
+        private System.Windows.Forms.Label label111;
     }
 }
 
