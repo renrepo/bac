@@ -1,0 +1,27 @@
+#XPS-spectrum
+
+#Date/time: 		 2018-12-19__14-52-17
+
+
+#AK pressure: 	can 	 mbar
+#Pass energy: 	109.1 		 eV
+#Volt. bias: 	0.0 		 V
+#E_Photon: 	1486.7 		 V
+#I_Emission: 	10 		 mA
+#Counttime: 	12000 		 ms
+#Prevoltage: 	85 		 V
+#Workfunction: 	5.1 		 eV
+#Samples/eV: 	10 		 1/s
+#TDAC: 	System.Windows.Forms.TextBox, Text: 1.207 		 V
+#V_Lens: 	System.Windows.Forms.TextBox, Text: 4000 		 V
+#Slope: 	0.0125 		 Samples/eV
+#V_Channelt.: 	2800 		 V
+#Flow cooling: 	0,0 		 l/min
+#Slit: 	C1 	
+
+
+
+
+#E_bind 	 cps 	 E_kin 	 V_hemo
+
+
