@@ -1252,7 +1252,7 @@ namespace XPS
             myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "_" + tb_safe.Text + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_" + tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + cb_bias.SelectedItem + "_" + tb_lens.Text + "\\"));
             path_logfile = dl.FullName;
             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
             {
@@ -1306,16 +1306,17 @@ namespace XPS
 
             token.ThrowIfCancellationRequested();
 
-            await DPS.voltage_ramp(10);
+            await DPS.voltage_ramp(12);
             await DPS.set_voltage(v_channeltron_out_min,4);
             await DPS.set_voltage(v_hemo_min,0);
-            //await DPS.set_voltage(1500,2);
+            await DPS.set_voltage(4000,2);
             await DPS.set_voltage(v_stabi_min,5);
             await DPS.channel_on(4);
             await DPS.channel_on(0);
             await DPS.channel_on(5);
+            await DPS.channel_on(5);
 
-            await Task.Delay(10000);
+            await Task.Delay(9000);
 
             await DPS.voltage_ramp(voltramp);
 
