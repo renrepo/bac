@@ -1364,6 +1364,7 @@ namespace XPS
                 await DPS.set_voltage(v_hemo_max,0);
                 await DPS.set_voltage(v_stabi_max, 5);
                 await DPS.set_voltage(v_channeltron_out_max, 4);
+                await DPS.set_voltage(Convert.ToDouble(tb_lens.Text) - 1600, 2);
 
                 await Task.Run(() =>
                 {
@@ -1772,13 +1773,16 @@ namespace XPS
         {
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "_LENS" + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_LENS" + tb_lens.Text + "\\"));
             path_logfile = dl.FullName;
 
-            await DPS.voltage_ramp(1);
-            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
+            await DPS.voltage_ramp(10);
+            await DPS.set_voltage(100, 2);
             await DPS.channel_on(2);
-            while (true)
+            await Task.Delay(10000);
+            await DPS.voltage_ramp(0.4) ; // 10V/sek
+            await DPS.set_voltage(4000, 2);
+            while (Convert.ToDouble(ch3_meas.Text) / 100 < Convert.ToDouble(tb_lens.Text)- 10)
             {
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -1789,8 +1793,26 @@ namespace XPS
                         //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                         );
                 }
-                await Task.Delay(500);
+                await Task.Delay(900);
+                values_to_plot.Add(Convert.ToDouble(ch3_meas.Text)/100, Convert.ToDouble(tb_counter.Text));
+                myCurve.AddPoint(Convert.ToDouble(ch3_meas.Text)/100, Convert.ToDouble(tb_counter.Text));
             }
+            await DPS.voltage_ramp(10);
+        }
+
+        private void btn_clear_fig_Click(object sender, EventArgs e)
+        {
+            fig_name.Clear();
+            zedGraphControl1.GraphPane.CurveList.Clear();
+            zedGraphControl1.GraphPane.GraphObjList.Clear();
+            values_to_plot.Clear();
+            display_labels.Clear();
+            myPane.YAxisList.Clear();
+            myPane.AddYAxis("counts");
+            progressBar1.Value = 0;
+            create_graph(myPane);
+            zedGraphControl1.AxisChange();
+            zedGraphControl1.Refresh();
         }
     }
 }

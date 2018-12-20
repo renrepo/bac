@@ -469,6 +469,7 @@
             this.btn_set_E_B = new System.Windows.Forms.Button();
             this.btn_Set_E_B_off = new System.Windows.Forms.Button();
             this.tb_slit = new System.Windows.Forms.TextBox();
+            this.btn_clear_fig = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -3972,10 +3973,18 @@
             resources.ApplyResources(this.tb_slit, "tb_slit");
             this.tb_slit.Name = "tb_slit";
             // 
+            // btn_clear_fig
+            // 
+            resources.ApplyResources(this.btn_clear_fig, "btn_clear_fig");
+            this.btn_clear_fig.Name = "btn_clear_fig";
+            this.btn_clear_fig.UseVisualStyleBackColor = true;
+            this.btn_clear_fig.Click += new System.EventHandler(this.btn_clear_fig_Click);
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn_clear_fig);
             this.Controls.Add(this.tb_slit);
             this.Controls.Add(this.btn_Set_E_B_off);
             this.Controls.Add(this.btn_set_E_B);
@@ -4547,6 +4556,7 @@
         private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.TextBox tb_slit;
+        private System.Windows.Forms.Button btn_clear_fig;
     }
 }
 
