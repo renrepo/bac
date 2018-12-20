@@ -358,7 +358,8 @@ namespace XPS
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
             //k = ra / ri - ri / ra;
-            k = 0.673;
+            //k = 0.673;
+            k = 0.6;
 
             try
             {
@@ -1252,7 +1253,8 @@ namespace XPS
             myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_" + tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + cb_bias.SelectedItem + "_" + tb_lens.Text + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_" + 
+            tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "_" + cb_bias.SelectedItem + "_" + tb_lens.Text + "\\"));
             path_logfile = dl.FullName;
             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
             {
@@ -1264,13 +1266,13 @@ namespace XPS
                 file.WriteLine("#Volt. bias: \t{0} \t{1}", vbias.ToString("0.0"), "\t V");
                 file.WriteLine("#E_Photon: \t{0} \t{1}", V_photon.ToString("0.0"), "\t V");
                 file.WriteLine("#I_Emission: \t{0} \t{1}", tb_emi.Text, "\t mA");
-                file.WriteLine("#Counttime: \t{0} \t{1}", tb_anode_voltage.Text , "\t ms");
+                file.WriteLine("#V_Anode: \t{0} \t{1}", tb_anode_voltage.Text , "\t V");
                 file.WriteLine("#Prevoltage: \t{0} \t{1}", tb_prevolt.Text, "\t V");
                 file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
                 file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
                 file.WriteLine("#TDAC: \t{0} \t{1}", tb_dac, "\t V");
                 file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens, "\t V");
-                //file.WriteLine("" + Environment.NewLine);
+                file.WriteLine("#Factor k: \t{0} \t{1}", k.ToString(), "\t ");
                 file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0000"), "\t Samples/eV");
                 file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
                 file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
@@ -1285,9 +1287,10 @@ namespace XPS
             token.ThrowIfCancellationRequested();
             // E_Analyser = E_pass - E_Photon = (U_Analyser - U_bias)*e; Electrons with E=E_photon barely can reach the chaneltron
             // neglected the work function of the electron (which would add +V_work to v_analyser_min)
-            v_analyser_min = (vpass - V_photon + vbias) + Convert.ToDouble(tb_prevolt.Text) ; //-50V extra
+            v_analyser_min = (vpass / k - V_photon + vbias) + Convert.ToDouble(tb_prevolt.Text) ; //-50V extra
             // corresponding minimum voltage of the outer/inner hemisphere; here "k" is estimated and yet not known exactly!
-            v_hemo_min = (v_analyser_min - (vpass * k * 0.4));
+            //v_hemo_min = (v_analyser_min - (vpass * k * 0.4));
+            v_hemo_min = (v_analyser_min - (vpass * 0.4));
             v_stabi_min = v_hemo_min + v_stabi_volt;
             //v_hemi_min = (v_hemo_min + vpass * k);
 
@@ -1295,8 +1298,9 @@ namespace XPS
             //vLens_min = .0;
 
             // even the slowest electron should now reach the chaneltron (E_Analyser = E_pass + (E_Spec - E_Probe) = (U_Analyser - U_bias)*e)
-            v_analyser_max = vpass + vbias + 50;     // "5" takes (unknown) E_Spec - E_Probe into account
-            v_hemo_max = (v_analyser_max - (vpass * k * 0.4));
+            //v_analyser_max = vpass + vbias + 50;     // "5" takes (unknown) E_Spec - E_Probe into account
+            v_analyser_max = vpass / k + vbias + 50;     // "5" takes (unknown) E_Spec - E_Probe into account
+            v_hemo_max = (v_analyser_max - (vpass * 0.4));
             v_stabi_max = v_hemo_max + v_stabi_volt;
             //v_hemi_max = (v_analyser_max + vpass * k);
 
@@ -1306,17 +1310,17 @@ namespace XPS
 
             token.ThrowIfCancellationRequested();
 
-            await DPS.voltage_ramp(12);
+            await DPS.voltage_ramp(15);
             await DPS.set_voltage(v_channeltron_out_min,4);
             await DPS.set_voltage(v_hemo_min,0);
-            await DPS.set_voltage(4000,2);
+            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text),2);
             await DPS.set_voltage(v_stabi_min,5);
             await DPS.channel_on(4);
             await DPS.channel_on(0);
             await DPS.channel_on(5);
-            await DPS.channel_on(5);
+            await DPS.channel_on(2);
 
-            await Task.Delay(9000);
+            await Task.Delay(8000);
 
             await DPS.voltage_ramp(voltramp);
 
@@ -1353,6 +1357,9 @@ namespace XPS
                 double t_now;
                 double t_old = 0;
                 double hemo_check = 0;
+
+                double faktor = 0;
+                double marker = 0;
                 
                 await DPS.set_voltage(v_hemo_max,0);
                 await DPS.set_voltage(v_stabi_max, 5);
@@ -1378,14 +1385,14 @@ namespace XPS
 
                             t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                             ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
-                            //if (t_now < t_old)
-                            //{
-                            //    ctn = (ctn_now  - ctn_old) / (t_now + t_old - 4294967295) * 40000000;
-                            //}
-                            //else
-                            //{
+                            if (t_now < t_old)
+                            {
+                                ctn = (ctn_now  - ctn_old) / (t_now - t_old + 4294967295) * 40000000;
+                            }
+                            else
+                            {
                             ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000;
-                            //}
+                            }
                             ctn_old = ctn_now;
                             t_old = t_now;
 
@@ -1413,13 +1420,12 @@ namespace XPS
                             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                             {
                                 file.WriteLine(
-                                    E_B.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                                    ctn.ToString("0.00000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                                    E_kin.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                    E_B.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                    ctn.ToString("0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                                    E_kin.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     //v_analyser.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                     //v_hemi.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                                    t_now.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                                    mean_volt_hemo.ToString("0000.00", System.Globalization.CultureInfo.InvariantCulture)
+                                    mean_volt_hemo.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture)
                                     //v_pass_meas.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture)
                                     //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                     );
