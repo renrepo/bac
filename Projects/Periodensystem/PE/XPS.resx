@@ -14761,7 +14761,7 @@
     <value>301</value>
   </data>
   <data name="tb_lens.Text" xml:space="preserve">
-    <value>4000</value>
+    <value>3800</value>
   </data>
   <data name="tb_lens.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -14914,7 +14914,7 @@
     <value>43.30</value>
   </data>
   <data name="cb_pass.Items3" xml:space="preserve">
-    <value>109.08</value>
+    <value>82.07</value>
   </data>
   <data name="cb_pass.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 43</value>

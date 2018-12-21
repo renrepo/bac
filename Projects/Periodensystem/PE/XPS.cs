@@ -528,8 +528,8 @@ namespace XPS
                 try
                 {
                     await DPS.open_session("132.195.109.144");
-                    //await DPS.check_dps();
-                    //await DPS.clear_emergency();
+                    await DPS.check_dps();
+                    await DPS.clear_emergency();
                     //await DPS.set_vnom(1000,1);
                     await DPS.voltage_ramp(4.0);
 
