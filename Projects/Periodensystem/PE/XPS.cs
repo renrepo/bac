@@ -62,7 +62,7 @@ namespace XPS
         double nach = 5;
         double slope_korr = 0.613;      // ergibt sich aus Plot vhemi gegen vlens bei maxmalen zählraten
         double offset = - 48.85;
-        double workfunction = 5.1;
+        double workfunction = 4.7;
         double v_stabi_volt;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
                                                  //double offset = 20;
 
@@ -359,7 +359,8 @@ namespace XPS
             // proportionality between the voltage applied to the hemispheres and the pass energy
             //k = ra / ri - ri / ra;
             //k = 0.673;
-            k = 0.6;
+            //k = 0.6;
+            k = 0.8;
 
             try
             {
@@ -527,8 +528,9 @@ namespace XPS
                 try
                 {
                     await DPS.open_session("132.195.109.144");
-                    await DPS.check_dps();
-                    await DPS.clear_emergency();
+                    //await DPS.check_dps();
+                    //await DPS.clear_emergency();
+                    //await DPS.set_vnom(1000,1);
                     await DPS.voltage_ramp(4.0);
 
                     for (int i = 0; i < 6; i++)
@@ -1410,7 +1412,8 @@ namespace XPS
                             //E_pass = (v_hemi - v_hemo) / k;
                             E_pass = vpass / k;
                             v_analyser = mean_volt_hemo + vpass * 0.4;
-                            // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass
+                            // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass NO?!
+                            // hv = E_B + E_Pass + V_bias - V_Aanaly + W_S
                             E_kin = E_pass - v_analyser + vbias;
                             E_B = V_photon - E_kin - workfunction;
 
@@ -1813,6 +1816,15 @@ namespace XPS
             create_graph(myPane);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Refresh();
+        }
+
+        private async void btn_query_ramp_Click(object sender, EventArgs e)
+        {
+            _suspend_background_measurement.Set();
+            //string answer = await DPS.read_iseg("*IDN?\n");
+            string answer = await DPS.read_iseg(":READ:VOLT:NOM? (@1)");
+            tb_hem_out.Text = answer;
+            _suspend_background_measurement.Reset();
         }
     }
 }

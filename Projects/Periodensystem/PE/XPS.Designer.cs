@@ -340,6 +340,7 @@
             this.label96 = new System.Windows.Forms.Label();
             this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.btn_query_ramp = new System.Windows.Forms.Button();
             this.label109 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.tb_volt_ramp = new System.Windows.Forms.TextBox();
@@ -3053,6 +3054,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.btn_query_ramp);
             this.tabPage4.Controls.Add(this.label109);
             this.tabPage4.Controls.Add(this.label88);
             this.tabPage4.Controls.Add(this.tb_volt_ramp);
@@ -3090,6 +3092,13 @@
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btn_query_ramp
+            // 
+            resources.ApplyResources(this.btn_query_ramp, "btn_query_ramp");
+            this.btn_query_ramp.Name = "btn_query_ramp";
+            this.btn_query_ramp.UseVisualStyleBackColor = true;
+            this.btn_query_ramp.Click += new System.EventHandler(this.btn_query_ramp_Click);
             // 
             // label109
             // 
@@ -4557,6 +4566,7 @@
         private System.Windows.Forms.Label label111;
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
+        private System.Windows.Forms.Button btn_query_ramp;
     }
 }
 

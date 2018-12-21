@@ -191,6 +191,27 @@ namespace XPS
         }
 
 
+        public async Task<int> set_vnom(double voltage, int channel)
+        {
+            string answern = await read_iseg("*INSTR?\n");
+            string answer0 = await read_iseg("*IDN?\n");
+            await write_to_iseg("CLS\n");
+            await write_to_iseg("CONF:HVMICC HV_NOT_OK\n");
+            session.RawIO.Write(String.Format("CONF:HVMICC?\n"));
+            string answer1 = session.RawIO.ReadString();
+            await write_to_iseg("SYS:USER:CONF 5200048\n");
+            string answer2 = await read_iseg(":READ:MOD:EV:STAT?\n");
+            await write_to_iseg("SYS:USER:CONF:WRITE:VNOM 1000, (@1)\n");
+            await write_to_iseg("SYS:USER:CALIB V,(@1)\n");
+            await write_to_iseg("SLEEP 1000\n");
+            string answer3 = await read_iseg("SYS:USER:READ:VNOM? (@1)\n");
+            await write_to_iseg("SYS:RECA 1\n");
+            await write_to_iseg("CONF:HVMICC HV_OK\n");
+            //await write_to_iseg("STOP\n");
+            return 1;
+        }
+
+
         public async Task<int> set_K_I(double K_I)
         {
             await write_to_iseg(":CONF:FILA:EMI:I " + K_I.ToString() + "\n");
