@@ -62,9 +62,15 @@ namespace XPS
         double nach = 5;
         double slope_korr = 0.613;      // ergibt sich aus Plot vhemi gegen vlens bei maxmalen zählraten
         double offset = - 48.85;
-        double workfunction = 4.7;
+        //double workfunction = 4.8;
+        double workfunction = 4.701;
         double v_stabi_volt;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
                                                  //double offset = 20;
+        double correction_offset = 0;        // correction factor vor pass energy
+
+        //[ 0.8544416  14.47170123  4.70083337  0.99564488]
+        double voltage_divider = 153.612 * 0.99564488;
+        double k = 0.85444;
 
 
         // Labjack stuff
@@ -360,7 +366,8 @@ namespace XPS
             //k = ra / ri - ri / ra;
             //k = 0.673;
             //k = 0.6;
-            k = 0.8;
+            //k = 0.8;
+            
 
             try
             {
@@ -611,7 +618,6 @@ namespace XPS
         double v_hemo = 0;
         double v_analyser = 0;
 
-        double k;
         double E_pass =15;
         double E_kin;
         double sc = 0;    
@@ -1221,7 +1227,7 @@ namespace XPS
             var progress = progressHandler as IProgress<string>;
 
             int samples_per_second = 5;
-            int samples_for_mean = 16;
+            int samples_for_mean = 32;
 
             int counter_LSB = 3036;
             int MSB = 4899;
@@ -1255,7 +1261,7 @@ namespace XPS
             myCurve = myPane.AddCurve("", values_to_plot, Color.Black, SymbolType.None);
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_" + 
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_Calibration\", " " + curr_time + "_" + 
             tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "_" + cb_bias.SelectedItem + "_" + tb_lens.Text + "\\"));
             path_logfile = dl.FullName;
             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
@@ -1279,7 +1285,10 @@ namespace XPS
                 file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
                 file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
                 file.WriteLine("#Slit: \t{0} \t{1}", tb_slit.Text, "");
-                //file.WriteLine("#X-ray source: \t{0}", source + Environment.NewLine);
+                file.WriteLine("#Corr offset: \t{0} \t{1}", correction_offset.ToString(), "");
+                file.WriteLine("#ADC_factor: \t{0} \t{1}", voltage_divider.ToString(), "");
+                file.WriteLine("#Samp_mean: \t{0} \t{1}", samples_for_mean.ToString(), "");
+                file.WriteLine("#Samp/sec: \t{0} \t{1}", samples_per_second.ToString(), "");
                 //file.WriteLine("#E_b \t counts");    
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("" + Environment.NewLine);
@@ -1359,9 +1368,6 @@ namespace XPS
                 double t_now;
                 double t_old = 0;
                 double hemo_check = 0;
-
-                double faktor = 0;
-                double marker = 0;
                 
                 await DPS.set_voltage(v_hemo_max,0);
                 await DPS.set_voltage(v_stabi_max, 5);
@@ -1405,7 +1411,9 @@ namespace XPS
                                 l++;
                             }
                             l--;
-                            mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1) * 153.05;
+                            mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1) * voltage_divider; 
+                            //STIMMT DAS???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+                            // wie lange ist die scan-time? 220ms? hängt das von den samples_for_mean ab?
 
                             //oldtime += 1;
 
@@ -1415,7 +1423,7 @@ namespace XPS
                             // because (V_analyser - V_bias)*e + E_kin - workfunction = E_pass NO?!
                             // hv = E_B + E_Pass + V_bias - V_Aanaly + W_S
                             E_kin = E_pass - v_analyser + vbias;
-                            E_B = V_photon - E_kin - workfunction;
+                            E_B = V_photon - E_kin - workfunction - correction_offset;
 
                             values_to_plot.Add(E_B, ctn);
                             myCurve.AddPoint(E_B, ctn);
@@ -1434,7 +1442,7 @@ namespace XPS
                                     //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
                                     );
                             }
-                            hemo_check = mean_volt_hemo / (samples_for_mean + 1) * 153.05;
+                            hemo_check = mean_volt_hemo / (samples_for_mean + 1) * voltage_divider;
                             //progress.Report(ctn.ToString("000000"));
                             mean_volt_hemo = 0;
                             token.ThrowIfCancellationRequested();
@@ -1466,6 +1474,7 @@ namespace XPS
                 await DPS.channel_off(4);
                 await DPS.channel_off(0);
                 await DPS.channel_off(5);
+                await DPS.channel_off(2);
                 zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
                 LJM.eStreamStop(handle_stream);
                 tb_show.Text = "Stop!";

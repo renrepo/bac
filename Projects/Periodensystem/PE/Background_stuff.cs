@@ -5,6 +5,8 @@ using System.Threading;
 using LabJack;
 using System.Drawing;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
 using ZedGraph;
 
 
@@ -222,6 +224,24 @@ namespace XPS
             {
                 MessageBox.Show("Type in Integer");
             }
+        }
+
+
+        private double median(double[] numbers)
+        {
+            int numberCount = numbers.Count();
+            int halfIndex = numbers.Count() / 2;
+            var sortedNumbers = numbers.OrderBy(n => n);
+            double median;
+            if ((numberCount % 2) == 0)
+            {
+                median = ((sortedNumbers.ElementAt(halfIndex) + sortedNumbers.ElementAt((halfIndex - 1))) / 2);
+            }
+            else
+            {
+                median = sortedNumbers.ElementAt(halfIndex);
+            }
+            return 1;
         }
     }
 
