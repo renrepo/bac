@@ -187,10 +187,6 @@
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.lb_element_name = new System.Windows.Forms.Label();
-            this.label56 = new System.Windows.Forms.Label();
-            this.lb_atomic_number = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -260,85 +256,6 @@
             this.label59 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.s44 = new System.Windows.Forms.Label();
-            this.s28 = new System.Windows.Forms.Label();
-            this.s55 = new System.Windows.Forms.Label();
-            this.s39 = new System.Windows.Forms.Label();
-            this.s23 = new System.Windows.Forms.Label();
-            this.s42 = new System.Windows.Forms.Label();
-            this.s14 = new System.Windows.Forms.Label();
-            this.s26 = new System.Windows.Forms.Label();
-            this.s53 = new System.Windows.Forms.Label();
-            this.s37 = new System.Windows.Forms.Label();
-            this.s21 = new System.Windows.Forms.Label();
-            this.s12 = new System.Windows.Forms.Label();
-            this.s43 = new System.Windows.Forms.Label();
-            this.s54 = new System.Windows.Forms.Label();
-            this.s38 = new System.Windows.Forms.Label();
-            this.s27 = new System.Windows.Forms.Label();
-            this.s22 = new System.Windows.Forms.Label();
-            this.s13 = new System.Windows.Forms.Label();
-            this.s41 = new System.Windows.Forms.Label();
-            this.s59 = new System.Windows.Forms.Label();
-            this.s50 = new System.Windows.Forms.Label();
-            this.s34 = new System.Windows.Forms.Label();
-            this.s46 = new System.Windows.Forms.Label();
-            this.s25 = new System.Windows.Forms.Label();
-            this.s30 = new System.Windows.Forms.Label();
-            this.s52 = new System.Windows.Forms.Label();
-            this.s36 = new System.Windows.Forms.Label();
-            this.s18 = new System.Windows.Forms.Label();
-            this.s20 = new System.Windows.Forms.Label();
-            this.s40 = new System.Windows.Forms.Label();
-            this.s9 = new System.Windows.Forms.Label();
-            this.s24 = new System.Windows.Forms.Label();
-            this.s51 = new System.Windows.Forms.Label();
-            this.s35 = new System.Windows.Forms.Label();
-            this.s11 = new System.Windows.Forms.Label();
-            this.s19 = new System.Windows.Forms.Label();
-            this.s5 = new System.Windows.Forms.Label();
-            this.s45 = new System.Windows.Forms.Label();
-            this.s10 = new System.Windows.Forms.Label();
-            this.label117 = new System.Windows.Forms.Label();
-            this.s29 = new System.Windows.Forms.Label();
-            this.s58 = new System.Windows.Forms.Label();
-            this.s49 = new System.Windows.Forms.Label();
-            this.s57 = new System.Windows.Forms.Label();
-            this.s33 = new System.Windows.Forms.Label();
-            this.s48 = new System.Windows.Forms.Label();
-            this.s17 = new System.Windows.Forms.Label();
-            this.s32 = new System.Windows.Forms.Label();
-            this.s16 = new System.Windows.Forms.Label();
-            this.s8 = new System.Windows.Forms.Label();
-            this.s7 = new System.Windows.Forms.Label();
-            this.s56 = new System.Windows.Forms.Label();
-            this.s47 = new System.Windows.Forms.Label();
-            this.s31 = new System.Windows.Forms.Label();
-            this.s15 = new System.Windows.Forms.Label();
-            this.s4 = new System.Windows.Forms.Label();
-            this.s6 = new System.Windows.Forms.Label();
-            this.s3 = new System.Windows.Forms.Label();
-            this.s2 = new System.Windows.Forms.Label();
-            this.s1 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
-            this.label67 = new System.Windows.Forms.Label();
-            this.label68 = new System.Windows.Forms.Label();
-            this.label69 = new System.Windows.Forms.Label();
-            this.label70 = new System.Windows.Forms.Label();
-            this.label71 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.label89 = new System.Windows.Forms.Label();
-            this.label90 = new System.Windows.Forms.Label();
-            this.label91 = new System.Windows.Forms.Label();
-            this.label92 = new System.Windows.Forms.Label();
-            this.label93 = new System.Windows.Forms.Label();
-            this.label94 = new System.Windows.Forms.Label();
-            this.label95 = new System.Windows.Forms.Label();
-            this.label96 = new System.Windows.Forms.Label();
-            this.label97 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.btn_query_ramp = new System.Windows.Forms.Button();
             this.label109 = new System.Windows.Forms.Label();
@@ -464,13 +381,19 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.label86 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tb_set_E_B = new System.Windows.Forms.TextBox();
-            this.label78 = new System.Windows.Forms.Label();
-            this.label82 = new System.Windows.Forms.Label();
-            this.btn_set_E_B = new System.Windows.Forms.Button();
-            this.btn_Set_E_B_off = new System.Windows.Forms.Button();
-            this.tb_slit = new System.Windows.Forms.TextBox();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.btn_clear_fig = new System.Windows.Forms.Button();
+            this.btn_test = new System.Windows.Forms.Button();
+            this.tb_set_E_B = new System.Windows.Forms.TextBox();
+            this.tb_slit = new System.Windows.Forms.TextBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.btn_Set_E_B_off = new System.Windows.Forms.Button();
+            this.btn_set_E_B = new System.Windows.Forms.Button();
+            this.label82 = new System.Windows.Forms.Label();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.lb_atomic_number = new System.Windows.Forms.Label();
+            this.lb_element_name = new System.Windows.Forms.Label();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -485,6 +408,9 @@
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -1556,7 +1482,7 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tableLayoutPanel1.Controls.Add(this.textBox19, 18, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox18, 17, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox17, 16, 0);
@@ -1714,241 +1640,275 @@
             // 
             // textBox19
             // 
+            this.textBox19.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox19, "textBox19");
-            this.textBox19.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox19.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox19.Name = "textBox19";
             // 
             // textBox18
             // 
+            this.textBox18.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox18, "textBox18");
-            this.textBox18.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox18.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox18.Name = "textBox18";
             // 
             // textBox17
             // 
+            this.textBox17.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox17, "textBox17");
-            this.textBox17.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox17.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox17.Name = "textBox17";
             // 
             // textBox16
             // 
+            this.textBox16.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox16, "textBox16");
-            this.textBox16.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox16.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox16.Name = "textBox16";
             // 
             // textBox15
             // 
+            this.textBox15.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox15, "textBox15");
-            this.textBox15.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox15.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox15.Name = "textBox15";
             // 
             // textBox14
             // 
+            this.textBox14.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox14, "textBox14");
-            this.textBox14.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox14.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox14.Name = "textBox14";
             // 
             // textBox13
             // 
+            this.textBox13.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox13, "textBox13");
-            this.textBox13.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox13.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox13.Name = "textBox13";
             // 
             // textBox12
             // 
+            this.textBox12.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox12, "textBox12");
-            this.textBox12.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox12.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox12.Name = "textBox12";
             // 
             // textBox11
             // 
+            this.textBox11.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox11, "textBox11");
-            this.textBox11.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox11.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox11.Name = "textBox11";
             // 
             // textBox10
             // 
+            this.textBox10.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox10, "textBox10");
-            this.textBox10.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox10.Name = "textBox10";
             // 
             // textBox9
             // 
+            this.textBox9.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox9, "textBox9");
-            this.textBox9.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox9.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox9.Name = "textBox9";
             // 
             // textBox8
             // 
+            this.textBox8.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox8, "textBox8");
-            this.textBox8.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox8.Name = "textBox8";
             // 
             // textBox7
             // 
+            this.textBox7.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox7, "textBox7");
-            this.textBox7.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox7.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox7.Name = "textBox7";
             // 
             // textBox6
             // 
+            this.textBox6.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox6.Name = "textBox6";
             // 
             // textBox5
             // 
+            this.textBox5.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox5, "textBox5");
-            this.textBox5.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox5.Name = "textBox5";
             // 
             // textBox4
             // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox4.Name = "textBox4";
             // 
             // textBox3
             // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.textBox3, "textBox3");
-            this.textBox3.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox3.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox3.Name = "textBox3";
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox1.Name = "textBox1";
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox2.Name = "textBox2";
             // 
             // textBox21
             // 
+            this.textBox21.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox21, "textBox21");
-            this.textBox21.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox21.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox21.Name = "textBox21";
             // 
             // textBox22
             // 
+            this.textBox22.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox22.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox22, "textBox22");
-            this.textBox22.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox22.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox22.Name = "textBox22";
             // 
             // textBox23
             // 
+            this.textBox23.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox23.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox23, "textBox23");
-            this.textBox23.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox23.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox23.Name = "textBox23";
             // 
             // textBox24
             // 
+            this.textBox24.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox24, "textBox24");
-            this.textBox24.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox24.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox24.Name = "textBox24";
             // 
             // textBox25
             // 
+            this.textBox25.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox25.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox25, "textBox25");
-            this.textBox25.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox25.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox25.Name = "textBox25";
             // 
             // textBox27
             // 
             resources.ApplyResources(this.textBox27, "textBox27");
+            this.textBox27.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox27.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox27.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox27.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox27.Name = "textBox27";
             // 
             // textBox20
             // 
+            this.textBox20.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox20, "textBox20");
-            this.textBox20.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox20.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox20.Name = "textBox20";
             // 
             // textBox28
             // 
+            this.textBox28.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox28.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox28, "textBox28");
-            this.textBox28.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox28.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox28.Name = "textBox28";
             // 
             // textBox29
             // 
+            this.textBox29.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox29.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox29, "textBox29");
-            this.textBox29.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox29.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox29.Name = "textBox29";
             // 
             // textBox30
             // 
+            this.textBox30.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox30.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox30, "textBox30");
-            this.textBox30.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox30.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox30.Name = "textBox30";
             // 
             // textBox31
             // 
+            this.textBox31.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox31.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox31, "textBox31");
-            this.textBox31.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox31.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox31.Name = "textBox31";
             // 
             // textBox32
             // 
+            this.textBox32.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox32.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox32, "textBox32");
-            this.textBox32.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox32.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox32.Name = "textBox32";
             // 
             // textBox33
             // 
+            this.textBox33.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox33.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox33, "textBox33");
-            this.textBox33.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox33.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox33.Name = "textBox33";
             // 
             // textBox34
             // 
+            this.textBox34.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox34.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox34, "textBox34");
-            this.textBox34.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox34.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox34.Name = "textBox34";
             // 
             // textBox26
             // 
+            this.textBox26.BackColor = System.Drawing.SystemColors.ControlDark;
             this.textBox26.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox26, "textBox26");
-            this.textBox26.ForeColor = System.Drawing.Color.DimGray;
+            this.textBox26.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox26.Name = "textBox26";
             // 
             // elementnames
@@ -1970,26 +1930,6 @@
             // 
             resources.ApplyResources(this.label24, "label24");
             this.label24.Name = "label24";
-            // 
-            // lb_element_name
-            // 
-            resources.ApplyResources(this.lb_element_name, "lb_element_name");
-            this.lb_element_name.Name = "lb_element_name";
-            // 
-            // label56
-            // 
-            resources.ApplyResources(this.label56, "label56");
-            this.label56.Name = "label56";
-            // 
-            // lb_atomic_number
-            // 
-            resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
-            this.lb_atomic_number.Name = "lb_atomic_number";
-            // 
-            // label55
-            // 
-            resources.ApplyResources(this.label55, "label55");
-            this.label55.Name = "label55";
             // 
             // label23
             // 
@@ -2340,6 +2280,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.SystemColors.ControlDark;
             this.groupBox3.Controls.Add(this.btn_emcy);
             this.groupBox3.Controls.Add(this.safe_fig);
             this.groupBox3.Controls.Add(this.showdata);
@@ -2458,602 +2399,9 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // s44
-            // 
-            resources.ApplyResources(this.s44, "s44");
-            this.s44.BackColor = System.Drawing.Color.Gainsboro;
-            this.s44.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s44.ForeColor = System.Drawing.Color.Black;
-            this.s44.Name = "s44";
-            // 
-            // s28
-            // 
-            resources.ApplyResources(this.s28, "s28");
-            this.s28.BackColor = System.Drawing.Color.Gainsboro;
-            this.s28.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s28.ForeColor = System.Drawing.Color.Black;
-            this.s28.Name = "s28";
-            // 
-            // s55
-            // 
-            resources.ApplyResources(this.s55, "s55");
-            this.s55.BackColor = System.Drawing.Color.Gainsboro;
-            this.s55.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s55.ForeColor = System.Drawing.Color.Black;
-            this.s55.Name = "s55";
-            // 
-            // s39
-            // 
-            resources.ApplyResources(this.s39, "s39");
-            this.s39.BackColor = System.Drawing.Color.Gainsboro;
-            this.s39.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s39.ForeColor = System.Drawing.Color.Black;
-            this.s39.Name = "s39";
-            // 
-            // s23
-            // 
-            resources.ApplyResources(this.s23, "s23");
-            this.s23.BackColor = System.Drawing.Color.Gainsboro;
-            this.s23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s23.ForeColor = System.Drawing.Color.Black;
-            this.s23.Name = "s23";
-            // 
-            // s42
-            // 
-            resources.ApplyResources(this.s42, "s42");
-            this.s42.BackColor = System.Drawing.Color.Gainsboro;
-            this.s42.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s42.ForeColor = System.Drawing.Color.Black;
-            this.s42.Name = "s42";
-            // 
-            // s14
-            // 
-            resources.ApplyResources(this.s14, "s14");
-            this.s14.BackColor = System.Drawing.Color.Gainsboro;
-            this.s14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s14.ForeColor = System.Drawing.Color.Black;
-            this.s14.Name = "s14";
-            // 
-            // s26
-            // 
-            resources.ApplyResources(this.s26, "s26");
-            this.s26.BackColor = System.Drawing.Color.Gainsboro;
-            this.s26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s26.ForeColor = System.Drawing.Color.Black;
-            this.s26.Name = "s26";
-            // 
-            // s53
-            // 
-            resources.ApplyResources(this.s53, "s53");
-            this.s53.BackColor = System.Drawing.Color.Gainsboro;
-            this.s53.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s53.ForeColor = System.Drawing.Color.Black;
-            this.s53.Name = "s53";
-            // 
-            // s37
-            // 
-            resources.ApplyResources(this.s37, "s37");
-            this.s37.BackColor = System.Drawing.Color.Gainsboro;
-            this.s37.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s37.ForeColor = System.Drawing.Color.Black;
-            this.s37.Name = "s37";
-            // 
-            // s21
-            // 
-            resources.ApplyResources(this.s21, "s21");
-            this.s21.BackColor = System.Drawing.Color.Gainsboro;
-            this.s21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s21.ForeColor = System.Drawing.Color.Black;
-            this.s21.Name = "s21";
-            // 
-            // s12
-            // 
-            resources.ApplyResources(this.s12, "s12");
-            this.s12.BackColor = System.Drawing.Color.Gainsboro;
-            this.s12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s12.ForeColor = System.Drawing.Color.Black;
-            this.s12.Name = "s12";
-            // 
-            // s43
-            // 
-            resources.ApplyResources(this.s43, "s43");
-            this.s43.BackColor = System.Drawing.Color.Gainsboro;
-            this.s43.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s43.ForeColor = System.Drawing.Color.Black;
-            this.s43.Name = "s43";
-            // 
-            // s54
-            // 
-            resources.ApplyResources(this.s54, "s54");
-            this.s54.BackColor = System.Drawing.Color.Gainsboro;
-            this.s54.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s54.ForeColor = System.Drawing.Color.Black;
-            this.s54.Name = "s54";
-            // 
-            // s38
-            // 
-            resources.ApplyResources(this.s38, "s38");
-            this.s38.BackColor = System.Drawing.Color.Gainsboro;
-            this.s38.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s38.ForeColor = System.Drawing.Color.Black;
-            this.s38.Name = "s38";
-            // 
-            // s27
-            // 
-            resources.ApplyResources(this.s27, "s27");
-            this.s27.BackColor = System.Drawing.Color.Gainsboro;
-            this.s27.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s27.ForeColor = System.Drawing.Color.Black;
-            this.s27.Name = "s27";
-            // 
-            // s22
-            // 
-            resources.ApplyResources(this.s22, "s22");
-            this.s22.BackColor = System.Drawing.Color.Gainsboro;
-            this.s22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s22.ForeColor = System.Drawing.Color.Black;
-            this.s22.Name = "s22";
-            // 
-            // s13
-            // 
-            resources.ApplyResources(this.s13, "s13");
-            this.s13.BackColor = System.Drawing.Color.Gainsboro;
-            this.s13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s13.ForeColor = System.Drawing.Color.Black;
-            this.s13.Name = "s13";
-            // 
-            // s41
-            // 
-            resources.ApplyResources(this.s41, "s41");
-            this.s41.BackColor = System.Drawing.Color.Gainsboro;
-            this.s41.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s41.ForeColor = System.Drawing.Color.Black;
-            this.s41.Name = "s41";
-            // 
-            // s59
-            // 
-            resources.ApplyResources(this.s59, "s59");
-            this.s59.BackColor = System.Drawing.Color.Gainsboro;
-            this.s59.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s59.ForeColor = System.Drawing.Color.Black;
-            this.s59.Name = "s59";
-            // 
-            // s50
-            // 
-            resources.ApplyResources(this.s50, "s50");
-            this.s50.BackColor = System.Drawing.Color.Gainsboro;
-            this.s50.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s50.ForeColor = System.Drawing.Color.Black;
-            this.s50.Name = "s50";
-            // 
-            // s34
-            // 
-            resources.ApplyResources(this.s34, "s34");
-            this.s34.BackColor = System.Drawing.Color.Gainsboro;
-            this.s34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s34.ForeColor = System.Drawing.Color.Black;
-            this.s34.Name = "s34";
-            // 
-            // s46
-            // 
-            resources.ApplyResources(this.s46, "s46");
-            this.s46.BackColor = System.Drawing.Color.Gainsboro;
-            this.s46.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s46.ForeColor = System.Drawing.Color.Black;
-            this.s46.Name = "s46";
-            // 
-            // s25
-            // 
-            resources.ApplyResources(this.s25, "s25");
-            this.s25.BackColor = System.Drawing.Color.Gainsboro;
-            this.s25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s25.ForeColor = System.Drawing.Color.Black;
-            this.s25.Name = "s25";
-            // 
-            // s30
-            // 
-            resources.ApplyResources(this.s30, "s30");
-            this.s30.BackColor = System.Drawing.Color.Gainsboro;
-            this.s30.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s30.ForeColor = System.Drawing.Color.Black;
-            this.s30.Name = "s30";
-            // 
-            // s52
-            // 
-            resources.ApplyResources(this.s52, "s52");
-            this.s52.BackColor = System.Drawing.Color.Gainsboro;
-            this.s52.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s52.ForeColor = System.Drawing.Color.Black;
-            this.s52.Name = "s52";
-            // 
-            // s36
-            // 
-            resources.ApplyResources(this.s36, "s36");
-            this.s36.BackColor = System.Drawing.Color.Gainsboro;
-            this.s36.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s36.ForeColor = System.Drawing.Color.Black;
-            this.s36.Name = "s36";
-            // 
-            // s18
-            // 
-            resources.ApplyResources(this.s18, "s18");
-            this.s18.BackColor = System.Drawing.Color.Gainsboro;
-            this.s18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s18.ForeColor = System.Drawing.Color.Black;
-            this.s18.Name = "s18";
-            // 
-            // s20
-            // 
-            resources.ApplyResources(this.s20, "s20");
-            this.s20.BackColor = System.Drawing.Color.Gainsboro;
-            this.s20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s20.ForeColor = System.Drawing.Color.Black;
-            this.s20.Name = "s20";
-            // 
-            // s40
-            // 
-            resources.ApplyResources(this.s40, "s40");
-            this.s40.BackColor = System.Drawing.Color.Gainsboro;
-            this.s40.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s40.ForeColor = System.Drawing.Color.Black;
-            this.s40.Name = "s40";
-            // 
-            // s9
-            // 
-            resources.ApplyResources(this.s9, "s9");
-            this.s9.BackColor = System.Drawing.Color.Gainsboro;
-            this.s9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s9.ForeColor = System.Drawing.Color.Black;
-            this.s9.Name = "s9";
-            // 
-            // s24
-            // 
-            resources.ApplyResources(this.s24, "s24");
-            this.s24.BackColor = System.Drawing.Color.Gainsboro;
-            this.s24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s24.ForeColor = System.Drawing.Color.Black;
-            this.s24.Name = "s24";
-            // 
-            // s51
-            // 
-            resources.ApplyResources(this.s51, "s51");
-            this.s51.BackColor = System.Drawing.Color.Gainsboro;
-            this.s51.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s51.ForeColor = System.Drawing.Color.Black;
-            this.s51.Name = "s51";
-            // 
-            // s35
-            // 
-            resources.ApplyResources(this.s35, "s35");
-            this.s35.BackColor = System.Drawing.Color.Gainsboro;
-            this.s35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s35.ForeColor = System.Drawing.Color.Black;
-            this.s35.Name = "s35";
-            // 
-            // s11
-            // 
-            resources.ApplyResources(this.s11, "s11");
-            this.s11.BackColor = System.Drawing.Color.Gainsboro;
-            this.s11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s11.ForeColor = System.Drawing.Color.Black;
-            this.s11.Name = "s11";
-            // 
-            // s19
-            // 
-            resources.ApplyResources(this.s19, "s19");
-            this.s19.BackColor = System.Drawing.Color.Gainsboro;
-            this.s19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s19.ForeColor = System.Drawing.Color.Black;
-            this.s19.Name = "s19";
-            // 
-            // s5
-            // 
-            resources.ApplyResources(this.s5, "s5");
-            this.s5.BackColor = System.Drawing.Color.Gainsboro;
-            this.s5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s5.ForeColor = System.Drawing.Color.Black;
-            this.s5.Name = "s5";
-            // 
-            // s45
-            // 
-            resources.ApplyResources(this.s45, "s45");
-            this.s45.BackColor = System.Drawing.Color.Gainsboro;
-            this.s45.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s45.ForeColor = System.Drawing.Color.Black;
-            this.s45.Name = "s45";
-            // 
-            // s10
-            // 
-            resources.ApplyResources(this.s10, "s10");
-            this.s10.BackColor = System.Drawing.Color.Gainsboro;
-            this.s10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s10.ForeColor = System.Drawing.Color.Black;
-            this.s10.Name = "s10";
-            // 
-            // label117
-            // 
-            resources.ApplyResources(this.label117, "label117");
-            this.label117.BackColor = System.Drawing.Color.Gainsboro;
-            this.label117.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label117.ForeColor = System.Drawing.Color.DarkGray;
-            this.label117.Name = "label117";
-            // 
-            // s29
-            // 
-            resources.ApplyResources(this.s29, "s29");
-            this.s29.BackColor = System.Drawing.Color.Gainsboro;
-            this.s29.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s29.ForeColor = System.Drawing.Color.Black;
-            this.s29.Name = "s29";
-            // 
-            // s58
-            // 
-            resources.ApplyResources(this.s58, "s58");
-            this.s58.BackColor = System.Drawing.Color.Gainsboro;
-            this.s58.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s58.ForeColor = System.Drawing.Color.Black;
-            this.s58.Name = "s58";
-            // 
-            // s49
-            // 
-            resources.ApplyResources(this.s49, "s49");
-            this.s49.BackColor = System.Drawing.Color.Gainsboro;
-            this.s49.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s49.ForeColor = System.Drawing.Color.Black;
-            this.s49.Name = "s49";
-            // 
-            // s57
-            // 
-            resources.ApplyResources(this.s57, "s57");
-            this.s57.BackColor = System.Drawing.Color.Gainsboro;
-            this.s57.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s57.ForeColor = System.Drawing.Color.Black;
-            this.s57.Name = "s57";
-            // 
-            // s33
-            // 
-            resources.ApplyResources(this.s33, "s33");
-            this.s33.BackColor = System.Drawing.Color.Gainsboro;
-            this.s33.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s33.ForeColor = System.Drawing.Color.Black;
-            this.s33.Name = "s33";
-            // 
-            // s48
-            // 
-            resources.ApplyResources(this.s48, "s48");
-            this.s48.BackColor = System.Drawing.Color.Gainsboro;
-            this.s48.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s48.ForeColor = System.Drawing.Color.Black;
-            this.s48.Name = "s48";
-            // 
-            // s17
-            // 
-            resources.ApplyResources(this.s17, "s17");
-            this.s17.BackColor = System.Drawing.Color.Gainsboro;
-            this.s17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s17.ForeColor = System.Drawing.Color.Black;
-            this.s17.Name = "s17";
-            // 
-            // s32
-            // 
-            resources.ApplyResources(this.s32, "s32");
-            this.s32.BackColor = System.Drawing.Color.Gainsboro;
-            this.s32.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s32.ForeColor = System.Drawing.Color.Black;
-            this.s32.Name = "s32";
-            // 
-            // s16
-            // 
-            resources.ApplyResources(this.s16, "s16");
-            this.s16.BackColor = System.Drawing.Color.Gainsboro;
-            this.s16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s16.ForeColor = System.Drawing.Color.Black;
-            this.s16.Name = "s16";
-            // 
-            // s8
-            // 
-            resources.ApplyResources(this.s8, "s8");
-            this.s8.BackColor = System.Drawing.Color.Gainsboro;
-            this.s8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s8.ForeColor = System.Drawing.Color.Black;
-            this.s8.Name = "s8";
-            // 
-            // s7
-            // 
-            resources.ApplyResources(this.s7, "s7");
-            this.s7.BackColor = System.Drawing.Color.Gainsboro;
-            this.s7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s7.ForeColor = System.Drawing.Color.Black;
-            this.s7.Name = "s7";
-            // 
-            // s56
-            // 
-            resources.ApplyResources(this.s56, "s56");
-            this.s56.BackColor = System.Drawing.Color.Gainsboro;
-            this.s56.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s56.ForeColor = System.Drawing.Color.Black;
-            this.s56.Name = "s56";
-            // 
-            // s47
-            // 
-            resources.ApplyResources(this.s47, "s47");
-            this.s47.BackColor = System.Drawing.Color.Gainsboro;
-            this.s47.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s47.ForeColor = System.Drawing.Color.Black;
-            this.s47.Name = "s47";
-            // 
-            // s31
-            // 
-            resources.ApplyResources(this.s31, "s31");
-            this.s31.BackColor = System.Drawing.Color.Gainsboro;
-            this.s31.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s31.ForeColor = System.Drawing.Color.Black;
-            this.s31.Name = "s31";
-            // 
-            // s15
-            // 
-            resources.ApplyResources(this.s15, "s15");
-            this.s15.BackColor = System.Drawing.Color.Gainsboro;
-            this.s15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s15.ForeColor = System.Drawing.Color.Black;
-            this.s15.Name = "s15";
-            // 
-            // s4
-            // 
-            resources.ApplyResources(this.s4, "s4");
-            this.s4.BackColor = System.Drawing.Color.Gainsboro;
-            this.s4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s4.ForeColor = System.Drawing.Color.Black;
-            this.s4.Name = "s4";
-            // 
-            // s6
-            // 
-            resources.ApplyResources(this.s6, "s6");
-            this.s6.BackColor = System.Drawing.Color.Gainsboro;
-            this.s6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s6.ForeColor = System.Drawing.Color.Black;
-            this.s6.Name = "s6";
-            // 
-            // s3
-            // 
-            resources.ApplyResources(this.s3, "s3");
-            this.s3.BackColor = System.Drawing.Color.Gainsboro;
-            this.s3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s3.ForeColor = System.Drawing.Color.Black;
-            this.s3.Name = "s3";
-            // 
-            // s2
-            // 
-            resources.ApplyResources(this.s2, "s2");
-            this.s2.BackColor = System.Drawing.Color.Gainsboro;
-            this.s2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s2.ForeColor = System.Drawing.Color.Black;
-            this.s2.Name = "s2";
-            // 
-            // s1
-            // 
-            resources.ApplyResources(this.s1, "s1");
-            this.s1.BackColor = System.Drawing.Color.Gainsboro;
-            this.s1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.s1.ForeColor = System.Drawing.Color.Black;
-            this.s1.Name = "s1";
-            // 
-            // label63
-            // 
-            resources.ApplyResources(this.label63, "label63");
-            this.label63.ForeColor = System.Drawing.Color.Blue;
-            this.label63.Name = "label63";
-            // 
-            // label64
-            // 
-            resources.ApplyResources(this.label64, "label64");
-            this.label64.ForeColor = System.Drawing.Color.Blue;
-            this.label64.Name = "label64";
-            // 
-            // label65
-            // 
-            resources.ApplyResources(this.label65, "label65");
-            this.label65.ForeColor = System.Drawing.Color.Blue;
-            this.label65.Name = "label65";
-            // 
-            // label66
-            // 
-            resources.ApplyResources(this.label66, "label66");
-            this.label66.ForeColor = System.Drawing.Color.Blue;
-            this.label66.Name = "label66";
-            // 
-            // label67
-            // 
-            resources.ApplyResources(this.label67, "label67");
-            this.label67.ForeColor = System.Drawing.Color.Blue;
-            this.label67.Name = "label67";
-            // 
-            // label68
-            // 
-            resources.ApplyResources(this.label68, "label68");
-            this.label68.ForeColor = System.Drawing.Color.Blue;
-            this.label68.Name = "label68";
-            // 
-            // label69
-            // 
-            resources.ApplyResources(this.label69, "label69");
-            this.label69.ForeColor = System.Drawing.Color.Blue;
-            this.label69.Name = "label69";
-            // 
-            // label70
-            // 
-            resources.ApplyResources(this.label70, "label70");
-            this.label70.ForeColor = System.Drawing.Color.Blue;
-            this.label70.Name = "label70";
-            // 
-            // label71
-            // 
-            resources.ApplyResources(this.label71, "label71");
-            this.label71.ForeColor = System.Drawing.Color.Blue;
-            this.label71.Name = "label71";
-            // 
-            // label72
-            // 
-            resources.ApplyResources(this.label72, "label72");
-            this.label72.ForeColor = System.Drawing.Color.Blue;
-            this.label72.Name = "label72";
-            // 
-            // label89
-            // 
-            resources.ApplyResources(this.label89, "label89");
-            this.label89.ForeColor = System.Drawing.Color.Blue;
-            this.label89.Name = "label89";
-            // 
-            // label90
-            // 
-            resources.ApplyResources(this.label90, "label90");
-            this.label90.ForeColor = System.Drawing.Color.Blue;
-            this.label90.Name = "label90";
-            // 
-            // label91
-            // 
-            resources.ApplyResources(this.label91, "label91");
-            this.label91.ForeColor = System.Drawing.Color.Blue;
-            this.label91.Name = "label91";
-            // 
-            // label92
-            // 
-            resources.ApplyResources(this.label92, "label92");
-            this.label92.ForeColor = System.Drawing.Color.Blue;
-            this.label92.Name = "label92";
-            // 
-            // label93
-            // 
-            resources.ApplyResources(this.label93, "label93");
-            this.label93.ForeColor = System.Drawing.Color.Blue;
-            this.label93.Name = "label93";
-            // 
-            // label94
-            // 
-            resources.ApplyResources(this.label94, "label94");
-            this.label94.ForeColor = System.Drawing.Color.Blue;
-            this.label94.Name = "label94";
-            // 
-            // label95
-            // 
-            resources.ApplyResources(this.label95, "label95");
-            this.label95.ForeColor = System.Drawing.Color.Blue;
-            this.label95.Name = "label95";
-            // 
-            // label96
-            // 
-            resources.ApplyResources(this.label96, "label96");
-            this.label96.ForeColor = System.Drawing.Color.Blue;
-            this.label96.Name = "label96";
-            // 
-            // label97
-            // 
-            resources.ApplyResources(this.label97, "label97");
-            this.label97.ForeColor = System.Drawing.Color.Blue;
-            this.label97.Name = "label97";
-            // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage4.Controls.Add(this.btn_query_ramp);
             this.tabPage4.Controls.Add(this.label109);
             this.tabPage4.Controls.Add(this.label88);
@@ -3091,7 +2439,6 @@
             this.tabPage4.Controls.Add(this.btn_dac);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // btn_query_ramp
             // 
@@ -3297,10 +2644,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage2.Controls.Add(this.tableLayoutPanel3);
             resources.ApplyResources(this.tabPage2, "tabPage2");
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -3615,13 +2962,13 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.tabPage1.Controls.Add(this.tableLayoutPanel4);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox2);
             this.tabPage1.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel4
             // 
@@ -3944,43 +3291,28 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage3);
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
-            // tb_set_E_B
+            // tabPage5
             // 
-            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
-            this.tb_set_E_B.Name = "tb_set_E_B";
-            // 
-            // label78
-            // 
-            resources.ApplyResources(this.label78, "label78");
-            this.label78.Name = "label78";
-            // 
-            // label82
-            // 
-            resources.ApplyResources(this.label82, "label82");
-            this.label82.Name = "label82";
-            // 
-            // btn_set_E_B
-            // 
-            resources.ApplyResources(this.btn_set_E_B, "btn_set_E_B");
-            this.btn_set_E_B.Name = "btn_set_E_B";
-            this.btn_set_E_B.UseVisualStyleBackColor = true;
-            this.btn_set_E_B.Click += new System.EventHandler(this.btn_set_E_B_Click);
-            // 
-            // btn_Set_E_B_off
-            // 
-            resources.ApplyResources(this.btn_Set_E_B_off, "btn_Set_E_B_off");
-            this.btn_Set_E_B_off.Name = "btn_Set_E_B_off";
-            this.btn_Set_E_B_off.UseVisualStyleBackColor = true;
-            this.btn_Set_E_B_off.Click += new System.EventHandler(this.btn_Set_E_B_off_Click);
-            // 
-            // tb_slit
-            // 
-            resources.ApplyResources(this.tb_slit, "tb_slit");
-            this.tb_slit.Name = "tb_slit";
+            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage5.Controls.Add(this.btn_clear_fig);
+            this.tabPage5.Controls.Add(this.btn_test);
+            this.tabPage5.Controls.Add(this.label86);
+            this.tabPage5.Controls.Add(this.tb_set_E_B);
+            this.tabPage5.Controls.Add(this.tb_slit);
+            this.tabPage5.Controls.Add(this.label78);
+            this.tabPage5.Controls.Add(this.btn_Set_E_B_off);
+            this.tabPage5.Controls.Add(this.tb_dac);
+            this.tabPage5.Controls.Add(this.btn_set_E_B);
+            this.tabPage5.Controls.Add(this.label82);
+            this.tabPage5.Controls.Add(this.btn_reload_dac);
+            resources.ApplyResources(this.tabPage5, "tabPage5");
+            this.tabPage5.Name = "tabPage5";
             // 
             // btn_clear_fig
             // 
@@ -3989,109 +3321,82 @@
             this.btn_clear_fig.UseVisualStyleBackColor = true;
             this.btn_clear_fig.Click += new System.EventHandler(this.btn_clear_fig_Click);
             // 
+            // btn_test
+            // 
+            resources.ApplyResources(this.btn_test, "btn_test");
+            this.btn_test.Name = "btn_test";
+            this.btn_test.UseVisualStyleBackColor = true;
+            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
+            // 
+            // tb_set_E_B
+            // 
+            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
+            this.tb_set_E_B.Name = "tb_set_E_B";
+            // 
+            // tb_slit
+            // 
+            resources.ApplyResources(this.tb_slit, "tb_slit");
+            this.tb_slit.Name = "tb_slit";
+            // 
+            // label78
+            // 
+            resources.ApplyResources(this.label78, "label78");
+            this.label78.Name = "label78";
+            // 
+            // btn_Set_E_B_off
+            // 
+            resources.ApplyResources(this.btn_Set_E_B_off, "btn_Set_E_B_off");
+            this.btn_Set_E_B_off.Name = "btn_Set_E_B_off";
+            this.btn_Set_E_B_off.UseVisualStyleBackColor = true;
+            this.btn_Set_E_B_off.Click += new System.EventHandler(this.btn_Set_E_B_off_Click);
+            // 
+            // btn_set_E_B
+            // 
+            resources.ApplyResources(this.btn_set_E_B, "btn_set_E_B");
+            this.btn_set_E_B.Name = "btn_set_E_B";
+            this.btn_set_E_B.UseVisualStyleBackColor = true;
+            this.btn_set_E_B.Click += new System.EventHandler(this.btn_set_E_B_Click);
+            // 
+            // label82
+            // 
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPage3.Controls.Add(this.lb_atomic_number);
+            this.tabPage3.Controls.Add(this.lb_element_name);
+            this.tabPage3.Controls.Add(this.tb_show);
+            this.tabPage3.Controls.Add(this.groupBox4);
+            resources.ApplyResources(this.tabPage3, "tabPage3");
+            this.tabPage3.Name = "tabPage3";
+            // 
+            // lb_atomic_number
+            // 
+            resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
+            this.lb_atomic_number.Name = "lb_atomic_number";
+            // 
+            // lb_element_name
+            // 
+            resources.ApplyResources(this.lb_element_name, "lb_element_name");
+            this.lb_element_name.Name = "lb_element_name";
+            // 
+            // tableLayoutPanel5
+            // 
+            resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
+            this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btn_clear_fig);
-            this.Controls.Add(this.tb_slit);
-            this.Controls.Add(this.btn_Set_E_B_off);
-            this.Controls.Add(this.btn_set_E_B);
-            this.Controls.Add(this.btn_reload_dac);
-            this.Controls.Add(this.label82);
-            this.Controls.Add(this.tb_dac);
-            this.Controls.Add(this.label78);
-            this.Controls.Add(this.tb_set_E_B);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label68);
-            this.Controls.Add(this.label67);
-            this.Controls.Add(this.label96);
-            this.Controls.Add(this.tb_show);
-            this.Controls.Add(this.label95);
-            this.Controls.Add(this.label94);
-            this.Controls.Add(this.label86);
-            this.Controls.Add(this.label97);
-            this.Controls.Add(this.label93);
-            this.Controls.Add(this.label92);
-            this.Controls.Add(this.label91);
-            this.Controls.Add(this.label90);
-            this.Controls.Add(this.label89);
-            this.Controls.Add(this.label72);
-            this.Controls.Add(this.label71);
-            this.Controls.Add(this.label70);
-            this.Controls.Add(this.label69);
-            this.Controls.Add(this.label66);
-            this.Controls.Add(this.label65);
-            this.Controls.Add(this.label64);
-            this.Controls.Add(this.label63);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.s44);
-            this.Controls.Add(this.lb_atomic_number);
-            this.Controls.Add(this.s28);
-            this.Controls.Add(this.s55);
-            this.Controls.Add(this.lb_element_name);
-            this.Controls.Add(this.s39);
-            this.Controls.Add(this.label56);
-            this.Controls.Add(this.s23);
-            this.Controls.Add(this.label55);
-            this.Controls.Add(this.s42);
-            this.Controls.Add(this.s14);
-            this.Controls.Add(this.s26);
-            this.Controls.Add(this.s53);
-            this.Controls.Add(this.s37);
-            this.Controls.Add(this.s21);
-            this.Controls.Add(this.s12);
-            this.Controls.Add(this.s43);
-            this.Controls.Add(this.s54);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.s38);
-            this.Controls.Add(this.s27);
+            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.zedGraphControl1);
-            this.Controls.Add(this.s22);
-            this.Controls.Add(this.s13);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.s41);
-            this.Controls.Add(this.s1);
-            this.Controls.Add(this.s59);
-            this.Controls.Add(this.s2);
-            this.Controls.Add(this.s50);
-            this.Controls.Add(this.s3);
-            this.Controls.Add(this.s34);
-            this.Controls.Add(this.s6);
-            this.Controls.Add(this.s46);
-            this.Controls.Add(this.s4);
-            this.Controls.Add(this.s25);
-            this.Controls.Add(this.s15);
-            this.Controls.Add(this.s31);
-            this.Controls.Add(this.s30);
-            this.Controls.Add(this.s47);
-            this.Controls.Add(this.s56);
-            this.Controls.Add(this.s52);
-            this.Controls.Add(this.s7);
-            this.Controls.Add(this.s36);
-            this.Controls.Add(this.s8);
-            this.Controls.Add(this.s18);
-            this.Controls.Add(this.s16);
-            this.Controls.Add(this.s20);
-            this.Controls.Add(this.s32);
-            this.Controls.Add(this.s40);
-            this.Controls.Add(this.s17);
-            this.Controls.Add(this.s9);
-            this.Controls.Add(this.s48);
-            this.Controls.Add(this.s24);
-            this.Controls.Add(this.s33);
-            this.Controls.Add(this.s51);
-            this.Controls.Add(this.s57);
-            this.Controls.Add(this.s35);
-            this.Controls.Add(this.s49);
-            this.Controls.Add(this.s11);
-            this.Controls.Add(this.s58);
-            this.Controls.Add(this.s19);
-            this.Controls.Add(this.s5);
-            this.Controls.Add(this.s29);
-            this.Controls.Add(this.s45);
-            this.Controls.Add(this.label117);
-            this.Controls.Add(this.s10);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.Name = "XPS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XPS_FormClosing);
@@ -4119,8 +3424,12 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -4312,8 +3621,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lb_element_name;
-        private System.Windows.Forms.Label lb_atomic_number;
         private ZedGraph.ZedGraphControl zedGraphControl1;
         private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label48;
@@ -4328,8 +3635,6 @@
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.Button btn_can;
         private System.Windows.Forms.TextBox tb_show;
@@ -4351,89 +3656,10 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Label s12;
-        private System.Windows.Forms.Label s9;
-        private System.Windows.Forms.Label s11;
-        private System.Windows.Forms.Label s5;
-        private System.Windows.Forms.Label s10;
-        private System.Windows.Forms.Label s8;
-        private System.Windows.Forms.Label s7;
-        private System.Windows.Forms.Label s4;
-        private System.Windows.Forms.Label s6;
-        private System.Windows.Forms.Label s3;
-        private System.Windows.Forms.Label s2;
-        private System.Windows.Forms.Label s1;
-        private System.Windows.Forms.Label s28;
-        private System.Windows.Forms.Label s23;
-        private System.Windows.Forms.Label s14;
-        private System.Windows.Forms.Label s26;
-        private System.Windows.Forms.Label s21;
-        private System.Windows.Forms.Label s27;
-        private System.Windows.Forms.Label s22;
-        private System.Windows.Forms.Label s13;
-        private System.Windows.Forms.Label s34;
-        private System.Windows.Forms.Label s25;
-        private System.Windows.Forms.Label s18;
-        private System.Windows.Forms.Label s20;
-        private System.Windows.Forms.Label s24;
-        private System.Windows.Forms.Label s19;
-        private System.Windows.Forms.Label s33;
-        private System.Windows.Forms.Label s17;
-        private System.Windows.Forms.Label s32;
-        private System.Windows.Forms.Label s16;
-        private System.Windows.Forms.Label s31;
-        private System.Windows.Forms.Label s15;
-        private System.Windows.Forms.Label s44;
-        private System.Windows.Forms.Label s55;
-        private System.Windows.Forms.Label s39;
-        private System.Windows.Forms.Label s42;
-        private System.Windows.Forms.Label s53;
-        private System.Windows.Forms.Label s37;
-        private System.Windows.Forms.Label s43;
-        private System.Windows.Forms.Label s54;
-        private System.Windows.Forms.Label s38;
-        private System.Windows.Forms.Label s41;
-        private System.Windows.Forms.Label s59;
-        private System.Windows.Forms.Label s50;
-        private System.Windows.Forms.Label s46;
-        private System.Windows.Forms.Label s30;
-        private System.Windows.Forms.Label s52;
-        private System.Windows.Forms.Label s36;
-        private System.Windows.Forms.Label s40;
-        private System.Windows.Forms.Label s51;
-        private System.Windows.Forms.Label s35;
-        private System.Windows.Forms.Label s45;
-        private System.Windows.Forms.Label label117;
-        private System.Windows.Forms.Label s29;
-        private System.Windows.Forms.Label s58;
-        private System.Windows.Forms.Label s49;
-        private System.Windows.Forms.Label s57;
-        private System.Windows.Forms.Label s48;
-        private System.Windows.Forms.Label s56;
-        private System.Windows.Forms.Label s47;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Label label60;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.Label label69;
-        private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.Label label72;
-        private System.Windows.Forms.Label label89;
-        private System.Windows.Forms.Label label90;
-        private System.Windows.Forms.Label label91;
-        private System.Windows.Forms.Label label92;
-        private System.Windows.Forms.Label label93;
-        private System.Windows.Forms.Label label94;
-        private System.Windows.Forms.Label label95;
-        private System.Windows.Forms.Label label96;
-        private System.Windows.Forms.Label label97;
         private System.Windows.Forms.Button btn_emcy;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button btn_hv_2;
@@ -4567,6 +3793,12 @@
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
         private System.Windows.Forms.Button btn_query_ramp;
+        private System.Windows.Forms.Button btn_test;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label lb_atomic_number;
+        private System.Windows.Forms.Label lb_element_name;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }
 

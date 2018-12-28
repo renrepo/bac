@@ -23,11 +23,13 @@ namespace XPS
         List<List<string>> elec_bind = new List<List<string>>();
         List<string> display_labels = new List<string>();
         PointPairList values_to_plot = new PointPairList();
+        PointPairList values_to_plot_svg = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
         Dictionary<string, string> dic = new Dictionary<string, string>();
         GraphPane myPane;
         LineItem myCurve;
+        LineItem myCurve_svg;
         TextObj pane_labs;
         YAxis yaxis = new YAxis();
 
@@ -41,15 +43,30 @@ namespace XPS
         // default settings
         private void create_graph(GraphPane myPane)
         {
-            myPane.Title.Text = "UPS/XPS";
-            myPane.Title.FontSpec.Size = 13;
+            myPane.Title.Text = "UPS/XPS Spectra";
+            myPane.Title.FontSpec.Size = 11;
             myPane.TitleGap = 1.6f;
-            myPane.XAxis.Title.Text = "Binding energy (+ offset) [eV]";
-            myPane.XAxis.Title.FontSpec.Size = 11;
-            myPane.XAxis.Scale.IsReverse = true;
-            myPane.YAxis.Title.Text = "counts";
-            myPane.YAxis.Title.FontSpec.Size = 11;
-            myPane.Fill.Color = Color.LightGray;
+            myPane.XAxis.Title.Text = "Binding energy [eV]";
+            myPane.XAxis.Title.FontSpec.Size = 10;
+            //myPane.XAxis.Scale.IsReverse = true;
+            myPane.YAxis.Title.Text = "cps";
+            myPane.YAxis.Title.FontSpec.Size = 10;
+            //myPane.Fill.Color = Color.LightGray;
+            // This will do the area outside of the graphing area
+            myPane.Fill = new Fill(Color.FromArgb(45, 45, 45));
+            // This will do the area inside the graphing area
+            myPane.Chart.Fill = new Fill(Color.FromArgb(35, 35, 35));
+            myPane.Chart.Border.Color = Color.White;
+            myPane.XAxis.Scale.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
+            //myPane.YAxis.MajorGrid.IsVisible = true;
+            
         }
 
 
@@ -155,7 +172,7 @@ namespace XPS
             }
         }
 
-
+        
         // Function for electronic configuration plot
         public void electron_configuration(object sender)
         {
@@ -200,6 +217,7 @@ namespace XPS
                 lb_atomic_number.Text = string.Empty;
             }
         }
+        
     }
 
 }
