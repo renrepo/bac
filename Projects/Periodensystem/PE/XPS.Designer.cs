@@ -242,12 +242,12 @@
             this.tb_show = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btn_clear = new System.Windows.Forms.Button();
-            this.lb_perc_gauss = new System.Windows.Forms.Label();
             this.fig_name = new System.Windows.Forms.TextBox();
             this.showdata = new System.Windows.Forms.Button();
             this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_progress = new System.Windows.Forms.Label();
             this.btn_emcy = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label62 = new System.Windows.Forms.Label();
@@ -256,9 +256,14 @@
             this.label59 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tb_testtab = new System.Windows.Forms.TabPage();
             this.btn_query_ramp = new System.Windows.Forms.Button();
             this.label109 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label80 = new System.Windows.Forms.Label();
+            this.cb_counter = new System.Windows.Forms.CheckBox();
+            this.tb_counter_ms = new System.Windows.Forms.TextBox();
+            this.tb_counter = new System.Windows.Forms.TextBox();
             this.label88 = new System.Windows.Forms.Label();
             this.tb_volt_ramp = new System.Windows.Forms.TextBox();
             this.tb_curr_ramp = new System.Windows.Forms.TextBox();
@@ -292,7 +297,7 @@
             this.btn_hv = new System.Windows.Forms.Button();
             this.tb_hem_out = new System.Windows.Forms.TextBox();
             this.btn_dac = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tb_iseg_control = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
             this.lb_vset = new System.Windows.Forms.Label();
@@ -335,34 +340,30 @@
             this.rs_all = new System.Windows.Forms.Button();
             this.stat_all = new System.Windows.Forms.Button();
             this.btn_reload_all = new System.Windows.Forms.Button();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tb_dashboard = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label64 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tb_detailscan_stop = new System.Windows.Forms.TextBox();
+            this.tb_detailscan_start = new System.Windows.Forms.TextBox();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.Iseg_Xray_session = new System.Windows.Forms.CheckBox();
             this.Iseg_DPS_session = new System.Windows.Forms.CheckBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label80 = new System.Windows.Forms.Label();
-            this.cb_counter = new System.Windows.Forms.CheckBox();
-            this.tb_counter_ms = new System.Windows.Forms.TextBox();
-            this.tb_counter = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label111 = new System.Windows.Forms.Label();
-            this.btn_load_lens = new System.Windows.Forms.Button();
-            this.label110 = new System.Windows.Forms.Label();
-            this.tb_lens = new System.Windows.Forms.TextBox();
-            this.tb_prevolt = new System.Windows.Forms.TextBox();
+            this.cb_scanrange = new System.Windows.Forms.ComboBox();
+            this.label55 = new System.Windows.Forms.Label();
             this.cb_samp_ev = new System.Windows.Forms.ComboBox();
             this.cb_select = new System.Windows.Forms.ComboBox();
-            this.cb_bias = new System.Windows.Forms.ComboBox();
             this.cb_pass = new System.Windows.Forms.ComboBox();
             this.label75 = new System.Windows.Forms.Label();
-            this.label74 = new System.Windows.Forms.Label();
-            this.label79 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
-            this.label85 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lb_cps = new System.Windows.Forms.Label();
             this.vm1 = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
             this.tb_pressure = new System.Windows.Forms.TextBox();
@@ -377,20 +378,26 @@
             this.label105 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
+            this.tb_cps = new System.Windows.Forms.TextBox();
+            this.label110 = new System.Windows.Forms.Label();
+            this.tb_lens = new System.Windows.Forms.TextBox();
+            this.tb_prevolt = new System.Windows.Forms.TextBox();
+            this.cb_bias = new System.Windows.Forms.ComboBox();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
             this.btn_reload_dac = new System.Windows.Forms.Button();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.label86 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.tb_settings = new System.Windows.Forms.TabPage();
             this.btn_clear_fig = new System.Windows.Forms.Button();
-            this.btn_test = new System.Windows.Forms.Button();
             this.tb_set_E_B = new System.Windows.Forms.TextBox();
+            this.btn_test = new System.Windows.Forms.Button();
+            this.label82 = new System.Windows.Forms.Label();
             this.tb_slit = new System.Windows.Forms.TextBox();
-            this.label78 = new System.Windows.Forms.Label();
             this.btn_Set_E_B_off = new System.Windows.Forms.Button();
             this.btn_set_E_B = new System.Windows.Forms.Button();
-            this.label82 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tb_binding_energies = new System.Windows.Forms.TabPage();
             this.lb_atomic_number = new System.Windows.Forms.Label();
             this.lb_element_name = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -398,18 +405,20 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
+            this.tb_testtab.SuspendLayout();
             this.groupBox5.SuspendLayout();
+            this.tb_iseg_control.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tb_dashboard.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tb_settings.SuspendLayout();
+            this.tb_binding_energies.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1482,7 +1491,7 @@
             // tableLayoutPanel1
             // 
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tableLayoutPanel1.Controls.Add(this.textBox19, 18, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox18, 17, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox17, 16, 0);
@@ -1640,7 +1649,7 @@
             // 
             // textBox19
             // 
-            this.textBox19.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox19.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox19.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox19, "textBox19");
             this.textBox19.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1648,7 +1657,7 @@
             // 
             // textBox18
             // 
-            this.textBox18.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox18.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox18.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox18, "textBox18");
             this.textBox18.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1656,7 +1665,7 @@
             // 
             // textBox17
             // 
-            this.textBox17.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox17.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox17.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox17, "textBox17");
             this.textBox17.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1664,7 +1673,7 @@
             // 
             // textBox16
             // 
-            this.textBox16.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox16.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox16.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox16, "textBox16");
             this.textBox16.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1672,7 +1681,7 @@
             // 
             // textBox15
             // 
-            this.textBox15.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox15.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox15.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox15, "textBox15");
             this.textBox15.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1680,7 +1689,7 @@
             // 
             // textBox14
             // 
-            this.textBox14.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox14.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox14.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox14, "textBox14");
             this.textBox14.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1688,7 +1697,7 @@
             // 
             // textBox13
             // 
-            this.textBox13.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox13.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox13.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox13, "textBox13");
             this.textBox13.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1696,7 +1705,7 @@
             // 
             // textBox12
             // 
-            this.textBox12.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox12.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox12, "textBox12");
             this.textBox12.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1704,7 +1713,7 @@
             // 
             // textBox11
             // 
-            this.textBox11.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox11.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox11, "textBox11");
             this.textBox11.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1712,7 +1721,7 @@
             // 
             // textBox10
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox10.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox10, "textBox10");
             this.textBox10.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1720,7 +1729,7 @@
             // 
             // textBox9
             // 
-            this.textBox9.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox9.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox9, "textBox9");
             this.textBox9.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1728,7 +1737,7 @@
             // 
             // textBox8
             // 
-            this.textBox8.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox8.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox8, "textBox8");
             this.textBox8.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1736,7 +1745,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox7.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox7, "textBox7");
             this.textBox7.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1744,7 +1753,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox6.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox6, "textBox6");
             this.textBox6.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1752,7 +1761,7 @@
             // 
             // textBox5
             // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1760,7 +1769,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox4.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox4, "textBox4");
             this.textBox4.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1768,7 +1777,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox3.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.textBox3, "textBox3");
@@ -1777,7 +1786,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox1.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox1, "textBox1");
             this.textBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1785,7 +1794,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox2.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox2, "textBox2");
             this.textBox2.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1793,7 +1802,7 @@
             // 
             // textBox21
             // 
-            this.textBox21.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox21.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox21.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox21, "textBox21");
             this.textBox21.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1801,7 +1810,7 @@
             // 
             // textBox22
             // 
-            this.textBox22.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox22.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox22.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox22, "textBox22");
             this.textBox22.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1809,7 +1818,7 @@
             // 
             // textBox23
             // 
-            this.textBox23.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox23.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox23.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox23, "textBox23");
             this.textBox23.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1817,7 +1826,7 @@
             // 
             // textBox24
             // 
-            this.textBox24.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox24.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox24.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox24, "textBox24");
             this.textBox24.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1825,7 +1834,7 @@
             // 
             // textBox25
             // 
-            this.textBox25.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox25.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox25.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox25, "textBox25");
             this.textBox25.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1834,14 +1843,14 @@
             // textBox27
             // 
             resources.ApplyResources(this.textBox27, "textBox27");
-            this.textBox27.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox27.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox27.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox27.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox27.Name = "textBox27";
             // 
             // textBox20
             // 
-            this.textBox20.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox20.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox20.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox20, "textBox20");
             this.textBox20.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1849,7 +1858,7 @@
             // 
             // textBox28
             // 
-            this.textBox28.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox28.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox28.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox28, "textBox28");
             this.textBox28.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1857,7 +1866,7 @@
             // 
             // textBox29
             // 
-            this.textBox29.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox29.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox29.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox29, "textBox29");
             this.textBox29.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1865,7 +1874,7 @@
             // 
             // textBox30
             // 
-            this.textBox30.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox30.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox30.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox30, "textBox30");
             this.textBox30.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1873,7 +1882,7 @@
             // 
             // textBox31
             // 
-            this.textBox31.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox31.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox31.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox31, "textBox31");
             this.textBox31.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1881,7 +1890,7 @@
             // 
             // textBox32
             // 
-            this.textBox32.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox32.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox32.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox32, "textBox32");
             this.textBox32.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1889,7 +1898,7 @@
             // 
             // textBox33
             // 
-            this.textBox33.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox33.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox33.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox33, "textBox33");
             this.textBox33.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1897,7 +1906,7 @@
             // 
             // textBox34
             // 
-            this.textBox34.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox34.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox34.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox34, "textBox34");
             this.textBox34.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -1905,7 +1914,7 @@
             // 
             // textBox26
             // 
-            this.textBox26.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.textBox26.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.textBox26.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.textBox26, "textBox26");
             this.textBox26.ForeColor = System.Drawing.Color.WhiteSmoke;
@@ -2247,11 +2256,6 @@
             this.btn_clear.UseVisualStyleBackColor = true;
             this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click);
             // 
-            // lb_perc_gauss
-            // 
-            resources.ApplyResources(this.lb_perc_gauss, "lb_perc_gauss");
-            this.lb_perc_gauss.Name = "lb_perc_gauss";
-            // 
             // fig_name
             // 
             resources.ApplyResources(this.fig_name, "fig_name");
@@ -2280,24 +2284,29 @@
             // 
             // groupBox3
             // 
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.groupBox3.Controls.Add(this.lb_progress);
             this.groupBox3.Controls.Add(this.btn_emcy);
             this.groupBox3.Controls.Add(this.safe_fig);
             this.groupBox3.Controls.Add(this.showdata);
             this.groupBox3.Controls.Add(this.fig_name);
             this.groupBox3.Controls.Add(this.btn_can);
-            this.groupBox3.Controls.Add(this.lb_perc_gauss);
             this.groupBox3.Controls.Add(this.tb_safe);
             this.groupBox3.Controls.Add(this.btn_start);
             this.groupBox3.Controls.Add(this.btn_clear);
             this.groupBox3.Controls.Add(this.progressBar1);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
+            // lb_progress
+            // 
+            resources.ApplyResources(this.lb_progress, "lb_progress");
+            this.lb_progress.Name = "lb_progress";
+            // 
             // btn_emcy
             // 
-            this.btn_emcy.BackColor = System.Drawing.Color.RosyBrown;
+            this.btn_emcy.BackColor = System.Drawing.Color.Firebrick;
             resources.ApplyResources(this.btn_emcy, "btn_emcy");
             this.btn_emcy.Name = "btn_emcy";
             this.btn_emcy.UseVisualStyleBackColor = false;
@@ -2399,46 +2408,47 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // tabPage4
+            // tb_testtab
             // 
-            this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage4.Controls.Add(this.btn_query_ramp);
-            this.tabPage4.Controls.Add(this.label109);
-            this.tabPage4.Controls.Add(this.label88);
-            this.tabPage4.Controls.Add(this.tb_volt_ramp);
-            this.tabPage4.Controls.Add(this.tb_curr_ramp);
-            this.tabPage4.Controls.Add(this.label108);
-            this.tabPage4.Controls.Add(this.label106);
-            this.tabPage4.Controls.Add(this.K_P);
-            this.tabPage4.Controls.Add(this.tb_KD);
-            this.tabPage4.Controls.Add(this.tb_KI);
-            this.tabPage4.Controls.Add(this.tb_KP);
-            this.tabPage4.Controls.Add(this.label87);
-            this.tabPage4.Controls.Add(this.tb_Imax);
-            this.tabPage4.Controls.Add(this.label84);
-            this.tabPage4.Controls.Add(this.tb_Imin);
-            this.tabPage4.Controls.Add(this.label77);
-            this.tabPage4.Controls.Add(this.tb_anode_voltage);
-            this.tabPage4.Controls.Add(this.btn_emi_off);
-            this.tabPage4.Controls.Add(this.label52);
-            this.tabPage4.Controls.Add(this.btn_hv_reset);
-            this.tabPage4.Controls.Add(this.btn_hv_ramp);
-            this.tabPage4.Controls.Add(this.btn_emi);
-            this.tabPage4.Controls.Add(this.tb_emi);
-            this.tabPage4.Controls.Add(this.tb_hv);
-            this.tabPage4.Controls.Add(this.btn_hv_off);
-            this.tabPage4.Controls.Add(this.btn_hv_on);
-            this.tabPage4.Controls.Add(this.btn_hv_reload);
-            this.tabPage4.Controls.Add(this.tb_rampe);
-            this.tabPage4.Controls.Add(this.btn_reload_fil_curr);
-            this.tabPage4.Controls.Add(this.tb_fil_curr);
-            this.tabPage4.Controls.Add(this.btn_stream_read);
-            this.tabPage4.Controls.Add(this.btn_hv_2);
-            this.tabPage4.Controls.Add(this.btn_hv);
-            this.tabPage4.Controls.Add(this.tb_hem_out);
-            this.tabPage4.Controls.Add(this.btn_dac);
-            resources.ApplyResources(this.tabPage4, "tabPage4");
-            this.tabPage4.Name = "tabPage4";
+            this.tb_testtab.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_testtab.Controls.Add(this.btn_query_ramp);
+            this.tb_testtab.Controls.Add(this.label109);
+            this.tb_testtab.Controls.Add(this.groupBox5);
+            this.tb_testtab.Controls.Add(this.label88);
+            this.tb_testtab.Controls.Add(this.tb_volt_ramp);
+            this.tb_testtab.Controls.Add(this.tb_curr_ramp);
+            this.tb_testtab.Controls.Add(this.label108);
+            this.tb_testtab.Controls.Add(this.label106);
+            this.tb_testtab.Controls.Add(this.K_P);
+            this.tb_testtab.Controls.Add(this.tb_KD);
+            this.tb_testtab.Controls.Add(this.tb_KI);
+            this.tb_testtab.Controls.Add(this.tb_KP);
+            this.tb_testtab.Controls.Add(this.label87);
+            this.tb_testtab.Controls.Add(this.tb_Imax);
+            this.tb_testtab.Controls.Add(this.label84);
+            this.tb_testtab.Controls.Add(this.tb_Imin);
+            this.tb_testtab.Controls.Add(this.label77);
+            this.tb_testtab.Controls.Add(this.tb_anode_voltage);
+            this.tb_testtab.Controls.Add(this.btn_emi_off);
+            this.tb_testtab.Controls.Add(this.label52);
+            this.tb_testtab.Controls.Add(this.btn_hv_reset);
+            this.tb_testtab.Controls.Add(this.btn_hv_ramp);
+            this.tb_testtab.Controls.Add(this.btn_emi);
+            this.tb_testtab.Controls.Add(this.tb_emi);
+            this.tb_testtab.Controls.Add(this.tb_hv);
+            this.tb_testtab.Controls.Add(this.btn_hv_off);
+            this.tb_testtab.Controls.Add(this.btn_hv_on);
+            this.tb_testtab.Controls.Add(this.btn_hv_reload);
+            this.tb_testtab.Controls.Add(this.tb_rampe);
+            this.tb_testtab.Controls.Add(this.btn_reload_fil_curr);
+            this.tb_testtab.Controls.Add(this.tb_fil_curr);
+            this.tb_testtab.Controls.Add(this.btn_stream_read);
+            this.tb_testtab.Controls.Add(this.btn_hv_2);
+            this.tb_testtab.Controls.Add(this.btn_hv);
+            this.tb_testtab.Controls.Add(this.tb_hem_out);
+            this.tb_testtab.Controls.Add(this.btn_dac);
+            resources.ApplyResources(this.tb_testtab, "tb_testtab");
+            this.tb_testtab.Name = "tb_testtab";
             // 
             // btn_query_ramp
             // 
@@ -2451,6 +2461,40 @@
             // 
             resources.ApplyResources(this.label109, "label109");
             this.label109.Name = "label109";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label80);
+            this.groupBox5.Controls.Add(this.cb_counter);
+            this.groupBox5.Controls.Add(this.tb_counter_ms);
+            this.groupBox5.Controls.Add(this.tb_counter);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
+            // 
+            // label80
+            // 
+            resources.ApplyResources(this.label80, "label80");
+            this.label80.Name = "label80";
+            // 
+            // cb_counter
+            // 
+            resources.ApplyResources(this.cb_counter, "cb_counter");
+            this.cb_counter.Name = "cb_counter";
+            this.cb_counter.UseVisualStyleBackColor = true;
+            this.cb_counter.CheckedChanged += new System.EventHandler(this.cb_counter_CheckedChanged);
+            // 
+            // tb_counter_ms
+            // 
+            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
+            this.tb_counter_ms.Name = "tb_counter_ms";
+            // 
+            // tb_counter
+            // 
+            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_counter, "tb_counter");
+            this.tb_counter.Name = "tb_counter";
+            this.tb_counter.ReadOnly = true;
             // 
             // label88
             // 
@@ -2642,12 +2686,12 @@
             this.btn_dac.UseVisualStyleBackColor = true;
             this.btn_dac.Click += new System.EventHandler(this.btn_dac_Click);
             // 
-            // tabPage2
+            // tb_iseg_control
             // 
-            this.tabPage2.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage2.Controls.Add(this.tableLayoutPanel3);
-            resources.ApplyResources(this.tabPage2, "tabPage2");
-            this.tabPage2.Name = "tabPage2";
+            this.tb_iseg_control.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_iseg_control.Controls.Add(this.tableLayoutPanel3);
+            resources.ApplyResources(this.tb_iseg_control, "tb_iseg_control");
+            this.tb_iseg_control.Name = "tb_iseg_control";
             // 
             // tableLayoutPanel3
             // 
@@ -2960,15 +3004,70 @@
             this.btn_reload_all.UseVisualStyleBackColor = true;
             this.btn_reload_all.Click += new System.EventHandler(this.btn_reload_all_Click);
             // 
-            // tabPage1
+            // tb_dashboard
             // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tabPage1.Controls.Add(this.tableLayoutPanel4);
-            this.tabPage1.Controls.Add(this.groupBox5);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            resources.ApplyResources(this.tabPage1, "tabPage1");
-            this.tabPage1.Name = "tabPage1";
+            this.tb_dashboard.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_dashboard.Controls.Add(this.groupBox7);
+            this.tb_dashboard.Controls.Add(this.groupBox6);
+            this.tb_dashboard.Controls.Add(this.tableLayoutPanel4);
+            this.tb_dashboard.Controls.Add(this.groupBox2);
+            this.tb_dashboard.Controls.Add(this.groupBox1);
+            resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
+            this.tb_dashboard.Name = "tb_dashboard";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.textBox35);
+            this.groupBox7.Controls.Add(this.label63);
+            this.groupBox7.Controls.Add(this.label64);
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
+            // textBox35
+            // 
+            resources.ApplyResources(this.textBox35, "textBox35");
+            this.textBox35.Name = "textBox35";
+            // 
+            // label63
+            // 
+            resources.ApplyResources(this.label63, "label63");
+            this.label63.Name = "label63";
+            // 
+            // label64
+            // 
+            resources.ApplyResources(this.label64, "label64");
+            this.label64.Name = "label64";
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.tb_detailscan_stop);
+            this.groupBox6.Controls.Add(this.tb_detailscan_start);
+            this.groupBox6.Controls.Add(this.label78);
+            this.groupBox6.Controls.Add(this.label56);
+            resources.ApplyResources(this.groupBox6, "groupBox6");
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.TabStop = false;
+            // 
+            // tb_detailscan_stop
+            // 
+            resources.ApplyResources(this.tb_detailscan_stop, "tb_detailscan_stop");
+            this.tb_detailscan_stop.Name = "tb_detailscan_stop";
+            // 
+            // tb_detailscan_start
+            // 
+            resources.ApplyResources(this.tb_detailscan_start, "tb_detailscan_start");
+            this.tb_detailscan_start.Name = "tb_detailscan_start";
+            // 
+            // label78
+            // 
+            resources.ApplyResources(this.label78, "label78");
+            this.label78.Name = "label78";
+            // 
+            // label56
+            // 
+            resources.ApplyResources(this.label56, "label56");
+            this.label56.Name = "label56";
             // 
             // tableLayoutPanel4
             // 
@@ -2994,88 +3093,34 @@
             this.Iseg_DPS_session.UseVisualStyleBackColor = false;
             this.Iseg_DPS_session.CheckedChanged += new System.EventHandler(this.Iseg_DPS_session_CheckedChanged);
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label80);
-            this.groupBox5.Controls.Add(this.cb_counter);
-            this.groupBox5.Controls.Add(this.tb_counter_ms);
-            this.groupBox5.Controls.Add(this.tb_counter);
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
-            // 
-            // label80
-            // 
-            resources.ApplyResources(this.label80, "label80");
-            this.label80.Name = "label80";
-            // 
-            // cb_counter
-            // 
-            resources.ApplyResources(this.cb_counter, "cb_counter");
-            this.cb_counter.Name = "cb_counter";
-            this.cb_counter.UseVisualStyleBackColor = true;
-            this.cb_counter.CheckedChanged += new System.EventHandler(this.cb_counter_CheckedChanged);
-            // 
-            // tb_counter_ms
-            // 
-            resources.ApplyResources(this.tb_counter_ms, "tb_counter_ms");
-            this.tb_counter_ms.Name = "tb_counter_ms";
-            // 
-            // tb_counter
-            // 
-            this.tb_counter.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_counter, "tb_counter");
-            this.tb_counter.Name = "tb_counter";
-            this.tb_counter.ReadOnly = true;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label111);
-            this.groupBox2.Controls.Add(this.btn_load_lens);
-            this.groupBox2.Controls.Add(this.label110);
-            this.groupBox2.Controls.Add(this.tb_lens);
-            this.groupBox2.Controls.Add(this.tb_prevolt);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.cb_scanrange);
+            this.groupBox2.Controls.Add(this.label55);
             this.groupBox2.Controls.Add(this.cb_samp_ev);
             this.groupBox2.Controls.Add(this.cb_select);
-            this.groupBox2.Controls.Add(this.cb_bias);
             this.groupBox2.Controls.Add(this.cb_pass);
             this.groupBox2.Controls.Add(this.label75);
-            this.groupBox2.Controls.Add(this.label74);
-            this.groupBox2.Controls.Add(this.label79);
             this.groupBox2.Controls.Add(this.label73);
-            this.groupBox2.Controls.Add(this.label83);
-            this.groupBox2.Controls.Add(this.label76);
-            this.groupBox2.Controls.Add(this.label85);
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
-            // label111
+            // cb_scanrange
             // 
-            resources.ApplyResources(this.label111, "label111");
-            this.label111.Name = "label111";
+            this.cb_scanrange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_scanrange.FormattingEnabled = true;
+            this.cb_scanrange.Items.AddRange(new object[] {
+            resources.GetString("cb_scanrange.Items"),
+            resources.GetString("cb_scanrange.Items1"),
+            resources.GetString("cb_scanrange.Items2")});
+            resources.ApplyResources(this.cb_scanrange, "cb_scanrange");
+            this.cb_scanrange.Name = "cb_scanrange";
             // 
-            // btn_load_lens
+            // label55
             // 
-            resources.ApplyResources(this.btn_load_lens, "btn_load_lens");
-            this.btn_load_lens.Name = "btn_load_lens";
-            this.btn_load_lens.UseVisualStyleBackColor = true;
-            this.btn_load_lens.Click += new System.EventHandler(this.btn_load_lens_Click);
-            // 
-            // label110
-            // 
-            resources.ApplyResources(this.label110, "label110");
-            this.label110.Name = "label110";
-            // 
-            // tb_lens
-            // 
-            resources.ApplyResources(this.tb_lens, "tb_lens");
-            this.tb_lens.Name = "tb_lens";
-            // 
-            // tb_prevolt
-            // 
-            resources.ApplyResources(this.tb_prevolt, "tb_prevolt");
-            this.tb_prevolt.Name = "tb_prevolt";
+            resources.ApplyResources(this.label55, "label55");
+            this.label55.Name = "label55";
             // 
             // cb_samp_ev
             // 
@@ -3103,15 +3148,6 @@
             this.cb_select.Name = "cb_select";
             this.cb_select.SelectedIndexChanged += new System.EventHandler(this.cb_select_SelectedIndexChanged);
             // 
-            // cb_bias
-            // 
-            this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_bias.FormattingEnabled = true;
-            this.cb_bias.Items.AddRange(new object[] {
-            resources.GetString("cb_bias.Items")});
-            resources.ApplyResources(this.cb_bias, "cb_bias");
-            this.cb_bias.Name = "cb_bias";
-            // 
             // cb_pass
             // 
             this.cb_pass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3129,35 +3165,10 @@
             resources.ApplyResources(this.label75, "label75");
             this.label75.Name = "label75";
             // 
-            // label74
-            // 
-            resources.ApplyResources(this.label74, "label74");
-            this.label74.Name = "label74";
-            // 
-            // label79
-            // 
-            resources.ApplyResources(this.label79, "label79");
-            this.label79.Name = "label79";
-            // 
             // label73
             // 
             resources.ApplyResources(this.label73, "label73");
             this.label73.Name = "label73";
-            // 
-            // label83
-            // 
-            resources.ApplyResources(this.label83, "label83");
-            this.label83.Name = "label83";
-            // 
-            // label76
-            // 
-            resources.ApplyResources(this.label76, "label76");
-            this.label76.Name = "label76";
-            // 
-            // label85
-            // 
-            resources.ApplyResources(this.label85, "label85");
-            this.label85.Name = "label85";
             // 
             // groupBox1
             // 
@@ -3169,6 +3180,7 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
+            this.tableLayoutPanel2.Controls.Add(this.lb_cps, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.vm1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label51, 0, 6);
             this.tableLayoutPanel2.Controls.Add(this.tb_pressure, 1, 5);
@@ -3183,7 +3195,13 @@
             this.tableLayoutPanel2.Controls.Add(this.label105, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label107, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.tb_flow, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.tb_cps, 1, 7);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            // 
+            // lb_cps
+            // 
+            resources.ApplyResources(this.lb_cps, "lb_cps");
+            this.lb_cps.Name = "lb_cps";
             // 
             // vm1
             // 
@@ -3269,6 +3287,46 @@
             this.tb_flow.Name = "tb_flow";
             this.tb_flow.ReadOnly = true;
             // 
+            // tb_cps
+            // 
+            resources.ApplyResources(this.tb_cps, "tb_cps");
+            this.tb_cps.Name = "tb_cps";
+            this.tb_cps.ReadOnly = true;
+            // 
+            // label110
+            // 
+            resources.ApplyResources(this.label110, "label110");
+            this.label110.Name = "label110";
+            // 
+            // tb_lens
+            // 
+            resources.ApplyResources(this.tb_lens, "tb_lens");
+            this.tb_lens.Name = "tb_lens";
+            // 
+            // tb_prevolt
+            // 
+            resources.ApplyResources(this.tb_prevolt, "tb_prevolt");
+            this.tb_prevolt.Name = "tb_prevolt";
+            // 
+            // cb_bias
+            // 
+            this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_bias.FormattingEnabled = true;
+            this.cb_bias.Items.AddRange(new object[] {
+            resources.GetString("cb_bias.Items")});
+            resources.ApplyResources(this.cb_bias, "cb_bias");
+            this.cb_bias.Name = "cb_bias";
+            // 
+            // label74
+            // 
+            resources.ApplyResources(this.label74, "label74");
+            this.label74.Name = "label74";
+            // 
+            // label76
+            // 
+            resources.ApplyResources(this.label76, "label76");
+            this.label76.Name = "label76";
+            // 
             // btn_reload_dac
             // 
             resources.ApplyResources(this.btn_reload_dac, "btn_reload_dac");
@@ -3288,31 +3346,36 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage3);
             resources.ApplyResources(this.tabControl1, "tabControl1");
+            this.tabControl1.Controls.Add(this.tb_dashboard);
+            this.tabControl1.Controls.Add(this.tb_settings);
+            this.tabControl1.Controls.Add(this.tb_iseg_control);
+            this.tabControl1.Controls.Add(this.tb_testtab);
+            this.tabControl1.Controls.Add(this.tb_binding_energies);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             // 
-            // tabPage5
+            // tb_settings
             // 
-            this.tabPage5.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage5.Controls.Add(this.btn_clear_fig);
-            this.tabPage5.Controls.Add(this.btn_test);
-            this.tabPage5.Controls.Add(this.label86);
-            this.tabPage5.Controls.Add(this.tb_set_E_B);
-            this.tabPage5.Controls.Add(this.tb_slit);
-            this.tabPage5.Controls.Add(this.label78);
-            this.tabPage5.Controls.Add(this.btn_Set_E_B_off);
-            this.tabPage5.Controls.Add(this.tb_dac);
-            this.tabPage5.Controls.Add(this.btn_set_E_B);
-            this.tabPage5.Controls.Add(this.label82);
-            this.tabPage5.Controls.Add(this.btn_reload_dac);
-            resources.ApplyResources(this.tabPage5, "tabPage5");
-            this.tabPage5.Name = "tabPage5";
+            this.tb_settings.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_settings.Controls.Add(this.tb_lens);
+            this.tb_settings.Controls.Add(this.btn_clear_fig);
+            this.tb_settings.Controls.Add(this.tb_prevolt);
+            this.tb_settings.Controls.Add(this.label76);
+            this.tb_settings.Controls.Add(this.cb_bias);
+            this.tb_settings.Controls.Add(this.tb_set_E_B);
+            this.tb_settings.Controls.Add(this.label74);
+            this.tb_settings.Controls.Add(this.label110);
+            this.tb_settings.Controls.Add(this.btn_test);
+            this.tb_settings.Controls.Add(this.label82);
+            this.tb_settings.Controls.Add(this.label86);
+            this.tb_settings.Controls.Add(this.tb_slit);
+            this.tb_settings.Controls.Add(this.btn_Set_E_B_off);
+            this.tb_settings.Controls.Add(this.tb_dac);
+            this.tb_settings.Controls.Add(this.btn_set_E_B);
+            this.tb_settings.Controls.Add(this.btn_reload_dac);
+            resources.ApplyResources(this.tb_settings, "tb_settings");
+            this.tb_settings.Name = "tb_settings";
             // 
             // btn_clear_fig
             // 
@@ -3321,6 +3384,11 @@
             this.btn_clear_fig.UseVisualStyleBackColor = true;
             this.btn_clear_fig.Click += new System.EventHandler(this.btn_clear_fig_Click);
             // 
+            // tb_set_E_B
+            // 
+            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
+            this.tb_set_E_B.Name = "tb_set_E_B";
+            // 
             // btn_test
             // 
             resources.ApplyResources(this.btn_test, "btn_test");
@@ -3328,20 +3396,15 @@
             this.btn_test.UseVisualStyleBackColor = true;
             this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
             // 
-            // tb_set_E_B
+            // label82
             // 
-            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
-            this.tb_set_E_B.Name = "tb_set_E_B";
+            resources.ApplyResources(this.label82, "label82");
+            this.label82.Name = "label82";
             // 
             // tb_slit
             // 
             resources.ApplyResources(this.tb_slit, "tb_slit");
             this.tb_slit.Name = "tb_slit";
-            // 
-            // label78
-            // 
-            resources.ApplyResources(this.label78, "label78");
-            this.label78.Name = "label78";
             // 
             // btn_Set_E_B_off
             // 
@@ -3357,20 +3420,15 @@
             this.btn_set_E_B.UseVisualStyleBackColor = true;
             this.btn_set_E_B.Click += new System.EventHandler(this.btn_set_E_B_Click);
             // 
-            // label82
+            // tb_binding_energies
             // 
-            resources.ApplyResources(this.label82, "label82");
-            this.label82.Name = "label82";
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPage3.Controls.Add(this.lb_atomic_number);
-            this.tabPage3.Controls.Add(this.lb_element_name);
-            this.tabPage3.Controls.Add(this.tb_show);
-            this.tabPage3.Controls.Add(this.groupBox4);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
-            this.tabPage3.Name = "tabPage3";
+            this.tb_binding_energies.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_binding_energies.Controls.Add(this.lb_atomic_number);
+            this.tb_binding_energies.Controls.Add(this.lb_element_name);
+            this.tb_binding_energies.Controls.Add(this.tb_show);
+            this.tb_binding_energies.Controls.Add(this.groupBox4);
+            resources.ApplyResources(this.tb_binding_energies, "tb_binding_energies");
+            this.tb_binding_energies.Name = "tb_binding_energies";
             // 
             // lb_atomic_number
             // 
@@ -3384,20 +3442,22 @@
             // 
             // tableLayoutPanel5
             // 
+            this.tableLayoutPanel5.BackColor = System.Drawing.SystemColors.ControlDark;
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
-            this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.zedGraphControl1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "XPS";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.XPS_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -3408,26 +3468,30 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
+            this.tb_testtab.ResumeLayout(false);
+            this.tb_testtab.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            this.tb_iseg_control.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tb_dashboard.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.tb_settings.ResumeLayout(false);
+            this.tb_settings.PerformLayout();
+            this.tb_binding_energies.ResumeLayout(false);
+            this.tb_binding_energies.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -3640,7 +3704,6 @@
         private System.Windows.Forms.TextBox tb_show;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btn_clear;
-        private System.Windows.Forms.Label lb_perc_gauss;
         private System.Windows.Forms.TextBox textBox28;
         private System.Windows.Forms.TextBox textBox29;
         private System.Windows.Forms.TextBox textBox30;
@@ -3661,13 +3724,13 @@
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Button btn_emcy;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tb_testtab;
         private System.Windows.Forms.Button btn_hv_2;
         private System.Windows.Forms.Button btn_hv;
         private System.Windows.Forms.TextBox tb_hem_out;
         private System.Windows.Forms.TextBox tb_rampe;
         private System.Windows.Forms.Button btn_dac;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tb_iseg_control;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label100;
         private System.Windows.Forms.Label lb_vset;
@@ -3710,7 +3773,7 @@
         private System.Windows.Forms.Button rs_all;
         private System.Windows.Forms.Button stat_all;
         private System.Windows.Forms.Button btn_reload_all;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tb_dashboard;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.CheckBox Iseg_Xray_session;
         private System.Windows.Forms.CheckBox Iseg_DPS_session;
@@ -3725,12 +3788,9 @@
         private System.Windows.Forms.ComboBox cb_pass;
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label74;
-        private System.Windows.Forms.Label label79;
         private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Label label86;
         private System.Windows.Forms.Label label76;
-        private System.Windows.Forms.Label label85;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox vm1;
@@ -3786,19 +3846,30 @@
         private System.Windows.Forms.Label label82;
         private System.Windows.Forms.Button btn_set_E_B;
         private System.Windows.Forms.Button btn_Set_E_B_off;
-        private System.Windows.Forms.Button btn_load_lens;
         private System.Windows.Forms.Label label110;
         private System.Windows.Forms.TextBox tb_lens;
-        private System.Windows.Forms.Label label111;
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
         private System.Windows.Forms.Button btn_query_ramp;
         private System.Windows.Forms.Button btn_test;
-        private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tb_settings;
+        private System.Windows.Forms.TabPage tb_binding_energies;
         private System.Windows.Forms.Label lb_atomic_number;
         private System.Windows.Forms.Label lb_element_name;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Label lb_cps;
+        private System.Windows.Forms.TextBox tb_cps;
+        private System.Windows.Forms.Label lb_progress;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.TextBox textBox35;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox tb_detailscan_stop;
+        private System.Windows.Forms.TextBox tb_detailscan_start;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.ComboBox cb_scanrange;
+        private System.Windows.Forms.Label label55;
     }
 }
 

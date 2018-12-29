@@ -43,30 +43,35 @@ namespace XPS
         // default settings
         private void create_graph(GraphPane myPane)
         {
+            int red = 255;
+            int green = 251;
+            int blue = 230;
             myPane.Title.Text = "UPS/XPS Spectra";
-            myPane.Title.FontSpec.Size = 11;
+            myPane.Title.FontSpec.Size = 12;
             myPane.TitleGap = 1.6f;
             myPane.XAxis.Title.Text = "Binding energy [eV]";
-            myPane.XAxis.Title.FontSpec.Size = 10;
+            myPane.XAxis.Title.FontSpec.Size = 11;
             //myPane.XAxis.Scale.IsReverse = true;
             myPane.YAxis.Title.Text = "cps";
-            myPane.YAxis.Title.FontSpec.Size = 10;
+            myPane.YAxis.Title.FontSpec.Size = 11;
             //myPane.Fill.Color = Color.LightGray;
             // This will do the area outside of the graphing area
             myPane.Fill = new Fill(Color.FromArgb(45, 45, 45));
             // This will do the area inside the graphing area
             myPane.Chart.Fill = new Fill(Color.FromArgb(35, 35, 35));
-            myPane.Chart.Border.Color = Color.White;
-            myPane.XAxis.Scale.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
-            myPane.Title.FontSpec.FontColor = Color.FromArgb(255, 248, 245);
+            myPane.Chart.Border.Color = Color.FromArgb(red, green, blue);
+            myPane.XAxis.Scale.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
+            myPane.YAxis.Color = Color.FromArgb(red, green, blue);
+
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;
-            
+
         }
 
 

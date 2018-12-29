@@ -262,7 +262,7 @@ namespace XPS
             // table_binding_energies: line=all elements in periodic table; column: 1) atomic number 2) element name 3)-x)electron binding energy
             // source: http://xdb.lbl.gov/Section1/Table_1-1.pdf
             table_binding_energies = File.ReadAllLines(path_binding_energies).Select(l => l.Split(',').ToList()).ToList();
-            elec_bind = File.ReadAllLines(path_electronconfig).Select(l => l.Split(',').ToList()).ToList();
+            //elec_bind = File.ReadAllLines(path_electronconfig).Select(l => l.Split(',').ToList()).ToList();
             // different linecolors for different elements the plot 
             color_dict = File.ReadLines(path_colors).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
 
@@ -902,7 +902,7 @@ namespace XPS
                 item.Text = String.Empty;
             }
             tb_show.Text = string.Empty;
-            lb_perc_gauss.Text = "%";
+            //lb_perc_gauss.Text = "%";
             btn_start.Enabled = true;
             btn_clear.Enabled = false;
             showdata.Enabled = false;
@@ -1788,37 +1788,6 @@ namespace XPS
             await DPS.reset_channels();
         }
 
-        private async void btn_load_lens_Click(object sender, EventArgs e)
-        {
-            curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
-            string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_new\", " " + curr_time + "_LENS" + tb_lens.Text + "\\"));
-            path_logfile = dl.FullName;
-
-            await DPS.voltage_ramp(10);
-            await DPS.set_voltage(100, 2);
-            await DPS.channel_on(2);
-            await Task.Delay(10000);
-            await DPS.voltage_ramp(0.4); // 10V/sek
-            await DPS.set_voltage(4000, 2);
-            while (Convert.ToDouble(ch3_meas.Text) / 100 < Convert.ToDouble(tb_lens.Text) - 10)
-            {
-                using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
-                {
-                    file.WriteLine(
-                        ch3_meas.Text + "\t" +
-                        tb_counter.Text
-                        //v_pass_meas.ToString("000.00", System.Globalization.CultureInfo.InvariantCulture)
-                        //(elapsed_seconds * 1000).ToString("000", System.Globalization.CultureInfo.InvariantCulture)
-                        );
-                }
-                await Task.Delay(900);
-                values_to_plot.Add(Convert.ToDouble(ch3_meas.Text) / 100, Convert.ToDouble(tb_counter.Text));
-                myCurve.AddPoint(Convert.ToDouble(ch3_meas.Text) / 100, Convert.ToDouble(tb_counter.Text));
-            }
-            await DPS.voltage_ramp(10);
-        }
-
         private void btn_clear_fig_Click(object sender, EventArgs e)
         {
             fig_name.Clear();
@@ -1885,7 +1854,9 @@ namespace XPS
             var progressHandler = new Progress<string>(value =>
             {
                 tb_hem_out.Text = timee.ToString("0.0");
-                
+                tb_cps.Text = value;
+                progressBar1.Value = Convert.ToInt32(timee);
+                lb_progress.Text = progressBar1.Value.ToString("0") + '%';
                 //tb_counter.Text = value;
                 //vm1.Text = ch1_meas.Text;
                 //vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
@@ -1896,8 +1867,8 @@ namespace XPS
                 //myCurve.AddPoint(E_kin, Convert.ToDouble(E_pass));
                 //values_to_plot.Add(ctner, Convert.ToDouble(value));
                 //myCurve.AddPoint(ctner, Convert.ToDouble(value));
-                zedGraphControl1.Invalidate();
-                zedGraphControl1.AxisChange();
+                //zedGraphControl1.Invalidate();
+                //zedGraphControl1.AxisChange();
             });
             var progress = progressHandler as IProgress<string>;
 
@@ -2108,12 +2079,10 @@ namespace XPS
                                         v_ctn_cum.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                                         ((t_now - t_old) / 40000000).ToString("0.000", System.Globalization.CultureInfo.InvariantCulture)
                                         );
-                                }
-                               
+                                }                              
                                 t_old = t_now;
                                 mean_volt_hemo = 0;
                                 
-
                                 filt_values.Enqueue(v_ctn_cum);
                                 if (filt_values.Count() == coeff.Length)
                                 {
@@ -2128,19 +2097,20 @@ namespace XPS
                                     values_to_plot_svg.Add((oldtime) / samples_for_mean - (coeff.Length - 1) / 2, result);
                                     myCurve_svg.AddPoint((oldtime) / samples_for_mean - (coeff.Length - 1) / 2, result);
                                 }
-
+                                progress.Report(v_ctn_cum.ToString("N"));
                                 v_ctn_cum = 0;
                             }
                             oldtime++;
                         }
-
+                        zedGraphControl1.Invalidate();
+                        zedGraphControl1.AxisChange();
+                        //progress.Report(v_ctn_cum.ToString("N"));
                         token.ThrowIfCancellationRequested();
-                        progress.Report(ctn.ToString("000000"));
+                        //progress.Report(ctn.ToString("N"));
                         //progress.Report((elapsed_seconds * 10000).ToString("000000"));
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                         //_suspend_background_measurement.WaitOne(Timeout.Infinite);
-                        timee = sw.Elapsed.TotalMilliseconds;
-                        
+                        timee = sw.Elapsed.TotalMilliseconds;                     
                         sw.Stop();
                     }
                 });

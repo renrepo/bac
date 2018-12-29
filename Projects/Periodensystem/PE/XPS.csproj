@@ -103,6 +103,11 @@
     <Compile Include="SelectResource.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="SelectResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SelectResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="XPS.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,7 +116,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="SelectResource.resx" />
+    <EmbeddedResource Include="SelectResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SelectResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="XPS.resx">
       <DependentUpon>XPS.cs</DependentUpon>
     </EmbeddedResource>
