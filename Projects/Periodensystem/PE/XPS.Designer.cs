@@ -257,13 +257,29 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tb_testtab = new System.Windows.Forms.TabPage();
-            this.btn_query_ramp = new System.Windows.Forms.Button();
-            this.label109 = new System.Windows.Forms.Label();
+            this.tb_roll = new System.Windows.Forms.TextBox();
+            this.tb_divisor = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label80 = new System.Windows.Forms.Label();
             this.cb_counter = new System.Windows.Forms.CheckBox();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
+            this.btn_test = new System.Windows.Forms.Button();
+            this.btn_hv_reset = new System.Windows.Forms.Button();
+            this.btn_hv_ramp = new System.Windows.Forms.Button();
+            this.tb_hv = new System.Windows.Forms.TextBox();
+            this.btn_hv_off = new System.Windows.Forms.Button();
+            this.btn_hv_on = new System.Windows.Forms.Button();
+            this.btn_hv_reload = new System.Windows.Forms.Button();
+            this.tb_rampe = new System.Windows.Forms.TextBox();
+            this.btn_reload_fil_curr = new System.Windows.Forms.Button();
+            this.tb_fil_curr = new System.Windows.Forms.TextBox();
+            this.btn_stream_read = new System.Windows.Forms.Button();
+            this.btn_hv_2 = new System.Windows.Forms.Button();
+            this.btn_hv = new System.Windows.Forms.Button();
+            this.tb_hem_out = new System.Windows.Forms.TextBox();
+            this.btn_dac = new System.Windows.Forms.Button();
+            this.label109 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.tb_volt_ramp = new System.Windows.Forms.TextBox();
             this.tb_curr_ramp = new System.Windows.Forms.TextBox();
@@ -281,22 +297,8 @@
             this.tb_anode_voltage = new System.Windows.Forms.TextBox();
             this.btn_emi_off = new System.Windows.Forms.Button();
             this.label52 = new System.Windows.Forms.Label();
-            this.btn_hv_reset = new System.Windows.Forms.Button();
-            this.btn_hv_ramp = new System.Windows.Forms.Button();
             this.btn_emi = new System.Windows.Forms.Button();
             this.tb_emi = new System.Windows.Forms.TextBox();
-            this.tb_hv = new System.Windows.Forms.TextBox();
-            this.btn_hv_off = new System.Windows.Forms.Button();
-            this.btn_hv_on = new System.Windows.Forms.Button();
-            this.btn_hv_reload = new System.Windows.Forms.Button();
-            this.tb_rampe = new System.Windows.Forms.TextBox();
-            this.btn_reload_fil_curr = new System.Windows.Forms.Button();
-            this.tb_fil_curr = new System.Windows.Forms.TextBox();
-            this.btn_stream_read = new System.Windows.Forms.Button();
-            this.btn_hv_2 = new System.Windows.Forms.Button();
-            this.btn_hv = new System.Windows.Forms.Button();
-            this.tb_hem_out = new System.Windows.Forms.TextBox();
-            this.btn_dac = new System.Windows.Forms.Button();
             this.tb_iseg_control = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label100 = new System.Windows.Forms.Label();
@@ -342,9 +344,9 @@
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.textBox35 = new System.Windows.Forms.TextBox();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
+            this.tb_set_E_B = new System.Windows.Forms.TextBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.tb_detailscan_stop = new System.Windows.Forms.TextBox();
             this.tb_detailscan_start = new System.Windows.Forms.TextBox();
@@ -390,9 +392,9 @@
             this.label86 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btn_clear_fig = new System.Windows.Forms.Button();
-            this.tb_set_E_B = new System.Windows.Forms.TextBox();
-            this.btn_test = new System.Windows.Forms.Button();
             this.label82 = new System.Windows.Forms.Label();
             this.tb_slit = new System.Windows.Forms.TextBox();
             this.btn_Set_E_B_off = new System.Windows.Forms.Button();
@@ -401,6 +403,9 @@
             this.lb_atomic_number = new System.Windows.Forms.Label();
             this.lb_element_name = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.label66 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -418,8 +423,11 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tb_settings.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.tb_binding_energies.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // Y
@@ -1100,10 +1108,10 @@
             // 
             // Rf
             // 
-            this.Rf.BackColor = System.Drawing.Color.Salmon;
+            this.Rf.BackColor = System.Drawing.Color.LightSalmon;
             this.Rf.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Rf, "Rf");
-            this.Rf.ForeColor = System.Drawing.Color.DimGray;
+            this.Rf.ForeColor = System.Drawing.Color.Transparent;
             this.Rf.Name = "Rf";
             this.Rf.UseVisualStyleBackColor = false;
             // 
@@ -1112,7 +1120,7 @@
             this.Db.BackColor = System.Drawing.Color.LightSalmon;
             this.Db.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Db, "Db");
-            this.Db.ForeColor = System.Drawing.Color.White;
+            this.Db.ForeColor = System.Drawing.Color.Transparent;
             this.Db.Name = "Db";
             this.Db.UseVisualStyleBackColor = false;
             // 
@@ -1121,7 +1129,7 @@
             this.Sg.BackColor = System.Drawing.Color.LightSalmon;
             this.Sg.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Sg, "Sg");
-            this.Sg.ForeColor = System.Drawing.Color.White;
+            this.Sg.ForeColor = System.Drawing.Color.Transparent;
             this.Sg.Name = "Sg";
             this.Sg.UseVisualStyleBackColor = false;
             // 
@@ -1130,7 +1138,7 @@
             this.Bh.BackColor = System.Drawing.Color.LightSalmon;
             this.Bh.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Bh, "Bh");
-            this.Bh.ForeColor = System.Drawing.Color.White;
+            this.Bh.ForeColor = System.Drawing.Color.Transparent;
             this.Bh.Name = "Bh";
             this.Bh.UseVisualStyleBackColor = false;
             // 
@@ -1139,7 +1147,7 @@
             this.Hs.BackColor = System.Drawing.Color.LightSalmon;
             this.Hs.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Hs, "Hs");
-            this.Hs.ForeColor = System.Drawing.Color.White;
+            this.Hs.ForeColor = System.Drawing.Color.Transparent;
             this.Hs.Name = "Hs";
             this.Hs.UseVisualStyleBackColor = false;
             // 
@@ -1148,7 +1156,7 @@
             this.Mt.BackColor = System.Drawing.Color.LightSalmon;
             this.Mt.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Mt, "Mt");
-            this.Mt.ForeColor = System.Drawing.Color.White;
+            this.Mt.ForeColor = System.Drawing.Color.Transparent;
             this.Mt.Name = "Mt";
             this.Mt.UseVisualStyleBackColor = false;
             // 
@@ -1157,7 +1165,7 @@
             this.Ds.BackColor = System.Drawing.Color.LightSalmon;
             this.Ds.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Ds, "Ds");
-            this.Ds.ForeColor = System.Drawing.Color.White;
+            this.Ds.ForeColor = System.Drawing.Color.Transparent;
             this.Ds.Name = "Ds";
             this.Ds.UseVisualStyleBackColor = false;
             // 
@@ -1166,7 +1174,7 @@
             this.Rg.BackColor = System.Drawing.Color.LightSalmon;
             this.Rg.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Rg, "Rg");
-            this.Rg.ForeColor = System.Drawing.Color.White;
+            this.Rg.ForeColor = System.Drawing.Color.Transparent;
             this.Rg.Name = "Rg";
             this.Rg.UseVisualStyleBackColor = false;
             // 
@@ -1175,7 +1183,7 @@
             this.Cn.BackColor = System.Drawing.Color.LightSalmon;
             this.Cn.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Cn, "Cn");
-            this.Cn.ForeColor = System.Drawing.Color.White;
+            this.Cn.ForeColor = System.Drawing.Color.Transparent;
             this.Cn.Name = "Cn";
             this.Cn.UseVisualStyleBackColor = false;
             // 
@@ -1184,7 +1192,7 @@
             this.Uut.BackColor = System.Drawing.Color.Aquamarine;
             this.Uut.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uut, "Uut");
-            this.Uut.ForeColor = System.Drawing.Color.White;
+            this.Uut.ForeColor = System.Drawing.Color.Transparent;
             this.Uut.Name = "Uut";
             this.Uut.UseVisualStyleBackColor = false;
             // 
@@ -1193,7 +1201,7 @@
             this.Uuq.BackColor = System.Drawing.Color.Aquamarine;
             this.Uuq.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuq, "Uuq");
-            this.Uuq.ForeColor = System.Drawing.Color.White;
+            this.Uuq.ForeColor = System.Drawing.Color.Transparent;
             this.Uuq.Name = "Uuq";
             this.Uuq.UseVisualStyleBackColor = false;
             // 
@@ -1202,7 +1210,7 @@
             this.Uup.BackColor = System.Drawing.Color.Aquamarine;
             this.Uup.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uup, "Uup");
-            this.Uup.ForeColor = System.Drawing.Color.White;
+            this.Uup.ForeColor = System.Drawing.Color.Transparent;
             this.Uup.Name = "Uup";
             this.Uup.UseVisualStyleBackColor = false;
             // 
@@ -1211,7 +1219,7 @@
             this.Uuh.BackColor = System.Drawing.Color.Aquamarine;
             this.Uuh.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuh, "Uuh");
-            this.Uuh.ForeColor = System.Drawing.Color.White;
+            this.Uuh.ForeColor = System.Drawing.Color.Transparent;
             this.Uuh.Name = "Uuh";
             this.Uuh.UseVisualStyleBackColor = false;
             // 
@@ -1220,7 +1228,7 @@
             this.Uus.BackColor = System.Drawing.Color.PaleGreen;
             this.Uus.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uus, "Uus");
-            this.Uus.ForeColor = System.Drawing.Color.White;
+            this.Uus.ForeColor = System.Drawing.Color.Transparent;
             this.Uus.Name = "Uus";
             this.Uus.UseVisualStyleBackColor = false;
             // 
@@ -1229,7 +1237,7 @@
             this.Uuo.BackColor = System.Drawing.Color.Orange;
             this.Uuo.Cursor = System.Windows.Forms.Cursors.Arrow;
             resources.ApplyResources(this.Uuo, "Uuo");
-            this.Uuo.ForeColor = System.Drawing.Color.White;
+            this.Uuo.ForeColor = System.Drawing.Color.Transparent;
             this.Uuo.Name = "Uuo";
             this.Uuo.UseVisualStyleBackColor = false;
             // 
@@ -2285,7 +2293,7 @@
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox3.Controls.Add(this.lb_progress);
             this.groupBox3.Controls.Add(this.btn_emcy);
             this.groupBox3.Controls.Add(this.safe_fig);
@@ -2410,31 +2418,12 @@
             // 
             // tb_testtab
             // 
-            this.tb_testtab.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tb_testtab.Controls.Add(this.btn_query_ramp);
-            this.tb_testtab.Controls.Add(this.label109);
+            this.tb_testtab.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_testtab.Controls.Add(this.groupBox10);
             this.tb_testtab.Controls.Add(this.groupBox5);
-            this.tb_testtab.Controls.Add(this.label88);
-            this.tb_testtab.Controls.Add(this.tb_volt_ramp);
-            this.tb_testtab.Controls.Add(this.tb_curr_ramp);
-            this.tb_testtab.Controls.Add(this.label108);
-            this.tb_testtab.Controls.Add(this.label106);
-            this.tb_testtab.Controls.Add(this.K_P);
-            this.tb_testtab.Controls.Add(this.tb_KD);
-            this.tb_testtab.Controls.Add(this.tb_KI);
-            this.tb_testtab.Controls.Add(this.tb_KP);
-            this.tb_testtab.Controls.Add(this.label87);
-            this.tb_testtab.Controls.Add(this.tb_Imax);
-            this.tb_testtab.Controls.Add(this.label84);
-            this.tb_testtab.Controls.Add(this.tb_Imin);
-            this.tb_testtab.Controls.Add(this.label77);
-            this.tb_testtab.Controls.Add(this.tb_anode_voltage);
-            this.tb_testtab.Controls.Add(this.btn_emi_off);
-            this.tb_testtab.Controls.Add(this.label52);
+            this.tb_testtab.Controls.Add(this.btn_test);
             this.tb_testtab.Controls.Add(this.btn_hv_reset);
             this.tb_testtab.Controls.Add(this.btn_hv_ramp);
-            this.tb_testtab.Controls.Add(this.btn_emi);
-            this.tb_testtab.Controls.Add(this.tb_emi);
             this.tb_testtab.Controls.Add(this.tb_hv);
             this.tb_testtab.Controls.Add(this.btn_hv_off);
             this.tb_testtab.Controls.Add(this.btn_hv_on);
@@ -2450,17 +2439,15 @@
             resources.ApplyResources(this.tb_testtab, "tb_testtab");
             this.tb_testtab.Name = "tb_testtab";
             // 
-            // btn_query_ramp
+            // tb_roll
             // 
-            resources.ApplyResources(this.btn_query_ramp, "btn_query_ramp");
-            this.btn_query_ramp.Name = "btn_query_ramp";
-            this.btn_query_ramp.UseVisualStyleBackColor = true;
-            this.btn_query_ramp.Click += new System.EventHandler(this.btn_query_ramp_Click);
+            resources.ApplyResources(this.tb_roll, "tb_roll");
+            this.tb_roll.Name = "tb_roll";
             // 
-            // label109
+            // tb_divisor
             // 
-            resources.ApplyResources(this.label109, "label109");
-            this.label109.Name = "label109";
+            resources.ApplyResources(this.tb_divisor, "tb_divisor");
+            this.tb_divisor.Name = "tb_divisor";
             // 
             // groupBox5
             // 
@@ -2495,6 +2482,108 @@
             resources.ApplyResources(this.tb_counter, "tb_counter");
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
+            // 
+            // btn_test
+            // 
+            resources.ApplyResources(this.btn_test, "btn_test");
+            this.btn_test.Name = "btn_test";
+            this.btn_test.UseVisualStyleBackColor = true;
+            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
+            // 
+            // btn_hv_reset
+            // 
+            resources.ApplyResources(this.btn_hv_reset, "btn_hv_reset");
+            this.btn_hv_reset.Name = "btn_hv_reset";
+            this.btn_hv_reset.UseVisualStyleBackColor = true;
+            this.btn_hv_reset.Click += new System.EventHandler(this.btn_hv_reset_Click);
+            // 
+            // btn_hv_ramp
+            // 
+            resources.ApplyResources(this.btn_hv_ramp, "btn_hv_ramp");
+            this.btn_hv_ramp.Name = "btn_hv_ramp";
+            this.btn_hv_ramp.UseVisualStyleBackColor = true;
+            this.btn_hv_ramp.Click += new System.EventHandler(this.btn_hv_ramp_Click);
+            // 
+            // tb_hv
+            // 
+            resources.ApplyResources(this.tb_hv, "tb_hv");
+            this.tb_hv.Name = "tb_hv";
+            // 
+            // btn_hv_off
+            // 
+            resources.ApplyResources(this.btn_hv_off, "btn_hv_off");
+            this.btn_hv_off.Name = "btn_hv_off";
+            this.btn_hv_off.UseVisualStyleBackColor = true;
+            this.btn_hv_off.Click += new System.EventHandler(this.btn_hv_off_Click);
+            // 
+            // btn_hv_on
+            // 
+            resources.ApplyResources(this.btn_hv_on, "btn_hv_on");
+            this.btn_hv_on.Name = "btn_hv_on";
+            this.btn_hv_on.UseVisualStyleBackColor = true;
+            this.btn_hv_on.Click += new System.EventHandler(this.btn_hv_on_Click);
+            // 
+            // btn_hv_reload
+            // 
+            resources.ApplyResources(this.btn_hv_reload, "btn_hv_reload");
+            this.btn_hv_reload.Name = "btn_hv_reload";
+            this.btn_hv_reload.UseVisualStyleBackColor = true;
+            this.btn_hv_reload.Click += new System.EventHandler(this.btn_hv_reload_Click);
+            // 
+            // tb_rampe
+            // 
+            resources.ApplyResources(this.tb_rampe, "tb_rampe");
+            this.tb_rampe.Name = "tb_rampe";
+            // 
+            // btn_reload_fil_curr
+            // 
+            resources.ApplyResources(this.btn_reload_fil_curr, "btn_reload_fil_curr");
+            this.btn_reload_fil_curr.Name = "btn_reload_fil_curr";
+            this.btn_reload_fil_curr.UseVisualStyleBackColor = true;
+            this.btn_reload_fil_curr.Click += new System.EventHandler(this.btn_reload_fil_curr_Click);
+            // 
+            // tb_fil_curr
+            // 
+            resources.ApplyResources(this.tb_fil_curr, "tb_fil_curr");
+            this.tb_fil_curr.Name = "tb_fil_curr";
+            // 
+            // btn_stream_read
+            // 
+            resources.ApplyResources(this.btn_stream_read, "btn_stream_read");
+            this.btn_stream_read.Name = "btn_stream_read";
+            this.btn_stream_read.UseVisualStyleBackColor = true;
+            this.btn_stream_read.Click += new System.EventHandler(this.btn_stream_read_Click);
+            // 
+            // btn_hv_2
+            // 
+            resources.ApplyResources(this.btn_hv_2, "btn_hv_2");
+            this.btn_hv_2.Name = "btn_hv_2";
+            this.btn_hv_2.UseVisualStyleBackColor = true;
+            this.btn_hv_2.Click += new System.EventHandler(this.btn_hv_2_Click);
+            // 
+            // btn_hv
+            // 
+            resources.ApplyResources(this.btn_hv, "btn_hv");
+            this.btn_hv.Name = "btn_hv";
+            this.btn_hv.UseVisualStyleBackColor = true;
+            this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
+            // 
+            // tb_hem_out
+            // 
+            resources.ApplyResources(this.tb_hem_out, "tb_hem_out");
+            this.tb_hem_out.Name = "tb_hem_out";
+            // 
+            // btn_dac
+            // 
+            resources.ApplyResources(this.btn_dac, "btn_dac");
+            this.btn_dac.Name = "btn_dac";
+            this.btn_dac.UseVisualStyleBackColor = true;
+            this.btn_dac.Click += new System.EventHandler(this.btn_dac_Click);
+            // 
+            // label109
+            // 
+            resources.ApplyResources(this.label109, "label109");
+            this.label109.Name = "label109";
             // 
             // label88
             // 
@@ -2584,20 +2673,6 @@
             resources.ApplyResources(this.label52, "label52");
             this.label52.Name = "label52";
             // 
-            // btn_hv_reset
-            // 
-            resources.ApplyResources(this.btn_hv_reset, "btn_hv_reset");
-            this.btn_hv_reset.Name = "btn_hv_reset";
-            this.btn_hv_reset.UseVisualStyleBackColor = true;
-            this.btn_hv_reset.Click += new System.EventHandler(this.btn_hv_reset_Click);
-            // 
-            // btn_hv_ramp
-            // 
-            resources.ApplyResources(this.btn_hv_ramp, "btn_hv_ramp");
-            this.btn_hv_ramp.Name = "btn_hv_ramp";
-            this.btn_hv_ramp.UseVisualStyleBackColor = true;
-            this.btn_hv_ramp.Click += new System.EventHandler(this.btn_hv_ramp_Click);
-            // 
             // btn_emi
             // 
             resources.ApplyResources(this.btn_emi, "btn_emi");
@@ -2610,85 +2685,9 @@
             resources.ApplyResources(this.tb_emi, "tb_emi");
             this.tb_emi.Name = "tb_emi";
             // 
-            // tb_hv
-            // 
-            resources.ApplyResources(this.tb_hv, "tb_hv");
-            this.tb_hv.Name = "tb_hv";
-            // 
-            // btn_hv_off
-            // 
-            resources.ApplyResources(this.btn_hv_off, "btn_hv_off");
-            this.btn_hv_off.Name = "btn_hv_off";
-            this.btn_hv_off.UseVisualStyleBackColor = true;
-            this.btn_hv_off.Click += new System.EventHandler(this.btn_hv_off_Click);
-            // 
-            // btn_hv_on
-            // 
-            resources.ApplyResources(this.btn_hv_on, "btn_hv_on");
-            this.btn_hv_on.Name = "btn_hv_on";
-            this.btn_hv_on.UseVisualStyleBackColor = true;
-            this.btn_hv_on.Click += new System.EventHandler(this.btn_hv_on_Click);
-            // 
-            // btn_hv_reload
-            // 
-            resources.ApplyResources(this.btn_hv_reload, "btn_hv_reload");
-            this.btn_hv_reload.Name = "btn_hv_reload";
-            this.btn_hv_reload.UseVisualStyleBackColor = true;
-            this.btn_hv_reload.Click += new System.EventHandler(this.btn_hv_reload_Click);
-            // 
-            // tb_rampe
-            // 
-            resources.ApplyResources(this.tb_rampe, "tb_rampe");
-            this.tb_rampe.Name = "tb_rampe";
-            // 
-            // btn_reload_fil_curr
-            // 
-            resources.ApplyResources(this.btn_reload_fil_curr, "btn_reload_fil_curr");
-            this.btn_reload_fil_curr.Name = "btn_reload_fil_curr";
-            this.btn_reload_fil_curr.UseVisualStyleBackColor = true;
-            this.btn_reload_fil_curr.Click += new System.EventHandler(this.btn_reload_fil_curr_Click);
-            // 
-            // tb_fil_curr
-            // 
-            resources.ApplyResources(this.tb_fil_curr, "tb_fil_curr");
-            this.tb_fil_curr.Name = "tb_fil_curr";
-            // 
-            // btn_stream_read
-            // 
-            resources.ApplyResources(this.btn_stream_read, "btn_stream_read");
-            this.btn_stream_read.Name = "btn_stream_read";
-            this.btn_stream_read.UseVisualStyleBackColor = true;
-            this.btn_stream_read.Click += new System.EventHandler(this.btn_stream_read_Click);
-            // 
-            // btn_hv_2
-            // 
-            resources.ApplyResources(this.btn_hv_2, "btn_hv_2");
-            this.btn_hv_2.Name = "btn_hv_2";
-            this.btn_hv_2.UseVisualStyleBackColor = true;
-            this.btn_hv_2.Click += new System.EventHandler(this.btn_hv_2_Click);
-            // 
-            // btn_hv
-            // 
-            resources.ApplyResources(this.btn_hv, "btn_hv");
-            this.btn_hv.Name = "btn_hv";
-            this.btn_hv.UseVisualStyleBackColor = true;
-            this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
-            // 
-            // tb_hem_out
-            // 
-            resources.ApplyResources(this.tb_hem_out, "tb_hem_out");
-            this.tb_hem_out.Name = "tb_hem_out";
-            // 
-            // btn_dac
-            // 
-            resources.ApplyResources(this.btn_dac, "btn_dac");
-            this.btn_dac.Name = "btn_dac";
-            this.btn_dac.UseVisualStyleBackColor = true;
-            this.btn_dac.Click += new System.EventHandler(this.btn_dac_Click);
-            // 
             // tb_iseg_control
             // 
-            this.tb_iseg_control.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_iseg_control.BackColor = System.Drawing.SystemColors.Control;
             this.tb_iseg_control.Controls.Add(this.tableLayoutPanel3);
             resources.ApplyResources(this.tb_iseg_control, "tb_iseg_control");
             this.tb_iseg_control.Name = "tb_iseg_control";
@@ -3006,28 +3005,25 @@
             // 
             // tb_dashboard
             // 
-            this.tb_dashboard.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_dashboard.BackColor = System.Drawing.SystemColors.Control;
             this.tb_dashboard.Controls.Add(this.groupBox7);
             this.tb_dashboard.Controls.Add(this.groupBox6);
             this.tb_dashboard.Controls.Add(this.tableLayoutPanel4);
             this.tb_dashboard.Controls.Add(this.groupBox2);
             this.tb_dashboard.Controls.Add(this.groupBox1);
+            this.tb_dashboard.Controls.Add(this.btn_emi_off);
+            this.tb_dashboard.Controls.Add(this.btn_emi);
             resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
             this.tb_dashboard.Name = "tb_dashboard";
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.textBox35);
             this.groupBox7.Controls.Add(this.label63);
             this.groupBox7.Controls.Add(this.label64);
+            this.groupBox7.Controls.Add(this.tb_set_E_B);
             resources.ApplyResources(this.groupBox7, "groupBox7");
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.TabStop = false;
-            // 
-            // textBox35
-            // 
-            resources.ApplyResources(this.textBox35, "textBox35");
-            this.textBox35.Name = "textBox35";
             // 
             // label63
             // 
@@ -3038,6 +3034,11 @@
             // 
             resources.ApplyResources(this.label64, "label64");
             this.label64.Name = "label64";
+            // 
+            // tb_set_E_B
+            // 
+            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
+            this.tb_set_E_B.Name = "tb_set_E_B";
             // 
             // groupBox6
             // 
@@ -3311,10 +3312,11 @@
             // cb_bias
             // 
             this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cb_bias, "cb_bias");
             this.cb_bias.FormattingEnabled = true;
             this.cb_bias.Items.AddRange(new object[] {
-            resources.GetString("cb_bias.Items")});
-            resources.ApplyResources(this.cb_bias, "cb_bias");
+            resources.GetString("cb_bias.Items"),
+            resources.GetString("cb_bias.Items1")});
             this.cb_bias.Name = "cb_bias";
             // 
             // label74
@@ -3346,6 +3348,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             resources.ApplyResources(this.tabControl1, "tabControl1");
             this.tabControl1.Controls.Add(this.tb_dashboard);
             this.tabControl1.Controls.Add(this.tb_settings);
@@ -3357,25 +3360,55 @@
             // 
             // tb_settings
             // 
-            this.tb_settings.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.tb_settings.Controls.Add(this.tb_lens);
+            this.tb_settings.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_settings.Controls.Add(this.groupBox9);
+            this.tb_settings.Controls.Add(this.groupBox8);
             this.tb_settings.Controls.Add(this.btn_clear_fig);
-            this.tb_settings.Controls.Add(this.tb_prevolt);
-            this.tb_settings.Controls.Add(this.label76);
-            this.tb_settings.Controls.Add(this.cb_bias);
-            this.tb_settings.Controls.Add(this.tb_set_E_B);
-            this.tb_settings.Controls.Add(this.label74);
-            this.tb_settings.Controls.Add(this.label110);
-            this.tb_settings.Controls.Add(this.btn_test);
             this.tb_settings.Controls.Add(this.label82);
-            this.tb_settings.Controls.Add(this.label86);
             this.tb_settings.Controls.Add(this.tb_slit);
             this.tb_settings.Controls.Add(this.btn_Set_E_B_off);
-            this.tb_settings.Controls.Add(this.tb_dac);
             this.tb_settings.Controls.Add(this.btn_set_E_B);
             this.tb_settings.Controls.Add(this.btn_reload_dac);
             resources.ApplyResources(this.tb_settings, "tb_settings");
             this.tb_settings.Name = "tb_settings";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label74);
+            this.groupBox9.Controls.Add(this.cb_bias);
+            this.groupBox9.Controls.Add(this.tb_lens);
+            this.groupBox9.Controls.Add(this.label76);
+            this.groupBox9.Controls.Add(this.tb_prevolt);
+            this.groupBox9.Controls.Add(this.label86);
+            this.groupBox9.Controls.Add(this.label110);
+            this.groupBox9.Controls.Add(this.tb_dac);
+            resources.ApplyResources(this.groupBox9, "groupBox9");
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.TabStop = false;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.tb_Imin);
+            this.groupBox8.Controls.Add(this.label109);
+            this.groupBox8.Controls.Add(this.label108);
+            this.groupBox8.Controls.Add(this.label84);
+            this.groupBox8.Controls.Add(this.tb_Imax);
+            this.groupBox8.Controls.Add(this.label106);
+            this.groupBox8.Controls.Add(this.label87);
+            this.groupBox8.Controls.Add(this.tb_KD);
+            this.groupBox8.Controls.Add(this.label88);
+            this.groupBox8.Controls.Add(this.K_P);
+            this.groupBox8.Controls.Add(this.tb_KI);
+            this.groupBox8.Controls.Add(this.tb_volt_ramp);
+            this.groupBox8.Controls.Add(this.tb_curr_ramp);
+            this.groupBox8.Controls.Add(this.tb_anode_voltage);
+            this.groupBox8.Controls.Add(this.label77);
+            this.groupBox8.Controls.Add(this.label52);
+            this.groupBox8.Controls.Add(this.tb_emi);
+            this.groupBox8.Controls.Add(this.tb_KP);
+            resources.ApplyResources(this.groupBox8, "groupBox8");
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.TabStop = false;
             // 
             // btn_clear_fig
             // 
@@ -3383,18 +3416,6 @@
             this.btn_clear_fig.Name = "btn_clear_fig";
             this.btn_clear_fig.UseVisualStyleBackColor = true;
             this.btn_clear_fig.Click += new System.EventHandler(this.btn_clear_fig_Click);
-            // 
-            // tb_set_E_B
-            // 
-            resources.ApplyResources(this.tb_set_E_B, "tb_set_E_B");
-            this.tb_set_E_B.Name = "tb_set_E_B";
-            // 
-            // btn_test
-            // 
-            resources.ApplyResources(this.btn_test, "btn_test");
-            this.btn_test.Name = "btn_test";
-            this.btn_test.UseVisualStyleBackColor = true;
-            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
             // 
             // label82
             // 
@@ -3422,7 +3443,7 @@
             // 
             // tb_binding_energies
             // 
-            this.tb_binding_energies.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tb_binding_energies.BackColor = System.Drawing.SystemColors.Control;
             this.tb_binding_energies.Controls.Add(this.lb_atomic_number);
             this.tb_binding_energies.Controls.Add(this.lb_element_name);
             this.tb_binding_energies.Controls.Add(this.tb_show);
@@ -3442,11 +3463,31 @@
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.tableLayoutPanel5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             resources.ApplyResources(this.tableLayoutPanel5, "tableLayoutPanel5");
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label66);
+            this.groupBox10.Controls.Add(this.label65);
+            this.groupBox10.Controls.Add(this.tb_roll);
+            this.groupBox10.Controls.Add(this.tb_divisor);
+            resources.ApplyResources(this.groupBox10, "groupBox10");
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.TabStop = false;
+            // 
+            // label65
+            // 
+            resources.ApplyResources(this.label65, "label65");
+            this.label65.Name = "label65";
+            // 
+            // label66
+            // 
+            resources.ApplyResources(this.label66, "label66");
+            this.label66.Name = "label66";
             // 
             // XPS
             // 
@@ -3490,9 +3531,15 @@
             this.tabControl1.ResumeLayout(false);
             this.tb_settings.ResumeLayout(false);
             this.tb_settings.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.tb_binding_energies.ResumeLayout(false);
             this.tb_binding_energies.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3850,7 +3897,6 @@
         private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
-        private System.Windows.Forms.Button btn_query_ramp;
         private System.Windows.Forms.Button btn_test;
         private System.Windows.Forms.TabPage tb_settings;
         private System.Windows.Forms.TabPage tb_binding_energies;
@@ -3861,7 +3907,6 @@
         private System.Windows.Forms.TextBox tb_cps;
         private System.Windows.Forms.Label lb_progress;
         private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.TextBox textBox35;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Label label64;
         private System.Windows.Forms.GroupBox groupBox6;
@@ -3870,6 +3915,13 @@
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.ComboBox cb_scanrange;
         private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.TextBox tb_roll;
+        private System.Windows.Forms.TextBox tb_divisor;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Label label65;
     }
 }
 

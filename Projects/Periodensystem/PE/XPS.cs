@@ -141,6 +141,7 @@ namespace XPS
         Button[] reset;
         CheckBox[] stat;
         TextBox[] vm;
+        TextBox[] pwm_tb;
 
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private CancellationTokenSource _cts_pressure_labjack;           // Cancellation of Labjack pressure background measurement 
@@ -380,7 +381,12 @@ namespace XPS
             //k = 0.673;
             //k = 0.6;
             //k = 0.8;
-
+            pwm_tb = new TextBox[] {tb_roll, tb_divisor};
+            foreach (var item in pwm_tb)
+            {
+                //item.KeyDown += global_pwm_down;
+                item.KeyDown += new KeyEventHandler(global_pwm_down);
+            }
         }
 
         //##################################################################################################################################################################
@@ -1803,24 +1809,6 @@ namespace XPS
             zedGraphControl1.Refresh();
         }
 
-        private async void btn_query_ramp_Click(object sender, EventArgs e)
-        {
-            // Configure Clock Registers:
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source
-                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_DIVISOR", 1);     // Configure Clock0's divisor
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", 80);  // Configure Clock0's roll value
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
-
-            // Configure EF Channel Registers:
-            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 0);    // Disable the EF system for initial configuration
-            LJM.eWriteName(handle_PWM, "DIO0_EF_INDEX", 0);     // Configure EF system for PWM
-            LJM.eWriteName(handle_PWM, "DIO0_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
-            LJM.eWriteName(handle_PWM, "DIO0_EF_CONFIG_A", 40);  // Configure duty cycle to be: 50%
-            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted
-
-        }
-
         double timee;
         /***
         private double sav_gol(Queue<> data)
@@ -1840,10 +1828,11 @@ namespace XPS
         private async void btn_test_Click(object sender, EventArgs e)
         {
             Queue<double> filt_values = new Queue<double>();
-            double[] coeff = {-0.06501548, -0.01857585,  0.02167183,  0.05572755,  0.08359133,
-        0.10526316,  0.12074303,  0.13003096,  0.13312693,  0.13003096,
-        0.12074303,  0.10526316,  0.08359133,  0.05572755,  0.02167183,
-       -0.01857585, -0.06501548};
+            double[] coeff = {0.0447205 , -0.02484472, -0.05001635, -0.04315136, -0.01515297,
+        0.02452935,  0.06789993,  0.10841682,  0.14099187,  0.16199065,
+        0.16923254,  0.16199065,  0.14099187,  0.10841682,  0.06789993,
+        0.02452935, -0.01515297, -0.04315136, -0.05001635, -0.02484472,
+        0.0447205};
             //double value2 = Convert.ToDouble(tb_dac.Text.Replace(",", "."));
             LJM.eWriteName(handle_DAC2, "DAC1", 4.0000);
 
@@ -1855,8 +1844,15 @@ namespace XPS
             {
                 tb_hem_out.Text = timee.ToString("0.0");
                 tb_cps.Text = value;
-                progressBar1.Value = Convert.ToInt32(timee);
-                lb_progress.Text = progressBar1.Value.ToString("0") + '%';
+                try
+                {
+                    progressBar1.Value = Convert.ToInt32(timee);
+                    lb_progress.Text = progressBar1.Value.ToString("0") + '%';
+                }
+                catch (Exception)
+                {
+                }
+                
                 //tb_counter.Text = value;
                 //vm1.Text = ch1_meas.Text;
                 //vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
@@ -1907,11 +1903,14 @@ namespace XPS
 
             btn_can.Enabled = true;
 
-            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(255, 40, 0), SymbolType.VDash);
-            myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(0, 255, 0), SymbolType.None);
-            //myCurve.Line.IsVisible = false;
-            myCurve.Line.Color = Color.FromArgb(35, 35, 35);
+            myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(75, 200, 28), SymbolType.None);
             myCurve_svg.Line.Width = 3;
+            myCurve_svg.Tag = 1;
+            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(220, 32, 0), SymbolType.VDash);
+            myCurve.Line.Color = Color.FromArgb(90, 15, 0);
+            myCurve.Tag = 2;           
+            //myCurve.Line.IsVisible = false;
+            
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
             DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_test\", " " + curr_time + "_" +
@@ -2143,6 +2142,50 @@ namespace XPS
                 btn_clear.Enabled = true;
                 //AutoClosingMessageBox.Show("Problem with background measurement of Iseg DPS voltages", "Info", 500);
             }
+        }
+
+
+        public void global_pwm_down(object sender, KeyEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            int roll = 0;
+            int divisor = 0;
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    roll = Convert.ToInt16(tb_roll.Text);
+                    divisor = Convert.ToInt32(tb_divisor.Text);
+                }
+                catch (Exception)
+                {
+                    AutoClosingMessageBox.Show("Bla", "Roll/Divisor muss int sein", 500);
+                }            
+                tb_roll.Text = String.Empty;
+                tb_roll.Text = roll.ToString();
+                tb_divisor.Text = String.Empty;
+                tb_divisor.Text = divisor.ToString();
+                PWM(sender, roll, divisor);
+            }
+            
+        }
+
+
+        public void PWM(object sender, int roll, int divisor)
+        {
+            //TextBox tb = (TextBox)sender;
+            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source
+                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
+            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_DIVISOR", divisor);     // Configure Clock0's divisor
+            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", roll);  // Configure Clock0's roll value
+            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
+
+            // Configure EF Channel Registers:
+            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 0);    // Disable the EF system for initial configuration
+            LJM.eWriteName(handle_PWM, "DIO0_EF_INDEX", 0);     // Configure EF system for PWM
+            LJM.eWriteName(handle_PWM, "DIO0_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
+            LJM.eWriteName(handle_PWM, "DIO0_EF_CONFIG_A", roll/2);  // Configure duty cycle to be: 50%
+            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted
         }
     }
 }
