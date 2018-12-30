@@ -24,12 +24,14 @@ namespace XPS
         List<string> display_labels = new List<string>();
         PointPairList values_to_plot = new PointPairList();
         PointPairList values_to_plot_svg = new PointPairList();
+        PointPairList values_to_plot_svg_deriv = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
         Dictionary<string, string> dic = new Dictionary<string, string>();
         GraphPane myPane;
         LineItem myCurve;
         LineItem myCurve_svg;
+        LineItem myCurve_svg_deriv;
         TextObj pane_labs;
         YAxis yaxis = new YAxis();
 
@@ -68,6 +70,7 @@ namespace XPS
             myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.YAxis.Color = Color.FromArgb(red, green, blue);
+            myPane.XAxis.Color = Color.FromArgb(red, green, blue);
 
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;

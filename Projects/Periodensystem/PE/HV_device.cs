@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NationalInstruments.Visa;
 using Ivi.Visa;
+using System.Windows.Forms;
 
 
 
@@ -21,7 +22,7 @@ namespace XPS
 
         public HV_device()
         {  //Parameterized constructor
-
+            //same as above but for the on/off switches in "Iseg ControL" tab
         }
 
         //~HV_device() { }

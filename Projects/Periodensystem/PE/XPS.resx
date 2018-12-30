@@ -8622,6 +8622,30 @@
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="groupBox11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 84</value>
+  </data>
+  <data name="groupBox11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 61</value>
+  </data>
+  <data name="groupBox11.TabIndex" type="System.Int32, mscorlib">
+    <value>342</value>
+  </data>
+  <data name="groupBox11.Text" xml:space="preserve">
+    <value>DAC</value>
+  </data>
+  <data name="&gt;&gt;groupBox11.Name" xml:space="preserve">
+    <value>groupBox11</value>
+  </data>
+  <data name="&gt;&gt;groupBox11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox11.Parent" xml:space="preserve">
+    <value>tb_testtab</value>
+  </data>
+  <data name="&gt;&gt;groupBox11.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label66.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -8758,7 +8782,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label80.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -8914,7 +8938,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btn_test.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8941,7 +8965,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_test.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="btn_hv_reset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8968,7 +8992,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_reset.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btn_hv_ramp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8995,7 +9019,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_ramp.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tb_hv.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 123</value>
@@ -9019,7 +9043,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;tb_hv.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="btn_hv_off.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9046,7 +9070,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_off.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="btn_hv_on.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9073,7 +9097,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_on.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btn_hv_reload.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9100,30 +9124,6 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_reload.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="tb_rampe.Location" type="System.Drawing.Point, System.Drawing">
-    <value>179, 154</value>
-  </data>
-  <data name="tb_rampe.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tb_rampe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 22</value>
-  </data>
-  <data name="tb_rampe.TabIndex" type="System.Int32, mscorlib">
-    <value>296</value>
-  </data>
-  <data name="&gt;&gt;tb_rampe.Name" xml:space="preserve">
-    <value>tb_rampe</value>
-  </data>
-  <data name="&gt;&gt;tb_rampe.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_rampe.Parent" xml:space="preserve">
-    <value>tb_testtab</value>
-  </data>
-  <data name="&gt;&gt;tb_rampe.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="btn_reload_fil_curr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -9177,33 +9177,6 @@
   <data name="&gt;&gt;tb_fil_curr.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
-  <data name="btn_stream_read.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_stream_read.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 179</value>
-  </data>
-  <data name="btn_stream_read.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_stream_read.TabIndex" type="System.Int32, mscorlib">
-    <value>308</value>
-  </data>
-  <data name="btn_stream_read.Text" xml:space="preserve">
-    <value>Stream_read</value>
-  </data>
-  <data name="&gt;&gt;btn_stream_read.Name" xml:space="preserve">
-    <value>btn_stream_read</value>
-  </data>
-  <data name="&gt;&gt;btn_stream_read.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_stream_read.Parent" xml:space="preserve">
-    <value>tb_testtab</value>
-  </data>
-  <data name="&gt;&gt;btn_stream_read.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <data name="btn_hv_2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -9229,7 +9202,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="btn_hv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9256,55 +9229,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="tb_hem_out.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 154</value>
-  </data>
-  <data name="tb_hem_out.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 24</value>
-  </data>
-  <data name="tb_hem_out.TabIndex" type="System.Int32, mscorlib">
-    <value>298</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_out.Name" xml:space="preserve">
-    <value>tb_hem_out</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_out.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_out.Parent" xml:space="preserve">
-    <value>tb_testtab</value>
-  </data>
-  <data name="&gt;&gt;tb_hem_out.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="btn_dac.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_dac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 151</value>
-  </data>
-  <data name="btn_dac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_dac.TabIndex" type="System.Int32, mscorlib">
-    <value>288</value>
-  </data>
-  <data name="btn_dac.Text" xml:space="preserve">
-    <value>Set DAC</value>
-  </data>
-  <data name="&gt;&gt;btn_dac.Name" xml:space="preserve">
-    <value>btn_dac</value>
-  </data>
-  <data name="&gt;&gt;btn_dac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_dac.Parent" xml:space="preserve">
-    <value>tb_testtab</value>
-  </data>
-  <data name="&gt;&gt;btn_dac.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>13</value>
   </data>
   <data name="tb_testtab.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -9844,7 +9769,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_emi_off.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label52.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9904,7 +9829,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_emi.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tb_emi.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 118</value>
@@ -11799,6 +11724,33 @@
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="btn_clear_fig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btn_clear_fig.Location" type="System.Drawing.Point, System.Drawing">
+    <value>379, 167</value>
+  </data>
+  <data name="btn_clear_fig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 33</value>
+  </data>
+  <data name="btn_clear_fig.TabIndex" type="System.Int32, mscorlib">
+    <value>302</value>
+  </data>
+  <data name="btn_clear_fig.Text" xml:space="preserve">
+    <value>Clear Fig</value>
+  </data>
+  <data name="&gt;&gt;btn_clear_fig.Name" xml:space="preserve">
+    <value>btn_clear_fig</value>
+  </data>
+  <data name="&gt;&gt;btn_clear_fig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_clear_fig.Parent" xml:space="preserve">
+    <value>tb_dashboard</value>
+  </data>
+  <data name="&gt;&gt;btn_clear_fig.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="tableLayoutPanel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
@@ -11926,7 +11878,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Iseg_Xray_session" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Iseg_DPS_session" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -12187,7 +12139,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -12784,7 +12736,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tb_dashboard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -12847,7 +12799,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;label110.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tb_lens.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 70</value>
@@ -12877,7 +12829,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;tb_lens.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="tb_prevolt.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 44</value>
@@ -12904,7 +12856,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;tb_prevolt.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="cb_bias.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -12934,7 +12886,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;cb_bias.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="label74.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -12967,7 +12919,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;label74.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label76.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -13000,31 +12952,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;label76.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="btn_reload_dac.Location" type="System.Drawing.Point, System.Drawing">
-    <value>358, 110</value>
-  </data>
-  <data name="btn_reload_dac.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 23</value>
-  </data>
-  <data name="btn_reload_dac.TabIndex" type="System.Int32, mscorlib">
-    <value>296</value>
-  </data>
-  <data name="btn_reload_dac.Text" xml:space="preserve">
-    <value>DAC</value>
-  </data>
-  <data name="&gt;&gt;btn_reload_dac.Name" xml:space="preserve">
-    <value>btn_reload_dac</value>
-  </data>
-  <data name="&gt;&gt;btn_reload_dac.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_reload_dac.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;btn_reload_dac.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 94</value>
@@ -13054,43 +12982,76 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="label86.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label86.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
-  </data>
-  <data name="label86.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label86.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 99</value>
-  </data>
-  <data name="label86.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 15</value>
-  </data>
-  <data name="label86.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="label86.Text" xml:space="preserve">
-    <value>DAC bias [mV]</value>
-  </data>
-  <data name="&gt;&gt;label86.Name" xml:space="preserve">
-    <value>label86</value>
-  </data>
-  <data name="&gt;&gt;label86.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label86.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label86.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="cb_DAC.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="cb_DAC.Items" xml:space="preserve">
+    <value>DAC0</value>
+  </data>
+  <data name="cb_DAC.Items1" xml:space="preserve">
+    <value>DAC1</value>
+  </data>
+  <data name="cb_DAC.Items2" xml:space="preserve">
+    <value>DAC2</value>
+  </data>
+  <data name="cb_DAC.Items3" xml:space="preserve">
+    <value>DAC3</value>
+  </data>
+  <data name="cb_DAC.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 93</value>
+  </data>
+  <data name="cb_DAC.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 23</value>
+  </data>
+  <data name="cb_DAC.TabIndex" type="System.Int32, mscorlib">
+    <value>302</value>
+  </data>
+  <data name="&gt;&gt;cb_DAC.Name" xml:space="preserve">
+    <value>cb_DAC</value>
+  </data>
+  <data name="&gt;&gt;cb_DAC.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cb_DAC.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;cb_DAC.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tb_slit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 118</value>
+  </data>
+  <data name="tb_slit.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tb_slit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 22</value>
+  </data>
+  <data name="tb_slit.TabIndex" type="System.Int32, mscorlib">
+    <value>301</value>
+  </data>
+  <data name="tb_slit.Text" xml:space="preserve">
+    <value>C1</value>
+  </data>
+  <data name="tb_slit.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Center</value>
+  </data>
+  <data name="&gt;&gt;tb_slit.Name" xml:space="preserve">
+    <value>tb_slit</value>
+  </data>
+  <data name="&gt;&gt;tb_slit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_slit.Parent" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;tb_slit.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>162, 4</value>
@@ -13139,144 +13100,6 @@
   </data>
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="btn_clear_fig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_clear_fig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>423, 205</value>
-  </data>
-  <data name="btn_clear_fig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>85, 33</value>
-  </data>
-  <data name="btn_clear_fig.TabIndex" type="System.Int32, mscorlib">
-    <value>302</value>
-  </data>
-  <data name="btn_clear_fig.Text" xml:space="preserve">
-    <value>Clear Fig</value>
-  </data>
-  <data name="&gt;&gt;btn_clear_fig.Name" xml:space="preserve">
-    <value>btn_clear_fig</value>
-  </data>
-  <data name="&gt;&gt;btn_clear_fig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_clear_fig.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;btn_clear_fig.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="label82.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label82.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label82.Location" type="System.Drawing.Point, System.Drawing">
-    <value>492, 21</value>
-  </data>
-  <data name="label82.Size" type="System.Drawing.Size, System.Drawing">
-    <value>17, 18</value>
-  </data>
-  <data name="label82.TabIndex" type="System.Int32, mscorlib">
-    <value>298</value>
-  </data>
-  <data name="label82.Text" xml:space="preserve">
-    <value>V</value>
-  </data>
-  <data name="&gt;&gt;label82.Name" xml:space="preserve">
-    <value>label82</value>
-  </data>
-  <data name="&gt;&gt;label82.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label82.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;label82.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tb_slit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 205</value>
-  </data>
-  <data name="tb_slit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 24</value>
-  </data>
-  <data name="tb_slit.TabIndex" type="System.Int32, mscorlib">
-    <value>301</value>
-  </data>
-  <data name="tb_slit.Text" xml:space="preserve">
-    <value>C1</value>
-  </data>
-  <data name="tb_slit.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tb_slit.Name" xml:space="preserve">
-    <value>tb_slit</value>
-  </data>
-  <data name="&gt;&gt;tb_slit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_slit.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;tb_slit.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="btn_Set_E_B_off.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_Set_E_B_off.Location" type="System.Drawing.Point, System.Drawing">
-    <value>456, 50</value>
-  </data>
-  <data name="btn_Set_E_B_off.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 38</value>
-  </data>
-  <data name="btn_Set_E_B_off.TabIndex" type="System.Int32, mscorlib">
-    <value>300</value>
-  </data>
-  <data name="btn_Set_E_B_off.Text" xml:space="preserve">
-    <value>OFF</value>
-  </data>
-  <data name="&gt;&gt;btn_Set_E_B_off.Name" xml:space="preserve">
-    <value>btn_Set_E_B_off</value>
-  </data>
-  <data name="&gt;&gt;btn_Set_E_B_off.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_Set_E_B_off.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;btn_Set_E_B_off.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="btn_set_E_B.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_set_E_B.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 141</value>
-  </data>
-  <data name="btn_set_E_B.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 35</value>
-  </data>
-  <data name="btn_set_E_B.TabIndex" type="System.Int32, mscorlib">
-    <value>299</value>
-  </data>
-  <data name="btn_set_E_B.Text" xml:space="preserve">
-    <value>reload</value>
-  </data>
-  <data name="&gt;&gt;btn_set_E_B.Name" xml:space="preserve">
-    <value>btn_set_E_B</value>
-  </data>
-  <data name="&gt;&gt;btn_set_E_B.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_set_E_B.Parent" xml:space="preserve">
-    <value>tb_settings</value>
-  </data>
-  <data name="&gt;&gt;btn_set_E_B.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="tb_settings.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
