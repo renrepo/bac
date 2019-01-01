@@ -25,6 +25,7 @@ namespace XPS
         PointPairList values_to_plot = new PointPairList();
         PointPairList values_to_plot_svg = new PointPairList();
         PointPairList values_to_plot_svg_deriv = new PointPairList();
+        PointPairList errorlist = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
         Dictionary<string, string> dic = new Dictionary<string, string>();
@@ -32,6 +33,7 @@ namespace XPS
         LineItem myCurve;
         LineItem myCurve_svg;
         LineItem myCurve_svg_deriv;
+        ErrorBarItem errorCurve;
         TextObj pane_labs;
         YAxis yaxis = new YAxis();
 
@@ -40,15 +42,17 @@ namespace XPS
         string path_electronconfig = Path.GetFullPath("electronconfiguration.csv");
 
         System.Windows.Forms.Label[] lb_list_binding_energies;
-        System.Windows.Forms.Label[] lb_list_orbital_structure;
+        //System.Windows.Forms.Label[] lb_list_orbital_structure;
 
         // default settings
+        int red = 255;
+        int green = 251;
+        int blue = 230;
+
         private void create_graph(GraphPane myPane)
-        {
-            int red = 255;
-            int green = 251;
-            int blue = 230;
+        {          
             myPane.Title.Text = "UPS/XPS Spectra";
+            //myPane.Title.Text = "";
             myPane.Title.FontSpec.Size = 12;
             myPane.TitleGap = 1.6f;
             myPane.XAxis.Title.Text = "Binding energy [eV]";
@@ -69,9 +73,16 @@ namespace XPS
             myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
-            myPane.YAxis.Color = Color.FromArgb(red, green, blue);
+            myPane.YAxis.Color = Color.FromArgb(red-150, green-150, blue-180);
             myPane.XAxis.Color = Color.FromArgb(red, green, blue);
 
+            myPane.Margin.All = 3;
+            myPane.TitleGap = 2;
+            myPane.Legend.IsVisible = false;
+            myPane.Legend.Gap = 2;
+
+            myPane.XAxis.Scale.MaxAuto = true;
+            myPane.YAxis.Scale.MaxAuto = true;
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;
 
@@ -128,7 +139,7 @@ namespace XPS
                         pane_labs.FontSpec.Size = 10f;
                         pane_labs.FontSpec.Angle = 40;
                         pane_labs.FontSpec.Fill.Color = Color.Transparent;
-                        pane_labs.FontSpec.FontColor = Color.DimGray;
+                        pane_labs.FontSpec.FontColor = Color.FromArgb(red, green, blue);
                         pane_labs.FontSpec.Border.IsVisible = false;
                         pane_labs.ZOrder = ZOrder.E_BehindCurves;
                         myPane.GraphObjList.Add(pane_labs);
@@ -198,12 +209,13 @@ namespace XPS
                     lb_list_binding_energies[i - 2].Text = table_binding_energies[current_line][i];
                 }
 
+                /***
                 // display orbital configuration of the element
                 for (int i = 1; i <= lb_list_orbital_structure.Count(); i++)
                 {
                     lb_list_orbital_structure[i - 1].Text = elec_bind[current_line][i];
                 }
-
+                ***/
                 lb_element_name.Text = elementnames.GetToolTip(btn);
                 lb_atomic_number.Text = binding_energies_dict[btn.Name];
             }
@@ -215,17 +227,39 @@ namespace XPS
                 {
                     label.Text = string.Empty;
                 }
-
+                /***
                 foreach (var label in lb_list_orbital_structure)
                 {
                     label.Text = "--";
                 }
-
+                ***/
                 lb_element_name.Text = string.Empty;
                 lb_atomic_number.Text = string.Empty;
             }
         }
-        
+
+
+        public Tuple<double, double> Sav_Gol(Queue<double> input_data, double[] coefficients, double[] coefficients_dev)
+        {
+            double smoothed_data = 0;
+            double smoothed_data_first_dev = 0;
+
+            //if (input_data.Count() == coefficients.Length)
+            //{
+                int i = 0;
+                foreach (var item in input_data)
+                {
+                    smoothed_data += coefficients[i] * item;
+                    smoothed_data_first_dev += coefficients_dev[i] * item;
+                    i++;
+                }
+            //}
+            return Tuple.Create(smoothed_data, smoothed_data_first_dev);
+        }
+
+
+
+
     }
 
 }

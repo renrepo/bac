@@ -183,6 +183,8 @@
             this.textBox33 = new System.Windows.Forms.TextBox();
             this.textBox34 = new System.Windows.Forms.TextBox();
             this.textBox26 = new System.Windows.Forms.TextBox();
+            this.lb_element_name = new System.Windows.Forms.Label();
+            this.lb_atomic_number = new System.Windows.Forms.Label();
             this.elementnames = new System.Windows.Forms.ToolTip(this.components);
             this.label26 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -249,7 +251,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lb_progress = new System.Windows.Forms.Label();
             this.btn_emcy = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label62 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.label61 = new System.Windows.Forms.Label();
@@ -268,17 +269,17 @@
             this.cb_counter = new System.Windows.Forms.CheckBox();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
-            this.btn_test = new System.Windows.Forms.Button();
             this.btn_hv_reset = new System.Windows.Forms.Button();
             this.btn_hv_ramp = new System.Windows.Forms.Button();
             this.tb_hv = new System.Windows.Forms.TextBox();
-            this.btn_hv_off = new System.Windows.Forms.Button();
             this.btn_hv_on = new System.Windows.Forms.Button();
             this.btn_hv_reload = new System.Windows.Forms.Button();
             this.btn_reload_fil_curr = new System.Windows.Forms.Button();
             this.tb_fil_curr = new System.Windows.Forms.TextBox();
             this.btn_hv_2 = new System.Windows.Forms.Button();
             this.btn_hv = new System.Windows.Forms.Button();
+            this.btn_test = new System.Windows.Forms.Button();
+            this.btn_hv_off = new System.Windows.Forms.Button();
             this.label109 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.tb_volt_ramp = new System.Windows.Forms.TextBox();
@@ -343,6 +344,7 @@
             this.stat_all = new System.Windows.Forms.Button();
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
+            this.btn_DPS_off = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label63 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
@@ -396,12 +398,11 @@
             this.tb_slit = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.tb_binding_energies = new System.Windows.Forms.TabPage();
-            this.lb_atomic_number = new System.Windows.Forms.Label();
-            this.lb_element_name = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tb_testtab.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -420,6 +421,8 @@
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tb_binding_energies.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1645,6 +1648,8 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox33, 19, 6);
             this.tableLayoutPanel1.Controls.Add(this.textBox34, 19, 7);
             this.tableLayoutPanel1.Controls.Add(this.textBox26, 3, 9);
+            this.tableLayoutPanel1.Controls.Add(this.lb_element_name, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lb_atomic_number, 5, 3);
             this.tableLayoutPanel1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
@@ -1920,6 +1925,16 @@
             resources.ApplyResources(this.textBox26, "textBox26");
             this.textBox26.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.textBox26.Name = "textBox26";
+            // 
+            // lb_element_name
+            // 
+            resources.ApplyResources(this.lb_element_name, "lb_element_name");
+            this.lb_element_name.Name = "lb_element_name";
+            // 
+            // lb_atomic_number
+            // 
+            resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
+            this.lb_atomic_number.Name = "lb_atomic_number";
             // 
             // elementnames
             // 
@@ -2313,68 +2328,6 @@
             this.btn_emcy.UseVisualStyleBackColor = false;
             this.btn_emcy.Click += new System.EventHandler(this.btn_emcy_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.label26);
-            this.groupBox4.Controls.Add(this.label33);
-            this.groupBox4.Controls.Add(this.label25);
-            this.groupBox4.Controls.Add(this.label24);
-            this.groupBox4.Controls.Add(this.label62);
-            this.groupBox4.Controls.Add(this.label60);
-            this.groupBox4.Controls.Add(this.label61);
-            this.groupBox4.Controls.Add(this.label54);
-            this.groupBox4.Controls.Add(this.label59);
-            this.groupBox4.Controls.Add(this.label53);
-            this.groupBox4.Controls.Add(this.label49);
-            this.groupBox4.Controls.Add(this.label47);
-            this.groupBox4.Controls.Add(this.label23);
-            this.groupBox4.Controls.Add(this.label45);
-            this.groupBox4.Controls.Add(this.label22);
-            this.groupBox4.Controls.Add(this.label43);
-            this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Controls.Add(this.label41);
-            this.groupBox4.Controls.Add(this.label20);
-            this.groupBox4.Controls.Add(this.label39);
-            this.groupBox4.Controls.Add(this.label19);
-            this.groupBox4.Controls.Add(this.label37);
-            this.groupBox4.Controls.Add(this.label18);
-            this.groupBox4.Controls.Add(this.label35);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.Controls.Add(this.label31);
-            this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.label29);
-            this.groupBox4.Controls.Add(this.label15);
-            this.groupBox4.Controls.Add(this.label27);
-            this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.label50);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.label48);
-            this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.label46);
-            this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.label44);
-            this.groupBox4.Controls.Add(this.label10);
-            this.groupBox4.Controls.Add(this.label42);
-            this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Controls.Add(this.label40);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.label38);
-            this.groupBox4.Controls.Add(this.label7);
-            this.groupBox4.Controls.Add(this.label36);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.label34);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.label32);
-            this.groupBox4.Controls.Add(this.label4);
-            this.groupBox4.Controls.Add(this.label30);
-            this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label28);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label1);
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
-            // 
             // label62
             // 
             resources.ApplyResources(this.label62, "label62");
@@ -2415,11 +2368,9 @@
             this.tb_testtab.Controls.Add(this.groupBox11);
             this.tb_testtab.Controls.Add(this.groupBox10);
             this.tb_testtab.Controls.Add(this.groupBox5);
-            this.tb_testtab.Controls.Add(this.btn_test);
             this.tb_testtab.Controls.Add(this.btn_hv_reset);
             this.tb_testtab.Controls.Add(this.btn_hv_ramp);
             this.tb_testtab.Controls.Add(this.tb_hv);
-            this.tb_testtab.Controls.Add(this.btn_hv_off);
             this.tb_testtab.Controls.Add(this.btn_hv_on);
             this.tb_testtab.Controls.Add(this.btn_hv_reload);
             this.tb_testtab.Controls.Add(this.btn_reload_fil_curr);
@@ -2499,13 +2450,6 @@
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
             // 
-            // btn_test
-            // 
-            resources.ApplyResources(this.btn_test, "btn_test");
-            this.btn_test.Name = "btn_test";
-            this.btn_test.UseVisualStyleBackColor = true;
-            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
-            // 
             // btn_hv_reset
             // 
             resources.ApplyResources(this.btn_hv_reset, "btn_hv_reset");
@@ -2524,13 +2468,6 @@
             // 
             resources.ApplyResources(this.tb_hv, "tb_hv");
             this.tb_hv.Name = "tb_hv";
-            // 
-            // btn_hv_off
-            // 
-            resources.ApplyResources(this.btn_hv_off, "btn_hv_off");
-            this.btn_hv_off.Name = "btn_hv_off";
-            this.btn_hv_off.UseVisualStyleBackColor = true;
-            this.btn_hv_off.Click += new System.EventHandler(this.btn_hv_off_Click);
             // 
             // btn_hv_on
             // 
@@ -2571,6 +2508,20 @@
             this.btn_hv.Name = "btn_hv";
             this.btn_hv.UseVisualStyleBackColor = true;
             this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
+            // 
+            // btn_test
+            // 
+            resources.ApplyResources(this.btn_test, "btn_test");
+            this.btn_test.Name = "btn_test";
+            this.btn_test.UseVisualStyleBackColor = true;
+            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
+            // 
+            // btn_hv_off
+            // 
+            resources.ApplyResources(this.btn_hv_off, "btn_hv_off");
+            this.btn_hv_off.Name = "btn_hv_off";
+            this.btn_hv_off.UseVisualStyleBackColor = true;
+            this.btn_hv_off.Click += new System.EventHandler(this.btn_hv_off_Click);
             // 
             // label109
             // 
@@ -2998,16 +2949,26 @@
             // tb_dashboard
             // 
             this.tb_dashboard.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_dashboard.Controls.Add(this.btn_DPS_off);
             this.tb_dashboard.Controls.Add(this.groupBox7);
             this.tb_dashboard.Controls.Add(this.groupBox6);
+            this.tb_dashboard.Controls.Add(this.btn_test);
             this.tb_dashboard.Controls.Add(this.btn_clear_fig);
             this.tb_dashboard.Controls.Add(this.tableLayoutPanel4);
             this.tb_dashboard.Controls.Add(this.groupBox2);
             this.tb_dashboard.Controls.Add(this.groupBox1);
             this.tb_dashboard.Controls.Add(this.btn_emi_off);
+            this.tb_dashboard.Controls.Add(this.btn_hv_off);
             this.tb_dashboard.Controls.Add(this.btn_emi);
             resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
             this.tb_dashboard.Name = "tb_dashboard";
+            // 
+            // btn_DPS_off
+            // 
+            resources.ApplyResources(this.btn_DPS_off, "btn_DPS_off");
+            this.btn_DPS_off.Name = "btn_DPS_off";
+            this.btn_DPS_off.UseVisualStyleBackColor = true;
+            this.btn_DPS_off.Click += new System.EventHandler(this.btn_DPS_off_Click);
             // 
             // groupBox7
             // 
@@ -3133,9 +3094,7 @@
             resources.GetString("cb_samp_ev.Items1"),
             resources.GetString("cb_samp_ev.Items2"),
             resources.GetString("cb_samp_ev.Items3"),
-            resources.GetString("cb_samp_ev.Items4"),
-            resources.GetString("cb_samp_ev.Items5"),
-            resources.GetString("cb_samp_ev.Items6")});
+            resources.GetString("cb_samp_ev.Items4")});
             resources.ApplyResources(this.cb_samp_ev, "cb_samp_ev");
             this.cb_samp_ev.Name = "cb_samp_ev";
             // 
@@ -3415,22 +3374,78 @@
             // tb_binding_energies
             // 
             this.tb_binding_energies.BackColor = System.Drawing.SystemColors.Control;
-            this.tb_binding_energies.Controls.Add(this.lb_atomic_number);
-            this.tb_binding_energies.Controls.Add(this.lb_element_name);
+            this.tb_binding_energies.Controls.Add(this.groupBox12);
             this.tb_binding_energies.Controls.Add(this.tb_show);
-            this.tb_binding_energies.Controls.Add(this.groupBox4);
             resources.ApplyResources(this.tb_binding_energies, "tb_binding_energies");
             this.tb_binding_energies.Name = "tb_binding_energies";
             // 
-            // lb_atomic_number
+            // groupBox12
             // 
-            resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
-            this.lb_atomic_number.Name = "lb_atomic_number";
+            this.groupBox12.Controls.Add(this.tableLayoutPanel6);
+            resources.ApplyResources(this.groupBox12, "groupBox12");
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.TabStop = false;
             // 
-            // lb_element_name
+            // tableLayoutPanel6
             // 
-            resources.ApplyResources(this.lb_element_name, "lb_element_name");
-            this.lb_element_name.Name = "lb_element_name";
+            resources.ApplyResources(this.tableLayoutPanel6, "tableLayoutPanel6");
+            this.tableLayoutPanel6.Controls.Add(this.label50, 7, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label49, 6, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label26, 3, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label47, 6, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label48, 7, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label37, 4, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label25, 2, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label38, 5, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label35, 4, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label33, 4, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label24, 3, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label36, 5, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label2, 1, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label53, 2, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label54, 3, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label23, 2, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label62, 7, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label45, 6, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label59, 4, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label14, 1, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label61, 6, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label60, 5, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label13, 0, 6);
+            this.tableLayoutPanel6.Controls.Add(this.label22, 3, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label12, 1, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label21, 2, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label11, 0, 5);
+            this.tableLayoutPanel6.Controls.Add(this.label46, 7, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label43, 6, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label5, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label15, 2, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label20, 3, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label41, 6, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label31, 4, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label34, 5, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label19, 2, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label4, 1, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label6, 1, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label39, 6, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label10, 1, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label44, 7, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label9, 0, 4);
+            this.tableLayoutPanel6.Controls.Add(this.label7, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label18, 3, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label8, 1, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label29, 4, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label27, 4, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label17, 2, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label16, 3, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label28, 5, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label32, 5, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label40, 7, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label30, 5, 2);
+            this.tableLayoutPanel6.Controls.Add(this.label42, 7, 2);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             // 
             // tableLayoutPanel5
             // 
@@ -3457,8 +3472,6 @@
             this.tableLayoutPanel1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.tb_testtab.ResumeLayout(false);
             this.tb_testtab.PerformLayout();
@@ -3489,6 +3502,9 @@
             this.groupBox8.PerformLayout();
             this.tb_binding_energies.ResumeLayout(false);
             this.tb_binding_energies.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -3713,7 +3729,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button showdata;
         private System.Windows.Forms.TextBox fig_name;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label label62;
@@ -3865,6 +3880,9 @@
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.GroupBox groupBox11;
         private System.Windows.Forms.ComboBox cb_DAC;
+        private System.Windows.Forms.Button btn_DPS_off;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
     }
 }
 
