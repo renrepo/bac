@@ -9069,33 +9069,6 @@
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btn_hv_reset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btn_hv_reset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>285, 64</value>
-  </data>
-  <data name="btn_hv_reset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="btn_hv_reset.TabIndex" type="System.Int32, mscorlib">
-    <value>319</value>
-  </data>
-  <data name="btn_hv_reset.Text" xml:space="preserve">
-    <value>hv reset</value>
-  </data>
-  <data name="&gt;&gt;btn_hv_reset.Name" xml:space="preserve">
-    <value>btn_hv_reset</value>
-  </data>
-  <data name="&gt;&gt;btn_hv_reset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btn_hv_reset.Parent" xml:space="preserve">
-    <value>tb_testtab</value>
-  </data>
-  <data name="&gt;&gt;btn_hv_reset.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="btn_hv_ramp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -9121,7 +9094,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_ramp.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="tb_hv.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 123</value>
@@ -9145,7 +9118,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;tb_hv.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btn_hv_on.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9172,7 +9145,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_on.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="btn_hv_reload.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9199,7 +9172,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_reload.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="btn_reload_fil_curr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9226,7 +9199,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_reload_fil_curr.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="tb_fil_curr.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 93</value>
@@ -9250,7 +9223,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;tb_fil_curr.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="btn_hv_2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9277,7 +9250,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="btn_hv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9304,7 +9277,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="tb_testtab.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>

@@ -269,7 +269,6 @@
             this.cb_counter = new System.Windows.Forms.CheckBox();
             this.tb_counter_ms = new System.Windows.Forms.TextBox();
             this.tb_counter = new System.Windows.Forms.TextBox();
-            this.btn_hv_reset = new System.Windows.Forms.Button();
             this.btn_hv_ramp = new System.Windows.Forms.Button();
             this.tb_hv = new System.Windows.Forms.TextBox();
             this.btn_hv_on = new System.Windows.Forms.Button();
@@ -2368,7 +2367,6 @@
             this.tb_testtab.Controls.Add(this.groupBox11);
             this.tb_testtab.Controls.Add(this.groupBox10);
             this.tb_testtab.Controls.Add(this.groupBox5);
-            this.tb_testtab.Controls.Add(this.btn_hv_reset);
             this.tb_testtab.Controls.Add(this.btn_hv_ramp);
             this.tb_testtab.Controls.Add(this.tb_hv);
             this.tb_testtab.Controls.Add(this.btn_hv_on);
@@ -2449,13 +2447,6 @@
             resources.ApplyResources(this.tb_counter, "tb_counter");
             this.tb_counter.Name = "tb_counter";
             this.tb_counter.ReadOnly = true;
-            // 
-            // btn_hv_reset
-            // 
-            resources.ApplyResources(this.btn_hv_reset, "btn_hv_reset");
-            this.btn_hv_reset.Name = "btn_hv_reset";
-            this.btn_hv_reset.UseVisualStyleBackColor = true;
-            this.btn_hv_reset.Click += new System.EventHandler(this.btn_hv_reset_Click);
             // 
             // btn_hv_ramp
             // 
@@ -3825,7 +3816,6 @@
         private System.Windows.Forms.Button btn_emi;
         private System.Windows.Forms.TextBox tb_emi;
         private System.Windows.Forms.Button btn_hv_ramp;
-        private System.Windows.Forms.Button btn_hv_reset;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Button btn_emi_off;
         private System.Windows.Forms.Label label77;

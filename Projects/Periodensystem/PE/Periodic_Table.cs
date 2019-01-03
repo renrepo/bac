@@ -73,8 +73,15 @@ namespace XPS
             myPane.XAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.YAxis.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
-            myPane.YAxis.Color = Color.FromArgb(red-150, green-150, blue-180);
+            myPane.YAxis.Color = Color.FromArgb(90, 30, 0);
             myPane.XAxis.Color = Color.FromArgb(red, green, blue);
+
+            //myPane.YAxis.Scale.MajorStepAuto = false;
+            //myPane.YAxis.MajorGrid.IsZeroLine = false;
+            //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
+            //myPane.YAxis.MajorGrid.IsVisible = true;
+            //myPane.XAxis.Scale.MajorStep = 100;
+            
 
             myPane.Margin.All = 3;
             myPane.TitleGap = 2;
@@ -85,6 +92,43 @@ namespace XPS
             myPane.YAxis.Scale.MaxAuto = true;
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;
+
+            int svg_red = 100;
+            int svg_green = 255;
+            int svg_blue = 255;
+            double dimm = 1.0;
+            //int error_red = Convert.ToInt16(Math.Floor((255 - svg_red) * dimm));
+            //int error_green = Convert.ToInt16(Math.Floor((255 - svg_green) * dimm));
+            //int error_blue = Convert.ToInt16(Math.Floor((255 - svg_blue) * dimm));
+            int error_red = 128;
+            int error_green = 21;
+            int error_blue = 0;
+            myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(svg_red, svg_green, svg_blue), SymbolType.None);
+            myCurve_svg.Line.Width = 1;
+            myCurve_svg.Tag = 1;
+            //myCurve_svg.YAxisIndex = 1;
+
+            myCurve_svg_deriv = myPane.AddCurve("", values_to_plot_svg_deriv, Color.FromArgb(21, 172, 61), SymbolType.None);
+            myCurve_svg_deriv.Line.Width = 1;
+            myCurve_svg_deriv.Tag = 2;
+            //myCurve_svg_deriv.YAxisIndex = 2;
+
+            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(error_red, error_green, error_blue));
+            errorCurve.Bar.Symbol.Type = SymbolType.Circle;
+            errorCurve.Bar.Symbol.Size = 0;
+            errorCurve.Tag = 3;
+            //errorCurve.YAxisIndex = 3;
+
+            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(210, 104, 87), SymbolType.Circle);
+            myCurve.Symbol.Size = 1;
+            //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
+            myCurve.Line.Color = Color.FromArgb(90, 15, 0);
+            myCurve.Tag = 4;
+
+            
+            //myCurve.YAxisIndex = 1;
+            //myPane.XAxis.Tag = 5;
+            //myPane.YAxis.Tag = 6;
 
         }
 

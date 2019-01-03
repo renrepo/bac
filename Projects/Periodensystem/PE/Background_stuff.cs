@@ -368,36 +368,7 @@ namespace XPS
             double voltramp = 0.125 * 1 / Convert.ToDouble(cb_samp_ev.SelectedItem);
 
             btn_can.Enabled = true;
-            int svg_red = 100;
-            int svg_green = 255;
-            int svg_blue = 255;
-            double dimm = 1.0;
-            //int error_red = Convert.ToInt16(Math.Floor((255 - svg_red) * dimm));
-            //int error_green = Convert.ToInt16(Math.Floor((255 - svg_green) * dimm));
-            //int error_blue = Convert.ToInt16(Math.Floor((255 - svg_blue) * dimm));
-            int error_red = 128;
-            int error_green = 21;
-            int error_blue = 0;
-            myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(svg_red, svg_green, svg_blue), SymbolType.None);
-            myCurve_svg.Line.Width = 1;
-            myCurve_svg.Tag = 1;
-
-            myCurve_svg_deriv = myPane.AddCurve("", values_to_plot_svg_deriv, Color.FromArgb(21, 172, 61), SymbolType.None);
-            myCurve_svg_deriv.Line.Width = 1;
-            myCurve_svg_deriv.Tag = 2;
-
-            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(error_red, error_green, error_blue));
-            errorCurve.Bar.Symbol.Type = SymbolType.Circle;
-            errorCurve.Bar.Symbol.Size = 0;
-            errorCurve.Tag = 3;
-
-            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(210, 104, 87), SymbolType.Circle);
-            myCurve.Symbol.Size = 1;
-            //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
-            myCurve.Line.Color = Color.FromArgb(90, 15, 0);
-            myCurve.Tag = 4;
-            myPane.XAxis.Tag = 5;
-            myPane.YAxis.Tag = 6;
+            
 
             //yaxis.Tag = 5;
             //Y2Axis axis2 = new Y2Axis("first deriv");
@@ -513,13 +484,13 @@ namespace XPS
             {
                 double oldtime = 1;
                 double cps = 0;
-                double ctn = 0;
+                //double ctn = 0;
                 double ctn_old = 0;
-                double ctn_now = 0;
-                double t_now;
+                //double ctn_now = 0;
+                //double t_now;
                 double t_old = 0;
                 double hemo_check = 0;
-                double error = 0;
+                //double error = 0;
                 //v_ctn_cum = 0;
                 Stopwatch sw = new Stopwatch();
 
@@ -544,7 +515,7 @@ namespace XPS
                     else
                     {
                         LJM.eStreamStop(handle_stream);
-                        _cts_UPS.Cancel();
+                        _cts_XPS.Cancel();
                         AutoClosingMessageBox.Show("Unable to read Labjack Stream Mode", "LJM Error", 2000);
                     }
                     while (hemo_check < 5.0 && !_cts_XPS.IsCancellationRequested)
@@ -575,8 +546,9 @@ namespace XPS
                         else
                         {
                             LJM.eStreamStop(handle_stream);
-                            _cts_UPS.Cancel();
+                            _cts_XPS.Cancel();
                             AutoClosingMessageBox.Show("Unable to read Labjack Stream Mode in while Loop", "LJM Error", 2000);
+                            return;
                         }
                     }
                 });
@@ -705,10 +677,12 @@ namespace XPS
             double error = 0;
             double v_ctn_cum = 0;
             double mean_volt_hemo = 0;
+            var inc = 0;
 
-            for (int j = 0; j < samples_per_second * samples_for_mean; j++)
+            for (var j = 0; j < samples_per_second * samples_for_mean; j++)
             {
-                ctn_now = aData[j * numAddresses + 1] + aData[j * numAddresses + 2] * 65536;
+                inc = j * numAddresses;
+                ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
                 if (ctn_now < ctn_old)
                 {
                     ctn = ctn_now - ctn_old + 65536;
@@ -723,10 +697,10 @@ namespace XPS
                 {
                     file.WriteLine(
                     oldtime.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[j * numAddresses + 3] + aData[j * numAddresses + 4] * 65536).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    (aData[inc + 3] + aData[inc + 4] * 65536).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     ctn.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[j * numAddresses + 2]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[j * numAddresses + 1]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    (aData[inc + 2]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    (aData[inc + 1]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     ctn_now.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     ctn_old.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     v_ctn_cum.ToString("N", System.Globalization.CultureInfo.InvariantCulture)
@@ -734,17 +708,17 @@ namespace XPS
                 }
                 ***/
                 ctn_old = ctn_now;
-                mean_volt_hemo += aData[j * numAddresses + 0] * ctn;
+                mean_volt_hemo += aData[inc + 0] * ctn;
                 v_ctn_cum += ctn;
 
                 if ((j + 1) % samples_for_mean == 0)
                 {
-                    t_now = aData[j * numAddresses + 3] + aData[j * numAddresses + 4] * 65536;
+                    t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                     mean_volt_hemo = mean_volt_hemo / v_ctn_cum;
 
                     if (t_now < t_old)
                     {
-                        v_ctn_cum = v_ctn_cum / (t_now - t_old + 4294967295) * 40000000;
+                        v_ctn_cum = v_ctn_cum / (t_now - t_old + Math.Pow(2,32)) * 40000000;
                     }
                     else
                     {
@@ -754,10 +728,7 @@ namespace XPS
                     error = Math.Sqrt(v_ctn_cum) / 2;
                     values_to_plot.Add((oldtime) / samples_for_mean, v_ctn_cum);
                     //myCurve.AddPoint((oldtime) / samples_for_mean, v_ctn_cum);
-
                     errorlist.Add((oldtime) / samples_for_mean, v_ctn_cum - error, v_ctn_cum + error);
-
-
 
                     using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                     {
@@ -779,7 +750,7 @@ namespace XPS
 
                     if (filt_values.Count() == coeff.Length)
                     {
-                        int i = 0;
+                        var i = 0;
                         double result = 0;
                         double result_deriv = 0;
                         foreach (var item in filt_values)
@@ -800,9 +771,9 @@ namespace XPS
                 oldtime++;
                 //progress.Report(v_ctn_cum.ToString("000000"));
             }
-            zedGraphControl1.Invalidate();
             zedGraphControl1.AxisChange();
-
+            zedGraphControl1.Invalidate();
+            
             return Tuple.Create(ctn_old, t_old, oldtime);
         }
 

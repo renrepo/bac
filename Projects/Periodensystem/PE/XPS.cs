@@ -40,7 +40,7 @@ namespace XPS
         string ip_dps;
         string ip_xray;
 
-        string LJM_connection_type = "USB";
+        string LJM_connection_type = "Ethernet";
 
         // General settings
         double V_photon;
@@ -80,14 +80,6 @@ namespace XPS
         // Voltage setting stuff
         double vpass;
         double vbias;                    // multiples of 4 mV/s
-        double v_analyser_min;              // initial and final voltages
-        double v_channeltron_out_min;
-        double v_hemo_min;
-        double v_analyser_max;
-        double v_stabi_min;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
-        double v_stabi_max;
-        double v_channeltron_out_max;
-        double v_hemo_max;
 
 
         // Emission current regulation
@@ -115,13 +107,12 @@ namespace XPS
         private CancellationTokenSource _cts_flow_labjack;           // Cancellation of Labjack pressure background measurement 
         private CancellationTokenSource _cts_volt_dps;           // Cancellation of Iseg DPS voltage background measurement 
         private CancellationTokenSource _cts_counter_labjack;           // Cancellation of Labjack Counter background measurement 
-        private CancellationTokenSource _cts_UPS;           // Cancellation of UPS spectra
         private CancellationTokenSource _cts_XPS;
         //private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         //private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
 
-        bool labjack_connected = false;
+
         bool take_UPS_spec = false;     // true if UPS spectra is taken
 
 
@@ -227,7 +218,7 @@ namespace XPS
             color_dict = File.ReadLines(path_colors).Select(line => line.Split(',')).ToDictionary(data => data[0], data => data[1]);
 
             //Dict with entries "element name" and "atomic number"
-            for (int i = 0; i < table_binding_energies.Count; i++)
+            for (var i = 0; i < table_binding_energies.Count; i++)
             {
                 binding_energies_dict.Add(table_binding_energies[i][1], table_binding_energies[i][0]);
             }
@@ -274,7 +265,7 @@ namespace XPS
             cb_bias.SelectedIndex = 0;
             cb_select.SelectedIndex = 0;
             //cb_counttime.SelectedIndex = 1;
-            cb_samp_ev.SelectedIndex = 4;
+            cb_samp_ev.SelectedIndex = 2;
             cb_DAC.SelectedIndex = 0;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
@@ -295,7 +286,7 @@ namespace XPS
 
 
 
-        private async void Init_DPS_control_panel()
+        private void Init_DPS_control_panel()
         {
             // textboxes and buttons for the "Iseg Control" panel (controlling of the 6-chanel-HV-device)
             vset = new TextBox[] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
@@ -568,9 +559,9 @@ namespace XPS
 
         private async void btn_can_Click(object sender, EventArgs e)
         {
-            if (_cts_UPS != null)
+            if (_cts_XPS != null)
             {
-                _cts_UPS.Cancel();
+                _cts_XPS.Cancel();
             }
             await DPS.reset_channels();
         }
@@ -760,6 +751,18 @@ namespace XPS
             }
             //await Task.Delay(500);
             //Thread.Sleep(500);
+
+            try
+            {
+                values_to_plot.Clear();
+                values_to_plot_svg.Clear();
+                errorlist.Clear();
+                values_to_plot_svg_deriv.Clear();
+            }
+            catch (Exception)
+            {
+                AutoClosingMessageBox.Show("Can't clear Pointpairlists", "ZedGraph error", 1000);
+            }
         }
 
 
@@ -912,7 +915,6 @@ namespace XPS
             await H150666.current_ramp(3);
             await H150666.channel_off(1);
             await H150666.set_current(0, 1);
-            fila_is_on = false;
         }
 
 
@@ -927,9 +929,6 @@ namespace XPS
             await H150666.set_voltage(Double.Parse(tb_hv.Text), 0);
         }
 
-
-        bool fila_is_on = true;
-        bool hv_is_on = true;
 
         private async void btn_emi_Click(object sender, EventArgs e)
         {
@@ -968,11 +967,6 @@ namespace XPS
             await H150666.channel_on(0);
         }
 
-        private void btn_hv_reset_Click(object sender, EventArgs e)
-        {
-            fila_is_on = true;
-            hv_is_on = true;
-        }
 
         private async void btn_emi_off_Click(object sender, EventArgs e)
         {
@@ -1032,7 +1026,7 @@ namespace XPS
         double timee;
 
 
-        private async void btn_test_Click(object sender, EventArgs e)
+        private void btn_test_Click(object sender, EventArgs e)
         {
             take_XPS_spectra();
         }
@@ -1064,7 +1058,7 @@ namespace XPS
         }
 
         int handle_PWM = 0;
-        public async void PWM(object sender, int roll, int divisor)
+        public void PWM(object sender, int roll, int divisor)
         {
             
 
@@ -1134,13 +1128,11 @@ namespace XPS
             try
             {
                 await H150666.voltage_ramp(20);
-                hv_is_on = false;
                 await H150666.channel_off(0);
                 await H150666.set_voltage(0, 0);
             }
             catch (Exception)
             {
-                //throw();
                 return;
             }
         }
