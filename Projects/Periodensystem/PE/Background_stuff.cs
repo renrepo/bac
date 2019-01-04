@@ -800,7 +800,7 @@ namespace XPS
                         filt_values.Dequeue();
                         values_to_plot_svg.Add(E_bind - samples_per_second / samp_ev, result);
                         //myCurve_svg.AddPoint((oldtime) / samples_for_mean - (coeff.Length - 1) / 2, result);
-                        values_to_plot_svg_deriv.Add(E_bind - samples_per_second / samp_ev, result_deriv);
+                        //values_to_plot_svg_deriv.Add(E_bind - samples_per_second / samp_ev, result_deriv);
                         //myCurve_svg_deriv.AddPoint((oldtime) / samples_for_mean - (coeff_deriv.Length - 1) / 2 - 1, result_deriv);
                     }
 

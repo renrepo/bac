@@ -9858,9 +9858,6 @@
   <data name="&gt;&gt;tb_anode_voltage.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="btn_emi_off.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="btn_emi_off.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
@@ -9920,9 +9917,6 @@
   </data>
   <data name="&gt;&gt;label52.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="btn_emi.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="btn_emi.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -13141,7 +13135,7 @@
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="cb_DAC.Items" xml:space="preserve">
-    <value>DAC0</value>
+    <value>TDAC0</value>
   </data>
   <data name="cb_DAC.Items1" xml:space="preserve">
     <value>DAC1</value>

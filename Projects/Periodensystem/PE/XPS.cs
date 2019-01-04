@@ -961,6 +961,7 @@ namespace XPS
             await H150666.voltage_ramp(20);
             await H150666.channel_off(0);
             await H150666.set_voltage(0, 0);
+            await H150666.reset_channels();
             //await H150666.set_current(0,2);
             //await H150666.channel_off(1);
         }
