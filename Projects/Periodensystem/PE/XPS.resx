@@ -8212,7 +8212,7 @@
     <value>False</value>
   </data>
   <data name="btn_start.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="btn_start.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8245,7 +8245,7 @@
     <value>False</value>
   </data>
   <data name="btn_can.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
+    <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="btn_can.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8329,7 +8329,7 @@
     <value>False</value>
   </data>
   <data name="btn_clear.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_clear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8362,13 +8362,13 @@
     <value>False</value>
   </data>
   <data name="fig_name.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="fig_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 48</value>
   </data>
   <data name="fig_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 24</value>
+    <value>98, 22</value>
   </data>
   <data name="fig_name.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -8396,6 +8396,9 @@
   </data>
   <data name="showdata.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
+  </data>
+  <data name="showdata.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="showdata.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8430,6 +8433,9 @@
   <data name="safe_fig.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Popup</value>
   </data>
+  <data name="safe_fig.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="safe_fig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -8458,13 +8464,13 @@
     <value>2</value>
   </data>
   <data name="tb_safe.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="tb_safe.Location" type="System.Drawing.Point, System.Drawing">
     <value>333, 15</value>
   </data>
   <data name="tb_safe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 24</value>
+    <value>98, 22</value>
   </data>
   <data name="tb_safe.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -8549,6 +8555,9 @@
   </data>
   <data name="&gt;&gt;btn_emcy.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="groupBox3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
@@ -9283,13 +9292,13 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="tb_testtab.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 27</value>
+    <value>4, 25</value>
   </data>
   <data name="tb_testtab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tb_testtab.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 241</value>
+    <value>518, 243</value>
   </data>
   <data name="tb_testtab.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -9308,6 +9317,9 @@
   </data>
   <data name="&gt;&gt;tb_testtab.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="btn_test.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_test.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9335,6 +9347,9 @@
   </data>
   <data name="&gt;&gt;btn_test.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="btn_hv_off.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_hv_off.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9846,6 +9861,9 @@
   <data name="btn_emi_off.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="btn_emi_off.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="btn_emi_off.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -9905,6 +9923,9 @@
   </data>
   <data name="btn_emi.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="btn_emi.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_emi.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11545,13 +11566,13 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="tb_iseg_control.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 27</value>
+    <value>4, 25</value>
   </data>
   <data name="tb_iseg_control.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tb_iseg_control.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 241</value>
+    <value>518, 243</value>
   </data>
   <data name="tb_iseg_control.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -11570,6 +11591,9 @@
   </data>
   <data name="&gt;&gt;tb_iseg_control.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="btn_DPS_off.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_DPS_off.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11608,7 +11632,7 @@
     <value>19, 17</value>
   </data>
   <data name="label63.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 18</value>
+    <value>40, 16</value>
   </data>
   <data name="label63.TabIndex" type="System.Int32, mscorlib">
     <value>297</value>
@@ -11638,7 +11662,7 @@
     <value>146, 17</value>
   </data>
   <data name="label64.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 18</value>
+    <value>25, 16</value>
   </data>
   <data name="label64.TabIndex" type="System.Int32, mscorlib">
     <value>298</value>
@@ -11662,7 +11686,7 @@
     <value>80, 13</value>
   </data>
   <data name="tb_set_E_B.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 24</value>
+    <value>63, 22</value>
   </data>
   <data name="tb_set_E_B.TabIndex" type="System.Int32, mscorlib">
     <value>296</value>
@@ -11685,8 +11709,8 @@
   <data name="&gt;&gt;tb_set_E_B.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="groupBox7.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="groupBox7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 194</value>
@@ -11716,7 +11740,7 @@
     <value>98, 20</value>
   </data>
   <data name="tb_detailscan_stop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 24</value>
+    <value>45, 22</value>
   </data>
   <data name="tb_detailscan_stop.TabIndex" type="System.Int32, mscorlib">
     <value>288</value>
@@ -11743,7 +11767,7 @@
     <value>4, 20</value>
   </data>
   <data name="tb_detailscan_start.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 24</value>
+    <value>45, 22</value>
   </data>
   <data name="tb_detailscan_start.TabIndex" type="System.Int32, mscorlib">
     <value>287</value>
@@ -11776,7 +11800,7 @@
     <value>54, 23</value>
   </data>
   <data name="label78.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 18</value>
+    <value>39, 16</value>
   </data>
   <data name="label78.TabIndex" type="System.Int32, mscorlib">
     <value>297</value>
@@ -11806,7 +11830,7 @@
     <value>146, 23</value>
   </data>
   <data name="label56.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 18</value>
+    <value>25, 16</value>
   </data>
   <data name="label56.TabIndex" type="System.Int32, mscorlib">
     <value>298</value>
@@ -11826,8 +11850,8 @@
   <data name="&gt;&gt;label56.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="groupBox6.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="groupBox6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="groupBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 144</value>
@@ -11852,6 +11876,9 @@
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="btn_clear_fig.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btn_clear_fig.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11899,7 +11926,7 @@
     <value>Popup</value>
   </data>
   <data name="Iseg_Xray_session.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="Iseg_Xray_session.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -11950,7 +11977,7 @@
     <value>Popup</value>
   </data>
   <data name="Iseg_DPS_session.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="Iseg_DPS_session.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -12028,7 +12055,7 @@
     <value>94, 106</value>
   </data>
   <data name="cb_scanrange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 26</value>
+    <value>77, 24</value>
   </data>
   <data name="cb_scanrange.TabIndex" type="System.Int32, mscorlib">
     <value>296</value>
@@ -12055,7 +12082,7 @@
     <value>9, 108</value>
   </data>
   <data name="label55.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 18</value>
+    <value>74, 16</value>
   </data>
   <data name="label55.TabIndex" type="System.Int32, mscorlib">
     <value>295</value>
@@ -12094,7 +12121,7 @@
     <value>108, 78</value>
   </data>
   <data name="cb_samp_ev.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 26</value>
+    <value>63, 24</value>
   </data>
   <data name="cb_samp_ev.TabIndex" type="System.Int32, mscorlib">
     <value>290</value>
@@ -12124,7 +12151,7 @@
     <value>6, 23</value>
   </data>
   <data name="cb_select.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 26</value>
+    <value>165, 24</value>
   </data>
   <data name="cb_select.TabIndex" type="System.Int32, mscorlib">
     <value>294</value>
@@ -12145,7 +12172,7 @@
     <value>3</value>
   </data>
   <data name="cb_pass.Items" xml:space="preserve">
-    <value>14.472</value>
+    <value>14.458</value>
   </data>
   <data name="cb_pass.Items1" xml:space="preserve">
     <value>27.527</value>
@@ -12160,7 +12187,7 @@
     <value>108, 50</value>
   </data>
   <data name="cb_pass.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 26</value>
+    <value>63, 24</value>
   </data>
   <data name="cb_pass.TabIndex" type="System.Int32, mscorlib">
     <value>287</value>
@@ -12187,7 +12214,7 @@
     <value>9, 80</value>
   </data>
   <data name="label75.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 18</value>
+    <value>83, 16</value>
   </data>
   <data name="label75.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -12217,7 +12244,7 @@
     <value>9, 53</value>
   </data>
   <data name="label73.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 18</value>
+    <value>76, 16</value>
   </data>
   <data name="label73.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -12238,13 +12265,13 @@
     <value>6</value>
   </data>
   <data name="groupBox2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 154</value>
+    <value>179, 156</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>285</value>
@@ -12835,7 +12862,7 @@
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lb_cps" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vm1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label51" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_pressure" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm3" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm4" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm5" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;Control Name="label102" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label103" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label104" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label105" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label107" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_flow" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_cps" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,42,85714,Percent,57,14286" /&gt;&lt;Rows Styles="Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>189, 6</value>
@@ -12865,13 +12892,13 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="tb_dashboard.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 27</value>
+    <value>4, 25</value>
   </data>
   <data name="tb_dashboard.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tb_dashboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 241</value>
+    <value>518, 243</value>
   </data>
   <data name="tb_dashboard.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -13228,13 +13255,13 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="tb_settings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 27</value>
+    <value>4, 25</value>
   </data>
   <data name="tb_settings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tb_settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 241</value>
+    <value>518, 243</value>
   </data>
   <data name="tb_settings.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -13315,13 +13342,13 @@
     <value>Microsoft Sans Serif, 11.25pt</value>
   </data>
   <data name="tb_binding_energies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 27</value>
+    <value>4, 25</value>
   </data>
   <data name="tb_binding_energies.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tb_binding_energies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 241</value>
+    <value>518, 243</value>
   </data>
   <data name="tb_binding_energies.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -13342,7 +13369,7 @@
     <value>4</value>
   </data>
   <data name="tabControl1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="tabControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 92</value>
@@ -13369,7 +13396,7 @@
     <value>1</value>
   </data>
   <data name="tableLayoutPanel5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 3</value>

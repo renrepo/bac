@@ -60,14 +60,14 @@ namespace XPS
         string pin_analyser = string.Empty;
         double vchanneltron;          // voltage drop over channeltron
         //double workfunction = 4.8;
-        double workfunction = 4.701;
+        double workfunction = 4.746;
         double v_stabi_volt;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
                                                  //double offset = 20;
         double correction_offset = 0;        // correction factor vor pass energy
 
         //[ 0.8544416  14.47170123  4.70083337  0.99564488]
-        double voltage_divider = 153.612 * 0.99564488;
-        double k = 0.85444;
+        double voltage_divider = 153.612 * 0.99569;
+        double k = 0.859;
 
 
         // Labjack stuff           // Labjack threads
@@ -279,7 +279,7 @@ namespace XPS
 
             //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            //this.WindowState = FormWindowState.Maximized;
         }
 
         //##################################################################################################################################################################
@@ -557,13 +557,13 @@ namespace XPS
 
 
 
-        private async void btn_can_Click(object sender, EventArgs e)
+        private void btn_can_Click(object sender, EventArgs e)
         {
             if (_cts_XPS != null)
             {
                 _cts_XPS.Cancel();
             }
-            await DPS.reset_channels();
+            //DPS_reset();
         }
 
 
@@ -604,6 +604,7 @@ namespace XPS
             values_to_plot.Clear();
             values_to_plot_svg.Clear();
             values_to_plot_svg_deriv.Clear();
+            errorlist.Clear();
             display_labels.Clear();
             myPane.YAxisList.Clear();
             myPane.AddYAxis("counts");
@@ -670,14 +671,7 @@ namespace XPS
 
         private async void rs_all_Click(object sender, EventArgs e)
         {
-            await DPS.reset_channels();
-            for (int i = 0; i <= 5; i++)
-            {
-                vset[i].Text = string.Empty;
-                vmeas[i].Text = string.Empty;
-                stat[i].Text = "Off";
-                stat[i].BackColor = SystemColors.ControlLightLight;
-            }
+            DPS_reset();
         }
 
 
@@ -803,16 +797,7 @@ namespace XPS
             await H150666.emergency_off(1);
             await H150666.emergency_off(2);
 
-            for (int i = 0; i < 6; i++)
-            {
-                await DPS.emergency_off(i);
-                stat[i].Text = "Off";
-                stat[i].Enabled = false;
-                reload[i].Enabled = false;
-                reset[i].Enabled = false;
-                stat[i].BackColor = SystemColors.ControlLightLight;
-            }
-            btn_start.Enabled = false;
+            DPS_reset();
         }
 
 
@@ -1023,7 +1008,7 @@ namespace XPS
             zedGraphControl1.Refresh();
         }
 
-        double timee;
+        //double timee;
 
 
         private void btn_test_Click(object sender, EventArgs e)
@@ -1130,6 +1115,8 @@ namespace XPS
                 await H150666.voltage_ramp(20);
                 await H150666.channel_off(0);
                 await H150666.set_voltage(0, 0);
+                await H150666.channel_off(1);
+                await H150666.set_voltage(0, 1);
             }
             catch (Exception)
             {
@@ -1137,10 +1124,25 @@ namespace XPS
             }
         }
 
+        private async void DPS_reset()
+        {
+            await DPS.voltage_ramp(20);
+            await DPS.reset_channels();
+            for (int i = 0; i <= 5; i++)
+            {
+                vset[i].Text = string.Empty;
+                vmeas[i].Text = string.Empty;
+                stat[i].Text = "Off";
+                stat[i].BackColor = SystemColors.ControlLightLight;
+            }
+        }
 
         private void btn_DPS_off_Click(object sender, EventArgs e)
         {
-            rs_all.PerformClick();
+            DPS_reset();
+            //_suspend_background_measurement.Set();
+            //rs_all.PerformClick();
+            //_suspend_background_measurement.Reset();
         }
 
 

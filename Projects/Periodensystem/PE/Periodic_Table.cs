@@ -75,13 +75,17 @@ namespace XPS
             myPane.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane.YAxis.Color = Color.FromArgb(90, 30, 0);
             myPane.XAxis.Color = Color.FromArgb(red, green, blue);
+            myPane.YAxis.MajorTic.Color = Color.FromArgb(red, green, blue);
+            myPane.YAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
+            myPane.XAxis.MajorTic.Color = Color.FromArgb(red, green, blue);
+            myPane.XAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
 
             //myPane.YAxis.Scale.MajorStepAuto = false;
             //myPane.YAxis.MajorGrid.IsZeroLine = false;
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;
             //myPane.XAxis.Scale.MajorStep = 100;
-            
+
 
             myPane.Margin.All = 3;
             myPane.TitleGap = 2;
