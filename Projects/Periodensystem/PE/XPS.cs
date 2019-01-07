@@ -40,7 +40,7 @@ namespace XPS
         string ip_dps;
         string ip_xray;
 
-        string LJM_connection_type = "Ethernet";
+        string LJM_connection_type = "ANY";
 
         // General settings
         double V_photon;
@@ -264,7 +264,7 @@ namespace XPS
             cb_pass.SelectedIndex = 3;
             cb_bias.SelectedIndex = 0;
             cb_select.SelectedIndex = 0;
-            //cb_counttime.SelectedIndex = 1;
+            cb_scanrange.SelectedIndex = 0;
             cb_samp_ev.SelectedIndex = 2;
             cb_DAC.SelectedIndex = 0;
 
@@ -280,6 +280,9 @@ namespace XPS
             //this.TopMost = true;
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
+
+            //Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
+            //Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
         }
 
         //##################################################################################################################################################################
@@ -596,6 +599,8 @@ namespace XPS
             safe_fig.Enabled = false;
             tb_safe.Enabled = true;
             fig_name.Enabled = false;
+            progressBar1.Value = 0;
+            lb_progress.Text = string.Empty;
             //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
             //    else { Al_anode.Enabled = true;}
             fig_name.Clear();
@@ -691,6 +696,15 @@ namespace XPS
 
         private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (_cts_XPS != null)
+            {
+                _cts_XPS.Cancel();
+                _cts_XPS.Token.WaitHandle.WaitOne();
+                //LJM.eStreamStop(handle_stream);
+                Thread.Sleep(1000);
+                //LJM.Close(handle_stream);
+            }
+
             if (_cts_pressure_labjack != null)
             {
                 _cts_pressure_labjack.Cancel();
@@ -713,15 +727,7 @@ namespace XPS
             {
                 _cts_flow_labjack.Cancel();
                 _cts_flow_labjack.Token.WaitHandle.WaitOne();
-            }
-
-            if (_cts_XPS != null)
-            {
-                _cts_XPS.Cancel();
-                _cts_XPS.Token.WaitHandle.WaitOne();
-                //LJM.eStreamStop(handle_stream);
-                //LJM.Close(handle_stream);
-            }
+            }     
 
             if (DPS.Is_session_open == true)
             {
@@ -734,7 +740,7 @@ namespace XPS
                 await H150666.reset_channels();
                 await H150666.dispose();
             }
-
+            
             try
             {  
                 LJM.CloseAll();
@@ -1043,7 +1049,7 @@ namespace XPS
             
         }
 
-        int handle_PWM = 0;
+        int handle_PWM = 6;
         public void PWM(object sender, int roll, int divisor)
         {
             
@@ -1078,9 +1084,18 @@ namespace XPS
             {
                 if (Double.TryParse(tb_dac.Text.Replace(",", "."), out double v_dac))
                 {
-                    int handle_DAC = 0;
+                    int handle_DAC = 5;
                     LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC);
-                    LJM.eWriteName(handle_DAC, cb_DAC.SelectedItem.ToString(), v_dac);
+                    try
+                    {
+                        LJM.eWriteName(handle_DAC, cb_DAC.SelectedItem.ToString(), v_dac);
+                    }
+                    catch (Exception)
+                    {
+                        AutoClosingMessageBox.Show("Input Error","LJM handle error",1000);
+                        LJM.Close(handle_DAC);
+                        return;
+                    }
                     tb_dac.Text = String.Empty;
                     tb_dac.Text = v_dac.ToString();
                     //LJM.Close(handle_DAC);
@@ -1127,14 +1142,22 @@ namespace XPS
 
         private async void DPS_reset()
         {
-            await DPS.voltage_ramp(20);
-            await DPS.reset_channels();
-            for (int i = 0; i <= 5; i++)
+            try
             {
-                vset[i].Text = string.Empty;
-                vmeas[i].Text = string.Empty;
-                stat[i].Text = "Off";
-                stat[i].BackColor = SystemColors.ControlLightLight;
+                await DPS.voltage_ramp(20);
+                await DPS.reset_channels();
+                for (int i = 0; i <= 5; i++)
+                {
+                    vset[i].Text = string.Empty;
+                    vmeas[i].Text = string.Empty;
+                    stat[i].Text = "Off";
+                    stat[i].BackColor = SystemColors.ControlLightLight;
+                }
+            }
+            catch (Exception)
+            {
+                AutoClosingMessageBox.Show("Can't reset DPS device","DPS Error",1000);
+                return;
             }
         }
 

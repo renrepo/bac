@@ -21,7 +21,7 @@ namespace XPS
 
         private async void background_meas_pressure_labjack()
         {
-            int handle_pressure_ak = 0;
+            int handle_pressure_ak = 1;
 
             try
             {
@@ -47,18 +47,20 @@ namespace XPS
                     while (!_cts_pressure_labjack.IsCancellationRequested)
                         //while (true)
                     {
-                        /***
-                        if (_cts_pressure_labjack.IsCancellationRequested)
+                        try
                         {
-                            return;
+                            LJM.eReadName(handle_pressure_ak, pin_pressure_ak, ref ionivac_v_out);
+                            pressure = Math.Pow(10, ((Convert.ToDouble(ionivac_v_out) - 7.75)) / 0.75);
+                            Thread.Sleep(2000);
+                            if (progress != null)
+                            {
+                                progress.Report(pressure.ToString("0.00E0"));
+                            }
                         }
-                        ***/
-                        LJM.eReadName(handle_pressure_ak, pin_pressure_ak, ref ionivac_v_out);
-                        pressure = Math.Pow(10, ((Convert.ToDouble(ionivac_v_out) - 7.75)) / 0.75);
-                        Thread.Sleep(2000);
-                        if (progress != null)
+                        catch (Exception)
                         {
-                            progress.Report(pressure.ToString("0.00E0"));
+                            AutoClosingMessageBox.Show("Can'r read pressure pin","LJM Error",1000);
+                            return;
                         }
                     }
                 });
@@ -82,10 +84,19 @@ namespace XPS
             {
                 //vmeas[result].Text = value.Substring(0,7);
                 vmeas[result].Text = String.Format("{0:.##}", value);
-
-                if (take_UPS_spec && result == 4)
+                if (result < 3)
                 {
-                    vm5.Text = value;
+                    vmeas2[result].Text = String.Format("{0:.##}", value);
+                }
+
+                if (result == 4)
+                {
+                    vmeas2[result].Text = String.Format("{0:.##}", value);
+                }
+
+                if (result == 5)
+                {
+                    vmeas2[result - 2].Text = String.Format("{0:.##}", value);
                 }
             });
             var progress = progressHandler2 as IProgress<string>;
@@ -136,7 +147,7 @@ namespace XPS
 
         private async void background_meas_flow_labjack()
         {
-            int handle_flow = 0;
+            int handle_flow = 2;
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_flow);
@@ -159,22 +170,27 @@ namespace XPS
                 //Stopwatch sw = new Stopwatch();
                 await Task.Run(() =>
                 {
+                    LJM.eWriteName(handle_flow, "DIO17_EF_INDEX", 7);
+                    LJM.eWriteName(handle_flow, "DIO17_EF_ENABLE", 1);
+
                     while (!_cts_flow_labjack.IsCancellationRequested)
                     {
-                        LJM.eWriteName(handle_flow, "DIO17_EF_INDEX", 7);
-                        LJM.eWriteName(handle_flow, "DIO17_EF_ENABLE", 1);
-                        //sw.Start();
-                        LJM.eReadName(handle_flow, "DIO17_EF_READ_A", ref cnt_flow_before);
-                        Thread.Sleep(2000);
-                        //sw.Stop();
-                        LJM.eReadName(handle_flow, "DIO17_EF_READ_A_AND_RESET", ref cnt_flow_after);
-                        erg2 = (cnt_flow_after - cnt_flow_before) / 750 / 2 * 60;
-                        //erg2 = (cnt_flow_after - cnt_flow_before);
-                        //sw.Reset();
-                        if (progress != null)
+                        try
                         {
-                            progress.Report(erg2.ToString("0.0"));    //no decimal placed
+                            LJM.eReadName(handle_flow, "DIO17_EF_READ_A", ref cnt_flow_before);
+                            Thread.Sleep(2000);
+                            LJM.eReadName(handle_flow, "DIO17_EF_READ_A_AND_RESET", ref cnt_flow_after);
+                            erg2 = (cnt_flow_after - cnt_flow_before) / 750 / 2 * 60;
+                            if (progress != null)
+                            {
+                                progress.Report(erg2.ToString("0.0"));    //no decimal placed
+                            }
                         }
+                        catch (Exception)
+                        {
+                            AutoClosingMessageBox.Show("Can'r read flow pin", "LJM Error", 1000);
+                            return;
+                        }                   
                     }
                 });
                 //MessageBox.Show("Completed!");
@@ -194,7 +210,7 @@ namespace XPS
 
         private async void background_counter_labjack()
         {
-            int handle_background_counter = 0;
+            int handle_background_counter = 3;
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_background_counter);
@@ -276,7 +292,7 @@ namespace XPS
             {
                 median = sortedNumbers.ElementAt(halfIndex);
             }
-            return 1;
+            return median;
         }
 
 
@@ -287,22 +303,21 @@ namespace XPS
             string dict_entry_deriv = "deriv_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
             double[] coeff = sav_gol_coeff[dict_entry_smooth];
             double[] coeff_deriv = sav_gol_coeff[dict_entry_deriv];
-
+            double timee = 0;
+            int handle_DAC2 = 4;
             int handle_stream = 0;
-
-
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_stream);
-                //LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC2);
+                LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC2);
             }
             catch (Exception)
             {
                 AutoClosingMessageBox.Show("Can't open Labjack T7 'handle_stream' or 'handle_DAC2' session!", "Info", 500);
                 return;
             }
-
-            //LJM.eWriteName(handle_DAC2, "DAC1", 4.0000);
+            
+            LJM.eWriteName(handle_DAC2, "DAC1", 4.0000);
 
             //double mean_volt_hemo = 0;
             _cts_XPS = new CancellationTokenSource();
@@ -312,7 +327,7 @@ namespace XPS
                 tb_cps.Text = value;
                 try
                 {
-                    //progressBar1.Value = Convert.ToInt32(timee/2);
+                    progressBar1.Value = Convert.ToInt32(timee/2);
                     lb_progress.Text = progressBar1.Value.ToString("0") + '%';
                 }
                 catch (Exception)
@@ -468,46 +483,6 @@ namespace XPS
             await Task.Delay(10000);
 
 
-            /***
-            // E_Analyser = E_pass - E_Photon = (U_Analyser - U_bias)*e; Electrons with E=E_photon barely can reach the chaneltron
-            // neglected the work function of the electron (which would add +V_work to v_analyser_min)
-            v_analyser_min = (vpass / k - V_photon + vbias) + Convert.ToDouble(tb_prevolt.Text) + workfunction; //-50V extra
-            // corresponding minimum voltage of the outer/inner hemisphere; here "k" is estimated and yet not known exactly!
-            //v_hemo_min = (v_analyser_min - (vpass * k * 0.4));
-            v_hemo_min = (v_analyser_min - (vpass * 0.4));
-            v_stabi_min = v_hemo_min + v_stabi_volt;
-            //v_hemi_min = (v_hemo_min + vpass * k);
-
-            // Needed lens voltage unknown
-            //vLens_min = .0;
-
-            // even the slowest electron should now reach the chaneltron (E_Analyser = E_pass + (E_Spec - E_Probe) = (U_Analyser - U_bias)*e)
-            //v_analyser_max = vpass + vbias + 50;     // "5" takes (unknown) E_Spec - E_Probe into account
-            v_analyser_max = vpass / k + vbias + 50;     // "5" takes (unknown) E_Spec - E_Probe into account
-            v_hemo_max = (v_analyser_max - (vpass * 0.4));
-            v_stabi_max = v_hemo_max + v_stabi_volt;
-            //v_hemi_max = (v_analyser_max + vpass * k);
-
-            // voltage drop over channeltron .
-            v_channeltron_out_min = v_analyser_min + vchanneltron;
-            v_channeltron_out_max = v_analyser_max + vchanneltron;
-
-            
-            await DPS.voltage_ramp(15);
-            await DPS.set_voltage(v_channeltron_out_min, 4);
-            await DPS.set_voltage(v_hemo_min, 0);
-            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
-            await DPS.set_voltage(v_stabi_min, 5);
-            await DPS.channel_on(4);
-            await DPS.channel_on(0);
-            await DPS.channel_on(5);
-            await DPS.channel_on(2);
-
-            await Task.Delay(8000);
-
-            await DPS.voltage_ramp(voltramp);
-            ***/
-
             btn_start.Enabled = false;
             btn_can.Enabled = true;
             tb_show.Enabled = true;
@@ -534,25 +509,16 @@ namespace XPS
             try
             {
                 double oldtime = 1;
-                double cps = 0;
-                //double ctn = 0;
+                double mean_volt_hemo = 0;
                 double ctn_old = 0;
-                //double ctn_now = 0;
-                //double t_now;
                 double t_old = 0;
                 double curr_E_B = 0;
                 double samp_ev = Convert.ToDouble(cb_samp_ev.SelectedItem);
-                //double error = 0;
-                //v_ctn_cum = 0;
-                //Stopwatch sw = new Stopwatch();
+                double cps_old = 1;
+                Stopwatch sw = new Stopwatch();
 
                 set_all_control_voltages(E_B_end,voltramp,100);
-                /***
-                await DPS.set_voltage(v_hemo_max, 0);
-                await DPS.set_voltage(v_stabi_max, 5);
-                await DPS.set_voltage(v_channeltron_out_max, 4);
-                await DPS.set_voltage(Convert.ToDouble(tb_lens.Text) - 1600, 2);
-                ***/
+
                 await Task.Run(() =>
                 {
                     LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
@@ -560,8 +526,8 @@ namespace XPS
                     if (LJMError == 0)
                     {
                         ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
-                        t_old = aData[data_length - 4] + aData[data_length - 3] * 65536;
-                        //hemo_check = aData[data_length - numAddresses] * voltage_divider;
+                        t_old = aData[data_length - 4] + aData[data_length - 3] * 65536 + 1;
+                        mean_volt_hemo = aData[data_length - numAddresses];
                     }
 
                     else
@@ -573,31 +539,35 @@ namespace XPS
                     //while (hemo_check < 5.0 && !_cts_XPS.IsCancellationRequested)
                     while (true)
                     {
-                        if ((E_B_end < (curr_E_B + 1.0)) || _cts_XPS.IsCancellationRequested)
+                        //if (oldtime > 20)
+                        if ((E_B_end < (curr_E_B + 1.2)))
                         {
-                            return;
+                            return; // jumps out of await Task.Run();
                         }
-                        //sw.Reset();
+                        sw.Reset();
                         _cts_XPS.Token.ThrowIfCancellationRequested();
                         LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
 
                         if (LJMError == 0)
                         {
-                            //sw.Start();
+                            sw.Start();
                             var old_values = data_processing(aData, numAddresses, filt_values, coeff, coeff_deriv, samples_per_second, samples_for_mean, samp_ev,
-                                ctn_old, t_old);
+                                ctn_old, t_old, mean_volt_hemo, oldtime, cps_old);
                             ctn_old = old_values.Item1;
                             t_old = old_values.Item2;
                             oldtime = old_values.Item3;
                             curr_E_B = old_values.Item4;
-                            progress.Report(cps.ToString("000000"));
+                            mean_volt_hemo = old_values.Item5;
+                            oldtime = old_values.Item6;
+                            cps_old = old_values.Item7;
+                            progress.Report(cps_old.ToString("000000"));
                             //progress.Report(v_ctn_cum.ToString("N"));
                             //progress.Report(ctn.ToString("N"));
                             //progress.Report((elapsed_seconds * 10000).ToString("000000"));
                             // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                             //_suspend_background_measurement.WaitOne(Timeout.Infinite);
-                            //timee = sw.Elapsed.TotalMilliseconds;
-                            //sw.Stop();
+                            timee = sw.Elapsed.TotalMilliseconds;
+                            sw.Stop();
                         }
 
                         else
@@ -617,6 +587,8 @@ namespace XPS
                 DPS_reset();
                 LJM.eStreamStop(handle_stream);
                 tb_cps.Text = "end";
+                progressBar1.Value = 0;
+                lb_progress.Text = String.Empty;
 
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -626,7 +598,7 @@ namespace XPS
 
             catch (OperationCanceledException)
             {
-                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
+                //zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
                 btn_can.Enabled = false;
                 btn_clear.Enabled = true;
                 fig_name.Enabled = true;
@@ -634,6 +606,8 @@ namespace XPS
                 DPS_reset();
                 //await DPS.channel_off(4);
                 //await DPS.reset_channels();
+                progressBar1.Value = 0;
+                lb_progress.Text = String.Empty;
                 LJM.eStreamStop(handle_stream);
                 tb_cps.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
@@ -700,146 +674,140 @@ namespace XPS
         };
 
 
-        public Tuple<double, double, double, double> data_processing(double[] aData, int numAddresses, Queue<double> filt_values,
+        public Tuple<double, double, double, double, double, double, double> data_processing(double[] aData, int numAddresses, Queue<double> filt_values,
             double[] coeff, double[] coeff_deriv, int samples_per_second, int samples_for_mean, double samp_ev,
-            double ctn_old, double t_old)
+            double ctn_old, double t_old, double mean_volt_hemo, double oldtime, double cps_old)
         {
-            
-            //double oldtime = 1;
-            double cps = 0;
             double ctn = 0;
-            //double ctn_old = 0;
             double ctn_now = 0;
             double t_now;
-            //double t_old = 0;
             double error = 0;
-            double v_ctn_cum = 0;
-            double mean_volt_hemo = 0;
             var inc = 0;
             double E_bind = 0;
             double result = 0;
+            int l = 0;
             double result_deriv = 0;
+            double mean_volt_hemo_old = mean_volt_hemo;
+            double[] arr_E_B = new double[samples_per_second];
+            double[] arr_cps = new double[samples_per_second];
+            double[] arr_mean_volt_hemo = new double[samples_per_second];
+            double[] arr_result = new double[samples_per_second];
+            double[] arr_median = new double[samples_for_mean+1];
 
-            for (var j = 0; j < samples_per_second * samples_for_mean; j++)
+            for (int i = 1; i <= samples_per_second; i++)
             {
-                inc = j * numAddresses;
+                inc = (i * samples_for_mean - 1) * numAddresses;
+
+                t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                 ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
-                if (ctn_now < ctn_old)
+                if (t_now < t_old)
                 {
-                    ctn = ctn_now - ctn_old + 65536;
-                    // warum auch immer wird manchmal ein MSB übertrag nicht mitgenommen?!
+                    ctn = (ctn_now - ctn_old) / (t_now - t_old + 4294967295) * 40000000 + 1;
                 }
                 else
                 {
-                    ctn = (ctn_now - ctn_old);
+                    ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000 + 1;
                 }
-                /***
-                using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+
+                //int p = 0;
+                while (l <= i * samples_for_mean - 1)
+                {
+                    mean_volt_hemo += aData[l * numAddresses + 0];
+                    //arr_median[p] = aData[l * numAddresses + 0];
+                    l++;
+                    //p++;
+                }
+                l--;
+                //p--;
+
+                //mean_volt_hemo = median(arr_median);
+                mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
+                mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
+
+
+                E_bind = mean_volt_hemo * voltage_divider + V_photon - vbias - vpass / k - workfunction + vpass * 0.4;
+
+                error = Math.Sqrt(ctn);
+                //values_to_plot.Add(oldtime, ctn);
+                values_to_plot.Add(E_bind, ctn);
+                
+                //myCurve.AddPoint(oldtime, oldtime + 1000);
+                errorlist.Add(E_bind, ctn - error, ctn + error);
+                //errorCurve.AddPoint(oldtime, ctn - error, ctn + error);
+
+                //t_old = t_now;
+                //mean_volt_hemo = 0;
+
+                //Savitzky Golay filtering
+                filt_values.Enqueue(ctn);
+                //double result = Sav_Gol(filt_values, coeff, coeff_deriv, 10).Item1;
+                //double result_deriv = Sav_Gol(filt_values, coeff, coeff_deriv, 10).Item2;   
+                //var results = Sav_Gol(filt_values, coeff, coeff_deriv);
+
+                if (filt_values.Count() == coeff.Length)
+                {
+                    result = 0;
+                    result_deriv = 0;
+                    var k = 0;
+                    foreach (var item in filt_values)
+                    {
+                        result += coeff[k] * item;
+                        result_deriv += coeff_deriv[k] * item;
+                        k++;
+                    }
+                    filt_values.Dequeue();
+                    //values_to_plot_svg.Add(E_bind - samples_per_second / samp_ev, result);
+                    values_to_plot_svg.Add(E_bind, result);
+                    //myCurve_svg.AddPoint(oldtime, result);
+                    //values_to_plot_svg_deriv.Add(E_bind - samples_per_second / samp_ev, result_deriv);
+                   // values_to_plot_svg_deriv.Add(oldtime, result_deriv);
+                    //myCurve_svg_deriv.AddPoint(oldtime, result_deriv);
+                }
+                arr_E_B[i - 1] = E_bind;
+                arr_cps[i - 1] = ctn;
+                arr_mean_volt_hemo[i - 1] = mean_volt_hemo;
+                arr_result[i - 1] = result;
+                
+                //myPane.GraphObjList.Clear();
+                //TextObj label = new TextObj(ctn.ToString("0.0"), 1, ctn);
+                //label.Location.CoordinateFrame = CoordType.XChartFractionY2Scale;
+                //label.Location.AlignH = AlignH.Right;
+                //myPane.GraphObjList.Add(label);
+                ctn_old = ctn_now;
+                t_old = t_now;
+                mean_volt_hemo_old = mean_volt_hemo;
+                mean_volt_hemo = 0;
+
+                oldtime++;
+            }
+            //mean_volt_hemo = aData[aData.Length - numAddresses];
+            //progress.Report(v_ctn_cum.ToString("000000"));
+            using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+            {
+                for (int i = 0; i < samples_per_second-1; i++)
                 {
                     file.WriteLine(
-                    oldtime.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[inc + 3] + aData[inc + 4] * 65536).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    ctn.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[inc + 2]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    (aData[inc + 1]).ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    ctn_now.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    ctn_old.ToString("N", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    v_ctn_cum.ToString("N", System.Globalization.CultureInfo.InvariantCulture)
+                    arr_E_B[i].ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    arr_cps[i].ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    arr_mean_volt_hemo[i].ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    arr_result[i].ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture)
                     );
                 }
-                ***/
-                ctn_old = ctn_now;
-                mean_volt_hemo += aData[inc + 0] * (ctn + 1);
-                v_ctn_cum += (ctn + 1);
-
-                if ((j + 1) % samples_for_mean == 0)
-                {
-                    t_now = aData[inc + 3] + aData[inc + 4] * 65536;
-                    mean_volt_hemo = mean_volt_hemo / v_ctn_cum * voltage_divider;
-                    v_ctn_cum = v_ctn_cum - samples_for_mean;
-
-                    if (t_now < t_old)
-                    {
-                        v_ctn_cum = v_ctn_cum / (t_now - t_old + Math.Pow(2,32)) * 40000000;
-                    }
-                    else
-                    {
-                        v_ctn_cum = v_ctn_cum / (t_now - t_old) * 40000000;
-                        //v_ctn_cum = v_ctn_cum * samples_per_second;
-                    }
-
-                    E_bind = mean_volt_hemo + V_photon - vbias - vpass / k - workfunction + vpass * 0.4;
-
-                    error = Math.Sqrt(v_ctn_cum) / 2;
-                    values_to_plot.Add(E_bind, v_ctn_cum);
-                    //myCurve.AddPoint((oldtime) / samples_for_mean, v_ctn_cum);
-                    errorlist.Add(E_bind, v_ctn_cum - error, v_ctn_cum + error);
-
-                    
-                    //t_old = t_now;
-                    //mean_volt_hemo = 0;
-
-                    //Savitzky Golay filtering
-                    filt_values.Enqueue(v_ctn_cum);
-                    //double result = Sav_Gol(filt_values, coeff, coeff_deriv, 10).Item1;
-                    //double result_deriv = Sav_Gol(filt_values, coeff, coeff_deriv, 10).Item2;   
-                    //var results = Sav_Gol(filt_values, coeff, coeff_deriv);
-
-                    if (filt_values.Count() == coeff.Length)
-                    {
-                        result = 0;
-                        result_deriv = 0;
-
-                        var i = 0;
-                        foreach (var item in filt_values)
-                        {
-                            result += coeff[i] * item;
-                            result_deriv += coeff_deriv[i] * item;
-                            i++;
-                        }
-                        filt_values.Dequeue();
-                        values_to_plot_svg.Add(E_bind - samples_per_second / samp_ev, result);
-                        //myCurve_svg.AddPoint((oldtime) / samples_for_mean - (coeff.Length - 1) / 2, result);
-                        //values_to_plot_svg_deriv.Add(E_bind - samples_per_second / samp_ev, result_deriv);
-                        //myCurve_svg_deriv.AddPoint((oldtime) / samples_for_mean - (coeff_deriv.Length - 1) / 2 - 1, result_deriv);
-                    }
-
-                    using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
-                    {
-                        file.WriteLine(
-                            E_bind.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                            v_ctn_cum.ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                            mean_volt_hemo.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                            result.ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                            result_deriv.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture)
-                            );
-                    }
-
-                    //myPane.GraphObjList.Clear();
-                    TextObj label = new TextObj(v_ctn_cum.ToString("0.0"), 1, v_ctn_cum);
-                    label.Location.CoordinateFrame = CoordType.XChartFractionY2Scale;
-                    label.Location.AlignH = AlignH.Right;
-                    myPane.GraphObjList.Add(label);
-
-                    t_old = t_now;
-                    mean_volt_hemo = 0;
-                    cps = v_ctn_cum;
-                    v_ctn_cum = 0;
-                }
-                //oldtime++;
-                //progress.Report(v_ctn_cum.ToString("000000"));
             }
+
+            
+
             try
             {
-                zedGraphControl1.AxisChange();
                 zedGraphControl1.Invalidate();
+                zedGraphControl1.AxisChange();
             }
             catch (Exception)
             {
 
-            }
+            }  
             
-            return Tuple.Create(ctn_old, t_old, samp_ev, E_bind);
+            return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, oldtime, ctn);
         }
 
         

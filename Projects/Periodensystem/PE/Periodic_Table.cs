@@ -92,8 +92,10 @@ namespace XPS
             myPane.Legend.IsVisible = false;
             myPane.Legend.Gap = 2;
 
-            myPane.XAxis.Scale.MaxAuto = true;
-            myPane.YAxis.Scale.MaxAuto = true;
+
+
+            //myPane.YAxis.Type = AxisType.Linear;
+            myPane.YAxis.Scale.MinAuto = true;
             //myPane.YAxis.MajorGrid.Color = Color.FromArgb(255, 248, 245);
             //myPane.YAxis.MajorGrid.IsVisible = true;
 
@@ -129,10 +131,16 @@ namespace XPS
             myCurve.Line.Color = Color.FromArgb(90, 15, 0);
             myCurve.Tag = 4;
 
-            
+
             //myCurve.YAxisIndex = 1;
             //myPane.XAxis.Tag = 5;
             //myPane.YAxis.Tag = 6;
+            myPane.XAxis.Scale.MaxAuto = true;
+            myPane.YAxis.Scale.MaxAuto = true;
+            myPane.XAxis.Scale.MinAuto = true;
+            myPane.YAxis.Scale.MinAuto = true;
+
+            myPane.AxisChange();
 
         }
 

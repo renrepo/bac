@@ -12328,7 +12328,7 @@
     <value>Fill</value>
   </data>
   <data name="vm1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="vm1.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 1</value>
@@ -12396,6 +12396,9 @@
   <data name="tb_pressure.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="tb_pressure.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="tb_pressure.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 126</value>
   </data>
@@ -12430,7 +12433,7 @@
     <value>Fill</value>
   </data>
   <data name="vm2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="vm2.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 26</value>
@@ -12462,6 +12465,9 @@
   <data name="vm3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="vm3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="vm3.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 51</value>
   </data>
@@ -12492,6 +12498,9 @@
   <data name="vm4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="vm4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="vm4.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 76</value>
   </data>
@@ -12521,6 +12530,9 @@
   </data>
   <data name="vm5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="vm5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="vm5.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 101</value>
@@ -12767,6 +12779,9 @@
   </data>
   <data name="tb_flow.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="tb_flow.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="tb_flow.Location" type="System.Drawing.Point, System.Drawing">
     <value>57, 151</value>
@@ -13138,12 +13153,15 @@
     <value>TDAC0</value>
   </data>
   <data name="cb_DAC.Items1" xml:space="preserve">
-    <value>DAC1</value>
+    <value>DAC0</value>
   </data>
   <data name="cb_DAC.Items2" xml:space="preserve">
-    <value>DAC2</value>
+    <value>DAC1</value>
   </data>
   <data name="cb_DAC.Items3" xml:space="preserve">
+    <value>DAC2</value>
+  </data>
+  <data name="cb_DAC.Items4" xml:space="preserve">
     <value>DAC3</value>
   </data>
   <data name="cb_DAC.Location" type="System.Drawing.Point, System.Drawing">

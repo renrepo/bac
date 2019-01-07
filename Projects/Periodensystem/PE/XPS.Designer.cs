@@ -3330,7 +3330,8 @@
             resources.GetString("cb_DAC.Items"),
             resources.GetString("cb_DAC.Items1"),
             resources.GetString("cb_DAC.Items2"),
-            resources.GetString("cb_DAC.Items3")});
+            resources.GetString("cb_DAC.Items3"),
+            resources.GetString("cb_DAC.Items4")});
             this.cb_DAC.Name = "cb_DAC";
             // 
             // tb_slit
