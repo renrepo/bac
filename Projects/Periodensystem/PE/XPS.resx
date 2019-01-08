@@ -9844,7 +9844,7 @@
     <value>322</value>
   </data>
   <data name="tb_anode_voltage.Text" xml:space="preserve">
-    <value>12500</value>
+    <value>12000</value>
   </data>
   <data name="&gt;&gt;tb_anode_voltage.Name" xml:space="preserve">
     <value>tb_anode_voltage</value>
@@ -13126,7 +13126,7 @@
     <value>295</value>
   </data>
   <data name="tb_dac.Text" xml:space="preserve">
-    <value>1.207</value>
+    <value>1.208</value>
   </data>
   <data name="tb_dac.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>

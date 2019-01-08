@@ -317,7 +317,7 @@ namespace XPS
                 return;
             }
             
-            LJM.eWriteName(handle_DAC2, "DAC1", 4.0000);
+            LJM.eWriteName(handle_DAC2, "DAC0", Convert.ToDouble(tb_dac.Text));
 
             //double mean_volt_hemo = 0;
             _cts_XPS = new CancellationTokenSource();
@@ -430,8 +430,9 @@ namespace XPS
             double E_B_end = 0;
             if (cb_scanrange.SelectedItem.ToString() == "Full")
             {
-                set_all_control_voltages(0, 12, 100);
+                set_all_control_voltages(0, 15, 100);
                 E_B_end = V_photon;
+                await Task.Delay(8500);
             }
 
             else if (cb_scanrange.SelectedItem.ToString() == "Detail")
@@ -442,7 +443,8 @@ namespace XPS
                     E_B_end = Convert.ToDouble(tb_detailscan_stop.Text);
                     if ((E_B_start >= 0) && (E_B_start <= V_photon) && (E_B_end >= 0) && (E_B_end <= V_photon))
                     {
-                        set_all_control_voltages(E_B_start, 12, 100);
+                        set_all_control_voltages(E_B_start, 15, 100);
+                        await Task.Delay(8500);
                     }
                     else
                     {
@@ -459,13 +461,32 @@ namespace XPS
 
             else if (cb_scanrange.SelectedItem.ToString() == "Spot")
             {
+                if (Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
+                {
+                    try
+                    {
+                        set_all_control_voltages(U_E_binding, 15, 100);
+                        btn_can.Enabled = true;
+                        tb_show.Enabled = true;
+                        tb_safe.Enabled = false;
+                        tb_set_E_B.Text = String.Empty;
+                        tb_set_E_B.Text = tb_set_E_B.Text.ToString();
+                        //await Task.Delay(10000);
+                    }
+                    catch (Exception)
+                    {
+                        return;
+                    }
+                }
+                return;
+                /***
                 try
                 {
                     double E_B_spot = Convert.ToDouble(tb_set_E_B.Text);
                     if ((E_B_spot >= 0) && (E_B_spot <= V_photon))
                     {
                         E_B_end = Convert.ToDouble(tb_set_E_B.Text);
-                        set_all_control_voltages(E_B_spot, 12, 100);
+                        set_all_control_voltages(E_B_spot, 15, 100);
                     }
                     else
                     {
@@ -477,10 +498,11 @@ namespace XPS
                 {
                     AutoClosingMessageBox.Show("Type in a number", "Input Error", 2000);
                     return;
-                }
+                
+                ***/
             }
 
-            await Task.Delay(10000);
+            
 
 
             btn_start.Enabled = false;

@@ -566,7 +566,7 @@ namespace XPS
             {
                 _cts_XPS.Cancel();
             }
-            //DPS_reset();
+            DPS_reset();
         }
 
 
@@ -1103,7 +1103,7 @@ namespace XPS
             }
         }
 
-        private async void tb_set_E_B_KeyDown(object sender, KeyEventArgs e)
+        private void tb_set_E_B_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -1111,10 +1111,10 @@ namespace XPS
                 {
                     try
                     {
-                        set_all_control_voltages(U_E_binding,12,100);
+                        set_all_control_voltages(U_E_binding,15,100);
                         tb_set_E_B.Text = String.Empty;
-                        tb_set_E_B.Text = tb_set_E_B.ToString();
-                        await Task.Delay(10000);
+                        tb_set_E_B.Text = tb_set_E_B.Text.ToString();
+                        //await Task.Delay(10000);
                     }
                     catch (Exception)
                     {
