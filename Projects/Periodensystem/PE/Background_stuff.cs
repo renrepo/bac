@@ -517,6 +517,7 @@ namespace XPS
                 double cps_old = 1;
                 Stopwatch sw = new Stopwatch();
 
+                tb_lens.Text = 200.ToString();
                 set_all_control_voltages(E_B_end,voltramp,100);
 
                 await Task.Run(() =>
@@ -659,17 +660,17 @@ namespace XPS
                 ***/
                 ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 4000000 + 1;
 
-                int p = 0;
+                //int p = 0;
                 while (l <= i * samples_for_mean - 1)
                 {
                     mean_volt_hemo += aData[l * numAddresses + 0];
-                    arr_median[p] = aData[l * numAddresses + 0];
+                    //arr_median[p] = aData[l * numAddresses + 0];
                     l++;
-                    p++;
+                    //p++;
                 }
                 l--;
-                p--;
-
+                //p--;
+                /***
                 using (var file = new StreamWriter(path_logfile + "test" + ".txt", true))
                 {
                     for (int k = 0; k < samples_for_mean; k++)
@@ -680,7 +681,7 @@ namespace XPS
                     }
                     file.WriteLine("" + Environment.NewLine);
                 }
-
+                ***/
                 //mean_volt_hemo = median(arr_median);
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
                 mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
@@ -718,7 +719,7 @@ namespace XPS
                     }
                     filt_values.Dequeue();
                     //values_to_plot_svg.Add(E_bind - samples_per_second / samp_ev, result);
-                    values_to_plot_svg.Add(E_bind, result);
+                    //values_to_plot_svg.Add(E_bind, result);
                     //myCurve_svg.AddPoint(oldtime, result);
                     //values_to_plot_svg_deriv.Add(E_bind - samples_per_second / samp_ev, result_deriv);
                    // values_to_plot_svg_deriv.Add(oldtime, result_deriv);
