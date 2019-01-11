@@ -393,6 +393,10 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.label67 = new System.Windows.Forms.Label();
+            this.tb_samples_for_mean = new System.Windows.Forms.TextBox();
+            this.tb_samples_per_second = new System.Windows.Forms.TextBox();
             this.cb_DAC = new System.Windows.Forms.ComboBox();
             this.tb_slit = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -2583,7 +2587,6 @@
             // 
             resources.ApplyResources(this.tb_Imin, "tb_Imin");
             this.tb_Imin.Name = "tb_Imin";
-            this.tb_Imin.TextChanged += new System.EventHandler(this.tb_Imin_TextChanged);
             // 
             // label77
             // 
@@ -3308,6 +3311,10 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.label68);
+            this.groupBox9.Controls.Add(this.label67);
+            this.groupBox9.Controls.Add(this.tb_samples_for_mean);
+            this.groupBox9.Controls.Add(this.tb_samples_per_second);
             this.groupBox9.Controls.Add(this.cb_DAC);
             this.groupBox9.Controls.Add(this.label74);
             this.groupBox9.Controls.Add(this.tb_slit);
@@ -3320,6 +3327,26 @@
             resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
+            // 
+            // label68
+            // 
+            resources.ApplyResources(this.label68, "label68");
+            this.label68.Name = "label68";
+            // 
+            // label67
+            // 
+            resources.ApplyResources(this.label67, "label67");
+            this.label67.Name = "label67";
+            // 
+            // tb_samples_for_mean
+            // 
+            resources.ApplyResources(this.tb_samples_for_mean, "tb_samples_for_mean");
+            this.tb_samples_for_mean.Name = "tb_samples_for_mean";
+            // 
+            // tb_samples_per_second
+            // 
+            resources.ApplyResources(this.tb_samples_per_second, "tb_samples_per_second");
+            this.tb_samples_per_second.Name = "tb_samples_per_second";
             // 
             // cb_DAC
             // 
@@ -3874,6 +3901,10 @@
         private System.Windows.Forms.Button btn_DPS_off;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.TextBox tb_samples_for_mean;
+        private System.Windows.Forms.TextBox tb_samples_per_second;
     }
 }
 

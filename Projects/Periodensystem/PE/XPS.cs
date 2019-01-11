@@ -43,7 +43,7 @@ namespace XPS
         string LJM_connection_type = "ANY";
 
         // General settings
-        double V_photon;
+        //double V_photon;
         double E_HeI;               // Energy HeI-line
         double E_Al_Ka;            // Energy Al K_alpha photon
         double E_Mg_Ka;            // Energy Mg K_alpha photon
@@ -89,7 +89,7 @@ namespace XPS
 
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string curr_time;
-        string[] scores = new string[] { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
+        string[] scores = { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
             "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
             "O5","P1","P2","P3"};       // name of energy-lines corresponding to electron binding energies in "Bindungsenergien.csv"
 
@@ -113,7 +113,6 @@ namespace XPS
 
 
 
-        bool take_UPS_spec = false;     // true if UPS spectra is taken
 
 
         public XPS()
@@ -122,9 +121,7 @@ namespace XPS
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             //try
             // {
-            var dic = File.ReadAllLines("settings.txt")
-              .Select(l => l.Split(new[] { '=' }))
-              .ToDictionary(s => s[0].Trim(), s => s[1].Trim());
+            var dic = File.ReadAllLines("settings.txt").Select(l => l.Split(new[] { '=' })).ToDictionary(s => s[0].Trim(), s => s[1].Trim());
             //}
             //catch (Exception)
             //{
@@ -281,8 +278,8 @@ namespace XPS
             //this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
 
-            //Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
-            //Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
+            Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
+            Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
         }
 
         //##################################################################################################################################################################
@@ -639,14 +636,7 @@ namespace XPS
 
         private void fig_name_TextChanged(object sender, EventArgs e)
         {
-            if (fig_name.Text == string.Empty)
-            {
-                safe_fig.Enabled = false;
-            }
-            else
-            {
-                safe_fig.Enabled = true;
-            }
+            safe_fig.Enabled = (fig_name.Text == string.Empty) ? false : true;
         }
 
         //####################################################################################################################################### 
@@ -674,7 +664,7 @@ namespace XPS
         }
 
 
-        private async void rs_all_Click(object sender, EventArgs e)
+        private void rs_all_Click(object sender, EventArgs e)
         {
             DPS_reset();
         }
@@ -727,13 +717,16 @@ namespace XPS
             {
                 _cts_flow_labjack.Cancel();
                 _cts_flow_labjack.Token.WaitHandle.WaitOne();
-            }     
+            }
+
 
             if (DPS.Is_session_open == true)
             {
                 await DPS.reset_channels();
                 await DPS.dispose();
             }
+
+
 
             if (H150666.Is_session_open == true)
             {
@@ -832,54 +825,8 @@ namespace XPS
 
         private void cb_select_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            if (cb_select.SelectedIndex == 0)
-            {
-                cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
-                V_photon = E_Al_Ka;
-
-                if (DPS.Is_session_open == true & H150666.Is_session_open == true)
-                {
-                    btn_start.Enabled = true;
-                }
-
-                else
-                {
-                    btn_start.Enabled = false;
-                }
-            }
-
-            if (cb_select.SelectedIndex == 1)
-            {
-                cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
-                V_photon = E_Mg_Ka;
-
-                if (DPS.Is_session_open == true & H150666.Is_session_open == true)
-                {
-                    btn_start.Enabled = true;
-                }
-
-                else
-                {
-                    btn_start.Enabled = false;
-                }
-            }
-
-            if (cb_select.SelectedIndex == 2)
-            {
-                cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
-                V_photon = E_HeI;
-
-                if (DPS.Is_session_open)
-                {
-                    btn_start.Enabled = true;
-                }
-
-                else
-                {
-                    btn_start.Enabled = false;
-                }
-            }
+            btn_start.Enabled = (DPS.Is_session_open == true & H150666.Is_session_open == true) ? true : false;
+            cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
         }
 
         
@@ -972,31 +919,34 @@ namespace XPS
             //await H150666.channel_off(1);
         }
 
-        private void tb_Imin_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime)
         {
-            double vpass = Convert.ToDouble(cb_pass.SelectedItem);
-            double vbias = Convert.ToDouble(cb_bias.SelectedItem);
-            double set_voltage_hemo = -V_photon + vbias + vpass / k + workfunction + E_bind - vpass * 0.4;
-            double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
-            double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
-            
-            await DPS.voltage_ramp(ramp);
-            await DPS.set_voltage(set_voltage_hemo, 0);
-            await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
-            await DPS.set_voltage(set_voltage_channeltron, 4);
-            await DPS.set_voltage(set_voltage_Stabi, 5);
+            try
+            {
+                double vpass = Convert.ToDouble(cb_pass.SelectedItem);
+                double vbias = Convert.ToDouble(cb_bias.SelectedItem);
+                double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
+                double set_voltage_hemo = -V_photon + vbias + vpass / k + workfunction + E_bind - vpass * 0.4;
+                double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
+                double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
 
-            await DPS.channel_on(0);
-            await DPS.channel_on(2);
-            await DPS.channel_on(4);
-            await DPS.channel_on(5);
-            
-            await Task.Delay(sleeptime);
+                await DPS.voltage_ramp(ramp);
+                await DPS.set_voltage(set_voltage_hemo, 0);
+                await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
+                await DPS.set_voltage(set_voltage_channeltron, 4);
+                await DPS.set_voltage(set_voltage_Stabi, 5);
+
+                await DPS.channel_on(0);
+                await DPS.channel_on(2);
+                await DPS.channel_on(4);
+                await DPS.channel_on(5);
+
+                await Task.Delay(sleeptime);
+            }
+            catch (Exception)
+            {
+                AutoClosingMessageBox.Show("Unable to set voltages","Voltage setting error",2000);
+            }
         }
 
 
@@ -1006,6 +956,8 @@ namespace XPS
             zedGraphControl1.GraphPane.CurveList.Clear();
             zedGraphControl1.GraphPane.GraphObjList.Clear();
             values_to_plot.Clear();
+            values_to_plot_svg.Clear();
+            values_to_plot_svg_deriv.Clear();
             display_labels.Clear();
             myPane.YAxisList.Clear();
             myPane.AddYAxis("counts");
@@ -1051,9 +1003,7 @@ namespace XPS
 
         int handle_PWM = 6;
         public void PWM(object sender, int roll, int divisor)
-        {
-            
-
+        {          
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_PWM);
@@ -1064,12 +1014,10 @@ namespace XPS
             }
             
             //TextBox tb = (TextBox)sender;
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source
-                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
+            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
             LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_DIVISOR", divisor);     // Configure Clock0's divisor
             LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", roll);  // Configure Clock0's roll value
             LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
-
             // Configure EF Channel Registers:
             LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 0);    // Disable the EF system for initial configuration
             LJM.eWriteName(handle_PWM, "DIO0_EF_INDEX", 0);     // Configure EF system for PWM
@@ -1080,47 +1028,34 @@ namespace XPS
 
         private void tb_dac_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && Double.TryParse(tb_dac.Text.Replace(",", "."), out double v_dac))
             {
-                if (Double.TryParse(tb_dac.Text.Replace(",", "."), out double v_dac))
+                int handle_DAC = 5;
+                LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC);
+                try
                 {
-                    int handle_DAC = 5;
-                    LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC);
-                    try
-                    {
-                        LJM.eWriteName(handle_DAC, cb_DAC.SelectedItem.ToString(), v_dac);
-                    }
-                    catch (Exception)
-                    {
-                        AutoClosingMessageBox.Show("Input Error","LJM handle error",1000);
-                        LJM.Close(handle_DAC);
-                        return;
-                    }
-                    tb_dac.Text = String.Empty;
-                    tb_dac.Text = v_dac.ToString();
-                    //LJM.Close(handle_DAC);
+                    LJM.eWriteName(handle_DAC, cb_DAC.SelectedItem.ToString(), v_dac);
                 }
+                catch (Exception)
+                {
+                    AutoClosingMessageBox.Show("Input Error","LJM handle error",1000);
+                    LJM.Close(handle_DAC);
+                    return;
+                }
+                tb_dac.Text = String.Empty;
+                tb_dac.Text = v_dac.ToString();
+                //LJM.Close(handle_DAC);
             }
         }
 
         private void tb_set_E_B_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Enter && Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
             {
-                if (Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
-                {
-                    try
-                    {
-                        set_all_control_voltages(U_E_binding,15,100);
-                        tb_set_E_B.Text = String.Empty;
-                        tb_set_E_B.Text = tb_set_E_B.Text.ToString();
-                        //await Task.Delay(10000);
-                    }
-                    catch (Exception)
-                    {
-                        return;
-                    }
-                }
+                set_all_control_voltages(U_E_binding,15,100);
+                tb_set_E_B.Text = String.Empty;
+                tb_set_E_B.Text = tb_set_E_B.Text.ToString();
+                //await Task.Delay(10000);
             }
         }
 
@@ -1169,7 +1104,10 @@ namespace XPS
             //_suspend_background_measurement.Reset();
         }
 
+        private void tb_Imin_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 

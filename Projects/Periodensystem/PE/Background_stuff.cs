@@ -306,6 +306,11 @@ namespace XPS
             double timee = 0;
             int handle_DAC2 = 4;
             int handle_stream = 0;
+
+            int.TryParse(tb_samples_per_second.Text, out int samples_per_second);
+            int.TryParse(tb_samples_for_mean.Text, out int samples_for_mean);
+
+            double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_stream);
@@ -346,9 +351,6 @@ namespace XPS
                 //zedGraphControl1.AxisChange();
             });
             var progress = progressHandler as IProgress<string>;
-
-            int samples_per_second = 5;
-            int samples_for_mean = 32;
 
             int counter_LSB = 3036;
             int MSB = 4899;
@@ -392,7 +394,7 @@ namespace XPS
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
             DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_test\", " " + curr_time + "_" +
-            tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "_" + cb_bias.SelectedItem + "_" + tb_lens.Text + "\\"));
+            tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "\\"));
             path_logfile = dl.FullName;
             using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
             {
@@ -471,7 +473,6 @@ namespace XPS
                         tb_safe.Enabled = false;
                         tb_set_E_B.Text = String.Empty;
                         tb_set_E_B.Text = tb_set_E_B.Text.ToString();
-                        //await Task.Delay(10000);
                     }
                     catch (Exception)
                     {
@@ -479,30 +480,7 @@ namespace XPS
                     }
                 }
                 return;
-                /***
-                try
-                {
-                    double E_B_spot = Convert.ToDouble(tb_set_E_B.Text);
-                    if ((E_B_spot >= 0) && (E_B_spot <= V_photon))
-                    {
-                        E_B_end = Convert.ToDouble(tb_set_E_B.Text);
-                        set_all_control_voltages(E_B_spot, 15, 100);
-                    }
-                    else
-                    {
-                        AutoClosingMessageBox.Show("E_B in range 0 to E_Photon", "Input Error", 2000);
-                        return;
-                    }
-                }
-                catch (Exception)
-                {
-                    AutoClosingMessageBox.Show("Type in a number", "Input Error", 2000);
-                    return;
-                
-                ***/
             }
-
-            
 
 
             btn_start.Enabled = false;
@@ -574,7 +552,7 @@ namespace XPS
                         {
                             sw.Start();
                             var old_values = data_processing(aData, numAddresses, filt_values, coeff, coeff_deriv, samples_per_second, samples_for_mean, samp_ev,
-                                ctn_old, t_old, mean_volt_hemo, oldtime, cps_old);
+                                ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon);
                             ctn_old = old_values.Item1;
                             t_old = old_values.Item2;
                             oldtime = old_values.Item3;
@@ -625,12 +603,12 @@ namespace XPS
                 btn_clear.Enabled = true;
                 fig_name.Enabled = true;
                 showdata.Enabled = true;
-                DPS_reset();
                 //await DPS.channel_off(4);
                 //await DPS.reset_channels();
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
                 LJM.eStreamStop(handle_stream);
+                DPS_reset();
                 tb_cps.Text = "Stop!";
                 using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
                 {
@@ -640,65 +618,12 @@ namespace XPS
         }
 
 
-        Dictionary<string, double[]> sav_gol_coeff = new Dictionary<string, double[]>
-        {
-            {"smooth_deg_4_num_points_5", new [] { 0.0, 0.0, 1.0, 0.0, 0.0} },
-            {"deriv_deg_4_num_points_5", new [] { 0.08333333, -0.66666667, 0.0 , 0.66666667, -0.08333333 } },
+        public Tuple<double, double, double, double, double, double, double> data_processing(
+            double[] aData, int numAddresses, Queue<double> filt_values,
+            double[] coeff, double[] coeff_deriv, int samples_per_second,
+            int samples_for_mean, double samp_ev, double ctn_old, double t_old, 
+            double mean_volt_hemo, double oldtime, double cps_old, double V_photon)
 
-            {"smooth_deg_4_num_points_11", new [] {0.04195804, -0.1048951 , -0.02331002,  0.13986014,  0.27972028,
-                0.33333333,  0.27972028,  0.13986014, -0.02331002, -0.1048951 ,
-                0.04195804} },
-            {"deriv_deg_4_num_points_11", new [] {0.058275, -0.057110, -0.103341, -0.097708, -0.057498, 0.000000,
-                0.057498, 0.097708, 0.103341, 0.057110, -0.058275} },
-
-            {"smooth_deg_4_num_points_21", new [] {0.044720, -0.024845, -0.050016, -0.043151, -0.015153, 0.024529,
-                0.067900, 0.108417, 0.140992, 0.161991, 0.169233, 0.161991,
-                0.140992, 0.108417, 0.067900, 0.024529, -0.015153, -0.043151,
-                -0.050016, -0.024845, 0.044720} },
-            {"deriv_deg_4_num_points_21", new [] {0.023135, 0.002761, -0.011911, -0.021512, -0.026677, -0.028040,
-                -0.026234, -0.021894, -0.015652, -0.008143, 0.000000, 0.008143,
-                0.015652, 0.021894, 0.026234, 0.028040, 0.026677, 0.021512,
-                0.011911, -0.002761, -0.023135} },
-
-            {"smooth_deg_4_num_points_33", new [] {0.03685504,  0.002457  , -0.01902195, -0.0297218 , -0.03163493,
-                -0.02660614, -0.01633264, -0.00236408,  0.01389751,  0.03119765,
-                 0.04842946,  0.06463365,  0.07899851,  0.0908599 ,  0.09970128,
-                 0.10515369,  0.10699576,  0.10515369,  0.09970128,  0.0908599 ,
-                 0.07899851,  0.06463365,  0.04842946,  0.03119765,  0.01389751,
-                -0.00236408, -0.01633264, -0.02660614, -0.03163493, -0.0297218 ,
-                -0.01902195,  0.002457  ,  0.03685504} },
-            {"deriv_deg_4_num_points_33", new [] {0.01079422,  0.00507526,  0.00033263, -0.00349878, -0.00648404,
-                -0.00868824, -0.01017648, -0.01101384, -0.01126541, -0.01099627,
-                -0.01027152, -0.00915624, -0.00771552, -0.00601445, -0.00411811,
-                -0.0020916 ,  0.0       ,  0.0020916 ,  0.00411811,  0.00601445,
-                 0.00771552,  0.00915624,  0.01027152,  0.01099627,  0.01126541,
-                 0.01101384,  0.01017648,  0.00868824,  0.00648404,  0.00349878,
-                -0.00033263, -0.00507526, -0.01079422} },
-
-            {"smooth_deg_4_num_points_51", new [] {0.027848, 0.011603, -0.000865, -0.009946, -0.016012, -0.019419,
-                -0.020508, -0.019600, -0.017002, -0.013005, -0.007880, -0.001886,
-                 0.004738, 0.011769, 0.018999, 0.026238, 0.033312, 0.040063,
-                 0.046352, 0.052053, 0.057059, 0.061279, 0.064639, 0.067080,
-                 0.068562, 0.069058, 0.068562, 0.067080, 0.064639, 0.061279,
-                 0.057059, 0.052053, 0.046352, 0.040063, 0.033312, 0.026238,
-                 0.018999, 0.011769, 0.004738, -0.001886, -0.007880, -0.013005,
-                 -0.017002, -0.019600, -0.020508, -0.019419, -0.016012, -0.009946,
-                -0.000865, 0.011603, 0.027848} },
-            {"deriv_deg_4_num_points_51", new [] {0.004928, 0.003292, 0.001833, 0.000543, -0.000586, -0.001561,
-                -0.002389, -0.003077, -0.003634, -0.004066, -0.004380, -0.004585,
-                -0.004686, -0.004693, -0.004611, -0.004449, -0.004213, -0.003911,
-                -0.003551, -0.003139, -0.002683, -0.002190, -0.001668, -0.001124,
-                 -0.000566, -0.000000, 0.000566, 0.001124, 0.001668, 0.002190,
-                 0.002683, 0.003139, 0.003551, 0.003911, 0.004213, 0.004449,
-                0.004611, 0.004693, 0.004686, 0.004585, 0.004380, 0.004066,
-                 0.003634, 0.003077, 0.002389, 0.001561, 0.000586, -0.000543,
-                 -0.001833, -0.003292, -0.004928} },
-        };
-
-
-        public Tuple<double, double, double, double, double, double, double> data_processing(double[] aData, int numAddresses, Queue<double> filt_values,
-            double[] coeff, double[] coeff_deriv, int samples_per_second, int samples_for_mean, double samp_ev,
-            double ctn_old, double t_old, double mean_volt_hemo, double oldtime, double cps_old)
         {
             double ctn = 0;
             double ctn_now = 0;
@@ -722,6 +647,7 @@ namespace XPS
 
                 t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                 ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
+                /***
                 if (t_now < t_old)
                 {
                     ctn = (ctn_now - ctn_old) / (t_now - t_old + 4294967295) * 40000000 + 1;
@@ -730,17 +656,30 @@ namespace XPS
                 {
                     ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000 + 1;
                 }
+                ***/
+                ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 4000000 + 1;
 
-                //int p = 0;
+                int p = 0;
                 while (l <= i * samples_for_mean - 1)
                 {
                     mean_volt_hemo += aData[l * numAddresses + 0];
-                    //arr_median[p] = aData[l * numAddresses + 0];
+                    arr_median[p] = aData[l * numAddresses + 0];
                     l++;
-                    //p++;
+                    p++;
                 }
                 l--;
-                //p--;
+                p--;
+
+                using (var file = new StreamWriter(path_logfile + "test" + ".txt", true))
+                {
+                    for (int k = 0; k < samples_for_mean; k++)
+                    {
+                        file.WriteLine(
+                        arr_median[k].ToString("0.000000", System.Globalization.CultureInfo.InvariantCulture)
+                        );
+                    }
+                    file.WriteLine("" + Environment.NewLine);
+                }
 
                 //mean_volt_hemo = median(arr_median);
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
