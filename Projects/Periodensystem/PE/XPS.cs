@@ -34,65 +34,29 @@ namespace XPS
 
         HV_device DPS = new HV_device();
         HV_device H150666 = new HV_device();
-
-
         // IP adress Iseg-devices (ethernet connection)
         string ip_dps;
         string ip_xray;
-
         string LJM_connection_type = "ANY";
-
         // General settings
         //double V_photon;
         double E_HeI;               // Energy HeI-line
         double E_Al_Ka;            // Energy Al K_alpha photon
         double E_Mg_Ka;            // Energy Mg K_alpha photon
-        double ri;                    // Radius inner hemisphere in mm
-        //double ri = 92.075;
-        double ra;                    // Radius outer hemisphere in mm
-        //double ra = 111.125;
-        string pin_pressure_ak = string.Empty;       // Analog Input Pin of Ionivac
-        string pin_pressure_pk = string.Empty;
-        string pin_pressure_sk = string.Empty;
-        string pin_flow = string.Empty;
-        string pin_hemo = string.Empty;
-        string pin_hemi = string.Empty;
-        string pin_analyser = string.Empty;
         double vchanneltron;          // voltage drop over channeltron
+        string pin_pressure_ak = String.Empty;
         //double workfunction = 4.8;
-        double workfunction = 4.746;
-        double v_stabi_volt;                     // to always habe approx. 1500V voltage drop over Z-diode circuitry
-                                                 //double offset = 20;
-        double correction_offset = 0;        // correction factor vor pass energy
-
+        double workfunction;
+        double v_stabi_volt;
+        double k_fac;
         //[ 0.8544416  14.47170123  4.70083337  0.99564488]
-        double voltage_divider = 153.612 * 0.99569;
-        double k = 0.859;
-
-
-        // Labjack stuff           // Labjack threads
-        double ionivac_v_out = 0;           // Voltage of Ionivac output measured with Labjack device
-        double cnt_before = 0;              // coutner reading befor and after delay
-        double cnt_after = 0;
-        double cnt_flow_before = 0;              // coutner reading befor and after delay
-        double cnt_flow_after = 0;
-
-        // Voltage setting stuff
-        double vpass;
-        double vbias;                    // multiples of 4 mV/s
-
-
-        // Emission current regulation
-
-
+        double voltage_divider;
         string path_logfile;
-
         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         string curr_time;
         string[] scores = { "OZ", "El","K", "L1", "L2", "L3", "M1", "M2",
             "M3","M4","M5","N1","N2","N3","N4","N5","N6","N7","O1","O2","O3","O4",
             "O5","P1","P2","P3"};       // name of energy-lines corresponding to electron binding energies in "Bindungsenergien.csv"
-
         TextBox[] vset;
         TextBox[] vmeas;
         TextBox[] vmeas2;
@@ -101,7 +65,6 @@ namespace XPS
         CheckBox[] stat;
         TextBox[] vm;
         TextBox[] pwm_tb;
-
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private CancellationTokenSource _cts_pressure_labjack;           // Cancellation of Labjack pressure background measurement 
         private CancellationTokenSource _cts_flow_labjack;           // Cancellation of Labjack pressure background measurement 
@@ -113,87 +76,37 @@ namespace XPS
 
 
 
-
-
         public XPS()
         {
+            InitializeComponent();
+
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-            //try
-            // {
-            var dic = File.ReadAllLines("settings.txt").Select(l => l.Split(new[] { '=' })).ToDictionary(s => s[0].Trim(), s => s[1].Trim());
-            //}
-            //catch (Exception)
-            //{
-            //  AutoClosingMessageBox.Show("Can't read settings.txt", "Info", 2000);
-            //XPS_FormClosing();
-            //}
 
+            var dic = File.ReadAllLines("settings.txt").Select(l => l.Split(new[] { '=' })).ToDictionary(s => s[0].Trim(), s => s[1].Trim());
 
             Double.TryParse(dic["E_Photon_Aluminium_Ka_emission_line_[eV]"], out E_Al_Ka);
             Double.TryParse(dic["E_Photon_Magnesium_Ka_emission_line_[eV]"], out E_Mg_Ka);
             Double.TryParse(dic["E_Photon_HeI_emission_line_[eV]"], out E_HeI);
-            Double.TryParse(dic["r_inner_hemisphere_[mm]"], out ri);
-            Double.TryParse(dic["r_outer_hemisphere_[mm]"], out ra);
             Double.TryParse(dic["V_channeltron_voltagedrop_[V]"], out vchanneltron);
             Double.TryParse(dic["V_across_z-Diode_circuitry_[V]"], out v_stabi_volt);
+            Double.TryParse(dic["Workfunction"], out workfunction);
+            Double.TryParse(dic["voltage_divider"], out voltage_divider);
+            Double.TryParse(dic["k"], out k_fac);
             pin_pressure_ak = dic["LJ_T7_input_ADC_pressure_analyser_chamber"];
-            pin_pressure_pk = dic["LJ_T7_input_ADC_pressure_analyser_chamber"];
-            pin_pressure_sk = dic["LJ_T7_input_ADC_pressure_analyser_chamber"];
-            pin_flow = dic["LJ_T7_input_ADC_flow_control"];
-            pin_hemo = dic["LJ_T7_input_ADC_Hemo"];
-            pin_hemi = dic["LJ_T7_input_ADC_Hemi"];
-            pin_analyser = dic["LJ_T7_input_ADC_Analyser"];
             ip_dps = dic["IP_Iseg_DPS"];
             ip_xray = dic["IP_Iseg_H150666"];
 
-            InitializeComponent();
             // graph for showing XPS/UPS spectra (zedGraph)
             myPane = zedGraphControl1.GraphPane;
 
-            // formatting stuff for some buttons
-            Rf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Db.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Sg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Bh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Hs.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Mt.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Ds.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Rg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Cn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LightSalmon;
-            Uuh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uut.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uus.FlatAppearance.MouseOverBackColor = System.Drawing.Color.PaleGreen;
-            Uup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uuq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Aquamarine;
-            Uuo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Orange;
-            Np.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Pu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Am.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Cm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Bk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Cf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Es.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Fm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Md.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            No.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-            Lr.FlatAppearance.MouseOverBackColor = System.Drawing.Color.MediumSpringGreen;
-
             // border for the periodic table
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
 
             // display bindung energies in "Bindung energies" block & show oribital structure of an element
             lb_list_binding_energies = new System.Windows.Forms.Label[] {label4,label6,label8,label10,label12,label14,label16,label18,label20,label22,
                                                    label24,label26,label28,label30,label32,label34,label36,label38,label40,label42,
                                                     label44,label46,label48,label50};
-            /***
-            lb_list_orbital_structure = new System.Windows.Forms.Label[] {s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,
-                                                   s23,s24,s25,s26,s27,s28,s29,s30,s31,s32,s33,s34,s35,s36,s37,s38,s39,s40,s41,s42,
-                                                   s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59};
-            ***/
-
-
         }
 
 
@@ -233,13 +146,9 @@ namespace XPS
                 MessageBox.Show("Can't create Folder 'Logfile_PES' on Desktop");
             }
 
-
             background_meas_pressure_labjack();
             // cooling flow measurement, update every second
             background_meas_flow_labjack();
-
-
-
 
             //buttons for interactive periodic table
             Button[] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
@@ -255,7 +164,6 @@ namespace XPS
             {
                 item.MouseDown += global_element_click;
             }
-
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 3;
@@ -923,16 +831,17 @@ namespace XPS
         {
             try
             {
+                Double.TryParse(tb_lens.Text, out double set_voltage_lens);
                 double vpass = Convert.ToDouble(cb_pass.SelectedItem);
                 double vbias = Convert.ToDouble(cb_bias.SelectedItem);
                 double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
-                double set_voltage_hemo = -V_photon + vbias + vpass / k + workfunction + E_bind - vpass * 0.4;
+                double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4;
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
                 double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
 
                 await DPS.voltage_ramp(ramp);
                 await DPS.set_voltage(set_voltage_hemo, 0);
-                await DPS.set_voltage(Convert.ToDouble(tb_lens.Text), 2);
+                await DPS.set_voltage(set_voltage_lens - E_bind, 2);
                 await DPS.set_voltage(set_voltage_channeltron, 4);
                 await DPS.set_voltage(set_voltage_Stabi, 5);
 
@@ -966,8 +875,6 @@ namespace XPS
             zedGraphControl1.AxisChange();
             zedGraphControl1.Refresh();
         }
-
-        //double timee;
 
 
         private void btn_test_Click(object sender, EventArgs e)
@@ -1099,9 +1006,6 @@ namespace XPS
         private void btn_DPS_off_Click(object sender, EventArgs e)
         {
             DPS_reset();
-            //_suspend_background_measurement.Set();
-            //rs_all.PerformClick();
-            //_suspend_background_measurement.Reset();
         }
 
         private void tb_Imin_TextChanged(object sender, EventArgs e)

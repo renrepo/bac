@@ -22,6 +22,7 @@ namespace XPS
         private async void background_meas_pressure_labjack()
         {
             int handle_pressure_ak = 1;
+            double ionivac_v_out = 0;
 
             try
             {
@@ -148,6 +149,8 @@ namespace XPS
         private async void background_meas_flow_labjack()
         {
             int handle_flow = 2;
+            double cnt_flow_before = 0;
+            double cnt_flow_after = 0;
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_flow);
@@ -211,6 +214,8 @@ namespace XPS
         private async void background_counter_labjack()
         {
             int handle_background_counter = 3;
+            double cnt_before = 0;
+            double cnt_after = 0;
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_background_counter);
@@ -376,8 +381,8 @@ namespace XPS
             //double v_ctn_cum = 0;
 
             // read in desired values for Passenergy, voltage bias, stepsize, time per step and lens voltage
-            vpass = Convert.ToDouble(cb_pass.SelectedItem);
-            vbias = Convert.ToDouble(cb_bias.SelectedItem);
+            double vpass = Convert.ToDouble(cb_pass.SelectedItem);
+            double vbias = Convert.ToDouble(cb_bias.SelectedItem);
             //vstepsize = Convert.ToDouble(cb_stepwidth.SelectedItem);
             double voltramp = 0.125 * 1 / Convert.ToDouble(cb_samp_ev.SelectedItem);
 
@@ -407,17 +412,15 @@ namespace XPS
                 file.WriteLine("#E_Photon: \t{0} \t{1}", V_photon.ToString("0.0"), "\t V");
                 file.WriteLine("#I_Emission: \t{0} \t{1}", tb_emi.Text, "\t mA");
                 file.WriteLine("#V_Anode: \t{0} \t{1}", tb_anode_voltage.Text, "\t V");
-                file.WriteLine("#Prevoltage: \t{0} \t{1}", tb_prevolt.Text, "\t V");
                 file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
                 file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
                 file.WriteLine("#TDAC: \t{0} \t{1}", tb_dac, "\t V");
                 file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens, "\t V");
-                file.WriteLine("#Factor k: \t{0} \t{1}", k.ToString(), "\t ");
+                file.WriteLine("#Factor k: \t{0} \t{1}", k_fac.ToString(), "\t ");
                 file.WriteLine("#Slope: \t{0} \t{1}", voltramp.ToString("0.0000"), "\t Samples/eV");
                 file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
                 file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
                 file.WriteLine("#Slit: \t{0} \t{1}", tb_slit.Text, "");
-                file.WriteLine("#Corr offset: \t{0} \t{1}", correction_offset.ToString(), "");
                 file.WriteLine("#ADC_factor: \t{0} \t{1}", voltage_divider.ToString(), "");
                 file.WriteLine("#Samp_mean: \t{0} \t{1}", samples_for_mean.ToString(), "");
                 file.WriteLine("#Samp/sec: \t{0} \t{1}", samples_per_second.ToString(), "");
@@ -517,7 +520,6 @@ namespace XPS
                 double cps_old = 1;
                 Stopwatch sw = new Stopwatch();
 
-                tb_lens.Text = 200.ToString();
                 set_all_control_voltages(E_B_end,voltramp,100);
 
                 await Task.Run(() =>
@@ -553,7 +555,7 @@ namespace XPS
                         {
                             sw.Start();
                             var old_values = data_processing(aData, numAddresses, filt_values, coeff, coeff_deriv, samples_per_second, samples_for_mean, samp_ev,
-                                ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon);
+                                ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon, vbias, vpass, k_fac);
                             ctn_old = old_values.Item1;
                             t_old = old_values.Item2;
                             oldtime = old_values.Item3;
@@ -604,8 +606,6 @@ namespace XPS
                 btn_clear.Enabled = true;
                 fig_name.Enabled = true;
                 showdata.Enabled = true;
-                //await DPS.channel_off(4);
-                //await DPS.reset_channels();
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
                 LJM.eStreamStop(handle_stream);
@@ -623,7 +623,8 @@ namespace XPS
             double[] aData, int numAddresses, Queue<double> filt_values,
             double[] coeff, double[] coeff_deriv, int samples_per_second,
             int samples_for_mean, double samp_ev, double ctn_old, double t_old, 
-            double mean_volt_hemo, double oldtime, double cps_old, double V_photon)
+            double mean_volt_hemo, double oldtime, double cps_old, double V_photon,
+            double vbias, double vpass, double k_fac)
 
         {
             double ctn = 0;
@@ -648,16 +649,7 @@ namespace XPS
 
                 t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                 ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
-                /***
-                if (t_now < t_old)
-                {
-                    ctn = (ctn_now - ctn_old) / (t_now - t_old + 4294967295) * 40000000 + 1;
-                }
-                else
-                {
-                    ctn = (ctn_now - ctn_old) / (t_now - t_old) * 40000000 + 1;
-                }
-                ***/
+
                 ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 4000000 + 1;
 
                 //int p = 0;
@@ -686,8 +678,7 @@ namespace XPS
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
                 mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
 
-
-                E_bind = mean_volt_hemo * voltage_divider + V_photon - vbias - vpass / k - workfunction + vpass * 0.4;
+                E_bind = mean_volt_hemo * voltage_divider + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
 
                 error = Math.Sqrt(ctn);
                 //values_to_plot.Add(oldtime, ctn);
@@ -696,9 +687,6 @@ namespace XPS
                 //myCurve.AddPoint(oldtime, oldtime + 1000);
                 errorlist.Add(E_bind, ctn - error, ctn + error);
                 //errorCurve.AddPoint(oldtime, ctn - error, ctn + error);
-
-                //t_old = t_now;
-                //mean_volt_hemo = 0;
 
                 //Savitzky Golay filtering
                 filt_values.Enqueue(ctn);
@@ -757,8 +745,6 @@ namespace XPS
                 }
             }
 
-            
-
             try
             {
                 zedGraphControl1.Invalidate();
@@ -766,9 +752,7 @@ namespace XPS
             }
             catch (Exception)
             {
-
-            }  
-            
+            }            
             return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, oldtime, ctn);
         }
 

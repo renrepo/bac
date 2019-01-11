@@ -385,10 +385,8 @@
             this.tb_cps = new System.Windows.Forms.TextBox();
             this.label110 = new System.Windows.Forms.Label();
             this.tb_lens = new System.Windows.Forms.TextBox();
-            this.tb_prevolt = new System.Windows.Forms.TextBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
             this.label74 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
@@ -3258,11 +3256,6 @@
             resources.ApplyResources(this.tb_lens, "tb_lens");
             this.tb_lens.Name = "tb_lens";
             // 
-            // tb_prevolt
-            // 
-            resources.ApplyResources(this.tb_prevolt, "tb_prevolt");
-            this.tb_prevolt.Name = "tb_prevolt";
-            // 
             // cb_bias
             // 
             this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3277,11 +3270,6 @@
             // 
             resources.ApplyResources(this.label74, "label74");
             this.label74.Name = "label74";
-            // 
-            // label76
-            // 
-            resources.ApplyResources(this.label76, "label76");
-            this.label76.Name = "label76";
             // 
             // tb_dac
             // 
@@ -3320,8 +3308,6 @@
             this.groupBox9.Controls.Add(this.tb_slit);
             this.groupBox9.Controls.Add(this.cb_bias);
             this.groupBox9.Controls.Add(this.tb_lens);
-            this.groupBox9.Controls.Add(this.label76);
-            this.groupBox9.Controls.Add(this.tb_prevolt);
             this.groupBox9.Controls.Add(this.label110);
             this.groupBox9.Controls.Add(this.tb_dac);
             resources.ApplyResources(this.groupBox9, "groupBox9");
@@ -3817,7 +3803,6 @@
         private System.Windows.Forms.Label label75;
         private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Label label73;
-        private System.Windows.Forms.Label label76;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox vm1;
@@ -3863,7 +3848,6 @@
         private System.Windows.Forms.TextBox tb_volt_ramp;
         private System.Windows.Forms.TextBox tb_curr_ramp;
         private System.Windows.Forms.ComboBox cb_samp_ev;
-        private System.Windows.Forms.TextBox tb_prevolt;
         private System.Windows.Forms.TextBox tb_dac;
         private System.Windows.Forms.TextBox tb_set_E_B;
         private System.Windows.Forms.Label label78;

@@ -12958,7 +12958,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;label110.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="tb_lens.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 70</value>
@@ -12973,7 +12973,7 @@
     <value>301</value>
   </data>
   <data name="tb_lens.Text" xml:space="preserve">
-    <value>3800</value>
+    <value>3900</value>
   </data>
   <data name="tb_lens.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -12989,33 +12989,6 @@
   </data>
   <data name="&gt;&gt;tb_lens.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="tb_prevolt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 44</value>
-  </data>
-  <data name="tb_prevolt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 24</value>
-  </data>
-  <data name="tb_prevolt.TabIndex" type="System.Int32, mscorlib">
-    <value>277</value>
-  </data>
-  <data name="tb_prevolt.Text" xml:space="preserve">
-    <value>-20</value>
-  </data>
-  <data name="tb_prevolt.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tb_prevolt.Name" xml:space="preserve">
-    <value>tb_prevolt</value>
-  </data>
-  <data name="&gt;&gt;tb_prevolt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_prevolt.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;tb_prevolt.ZOrder" xml:space="preserve">
-    <value>10</value>
   </data>
   <data name="cb_bias.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -13080,39 +13053,6 @@
   <data name="&gt;&gt;label74.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="label76.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label76.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
-  </data>
-  <data name="label76.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label76.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 49</value>
-  </data>
-  <data name="label76.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 15</value>
-  </data>
-  <data name="label76.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="label76.Text" xml:space="preserve">
-    <value>U_pre [V]</value>
-  </data>
-  <data name="&gt;&gt;label76.Name" xml:space="preserve">
-    <value>label76</value>
-  </data>
-  <data name="&gt;&gt;label76.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label76.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label76.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="tb_dac.Location" type="System.Drawing.Point, System.Drawing">
     <value>107, 94</value>
   </data>
@@ -13126,7 +13066,7 @@
     <value>295</value>
   </data>
   <data name="tb_dac.Text" xml:space="preserve">
-    <value>1.202</value>
+    <value>1.203</value>
   </data>
   <data name="tb_dac.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -13141,7 +13081,7 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
