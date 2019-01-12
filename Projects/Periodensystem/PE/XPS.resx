@@ -10246,7 +10246,7 @@
     <value>14</value>
   </data>
   <data name="label57.Text" xml:space="preserve">
-    <value>Outer Hem.</value>
+    <value>Inner Hem.</value>
   </data>
   <data name="label57.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -10288,7 +10288,7 @@
     <value>14</value>
   </data>
   <data name="label81.Text" xml:space="preserve">
-    <value>Inner Hem.</value>
+    <value>Outer Hem.</value>
   </data>
   <data name="label81.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -12495,39 +12495,6 @@
   <data name="&gt;&gt;vm3.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="vm4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="vm4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9.75pt</value>
-  </data>
-  <data name="vm4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 76</value>
-  </data>
-  <data name="vm4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="vm4.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="vm4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="vm4.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;vm4.Name" xml:space="preserve">
-    <value>vm4</value>
-  </data>
-  <data name="&gt;&gt;vm4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;vm4.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;vm4.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="vm5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -12535,7 +12502,7 @@
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="vm5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 101</value>
+    <value>57, 76</value>
   </data>
   <data name="vm5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -12547,7 +12514,7 @@
     <value>75, 23</value>
   </data>
   <data name="vm5.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;vm5.Name" xml:space="preserve">
     <value>vm5</value>
@@ -12559,6 +12526,39 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;vm5.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="vm6.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="vm6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="vm6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>57, 101</value>
+  </data>
+  <data name="vm6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="vm6.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="vm6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="vm6.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;vm6.Name" xml:space="preserve">
+    <value>vm6</value>
+  </data>
+  <data name="&gt;&gt;vm6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vm6.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;vm6.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="label101.AutoSize" type="System.Boolean, mscorlib">
@@ -12669,6 +12669,42 @@
   <data name="&gt;&gt;label103.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="label105.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label105.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label105.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label105.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 75</value>
+  </data>
+  <data name="label105.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 25</value>
+  </data>
+  <data name="label105.TabIndex" type="System.Int32, mscorlib">
+    <value>279</value>
+  </data>
+  <data name="label105.Text" xml:space="preserve">
+    <value>CEM</value>
+  </data>
+  <data name="label105.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;label105.Name" xml:space="preserve">
+    <value>label105</value>
+  </data>
+  <data name="&gt;&gt;label105.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label105.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;label105.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="label104.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -12679,7 +12715,7 @@
     <value>NoControl</value>
   </data>
   <data name="label104.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 75</value>
+    <value>3, 100</value>
   </data>
   <data name="label104.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 25</value>
@@ -12703,42 +12739,6 @@
     <value>tableLayoutPanel2</value>
   </data>
   <data name="&gt;&gt;label104.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="label105.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label105.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="label105.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label105.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 100</value>
-  </data>
-  <data name="label105.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 25</value>
-  </data>
-  <data name="label105.TabIndex" type="System.Int32, mscorlib">
-    <value>279</value>
-  </data>
-  <data name="label105.Text" xml:space="preserve">
-    <value>CEM out</value>
-  </data>
-  <data name="label105.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;label105.Name" xml:space="preserve">
-    <value>label105</value>
-  </data>
-  <data name="&gt;&gt;label105.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label105.Parent" xml:space="preserve">
-    <value>tableLayoutPanel2</value>
-  </data>
-  <data name="&gt;&gt;label105.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
   <data name="label107.AutoSize" type="System.Boolean, mscorlib">
@@ -12868,7 +12868,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lb_cps" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vm1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label51" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_pressure" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm3" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm4" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm5" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;Control Name="label102" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label103" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label104" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label105" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label107" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_flow" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_cps" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,42,85714,Percent,57,14286" /&gt;&lt;Rows Styles="Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lb_cps" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vm1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label51" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_pressure" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm3" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm5" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm6" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;Control Name="label102" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label103" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label105" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label104" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label107" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_flow" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_cps" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,42,85714,Percent,57,14286" /&gt;&lt;Rows Styles="Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,25,Absolute,20,Absolute,20,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>

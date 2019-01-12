@@ -113,9 +113,7 @@ namespace XPS
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            DPS.Is_session_open = false;
-            H150666.Is_session_open = false;
-            groupBox3.Enabled = false;
+            DPS.Is_session_open = H150666.Is_session_open = groupBox3.Enabled = false;
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
             // draw coordinate system
@@ -167,11 +165,8 @@ namespace XPS
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 3;
-            cb_bias.SelectedIndex = 0;
-            cb_select.SelectedIndex = 0;
-            cb_scanrange.SelectedIndex = 0;
+            cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
             cb_samp_ev.SelectedIndex = 2;
-            cb_DAC.SelectedIndex = 0;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
 
@@ -188,6 +183,8 @@ namespace XPS
 
             Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
             Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
+
+            Init_DPS_control_panel();
         }
 
         //##################################################################################################################################################################
@@ -199,12 +196,12 @@ namespace XPS
             // textboxes and buttons for the "Iseg Control" panel (controlling of the 6-chanel-HV-device)
             vset = new TextBox[] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
-            vmeas2 = new TextBox[] { vm1, vm2, vm3, vm4, vm5 };
+            vmeas2 = new TextBox[] { vm1, vm2, vm3, vm5, vm6 };
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1, rs2, rs3, rs4, rs5, rs6 };
             stat = new CheckBox[] { stat1, stat2, stat3, stat4, stat5, stat6 };
 
-            vm = new TextBox[] { vm1, vm2, vm3, vm4, vm5 };
+            vm = new TextBox[] { vm1, vm2, vm3, vm5, vm6 };
 
             // Try to Open DPS and H150666 HV devices while startup of software
             // IMPORTANT: textboxes have to be created before éxecuting the code below!!!
@@ -331,15 +328,7 @@ namespace XPS
                     c.Text = "Iseg Xray connected";
                     c.BackColor = Color.LightGreen;
 
-                    if ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && DPS.Is_session_open == true)
-                    {
-                        btn_start.Enabled = true;
-                    }
-
-                    else
-                    {
-                        btn_start.Enabled = false;
-                    }
+                    btn_start.Enabled = ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && DPS.Is_session_open == true) ? true : false;
                 }
                 catch (Exception exp)
                 {
@@ -352,7 +341,6 @@ namespace XPS
                 }
 
             }
-
             else
             {
                 try
@@ -382,41 +370,24 @@ namespace XPS
         {
             CheckBox c = sender as CheckBox;
             Cursor.Current = Cursors.WaitCursor;
-            //if (c.Text == "Iseg DPS disconnected")
             if (DPS.Is_session_open == false)
             {
-                Init_DPS_control_panel();
-
                 try
                 {
                     await DPS.open_session("132.195.109.144");
                     await DPS.check_dps();
                     await DPS.clear_emergency();
-                    //await DPS.set_vnom(1000,1);
-                    await DPS.voltage_ramp(4.0);
+                    await DPS.voltage_ramp(5.0);
 
                     for (int i = 0; i < 6; i++)
                     {
-                        reset[i].Enabled = true;
-                        reload[i].Enabled = true;
-                        stat[i].Enabled = true;
+                        reset[i].Enabled = reload[i].Enabled = stat[i].Enabled = true;
                     }
-                    groupBox3.Enabled = true;
-                    rs_all.Enabled = true;
-                    btn_emcy.Enabled = true;
+                    groupBox3.Enabled = rs_all.Enabled = btn_emcy.Enabled = true;
                     background_meas_volt_DPS();
                     c.Text = "Iseg DPS connected";
                     c.BackColor = Color.LightGreen;
-
-                    if ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && H150666.Is_session_open == true)
-                    {
-                        btn_start.Enabled = true;
-                    }
-
-                    else
-                    {
-                        btn_start.Enabled = false;
-                    }
+                    btn_start.Enabled = ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && H150666.Is_session_open == true) ? true : false;
                 }
                 catch (Exception exp)
                 {
@@ -428,21 +399,11 @@ namespace XPS
                     Cursor.Current = Cursors.Default;
                 }
             }
-
             else
             {
                 try
                 {
-                    if (_cts_volt_dps != null)
-                    {
-                        _cts_volt_dps.Cancel();
-                    }
-                    _suspend_background_measurement.Set();
-                    await DPS.reset_channels();
-                    //DPS.clear();
-                    await DPS.dispose();
-                    DPS.Is_session_open = false;
-                    btn_start.Enabled = false;
+                    _cts_volt_dps.Cancel();
                     c.Text = "Iseg DPS disconnected";
                     c.BackColor = Color.Silver;
                 }
@@ -498,12 +459,8 @@ namespace XPS
             }
             tb_show.Text = string.Empty;
             //lb_perc_gauss.Text = "%";
-            btn_start.Enabled = true;
-            btn_clear.Enabled = false;
-            showdata.Enabled = false;
-            safe_fig.Enabled = false;
-            tb_safe.Enabled = true;
-            fig_name.Enabled = false;
+            btn_start.Enabled = tb_safe.Enabled = true;
+            btn_clear.Enabled = showdata.Enabled = safe_fig.Enabled = fig_name.Enabled = false;
             progressBar1.Value = 0;
             lb_progress.Text = string.Empty;
             //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
@@ -823,8 +780,6 @@ namespace XPS
             await H150666.channel_off(0);
             await H150666.set_voltage(0, 0);
             await H150666.reset_channels();
-            //await H150666.set_current(0,2);
-            //await H150666.channel_off(1);
         }
 
         private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime)

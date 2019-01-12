@@ -79,44 +79,36 @@ namespace XPS
         {
             _cts_volt_dps = new CancellationTokenSource();
             var token = _cts_volt_dps.Token;
-            int result = 0;
             int i = -1;
+            string[] arr_voltages = new string[6];
             var progressHandler2 = new Progress<string>(value =>
             {
-                //vmeas[result].Text = value.Substring(0,7);
-                vmeas[result].Text = String.Format("{0:.##}", value);
-                if (result < 3)
+                for (int j = 0; j < 6; j++)
                 {
-                    vmeas2[result].Text = String.Format("{0:.##}", value);
-                }
-
-                if (result == 4)
-                {
-                    vmeas2[result].Text = String.Format("{0:.##}", value);
-                }
-
-                if (result == 5)
-                {
-                    vmeas2[result - 2].Text = String.Format("{0:.##}", value);
+                    vmeas[j].Text = String.Format("{0:.##}", arr_voltages[j]);
+                    if (j != 3)
+                    {
+                        vmeas2[j].Text = String.Format("{0:.##}", arr_voltages[j]);
+                    }
                 }
             });
             var progress = progressHandler2 as IProgress<string>;
             string readback = string.Empty;
-            //double readback = 0;
             try
             {
                 await Task.Run(() =>
                 {
                     while (true)
                     {
+                        _cts_volt_dps.Token.ThrowIfCancellationRequested();
                         ++i;
                         if (i == 6)
                         {
+                            progress.Report(readback);
                             i = 0;
                         }
                         DPS.raw_read_syn(i);
-                        Thread.Sleep(50);
-                        //otherwise problems when closing DPS-session
+                        Thread.Sleep(60);
                         try
                         {
                             readback = (DPS.raw_read_syn().Replace("V\r\n", ""));
@@ -127,21 +119,19 @@ namespace XPS
                                 readback = readback.Replace("E3", "");
                                 readback = ((Double.Parse(readback) * 1000.0).ToString("0.00"));
                             }
+                            arr_voltages[i] = readback;
                         }
-                        catch (Exception) { }
-                        progress.Report(readback);
-                        //progress.Report(i.ToString());
-                        result = i;
+                        catch (Exception) { }                 
                         // don't place _suspend_.. above "result = i" (avoids false allocation of readback and chanel number)
                         _suspend_background_measurement.WaitOne(Timeout.Infinite);
-                        Thread.Sleep(50);
                     }
                 });
-                //MessageBox.Show("Completed!");
             }
             catch (OperationCanceledException)
             {
-                //AutoClosingMessageBox.Show("Problem with background measurement of Iseg DPS voltages", "Info", 500);
+                await DPS.reset_channels();
+                DPS.Is_session_open = btn_start.Enabled = false;
+                await DPS.dispose();           
             }
         }
 
@@ -486,10 +476,8 @@ namespace XPS
             }
 
 
-            btn_start.Enabled = false;
-            btn_can.Enabled = true;
-            tb_show.Enabled = true;
-            tb_safe.Enabled = false;
+            btn_start.Enabled = tb_safe.Enabled = false;
+            btn_can.Enabled = tb_show.Enabled = true;
 
             LJM.eWriteName(handle_stream, "DIO18_EF_INDEX", 7);
             LJM.eWriteName(handle_stream, "DIO18_EF_ENABLE", 1);
@@ -584,9 +572,7 @@ namespace XPS
                 });
                 zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
                 btn_can.Enabled = false;
-                btn_clear.Enabled = true;
-                fig_name.Enabled = true;
-                showdata.Enabled = true;
+                btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                 DPS_reset();
                 LJM.eStreamStop(handle_stream);
                 tb_cps.Text = "end";
@@ -603,9 +589,7 @@ namespace XPS
             {
                 //zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
                 btn_can.Enabled = false;
-                btn_clear.Enabled = true;
-                fig_name.Enabled = true;
-                showdata.Enabled = true;
+                btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
                 LJM.eStreamStop(handle_stream);
@@ -755,8 +739,6 @@ namespace XPS
             }            
             return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, oldtime, ctn);
         }
-
-        
 
     }
 }

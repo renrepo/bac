@@ -190,10 +190,7 @@ namespace XPS
             //myCurve.YAxisIndex = 1;
             //myPane.XAxis.Tag = 5;
             //myPane.YAxis.Tag = 6;
-            myPane.XAxis.Scale.MaxAuto = true;
-            myPane.YAxis.Scale.MaxAuto = true;
-            myPane.XAxis.Scale.MinAuto = true;
-            myPane.YAxis.Scale.MinAuto = true;
+            myPane.XAxis.Scale.MaxAuto = myPane.YAxis.Scale.MaxAuto = myPane.XAxis.Scale.MinAuto = myPane.YAxis.Scale.MinAuto = true;
 
             myPane.AxisChange();
 
@@ -365,9 +362,6 @@ namespace XPS
             //}
             return Tuple.Create(smoothed_data, smoothed_data_first_dev);
         }
-
-
-
 
     }
 

@@ -373,13 +373,13 @@
             this.tb_pressure = new System.Windows.Forms.TextBox();
             this.vm2 = new System.Windows.Forms.TextBox();
             this.vm3 = new System.Windows.Forms.TextBox();
-            this.vm4 = new System.Windows.Forms.TextBox();
             this.vm5 = new System.Windows.Forms.TextBox();
+            this.vm6 = new System.Windows.Forms.TextBox();
             this.label101 = new System.Windows.Forms.Label();
             this.label102 = new System.Windows.Forms.Label();
             this.label103 = new System.Windows.Forms.Label();
-            this.label104 = new System.Windows.Forms.Label();
             this.label105 = new System.Windows.Forms.Label();
+            this.label104 = new System.Windows.Forms.Label();
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
             this.tb_cps = new System.Windows.Forms.TextBox();
@@ -3139,13 +3139,13 @@
             this.tableLayoutPanel2.Controls.Add(this.tb_pressure, 1, 5);
             this.tableLayoutPanel2.Controls.Add(this.vm2, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.vm3, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.vm4, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.vm5, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.vm5, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.vm6, 1, 4);
             this.tableLayoutPanel2.Controls.Add(this.label101);
             this.tableLayoutPanel2.Controls.Add(this.label102, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label103, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label104, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label105, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label105, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label104, 0, 4);
             this.tableLayoutPanel2.Controls.Add(this.label107, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.tb_flow, 1, 6);
             this.tableLayoutPanel2.Controls.Add(this.tb_cps, 1, 7);
@@ -3189,19 +3189,19 @@
             this.vm3.Name = "vm3";
             this.vm3.ReadOnly = true;
             // 
-            // vm4
-            // 
-            this.vm4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.vm4, "vm4");
-            this.vm4.Name = "vm4";
-            this.vm4.ReadOnly = true;
-            // 
             // vm5
             // 
             this.vm5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm5, "vm5");
             this.vm5.Name = "vm5";
             this.vm5.ReadOnly = true;
+            // 
+            // vm6
+            // 
+            this.vm6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.vm6, "vm6");
+            this.vm6.Name = "vm6";
+            this.vm6.ReadOnly = true;
             // 
             // label101
             // 
@@ -3218,15 +3218,15 @@
             resources.ApplyResources(this.label103, "label103");
             this.label103.Name = "label103";
             // 
-            // label104
-            // 
-            resources.ApplyResources(this.label104, "label104");
-            this.label104.Name = "label104";
-            // 
             // label105
             // 
             resources.ApplyResources(this.label105, "label105");
             this.label105.Name = "label105";
+            // 
+            // label104
+            // 
+            resources.ApplyResources(this.label104, "label104");
+            this.label104.Name = "label104";
             // 
             // label107
             // 
@@ -3809,8 +3809,8 @@
         private System.Windows.Forms.TextBox tb_pressure;
         private System.Windows.Forms.TextBox vm2;
         private System.Windows.Forms.TextBox vm3;
-        private System.Windows.Forms.TextBox vm4;
         private System.Windows.Forms.TextBox vm5;
+        private System.Windows.Forms.TextBox vm6;
         private System.Windows.Forms.Label label101;
         private System.Windows.Forms.Label label102;
         private System.Windows.Forms.Label label103;
