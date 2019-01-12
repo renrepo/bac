@@ -668,7 +668,7 @@ namespace XPS
                 ***/
                 //mean_volt_hemo = median(arr_median);
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
-                mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
+                //mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
 
                 E_bind = mean_volt_hemo * voltage_divider + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
 

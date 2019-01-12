@@ -167,6 +167,7 @@ namespace XPS
             cb_pass.SelectedIndex = 3;
             cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
             cb_samp_ev.SelectedIndex = 2;
+            cb_DAC.SelectedIndex = 1;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
 
