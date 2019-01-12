@@ -134,9 +134,9 @@ namespace XPS
             //create dictionary for logfiles
             try
             {
-                if (!Directory.Exists(path + @"\Logfiles_PES"))
+                if (!Directory.Exists(path + @"\Logfiles_PES_tin"))
                 {
-                    Directory.CreateDirectory(path + @"\Logfiles_PES");
+                    Directory.CreateDirectory(path + @"\Logfiles_PES_tin");
                 }
             }
             catch
@@ -200,8 +200,6 @@ namespace XPS
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1, rs2, rs3, rs4, rs5, rs6 };
             stat = new CheckBox[] { stat1, stat2, stat3, stat4, stat5, stat6 };
-
-            vm = new TextBox[] { vm1, vm2, vm3, vm5, vm6 };
 
             // Try to Open DPS and H150666 HV devices while startup of software
             // IMPORTANT: textboxes have to be created before éxecuting the code below!!!
@@ -453,7 +451,7 @@ namespace XPS
         private void btn_clear_Click(object sender, EventArgs e)
         {
             //take_UPS_spec = false;
-            foreach (var item in vm)
+            foreach (var item in vmeas2)
             {
                 item.Text = String.Empty;
             }

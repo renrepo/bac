@@ -86,9 +86,15 @@ namespace XPS
                 for (int j = 0; j < 6; j++)
                 {
                     vmeas[j].Text = String.Format("{0:.##}", arr_voltages[j]);
-                    if (j != 3)
+
+                    if (j < 3)
                     {
                         vmeas2[j].Text = String.Format("{0:.##}", arr_voltages[j]);
+                    }
+
+                    if (j == 4|| j == 5)
+                    {
+                        vmeas2[j-1].Text = String.Format("{0:.##}", arr_voltages[j]);
                     }
                 }
             });
@@ -108,7 +114,7 @@ namespace XPS
                             i = 0;
                         }
                         DPS.raw_read_syn(i);
-                        Thread.Sleep(60);
+                        Thread.Sleep(40);
                         try
                         {
                             readback = (DPS.raw_read_syn().Replace("V\r\n", ""));
@@ -388,10 +394,11 @@ namespace XPS
             //myCurve.Line.IsVisible = false;
             curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
             string u = tb_safe.Text + curr_time;
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_test\", " " + curr_time + "_" +
-            tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "\\"));
+            //DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_tin\", " " + curr_time + "_" +
+            //tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_tin\", "tin" + "\\"));
             path_logfile = dl.FullName;
-            using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
             {
                 file.WriteLine("#XPS-spectrum" + Environment.NewLine);
                 file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
@@ -531,12 +538,12 @@ namespace XPS
                     while (true)
                     {
                         //if (oldtime > 20)
-                        if ((E_B_end < (curr_E_B + 1.2)))
+                        if ((E_B_end < (curr_E_B + 1.8)))
                         {
                             return; // jumps out of await Task.Run();
                         }
                         sw.Reset();
-                        _cts_XPS.Token.ThrowIfCancellationRequested();
+                        
                         LJMError = LJM.eStreamRead(handle_stream, aData, ref DeviceScanBacklog, ref LJMScanBacklog);
 
                         if (LJMError == 0)
@@ -559,6 +566,7 @@ namespace XPS
                             //_suspend_background_measurement.WaitOne(Timeout.Infinite);
                             timee = sw.Elapsed.TotalMilliseconds;
                             sw.Stop();
+                            _cts_XPS.Token.ThrowIfCancellationRequested();
                         }
 
                         else
@@ -570,7 +578,7 @@ namespace XPS
                         }
                     }
                 });
-                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
+                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "_" + tb_safe.Text + ".png"));
                 btn_can.Enabled = false;
                 btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                 DPS_reset();
@@ -579,7 +587,7 @@ namespace XPS
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
 
-                using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  E N D");
                 }
@@ -595,7 +603,7 @@ namespace XPS
                 LJM.eStreamStop(handle_stream);
                 DPS_reset();
                 tb_cps.Text = "Stop!";
-                using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
@@ -634,7 +642,7 @@ namespace XPS
                 t_now = aData[inc + 3] + aData[inc + 4] * 65536;
                 ctn_now = aData[inc + 1] + aData[inc + 2] * 65536;
 
-                ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 4000000 + 1;
+                ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 40000000 + 1;
 
                 //int p = 0;
                 while (l <= i * samples_for_mean - 1)
@@ -716,7 +724,7 @@ namespace XPS
             }
             //mean_volt_hemo = aData[aData.Length - numAddresses];
             //progress.Report(v_ctn_cum.ToString("000000"));
-            using (var file = new StreamWriter(path_logfile + "data" + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
             {
                 for (int i = 0; i < samples_per_second-1; i++)
                 {
@@ -731,8 +739,11 @@ namespace XPS
 
             try
             {
-                zedGraphControl1.Invalidate();
-                zedGraphControl1.AxisChange();
+                if (!_cts_XPS.Token.IsCancellationRequested)
+                {
+                    zedGraphControl1.Invalidate();
+                    zedGraphControl1.AxisChange();
+                }
             }
             catch (Exception)
             {
