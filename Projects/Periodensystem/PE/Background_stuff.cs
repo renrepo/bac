@@ -794,7 +794,8 @@ namespace XPS
 
             for (int i = 0; i < 1000; i++)
             {
-                LJM.eWriteName(handle_dac, "TDAC0", i/500);
+                double volt = i / 100.0;
+                LJM.eWriteName(handle_dac, "TDAC0", volt);
                 await Task.Delay(200);
 
                 if (test_abort)
