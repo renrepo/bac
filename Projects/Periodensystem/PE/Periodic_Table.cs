@@ -157,13 +157,12 @@ namespace XPS
             int svg_red = 100;
             int svg_green = 255;
             int svg_blue = 255;
-            double dimm = 1.0;
             //int error_red = Convert.ToInt16(Math.Floor((255 - svg_red) * dimm));
             //int error_green = Convert.ToInt16(Math.Floor((255 - svg_green) * dimm));
             //int error_blue = Convert.ToInt16(Math.Floor((255 - svg_blue) * dimm));
-            int error_red = 128;
-            int error_green = 21;
-            int error_blue = 0;
+            //int error_red = 128;
+            //int error_green = 21;
+            //int error_blue = 0;
             myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(svg_red, svg_green, svg_blue), SymbolType.None);
             myCurve_svg.Line.Width = 1;
             myCurve_svg.Tag = 1;
@@ -174,16 +173,18 @@ namespace XPS
             myCurve_svg_deriv.Tag = 2;
             //myCurve_svg_deriv.YAxisIndex = 2;
 
-            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(error_red, error_green, error_blue));
+            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(230, 225, 215));
             errorCurve.Bar.Symbol.Type = SymbolType.Circle;
             errorCurve.Bar.Symbol.Size = 0;
             errorCurve.Tag = 3;
             //errorCurve.YAxisIndex = 3;
 
-            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(210, 104, 87), SymbolType.Circle);
+            myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(red, green, blue), SymbolType.Circle);
+            //myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(210, 104, 87), SymbolType.Circle);
             myCurve.Symbol.Size = 1;
             //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
-            myCurve.Line.Color = Color.FromArgb(90, 15, 0);
+            //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
+            myCurve.Line.Color = Color.FromArgb(230, 225, 215);
             myCurve.Tag = 4;
 
 

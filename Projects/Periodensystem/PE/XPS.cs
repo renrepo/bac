@@ -32,12 +32,13 @@ namespace XPS
     public partial class XPS : Form
     {
 
-        HV_device DPS = new HV_device();
-        HV_device H150666 = new HV_device();
+        HV_device DPS = null;
+        HV_device H150666 = null;
         // IP adress Iseg-devices (ethernet connection)
         string ip_dps;
         string ip_xray;
         string LJM_connection_type = "ANY";
+        string pin_bias_voltage = "2";
         // General settings
         //double V_photon;
         double E_HeI;               // Energy HeI-line
@@ -63,7 +64,6 @@ namespace XPS
         Button[] reload;
         Button[] reset;
         CheckBox[] stat;
-        TextBox[] vm;
         TextBox[] pwm_tb;
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         private CancellationTokenSource _cts_pressure_labjack;           // Cancellation of Labjack pressure background measurement 
@@ -112,7 +112,8 @@ namespace XPS
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            DPS =  new HV_device();
+            H150666 = new HV_device();
             DPS.Is_session_open = H150666.Is_session_open = groupBox3.Enabled = false;
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
@@ -130,7 +131,6 @@ namespace XPS
             {
                 binding_energies_dict.Add(table_binding_energies[i][1], table_binding_energies[i][0]);
             }
-
             //create dictionary for logfiles
             try
             {
@@ -164,9 +164,9 @@ namespace XPS
             }
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
-            cb_pass.SelectedIndex = 3;
+            cb_pass.SelectedIndex = 4;
             cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
-            cb_samp_ev.SelectedIndex = 2;
+            cb_samp_ev.SelectedIndex = 4;
             cb_DAC.SelectedIndex = 1;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
@@ -246,16 +246,14 @@ namespace XPS
             if (c.Text == "Off")
             {
                 await DPS.channel_on(chanel);
-                c.Text = "On";
-                c.BackColor = Color.LimeGreen;
             }
 
             else
             {
                 await DPS.channel_off(chanel);
-                c.Text = "Off";
-                c.BackColor = SystemColors.ControlLightLight;
             }
+            c.Text = (c.Text == "Off") ?  "On"  : "Off";
+            c.BackColor = (c.Text == "Off") ? Color.LimeGreen : SystemColors.ControlLightLight;
             _suspend_background_measurement.Set();
         }
 
@@ -431,12 +429,14 @@ namespace XPS
             {
                 _cts_XPS.Cancel();
             }
+            _cts_XPS?.Cancel();
             DPS_reset();
         }
 
 
         private void btn_start_Click(object sender, EventArgs e)
         {
+            /***
             if ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && DPS.Is_session_open == true && H150666.Is_session_open == true)
             {
                 take_XPS_spectra();
@@ -446,6 +446,8 @@ namespace XPS
             {
                 //take_UPS_spectra();
             }
+            ***/
+            take_XPS_spectra();
         }
 
 
@@ -559,11 +561,13 @@ namespace XPS
                 //LJM.Close(handle_stream);
             }
 
+           // _cts_pressure_labjack?.Cancel();
+
             if (_cts_pressure_labjack != null)
             {
                 _cts_pressure_labjack.Cancel();
                 _cts_pressure_labjack.Token.WaitHandle.WaitOne();
-            }
+            }      
 
             if (_cts_volt_dps != null)
             {
@@ -591,7 +595,6 @@ namespace XPS
             }
 
 
-
             if (H150666.Is_session_open == true)
             {
                 await H150666.reset_channels();
@@ -608,18 +611,10 @@ namespace XPS
             }
             //await Task.Delay(500);
             //Thread.Sleep(500);
-
-            try
-            {
-                values_to_plot.Clear();
-                values_to_plot_svg.Clear();
-                errorlist.Clear();
-                values_to_plot_svg_deriv.Clear();
-            }
-            catch (Exception)
-            {
-                AutoClosingMessageBox.Show("Can't clear Pointpairlists", "ZedGraph error", 1000);
-            }
+            values_to_plot.Clear();
+            values_to_plot_svg.Clear();
+            errorlist.Clear();
+            values_to_plot_svg_deriv.Clear();
         }
 
 
@@ -659,7 +654,6 @@ namespace XPS
         {
             await H150666.emergency_off(1);
             await H150666.emergency_off(2);
-
             DPS_reset();
         }
 
@@ -692,10 +686,6 @@ namespace XPS
             btn_start.Enabled = (DPS.Is_session_open == true & H150666.Is_session_open == true) ? true : false;
             cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
         }
-
-        
-
-
 
 
 
@@ -734,15 +724,17 @@ namespace XPS
 
         private async void btn_emi_Click(object sender, EventArgs e)
         {
-            int anode_voltage = int.Parse(tb_anode_voltage.Text);
-            double emission_current = Double.Parse(tb_emi.Text) / 1000.0;
-            double K_P = Double.Parse(tb_KP.Text);
-            double K_I = Double.Parse(tb_KI.Text);
-            double K_D = Double.Parse(tb_KD.Text);
-            double I_min = Double.Parse(tb_Imin.Text);
-            double I_max = Double.Parse(tb_Imax.Text);
-            int curr_ramp = int.Parse(tb_curr_ramp.Text);
-            int volt_ramp = int.Parse(tb_volt_ramp.Text);
+            Int32.TryParse(tb_anode_voltage.Text, out int anode_voltage);
+            Double.TryParse(tb_emi.Text, out double emission_current);
+            emission_current = emission_current / 1000;
+            Double.TryParse(tb_KP.Text, out double K_P);
+            Double.TryParse(tb_KI.Text, out double K_I);
+            Double.TryParse(tb_KD.Text, out double K_D);
+            Double.TryParse(tb_Imin.Text, out double I_min);
+            Double.TryParse(tb_Imax.Text, out double I_max);
+            Int32.TryParse(tb_curr_ramp.Text, out int curr_ramp);
+            //int curr_ramp = Int32.Parse(tb_curr_ramp.Text);
+            Int32.TryParse(tb_volt_ramp.Text, out int volt_ramp);
 
             await H150666.set_current(0, 1);
             await H150666.set_voltage(0, 0);
@@ -781,13 +773,13 @@ namespace XPS
             await H150666.reset_channels();
         }
 
-        private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime)
+        private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime, double vbias)
         {
             try
             {
                 Double.TryParse(tb_lens.Text, out double set_voltage_lens);
                 double vpass = Convert.ToDouble(cb_pass.SelectedItem);
-                double vbias = Convert.ToDouble(cb_bias.SelectedItem);
+                //double vbias = Convert.ToDouble(cb_bias.SelectedItem);
                 double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
                 double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4;
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
@@ -828,12 +820,6 @@ namespace XPS
             create_graph(myPane);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Refresh();
-        }
-
-
-        private void btn_test_Click(object sender, EventArgs e)
-        {
-            take_XPS_spectra();
         }
 
 
@@ -913,10 +899,10 @@ namespace XPS
         {
             if (e.KeyCode == Keys.Enter && Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
             {
-                set_all_control_voltages(U_E_binding,15,100);
+                double vbias = LJM_ADC(pin_bias_voltage, 8);
+                set_all_control_voltages(U_E_binding, 15, 100, vbias);
                 tb_set_E_B.Text = String.Empty;
                 tb_set_E_B.Text = tb_set_E_B.Text.ToString();
-                //await Task.Delay(10000);
             }
         }
 
@@ -966,6 +952,8 @@ namespace XPS
         {
 
         }
+
+       
     }
 }
 

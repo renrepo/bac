@@ -258,6 +258,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tb_testtab = new System.Windows.Forms.TabPage();
+            this.btn_UPS = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.label66 = new System.Windows.Forms.Label();
@@ -277,7 +278,6 @@
             this.tb_fil_curr = new System.Windows.Forms.TextBox();
             this.btn_hv_2 = new System.Windows.Forms.Button();
             this.btn_hv = new System.Windows.Forms.Button();
-            this.btn_test = new System.Windows.Forms.Button();
             this.btn_hv_off = new System.Windows.Forms.Button();
             this.label109 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
@@ -402,6 +402,7 @@
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btn_stop_UPS_test = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -2366,6 +2367,8 @@
             // tb_testtab
             // 
             this.tb_testtab.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_testtab.Controls.Add(this.btn_stop_UPS_test);
+            this.tb_testtab.Controls.Add(this.btn_UPS);
             this.tb_testtab.Controls.Add(this.groupBox11);
             this.tb_testtab.Controls.Add(this.groupBox10);
             this.tb_testtab.Controls.Add(this.groupBox5);
@@ -2379,6 +2382,13 @@
             this.tb_testtab.Controls.Add(this.btn_hv);
             resources.ApplyResources(this.tb_testtab, "tb_testtab");
             this.tb_testtab.Name = "tb_testtab";
+            // 
+            // btn_UPS
+            // 
+            resources.ApplyResources(this.btn_UPS, "btn_UPS");
+            this.btn_UPS.Name = "btn_UPS";
+            this.btn_UPS.UseVisualStyleBackColor = true;
+            this.btn_UPS.Click += new System.EventHandler(this.btn_UPS_Click);
             // 
             // groupBox11
             // 
@@ -2501,13 +2511,6 @@
             this.btn_hv.Name = "btn_hv";
             this.btn_hv.UseVisualStyleBackColor = true;
             this.btn_hv.Click += new System.EventHandler(this.btn_hv_Click);
-            // 
-            // btn_test
-            // 
-            resources.ApplyResources(this.btn_test, "btn_test");
-            this.btn_test.Name = "btn_test";
-            this.btn_test.UseVisualStyleBackColor = true;
-            this.btn_test.Click += new System.EventHandler(this.btn_test_Click);
             // 
             // btn_hv_off
             // 
@@ -2944,7 +2947,6 @@
             this.tb_dashboard.Controls.Add(this.btn_DPS_off);
             this.tb_dashboard.Controls.Add(this.groupBox7);
             this.tb_dashboard.Controls.Add(this.groupBox6);
-            this.tb_dashboard.Controls.Add(this.btn_test);
             this.tb_dashboard.Controls.Add(this.btn_clear_fig);
             this.tb_dashboard.Controls.Add(this.tableLayoutPanel4);
             this.tb_dashboard.Controls.Add(this.groupBox2);
@@ -3109,7 +3111,8 @@
             resources.GetString("cb_pass.Items"),
             resources.GetString("cb_pass.Items1"),
             resources.GetString("cb_pass.Items2"),
-            resources.GetString("cb_pass.Items3")});
+            resources.GetString("cb_pass.Items3"),
+            resources.GetString("cb_pass.Items4")});
             resources.ApplyResources(this.cb_pass, "cb_pass");
             this.cb_pass.Name = "cb_pass";
             // 
@@ -3344,7 +3347,8 @@
             resources.GetString("cb_DAC.Items1"),
             resources.GetString("cb_DAC.Items2"),
             resources.GetString("cb_DAC.Items3"),
-            resources.GetString("cb_DAC.Items4")});
+            resources.GetString("cb_DAC.Items4"),
+            resources.GetString("cb_DAC.Items5")});
             this.cb_DAC.Name = "cb_DAC";
             // 
             // tb_slit
@@ -3459,6 +3463,13 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // btn_stop_UPS_test
+            // 
+            resources.ApplyResources(this.btn_stop_UPS_test, "btn_stop_UPS_test");
+            this.btn_stop_UPS_test.Name = "btn_stop_UPS_test";
+            this.btn_stop_UPS_test.UseVisualStyleBackColor = true;
+            this.btn_stop_UPS_test.Click += new System.EventHandler(this.btn_stop_UPS_test_Click);
             // 
             // XPS
             // 
@@ -3855,7 +3866,6 @@
         private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
-        private System.Windows.Forms.Button btn_test;
         private System.Windows.Forms.TabPage tb_settings;
         private System.Windows.Forms.TabPage tb_binding_energies;
         private System.Windows.Forms.Label lb_atomic_number;
@@ -3889,6 +3899,8 @@
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.TextBox tb_samples_for_mean;
         private System.Windows.Forms.TextBox tb_samples_per_second;
+        private System.Windows.Forms.Button btn_UPS;
+        private System.Windows.Forms.Button btn_stop_UPS_test;
     }
 }
 
