@@ -495,7 +495,7 @@ namespace XPS
                     AutoClosingMessageBox.Show("Can't open Labjack T7 'handle_adc' session!", "Info", 500);
                 }
 
-                set_all_control_voltages(-4, 15, 100, vbias, handle_tdac, "UPS");
+                set_all_control_voltages(0, 15, 100, vbias, handle_tdac, "UPS");
                 E_B_end = V_photon;
                 await Task.Delay(500);
             }

@@ -392,6 +392,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.tb_dps_ramp = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
             this.label67 = new System.Windows.Forms.Label();
             this.tb_samples_for_mean = new System.Windows.Forms.TextBox();
@@ -403,8 +405,6 @@
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_dps_ramp = new System.Windows.Forms.TextBox();
-            this.label69 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -3328,6 +3328,17 @@
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
             // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.Name = "label69";
+            // 
+            // tb_dps_ramp
+            // 
+            resources.ApplyResources(this.tb_dps_ramp, "tb_dps_ramp");
+            this.tb_dps_ramp.Name = "tb_dps_ramp";
+            this.tb_dps_ramp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_dps_ramp_KeyDown);
+            // 
             // label68
             // 
             resources.ApplyResources(this.label68, "label68");
@@ -3474,17 +3485,6 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            // 
-            // tb_dps_ramp
-            // 
-            resources.ApplyResources(this.tb_dps_ramp, "tb_dps_ramp");
-            this.tb_dps_ramp.Name = "tb_dps_ramp";
-            this.tb_dps_ramp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_dps_ramp_KeyDown);
-            // 
-            // label69
-            // 
-            resources.ApplyResources(this.label69, "label69");
-            this.label69.Name = "label69";
             // 
             // XPS
             // 
