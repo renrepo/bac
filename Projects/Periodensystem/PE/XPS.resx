@@ -13156,7 +13156,7 @@
     <value>339</value>
   </data>
   <data name="tb_dps_ramp.Text" xml:space="preserve">
-    <value>2.0</value>
+    <value>5.0</value>
   </data>
   <data name="tb_dps_ramp.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
