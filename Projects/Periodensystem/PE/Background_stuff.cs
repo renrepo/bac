@@ -642,6 +642,11 @@ namespace XPS
                 {
                     LJM.eStreamStop(handle_stream);
                 }
+                if (num_scans == samples_for_mean)
+                {
+                    LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
+                    LJM.eWriteName(handle_tdac, "TDAC1", ups_volt + UPS_delta / fac_amp);
+                }
                 tb_cps.Text = "end";
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
@@ -662,6 +667,11 @@ namespace XPS
                 if (num_scans == scansPerRead)
                 {
                     LJM.eStreamStop(handle_stream);
+                }
+                if (num_scans == samples_for_mean)
+                {
+                    LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
+                    LJM.eWriteName(handle_tdac, "TDAC1", ups_volt + UPS_delta / fac_amp);
                 }
                 DPS_reset();
                 tb_cps.Text = "Stop!";

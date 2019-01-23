@@ -788,6 +788,7 @@ namespace XPS
                 double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4;
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
                 double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
+                double set_voltage_Stabi_UPS = set_voltage_hemo + 180;
 
                 if (mode == "XPS")
                 {
@@ -813,8 +814,10 @@ namespace XPS
                     
                     await DPS.set_voltage(set_voltage_lens - E_bind - 1487, 2);
                     await DPS.set_voltage(set_voltage_channeltron, 4);
+                    await DPS.set_voltage(set_voltage_Stabi_UPS, 5);
                     await DPS.channel_on(2);
-                    //await DPS.channel_on(4);
+                    await DPS.channel_on(4);
+                    await DPS.channel_on(5);
                 }
 
             }
@@ -915,6 +918,16 @@ namespace XPS
             }
         }
 
+        private async void tb_dps_ramp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && Double.TryParse(tb_dps_ramp.Text.Replace(",", "."), out double ramp))
+            {
+                await DPS.voltage_ramp(ramp);
+                tb_dps_ramp.Text = String.Empty;
+                tb_dps_ramp.Text = ramp.ToString();
+            }
+        }
+
         private void tb_set_E_B_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
@@ -973,7 +986,7 @@ namespace XPS
 
         }
 
-       
+      
     }
 }
 

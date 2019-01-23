@@ -403,6 +403,8 @@
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_dps_ramp = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -3309,6 +3311,8 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.label69);
+            this.groupBox9.Controls.Add(this.tb_dps_ramp);
             this.groupBox9.Controls.Add(this.label68);
             this.groupBox9.Controls.Add(this.label67);
             this.groupBox9.Controls.Add(this.tb_samples_for_mean);
@@ -3470,6 +3474,17 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            // 
+            // tb_dps_ramp
+            // 
+            resources.ApplyResources(this.tb_dps_ramp, "tb_dps_ramp");
+            this.tb_dps_ramp.Name = "tb_dps_ramp";
+            this.tb_dps_ramp.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_dps_ramp_KeyDown);
+            // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.Name = "label69";
             // 
             // XPS
             // 
@@ -3901,6 +3916,8 @@
         private System.Windows.Forms.TextBox tb_samples_per_second;
         private System.Windows.Forms.Button btn_UPS;
         private System.Windows.Forms.Button btn_stop_UPS_test;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.TextBox tb_dps_ramp;
     }
 }
 
