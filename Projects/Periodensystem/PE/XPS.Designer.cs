@@ -258,6 +258,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tb_testtab = new System.Windows.Forms.TabPage();
+            this.btn_stop_UPS_test = new System.Windows.Forms.Button();
             this.btn_UPS = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -402,7 +403,6 @@
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btn_stop_UPS_test = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -2383,6 +2383,13 @@
             resources.ApplyResources(this.tb_testtab, "tb_testtab");
             this.tb_testtab.Name = "tb_testtab";
             // 
+            // btn_stop_UPS_test
+            // 
+            resources.ApplyResources(this.btn_stop_UPS_test, "btn_stop_UPS_test");
+            this.btn_stop_UPS_test.Name = "btn_stop_UPS_test";
+            this.btn_stop_UPS_test.UseVisualStyleBackColor = true;
+            this.btn_stop_UPS_test.Click += new System.EventHandler(this.btn_stop_UPS_test_Click);
+            // 
             // btn_UPS
             // 
             resources.ApplyResources(this.btn_UPS, "btn_UPS");
@@ -3463,13 +3470,6 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            // 
-            // btn_stop_UPS_test
-            // 
-            resources.ApplyResources(this.btn_stop_UPS_test, "btn_stop_UPS_test");
-            this.btn_stop_UPS_test.Name = "btn_stop_UPS_test";
-            this.btn_stop_UPS_test.UseVisualStyleBackColor = true;
-            this.btn_stop_UPS_test.Click += new System.EventHandler(this.btn_stop_UPS_test_Click);
             // 
             // XPS
             // 

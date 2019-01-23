@@ -39,6 +39,10 @@ namespace XPS
         string ip_xray;
         string LJM_connection_type = "ANY";
         string pin_bias_voltage = "2";
+        double fac_amp = 4.8125;
+        double UPS_delta = 30.0;
+        double ups_volt = 0;
+        double ups_step = 0.1;
         // General settings
         //double V_photon;
         double E_HeI;               // Energy HeI-line
@@ -773,7 +777,7 @@ namespace XPS
             await H150666.reset_channels();
         }
 
-        private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime, double vbias)
+        private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime, double vbias, int handle_tdac, string mode)
         {
             try
             {
@@ -785,18 +789,34 @@ namespace XPS
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
                 double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
 
-                await DPS.voltage_ramp(ramp);
-                await DPS.set_voltage(set_voltage_hemo, 0);
-                await DPS.set_voltage(set_voltage_lens - E_bind, 2);
-                await DPS.set_voltage(set_voltage_channeltron, 4);
-                await DPS.set_voltage(set_voltage_Stabi, 5);
+                if (mode == "XPS")
+                {
+                    await DPS.voltage_ramp(ramp);
+                    await DPS.set_voltage(set_voltage_hemo, 0);
+                    await DPS.set_voltage(set_voltage_lens - E_bind, 2);
+                    await DPS.set_voltage(set_voltage_channeltron, 4);
+                    await DPS.set_voltage(set_voltage_Stabi, 5);
 
-                await DPS.channel_on(0);
-                await DPS.channel_on(2);
-                await DPS.channel_on(4);
-                await DPS.channel_on(5);
+                    await DPS.channel_on(0);
+                    await DPS.channel_on(2);
+                    await DPS.channel_on(4);
+                    await DPS.channel_on(5);
 
-                await Task.Delay(sleeptime);
+                    await Task.Delay(sleeptime);
+                }
+
+                if (mode == "UPS")
+                {
+                    ups_volt = set_voltage_hemo / fac_amp;
+                    LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
+                    LJM.eWriteName(handle_tdac, "TDAC1", (set_voltage_hemo + UPS_delta) / fac_amp);
+                    
+                    await DPS.set_voltage(set_voltage_lens - E_bind - 1487, 2);
+                    await DPS.set_voltage(set_voltage_channeltron, 4);
+                    await DPS.channel_on(2);
+                    //await DPS.channel_on(4);
+                }
+
             }
             catch (Exception)
             {
@@ -900,7 +920,7 @@ namespace XPS
             if (e.KeyCode == Keys.Enter && Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
             {
                 double vbias = LJM_ADC(pin_bias_voltage, 8);
-                set_all_control_voltages(U_E_binding, 15, 100, vbias);
+                set_all_control_voltages(U_E_binding, 15, 100, vbias, 0, "XPS");
                 tb_set_E_B.Text = String.Empty;
                 tb_set_E_B.Text = tb_set_E_B.Text.ToString();
             }
