@@ -829,17 +829,18 @@ namespace XPS
     public Tuple<double,double,double> data_processing_UPS(double[] aData, int numAddresses, int num_scans, double V_photon, double vbias, double vpass, double oldtime)
         {
             double ctn, ctn_now, t_now, error, E_bind, result, result_deriv, t_old, ctn_old;
-            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = t_old = ctn_old = 0;
+            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = t_old = ctn_old = 0.0;
             int l = 0;
             double mean_volt_hemo = 0;
             double volt_div_ups = 4.0;
 
-            t_old = aData[aData.Length - numAddresses + 3] + aData[aData.Length - numAddresses + 4] * 65536;
-            t_now = aData[3] + aData[4] * 65536;
-            ctn_old = aData[aData.Length - numAddresses + 1] + aData[aData.Length - numAddresses + 2] * 65536;
-            ctn_now = aData[1] + aData[2] * 65536;
+            t_now = aData[aData.Length - numAddresses + 3] + aData[aData.Length - numAddresses + 4] * 65536;
+            t_old = aData[3] + aData[4] * 65536;
+            ctn_now = aData[aData.Length - numAddresses + 1] + aData[aData.Length - numAddresses + 2] * 65536;
+            ctn_old = aData[1] + aData[2] * 65536;
 
-            ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 40000000 + 1;
+            ctn = (t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old);
+            ctn = ctn * 40000000 + 1;
 
             while (l <= num_scans - 1)
             {
@@ -850,14 +851,14 @@ namespace XPS
             mean_volt_hemo = mean_volt_hemo / (num_scans);
             E_bind = mean_volt_hemo * volt_div_ups + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
             error = Math.Sqrt(40000000/ (t_now - t_old)) * Math.Sqrt(ctn);
-            values_to_plot.Add(E_bind, oldtime);
-            errorlist.Add(E_bind, oldtime - error, oldtime + error);
+            values_to_plot.Add(E_bind, ctn);
+            errorlist.Add(E_bind, ctn - error, ctn + error);
 
             using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
             {
                 file.WriteLine(
                 E_bind.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                //ctn.ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                ctn.ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                 mean_volt_hemo.ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                 //arr_result[i].ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                 (40000000 / (t_now - t_old)).ToString("000.0000", System.Globalization.CultureInfo.InvariantCulture)
