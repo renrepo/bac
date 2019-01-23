@@ -495,7 +495,7 @@ namespace XPS
                     AutoClosingMessageBox.Show("Can't open Labjack T7 'handle_adc' session!", "Info", 500);
                 }
 
-                set_all_control_voltages(0, 15, 100, vbias, handle_tdac, "UPS");
+                set_all_control_voltages(-4, 15, 100, vbias, handle_tdac, "UPS");
                 E_B_end = V_photon;
                 await Task.Delay(500);
             }
@@ -610,8 +610,9 @@ namespace XPS
                             LJMError = LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, num_scans, aData);
                             if (LJMError == 0)
                             {
-                                data_processing_UPS(aData, numAddresses, num_scans, V_photon, vbias, vpass, oldtime);
-
+                                var old_values = data_processing_UPS(aData, numAddresses, num_scans, V_photon, vbias, vpass, oldtime);
+                                curr_E_B = old_values.Item1;
+                                oldtime = old_values.Item3;
                                 timee = sw.Elapsed.TotalMilliseconds;
                                 sw.Stop();
                                 _cts_XPS.Token.ThrowIfCancellationRequested();
@@ -839,8 +840,8 @@ namespace XPS
             mean_volt_hemo = mean_volt_hemo / (num_scans);
             E_bind = mean_volt_hemo * volt_div_ups + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
             error = Math.Sqrt(40000000/ (t_now - t_old)) * Math.Sqrt(ctn);
-            values_to_plot.Add(oldtime, E_bind);
-            errorlist.Add(oldtime, E_bind - error, E_bind + error);
+            values_to_plot.Add(E_bind, oldtime);
+            errorlist.Add(E_bind, oldtime - error, oldtime + error);
 
             using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
             {
@@ -853,7 +854,20 @@ namespace XPS
                 );
             }
             oldtime++;
-            return Tuple.Create(E_bind, ctn, mean_volt_hemo);
+
+            try
+            {
+                if (!_cts_XPS.Token.IsCancellationRequested)
+                {
+                    zedGraphControl1.Invalidate();
+                    zedGraphControl1.AxisChange();
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return Tuple.Create(E_bind, ctn, oldtime);
         }
 
 
