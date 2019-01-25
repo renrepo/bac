@@ -40,9 +40,9 @@ namespace XPS
         string LJM_connection_type = "ANY";
         string pin_bias_voltage = "2";
         double fac_amp = 4.8125;
-        double UPS_delta = 30.0;
+        double UPS_delta = 25.0;
         double ups_volt = 0;
-        double ups_step = 0.1;
+        double ups_step = 0.08;
         // General settings
         //double V_photon;
         double E_HeI;               // Energy HeI-line

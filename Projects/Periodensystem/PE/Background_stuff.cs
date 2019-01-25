@@ -335,8 +335,9 @@ namespace XPS
             var progressHandler = new Progress<string>(value =>
             {
                 tb_cps.Text = value;
-                progressBar1.Value = Convert.ToInt32(timee/2);
-                lb_progress.Text = progressBar1.Value.ToString("0") + '%';
+                //progressBar1.Value = Convert.ToInt32(timee/2);
+                //lb_progress.Text = progressBar1.Value.ToString("0") + '%';
+                lb_progress.Text = Convert.ToInt32(timee).ToString("0") + "ms";
                 //vm1.Text = ch1_meas.Text;
                 //vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
                 //vm3.Text = ch3_meas.Text;
@@ -377,6 +378,7 @@ namespace XPS
             // read in desired values for Passenergy, voltage bias, stepsize, time per step and lens voltage
             double vpass = Convert.ToDouble(cb_pass.SelectedItem);
             //double vbias = Convert.ToDouble(cb_bias.SelectedItem);
+            //double vbias = 0.0;
             double vbias = LJM_ADC(pin_bias_voltage,16);
             //vstepsize = Convert.ToDouble(cb_stepwidth.SelectedItem);
             // 0.025 = 100/4000 (100 wg. prozentualer angabe), insg. faktor, mit dem die V/s multipliziert werden müssen
@@ -495,7 +497,7 @@ namespace XPS
                     AutoClosingMessageBox.Show("Can't open Labjack T7 'handle_adc' session!", "Info", 500);
                 }
 
-                set_all_control_voltages(0-4, 15, 100, vbias, handle_tdac, "UPS");
+                set_all_control_voltages(0-8, 15, 100, vbias, handle_tdac, "UPS");
                 E_B_end = V_photon;
                 await Task.Delay(500);
             }
@@ -670,8 +672,8 @@ namespace XPS
                 }
                 if (num_scans == samples_for_mean)
                 {
-                    LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
-                    LJM.eWriteName(handle_tdac, "TDAC1", ups_volt + UPS_delta / fac_amp);
+                    //LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
+                    //LJM.eWriteName(handle_tdac, "TDAC1", ups_volt + UPS_delta / fac_amp);
                 }
                 DPS_reset();
                 tb_cps.Text = "Stop!";
@@ -744,13 +746,13 @@ namespace XPS
 
                 // because ctn is measured only for 1/samples_per_second time intervall, and so total poisson-error is samples_per_sec * ctn_in_meas_interval
                 error = Math.Sqrt(samples_per_second) * Math.Sqrt(ctn);
-                values_to_plot.Add(oldtime, E_bind);
-                //values_to_plot.Add(E_bind, ctn);
+                //values_to_plot.Add(oldtime, E_bind);
+                values_to_plot.Add(E_bind, ctn);
 
 
                 //myCurve.AddPoint(oldtime, oldtime + 1000);
-                //errorlist.Add(E_bind, ctn - error, ctn + error);
-                errorlist.Add(oldtime, E_bind - error, E_bind + error);
+                errorlist.Add(E_bind, ctn - error, ctn + error);
+                //errorlist.Add(oldtime, E_bind - error, E_bind + error);
                 //errorCurve.Add(oldtime, ctn - error, ctn + error);
 
                 //Savitzky Golay filtering

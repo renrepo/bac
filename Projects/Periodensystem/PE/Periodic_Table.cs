@@ -173,7 +173,7 @@ namespace XPS
             myCurve_svg_deriv.Tag = 2;
             //myCurve_svg_deriv.YAxisIndex = 2;
 
-            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(230, 225, 215));
+            errorCurve = myPane.AddErrorBar("Error", errorlist, Color.FromArgb(90, 15, 0));
             errorCurve.Bar.Symbol.Type = SymbolType.Circle;
             errorCurve.Bar.Symbol.Size = 0;
             errorCurve.Tag = 3;
