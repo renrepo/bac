@@ -3275,7 +3275,12 @@
             this.cb_bias.FormattingEnabled = true;
             this.cb_bias.Items.AddRange(new object[] {
             resources.GetString("cb_bias.Items"),
-            resources.GetString("cb_bias.Items1")});
+            resources.GetString("cb_bias.Items1"),
+            resources.GetString("cb_bias.Items2"),
+            resources.GetString("cb_bias.Items3"),
+            resources.GetString("cb_bias.Items4"),
+            resources.GetString("cb_bias.Items5"),
+            resources.GetString("cb_bias.Items6")});
             this.cb_bias.Name = "cb_bias";
             // 
             // label74

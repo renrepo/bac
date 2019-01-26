@@ -13023,6 +13023,21 @@
   <data name="cb_bias.Items1" xml:space="preserve">
     <value>auto</value>
   </data>
+  <data name="cb_bias.Items2" xml:space="preserve">
+    <value>-15.0</value>
+  </data>
+  <data name="cb_bias.Items3" xml:space="preserve">
+    <value>-12.0</value>
+  </data>
+  <data name="cb_bias.Items4" xml:space="preserve">
+    <value>-20.0</value>
+  </data>
+  <data name="cb_bias.Items5" xml:space="preserve">
+    <value>-25.0</value>
+  </data>
+  <data name="cb_bias.Items6" xml:space="preserve">
+    <value>-30.0</value>
+  </data>
   <data name="cb_bias.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 18</value>
   </data>
