@@ -40,7 +40,7 @@ namespace XPS
         string LJM_connection_type = "ANY";
         string pin_bias_voltage = "2";
         double fac_amp = 4.8125;
-        double UPS_delta = 25.0;
+        double UPS_delta = 30.0;
         double ups_volt = 0;
         double ups_step = 0.08;
         // General settings
@@ -135,18 +135,7 @@ namespace XPS
             {
                 binding_energies_dict.Add(table_binding_energies[i][1], table_binding_energies[i][0]);
             }
-            //create dictionary for logfiles
-            try
-            {
-                if (!Directory.Exists(path + @"\Logfiles_PES_tin"))
-                {
-                    Directory.CreateDirectory(path + @"\Logfiles_PES_tin");
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Can't create Folder 'Logfile_PES' on Desktop");
-            }
+            
 
             background_meas_pressure_labjack();
             // cooling flow measurement, update every second

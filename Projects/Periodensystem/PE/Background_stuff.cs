@@ -386,7 +386,7 @@ namespace XPS
             //double voltramp = 0.001;
 
             btn_can.Enabled = true;
-            
+
 
             //yaxis.Tag = 5;
             //Y2Axis axis2 = new Y2Axis("first deriv");
@@ -395,13 +395,27 @@ namespace XPS
             //myCurve_svg_deriv.IsY2Axis = true;
             //myCurve_svg_deriv.YAxisIndex = axis2;
             //myCurve.Line.IsVisible = false;
-            curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
+            try
+            {
+                if (!Directory.Exists(path + @"\Logfiles_PES"))
+                {
+                    Directory.CreateDirectory(path + @"\Logfiles_PES");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Can't create Folder 'Logfile_PES' on Desktop");
+            }
+            //curr_time = DateTime.Now.ToString("yyyy-MM-dd__HH-mm-ss");
+            curr_time = DateTime.Now.ToString("yyyy-MM-dd__");
             string u = tb_safe.Text + curr_time;
             //DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_tin\", " " + curr_time + "_" +
             //tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "\\"));
-            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES_tin\", "tin" + "\\"));
+            DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "XPS" + "\\"));
             path_logfile = dl.FullName;
-            using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
+            string name = tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "_" + cb_bias.SelectedItem;
+            fig_name.Text = name;
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
             {
                 file.WriteLine("#XPS-spectrum" + Environment.NewLine);
                 file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
@@ -414,18 +428,18 @@ namespace XPS
                 file.WriteLine("#V_Anode: \t{0} \t{1}", tb_anode_voltage.Text, "\t V");
                 file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
                 file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
-                file.WriteLine("#TDAC: \t{0} \t{1}", tb_dac, "\t V");
-                file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens, "\t V");
+                file.WriteLine("#TDAC Amplifier: \t{0} \t{1}", tb_dac.Text.ToString(), "\t V");
+                file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens.Text.ToString(), "\t V");
                 file.WriteLine("#Factor k: \t{0} \t{1}", k_fac.ToString(), "\t ");
                 file.WriteLine("#Slope: \t{0} \t{1}", (voltramp * 4000 / 100).ToString("0.000000"), "\t V/s");
                 file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
                 file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
-                file.WriteLine("#Slit: \t{0} \t{1}", tb_slit.Text, "");
+                file.WriteLine("#Analyser Slit: \t{0} \t{1}", tb_slit.Text, "");
                 file.WriteLine("#ADC_factor: \t{0} \t{1}", voltage_divider.ToString(), "");
                 file.WriteLine("#Samp_mean: \t{0} \t{1}", samples_for_mean.ToString(), "");
                 file.WriteLine("#Samp/sec: \t{0} \t{1}", samples_per_second.ToString(), "");
                 file.WriteLine("#Sav_Gol deg: \t 4");
-                file.WriteLine("#Sav_Gold Samp: \t{0} ", (samples_per_second*2).ToString(), "");
+                file.WriteLine("#Sav_Gol Samp: \t{0} ", (samples_per_second*2).ToString(), "");
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("" + Environment.NewLine);
                 file.WriteLine("#E_bind \t cps \t E_kin \t V_hemo");
@@ -564,6 +578,7 @@ namespace XPS
                         }
                     }
 
+                    
                     //while (hemo_check < 5.0 && !_cts_XPS.IsCancellationRequested)
                     while (true)
                     {
@@ -582,7 +597,7 @@ namespace XPS
                             {
                                 sw.Start();
                                 var old_values = data_processing(aData, numAddresses, filt_values, coeff, coeff_deriv, samples_per_second, samples_for_mean, samp_ev,
-                                    ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon, vbias, vpass, k_fac);
+                                    ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon, vbias, vpass, k_fac, name);
                                 ctn_old = old_values.Item1;
                                 t_old = old_values.Item2;
                                 oldtime = old_values.Item3;
@@ -612,7 +627,7 @@ namespace XPS
                             LJMError = LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, num_scans, aData);
                             if (LJMError == 0)
                             {
-                                var old_values = data_processing_UPS(aData, numAddresses, num_scans, V_photon, vbias, vpass, oldtime);
+                                var old_values = data_processing_UPS(aData, numAddresses, num_scans, V_photon, vbias, vpass, oldtime, name);
                                 curr_E_B = old_values.Item1;
                                 oldtime = old_values.Item3;
                                 timee = sw.Elapsed.TotalMilliseconds;
@@ -636,7 +651,7 @@ namespace XPS
                         
                     }
                 });
-                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "_" + tb_safe.Text + ".png"));
+                zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "_" + name + ".png"));
                 btn_can.Enabled = false;
                 btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                 DPS_reset();
@@ -653,7 +668,7 @@ namespace XPS
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
 
-                using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  E N D");
                 }
@@ -677,7 +692,7 @@ namespace XPS
                 }
                 DPS_reset();
                 tb_cps.Text = "Stop!";
-                using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
@@ -690,7 +705,7 @@ namespace XPS
             double[] coeff, double[] coeff_deriv, int samples_per_second,
             int samples_for_mean, double samp_ev, double ctn_old, double t_old, 
             double mean_volt_hemo, double oldtime, double cps_old, double V_photon,
-            double vbias, double vpass, double k_fac)
+            double vbias, double vpass, double k_fac, string name)
 
         {
             double ctn, ctn_now, t_now, error, E_bind, result, result_deriv;
@@ -799,7 +814,7 @@ namespace XPS
             }
             //mean_volt_hemo = aData[aData.Length - numAddresses];
             //progress.Report(v_ctn_cum.ToString("000000"));
-            using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
             {
                 for (int i = 0; i <= samples_per_second-1; i++)
                 {
@@ -828,7 +843,7 @@ namespace XPS
         }
 
 
-    public Tuple<double,double,double> data_processing_UPS(double[] aData, int numAddresses, int num_scans, double V_photon, double vbias, double vpass, double oldtime)
+    public Tuple<double,double,double> data_processing_UPS(double[] aData, int numAddresses, int num_scans, double V_photon, double vbias, double vpass, double oldtime, string name)
         {
             double ctn, ctn_now, t_now, error, E_bind, result, result_deriv, t_old, ctn_old;
             ctn = ctn_now = t_now = error = E_bind = result = result_deriv = t_old = ctn_old = 0.0;
@@ -856,7 +871,7 @@ namespace XPS
             values_to_plot.Add(E_bind, ctn);
             errorlist.Add(E_bind, ctn - error, ctn + error);
 
-            using (var file = new StreamWriter(path_logfile + tb_safe.Text + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
             {
                 file.WriteLine(
                 E_bind.ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
