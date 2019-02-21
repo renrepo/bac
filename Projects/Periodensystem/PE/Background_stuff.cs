@@ -413,9 +413,9 @@ namespace XPS
             //tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "\\"));
             DirectoryInfo dl = Directory.CreateDirectory(Path.Combine(path + @"\Logfiles_PES\", " " + curr_time + "XPS" + "\\"));
             path_logfile = dl.FullName;
-            string name = tb_safe.Text + "_" + cb_pass.SelectedItem + "_" + tb_slit.Text + "_" + cb_bias.SelectedItem;
+            string name = tb_safe.Text + "_" + cb_pass.SelectedItem;
             fig_name.Text = name;
-            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + name + "_header.txt", true))
             {
                 file.WriteLine("#XPS-spectrum" + Environment.NewLine);
                 file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
@@ -668,7 +668,7 @@ namespace XPS
                 progressBar1.Value = 0;
                 lb_progress.Text = String.Empty;
 
-                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + name + "_header.txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  E N D");
                 }
@@ -692,7 +692,7 @@ namespace XPS
                 }
                 DPS_reset();
                 tb_cps.Text = "Stop!";
-                using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+                using (var file = new StreamWriter(path_logfile + name + "_header.txt", true))
                 {
                     file.WriteLine(Environment.NewLine + "#S C A N  C A N C E L L E D");
                 }
@@ -814,16 +814,16 @@ namespace XPS
             }
             //mean_volt_hemo = aData[aData.Length - numAddresses];
             //progress.Report(v_ctn_cum.ToString("000000"));
-            using (var file = new StreamWriter(path_logfile + name + ".txt", true))
+            using (var file = new StreamWriter(path_logfile + name + "_data.txt", true))
             {
                 for (int i = 0; i <= samples_per_second-1; i++)
                 {
                     file.WriteLine(
                     arr_E_B[i].ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_cps[i].ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_mean_volt_hemo[i].ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_result[i].ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_time[i].ToString("000.0000", System.Globalization.CultureInfo.InvariantCulture)
+                    arr_cps[i].ToString("000000", System.Globalization.CultureInfo.InvariantCulture)
+                    //arr_mean_volt_hemo[i].ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    //arr_result[i].ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    //arr_time[i].ToString("000.0000", System.Globalization.CultureInfo.InvariantCulture)
                     );
                 }
             }

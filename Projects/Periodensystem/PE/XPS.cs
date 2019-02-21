@@ -783,12 +783,12 @@ namespace XPS
                 {
                     await DPS.voltage_ramp(ramp);
                     await DPS.set_voltage(set_voltage_hemo, 0);
-                    await DPS.set_voltage(set_voltage_lens - E_bind, 2);
+                    //await DPS.set_voltage(set_voltage_lens - E_bind, 2);
                     await DPS.set_voltage(set_voltage_channeltron, 4);
                     await DPS.set_voltage(set_voltage_Stabi, 5);
 
                     await DPS.channel_on(0);
-                    await DPS.channel_on(2);
+                    //await DPS.channel_on(2);
                     await DPS.channel_on(4);
                     await DPS.channel_on(5);
 
