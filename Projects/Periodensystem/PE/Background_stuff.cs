@@ -86,18 +86,18 @@ namespace XPS
                 for (int j = 0; j < 6; j++)
                 {
                     vmeas[j].Text = String.Format("{0:.##}", arr_voltages[j]);
-                    vmeas[j].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 10 ? Color.Khaki : SystemColors.Control;
+                    vmeas[j].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000 ? Color.Khaki : SystemColors.Control;
 
                     if (j < 3)
                     {
                         vmeas2[j].Text = String.Format("{0:.##}", arr_voltages[j]);
-                        vmeas2[j].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 10 ? Color.Khaki : SystemColors.Control;
+                        vmeas2[j].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000 ? Color.Khaki : SystemColors.Control;
                     }
 
                     if (j == 4|| j == 5)
                     {
                         vmeas2[j - 1].Text = String.Format("{0:.##}", arr_voltages[j]);
-                        vmeas2[j - 1].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 10 ? Color.Khaki : SystemColors.Control;
+                        vmeas2[j - 1].BackColor = Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000 ? Color.Khaki : SystemColors.Control;
                     }
 
 
@@ -184,7 +184,8 @@ namespace XPS
                             LJM.eReadName(handle_flow, "DIO17_EF_READ_A", ref cnt_flow_before);
                             Thread.Sleep(2000);
                             LJM.eReadName(handle_flow, "DIO17_EF_READ_A_AND_RESET", ref cnt_flow_after);
-                            erg2 = (cnt_flow_after - cnt_flow_before) / 750 / 2 * 60;
+                            //erg2 = (cnt_flow_after - cnt_flow_before) / 750 / 2 * 60;
+                            erg2 = (cnt_flow_after - cnt_flow_before);
                             if (progress != null)
                             {
                                 progress.Report(erg2.ToString("0.0"));    //no decimal placed
@@ -304,6 +305,16 @@ namespace XPS
 
         private async void take_XPS_spectra()
         {
+            if (_cts_pressure_labjack != null)
+            {
+                _cts_pressure_labjack.Cancel();
+            }
+
+            if (_cts_flow_labjack != null)
+            {
+                _cts_flow_labjack.Cancel();
+            }
+
             Queue<double> filt_values = new Queue<double>();
             string dict_entry_smooth = "smooth_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
             string dict_entry_deriv = "deriv_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
@@ -316,6 +327,9 @@ namespace XPS
             int handle_stream = 0;
             int handle_tdac = 14;
             int num_scans = 0;
+
+            int DeviceScanBacklog = 0;
+            int LJMScanBacklog = 0;
 
             int.TryParse(tb_samples_per_second.Text, out int samples_per_second);
             int.TryParse(tb_samples_for_mean.Text, out int samples_for_mean);
@@ -354,6 +368,7 @@ namespace XPS
                     lb_progress.Text = Convert.ToInt32(timee).ToString("0") + "ms";
                     tb_pressure.Text = Math.Pow(10, ((Convert.ToDouble(p_ak) - 7.75)) / 0.75).ToString("0.00E0");
                     tb_flow.Text = flow_rate.ToString("0.0");
+                    tb_flow.Text = DeviceScanBacklog.ToString("0.0");
                     //vm1.Text = ch1_meas.Text;
                     //vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
                     //vm3.Text = ch3_meas.Text;
@@ -387,8 +402,6 @@ namespace XPS
                 int data_length = numAddresses * scansPerRead;
                 double[] aData = (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) ? new double[data_length] : new double[samples_for_mean * numAddresses];
                 double[] v_hemo_arr = new double[data_length];
-                int DeviceScanBacklog = 0;
-                int LJMScanBacklog = 0;
                 //double v_ctn_cum = 0;
 
                 // read in desired values for Passenergy, voltage bias, stepsize, time per step and lens voltage
@@ -674,7 +687,13 @@ namespace XPS
 
                     }
                     });
-                    zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, "_" + name + i + ".png"));
+                    try
+                    {   
+                        zedGraphControl1.MasterPane.GetImage().Save(path_logfile + "_" + name + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                    }
+                    catch (Exception)
+                    {
+                    }
                     btn_can.Enabled = false;
                     btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                     DPS_reset();
@@ -700,7 +719,7 @@ namespace XPS
 
                 catch (OperationCanceledException)
                 {
-                    //zedGraphControl1.MasterPane.GetImage().Save(Path.Combine(path_logfile, fig_name.Text + ".png"));
+                    zedGraphControl1.MasterPane.GetImage().Save(path_logfile + fig_name.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
                     btn_can.Enabled = false;
                     btn_clear.Enabled = fig_name.Enabled = showdata.Enabled = true;
                     progressBar1.Value = 0;
@@ -861,7 +880,7 @@ namespace XPS
 
             // X-Ray HV device cooling
             flow_beg = aData[6];
-            flow_end = aData[aData.Length];
+            flow_end = aData[aData.Length - 1];
             flow_rate = ((flow_end > flow_beg) ? (flow_end - flow_beg) : (flow_end - flow_beg + 65536)) / 750 * 60;
 
             //mean_volt_hemo = aData[aData.Length - numAddresses];
@@ -873,12 +892,12 @@ namespace XPS
                     file.WriteLine(
                     arr_E_B[i].ToString("0000.000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     arr_cps[i].ToString("000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_timer[i].ToString("0000000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    //arr_timer[i].ToString("0000000000", System.Globalization.CultureInfo.InvariantCulture)
                     //arr_mean_volt_hemo[i].ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
                     //arr_result[i].ToString("000000.0", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
-                    arr_time[i].ToString("000.0000", System.Globalization.CultureInfo.InvariantCulture) + "\t" +
+                    arr_time[i].ToString("000.0000", System.Globalization.CultureInfo.InvariantCulture)
                     //string.Join("\n", aData) + "\t" +
-                    "######################################################################################"
+                    //"######################################################################################"
                     );
                 }
             }

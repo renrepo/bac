@@ -116,6 +116,7 @@ namespace XPS
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            LJM.CloseAll();
             DPS =  new HV_device();
             H150666 = new HV_device();
             DPS.Is_session_open = H150666.Is_session_open = groupBox3.Enabled = false;
