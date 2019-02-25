@@ -492,7 +492,14 @@ namespace XPS
                         if ((E_B_start >= 0) && (E_B_start <= V_photon) && (E_B_end >= 0) && (E_B_end <= V_photon))
                         {
                             set_all_control_voltages(E_B_start, 15, 100, vbias, 0, "XPS");
-                            await Task.Delay(8500, token);
+                            if (i == 0)
+                            {
+                                await Task.Delay(8500, token);
+                            }
+                            else
+                            {
+                                await Task.Delay(3000, token);
+                            }
                         }
                         else
                         {
@@ -858,7 +865,7 @@ namespace XPS
 
                 ***/
 
-                arr_time[i - 1] = (t_now - t_old) / 40000 ;
+                arr_time[i - 1] = ((t_now > t_old) ? (t_now - t_old)  : (t_now - t_old + 4294967295)) / 40000;
                 arr_E_B[i - 1] = E_bind;
                 arr_cps[i - 1] = ctn;
                 arr_mean_volt_hemo[i - 1] = mean_volt_hemo;
