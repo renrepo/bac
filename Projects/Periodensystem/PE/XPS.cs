@@ -440,11 +440,13 @@ namespace XPS
                 //take_UPS_spectra();
             }
             ***/
+
             take_XPS_spectra();
+
         }
 
 
-        private void btn_clear_Click(object sender, EventArgs e)
+        private void Clear()
         {
             //take_UPS_spec = false;
             foreach (var item in vmeas2)
@@ -473,6 +475,12 @@ namespace XPS
             create_graph(myPane);
             zedGraphControl1.AxisChange();
             zedGraphControl1.Refresh();
+        }
+
+
+        private void btn_clear_Click(object sender, EventArgs e)
+        {
+            Clear();
         }
 
 

@@ -392,6 +392,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.tb_num_spectra = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
             this.label69 = new System.Windows.Forms.Label();
             this.tb_dps_ramp = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
@@ -3170,6 +3172,7 @@
             // 
             // vm1
             // 
+            this.vm1.BackColor = System.Drawing.SystemColors.Control;
             this.vm1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             resources.ApplyResources(this.vm1, "vm1");
             this.vm1.Name = "vm1";
@@ -3316,6 +3319,8 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.tb_num_spectra);
+            this.groupBox9.Controls.Add(this.label70);
             this.groupBox9.Controls.Add(this.label69);
             this.groupBox9.Controls.Add(this.tb_dps_ramp);
             this.groupBox9.Controls.Add(this.label68);
@@ -3332,6 +3337,16 @@
             resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.TabStop = false;
+            // 
+            // tb_num_spectra
+            // 
+            resources.ApplyResources(this.tb_num_spectra, "tb_num_spectra");
+            this.tb_num_spectra.Name = "tb_num_spectra";
+            // 
+            // label70
+            // 
+            resources.ApplyResources(this.label70, "label70");
+            this.label70.Name = "label70";
             // 
             // label69
             // 
@@ -3923,6 +3938,8 @@
         private System.Windows.Forms.Button btn_stop_UPS_test;
         private System.Windows.Forms.Label label69;
         private System.Windows.Forms.TextBox tb_dps_ramp;
+        private System.Windows.Forms.TextBox tb_num_spectra;
+        private System.Windows.Forms.Label label70;
     }
 }
 
