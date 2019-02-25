@@ -311,6 +311,7 @@ namespace XPS
             double[] coeff_deriv = sav_gol_coeff[dict_entry_deriv];
             double timee = 0;
             double p_ak = 0;
+            double flow_rate = 0;
             int handle_DAC2 = 4;
             int handle_stream = 0;
             int handle_tdac = 14;
@@ -352,6 +353,7 @@ namespace XPS
                     //lb_progress.Text = progressBar1.Value.ToString("0") + '%';
                     lb_progress.Text = Convert.ToInt32(timee).ToString("0") + "ms";
                     tb_pressure.Text = Math.Pow(10, ((Convert.ToDouble(p_ak) - 7.75)) / 0.75).ToString("0.00E0");
+                    tb_flow.Text = flow_rate.ToString("0.0");
                     //vm1.Text = ch1_meas.Text;
                     //vm2.Text = (Convert.ToDouble(ch1_meas.Text) + vpass).ToString("0.0");
                     //vm3.Text = ch3_meas.Text;
@@ -535,12 +537,15 @@ namespace XPS
 
                 LJM.eWriteName(handle_stream, "DIO18_EF_INDEX", 7);
                 LJM.eWriteName(handle_stream, "DIO18_EF_ENABLE", 1);
-                LJM.eWriteName(handle_stream, "STREAM_RESOLUTION_INDEX", 8); //Resolution Index  8 still ok?
+                LJM.eWriteName(handle_stream, "DIO17_EF_INDEX", 7);
+                LJM.eWriteName(handle_stream, "DIO17_EF_ENABLE", 1);
+                LJM.eWriteName(handle_stream, "STREAM_RESOLUTION_INDEX", 6); //Resolution Index  8 still ok?
 
                 LJM.LJMERROR LJMError;
                 if (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1)
                 {
                     LJMError = LJM.eStreamStart(handle_stream, scansPerRead, numAddresses, aScanList, ref scanRate);
+                    Thread.Sleep(20);
                 }
 
                 if (_cts_pressure_labjack != null)
@@ -579,12 +584,12 @@ namespace XPS
 
                         if (LJMError == 0)
                         {
-                            //ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
-                            //t_old = aData[data_length - 4] + aData[data_length - 3] * 65536 + 1;
-                            //mean_volt_hemo = aData[data_length - numAddresses];
-                            ctn_old = aData[1] + aData[2] * 65536;
-                            t_old = aData[3] + aData[4] * 65536 + 1;
-                            mean_volt_hemo = aData[0];
+                            ctn_old = aData[data_length - 6] + aData[data_length - 5] * 65536;
+                            t_old = aData[data_length - 4] + aData[data_length - 3] * 65536 + 1;
+                            mean_volt_hemo = aData[data_length - numAddresses];
+                            //ctn_old = aData[1] + aData[2] * 65536;
+                            //t_old = aData[3] + aData[4] * 65536 + 1;
+                            //mean_volt_hemo = aData[0];
                         }
                         else
                         {
@@ -616,7 +621,8 @@ namespace XPS
                                     ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon, vbias, vpass, k_fac, name);
                                 ctn_old = old_values.Item1;
                                 t_old = old_values.Item2;
-                                oldtime = old_values.Item3;
+                                //oldtime = old_values.Item3;
+                                flow_rate = old_values.Item3;
                                 curr_E_B = old_values.Item4;
                                 mean_volt_hemo = old_values.Item5;
                                 oldtime = old_values.Item6;
@@ -740,8 +746,8 @@ namespace XPS
             double vbias, double vpass, double k_fac, string name)
 
         {
-            double ctn, ctn_now, t_now, error, E_bind, result, result_deriv;
-            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = 0;
+            double ctn, ctn_now, t_now, error, E_bind, result, result_deriv, flow_beg, flow_end, flow_rate;
+            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = flow_beg = flow_end = flow_rate = 0;
             double p_ak = 0;
             var inc = 0;
             int l = 0;
@@ -805,6 +811,7 @@ namespace XPS
                 //errorlist.Add(oldtime, E_bind - error, E_bind + error);
                 //errorCurve.Add(oldtime, ctn - error, ctn + error);
 
+                /***
                 //Savitzky Golay filtering
                 filt_values.Enqueue(ctn);
                 //double result = Sav_Gol(filt_values, coeff, coeff_deriv, 10).Item1;
@@ -829,6 +836,9 @@ namespace XPS
                    // values_to_plot_svg_deriv.Add(oldtime, result_deriv);
                     //myCurve_svg_deriv.AddPoint(oldtime, result_deriv);
                 }
+
+                ***/
+
                 arr_time[i - 1] = (t_now - t_old) / 40000 ;
                 arr_E_B[i - 1] = E_bind;
                 arr_cps[i - 1] = ctn;
@@ -848,6 +858,12 @@ namespace XPS
 
                 oldtime++;
             }
+
+            // X-Ray HV device cooling
+            flow_beg = aData[6];
+            flow_end = aData[aData.Length];
+            flow_rate = ((flow_end > flow_beg) ? (flow_end - flow_beg) : (flow_end - flow_beg + 65536)) / 750 * 60;
+
             //mean_volt_hemo = aData[aData.Length - numAddresses];
             //progress.Report(v_ctn_cum.ToString("000000"));
             using (var file = new StreamWriter(path_logfile + name + "_data.txt", true))
@@ -881,7 +897,7 @@ namespace XPS
             }
 
             //return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, oldtime, ctn, p_ak);
-            return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, oldtime, ctn, p_ak);
+            return Tuple.Create(ctn_old, t_old, samp_ev, E_bind, mean_volt_hemo_old, flow_rate, ctn, p_ak);
         }
 
 
