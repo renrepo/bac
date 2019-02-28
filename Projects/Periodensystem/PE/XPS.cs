@@ -22,9 +22,19 @@ using System.Diagnostics;
 //using NationalInstruments.Visa;
 using LabJack;
 //using Ivi.Visa;
-//using ArduinoDriver;
-//using ArduinoUploader;
 
+
+/***
+ * Bugs
+ * #################
+ * --- Abbruch im Streammode erfordert "Hardreset" durch Wegnahme der Spannung
+ * --- Speichern des Spektrums nach beendigen gibt "not a valid parameter" Fehler
+ * --- Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture; nur für GUI-Thread!
+ * --- await take_XPS_spectra() ? Vllt dann Abspeichern eines Bildes möglich??
+ * --- XRAY HV monitoring usw.!
+ * 
+ * 
+ ***/
 
 
 namespace XPS
@@ -64,6 +74,7 @@ namespace XPS
             "O5","P1","P2","P3"};       // name of energy-lines corresponding to electron binding energies in "Bindungsenergien.csv"
         TextBox[] vset;
         TextBox[] vmeas;
+        TextBox[] meas_H150666;
         TextBox[] vmeas2;
         Button[] reload;
         Button[] reset;
@@ -87,6 +98,12 @@ namespace XPS
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
 
+            // graph for showing XPS/UPS spectra (zedGraph)
+            myPane = zedGraphControl1.GraphPane;
+            // draw coordinate system
+            create_graph(myPane);
+
+
             var dic = File.ReadAllLines("settings.txt").Select(l => l.Split(new[] { '=' })).ToDictionary(s => s[0].Trim(), s => s[1].Trim());
 
             Double.TryParse(dic["E_Photon_Aluminium_Ka_emission_line_[eV]"], out E_Al_Ka);
@@ -100,9 +117,6 @@ namespace XPS
             pin_pressure_ak = dic["LJ_T7_input_ADC_pressure_analyser_chamber"];
             ip_dps = dic["IP_Iseg_DPS"];
             ip_xray = dic["IP_Iseg_H150666"];
-
-            // graph for showing XPS/UPS spectra (zedGraph)
-            myPane = zedGraphControl1.GraphPane;
 
             // border for the periodic table
             tableLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -122,8 +136,6 @@ namespace XPS
             DPS.Is_session_open = H150666.Is_session_open = groupBox3.Enabled = false;
             // dot instead of comma (very important for voltage input values!)
             Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
-            // draw coordinate system
-            create_graph(myPane);
             // table_binding_energies: line=all elements in periodic table; column: 1) atomic number 2) element name 3)-x)electron binding energy
             // source: http://xdb.lbl.gov/Section1/Table_1-1.pdf
             table_binding_energies = File.ReadAllLines(path_binding_energies).Select(l => l.Split(',').ToList()).ToList();
@@ -158,10 +170,11 @@ namespace XPS
             }
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
-            cb_pass.SelectedIndex = 4;
+            cb_pass.SelectedIndex = 1;
             cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
-            cb_samp_ev.SelectedIndex = 4;
+            cb_samp_ev.SelectedIndex = 2;
             cb_DAC.SelectedIndex = 1;
+            cb_scanrange.SelectedIndex = 1;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
 
@@ -192,6 +205,7 @@ namespace XPS
             vset = new TextBox[] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
             vmeas2 = new TextBox[] { vm1, vm2, vm3, vm5, vm6 };
+            meas_H150666 = new TextBox[] { tb_v_anode, tb_i_fila, tb_i_emi};
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1, rs2, rs3, rs4, rs5, rs6 };
             stat = new CheckBox[] { stat1, stat2, stat3, stat4, stat5, stat6 };
@@ -395,6 +409,10 @@ namespace XPS
                 try
                 {
                     _cts_volt_dps.Cancel();
+                    await DPS.reset_channels();
+                    await DPS.clear();
+                    await DPS.dispose();
+                    DPS.Is_session_open = false;
                     c.Text = "Iseg DPS disconnected";
                     c.BackColor = Color.Silver;
                 }
@@ -457,7 +475,7 @@ namespace XPS
             tb_show.Text = string.Empty;
             //lb_perc_gauss.Text = "%";
             btn_start.Enabled = tb_safe.Enabled = true;
-            btn_clear.Enabled = showdata.Enabled = safe_fig.Enabled = fig_name.Enabled = false;
+            btn_clear.Enabled = showdata.Enabled = safe_fig.Enabled = fig_name.Enabled = btn_can.Enabled = false;
             progressBar1.Value = 0;
             lb_progress.Text = string.Empty;
             //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
@@ -887,11 +905,11 @@ namespace XPS
             LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", roll);  // Configure Clock0's roll value
             LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
             // Configure EF Channel Registers:
-            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 0);    // Disable the EF system for initial configuration
-            LJM.eWriteName(handle_PWM, "DIO0_EF_INDEX", 0);     // Configure EF system for PWM
-            LJM.eWriteName(handle_PWM, "DIO0_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
-            LJM.eWriteName(handle_PWM, "DIO0_EF_CONFIG_A", roll/2);  // Configure duty cycle to be: 50%
-            LJM.eWriteName(handle_PWM, "DIO0_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted          
+            LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 0);    // Disable the EF system for initial configuration
+            LJM.eWriteName(handle_PWM, "DIO2_EF_INDEX", 0);     // Configure EF system for PWM
+            LJM.eWriteName(handle_PWM, "DIO2_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
+            LJM.eWriteName(handle_PWM, "DIO2_EF_CONFIG_A", roll/2);  // Configure duty cycle to be: 50%
+            LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted          
         }
 
         private void tb_dac_KeyDown(object sender, KeyEventArgs e)
@@ -984,7 +1002,20 @@ namespace XPS
 
         }
 
-      
+        private void btn_reset_LJM_Click(object sender, EventArgs e)
+        {
+            /***
+            int handle_ref = 22;
+            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_ref);
+            Thread.Sleep(40);
+            LJM.CloseAll();
+            ***/
+        }
+
+        public void safe_spectra_fig(string path)
+        {
+            zedGraphControl1.MasterPane.GetImage().Save(path_logfile, System.Drawing.Imaging.ImageFormat.Png);
+        }
     }
 }
 

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using NationalInstruments.Visa;
 using Ivi.Visa;
 using System.Windows.Forms;
+using System.Globalization;
 
 
 
@@ -241,18 +242,47 @@ namespace XPS
         }
 
 
-        public void raw_read_syn(int channel)
+        public string raw_read_syn(int channel, string what)
         {
             try
             {
-                session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString() + ")\n"));
+                if (Is_session_open)
+                {
+                    if (what == "U")
+                    {
+                        session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString() + ")\n"));
+                        Thread.Sleep(20);
+                        return Double.Parse(session.RawIO.ReadString().Replace("V\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                    }
+
+                    if (what == "I")
+                    {
+                        session.RawIO.Write(String.Format(":MEAS:CURR? (@" + channel.ToString() + ")\n"));
+                        Thread.Sleep(20);
+                        return Double.Parse(session.RawIO.ReadString().Replace("A\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                    }
+
+                    else
+                    {
+                        return String.Empty;
+                    }
+                    //return session.FormattedIO.ReadLine();
+                }
+
+                else
+                {
+                    //MessageBox.Show("DPS-device not open");
+                    return String.Empty;
+                }
+
             }
             catch (Exception)
             {
+                return String.Empty;
             }
         }
 
-
+        /***
         public string raw_read_syn()
         {
             try
@@ -264,6 +294,7 @@ namespace XPS
                 return String.Empty;
             }
         }
+        ***/
 
 
         public async Task<int> dispose()

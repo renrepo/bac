@@ -344,6 +344,9 @@
             this.stat_all = new System.Windows.Forms.Button();
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
+            this.tb_i_emi = new System.Windows.Forms.TextBox();
+            this.tb_i_fila = new System.Windows.Forms.TextBox();
+            this.tb_v_anode = new System.Windows.Forms.TextBox();
             this.btn_DPS_off = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label63 = new System.Windows.Forms.Label();
@@ -391,6 +394,7 @@
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
+            this.btn_reset_LJM = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.tb_num_spectra = new System.Windows.Forms.TextBox();
             this.label70 = new System.Windows.Forms.Label();
@@ -2955,6 +2959,9 @@
             // tb_dashboard
             // 
             this.tb_dashboard.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_dashboard.Controls.Add(this.tb_i_emi);
+            this.tb_dashboard.Controls.Add(this.tb_i_fila);
+            this.tb_dashboard.Controls.Add(this.tb_v_anode);
             this.tb_dashboard.Controls.Add(this.btn_DPS_off);
             this.tb_dashboard.Controls.Add(this.groupBox7);
             this.tb_dashboard.Controls.Add(this.groupBox6);
@@ -2967,6 +2974,30 @@
             this.tb_dashboard.Controls.Add(this.btn_emi);
             resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
             this.tb_dashboard.Name = "tb_dashboard";
+            // 
+            // tb_i_emi
+            // 
+            this.tb_i_emi.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_i_emi.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_i_emi, "tb_i_emi");
+            this.tb_i_emi.Name = "tb_i_emi";
+            this.tb_i_emi.ReadOnly = true;
+            // 
+            // tb_i_fila
+            // 
+            this.tb_i_fila.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_i_fila.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_i_fila, "tb_i_fila");
+            this.tb_i_fila.Name = "tb_i_fila";
+            this.tb_i_fila.ReadOnly = true;
+            // 
+            // tb_v_anode
+            // 
+            this.tb_v_anode.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_v_anode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_v_anode, "tb_v_anode");
+            this.tb_v_anode.Name = "tb_v_anode";
+            this.tb_v_anode.ReadOnly = true;
             // 
             // btn_DPS_off
             // 
@@ -3312,10 +3343,18 @@
             // tb_settings
             // 
             this.tb_settings.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_settings.Controls.Add(this.btn_reset_LJM);
             this.tb_settings.Controls.Add(this.groupBox9);
             this.tb_settings.Controls.Add(this.groupBox8);
             resources.ApplyResources(this.tb_settings, "tb_settings");
             this.tb_settings.Name = "tb_settings";
+            // 
+            // btn_reset_LJM
+            // 
+            resources.ApplyResources(this.btn_reset_LJM, "btn_reset_LJM");
+            this.btn_reset_LJM.Name = "btn_reset_LJM";
+            this.btn_reset_LJM.UseVisualStyleBackColor = true;
+            this.btn_reset_LJM.Click += new System.EventHandler(this.btn_reset_LJM_Click);
             // 
             // groupBox9
             // 
@@ -3534,6 +3573,7 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tb_dashboard.ResumeLayout(false);
+            this.tb_dashboard.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox6.ResumeLayout(false);
@@ -3940,6 +3980,10 @@
         private System.Windows.Forms.TextBox tb_dps_ramp;
         private System.Windows.Forms.TextBox tb_num_spectra;
         private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Button btn_reset_LJM;
+        private System.Windows.Forms.TextBox tb_v_anode;
+        private System.Windows.Forms.TextBox tb_i_emi;
+        private System.Windows.Forms.TextBox tb_i_fila;
     }
 }
 

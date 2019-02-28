@@ -9397,7 +9397,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_hv_off.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="label109.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9889,7 +9889,7 @@
     <value>428, 125</value>
   </data>
   <data name="btn_emi_off.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 35</value>
+    <value>82, 28</value>
   </data>
   <data name="btn_emi_off.TabIndex" type="System.Int32, mscorlib">
     <value>321</value>
@@ -9907,7 +9907,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_emi_off.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="label52.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9949,7 +9949,7 @@
     <value>339, 125</value>
   </data>
   <data name="btn_emi.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 35</value>
+    <value>82, 28</value>
   </data>
   <data name="btn_emi.TabIndex" type="System.Int32, mscorlib">
     <value>316</value>
@@ -9967,7 +9967,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_emi.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="tb_emi.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 118</value>
@@ -11607,6 +11607,96 @@
   <data name="&gt;&gt;tb_iseg_control.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="tb_i_emi.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="tb_i_emi.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 211</value>
+  </data>
+  <data name="tb_i_emi.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="tb_i_emi.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tb_i_emi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="tb_i_emi.TabIndex" type="System.Int32, mscorlib">
+    <value>326</value>
+  </data>
+  <data name="&gt;&gt;tb_i_emi.Name" xml:space="preserve">
+    <value>tb_i_emi</value>
+  </data>
+  <data name="&gt;&gt;tb_i_emi.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_i_emi.Parent" xml:space="preserve">
+    <value>tb_dashboard</value>
+  </data>
+  <data name="&gt;&gt;tb_i_emi.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tb_i_fila.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="tb_i_fila.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 188</value>
+  </data>
+  <data name="tb_i_fila.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="tb_i_fila.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tb_i_fila.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="tb_i_fila.TabIndex" type="System.Int32, mscorlib">
+    <value>325</value>
+  </data>
+  <data name="&gt;&gt;tb_i_fila.Name" xml:space="preserve">
+    <value>tb_i_fila</value>
+  </data>
+  <data name="&gt;&gt;tb_i_fila.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_i_fila.Parent" xml:space="preserve">
+    <value>tb_dashboard</value>
+  </data>
+  <data name="&gt;&gt;tb_i_fila.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tb_v_anode.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="tb_v_anode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 165</value>
+  </data>
+  <data name="tb_v_anode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="tb_v_anode.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tb_v_anode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 21</value>
+  </data>
+  <data name="tb_v_anode.TabIndex" type="System.Int32, mscorlib">
+    <value>323</value>
+  </data>
+  <data name="&gt;&gt;tb_v_anode.Name" xml:space="preserve">
+    <value>tb_v_anode</value>
+  </data>
+  <data name="&gt;&gt;tb_v_anode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_v_anode.Parent" xml:space="preserve">
+    <value>tb_dashboard</value>
+  </data>
+  <data name="&gt;&gt;tb_v_anode.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="btn_DPS_off.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
@@ -11635,7 +11725,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_DPS_off.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="label63.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -11749,7 +11839,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="tb_detailscan_stop.Location" type="System.Drawing.Point, System.Drawing">
     <value>98, 20</value>
@@ -11890,7 +11980,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="btn_clear_fig.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -11899,10 +11989,10 @@
     <value>NoControl</value>
   </data>
   <data name="btn_clear_fig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 165</value>
+    <value>428, 157</value>
   </data>
   <data name="btn_clear_fig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 37</value>
+    <value>82, 29</value>
   </data>
   <data name="btn_clear_fig.TabIndex" type="System.Int32, mscorlib">
     <value>302</value>
@@ -11920,7 +12010,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;btn_clear_fig.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -12049,7 +12139,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Iseg_Xray_session" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Iseg_DPS_session" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -12307,7 +12397,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -12919,7 +13009,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="tb_dashboard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -13124,6 +13214,30 @@
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="btn_reset_LJM.Location" type="System.Drawing.Point, System.Drawing">
+    <value>322, 11</value>
+  </data>
+  <data name="btn_reset_LJM.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 46</value>
+  </data>
+  <data name="btn_reset_LJM.TabIndex" type="System.Int32, mscorlib">
+    <value>305</value>
+  </data>
+  <data name="btn_reset_LJM.Text" xml:space="preserve">
+    <value>Labjack reset</value>
+  </data>
+  <data name="&gt;&gt;btn_reset_LJM.Name" xml:space="preserve">
+    <value>btn_reset_LJM</value>
+  </data>
+  <data name="&gt;&gt;btn_reset_LJM.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_reset_LJM.Parent" xml:space="preserve">
+    <value>tb_settings</value>
+  </data>
+  <data name="&gt;&gt;btn_reset_LJM.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tb_num_spectra.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 190</value>
@@ -13330,7 +13444,7 @@
     <value>306</value>
   </data>
   <data name="tb_samples_for_mean.Text" xml:space="preserve">
-    <value>20</value>
+    <value>16</value>
   </data>
   <data name="tb_samples_for_mean.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -13471,7 +13585,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 4</value>
@@ -13495,7 +13609,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tb_settings.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
