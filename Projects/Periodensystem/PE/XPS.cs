@@ -28,11 +28,12 @@ using LabJack;
  * Bugs
  * #################
  * --- Abbruch im Streammode erfordert "Hardreset" durch Wegnahme der Spannung
- * --- Speichern des Spektrums nach beendigen gibt "not a valid parameter" Fehler
+ * +++ Speichern des Spektrums nach beendigen gibt "not a valid parameter" Fehler (Fehler kommt, wenn Fenster getabt wird!)
  * --- Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture; nur für GUI-Thread!
- * --- await take_XPS_spectra() ? Vllt dann Abspeichern eines Bildes möglich??
- * --- XRAY HV monitoring usw.!
- * 
+ * +++ XRAY HV monitoring usw.!
+ * --- EMCY-Button test
+ * --- Grüne Farbe ISEG COntrol
+ * --- Cursor.Current = Cursors.WaitCursor; Cursor.Current = Cursors.Default; einfügen
  * 
  ***/
 
@@ -89,7 +90,8 @@ namespace XPS
         //private IMessageBasedSession DPS_HV;           // Iseg-HV session 6 Chanel HV
         //private IMessageBasedSession Xray_HV;        // Iseg X-Ray HV session
 
-
+        int handle_DAC2 = 4;
+        int handle_stream = 0;
 
         public XPS()
         {
@@ -154,6 +156,7 @@ namespace XPS
             // cooling flow measurement, update every second
             background_meas_flow_labjack();
 
+
             //buttons for interactive periodic table
             Button[] but = {H ,He, Li, Be, B, C, N, O, F, Ne, Na, Mg, Al, Si, P, S, Cl, Ar, K, Ca, Sc,
                              Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr, Rb, Sr, Y, Zr,
@@ -191,8 +194,15 @@ namespace XPS
 
             Iseg_DPS_session.Checked = !Iseg_DPS_session.Checked;
             Iseg_Xray_session.Checked = !Iseg_Xray_session.Checked;
-
+            background_meas_volt_DPS();
             Init_DPS_control_panel();
+
+            pb_hv_icon.Image = new Bitmap("hv_symbol.gif");
+            pb_hv_icon.Enabled = false;
+
+            
+
+            cb_H150666.Checked = false;
         }
 
         //##################################################################################################################################################################
@@ -332,8 +342,8 @@ namespace XPS
                     await H150666.set_current(0, 1);
                     c.Text = "Iseg Xray connected";
                     c.BackColor = Color.LightGreen;
-
                     btn_start.Enabled = ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && DPS.Is_session_open == true) ? true : false;
+                
                 }
                 catch (Exception exp)
                 {
@@ -350,10 +360,10 @@ namespace XPS
             {
                 try
                 {
+                    H150666.Is_session_open = false;
                     await H150666.reset_channels();
                     await H150666.clear();
                     await H150666.dispose();
-                    H150666.Is_session_open = false;
                     c.Text = "Iseg Xray disconnected";
                     c.BackColor = Color.Silver;
                     btn_start.Enabled = false;
@@ -384,12 +394,9 @@ namespace XPS
                     await DPS.clear_emergency();
                     await DPS.voltage_ramp(5.0);
 
-                    for (int i = 0; i < 6; i++)
-                    {
-                        reset[i].Enabled = reload[i].Enabled = stat[i].Enabled = true;
-                    }
-                    groupBox3.Enabled = rs_all.Enabled = btn_emcy.Enabled = true;
-                    background_meas_volt_DPS();
+
+                    groupBox3.Enabled = rs_all.Enabled = btn_emcy.Enabled = tableLayoutPanel3.Enabled = groupBox6.Enabled = groupBox7.Enabled = groupBox2.Enabled = true;
+                    //background_meas_volt_DPS();
                     c.Text = "Iseg DPS connected";
                     c.BackColor = Color.LightGreen;
                     btn_start.Enabled = ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && H150666.Is_session_open == true) ? true : false;
@@ -408,13 +415,14 @@ namespace XPS
             {
                 try
                 {
-                    _cts_volt_dps.Cancel();
+                    //_cts_volt_dps.Cancel();
+                    DPS.Is_session_open = false;
                     await DPS.reset_channels();
                     await DPS.clear();
                     await DPS.dispose();
-                    DPS.Is_session_open = false;
                     c.Text = "Iseg DPS disconnected";
                     c.BackColor = Color.Silver;
+                    tableLayoutPanel3.Enabled = groupBox6.Enabled = groupBox7.Enabled = groupBox2.Enabled = false;
                 }
                 catch (Exception exp)
                 {
@@ -441,7 +449,7 @@ namespace XPS
             {
                 _cts_XPS.Cancel();
             }
-            _cts_XPS?.Cancel();
+            //_cts_XPS?.Cancel();
             DPS_reset();
         }
 
@@ -475,7 +483,7 @@ namespace XPS
             tb_show.Text = string.Empty;
             //lb_perc_gauss.Text = "%";
             btn_start.Enabled = tb_safe.Enabled = true;
-            btn_clear.Enabled = showdata.Enabled = safe_fig.Enabled = fig_name.Enabled = btn_can.Enabled = false;
+            btn_clear.Enabled = safe_fig.Enabled = fig_name.Enabled = btn_can.Enabled = false;
             progressBar1.Value = 0;
             lb_progress.Text = string.Empty;
             //if (Mg_anode.Checked) {Mg_anode.Enabled = true;}
@@ -511,12 +519,6 @@ namespace XPS
             await Task.Delay(800);
             safe_fig.Text = "Save fig.";
             safe_fig.BackColor = Color.Transparent;
-        }
-
-
-        private void showdata_Click(object sender, EventArgs e)
-        {
-            Process.Start("notepad.exe", path_logfile + "data.txt");
         }
 
 
@@ -672,6 +674,10 @@ namespace XPS
 
         private async void btn_emcy_Click(object sender, EventArgs e)
         {
+            if (_cts_XPS != null)
+            {
+                _cts_XPS.Cancel();
+            }
             await H150666.emergency_off(1);
             await H150666.emergency_off(2);
             DPS_reset();
@@ -682,7 +688,7 @@ namespace XPS
         {
             CheckBox c = sender as CheckBox;
 
-            if (c.Text == "Off")
+            if (c.Checked)
             {
                 background_counter_labjack();
             }
@@ -742,38 +748,6 @@ namespace XPS
         }
 
 
-        private async void btn_emi_Click(object sender, EventArgs e)
-        {
-            Int32.TryParse(tb_anode_voltage.Text, out int anode_voltage);
-            Double.TryParse(tb_emi.Text, out double emission_current);
-            emission_current = emission_current / 1000;
-            Double.TryParse(tb_KP.Text, out double K_P);
-            Double.TryParse(tb_KI.Text, out double K_I);
-            Double.TryParse(tb_KD.Text, out double K_D);
-            Double.TryParse(tb_Imin.Text, out double I_min);
-            Double.TryParse(tb_Imax.Text, out double I_max);
-            Int32.TryParse(tb_curr_ramp.Text, out int curr_ramp);
-            //int curr_ramp = Int32.Parse(tb_curr_ramp.Text);
-            Int32.TryParse(tb_volt_ramp.Text, out int volt_ramp);
-
-            await H150666.set_current(0, 1);
-            await H150666.set_voltage(0, 0);
-            await H150666.current_ramp(curr_ramp);
-            await H150666.voltage_ramp(volt_ramp);
-            await H150666.filament_current_min(I_min);
-            await H150666.filament_current_max(I_max);
-            await H150666.set_K_P(K_P);
-            await H150666.set_K_I(K_I);
-            await H150666.set_K_D(K_D);
-            await H150666.set_voltage(anode_voltage, 0);
-            await H150666.channel_on(0);
-            await H150666.set_current(I_min, 1);
-            await H150666.channel_on(1);
-            await H150666.set_current(emission_current, 2);
-            await H150666.channel_on(2);
-        }
-
-
         private async void btn_hv_ramp_Click(object sender, EventArgs e)
         {
             await H150666.voltage_ramp(10);
@@ -781,17 +755,6 @@ namespace XPS
             await H150666.channel_on(0);
         }
 
-
-        private async void btn_emi_off_Click(object sender, EventArgs e)
-        {
-            await H150666.current_ramp(3);
-            await H150666.channel_off(0);
-            await H150666.set_current(0, 1);
-            await H150666.voltage_ramp(20);
-            await H150666.channel_off(0);
-            await H150666.set_voltage(0, 0);
-            await H150666.reset_channels();
-        }
 
         private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime, double vbias, int handle_tdac, string mode)
         {
@@ -874,9 +837,9 @@ namespace XPS
                     roll = Convert.ToInt16(tb_roll.Text);
                     divisor = Convert.ToInt32(tb_divisor.Text);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    AutoClosingMessageBox.Show("Bla", "Roll/Divisor muss int sein", 500);
+                    MessageBox.Show(ex.Message);
                 }            
                 tb_roll.Text = String.Empty;
                 tb_roll.Text = roll.ToString();
@@ -893,44 +856,69 @@ namespace XPS
             try
             {
                 LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_PWM);
+                //TextBox tb = (TextBox)sender;
+                LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
+                LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_DIVISOR", divisor);     // Configure Clock0's divisor
+                LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", roll);  // Configure Clock0's roll value
+                LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
+                                                                        // Configure EF Channel Registers:
+                LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 0);    // Disable the EF system for initial configuration
+                LJM.eWriteName(handle_PWM, "DIO2_EF_INDEX", 0);     // Configure EF system for PWM
+                LJM.eWriteName(handle_PWM, "DIO2_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
+                LJM.eWriteName(handle_PWM, "DIO2_EF_CONFIG_A", roll / 2);  // Configure duty cycle to be: 50%
+                LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                AutoClosingMessageBox.Show("Can't open Labjack T7 'handle_PWM' session!", "Info", 500);
-            }
-            
-            //TextBox tb = (TextBox)sender;
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 0);  // Disable clock source                                                                    // Set Clock0's divisor and roll value to configure frequency: 80MHz/1/80000 = 1kHz
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_DIVISOR", divisor);     // Configure Clock0's divisor
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ROLL_VALUE", roll);  // Configure Clock0's roll value
-            LJM.eWriteName(handle_PWM, "DIO_EF_CLOCK1_ENABLE", 1);  // Enable the clock source
-            // Configure EF Channel Registers:
-            LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 0);    // Disable the EF system for initial configuration
-            LJM.eWriteName(handle_PWM, "DIO2_EF_INDEX", 0);     // Configure EF system for PWM
-            LJM.eWriteName(handle_PWM, "DIO2_EF_OPTIONS", 1);   // Configure what clock source to use: Clock0
-            LJM.eWriteName(handle_PWM, "DIO2_EF_CONFIG_A", roll/2);  // Configure duty cycle to be: 50%
-            LJM.eWriteName(handle_PWM, "DIO2_EF_ENABLE", 1); 	// Enable the EF system, PWM wave is now being outputted          
+                MessageBox.Show(ex.Message);
+            }     
         }
 
         private void tb_dac_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && Double.TryParse(tb_dac.Text.Replace(",", "."), out double v_dac))
             {
+                
+                Cursor.Current = Cursors.WaitCursor;
                 int handle_DAC = 5;
-                LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC);
                 try
                 {
+
+                    LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_DAC);
                     LJM.eWriteName(handle_DAC, cb_DAC.SelectedItem.ToString(), v_dac);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    AutoClosingMessageBox.Show("Input Error","LJM handle error",1000);
-                    LJM.Close(handle_DAC);
+                    MessageBox.Show(ex.Message);
                     return;
                 }
-                tb_dac.Text = String.Empty;
-                tb_dac.Text = v_dac.ToString();
-                //LJM.Close(handle_DAC);
+                finally
+                {
+                    tb_dac.Text = String.Empty;
+                    tb_dac.Text = v_dac.ToString();
+                    Cursor.Current = Cursors.Default;
+                }
+                LJM.Close(handle_DAC);
+            }
+        }
+
+        private void integer_filter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void float_filter_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
+            {
+                e.Handled = true;
             }
         }
 
@@ -955,22 +943,6 @@ namespace XPS
             }
         }
 
-        private async void btn_hv_off_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                await H150666.voltage_ramp(20);
-                await H150666.channel_off(0);
-                await H150666.set_voltage(0, 0);
-                await H150666.channel_off(1);
-                await H150666.set_voltage(0, 1);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-        }
-
         private async void DPS_reset()
         {
             try
@@ -992,11 +964,6 @@ namespace XPS
             }
         }
 
-        private void btn_DPS_off_Click(object sender, EventArgs e)
-        {
-            DPS_reset();
-        }
-
         private void tb_Imin_TextChanged(object sender, EventArgs e)
         {
 
@@ -1004,17 +971,111 @@ namespace XPS
 
         private void btn_reset_LJM_Click(object sender, EventArgs e)
         {
-            /***
-            int handle_ref = 22;
-            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_ref);
-            Thread.Sleep(40);
             LJM.CloseAll();
-            ***/
         }
 
         public void safe_spectra_fig(string path)
         {
-            zedGraphControl1.MasterPane.GetImage().Save(path_logfile, System.Drawing.Imaging.ImageFormat.Png);
+            //https://stackoverflow.com/questions/15862810/a-generic-error-occurred-in-gdi-in-bitmap-save-method
+            //zedGraphControl1.MasterPane.GetImage().Save(path_logfile, System.Drawing.Imaging.ImageFormat.Png);
+            zedGraphControl1.Validate();
+            //zedGraphControl1.MasterPane.GetImage().Save(path, System.Drawing.Imaging.ImageFormat.Png);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    zedGraphControl1.MasterPane.GetImage().Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                    byte[] bytes = memory.ToArray();
+                    fs.Write(bytes, 0, bytes.Length);
+                }
+            }      
+        }
+
+        private async void cb_H150666_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox c = sender as CheckBox;
+            Cursor.Current = Cursors.WaitCursor;
+            if (c.Checked == false)
+            {
+                try
+                {
+                    
+                    Int32.TryParse(tb_anode_voltage.Text, out int anode_voltage);
+                    //int anode_voltage = int.TryParse(tb_anode_voltage.Text, out anode_voltage) ? anode_voltage : false;
+                    Double.TryParse(tb_emi.Text, out double emission_current);
+                    emission_current = emission_current / 1000;
+                    Double.TryParse(tb_KP.Text, out double K_P);
+                    Double.TryParse(tb_KI.Text, out double K_I);
+                    Double.TryParse(tb_KD.Text, out double K_D);
+                    Double.TryParse(tb_Imin.Text, out double I_min);
+                    Double.TryParse(tb_Imax.Text, out double I_max);
+                    Int32.TryParse(tb_curr_ramp.Text, out int curr_ramp);
+                    //int curr_ramp = Int32.Parse(tb_curr_ramp.Text);
+                    Int32.TryParse(tb_volt_ramp.Text, out int volt_ramp);
+
+                    await H150666.set_current(0, 1);
+                    await H150666.set_voltage(0, 0);
+                    await H150666.current_ramp(curr_ramp);
+                    await H150666.voltage_ramp(volt_ramp);
+                    await H150666.filament_current_min(I_min);
+                    await H150666.filament_current_max(I_max);
+                    await H150666.set_K_P(K_P);
+                    await H150666.set_K_I(K_I);
+                    await H150666.set_K_D(K_D);
+                    await H150666.set_voltage(anode_voltage, 0);
+                    await H150666.channel_on(0);
+                    await H150666.set_current(I_min, 1);
+                    await H150666.channel_on(1);
+                    await H150666.set_current(emission_current, 2);
+                    await H150666.channel_on(2);
+                    
+
+                    c.Text = "PID on";
+                    c.BackColor = Color.LightGreen;
+                    return;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+            else if (c.Checked == true)
+            {
+                try
+                {
+                    
+                    await H150666.current_ramp(3);
+                    await H150666.set_current(0, 1);
+                    await H150666.channel_off(0);
+                    await H150666.voltage_ramp(20);                    
+                    await H150666.set_voltage(0, 0);
+                    await H150666.channel_off(0);
+                    //await H150666.reset_channels();
+                    await H150666.set_current(0, 1);
+
+
+                    c.Text = "PID off";
+                    c.BackColor = SystemColors.Control;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show(exp.Message);
+                }
+                finally
+                {
+                    Cursor.Current = Cursors.Default;
+                }
+            }
+        }
+
+        private void btn_open_folder_Click(object sender, EventArgs e)
+        {
+            //Environment.GetFolderPath(Environment.SpecialFolder.Desktop)++ @"\Logfiles_PES\";
+            System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Logfiles_PES\");
         }
     }
 }

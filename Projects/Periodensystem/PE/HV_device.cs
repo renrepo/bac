@@ -252,21 +252,22 @@ namespace XPS
                     {
                         session.RawIO.Write(String.Format(":MEAS:VOLT? (@" + channel.ToString() + ")\n"));
                         Thread.Sleep(20);
-                        return Double.Parse(session.RawIO.ReadString().Replace("V\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                        //return Double.Parse(session.RawIO.ReadString().Replace("V\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                        return Double.TryParse(session.RawIO.ReadString().Replace("V\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture, out double voltage) ? voltage.ToString("0.00") : String.Empty;                   
                     }
 
                     if (what == "I")
                     {
                         session.RawIO.Write(String.Format(":MEAS:CURR? (@" + channel.ToString() + ")\n"));
                         Thread.Sleep(20);
-                        return Double.Parse(session.RawIO.ReadString().Replace("A\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                        //return Double.Parse(session.RawIO.ReadString().Replace("A\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture).ToString("0.00");
+                        return Double.TryParse(session.RawIO.ReadString().Replace("A\r\n", ""), NumberStyles.Float, CultureInfo.InvariantCulture, out double voltage) ? (voltage*1000).ToString("0.0") : String.Empty;
                     }
 
                     else
                     {
                         return String.Empty;
-                    }
-                    //return session.FormattedIO.ReadLine();
+                    }         
                 }
 
                 else
