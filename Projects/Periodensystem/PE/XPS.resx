@@ -12681,46 +12681,46 @@
   <data name="&gt;&gt;label71.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lb_cps.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lb_power.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lb_cps.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="lb_power.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="lb_cps.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lb_power.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="lb_cps.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lb_power.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lb_cps.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lb_power.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 176</value>
   </data>
-  <data name="lb_cps.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lb_power.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="lb_cps.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lb_power.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 22</value>
   </data>
-  <data name="lb_cps.TabIndex" type="System.Int32, mscorlib">
+  <data name="lb_power.TabIndex" type="System.Int32, mscorlib">
     <value>284</value>
   </data>
-  <data name="lb_cps.Text" xml:space="preserve">
-    <value>CPS</value>
+  <data name="lb_power.Text" xml:space="preserve">
+    <value>Power</value>
   </data>
-  <data name="lb_cps.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lb_power.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lb_cps.Name" xml:space="preserve">
-    <value>lb_cps</value>
+  <data name="&gt;&gt;lb_power.Name" xml:space="preserve">
+    <value>lb_power</value>
   </data>
-  <data name="&gt;&gt;lb_cps.Type" xml:space="preserve">
+  <data name="&gt;&gt;lb_power.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lb_cps.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lb_power.Parent" xml:space="preserve">
     <value>tableLayoutPanel2</value>
   </data>
-  <data name="&gt;&gt;lb_cps.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lb_power.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="vm1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -13324,7 +13324,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel2.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tb_power" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label71" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_cps" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vm1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_i_emi" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_v_anode" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm3" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_i_fila" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm5" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm6" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;Control Name="label102" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label103" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label105" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label104" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label76" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label72" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,48,1203,Percent,51,8797" /&gt;&lt;Rows Styles="Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tb_power" Row="8" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label71" Row="5" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lb_power" Row="8" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="vm1" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm2" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_i_emi" Row="7" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_v_anode" Row="5" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm3" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="tb_i_fila" Row="6" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm5" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="vm6" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label101" Row="-1" RowSpan="1" Column="-1" ColumnSpan="1" /&gt;&lt;Control Name="label102" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label103" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label105" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label104" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label76" Row="7" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label72" Row="6" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,48,1203,Percent,51,8797" /&gt;&lt;Rows Styles="Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22,Absolute,22" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>

@@ -81,6 +81,7 @@ namespace XPS
             //var token = _cts_volt_dps.Token;
             string[] arr_voltages = new string[6];
             string[] arr_voltages_H150666 = new string[6];
+            double volt, curr = 0;
             var progressHandler2 = new Progress<string>(value =>
             {
                 for (int j = 0; j < 6; j++)
@@ -94,7 +95,7 @@ namespace XPS
                         //vmeas2[j].Text = String.Format("{0:.##}" + " V", arr_voltages[j]);
                         vmeas2[j].Text = arr_voltages[j];
                         //vmeas2[j].BackColor = (arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
-                        meas_H150666[j].Text = arr_voltages_H150666[j];
+                        meas_H150666[j].Text = j < 1 ? arr_voltages_H150666[j] + " V" : arr_voltages_H150666[j] + " mA";
                     }
 
                     if (j == 4|| j == 5)
@@ -103,7 +104,9 @@ namespace XPS
                         //vmeas2[j - 1].BackColor = (arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
                     }             
                 }
-                tb_power.Text = (Convert.ToDouble(arr_voltages_H150666[0]) * Convert.ToDouble(arr_voltages_H150666[1]) / 1000.0).ToString();
+                Double.TryParse(arr_voltages_H150666[0], out volt);
+                Double.TryParse(arr_voltages_H150666[1], out curr);
+                tb_power.Text = ((volt * curr / 1000.0) > 2.0 ? (volt * curr / 1000.0).ToString("0.0") : "0.0") + " W";
                 //meas_H150666[0].BackColor = (arr_voltages_H150666[0] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages_H150666[0])) > 1000) ? Color.Khaki : SystemColors.Control;
             });
             var progress = progressHandler2 as IProgress<string>;
@@ -119,9 +122,9 @@ namespace XPS
                             //_cts_volt_dps.Token.ThrowIfCancellationRequested();
                             arr_voltages[s] = DPS.raw_read_syn(s, "U") + " V";
                         }             
-                        arr_voltages_H150666[0] = H150666.raw_read_syn(0, "U") + " V";
-                        arr_voltages_H150666[1] = H150666.raw_read_syn(1, "I") + " mA";
-                        arr_voltages_H150666[2] = H150666.raw_read_syn(2, "I") + " mA";
+                        arr_voltages_H150666[0] = H150666.raw_read_syn(0, "U");
+                        arr_voltages_H150666[1] = H150666.raw_read_syn(1, "I");
+                        arr_voltages_H150666[2] = H150666.raw_read_syn(2, "I");
 
                         progress.Report(readback);
                         Thread.Sleep(250);

@@ -248,6 +248,7 @@
             this.safe_fig = new System.Windows.Forms.Button();
             this.tb_safe = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_num_spectra = new System.Windows.Forms.Label();
             this.btn_open_folder = new System.Windows.Forms.Button();
             this.lb_progress = new System.Windows.Forms.Label();
             this.btn_emcy = new System.Windows.Forms.Button();
@@ -343,6 +344,8 @@
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.tb_cps = new System.Windows.Forms.TextBox();
+            this.label83 = new System.Windows.Forms.Label();
             this.tb_pressure = new System.Windows.Forms.TextBox();
             this.label107 = new System.Windows.Forms.Label();
             this.tb_flow = new System.Windows.Forms.TextBox();
@@ -374,9 +377,9 @@
             this.label73 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tb_cps = new System.Windows.Forms.TextBox();
+            this.tb_power = new System.Windows.Forms.TextBox();
             this.label71 = new System.Windows.Forms.Label();
-            this.lb_cps = new System.Windows.Forms.Label();
+            this.lb_power = new System.Windows.Forms.Label();
             this.vm1 = new System.Windows.Forms.TextBox();
             this.vm2 = new System.Windows.Forms.TextBox();
             this.tb_i_emi = new System.Windows.Forms.TextBox();
@@ -417,9 +420,6 @@
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.lb_num_spectra = new System.Windows.Forms.Label();
-            this.label83 = new System.Windows.Forms.Label();
-            this.tb_power = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_hv_icon)).BeginInit();
@@ -2357,6 +2357,11 @@
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
+            // lb_num_spectra
+            // 
+            resources.ApplyResources(this.lb_num_spectra, "lb_num_spectra");
+            this.lb_num_spectra.Name = "lb_num_spectra";
+            // 
             // btn_open_folder
             // 
             resources.ApplyResources(this.btn_open_folder, "btn_open_folder");
@@ -3034,6 +3039,17 @@
             this.tableLayoutPanel7.Controls.Add(this.tb_PSK, 1, 2);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             // 
+            // tb_cps
+            // 
+            resources.ApplyResources(this.tb_cps, "tb_cps");
+            this.tb_cps.Name = "tb_cps";
+            this.tb_cps.ReadOnly = true;
+            // 
+            // label83
+            // 
+            resources.ApplyResources(this.label83, "label83");
+            this.label83.Name = "label83";
+            // 
             // tb_pressure
             // 
             resources.ApplyResources(this.tb_pressure, "tb_pressure");
@@ -3256,7 +3272,7 @@
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
             this.tableLayoutPanel2.Controls.Add(this.tb_power, 1, 8);
             this.tableLayoutPanel2.Controls.Add(this.label71, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.lb_cps, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.lb_power, 0, 8);
             this.tableLayoutPanel2.Controls.Add(this.vm1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.vm2, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.tb_i_emi, 1, 7);
@@ -3274,11 +3290,13 @@
             this.tableLayoutPanel2.Controls.Add(this.label72, 0, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // tb_cps
+            // tb_power
             // 
-            resources.ApplyResources(this.tb_cps, "tb_cps");
-            this.tb_cps.Name = "tb_cps";
-            this.tb_cps.ReadOnly = true;
+            this.tb_power.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_power.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            resources.ApplyResources(this.tb_power, "tb_power");
+            this.tb_power.Name = "tb_power";
+            this.tb_power.ReadOnly = true;
             // 
             // label71
             // 
@@ -3286,11 +3304,11 @@
             this.label71.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.label71.Name = "label71";
             // 
-            // lb_cps
+            // lb_power
             // 
-            resources.ApplyResources(this.lb_cps, "lb_cps");
-            this.lb_cps.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.lb_cps.Name = "lb_cps";
+            resources.ApplyResources(this.lb_power, "lb_power");
+            this.lb_power.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.lb_power.Name = "lb_power";
             // 
             // vm1
             // 
@@ -3661,24 +3679,6 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tabControl1, 0, 1);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            // 
-            // lb_num_spectra
-            // 
-            resources.ApplyResources(this.lb_num_spectra, "lb_num_spectra");
-            this.lb_num_spectra.Name = "lb_num_spectra";
-            // 
-            // label83
-            // 
-            resources.ApplyResources(this.label83, "label83");
-            this.label83.Name = "label83";
-            // 
-            // tb_power
-            // 
-            this.tb_power.BackColor = System.Drawing.SystemColors.Control;
-            this.tb_power.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            resources.ApplyResources(this.tb_power, "tb_power");
-            this.tb_power.Name = "tb_power";
-            this.tb_power.ReadOnly = true;
             // 
             // XPS
             // 
@@ -4079,7 +4079,6 @@
         private System.Windows.Forms.Label lb_atomic_number;
         private System.Windows.Forms.Label lb_element_name;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private System.Windows.Forms.Label lb_cps;
         private System.Windows.Forms.TextBox tb_cps;
         private System.Windows.Forms.Label lb_progress;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -4130,6 +4129,7 @@
         private System.Windows.Forms.Label lb_num_spectra;
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.TextBox tb_power;
+        private System.Windows.Forms.Label lb_power;
     }
 }
 
