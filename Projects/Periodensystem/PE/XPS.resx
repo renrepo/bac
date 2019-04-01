@@ -11514,6 +11514,30 @@
   <data name="&gt;&gt;tb_iseg_control.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btn_fit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>418, 89</value>
+  </data>
+  <data name="btn_fit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 28</value>
+  </data>
+  <data name="btn_fit.TabIndex" type="System.Int32, mscorlib">
+    <value>330</value>
+  </data>
+  <data name="btn_fit.Text" xml:space="preserve">
+    <value>Curvefit</value>
+  </data>
+  <data name="&gt;&gt;btn_fit.Name" xml:space="preserve">
+    <value>btn_fit</value>
+  </data>
+  <data name="&gt;&gt;btn_fit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_fit.Parent" xml:space="preserve">
+    <value>tb_dashboard</value>
+  </data>
+  <data name="&gt;&gt;btn_fit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tableLayoutPanel7.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -11911,7 +11935,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel7.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tableLayoutPanel7.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="tb_cps" Row="4" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label83" Row="4" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_pressure" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label107" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_flow" Row="3" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label51" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="label79" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="textBox35" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label82" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tb_PSK" Row="2" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Absolute,44,Absolute,89" /&gt;&lt;Rows Styles="Absolute,21,Absolute,21,Absolute,21,Absolute,21,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -11947,7 +11971,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;cb_H150666.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label63.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -12064,7 +12088,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tb_detailscan_stop.Location" type="System.Drawing.Point, System.Drawing">
     <value>98, 20</value>
@@ -12208,7 +12232,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tableLayoutPanel4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -12337,7 +12361,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tableLayoutPanel4.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="Iseg_Xray_session" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="Iseg_DPS_session" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="Percent,50,Percent,50" /&gt;&lt;/TableLayoutSettings&gt;</value>
@@ -12601,7 +12625,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="tableLayoutPanel2.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -13351,7 +13375,7 @@
     <value>tb_dashboard</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tb_dashboard.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>

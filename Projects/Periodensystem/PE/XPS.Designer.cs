@@ -343,6 +343,7 @@
             this.stat_all = new System.Windows.Forms.Button();
             this.btn_reload_all = new System.Windows.Forms.Button();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
+            this.btn_fit = new System.Windows.Forms.Button();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tb_cps = new System.Windows.Forms.TextBox();
             this.label83 = new System.Windows.Forms.Label();
@@ -3014,6 +3015,7 @@
             // tb_dashboard
             // 
             this.tb_dashboard.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_dashboard.Controls.Add(this.btn_fit);
             this.tb_dashboard.Controls.Add(this.tableLayoutPanel7);
             this.tb_dashboard.Controls.Add(this.cb_H150666);
             this.tb_dashboard.Controls.Add(this.groupBox7);
@@ -3023,6 +3025,13 @@
             this.tb_dashboard.Controls.Add(this.groupBox1);
             resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
             this.tb_dashboard.Name = "tb_dashboard";
+            // 
+            // btn_fit
+            // 
+            resources.ApplyResources(this.btn_fit, "btn_fit");
+            this.btn_fit.Name = "btn_fit";
+            this.btn_fit.UseVisualStyleBackColor = true;
+            this.btn_fit.Click += new System.EventHandler(this.btn_fit_Click);
             // 
             // tableLayoutPanel7
             // 
@@ -4130,6 +4139,7 @@
         private System.Windows.Forms.Label label83;
         private System.Windows.Forms.TextBox tb_power;
         private System.Windows.Forms.Label lb_power;
+        private System.Windows.Forms.Button btn_fit;
     }
 }
 

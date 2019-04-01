@@ -96,10 +96,23 @@
     <Compile Include="Background_stuff.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Analyser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Analyser.Designer.cs">
+      <DependentUpon>Analyser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Quantify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Quantify.Designer.cs">
+      <DependentUpon>Quantify.cs</DependentUpon>
+    </Compile>
     <Compile Include="Periodic_Table.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HV_device.cs" />
+    <Compile Include="pre_processing\load_data.cs" />
     <Compile Include="SelectResource.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +129,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Analyser.resx">
+      <DependentUpon>Analyser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Quantify.resx">
+      <DependentUpon>Quantify.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelectResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SelectResource.Designer.cs</LastGenOutput>

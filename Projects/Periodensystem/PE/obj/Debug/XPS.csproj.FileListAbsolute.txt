@@ -115,3 +115,5 @@ C:\Users\ESCA\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.Genera
 C:\Users\ESCA\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.csproj.CoreCompileInputs.cache
 C:\Users\ESCA\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.exe
 C:\Users\ESCA\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\PE.pdb
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.Analyser.resources
+C:\Users\admin\Desktop\bac\Projects\Periodensystem\PE\obj\Debug\XPS.Quantify.resources

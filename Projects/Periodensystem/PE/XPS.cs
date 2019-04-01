@@ -1077,6 +1077,37 @@ namespace XPS
             //Environment.GetFolderPath(Environment.SpecialFolder.Desktop)++ @"\Logfiles_PES\";
             System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Logfiles_PES\");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Analyser Analyser_form = new Analyser();
+        private void btn_fit_Click(object sender, EventArgs e)
+        {
+            if (Analyser_form.IsDisposed)
+            {
+                Analyser_form = new Analyser();
+            }
+
+            Analyser_form.Show();
+            //Form Analyser = new Form();
+        }
     }
 }
 
