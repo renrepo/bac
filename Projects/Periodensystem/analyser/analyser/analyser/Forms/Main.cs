@@ -15,12 +15,10 @@ namespace analyser
 {
     public partial class Main : Form
     {
-        Fitmodels fm = new Fitmodels();
+        Fitmodels fm;
         GetData GD;
-        shirley sh;
-        //Dictionary<string, ZedGraphControl> zgc_dic = new Dictionary<string, ZedGraphControl>();
-        Dictionary<string, zedgraph> zgc_class = new Dictionary<string, zedgraph>();
-
+        bg_processing sh;
+        List<zgc_class> zgc_list = new List<zgc_class>();
 
         #region Constructor
         public Main()
@@ -35,7 +33,8 @@ namespace analyser
         private void Main_Load(object sender, EventArgs e)
         {
             GD = new GetData();
-            sh = new shirley();
+            sh = new bg_processing();
+            fm = new Fitmodels();
         }
         #endregion
 
@@ -45,17 +44,19 @@ namespace analyser
         {    
             var data = GD.get_values_to_plot();
 
-            if (zgc_class.ContainsKey(data.Item3))
+            //if (zgc_class.ContainsKey(data.Item3))
+            if (zgc_list.Contains(zgc_list.Find(x => x.class_name == data.Item3)))
             {
                 tc_plots.SelectTab(data.Item3);
             }
 
             else
             {
-                zedgraph zw = new zedgraph(data.Item3);
-                zgc_class.Add(data.Item3, zw);
-                zw.new_zgc(tc_plots);
-                zw.plot_data(data.Item1, data.Item2);
+                zgc_class zw = new zgc_class(data.Item3, tc_plots);
+                zgc_list.Add(zw);
+                //zgc_class.Add(data.Item3, zw);
+                //zw.new_zgc(tc_plots);
+                zw.plot_data(data.Item1, data.Item2, data.Item3 + "_data");
             }                 
         }
 
@@ -107,8 +108,13 @@ namespace analyser
         {
             if (tc_plots.SelectedTab != null)
             {
-                zgc_class.Remove(tc_plots.SelectedTab.Name);
+                //zgc_class.Remove(tc_plots.SelectedTab.Name);
+                zgc_list.RemoveAt(zgc_list.FindIndex(x => x.class_name == tc_plots.SelectedTab.Name));
                 tc_plots.TabPages.Remove(tc_plots.SelectedTab);
+                foreach (var item in zgc_list)
+                {
+                    Console.WriteLine(item.class_name);
+                }
             }
                              
         }
@@ -119,7 +125,7 @@ namespace analyser
         {
             if (tc_plots.SelectedTab != null)
             {
-                zgc_class[tc_plots.SelectedTab.Name].tester(tc_plots.SelectedTab.Name);
+                //zgc_class[tc_plots.SelectedTab.Name].tester(tc_plots.SelectedTab.Name);
                //double[] x = new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 };
                 //double[] y = new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 };
                 //zgc_class[tc_plots.SelectedTab.Name].plot_data(x,y);
@@ -137,16 +143,51 @@ namespace analyser
         {
             if (tc_plots.SelectedTab != null)
             {
-
-                zgc_class[tc_plots.SelectedTab.Name].disable_zoom();
-                zgc_class[tc_plots.SelectedTab.Name].zgc.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_class[tc_plots.SelectedTab.Name].zgc_MouseDownEvent);
-                zgc_class[tc_plots.SelectedTab.Name].zgc.MouseUpEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_class[tc_plots.SelectedTab.Name].zgc_MouseUpEvent);
-                zgc_class[tc_plots.SelectedTab.Name].zgc.MouseMoveEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_class[tc_plots.SelectedTab.Name].zgc_MouseMoveEvent);
+                var zc = zgc_list.Find(x => x.class_name == tc_plots.SelectedTab.Name);
+                zc.disable_zoom();
+                //zgc_class[tc_plots.SelectedTab.Name].disable_zoom();
+                //Console.WriteLine(zgc_class[tc_plots.SelectedTab.Name].class_name);
+                zc.zgc.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zc.zgc_MouseDownEvent);
+                zc.zgc.MouseUpEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zc.zgc_MouseUpEvent);
+                zc.zgc.MouseMoveEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zc.zgc_MouseMoveEvent);
+                //zgc_class[tc_plots.SelectedTab.Name].DrawLine(ZedGraphControl sender, MouseEventArgs e, 360, 370);
                 //double[] x = new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 };
                 //double[] y = new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 };
                 //zgc_class[tc_plots.SelectedTab.Name].plot_data(x,y);
 
             }
+        }
+
+        private void btn_bg_add_Click(object sender, EventArgs e)
+        {
+            // zgc_class[tc_plots.SelectedTab.Name].start = true;
+            //var name = zgc_class[tc_plots.SelectedTab.Name].zgc.AccessibleName;
+
+            List<ZedGraphControl> zgc_list = new List<ZedGraphControl>();
+            //ZedGraphControl z1 = new ZedGraphControl();
+            zgc_list.Add(new ZedGraphControl() { AccessibleName = "z1" });
+            zgc_list[zgc_list.Count - 1].AccessibleName = "z1";
+            zgc_list.Add(new ZedGraphControl());
+            zgc_list[zgc_list.Count - 1].AccessibleName = "z2";
+            zgc_list.Add(new ZedGraphControl());
+            zgc_list[zgc_list.Count - 1].AccessibleName = "z3";
+            zgc_list.RemoveAt(zgc_list.FindIndex(x => x.AccessibleName == "z1"));
+            zgc_list.Add(new ZedGraphControl());
+            zgc_list[zgc_list.Count - 1].AccessibleName = "z4";
+            zgc_list.Add(new ZedGraphControl());
+            zgc_list[zgc_list.Count - 1].AccessibleName = "z5";
+
+            foreach (var item in zgc_list)
+            {
+                Console.WriteLine(item.AccessibleName);
+            }
+
+
+        }
+
+        private void tc_plots_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            fm.tb_changed(tc_plots.SelectedTab.Name);
         }
     }
 

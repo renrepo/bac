@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace analyser
 {
-    class shirley
+    class bg_processing
     {
         #region Fields
         private double[] x_data;
@@ -17,11 +17,9 @@ namespace analyser
         #endregion
 
         #region Constructor
-        public shirley()
+        public bg_processing()
         {
-            //this.x_data = (x_data);
-            //this.y_data = y_data;
-            //this.iterations = iterations;
+
         }
         #endregion
 

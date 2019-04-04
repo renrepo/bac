@@ -34,6 +34,7 @@
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_tester = new System.Windows.Forms.Button();
             this.btn_bg = new System.Windows.Forms.Button();
+            this.btn_bg_add = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_load_data
@@ -66,6 +67,7 @@
             this.tc_plots.SelectedIndex = 0;
             this.tc_plots.Size = new System.Drawing.Size(1594, 844);
             this.tc_plots.TabIndex = 3;
+            this.tc_plots.SelectedIndexChanged += new System.EventHandler(this.tc_plots_SelectedIndexChanged);
             // 
             // btn_del
             // 
@@ -97,11 +99,22 @@
             this.btn_bg.UseVisualStyleBackColor = true;
             this.btn_bg.Click += new System.EventHandler(this.btn_bg_Click);
             // 
+            // btn_bg_add
+            // 
+            this.btn_bg_add.Location = new System.Drawing.Point(322, 13);
+            this.btn_bg_add.Name = "btn_bg_add";
+            this.btn_bg_add.Size = new System.Drawing.Size(75, 34);
+            this.btn_bg_add.TabIndex = 7;
+            this.btn_bg_add.Text = "Add BG";
+            this.btn_bg_add.UseVisualStyleBackColor = true;
+            this.btn_bg_add.Click += new System.EventHandler(this.btn_bg_add_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1600, 900);
+            this.Controls.Add(this.btn_bg_add);
             this.Controls.Add(this.btn_bg);
             this.Controls.Add(this.btn_tester);
             this.Controls.Add(this.btn_del);
@@ -118,10 +131,11 @@
         #endregion
         private System.Windows.Forms.Button btn_load_data;
         private System.Windows.Forms.Button btn_processing;
-        private System.Windows.Forms.TabControl tc_plots;
+        public System.Windows.Forms.TabControl tc_plots;
         private System.Windows.Forms.Button btn_del;
         private System.Windows.Forms.Button btn_tester;
         private System.Windows.Forms.Button btn_bg;
+        private System.Windows.Forms.Button btn_bg_add;
     }
 }
 

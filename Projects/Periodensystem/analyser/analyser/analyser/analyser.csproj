@@ -71,8 +71,8 @@
     <Compile Include="LMAFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="shirley.cs" />
-    <Compile Include="zedgraph.cs" />
+    <Compile Include="bg_processing.cs" />
+    <Compile Include="zgc_class.cs" />
     <EmbeddedResource Include="Forms\Fitmodels.resx">
       <DependentUpon>Fitmodels.cs</DependentUpon>
     </EmbeddedResource>
