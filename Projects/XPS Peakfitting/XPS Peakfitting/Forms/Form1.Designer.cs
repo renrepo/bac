@@ -31,6 +31,7 @@
             this.tc_plots = new System.Windows.Forms.TabControl();
             this.btn_open = new System.Windows.Forms.Button();
             this.btn_analyse = new System.Windows.Forms.Button();
+            this.btn_close_tab = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tc_plots
@@ -61,16 +62,28 @@
             this.btn_analyse.UseVisualStyleBackColor = true;
             this.btn_analyse.Click += new System.EventHandler(this.btn_analyse_Click);
             // 
+            // btn_close_tab
+            // 
+            this.btn_close_tab.Location = new System.Drawing.Point(141, 12);
+            this.btn_close_tab.Name = "btn_close_tab";
+            this.btn_close_tab.Size = new System.Drawing.Size(59, 37);
+            this.btn_close_tab.TabIndex = 5;
+            this.btn_close_tab.Text = "Close Tab";
+            this.btn_close_tab.UseVisualStyleBackColor = true;
+            this.btn_close_tab.Click += new System.EventHandler(this.btn_close_tab_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.btn_close_tab);
             this.Controls.Add(this.btn_analyse);
             this.Controls.Add(this.btn_open);
             this.Controls.Add(this.tc_plots);
             this.Name = "Form1";
             this.Text = "XPS Peakfitting";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
@@ -80,6 +93,7 @@
         private System.Windows.Forms.TabControl tc_plots;
         private System.Windows.Forms.Button btn_open;
         private System.Windows.Forms.Button btn_analyse;
+        private System.Windows.Forms.Button btn_close_tab;
     }
 }
 
