@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6C3CFC91-7D3C-47A4-A1D6-A609AA118DB0}</ProjectGuid>
+    <ProjectGuid>{F3D50FB4-819D-4843-A857-42658C61FDD6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>analyser</RootNamespace>
-    <AssemblyName>analyser</AssemblyName>
+    <RootNamespace>XPS_Peakfitting</RootNamespace>
+    <AssemblyName>XPS Peakfitting</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GeneralMatrix">
-      <HintPath>..\..\..\..\..\..\..\Downloads\LMA\LMA\LMA\bin\Debug\GeneralMatrix.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,36 +45,29 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="ZedGraph">
-      <HintPath>..\..\..\PE\bin\Debug\ZedGraph.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\bac\Projects\Periodensystem\PE\bin\Debug\ZedGraph.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="constants.cs" />
-    <Compile Include="Forms\Form_Main.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Main.Designer.cs">
-      <DependentUpon>Form_Main.cs</DependentUpon>
+    <Compile Include="Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form_Fitmodels.cs">
+    <Compile Include="Forms\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form_Fitmodels.Designer.cs">
-      <DependentUpon>Form_Fitmodels.cs</DependentUpon>
+    <Compile Include="Forms\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="GetData.cs" />
-    <Compile Include="ILMAFunction.cs" />
-    <Compile Include="LMA.cs" />
-    <Compile Include="LMAFunction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="bg_processing.cs" />
-    <Compile Include="zgc_class.cs" />
-    <EmbeddedResource Include="Forms\Form_Fitmodels.resx">
-      <DependentUpon>Form_Fitmodels.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form_Main.resx">
-      <DependentUpon>Form_Main.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

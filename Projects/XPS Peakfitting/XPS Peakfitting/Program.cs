@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace analyser
+namespace XPS_Peakfitting
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace analyser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Main());
+            Application.Run(new Form1());
         }
     }
 }

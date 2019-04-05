@@ -1,6 +1,6 @@
 ﻿namespace analyser
 {
-    partial class Main
+    partial class Form_Main
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,6 @@
             this.btn_processing = new System.Windows.Forms.Button();
             this.tc_plots = new System.Windows.Forms.TabControl();
             this.btn_del = new System.Windows.Forms.Button();
-            this.btn_tester = new System.Windows.Forms.Button();
             this.btn_bg = new System.Windows.Forms.Button();
             this.btn_bg_add = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -62,10 +61,10 @@
             this.tc_plots.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tc_plots.Location = new System.Drawing.Point(4, 53);
+            this.tc_plots.Location = new System.Drawing.Point(4, 159);
             this.tc_plots.Name = "tc_plots";
             this.tc_plots.SelectedIndex = 0;
-            this.tc_plots.Size = new System.Drawing.Size(1594, 844);
+            this.tc_plots.Size = new System.Drawing.Size(1594, 738);
             this.tc_plots.TabIndex = 3;
             this.tc_plots.SelectedIndexChanged += new System.EventHandler(this.tc_plots_SelectedIndexChanged);
             // 
@@ -78,16 +77,6 @@
             this.btn_del.Text = "Close Tab";
             this.btn_del.UseVisualStyleBackColor = true;
             this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
-            // 
-            // btn_tester
-            // 
-            this.btn_tester.Location = new System.Drawing.Point(715, 13);
-            this.btn_tester.Name = "btn_tester";
-            this.btn_tester.Size = new System.Drawing.Size(75, 34);
-            this.btn_tester.TabIndex = 5;
-            this.btn_tester.Text = "Tester";
-            this.btn_tester.UseVisualStyleBackColor = true;
-            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
             // 
             // btn_bg
             // 
@@ -109,19 +98,18 @@
             this.btn_bg_add.UseVisualStyleBackColor = true;
             this.btn_bg_add.Click += new System.EventHandler(this.btn_bg_add_Click);
             // 
-            // Main
+            // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1600, 900);
             this.Controls.Add(this.btn_bg_add);
             this.Controls.Add(this.btn_bg);
-            this.Controls.Add(this.btn_tester);
             this.Controls.Add(this.btn_del);
             this.Controls.Add(this.tc_plots);
             this.Controls.Add(this.btn_processing);
             this.Controls.Add(this.btn_load_data);
-            this.Name = "Main";
+            this.Name = "Form_Main";
             this.Text = "Analyser";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResumeLayout(false);
@@ -133,7 +121,6 @@
         private System.Windows.Forms.Button btn_processing;
         public System.Windows.Forms.TabControl tc_plots;
         private System.Windows.Forms.Button btn_del;
-        private System.Windows.Forms.Button btn_tester;
         private System.Windows.Forms.Button btn_bg;
         private System.Windows.Forms.Button btn_bg_add;
     }

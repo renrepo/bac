@@ -8,51 +8,54 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
-using analyser.Forms;
 using System.Diagnostics;
 
-namespace analyser.Forms
+
+namespace analyser
 {
-    public partial class Fitmodels : Form
+    public partial class Form_Fitmodels : Form
     {
+        zgc_class z;
+        #region Properties
         public string filename { get; set; }
+        #endregion
+
+
+        #region Fields
+        private Form_Main mainForm = null;
+        #endregion
+
+
         #region Constructor
-        public Fitmodels()
+        public Form_Fitmodels(Form callingForm)
         {
+            //https://stackoverflow.com/questions/1665533/communicate-between-two-windows-forms-in-c-sharp
+            mainForm = callingForm as Form_Main;
             InitializeComponent();
             //keep Form always on top
             this.TopMost = true;
-            dgv_background.CellValueChanged +=
-             new DataGridViewCellEventHandler(dataGridView1_CellValueChanged);
-            dgv_background.CurrentCellDirtyStateChanged +=
-                 new EventHandler(dataGridView1_CurrentCellDirtyStateChanged);
+
+
+            dgv_background.CellValueChanged += new DataGridViewCellEventHandler(dgv_background_CellValueChanged);
+            dgv_background.CurrentCellDirtyStateChanged += new EventHandler(dgv_background_CurrentCellDirtyStateChanged);
 
         }
         #endregion
 
-        private void btn_shirley_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void Fitmodels_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void tb_select_bg_Click(object sender, EventArgs e)
-        {
-            //ZedGraphControl z =
-        }
 
         public void tb_changed(string filename)
         {
-            
-          // lb_filename.Refresh();
+            //this.z = filename;
+            //lb_filename.Refresh();
         }
 
-        void dataGridView1_CurrentCellDirtyStateChanged(object sender,
-        EventArgs e)
+        void dgv_background_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgv_background.IsCurrentCellDirty)
             {
@@ -61,13 +64,14 @@ namespace analyser.Forms
             }
         }
 
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void dgv_background_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             // My combobox column is the second one so I hard coded a 1, flavor to taste
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_background.Rows[e.RowIndex].Cells[0];
             if (cb.Value != null)
             {
                 // do stuff
+                mainForm.get_coordinates();
                 lb_filename.Text = cb.Value.ToString();
                 dgv_background.Invalidate();
             }

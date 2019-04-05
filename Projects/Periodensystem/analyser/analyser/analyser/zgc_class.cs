@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
-using analyser.Forms;
 using System.Diagnostics;
 using System.Threading;
 
@@ -25,18 +24,17 @@ namespace analyser
         public double[] y_vals;
         List<LineItem> line_items = new List<LineItem>();
         List<PolyObj> polyobj_item = new List<PolyObj>();
+
         public ZedGraphControl zgc { get; set; }
         public ZedGraph.GraphPane myPane;
-
-
         public bool bMouseDown = false;
         public bool start = true;
         double xVal_left;
         double xVal_right;
 
-
-
         #endregion
+
+
 
         #region Constructor
         public zgc_class(string name, TabControl tc)
@@ -95,7 +93,6 @@ namespace analyser
 
         public Tuple<double,double> select_background()
         {
-
             return Tuple.Create(1.0,1.0);
         }
 
@@ -132,9 +129,9 @@ namespace analyser
                         y_vals_crop.Add(y_vals[Array.IndexOf(x_vals, item)]);
                     }
                 }
-                double[] erg = sh.integral(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 5);
+                double[] erg = sh.integral(x_vals_crop.ToArray(), y_vals_crop.ToArray(),5);
                 line_items.Add(myPane.AddCurve(" ", x_vals_crop.ToArray(), erg, Color.Red, SymbolType.None));
-                //line_items[line_items.Count - 1].
+                //line_items[line_items.Count - 1].;
                 zgc.Invalidate();
                 //myPane.CurveList[myPane.CurveList.Count - 1].Clear();
                 bMouseDown = false;
@@ -166,17 +163,6 @@ namespace analyser
                 polyobj_item.Add(poly);
                 polyobj_item[polyobj_item.Count - 1].Tag = "tag";
                 myPane.GraphObjList.Add(poly);
-
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Max);
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Min);
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Max);
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Min);
-                //line_items.Add(myPane.AddCurve(" ", userClickrList_right, Color.Red, SymbolType.None));
-                //line_items[line_items.Count - 1].Tag = "userClickCurve_right";
-                //line_items.Add(myPane.AddCurve(" ", userClickrList_left, Color.Blue, SymbolType.None));
-                //line_items[line_items.Count - 1].Tag = "userClickCurve_left";
-                //line_items.Add(myPane.AddCurve(" ", null, null, Color.Red, SymbolType.None));
-                //line_items[line_items.Count - 1].Tag = "";
                 start = false;
                 zgc.Refresh();
                 return true;
@@ -201,21 +187,9 @@ namespace analyser
 
         public Tuple<double,double> DrawLine(ZedGraphControl sender, MouseEventArgs e, double xVal_left, double xVal_right)
         {
-            // GraphPane myPane = zedGraphControl1.GraphPane;
-            // x & y variables to store the axis values
             double yVal_left;
             double yVal_right;
-            //bool start = true;
-
-            //userClickrList_left.Clear();
-            //userClickrList_right.Clear();
-
-
-
-            myPane.Legend.IsVisible = false;
-
-            // Use the current mouse locations to get the corresponding 
-            // X & Y CO-Ordinates         
+            myPane.Legend.IsVisible = false; 
             myPane.ReverseTransform(e.Location, out double x_cond, out double y_cond);
 
             if (0.5 * (xVal_right + xVal_left) < x_cond)
@@ -229,13 +203,6 @@ namespace analyser
                     new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Max),
                     new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max)
                 };
-                //myPane.FindNearestPoint(e.Location, curve, out userClickCurve_left, out int np);
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Max);
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Min);
-                //userClickCurve_right = myPane.AddCurve(" ", userClickrList_right, Color.Red, SymbolType.None);
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Max);
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Min);
-                //userClickCurve_left = myPane.AddCurve(" ", userClickrList_left, Color.Blue, SymbolType.None);
             }
 
             else
@@ -249,23 +216,31 @@ namespace analyser
                     new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Max),
                     new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max)
                 };
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Max);
-                //userClickrList_left.Add(xVal_left, myPane.YAxis.Scale.Min);
-                //userClickCurve_left = myPane.AddCurve(" ", userClickrList_left, Color.Blue, SymbolType.None);
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Max);
-                //userClickrList_right.Add(xVal_right, myPane.YAxis.Scale.Min);
-                //userClickCurve_right = myPane.AddCurve(" ", userClickrList_right, Color.Red, SymbolType.None);
-            }
-
-            
+            }          
             zgc.Refresh();
-            //zgc.Invalidate();
             Thread.Sleep(20);
             return Tuple.Create(xVal_left, xVal_right);
-        
+
+           
+        }
+
+
+
+
+        public void testt()
+        {
+            double[,] xy = new double[,] { { 1, 2 }, { 1, 2 } };
+            double[,] xyz = new double[,] { { 1, 2, 4 }, { 1, 2, 8 } };
+            List<double[,]> lll = new List<double[,]>();
+            lll.Add(xy);
+            lll.Add(xyz);
         }
 
 
         #endregion
+
+
+
+
     }
 }

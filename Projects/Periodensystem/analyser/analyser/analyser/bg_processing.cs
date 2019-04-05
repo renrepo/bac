@@ -16,6 +16,10 @@ namespace analyser
         //private double IntMax;
         #endregion
 
+        #region Properties
+
+        #endregion
+
         #region Constructor
         public bg_processing()
         {

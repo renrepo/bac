@@ -1,6 +1,6 @@
-﻿namespace analyser.Forms
+﻿namespace analyser
 {
-    partial class Fitmodels
+    partial class Form_Fitmodels
     {
         /// <summary>
         /// Required designer variable.
@@ -29,9 +29,12 @@
         private void InitializeComponent()
         {
             this.dgv_fit = new System.Windows.Forms.DataGridView();
+            this.dgv_fit_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_fit_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_fit_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_fit_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_fit_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_fit = new System.Windows.Forms.Button();
-            this.btn_shirley = new System.Windows.Forms.Button();
-            this.tb_select_bg = new System.Windows.Forms.Button();
             this.lb_filename = new System.Windows.Forms.Label();
             this.tc_processing = new System.Windows.Forms.TabControl();
             this.tb_fit = new System.Windows.Forms.TabPage();
@@ -41,11 +44,6 @@
             this.dgv_background_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_fit_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_fit_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_fit_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_fit_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_fit_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fit)).BeginInit();
             this.tc_processing.SuspendLayout();
             this.tb_fit.SuspendLayout();
@@ -67,6 +65,36 @@
             this.dgv_fit.Size = new System.Drawing.Size(537, 159);
             this.dgv_fit.TabIndex = 0;
             // 
+            // dgv_fit_model
+            // 
+            this.dgv_fit_model.HeaderText = "Model";
+            this.dgv_fit_model.Items.AddRange(new object[] {
+            "G",
+            "L",
+            "GLS",
+            "GLP"});
+            this.dgv_fit_model.Name = "dgv_fit_model";
+            // 
+            // dgv_fit_amp
+            // 
+            this.dgv_fit_amp.HeaderText = "Amplitude";
+            this.dgv_fit_amp.Name = "dgv_fit_amp";
+            // 
+            // dgv_fit_cen
+            // 
+            this.dgv_fit_cen.HeaderText = "Center";
+            this.dgv_fit_cen.Name = "dgv_fit_cen";
+            // 
+            // dgv_fit_wid
+            // 
+            this.dgv_fit_wid.HeaderText = "Width";
+            this.dgv_fit_wid.Name = "dgv_fit_wid";
+            // 
+            // dgv_fit_mix
+            // 
+            this.dgv_fit_mix.HeaderText = "Mixing-Ratio";
+            this.dgv_fit_mix.Name = "dgv_fit_mix";
+            // 
             // btn_fit
             // 
             this.btn_fit.Location = new System.Drawing.Point(12, 12);
@@ -75,26 +103,6 @@
             this.btn_fit.TabIndex = 1;
             this.btn_fit.Text = "Process Fit";
             this.btn_fit.UseVisualStyleBackColor = true;
-            // 
-            // btn_shirley
-            // 
-            this.btn_shirley.Location = new System.Drawing.Point(103, 11);
-            this.btn_shirley.Name = "btn_shirley";
-            this.btn_shirley.Size = new System.Drawing.Size(75, 23);
-            this.btn_shirley.TabIndex = 2;
-            this.btn_shirley.Text = "Shirley";
-            this.btn_shirley.UseVisualStyleBackColor = true;
-            this.btn_shirley.Click += new System.EventHandler(this.btn_shirley_Click);
-            // 
-            // tb_select_bg
-            // 
-            this.tb_select_bg.Location = new System.Drawing.Point(184, 11);
-            this.tb_select_bg.Name = "tb_select_bg";
-            this.tb_select_bg.Size = new System.Drawing.Size(75, 23);
-            this.tb_select_bg.TabIndex = 3;
-            this.tb_select_bg.Text = "Background";
-            this.tb_select_bg.UseVisualStyleBackColor = true;
-            this.tb_select_bg.Click += new System.EventHandler(this.tb_select_bg_Click);
             // 
             // lb_filename
             // 
@@ -167,37 +175,7 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "----";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
-            // dgv_fit_model
-            // 
-            this.dgv_fit_model.HeaderText = "Model";
-            this.dgv_fit_model.Items.AddRange(new object[] {
-            "G",
-            "L",
-            "GLS",
-            "GLP"});
-            this.dgv_fit_model.Name = "dgv_fit_model";
-            // 
-            // dgv_fit_amp
-            // 
-            this.dgv_fit_amp.HeaderText = "Amplitude";
-            this.dgv_fit_amp.Name = "dgv_fit_amp";
-            // 
-            // dgv_fit_cen
-            // 
-            this.dgv_fit_cen.HeaderText = "Center";
-            this.dgv_fit_cen.Name = "dgv_fit_cen";
-            // 
-            // dgv_fit_wid
-            // 
-            this.dgv_fit_wid.HeaderText = "Width";
-            this.dgv_fit_wid.Name = "dgv_fit_wid";
-            // 
-            // dgv_fit_mix
-            // 
-            this.dgv_fit_mix.HeaderText = "Mixing-Ratio";
-            this.dgv_fit_mix.Name = "dgv_fit_mix";
-            // 
-            // Fitmodels
+            // Form_Fitmodels
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -205,10 +183,8 @@
             this.Controls.Add(this.dgv_background);
             this.Controls.Add(this.tc_processing);
             this.Controls.Add(this.lb_filename);
-            this.Controls.Add(this.tb_select_bg);
-            this.Controls.Add(this.btn_shirley);
             this.Controls.Add(this.btn_fit);
-            this.Name = "Fitmodels";
+            this.Name = "Form_Fitmodels";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Fitmodels_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fit)).EndInit();
@@ -224,8 +200,6 @@
 
         private System.Windows.Forms.DataGridView dgv_fit;
         private System.Windows.Forms.Button btn_fit;
-        private System.Windows.Forms.Button btn_shirley;
-        private System.Windows.Forms.Button tb_select_bg;
         private System.Windows.Forms.Label lb_filename;
         private System.Windows.Forms.TabControl tc_processing;
         private System.Windows.Forms.TabPage tb_fit;
