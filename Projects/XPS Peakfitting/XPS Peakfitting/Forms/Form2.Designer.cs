@@ -35,10 +35,10 @@
             this.dgv_fit_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_fit_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_bg = new System.Windows.Forms.DataGridView();
+            this.btn_form2_test = new System.Windows.Forms.Button();
             this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_bg_start = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_bg_end = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_form2_test = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             this.SuspendLayout();
@@ -99,9 +99,24 @@
             this.dgv_bg.Size = new System.Drawing.Size(580, 65);
             this.dgv_bg.TabIndex = 1;
             // 
+            // btn_form2_test
+            // 
+            this.btn_form2_test.Location = new System.Drawing.Point(450, 53);
+            this.btn_form2_test.Name = "btn_form2_test";
+            this.btn_form2_test.Size = new System.Drawing.Size(75, 23);
+            this.btn_form2_test.TabIndex = 2;
+            this.btn_form2_test.Text = "button1";
+            this.btn_form2_test.UseVisualStyleBackColor = true;
+            this.btn_form2_test.Click += new System.EventHandler(this.btn_form2_test_Click);
+            // 
             // dgv_bg_model
             // 
             this.dgv_bg_model.HeaderText = "Model";
+            this.dgv_bg_model.Items.AddRange(new object[] {
+            "Shirley",
+            "Linear",
+            "Touugrad",
+            "Constant"});
             this.dgv_bg_model.Name = "dgv_bg_model";
             this.dgv_bg_model.Width = 80;
             // 
@@ -116,16 +131,6 @@
             this.dgv_bg_end.HeaderText = "to";
             this.dgv_bg_end.Name = "dgv_bg_end";
             this.dgv_bg_end.Width = 80;
-            // 
-            // btn_form2_test
-            // 
-            this.btn_form2_test.Location = new System.Drawing.Point(450, 53);
-            this.btn_form2_test.Name = "btn_form2_test";
-            this.btn_form2_test.Size = new System.Drawing.Size(75, 23);
-            this.btn_form2_test.TabIndex = 2;
-            this.btn_form2_test.Text = "button1";
-            this.btn_form2_test.UseVisualStyleBackColor = true;
-            this.btn_form2_test.Click += new System.EventHandler(this.btn_form2_test_Click);
             // 
             // Form2
             // 
@@ -152,9 +157,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_fit_wid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_fit_mix;
         private System.Windows.Forms.DataGridView dgv_bg;
+        private System.Windows.Forms.Button btn_form2_test;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_bg_model;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_start;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_end;
-        private System.Windows.Forms.Button btn_form2_test;
     }
 }

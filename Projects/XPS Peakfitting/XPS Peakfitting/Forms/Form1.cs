@@ -18,10 +18,14 @@ namespace XPS_Peakfitting
 
 
         #region Fields
+
+        private ZedGraphControl zgc;
+        private int current_tp_index;
         private Form2 f2;
         stuff stuff = new stuff();
         private List<ZedGraphControl> _list_zgc = new List<ZedGraphControl>();
         private List<LineItem> _list_lineitem_raw = new List<LineItem>();
+
         #endregion //--------------------------------------------------------------------------------------
 
 
@@ -30,6 +34,17 @@ namespace XPS_Peakfitting
 
         #region Properties
 
+        public ZedGraphControl ZGC
+        {
+            get { return _list_zgc[_list_zgc.FindIndex(x => x.AccessibleName == (tc_plots.SelectedTab.Name + "_plots"))]; }
+            set { zgc = value; }
+        }
+
+        public int Current_tp_index
+        {
+            get { return _list_zgc.FindIndex(x => x.AccessibleName == (tc_plots.SelectedTab.Name + "_plots")); }
+            set { current_tp_index = value; }
+        }
 
         #endregion //--------------------------------------------------------------------------------------
 
@@ -57,6 +72,9 @@ namespace XPS_Peakfitting
         {
             Console.WriteLine("test");
         }
+
+
+        
 
         #endregion //--------------------------------------------------------------------------------------
 
@@ -96,8 +114,8 @@ namespace XPS_Peakfitting
                 tlp.ColumnCount = 1;
                 tc_plots.TabPages.Add(tp);
                 tp.Controls.Add(tlp);
-                tlp.Controls.Add(zgc_plots);
                 tlp.Controls.Add(zgc_residuals);
+                tlp.Controls.Add(zgc_plots);
                 tlp.Dock = DockStyle.Fill;
                 zgc_residuals.Dock = DockStyle.Fill;
                 zgc_plots.Dock = DockStyle.Fill;
@@ -134,6 +152,8 @@ namespace XPS_Peakfitting
                 {
                     Console.WriteLine(item.AccessibleName);
                 }
+
+                stuff.Draw_line(zgc_plots, data.Item1);
             }
 
         }
