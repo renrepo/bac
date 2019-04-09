@@ -17,6 +17,7 @@ namespace XPS_Peakfitting.Forms
 
 
         #region Fields
+
         Form1 f1;
         stuff s = new stuff();
         private ZedGraphControl _zg_control;
@@ -26,6 +27,13 @@ namespace XPS_Peakfitting.Forms
         private List<List<double>> _models_data_item;
         private List<List<List<double>>> _raw_bg_data = new List<List<List<double>>>();
         private List<List<List<double>>> _models_data = new List<List<List<double>>>();
+
+        //private List<List<double>> _bg_start_stop = new List<List<double>>();
+        private int current_row_index;
+        private double bg_values;
+        //private List<List<string>> _bg_model = new List<List<string>>();
+
+        private List<data_storage> list_data_storage = new List<data_storage>();
 
         #endregion //--------------------------------------------------------------------------------------
 
@@ -63,8 +71,7 @@ namespace XPS_Peakfitting.Forms
             get { return _raw_bg_data_item_single; }
             set
             {
-                _raw_bg_data_item[_models_data.Count] = value;
-                _raw_bg_data[_models_data.Count].Add(value);
+                _raw_bg_data[f1.Current_tp_index].Add(value);
             }
         }
 
@@ -73,10 +80,29 @@ namespace XPS_Peakfitting.Forms
             get { return _models_data_item_single; }
             set
             {
-                _models_data_item[_models_data.Count] = value;
-                _models_data[_models_data.Count].Add(value);
+                _models_data[f1.Current_tp_index].Add(value);
             }
         }
+
+        public int remove_at_index
+        {
+            get { return 0; }
+            set
+            {
+                _raw_bg_data.RemoveAt(value);
+                if (_models_data.Count >= value)
+                {
+                    _models_data.RemoveAt(value);
+                }               
+            }
+        }
+
+        public double Bg_values
+        {
+            get { return 0; }
+            set { list_data_storage.Find(x => x.Name == f1.Current_tp_name).bg.Add(value); }
+        }
+
 
         #endregion //--------------------------------------------------------------------------------------
 
@@ -102,7 +128,8 @@ namespace XPS_Peakfitting.Forms
         #region Events
         private void btn_form2_test_Click(object sender, EventArgs e)
         {
-            f1.tester();
+            //f1.Tester();
+            //Console.WriteLine(_raw_bg_data);
         }
 
 
@@ -119,20 +146,43 @@ namespace XPS_Peakfitting.Forms
         {
             // My combobox column is the second one so I hard coded a 1, flavor to taste
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
+            if (!list_data_storage.Contains(list_data_storage.Find(x => x.Name == f1.Current_tp_name)))
+            {
+                f1.x = _raw_bg_data[f1.Current_tp_index][0].ToArray();
+                f1.y = _raw_bg_data[f1.Current_tp_index][1].ToArray();
+                data_storage ds = new data_storage(f1.Current_tp_name, _raw_bg_data[f1.Current_tp_index][0], _raw_bg_data[f1.Current_tp_index][1]);
+                list_data_storage.Add(ds);
+                ds.draw_initial_bg(f1.ZGC);
+            }
+
+            else
+            {
+                data_storage ds = list_data_storage.Find(x => x.Name == f1.Current_tp_name);
+                if (ds.bg.Count != 0)
+                {
+                    ds.draw_objectboxes(f1.ZGC);
+                }
+            }
+
             if (cb.Value != null)
             {
-                if (cb.Value.ToString() == "Shirley")
+                var zgc = f1.ZGC;
+
+                if (e.RowIndex == 0)
                 {
-                    s.X = _raw_bg_data[f1.Current_tp_index][e.RowIndex];
-                    s.Y = _raw_bg_data[f1.Current_tp_index][e.RowIndex + 1];
-                    var zgc = f1.ZGC;
                     zgc.IsEnableHZoom = false;
                     zgc.IsEnableVZoom = false;
-                    zgc.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(s.zgc_MouseDownEvent);
-                    zgc.MouseUpEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(s.zgc_MouseUpEvent);
-                    zgc.MouseMoveEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(s.zgc_MouseMoveEvent);
+                    zgc.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(f1.zgc_MouseDownEvent);
+                    zgc.MouseUpEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(f1.zgc_MouseUpEvent);
+                    zgc.MouseMoveEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(f1.zgc_MouseMoveEvent);                   
+                }
 
-                    Console.WriteLine("OK");
+                current_row_index = e.RowIndex;              
+                //f1.zgc_MouseDownEvent(f1.ZGC, null);
+
+                if (cb.Value.ToString() == "Shirley")
+                {                    
+                    
                 }
 
                 // do stuff

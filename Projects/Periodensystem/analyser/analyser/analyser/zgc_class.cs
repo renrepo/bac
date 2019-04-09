@@ -131,7 +131,7 @@ namespace analyser
                 }
                 double[] erg = sh.integral(x_vals_crop.ToArray(), y_vals_crop.ToArray(),5);
                 line_items.Add(myPane.AddCurve(" ", x_vals_crop.ToArray(), erg, Color.Red, SymbolType.None));
-                //line_items[line_items.Count - 1].;
+                //line_items[line_items.Count - 1];
                 zgc.Invalidate();
                 //myPane.CurveList[myPane.CurveList.Count - 1].Clear();
                 bMouseDown = false;

@@ -13,34 +13,24 @@ namespace XPS_Peakfitting
 {
     class stuff
     {
-
         #region Fields
 
-        private double[] x;
-        private double[] y;
-        public bool bMouseDown = false;
-        public bool start = true;
-        double xVal_left;
-        double xVal_right;
-        List<PolyObj> polyobj_item = new List<PolyObj>();
 
-        #endregion
+        #endregion //--------------------------------------------------------------------------------------
+
+
+
+
 
 
         #region Properties
 
-        public List<double> X
-        {
-            get { return null; }
-            set { x = value.ToArray(); }
-        }
-        public List<double> Y
-        {
-            get { return null; }
-            set { y = value.ToArray(); }
-        }
 
-        #endregion
+        #endregion //--------------------------------------------------------------------------------------
+
+
+
+
 
 
         #region Methods
@@ -97,18 +87,7 @@ namespace XPS_Peakfitting
         }
 
 
-        public void Draw_line(ZedGraphControl zgc, List<List<double>> values)
-        {
-            double[][] vals = values.Select(a => a.ToArray()).ToArray();
-            zgc.GraphPane.AddCurve("", vals[0], vals[1], Color.FromArgb(21, 172, 61), SymbolType.None);
-            //myPane.CurveList[myPane.CurveList.Count - 1].Tag = curve_name;
-            //line_items[line_items.Count - 1].Tag = curve_name;
-            //line_items[line_items.Count - 1].Line.Width = 1;
-            zgc.AxisChange();
-            zgc.Invalidate();
-            //x_vals = x;
-            //y_vals = y;
-        }
+
 
 
         public double[] integral(double[] x_data, double[] y_data, int iterations)
@@ -164,119 +143,10 @@ namespace XPS_Peakfitting
 
 
         #region Events
-        public bool zgc_MouseUpEvent(ZedGraphControl sender, MouseEventArgs e)
-        {
-            if (bMouseDown)
-            {
-                List<double> x_vals_crop = new List<double>();
-                List<double> y_vals_crop = new List<double>();
-                foreach (var item in x)
-                {
-                    if (item > xVal_left && item < xVal_right)
-                    {
-                        x_vals_crop.Add(item);
-                        y_vals_crop.Add(y[Array.IndexOf(x, item)]);
-                    }
-                }
-                double[] erg = integral(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 5);
-                bMouseDown = false;
-                List<List<double>> result = new List<List<double>>();
-                result.Add(x_vals_crop);
-                result.Add(erg.ToList());
-                
-            }
-            return false;
-        }
+        
 
-        public bool zgc_MouseDownEvent(ZedGraphControl sender, MouseEventArgs e)
-        {
-            ZedGraphControl zgc = sender as ZedGraphControl;
-            GraphPane myPane = zgc.GraphPane;
-            
-            if (start)
-            {
-                xVal_left = x[Array.IndexOf(y, y.Max())] - 1;
-                xVal_right = x[Array.IndexOf(y, y.Max())] + 1;
-                var poly = new ZedGraph.PolyObj
-                {
-                    Points = new[]
-                    {
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max)
-                },
-                    Fill = new ZedGraph.Fill(Color.FromArgb(204, 255, 204)),
-                    ZOrder = ZedGraph.ZOrder.E_BehindCurves,
-                };
-                poly.Border.Color = Color.FromArgb(153, 255, 153);
-                polyobj_item.Add(poly);
-                polyobj_item[polyobj_item.Count - 1].Tag = "tag";
-                myPane.GraphObjList.Add(poly);
-                start = false;
-                zgc.Refresh();
-                return true;
-            }
-            bMouseDown = true;
-            var result = DrawLine(sender, e, xVal_left, xVal_right);
-            xVal_left = result.Item1;
-            xVal_right = result.Item2;
-            return false;
-        }
+        
 
-        public bool zgc_MouseMoveEvent(ZedGraphControl sender, MouseEventArgs e)
-        {
-            if (bMouseDown)
-            {
-                var result = DrawLine(sender, e, xVal_left, xVal_right);
-                xVal_left = result.Item1;
-                xVal_right = result.Item2;
-            }
-            return false;
-        }
-
-        public Tuple<double, double> DrawLine(ZedGraphControl sender, MouseEventArgs e, double xVal_left, double xVal_right)
-        {
-            ZedGraphControl zgc = sender as ZedGraphControl;
-            GraphPane myPane = zgc.GraphPane;
-            double yVal_left;
-            double yVal_right;
-            myPane.Legend.IsVisible = false;
-            myPane.ReverseTransform(e.Location, out double x_cond, out double y_cond);
-
-            if (0.5 * (xVal_right + xVal_left) < x_cond)
-            {
-                myPane.ReverseTransform(e.Location, out xVal_right, out yVal_right);
-                polyobj_item[polyobj_item.Count - 1].Points = new[]
-                    {
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max)
-                };
-            }
-
-            else
-            {
-                myPane.ReverseTransform(e.Location, out xVal_left, out yVal_left);
-                polyobj_item[polyobj_item.Count - 1].Points = new[]
-                    {
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Min),
-                    new ZedGraph.PointD(xVal_right, myPane.YAxis.Scale.Max),
-                    new ZedGraph.PointD(xVal_left, myPane.YAxis.Scale.Max)
-                };
-            }
-            zgc.Refresh();
-            Thread.Sleep(20);
-            return Tuple.Create(xVal_left, xVal_right);
-
-
-        }
-
-        #endregion
+        #endregion //--------------------------------------------------------------------------------------
     }
 }
