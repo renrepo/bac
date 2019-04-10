@@ -84,9 +84,9 @@
             this.dgv_bg_from,
             this.dgv_bg_to});
             this.dgv_bg.Enabled = false;
-            this.dgv_bg.Location = new System.Drawing.Point(800, 30);
+            this.dgv_bg.Location = new System.Drawing.Point(769, 13);
             this.dgv_bg.Name = "dgv_bg";
-            this.dgv_bg.Size = new System.Drawing.Size(286, 109);
+            this.dgv_bg.Size = new System.Drawing.Size(317, 119);
             this.dgv_bg.TabIndex = 3;
             // 
             // dgv_bg_sel
@@ -128,9 +128,9 @@
             this.dgv_models_wid,
             this.dgv_models_mix});
             this.dgv_models.Enabled = false;
-            this.dgv_models.Location = new System.Drawing.Point(1092, 30);
+            this.dgv_models.Location = new System.Drawing.Point(1092, 13);
             this.dgv_models.Name = "dgv_models";
-            this.dgv_models.Size = new System.Drawing.Size(485, 109);
+            this.dgv_models.Size = new System.Drawing.Size(485, 142);
             this.dgv_models.TabIndex = 4;
             // 
             // dgv_models_models
@@ -172,7 +172,7 @@
             // 
             this.cb_bg.AutoSize = true;
             this.cb_bg.Enabled = false;
-            this.cb_bg.Location = new System.Drawing.Point(800, 7);
+            this.cb_bg.Location = new System.Drawing.Point(769, 138);
             this.cb_bg.Name = "cb_bg";
             this.cb_bg.Size = new System.Drawing.Size(165, 17);
             this.cb_bg.TabIndex = 5;

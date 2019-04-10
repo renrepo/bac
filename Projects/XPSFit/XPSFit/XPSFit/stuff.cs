@@ -111,31 +111,30 @@ namespace XPSFit
 
         public void Draw_Line(List<double> x_values, List<double> y_values, string tag)
         {
-           
+            LineItem LI;
             if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
             {
-                var LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
+                LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
                 var LI_tag = LI.Tag;
                 var index = List_LineItem.FindIndex(a => a == LI);
                 List_LineItem.Remove(LI);
+                myPane_plots.CurveList.Remove(LI);
                 var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
                 LI_new.Tag = LI_tag;
-                LI.IsSelectable = true;
-                List_LineItem.Insert(index, LI);
-                zgc_plots.AxisChange();
-                zgc_plots.Invalidate();
+                List_LineItem.Insert(index, LI_new);
             }
 
             else
             {
-                var LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
                 LI.Tag = tag ?? Data_name;
-                LI.IsSelectable = true;
                 List_LineItem.Add(LI);
-                zgc_plots.AxisChange();
-                zgc_plots.Invalidate();
             }
-            
+            LI.IsSelectable = true;
+            zgc_plots.AxisChange();
+            zgc_plots.Invalidate();
+
+
         }
 
 
@@ -186,7 +185,6 @@ namespace XPSFit
                 List_PolyObj.Add(PO_new);
                 myPane_plots.GraphObjList.Add(PO_new); // really necessary??
             }
-            Console.WriteLine(X_left);
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();           
         }
@@ -288,9 +286,9 @@ namespace XPSFit
                     y_vals_crop.Add(y[x.IndexOf(item)]);
                 }
             }
-            double[] erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 5);
+            //double[] erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
+            double[] erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
             Draw_Line(x_vals_crop,erg.ToList(),Bg_tag);
-            //Update_Line(x_vals_crop, erg.ToList(), null);
 
             return false;
         }

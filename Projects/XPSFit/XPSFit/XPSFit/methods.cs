@@ -87,10 +87,11 @@ namespace XPSFit
         {
             int data_length = x_data.Length;
             double I_max = y_data[data_length - 1];
-            double I_min = y_data[1];
+            double I_min = y_data[0];
             double[] B_n = new double[data_length];
             double[] B_n_old = new double[data_length];
             double fak = 1.0;
+            int tester = 0;
 
             for (int k = 0; k < data_length; k++)
             {
@@ -118,14 +119,19 @@ namespace XPSFit
                     }
                     B_n[i] *= (I_min - I_max) / fak;
                 }
-                for (int r = 0; r < data_length; r++)
-                {
-                    B_n_old[r] = B_n[r];
-                    B_n[r] = 0.0;
-                }
-            }
-            for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
 
+                for (int t = 0; t < data_length; t++)
+                {
+                    if (Math.Abs(B_n_old[t] - B_n[t]) < 0.0001) tester += 1;
+                    B_n_old[t] = B_n[t];
+                    B_n[t] = 0.0;
+                }
+
+                if (tester > data_length - 10) break;
+            }
+
+            for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
+            B_n_old[0] = y_data[0];
             return B_n_old;
         }
 
