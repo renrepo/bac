@@ -32,6 +32,10 @@
             this.btn_open = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
             this.dgv_bg = new System.Windows.Forms.DataGridView();
+            this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models = new System.Windows.Forms.DataGridView();
             this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,10 +43,6 @@
             this.dgv_models_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cb_bg = new System.Windows.Forms.CheckBox();
-            this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -88,6 +88,35 @@
             this.dgv_bg.Name = "dgv_bg";
             this.dgv_bg.Size = new System.Drawing.Size(286, 109);
             this.dgv_bg.TabIndex = 3;
+            // 
+            // dgv_bg_sel
+            // 
+            this.dgv_bg_sel.HeaderText = "set";
+            this.dgv_bg_sel.Name = "dgv_bg_sel";
+            this.dgv_bg_sel.Width = 30;
+            // 
+            // dgv_bg_model
+            // 
+            this.dgv_bg_model.HeaderText = "Model";
+            this.dgv_bg_model.Items.AddRange(new object[] {
+            "None",
+            "Shirley",
+            "Linear",
+            "Constant"});
+            this.dgv_bg_model.Name = "dgv_bg_model";
+            this.dgv_bg_model.Width = 80;
+            // 
+            // dgv_bg_from
+            // 
+            this.dgv_bg_from.HeaderText = "from";
+            this.dgv_bg_from.Name = "dgv_bg_from";
+            this.dgv_bg_from.Width = 80;
+            // 
+            // dgv_bg_to
+            // 
+            this.dgv_bg_to.HeaderText = "to";
+            this.dgv_bg_to.Name = "dgv_bg_to";
+            this.dgv_bg_to.Width = 80;
             // 
             // dgv_models
             // 
@@ -150,35 +179,6 @@
             this.cb_bg.Text = "Enable Background selection";
             this.cb_bg.UseVisualStyleBackColor = true;
             this.cb_bg.CheckedChanged += new System.EventHandler(this.cb_bg_CheckedChanged);
-            // 
-            // dgv_bg_sel
-            // 
-            this.dgv_bg_sel.HeaderText = "set";
-            this.dgv_bg_sel.Name = "dgv_bg_sel";
-            this.dgv_bg_sel.Width = 30;
-            // 
-            // dgv_bg_model
-            // 
-            this.dgv_bg_model.HeaderText = "Model";
-            this.dgv_bg_model.Items.AddRange(new object[] {
-            "None",
-            "Shirley",
-            "Linear",
-            "Constant"});
-            this.dgv_bg_model.Name = "dgv_bg_model";
-            this.dgv_bg_model.Width = 80;
-            // 
-            // dgv_bg_from
-            // 
-            this.dgv_bg_from.HeaderText = "from";
-            this.dgv_bg_from.Name = "dgv_bg_from";
-            this.dgv_bg_from.Width = 80;
-            // 
-            // dgv_bg_to
-            // 
-            this.dgv_bg_to.HeaderText = "to";
-            this.dgv_bg_to.Name = "dgv_bg_to";
-            this.dgv_bg_to.Width = 80;
             // 
             // Form1
             // 

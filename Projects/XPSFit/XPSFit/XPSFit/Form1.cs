@@ -18,7 +18,6 @@ namespace XPSFit
         methods m = new methods();
         stuff Curr_S;
         List<stuff> list_stuff = new List<stuff>();
-        bool bg_active = false;
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -86,6 +85,7 @@ namespace XPSFit
         }
 
 
+
         private void dgv_bg_CurrentCellDirtyStateChanged(object sender, EventArgs e)
         {
             if (dgv_bg.IsCurrentCellDirty) dgv_bg.CommitEdit(DataGridViewDataErrorContexts.Commit); // This fires the cell value changed handler below
@@ -96,16 +96,22 @@ namespace XPSFit
         {
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_bg.Rows[e.RowIndex].Cells[1];
             DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
-            if (cc.State == DataGridViewElementStates.)
+
+            if (cc.State == DataGridViewElementStates.Selected)
             {
-                Curr_S.Draw_Polyobj_initial(cb.Value + "_" + e.RowIndex);
-                Curr_S.Add_Mouse_Events();
-            }
-            else
-            {
-                Curr_S.Remove_Mouse_Events();
-            }
-            Console.WriteLine("Value: {0}   Row: {1}", cb.Value, e.RowIndex);
+                if (cc.Value.ToString() == "True")
+                {
+                    Curr_S.Add_Mouse_Events();
+                    var max = Curr_S.x[Curr_S.y.IndexOf(Curr_S.y.Max())];
+                    Curr_S.Bg_tag = (cb.Value.ToString() + "_" + e.RowIndex);
+                    Curr_S.Draw_Polyobj(max - 1.0, max + 1.0);
+                }
+
+                else
+	            {
+                    Curr_S.Remove_Mouse_Events();
+                }
+            }         
         }
 
 

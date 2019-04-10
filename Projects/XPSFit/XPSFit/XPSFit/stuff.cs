@@ -10,7 +10,7 @@ using System.Drawing;
 
 namespace XPSFit
 {
-    class stuff
+    class stuff : methods
     {
         #region Fields
 
@@ -23,6 +23,7 @@ namespace XPSFit
 
         public List<LineItem> List_LineItem = new List<LineItem>();
         public List<PolyObj> List_PolyObj = new List<PolyObj>();
+        public Dictionary<string, double> Bg_Bounds = new Dictionary<string, double>();
 
         bool bMouseDown = false;
         double x_left;
@@ -40,6 +41,7 @@ namespace XPSFit
         public List<double> x { get; set; }
         public List<double> y { get; set; }
         public TabControl tc_zgc { get; set; }
+        public string Bg_tag { get; set; }
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -109,28 +111,59 @@ namespace XPSFit
 
         public void Draw_Line(List<double> x_values, List<double> y_values, string tag)
         {
-            var LI =  myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
-            LI.Tag = tag ?? Data_name;
-            LI.IsSelectable = true;
-            List_LineItem.Add(LI);
-            zgc_plots.AxisChange();
-            zgc_plots.Invalidate();
+           
+            if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
+            {
+                var LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
+                var LI_tag = LI.Tag;
+                var index = List_LineItem.FindIndex(a => a == LI);
+                List_LineItem.Remove(LI);
+                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI_new.Tag = LI_tag;
+                LI.IsSelectable = true;
+                List_LineItem.Insert(index, LI);
+                zgc_plots.AxisChange();
+                zgc_plots.Invalidate();
+            }
+
+            else
+            {
+                var LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI.Tag = tag ?? Data_name;
+                LI.IsSelectable = true;
+                List_LineItem.Add(LI);
+                zgc_plots.AxisChange();
+                zgc_plots.Invalidate();
+            }
+            
         }
 
 
-        public void Draw_Polyobj(double x_left, double x_right, string tag)
+        public void Draw_Polyobj(double x_left, double x_right)
         {
-            var PO = List_PolyObj.Find(a => a.Tag == tag);
+            var PO = List_PolyObj.Find(a => a.Tag.ToString() == Bg_tag);
+
+            if (!Bg_Bounds.ContainsKey(Bg_tag + "_left"))
+            {
+                Bg_Bounds.Add(Bg_tag + "_left", x_left);
+                Bg_Bounds.Add(Bg_tag + "_right", x_right);
+            }
+
+            double X_left = Bg_Bounds[Bg_tag + "_left"];
+            double X_right = Bg_Bounds[Bg_tag + "_right"];
+            double Y_max = myPane_plots.YAxis.Scale.Max;
+            double Y_min = myPane_plots.YAxis.Scale.Min;
+
             if (PO != null)
             {
                 PO.Points = new[]
                     {
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max),
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Min),
-                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Min),
-                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Max),
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max)
-                };
+                    new ZedGraph.PointD(X_left, Y_max),
+                    new ZedGraph.PointD(X_left, Y_min),
+                    new ZedGraph.PointD(X_right, Y_min),
+                    new ZedGraph.PointD(X_right, Y_max),
+                    new ZedGraph.PointD(X_left, Y_max)
+                };               
             }
 
             else
@@ -139,32 +172,25 @@ namespace XPSFit
                 {
                     Points = new[]
                     {
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max),
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Min),
-                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Min),
-                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Max),
-                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max)
+                        new ZedGraph.PointD(X_left, Y_max),
+                        new ZedGraph.PointD(X_left, Y_min),
+                        new ZedGraph.PointD(X_right, Y_min),
+                        new ZedGraph.PointD(X_right, Y_max),
+                        new ZedGraph.PointD(X_left, Y_max)
                     },
                     Fill = new ZedGraph.Fill(Color.FromArgb(230, 255, 225)),
                     ZOrder = ZedGraph.ZOrder.E_BehindCurves
                 };
                 PO_new.Border.Color = Color.FromArgb(140, 255, 140);
-                PO_new.Tag = tag;
+                PO_new.Tag = Bg_tag;
                 List_PolyObj.Add(PO_new);
                 myPane_plots.GraphObjList.Add(PO_new); // really necessary??
             }
+            Console.WriteLine(X_left);
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();           
         }
 
-
-        public void Draw_Polyobj_initial(string tag)
-        {
-            var x_max = x[y.IndexOf(y.Max())];
-            x_left = x_max - 1.0;
-            x_right = x_max + 1.0;
-            Draw_Polyobj(x_left, x_right, tag);
-        }
 
 
         public void Update_Line(List<double> x_values, List<double> y_values, LineItem LI)
@@ -181,6 +207,11 @@ namespace XPSFit
                 List_LineItem.Insert(index, LI);
                 zgc_plots.AxisChange();
                 zgc_plots.Invalidate();
+            }
+
+            else
+            {
+                Draw_Line(x_values, y_values, Bg_tag);
             }
         }
 
@@ -228,15 +259,15 @@ namespace XPSFit
             if (bMouseDown)
             {
                 myPane_plots.ReverseTransform(e.Location, out double x_cond, out double y_cond);
-                if (0.5 * (x_left + x_right) < x_cond)
+                if (0.5 * (Bg_Bounds[Bg_tag + "_left"] + Bg_Bounds[Bg_tag + "_right"]) < x_cond)
                 {
-                    Draw_Polyobj(x_left, x_cond, "test");
-                    x_right = x_cond;
+                    Draw_Polyobj(Bg_Bounds[Bg_tag + "_left"], x_cond);
+                    Bg_Bounds[Bg_tag + "_right"] = x_cond;
                 }
                 else
                 {
-                    Draw_Polyobj(x_cond, x_right, "test");
-                    x_left = x_cond;
+                    Draw_Polyobj(x_cond, Bg_Bounds[Bg_tag + "_right"]);
+                    Bg_Bounds[Bg_tag + "_left"] = x_cond;
                 }
             }
             return false;
@@ -246,6 +277,21 @@ namespace XPSFit
         public bool zgc_plots_MouseUpEvent(object sender, MouseEventArgs e)
         {
             bMouseDown = false;
+
+            List<double> x_vals_crop = new List<double>();
+            List<double> y_vals_crop = new List<double>();
+            foreach (var item in x)
+            {
+                if (item > Bg_Bounds[Bg_tag + "_left"] && item < Bg_Bounds[Bg_tag + "_right"])
+                {
+                    x_vals_crop.Add(item);
+                    y_vals_crop.Add(y[x.IndexOf(item)]);
+                }
+            }
+            double[] erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 5);
+            Draw_Line(x_vals_crop,erg.ToList(),Bg_tag);
+            //Update_Line(x_vals_crop, erg.ToList(), null);
+
             return false;
         }
 
