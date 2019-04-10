@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZedGraph;
-using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -22,7 +22,11 @@ namespace XPSFit
         TableLayoutPanel tlp;
 
         public List<LineItem> List_LineItem = new List<LineItem>();
-        List<GraphObj> List_GraphObj = new List<GraphObj>();
+        public List<PolyObj> List_PolyObj = new List<PolyObj>();
+
+        bool bMouseDown = false;
+        double x_left;
+        double x_right;
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -102,6 +106,7 @@ namespace XPSFit
             myPane_residuals.TitleGap = 0;           
         }
 
+
         public void Draw_Line(List<double> x_values, List<double> y_values, string tag)
         {
             var LI =  myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
@@ -111,6 +116,56 @@ namespace XPSFit
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
         }
+
+
+        public void Draw_Polyobj(double x_left, double x_right, string tag)
+        {
+            var PO = List_PolyObj.Find(a => a.Tag == tag);
+            if (PO != null)
+            {
+                PO.Points = new[]
+                    {
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max),
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Min),
+                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Min),
+                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Max),
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max)
+                };
+            }
+
+            else
+            {
+                var PO_new = new ZedGraph.PolyObj
+                {
+                    Points = new[]
+                    {
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max),
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Min),
+                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Min),
+                    new ZedGraph.PointD(x_right, myPane_plots.YAxis.Scale.Max),
+                    new ZedGraph.PointD(x_left, myPane_plots.YAxis.Scale.Max)
+                    },
+                    Fill = new ZedGraph.Fill(Color.FromArgb(230, 255, 225)),
+                    ZOrder = ZedGraph.ZOrder.E_BehindCurves
+                };
+                PO_new.Border.Color = Color.FromArgb(140, 255, 140);
+                PO_new.Tag = tag;
+                List_PolyObj.Add(PO_new);
+                myPane_plots.GraphObjList.Add(PO_new); // really necessary??
+            }
+            zgc_plots.AxisChange();
+            zgc_plots.Invalidate();           
+        }
+
+
+        public void Draw_Polyobj_initial(string tag)
+        {
+            var x_max = x[y.IndexOf(y.Max())];
+            x_left = x_max - 1.0;
+            x_right = x_max + 1.0;
+            Draw_Polyobj(x_left, x_right, tag);
+        }
+
 
         public void Update_Line(List<double> x_values, List<double> y_values, LineItem LI)
         {
@@ -129,6 +184,7 @@ namespace XPSFit
             }
         }
 
+
         public void Remove_Line(string tag)
         {
             var name = tag ?? Data_name;
@@ -142,6 +198,56 @@ namespace XPSFit
         }
 
 
+        public void Add_Mouse_Events()
+        {
+            zgc_plots.MouseDownEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseDownEvent);
+            zgc_plots.MouseMoveEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseMoveEvent);
+            zgc_plots.MouseUpEvent += new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseUpEvent);
+            zgc_plots.IsEnableHZoom = zgc_plots.IsEnableVZoom = false;
+        }
+
+
+        public void Remove_Mouse_Events()
+        {
+            zgc_plots.MouseDownEvent -= new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseDownEvent);
+            zgc_plots.MouseMoveEvent -= new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseMoveEvent);
+            zgc_plots.MouseUpEvent -= new ZedGraph.ZedGraphControl.ZedMouseEventHandler(zgc_plots_MouseUpEvent);
+            zgc_plots.IsEnableHZoom = zgc_plots.IsEnableVZoom = true;
+        }
+
+
+        public bool zgc_plots_MouseDownEvent(object sender, MouseEventArgs e)
+        {
+            bMouseDown = true;
+            return false;
+        }
+
+
+        public bool zgc_plots_MouseMoveEvent(object sender, MouseEventArgs e)
+        {
+            if (bMouseDown)
+            {
+                myPane_plots.ReverseTransform(e.Location, out double x_cond, out double y_cond);
+                if (0.5 * (x_left + x_right) < x_cond)
+                {
+                    Draw_Polyobj(x_left, x_cond, "test");
+                    x_right = x_cond;
+                }
+                else
+                {
+                    Draw_Polyobj(x_cond, x_right, "test");
+                    x_left = x_cond;
+                }
+            }
+            return false;
+        }
+
+
+        public bool zgc_plots_MouseUpEvent(object sender, MouseEventArgs e)
+        {
+            bMouseDown = false;
+            return false;
+        }
 
         #endregion //-------------------------------------------------------------------------------------
 
