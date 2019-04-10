@@ -21,7 +21,7 @@ namespace XPSFit
         TabPage tp;
         TableLayoutPanel tlp;
 
-        List<LineItem> List_LineItem = new List<LineItem>();
+        public List<LineItem> List_LineItem = new List<LineItem>();
         List<GraphObj> List_GraphObj = new List<GraphObj>();
 
         #endregion //-------------------------------------------------------------------------------------
@@ -51,7 +51,8 @@ namespace XPSFit
             y = Y_values;
             Data_name = Name;
             tc_zgc = Tc_zgc;
-            initial_zgc();    
+            initial_zgc();
+            Draw_Line(x,y,Data_name);
         }
 
         #endregion //-------------------------------------------------------------------------------------
