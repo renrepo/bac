@@ -83,7 +83,7 @@ namespace XPSFit
         }
 
 
-        public double[] Shirley(double[] x_data, double[] y_data, int iterations)
+        public List<double> Shirley(double[] x_data, double[] y_data, int iterations)
         {
             int data_length = x_data.Length;
             double I_max = y_data[data_length - 1];
@@ -92,6 +92,8 @@ namespace XPSFit
             double[] B_n_old = new double[data_length];
             double fak = 1.0;
             int tester = 0;
+            double smooth_start = 0;
+            double smooth_end = 0;
 
             for (int k = 0; k < data_length; k++)
             {
@@ -126,18 +128,28 @@ namespace XPSFit
                     B_n_old[t] = B_n[t];
                     B_n[t] = 0.0;
                 }
-
                 if (tester > data_length - 10) break;
             }
-
             for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
-            B_n_old[0] = y_data[0];
-            return B_n_old;
+            for (int i = 1; i < 11; i++)
+            {
+                smooth_start += B_n_old[i];
+                smooth_end += B_n_old[data_length - i];
+            }
+            smooth_start /= 10;
+            smooth_end /= 10;
+            B_n_old[0] = smooth_start;
+            B_n_old[data_length - 1] = smooth_end;
+            smooth_start = smooth_end = 0;
+
+            return B_n_old.ToList();
         }
 
 
-        public double[] Linear(double[] x_data, double[] y_data)
+        public List<double> Linear(double[] x_data, double[] y_data)
         {
+            double smooth_start = 0;
+            double smooth_end = 0;
             int data_length = x_data.Length;
             double[] result = new double[data_length];
 
@@ -148,7 +160,18 @@ namespace XPSFit
             {
                 result[i] = m * x_data[i] + n;
             }
-            return result;
+
+            for (int i = 1; i < 11; i++)
+            {
+                smooth_start += result[i];
+                smooth_end += result[data_length - i];
+            }
+            smooth_start /= 10;
+            smooth_end /= 10;
+            result[0] = smooth_start;
+            result[data_length - 1] = smooth_end;
+            smooth_start = smooth_end = 0;
+            return result.ToList();
         }
 
             #endregion //-------------------------------------------------------------------------------------

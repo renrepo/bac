@@ -65,6 +65,7 @@ namespace XPSFit
             tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_SelectedIndexChanged);
             dgv_bg.CurrentCellDirtyStateChanged += new EventHandler(dgv_bg_CurrentCellDirtyStateChanged);
             dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
+            dgv_bg[1, 0].Value = "Shirley";
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -97,18 +98,33 @@ namespace XPSFit
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_bg.Rows[e.RowIndex].Cells[1];
             DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
 
+
+            if (cb.Value.ToString() == "Remove")
+            {
+                Curr_S.Bg_tag_num = (e.RowIndex.ToString());
+                Curr_S.Remove_PolyObj();
+                Curr_S.Remove_Line();
+                Curr_S.Remove_Mouse_Events();
+                return;
+            }
+
             if (cc.State == DataGridViewElementStates.Selected)
             {
-                if (cc.Value.ToString() == "True")
+                Curr_S.Bg_tag_num = (e.RowIndex.ToString());
+                if (cc.Value.ToString() == "True" && cb.Value != null)
                 {
+                    Curr_S.Bg_tag_type = cb.Value.ToString();
                     Curr_S.Add_Mouse_Events();
                     var max = Curr_S.x[Curr_S.y.IndexOf(Curr_S.y.Max())];
-                    Curr_S.Bg_tag = (cb.Value.ToString() + "_" + e.RowIndex);
-                    Curr_S.Draw_Polyobj(max - 1.0, max + 1.0);
+                    Curr_S.x_bg_left = max - 1.0;
+                    Curr_S.x_bg_right = max + 1.0;
+                    Curr_S.Draw_Polyobj();
+                    Curr_S.zgc_plots_MouseUpEvent(null, null);
                 }
 
                 else
 	            {
+                    Curr_S.Remove_PolyObj();
                     Curr_S.Remove_Mouse_Events();
                 }
             }         
