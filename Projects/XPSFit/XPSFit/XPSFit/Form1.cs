@@ -18,6 +18,10 @@ namespace XPSFit
         methods m = new methods();
         stuff Curr_S;
         List<stuff> list_stuff = new List<stuff>();
+        List<DataGridView> List_DGV_bg = new List<DataGridView>();
+        List<DataGridView> List_DGV_models = new List<DataGridView>();
+
+        int old_row_index = -1;
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -50,7 +54,10 @@ namespace XPSFit
 
         #region Methods
 
-
+        private void btn_tester_Click(object sender, EventArgs e)
+        {
+            dgv_bg.Rows.RemoveAt(1);
+        }
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -99,18 +106,24 @@ namespace XPSFit
             DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
 
 
-            if (cb.Value.ToString() == "Remove")
+            if (cb.Value != null && cb.Value.ToString() == "Remove" && dgv_bg.RowCount > 0)
             {
-                Curr_S.Bg_tag_num = (e.RowIndex.ToString());
+
+                Curr_S.Bg_tag_num = (e.RowIndex);
                 Curr_S.Remove_PolyObj();
                 Curr_S.Remove_Line();
                 Curr_S.Remove_Mouse_Events();
+                Curr_S.Bg_Bounds.RemoveRange(e.RowIndex * 2, 2);
+                //cc.Value = "False";
+                //dgv_bg.Rows[e.RowIndex - 1].Cells[0].Value = "True";
+                dgv_bg.Rows.RemoveAt(e.RowIndex);
+                //cb.Value = "Shirley";
                 return;
             }
 
             if (cc.State == DataGridViewElementStates.Selected)
             {
-                Curr_S.Bg_tag_num = (e.RowIndex.ToString());
+                Curr_S.Bg_tag_num = (e.RowIndex);
                 if (cc.Value.ToString() == "True" && cb.Value != null)
                 {
                     Curr_S.Bg_tag_type = cb.Value.ToString();
@@ -120,6 +133,14 @@ namespace XPSFit
                     Curr_S.x_bg_right = max + 1.0;
                     Curr_S.Draw_Polyobj();
                     Curr_S.zgc_plots_MouseUpEvent(null, null);
+                    if (old_row_index != -1)
+                    {
+                        dgv_bg[0, old_row_index].Value = "False";
+                        Curr_S.Bg_tag_num = (old_row_index);
+                        Curr_S.Remove_PolyObj();
+                        Curr_S.Bg_tag_num = (e.RowIndex);
+                    }
+                    old_row_index = e.RowIndex;
                 }
 
                 else
@@ -160,14 +181,8 @@ namespace XPSFit
 
 
 
-
-
-
-
-
-
         #endregion //-------------------------------------------------------------------------------------
 
-
+        
     }
 }

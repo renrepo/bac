@@ -43,6 +43,7 @@
             this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_tester = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -179,11 +180,22 @@
             this.dgv_bg_to.Name = "dgv_bg_to";
             this.dgv_bg_to.Width = 80;
             // 
+            // btn_tester
+            // 
+            this.btn_tester.Location = new System.Drawing.Point(398, 25);
+            this.btn_tester.Name = "btn_tester";
+            this.btn_tester.Size = new System.Drawing.Size(75, 65);
+            this.btn_tester.TabIndex = 6;
+            this.btn_tester.Text = "TEST";
+            this.btn_tester.UseVisualStyleBackColor = true;
+            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 861);
+            this.Controls.Add(this.btn_tester);
             this.Controls.Add(this.cb_bg);
             this.Controls.Add(this.dgv_models);
             this.Controls.Add(this.dgv_bg);
@@ -217,6 +229,7 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_bg_model;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_from;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_to;
+        private System.Windows.Forms.Button btn_tester;
     }
 }
 

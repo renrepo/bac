@@ -23,7 +23,8 @@ namespace XPSFit
 
         public List<LineItem> List_LineItem = new List<LineItem>();
         public List<PolyObj> List_PolyObj = new List<PolyObj>();
-        public Dictionary<string, double> Bg_Bounds = new Dictionary<string, double>();
+        //public Dictionary<string, double> Bg_Bounds = new Dictionary<string, double>();
+        public List<double> Bg_Bounds = new List<double>();
 
         bool bMouseDown = false;
 
@@ -40,7 +41,7 @@ namespace XPSFit
         public List<double> x { get; set; }
         public List<double> y { get; set; }
         public TabControl tc_zgc { get; set; }
-        public string Bg_tag_num { get; set; }
+        public int Bg_tag_num { get; set; }
         public string Bg_tag_type { get; set; }
         public double x_bg_left { get; set; }
         public double x_bg_right { get; set; }
@@ -142,16 +143,16 @@ namespace XPSFit
 
         public void Draw_Polyobj()
         {
-            var PO = List_PolyObj.Find(a => a.Tag.ToString() == Bg_tag_num);
+            var PO = List_PolyObj.Find(a => Convert.ToInt16(a.Tag) == Bg_tag_num);
 
-            if (!Bg_Bounds.ContainsKey(Bg_tag_num + "_left"))
+            if (Bg_Bounds.Count < (Bg_tag_num + 1) * 2)
             {
-                Bg_Bounds.Add(Bg_tag_num + "_left", x_bg_left);
-                Bg_Bounds.Add(Bg_tag_num + "_right", x_bg_right);
+                Bg_Bounds.Add(x_bg_left);
+                Bg_Bounds.Add(x_bg_right);
             }
 
-            double X_left = Bg_Bounds[Bg_tag_num + "_left"];
-            double X_right = Bg_Bounds[Bg_tag_num + "_right"];
+            double X_left = Bg_Bounds[Bg_tag_num*2];
+            double X_right = Bg_Bounds[Bg_tag_num * 2 + 1];
             double Y_max = myPane_plots.YAxis.Scale.Max;
             double Y_min = myPane_plots.YAxis.Scale.Min;
 
@@ -195,11 +196,12 @@ namespace XPSFit
 
         public void Remove_PolyObj()
         {
-            var GO = List_PolyObj.Find(a => a.Tag.ToString() == Bg_tag_num);
+            var GO = List_PolyObj.Find(a => Convert.ToInt16(a.Tag) == Bg_tag_num);
             if (GO != null)
             {
                 myPane_plots.GraphObjList.Remove(GO);
                 List_PolyObj.Remove(GO);
+                //Bg_Bounds.RemoveRange(Bg_tag_num * 2, 2);
                 zgc_plots.AxisChange();
                 zgc_plots.Invalidate();
             }
@@ -225,7 +227,7 @@ namespace XPSFit
 
             else
             {
-                Draw_Line(x_values, y_values, Bg_tag_num);
+                Draw_Line(x_values, y_values, Bg_tag_num.ToString());
             }
         }
 
@@ -233,7 +235,7 @@ namespace XPSFit
         public void Remove_Line()
         {
             //var name = tag ?? Data_name;
-            var LI = List_LineItem.Find(a => a.Tag.ToString() == Bg_tag_num);
+            var LI = List_LineItem.Find(a => a.Tag.ToString() == Bg_tag_num.ToString());
             if (LI != null)
             {
                 List_LineItem.Remove(LI);
@@ -273,17 +275,17 @@ namespace XPSFit
             if (bMouseDown)
             {
                 myPane_plots.ReverseTransform(e.Location, out double x_cond, out double y_cond);
-                if (0.5 * (Bg_Bounds[Bg_tag_num + "_left"] + Bg_Bounds[Bg_tag_num + "_right"]) < x_cond)
+                if (0.5 * (Bg_Bounds[Bg_tag_num * 2] + Bg_Bounds[Bg_tag_num * 2 + 1]) < x_cond)
                 {
                     Draw_Polyobj();
                     //Draw_Polyobj(Bg_Bounds[Bg_tag + "_left"], x_cond);
-                    Bg_Bounds[Bg_tag_num + "_right"] = x_cond;
+                    Bg_Bounds[Bg_tag_num *2 + 1] = x_cond;
                 }
                 else
                 {
                     Draw_Polyobj();
                     //Draw_Polyobj(x_cond, Bg_Bounds[Bg_tag + "_right"]);
-                    Bg_Bounds[Bg_tag_num + "_left"] = x_cond;
+                    Bg_Bounds[Bg_tag_num * 2] = x_cond;
                 }
             }
             return false;
@@ -299,7 +301,7 @@ namespace XPSFit
             List<double> erg;
             foreach (var item in x)
             {
-                if (item > Bg_Bounds[Bg_tag_num + "_left"] && item < Bg_Bounds[Bg_tag_num + "_right"])
+                if (item > Bg_Bounds[Bg_tag_num * 2] && item < Bg_Bounds[Bg_tag_num * 2 + 1])
                 {
                     x_vals_crop.Add(item);
                     y_vals_crop.Add(y[x.IndexOf(item)]);
@@ -311,11 +313,11 @@ namespace XPSFit
             {
                 case "Shirley":
                     erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString());
                     break;
                 case "Linear":
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString());
                     break;
             }
             Cursor.Current = Cursors.Default;
