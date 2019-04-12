@@ -27,6 +27,7 @@ namespace XPSFit
         public List<double> Bg_Bounds = new List<double>();
 
         bool bMouseDown = false;
+        bool MouseEventExist = false;
 
 
         #endregion //-------------------------------------------------------------------------------------
@@ -45,6 +46,7 @@ namespace XPSFit
         public string Bg_tag_type { get; set; }
         public double x_bg_left { get; set; }
         public double x_bg_right { get; set; }
+        public double[] Bg_Sub { get; set; }
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -62,6 +64,8 @@ namespace XPSFit
             tc_zgc = Tc_zgc;
             initial_zgc();
             Draw_Line(x,y,Data_name);
+            Bg_Sub = new double[x.Count];
+            Bg_Sub = x.ToArray();
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -137,27 +141,23 @@ namespace XPSFit
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
 
-
         }
 
 
         public void Draw_Polyobj()
         {
+            double X_left;
+            double X_right;
             var PO = List_PolyObj.Find(a => Convert.ToInt16(a.Tag) == Bg_tag_num);
-
-            if (Bg_Bounds.Count < (Bg_tag_num + 1) * 2)
-            {
-                Bg_Bounds.Add(x_bg_left);
-                Bg_Bounds.Add(x_bg_right);
-            }
-
-            double X_left = Bg_Bounds[Bg_tag_num*2];
-            double X_right = Bg_Bounds[Bg_tag_num * 2 + 1];
+   
             double Y_max = myPane_plots.YAxis.Scale.Max;
             double Y_min = myPane_plots.YAxis.Scale.Min;
 
             if (PO != null)
             {
+                X_left = Bg_Bounds[Bg_tag_num * 2];
+                X_right = Bg_Bounds[Bg_tag_num * 2 + 1];
+
                 PO.Points = new[]
                     {
                     new ZedGraph.PointD(X_left, Y_max),
@@ -165,22 +165,29 @@ namespace XPSFit
                     new ZedGraph.PointD(X_right, Y_min),
                     new ZedGraph.PointD(X_right, Y_max),
                     new ZedGraph.PointD(X_left, Y_max)
-                };               
+            };
+                PO.IsVisible = true;
             }
 
             else
             {
+                var max = x[y.IndexOf(y.Max())];
+                Bg_Bounds.Add(max - 1.0);
+                Bg_Bounds.Add(max + 1.0);
+                X_left = max - 1.0;
+                X_right = max + 1.0;
+
                 var PO_new = new ZedGraph.PolyObj
                 {
                     Points = new[]
                     {
-                        new ZedGraph.PointD(X_left, Y_max),
-                        new ZedGraph.PointD(X_left, Y_min),
-                        new ZedGraph.PointD(X_right, Y_min),
-                        new ZedGraph.PointD(X_right, Y_max),
-                        new ZedGraph.PointD(X_left, Y_max)
-                    },
-                    Fill = new ZedGraph.Fill(Color.FromArgb(230, 255, 225)),
+                    new ZedGraph.PointD(X_left, Y_max),
+                    new ZedGraph.PointD(X_left, Y_min),
+                    new ZedGraph.PointD(X_right, Y_min),
+                    new ZedGraph.PointD(X_right, Y_max),
+                    new ZedGraph.PointD(X_left, Y_max)
+                },
+                    Fill = new ZedGraph.Fill(Color.FromArgb(225, 255, 225)),
                     ZOrder = ZedGraph.ZOrder.E_BehindCurves
                 };
                 PO_new.Border.Color = Color.FromArgb(140, 255, 140);
@@ -201,48 +208,49 @@ namespace XPSFit
             {
                 myPane_plots.GraphObjList.Remove(GO);
                 List_PolyObj.Remove(GO);
-                //Bg_Bounds.RemoveRange(Bg_tag_num * 2, 2);
+                zgc_plots.AxisChange();
+                zgc_plots.Invalidate();
+            }
+        }
+
+        public void Hide_PolyObj(int tag)
+        {
+            var GO = List_PolyObj.Find(a => Convert.ToInt16(a.Tag) == tag);
+            if (GO != null)
+            {
+                GO.IsVisible = false;
                 zgc_plots.AxisChange();
                 zgc_plots.Invalidate();
             }
         }
 
 
-
-        public void Update_Line(List<double> x_values, List<double> y_values, LineItem LI)
+        public void Remove_Line(string tag)
         {
-            // better modifie CurveObj-List!
-            var LI_tag = LI.Tag;
-            var index = List_LineItem.FindIndex(a => a == LI);
-            if (List_LineItem.Contains(LI))
-            {
-                List_LineItem.Remove(LI);
-                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
-                LI_new.Tag = LI_tag;
-                LI.IsSelectable = true;
-                List_LineItem.Insert(index, LI);
-                zgc_plots.AxisChange();
-                zgc_plots.Invalidate();
-            }
-
-            else
-            {
-                Draw_Line(x_values, y_values, Bg_tag_num.ToString());
-            }
-        }
-
-
-        public void Remove_Line()
-        {
-            //var name = tag ?? Data_name;
-            var LI = List_LineItem.Find(a => a.Tag.ToString() == Bg_tag_num.ToString());
+            var name = tag ?? Data_name;
+            var LI = List_LineItem.Find(a => a.Tag.ToString() == tag.ToString());
             if (LI != null)
             {
+                myPane_plots.CurveList.Remove(LI);
                 List_LineItem.Remove(LI);
                 LI.Clear();
                 zgc_plots.Refresh();
             }          
         }
+
+        public void Hide_Line(string tag)
+        {
+            var name = tag ?? Data_name;
+            var LI = List_LineItem.Find(a => a.Tag.ToString() == tag.ToString());
+            if (LI != null)
+            {
+                LI.IsVisible = false;
+                zgc_plots.Refresh();
+            }
+        }
+
+
+
 
 
         public void Add_Mouse_Events()
@@ -272,21 +280,16 @@ namespace XPSFit
 
         public bool zgc_plots_MouseMoveEvent(object sender, MouseEventArgs e)
         {
+            var x_left = Bg_Bounds[Bg_tag_num * 2];
+            var x_right = Bg_Bounds[Bg_tag_num * 2 + 1];
             if (bMouseDown)
             {
                 myPane_plots.ReverseTransform(e.Location, out double x_cond, out double y_cond);
-                if (0.5 * (Bg_Bounds[Bg_tag_num * 2] + Bg_Bounds[Bg_tag_num * 2 + 1]) < x_cond)
-                {
-                    Draw_Polyobj();
-                    //Draw_Polyobj(Bg_Bounds[Bg_tag + "_left"], x_cond);
-                    Bg_Bounds[Bg_tag_num *2 + 1] = x_cond;
-                }
-                else
-                {
-                    Draw_Polyobj();
-                    //Draw_Polyobj(x_cond, Bg_Bounds[Bg_tag + "_right"]);
-                    Bg_Bounds[Bg_tag_num * 2] = x_cond;
-                }
+                if (0.5 * (x_left + x_right) < x_cond) x_right = x_cond;
+                else x_left = x_cond;
+                Draw_Polyobj();
+                Bg_Bounds[Bg_tag_num * 2] = x_left;
+                Bg_Bounds[Bg_tag_num * 2 + 1] = x_right;
             }
             return false;
         }
@@ -298,7 +301,9 @@ namespace XPSFit
 
             List<double> x_vals_crop = new List<double>();
             List<double> y_vals_crop = new List<double>();
-            List<double> erg;
+            List<double> erg = new List<double>();
+            int counter = 0;
+
             foreach (var item in x)
             {
                 if (item > Bg_Bounds[Bg_tag_num * 2] && item < Bg_Bounds[Bg_tag_num * 2 + 1])
@@ -307,7 +312,7 @@ namespace XPSFit
                     y_vals_crop.Add(y[x.IndexOf(item)]);
                 }
             }
-            //double[] erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
+
             Cursor.Current = Cursors.WaitCursor;
             switch (Bg_tag_type)
             {
@@ -319,6 +324,16 @@ namespace XPSFit
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
                     Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString());
                     break;
+            }
+
+            for (int i = 0; i < x.Count; i++)
+            {
+                var item = x[i];
+                if (item > Bg_Bounds[Bg_tag_num * 2] && item < Bg_Bounds[Bg_tag_num * 2 + 1])
+                {
+                    Bg_Sub[i] = erg[counter];
+                    counter += 1;
+                }
             }
             Cursor.Current = Cursors.Default;
 

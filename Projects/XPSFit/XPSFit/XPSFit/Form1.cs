@@ -56,7 +56,11 @@ namespace XPSFit
 
         private void btn_tester_Click(object sender, EventArgs e)
         {
-            dgv_bg.Rows.RemoveAt(1);
+            //dgv_bg.Rows.RemoveAt(1);
+            dgv_bg.CellValueChanged -= new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
+            dgv_bg[0, 0].Value = "True";
+            dgv_bg[0, 0].Value = "false";
+            dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -80,16 +84,17 @@ namespace XPSFit
             var data = m.get_values_to_plot();
 
             if (data == null) return;
-            dgv_bg.Enabled = dgv_models.Enabled = cb_bg.Enabled = true;
+            dgv_bg.Enabled = dgv_models.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
             else { list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc)); Curr_S = list_stuff[list_stuff.Count - 1]; }
+            Curr_S.Bg_Sub = data.Item2.ToArray();
         }
 
 
         private void btn_close_Click(object sender, EventArgs e)
         {
             if (tc_zgc.SelectedTab != null) { list_stuff.Remove(Curr_S); tc_zgc.SelectedTab.Dispose(); }
-            if (tc_zgc.TabPages.Count == 0) dgv_bg.Enabled = dgv_models.Enabled = cb_bg.Enabled = false;
+            if (tc_zgc.TabPages.Count == 0) dgv_bg.Enabled = dgv_models.Enabled = false;
         }
 
 
@@ -105,50 +110,97 @@ namespace XPSFit
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_bg.Rows[e.RowIndex].Cells[1];
             DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
 
-
-            if (cb.Value != null && cb.Value.ToString() == "Remove" && dgv_bg.RowCount > 0)
+            if (cb.Value == null)
             {
-
-                Curr_S.Bg_tag_num = (e.RowIndex);
-                Curr_S.Remove_PolyObj();
-                Curr_S.Remove_Line();
-                Curr_S.Remove_Mouse_Events();
-                Curr_S.Bg_Bounds.RemoveRange(e.RowIndex * 2, 2);
-                //cc.Value = "False";
-                //dgv_bg.Rows[e.RowIndex - 1].Cells[0].Value = "True";
-                dgv_bg.Rows.RemoveAt(e.RowIndex);
-                //cb.Value = "Shirley";
                 return;
+            }
+
+            if (cb.State == DataGridViewElementStates.Selected)
+            {
+                if (cc.Value != null && cc.Value.ToString() == "True" && cb.Value.ToString() != "Remove")
+                {
+                    Curr_S.Bg_tag_type = cb.Value.ToString();
+                    Curr_S.zgc_plots_MouseUpEvent(null, null);
+                }
+
+                if (cc.Value != null && cb.Value.ToString() == "Remove")
+                {
+                    if (cc.Value.ToString() != "True")
+                    {
+                        MessageBox.Show("Select BG to delete");
+                        return;
+                    }
+                    Curr_S.Bg_tag_num = (e.RowIndex);
+                    Curr_S.Remove_PolyObj();
+                    Curr_S.Remove_Line(e.RowIndex.ToString());
+                    //Curr_S.Remove_Line(null); //-------------------------------------------------------------------------------null????
+                    Curr_S.Remove_Mouse_Events();
+                    Curr_S.Bg_Bounds.RemoveRange(e.RowIndex * 2, 2);
+                    dgv_bg.Rows.RemoveAt(e.RowIndex);                   
+
+                    if (e.RowIndex == 0)
+                    {
+                        dgv_bg[1, 0].Value = "Shirley";
+                    }
+                    return;
+                }
+
+                else
+                {
+                    return;
+                }
             }
 
             if (cc.State == DataGridViewElementStates.Selected)
             {
-                Curr_S.Bg_tag_num = (e.RowIndex);
-                if (cc.Value.ToString() == "True" && cb.Value != null)
-                {
-                    Curr_S.Bg_tag_type = cb.Value.ToString();
-                    Curr_S.Add_Mouse_Events();
-                    var max = Curr_S.x[Curr_S.y.IndexOf(Curr_S.y.Max())];
-                    Curr_S.x_bg_left = max - 1.0;
-                    Curr_S.x_bg_right = max + 1.0;
-                    Curr_S.Draw_Polyobj();
-                    Curr_S.zgc_plots_MouseUpEvent(null, null);
-                    if (old_row_index != -1)
+                if (cb.Value != null && cb.Value.ToString() != "Remove" && cc.Value.ToString() == "True")
+                { 
+                    if (e.RowIndex * 2  <= Curr_S.Bg_Bounds.Count)
                     {
-                        dgv_bg[0, old_row_index].Value = "False";
-                        Curr_S.Bg_tag_num = (old_row_index);
-                        Curr_S.Remove_PolyObj();
                         Curr_S.Bg_tag_num = (e.RowIndex);
+                        //DataGridViewRow row = (DataGridViewRow)dgv_bg.Rows[0].Clone();
+                        //dgv_bg.Rows.Add(row);
+                        Curr_S.Bg_tag_type = cb.Value.ToString();
+                        Curr_S.Draw_Polyobj();
+                        Curr_S.Remove_Mouse_Events();
+                        Curr_S.Add_Mouse_Events();
+                        Curr_S.zgc_plots_MouseUpEvent(null, null);
+
+                        if (old_row_index != -1 && old_row_index != e.RowIndex)
+                        {
+                            dgv_bg[0, old_row_index].Value = "False";
+                            Curr_S.Hide_PolyObj(old_row_index);
+                        }
+                        old_row_index = e.RowIndex;
                     }
-                    old_row_index = e.RowIndex;
+
+                    else
+                    {
+                        Curr_S.Remove_Mouse_Events();
+                        MessageBox.Show("Use upper rows.");
+                        return;
+                    }
+
+                }
+                else if (cb.Value == null)
+                {
+                    Curr_S.Remove_Mouse_Events();
+                    cc.Value = "False";
+                    MessageBox.Show("No entry in Combobox");
+                    return;
                 }
 
                 else
-	            {
-                    Curr_S.Remove_PolyObj();
+                {
                     Curr_S.Remove_Mouse_Events();
+                    Curr_S.Hide_PolyObj(e.RowIndex);                  
                 }
-            }         
+            }
+
+            else
+            {
+
+            }
         }
 
 
@@ -157,32 +209,44 @@ namespace XPSFit
             Curr_S = tc_zgc.TabPages.Count > 0 ?  list_stuff.Find(a => a.Data_name == (sender as TabControl).SelectedTab.Name) : null; // select current stuff-instance
         }
 
-
-        private void cb_bg_CheckedChanged(object sender, EventArgs e)
+        private void cb_Bg_Sub_CheckedChanged(object sender, EventArgs e)
         {
-            //cb_bg.Checked = cb_bg.Checked == true ? false : true;
-            if (cb_bg.Checked)
+            if (cb_Bg_Sub.Checked)
             {
-                //dgv_bg.BackgroundColor = SystemColors.Control;
-                dgv_bg.Enabled = true;
-                cb_bg.Text = "Disable Background selection";
-                //Curr_S.Add_Mouse_Events();
-                
+                foreach (var item in Curr_S.List_LineItem)
+                {
+                    item.IsVisible = false;
+                }
+                List<double> erg = new List<double>();
+                for (int i = 0; i < Curr_S.y.Count; i++)
+                {
+                    erg.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
+                }
+                tc_zgc.Refresh();
+                Curr_S.Draw_Line(Curr_S.x, erg , Curr_S.Data_name + "_bg_sub");
+                cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
-            else
+            if (!cb_Bg_Sub.Checked)
             {
-                dgv_bg.Enabled = false;
-                cb_bg.Text = "Enable Background selection";
-                //Curr_S.Remove_Mouse_Events();
-                //dgv_bg.BackgroundColor = Color.MediumSpringGreen;
+                foreach (var item in Curr_S.List_LineItem)
+                {
+                    item.IsVisible = true;
+                }
+                Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name);
+                cb_Bg_Sub.BackColor = SystemColors.Control;
             }
         }
 
 
 
+
+
+
+
         #endregion //-------------------------------------------------------------------------------------
 
-        
+
     }
 }

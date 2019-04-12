@@ -67,7 +67,6 @@ namespace XPSFit
                             lin = line.Split('\t');
                             list_energy.Add(Convert.ToDouble(lin[0], System.Globalization.CultureInfo.InvariantCulture));
                             list_cps.Add(Convert.ToDouble(lin[1], System.Globalization.CultureInfo.InvariantCulture));
-                            //ppl.Add(Convert.ToDouble(lin[0]), Convert.ToDouble(lin[1]));
                         }
                         file_name = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                     }
@@ -131,13 +130,13 @@ namespace XPSFit
                 if (tester > data_length - 10) break;
             }
             for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
-            for (int i = 1; i < 11; i++)
+            for (int i = 2; i < 52; i++)
             {
                 smooth_start += B_n_old[i];
                 smooth_end += B_n_old[data_length - i];
             }
-            smooth_start /= 10;
-            smooth_end /= 10;
+            smooth_start /= 50;
+            smooth_end /= 50;
             B_n_old[0] = smooth_start;
             B_n_old[data_length - 1] = smooth_end;
             smooth_start = smooth_end = 0;
