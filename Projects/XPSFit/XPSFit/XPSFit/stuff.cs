@@ -130,7 +130,6 @@ namespace XPSFit
                 LI_new.Tag = LI_tag;
                 List_LineItem.Insert(index, LI_new);
             }
-
             else
             {
                 LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);

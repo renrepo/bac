@@ -32,10 +32,6 @@
             this.btn_open = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
             this.dgv_bg = new System.Windows.Forms.DataGridView();
-            this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models = new System.Windows.Forms.DataGridView();
             this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +40,10 @@
             this.dgv_models_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_tester = new System.Windows.Forms.Button();
             this.cb_Bg_Sub = new System.Windows.Forms.CheckBox();
+            this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -89,34 +89,6 @@
             this.dgv_bg.Name = "dgv_bg";
             this.dgv_bg.Size = new System.Drawing.Size(317, 119);
             this.dgv_bg.TabIndex = 3;
-            // 
-            // dgv_bg_sel
-            // 
-            this.dgv_bg_sel.HeaderText = "set";
-            this.dgv_bg_sel.Name = "dgv_bg_sel";
-            this.dgv_bg_sel.Width = 30;
-            // 
-            // dgv_bg_model
-            // 
-            this.dgv_bg_model.HeaderText = "Model";
-            this.dgv_bg_model.Items.AddRange(new object[] {
-            "Shirley",
-            "Linear",
-            "Remove"});
-            this.dgv_bg_model.Name = "dgv_bg_model";
-            this.dgv_bg_model.Width = 80;
-            // 
-            // dgv_bg_from
-            // 
-            this.dgv_bg_from.HeaderText = "from";
-            this.dgv_bg_from.Name = "dgv_bg_from";
-            this.dgv_bg_from.Width = 80;
-            // 
-            // dgv_bg_to
-            // 
-            this.dgv_bg_to.HeaderText = "to";
-            this.dgv_bg_to.Name = "dgv_bg_to";
-            this.dgv_bg_to.Width = 80;
             // 
             // dgv_models
             // 
@@ -190,6 +162,31 @@
             this.cb_Bg_Sub.UseVisualStyleBackColor = true;
             this.cb_Bg_Sub.CheckedChanged += new System.EventHandler(this.cb_Bg_Sub_CheckedChanged);
             // 
+            // dgv_bg_sel
+            // 
+            this.dgv_bg_sel.HeaderText = "set";
+            this.dgv_bg_sel.Name = "dgv_bg_sel";
+            this.dgv_bg_sel.Width = 30;
+            // 
+            // dgv_bg_model
+            // 
+            this.dgv_bg_model.HeaderText = "Model";
+            this.dgv_bg_model.Name = "dgv_bg_model";
+            this.dgv_bg_model.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_bg_model.Width = 80;
+            // 
+            // dgv_bg_from
+            // 
+            this.dgv_bg_from.HeaderText = "from";
+            this.dgv_bg_from.Name = "dgv_bg_from";
+            this.dgv_bg_from.Width = 80;
+            // 
+            // dgv_bg_to
+            // 
+            this.dgv_bg_to.HeaderText = "to";
+            this.dgv_bg_to.Name = "dgv_bg_to";
+            this.dgv_bg_to.Width = 80;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -224,12 +221,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_cen;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_wid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_mix;
+        private System.Windows.Forms.Button btn_tester;
+        private System.Windows.Forms.CheckBox cb_Bg_Sub;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_bg_sel;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_bg_model;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_from;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_to;
-        private System.Windows.Forms.Button btn_tester;
-        private System.Windows.Forms.CheckBox cb_Bg_Sub;
     }
 }
 

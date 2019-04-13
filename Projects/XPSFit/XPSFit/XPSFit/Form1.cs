@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace XPSFit
 {
@@ -56,11 +57,24 @@ namespace XPSFit
 
         private void btn_tester_Click(object sender, EventArgs e)
         {
-            //dgv_bg.Rows.RemoveAt(1);
-            dgv_bg.CellValueChanged -= new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
-            dgv_bg[0, 0].Value = "True";
-            dgv_bg[0, 0].Value = "false";
-            dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
+            double[] a = new double[] {8000,368,1.0, 6000, 374.2, 1.0 };
+            double[] x = Curr_S.x.ToArray();
+            double[] y = Curr_S.y.ToArray();
+            double[] w = new double[x.Length];
+            for (int i = 0; i < x.Count(); i++)
+            {
+                w[i] = 1.0 / (y[i] * y[i]);
+            }
+            LMAFunction f = new GaussianFunction();
+
+            LMA algorithm = new LMA(f, ref x, ref y, ref w ,ref a);
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            algorithm.fit();
+            var time = sw.Elapsed.TotalMilliseconds;
+            btn_tester.Text = time.ToString("0.0");
+
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -76,7 +90,7 @@ namespace XPSFit
             tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_SelectedIndexChanged);
             dgv_bg.CurrentCellDirtyStateChanged += new EventHandler(dgv_bg_CurrentCellDirtyStateChanged);
             dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
-            dgv_bg[1, 0].Value = "Shirley";
+            //dgv_bg[1, 0].Value = "Shirley";
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -165,6 +179,7 @@ namespace XPSFit
                         Curr_S.Remove_Mouse_Events();
                         Curr_S.Add_Mouse_Events();
                         Curr_S.zgc_plots_MouseUpEvent(null, null);
+                        dgv_bg[1, e.RowIndex + 1].Value = "Shirley";
 
                         if (old_row_index != -1 && old_row_index != e.RowIndex)
                         {
@@ -223,7 +238,7 @@ namespace XPSFit
                     erg.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
                 }
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, erg , Curr_S.Data_name + "_bg_sub");
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.Bg_Sub.ToList() , Curr_S.Data_name + "_bg_sub");
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
