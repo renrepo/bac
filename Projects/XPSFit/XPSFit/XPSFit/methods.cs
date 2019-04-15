@@ -193,39 +193,8 @@ namespace XPSFit
 
     }
 
-    #region Fitfunctions
 
-    public class GaussianFunction : LMAFunction
-    {
-
-        /// <summary>
-        /// Returns Gaussian values
-        /// </summary>
-        /// <param name="x">x value</param>
-        /// <param name="a">parameters</param>
-        /// <returns></returns>
-        public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda)
-        {
-
-            int i, na = a.Count();
-            double fac, ex, arg;
-            y = 0.0;
-            for (i = 0; i < na - 1; i += 3)
-            {
-                arg = (x - a[i + 1]) / a[i + 2];
-                ex = Math.Exp(-Math.Pow(arg, 2));
-                if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
-                fac = a[i] * ex * 2.0 * arg;
-                y += a[i] * ex;
-                dyda[i] = ex;
-                dyda[i + 1] = fac / a[i + 2];
-                dyda[i + 2] = fac * arg / a[i + 2];
-            }
-
-
-        }
-    }
+    
 }
 
-            #endregion //-------------------------------------------------------------------------------------
 

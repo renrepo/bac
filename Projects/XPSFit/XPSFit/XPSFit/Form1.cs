@@ -21,6 +21,7 @@ namespace XPSFit
         List<stuff> list_stuff = new List<stuff>();
         List<DataGridView> List_DGV_bg = new List<DataGridView>();
         List<DataGridView> List_DGV_models = new List<DataGridView>();
+        List<double[]> para;
 
         int old_row_index = -1;
 
@@ -57,23 +58,80 @@ namespace XPSFit
 
         private void btn_tester_Click(object sender, EventArgs e)
         {
-            double[] a = new double[] {8000,368,1.0, 6000, 374.2, 1.0 };
+            List<double> yy = new List<double>();
+            List<double> yy_calc = new List<double>();
+            List<double> xx = new List<double>();
+
+            double time = 0;
+            double[] a = new double[] {45000.0,368.4,1.0,1.0,0};
+            //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
-            double[] y = Curr_S.y.ToArray();
+            //double[] y = Curr_S.y.ToArray();
+
+            for (int i = 0; i < Curr_S.y.Count; i++)
+            {
+                yy_calc.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
+            }
+            double[] y = yy_calc.ToArray();
             double[] w = new double[x.Length];
             for (int i = 0; i < x.Count(); i++)
             {
                 w[i] = 1.0 / (y[i] * y[i]);
+                //w[i] = 1.0;
             }
-            LMAFunction f = new GaussianFunction();
+            LMAFunction f = new CustomFunction();
 
             LMA algorithm = new LMA(f, ref x, ref y, ref w ,ref a);
-
+            algorithm.hold(4,0);
+            algorithm.hold(2, 1);
+            //algorithm.hold(11, 0.0);
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            algorithm.fit();
-            var time = sw.Elapsed.TotalMilliseconds;
-            btn_tester.Text = time.ToString("0.0");
+
+            for (int i = 0; i < 1; i++)
+            {              
+                algorithm.fit();
+            }
+            double[] paras = algorithm.A;
+            foreach (var item in paras)
+            {
+                Console.WriteLine(item);
+            }
+            for (int l = 0; l < x.Length; l++)
+            {
+                double ln = 4.0 * Math.Log(2.0);
+                int i, na = a.Count();
+                double fac, ex, argG,argL1,argL2,G,L,V,m, arg;
+                double yi = 0.0;
+                for (i = 0; i < na - 1; i += 5)
+                {
+
+                    arg = (x[l] - a[i + 1]) / a[i + 2];
+                    ex = Math.Exp(-Math.Pow(arg, 2) * ln);
+                    if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
+                    fac = a[i] * ex * 2.0 * arg;
+                    yi += a[i] * ex;
+                    /***
+                    m = paras[i + 4] * 0.01;
+                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
+                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
+                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
+
+                    G = Math.Exp(ln * Math.Pow(argG, 2));
+                    L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
+
+                    V = (m * L + (1.0 - m) * G);
+                    yi = paras[i] * V;
+                    ***/
+                }
+                yy.Add(yi + Curr_S.Bg_Sub[l]);
+                //yy.Add(yi);
+            }
+
+            time += sw.Elapsed.TotalMilliseconds;
+            btn_tester.Text = (time/1).ToString("0.00");
+            Curr_S.Draw_Line(x.ToList(),yy,"Fit");
+            
 
         }
 
@@ -90,7 +148,13 @@ namespace XPSFit
             tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_SelectedIndexChanged);
             dgv_bg.CurrentCellDirtyStateChanged += new EventHandler(dgv_bg_CurrentCellDirtyStateChanged);
             dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
-            //dgv_bg[1, 0].Value = "Shirley";
+            dgv_bg[1, 0].Value = "Shirley";
+
+            dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
+            dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
+            dgv_models[0, 0].Value = "Gauss-Lorentz";
+            dgv_models[5, 0].Value = "#############";
+            dgv_models[4, 0].Value = String.Empty;
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -238,7 +302,7 @@ namespace XPSFit
                     erg.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
                 }
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.Bg_Sub.ToList() , Curr_S.Data_name + "_bg_sub");
+                Curr_S.Draw_Line(Curr_S.x, erg , Curr_S.Data_name + "_bg_sub");
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
@@ -255,13 +319,106 @@ namespace XPSFit
         }
 
 
+        private void dgv_models_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dgv_models.IsCurrentCellDirty) dgv_models.CommitEdit(DataGridViewDataErrorContexts.Commit); // This fires the cell value changed handler below
+        }
 
 
+        private void dgv_models_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_models.Rows[e.RowIndex].Cells[0];
+            //DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_models.Rows[e.RowIndex].Cells[0];
 
+
+            if (cb.State == DataGridViewElementStates.Selected && cb.Value != null)
+            {
+                dgv_models.CurrentCellDirtyStateChanged -= new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
+                dgv_models.CellValueChanged -= new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
+
+
+                switch (cb.Value)
+                {
+                    case ("Gauss"):
+                    case ("Lorentz"):
+                        dgv_models[4, e.RowIndex].Value = (cb.Value.ToString() == "Gauss") ? 100 : 0;
+                        dgv_models[5, e.RowIndex].Value = "##########";
+                        dgv_models[4, e.RowIndex].ReadOnly = dgv_models[5, e.RowIndex].ReadOnly = true;
+                        //if (get_paras(e.RowIndex, 3) != null) para.Add(get_paras(e.RowIndex, 3));
+                        break;
+
+                    case ("Gauss-Lorentz"):
+                        dgv_models[5, e.RowIndex].Value = "##########";
+                        dgv_models[4, e.RowIndex].Value = String.Empty;
+                        dgv_models[5, e.RowIndex].ReadOnly = false;
+                        //if (get_paras(e.RowIndex, 4) != null) para.Add(get_paras(e.RowIndex, 4));
+                        break;
+
+                    case ("GLP"):
+                        dgv_models[4, e.RowIndex].Value = dgv_models[5, e.RowIndex].Value = String.Empty;
+                        dgv_models[4, e.RowIndex].ReadOnly = dgv_models[5, e.RowIndex].ReadOnly = false;
+                        //if (get_paras(e.RowIndex, 5) != null) para.Add(get_paras(e.RowIndex, 5));
+                        break;
+
+                    case ("Remove"):                       
+                        for (int i = 1; i < 6; i++)
+                        {
+                            dgv_models[i, e.RowIndex].Value = String.Empty;
+                            dgv_models[i, e.RowIndex].ReadOnly = false;
+                        }
+                        dgv_models.Rows.RemoveAt(e.RowIndex);
+                        break;
+                }
+                dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
+                dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
+            }
+
+        }
+
+
+        private void btn_fit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgv_models_MouseEnter(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            //var row = dgv.CurrentCell.RowIndex;
+            //if (para.Count() < row)
+            //{
+                //para.Add(get_paras())
+            //}
+            
+        }
 
 
         #endregion //-------------------------------------------------------------------------------------
 
+
+
+
+
+
+        #region Methods
+
+        private double[] get_paras(int rowindex, int numbers)
+        {
+            bool tryparse;
+            double[] paras = new double[numbers];
+
+            for (int i = 0; i < numbers; i++)
+            {
+                tryparse = double.TryParse(dgv_models[rowindex, i + 1].Value.ToString().Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double value);
+                
+                if (tryparse && value > 0) paras[i] = value;
+                else return null; MessageBox.Show("Type in Numbers for Fitparameters.");
+                
+            }
+            return paras;
+        }
+
+        #endregion
 
     }
 }

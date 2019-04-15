@@ -333,6 +333,10 @@ namespace XPSFit
                     Bg_Sub[i] = erg[counter];
                     counter += 1;
                 }
+                else
+                {
+                    Bg_Sub[i] = y[i];
+                }
             }
             Cursor.Current = Cursors.Default;
 

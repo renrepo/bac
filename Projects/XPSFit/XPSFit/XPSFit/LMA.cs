@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace XPSFit
 {
-    class LMA
+    struct LMA
     {
         #region Fields
 
-        static int NDONE = 4, ITMAX = 200;
+        const int NDONE = 4, ITMAX = 1000;
         int ndat, ma, mfit;
         private double[] x, y, sig;
         double tol;
@@ -23,15 +23,13 @@ namespace XPSFit
         double[,] alpha;
         double chisq;
 
-        Stopwatch sw = new Stopwatch();
-
         #endregion //-----------------------------------------------
 
 
         #region Constructor
 
         public LMA(LMAFunction f, ref double[] xx, ref double[] yy, ref double[] ssig,
-                ref double[] aa, double TOL=1.3e-3  )
+                ref double[] aa, double TOL = 0.001 )
         {
             this.ndat = xx.Count();
             this.ma = aa.Count();
@@ -45,24 +43,39 @@ namespace XPSFit
             this.a = aa;
             this.covar = new double[ma,ma];
 
+            this.chisq = 0; //-------------------------------------------------------------------------- mandatory when using struct! (+ performance?)
+            this.mfit = 0;
+
             for (int i = 0; i < ma; i++) ia[i] = true;
         }
 
         #endregion //-----------------------------------------------
 
 
+
+
+
         #region Properties
 
+        public double[] A
+        {
+            get { return a; }
+            set { a = value; }
 
+        }
 
         #endregion //-----------------------------------------------
 
 
 
+
+
+
+    
         #region Methods
 
-        private void hold(int i, double val) { ia[i] = false; a[i] = val; }  
-        private void free(int i) { ia[i] = true; }
+        public void hold(int i, double val) { ia[i] = false; a[i] = val; }  
+        public void free(int i) { ia[i] = true; }
 
 
         public void fit()
@@ -83,6 +96,7 @@ namespace XPSFit
             ochisq = chisq;
             for (iter = 0; iter < ITMAX; iter++)
             {
+                Console.WriteLine(iter);
                 if (done == NDONE) alambda = 0.0;
                 for (j = 0; j < mfit; j++)
                 {
@@ -94,7 +108,7 @@ namespace XPSFit
 
                 gaussj(ref temp, ref oneda); // Matrix solution.
                 
-                for (j = 0; j < ma; j++) 
+                for (j = 0; j < mfit; j++) 
                 {
                     for (k = 0; k < mfit; k++) covar[j, k] = temp[j, k];
                     da[j] = oneda[j,0];
@@ -104,6 +118,7 @@ namespace XPSFit
                 {
                     covstr(ref covar);
                     covstr(ref alpha);
+                    A = a;
                     return;
                 }
 
@@ -161,7 +176,7 @@ namespace XPSFit
                         wt = dyda[l] * sig2i;
                         for (k = 0, m = 0; m < l + 1; m++)
                         {
-                            if (ia[m]) alpha[j,k++] += wt*dyda[m];
+                            if (ia[m]) alpha[j,k++] += wt * dyda[m];
                         }
                         beta[j++] += dy * wt;
                     }
