@@ -62,7 +62,7 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {40000.0,368.4,1.2};
+            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0};
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
@@ -114,32 +114,43 @@ namespace XPSFit
             }
             for (int l = 0; l < x.Length; l++)
             {
-                double ln = 4.0 * Math.Log(2.0);
+                double ln = - 4.0 * Math.Log(2.0);
                 int i, na = a.Count();
-                double fac, ex, argG,argL1,argL2,G,L,V,m, arg;
+                double fac, ex, argG,argL1,argL2,G,L,V,m, arg,L1,L2;
                 double yi = 0.0;
-                for (i = 0; i < na - 1; i += 3)
+                for (i = 0; i < na - 1; i += 5)
                 {
-                    
+                    /***--------------------------------------------------------------------------------------G A U S S I A N
                     arg = (x[l] - paras[i + 1]) / paras[i + 2];
                     ex = Math.Exp(-Math.Pow(arg, 2) * ln);
                     if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
                     fac = paras[i] * ex * 2.0 * arg;
                     yi += paras[i] * ex;
-                    /***
-                    
+                    ***/
+                    /***--------------------------------------------------------------------------------------L O R E N T Z I A N
+                    argL1 = (x[l] - paras[i + 1]) / a[i + 2];
+                    argL2 = (x[l] - paras[i + 1] - 0.416) / a[i + 2];
+
+                    L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+                    L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
+
+                    yi += paras[i] * (L1 + L2);
+
+                    /***-------------------------------------------------------------------------------------- G L 
+                    ***/
                     m = paras[i + 4] * 0.01;
-                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
+                    
                     argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
                     argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
+                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
 
                     G = Math.Exp(ln * Math.Pow(argG, 2));
                     L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
 
                     V = (m * L + (1.0 - m) * G);
                     yi = paras[i] * V;
-                    ***/
                     
+
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
                 //yy.Add(yi);
