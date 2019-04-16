@@ -181,6 +181,7 @@ namespace XPSFit
                 newParam[l] = a[l];
 
 
+            
             for (i = 0; i < na - 1; i += 5)
             {
                 argL1 = (x - a[i + 1]) / a[i + 2];
@@ -196,8 +197,21 @@ namespace XPSFit
                 dyda[i] = m * L + (1.0 - m) * G;
                 dyda[i + 1] = a[i] * (m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2] + m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2] - (1.0 - m) * 2.0 * argG * ln * G / a[i + 3]);
                 dyda[i + 2] = a[i] * (m * 8.0 * Math.Pow(argL1, 2) * Math.Pow(L1,2) / a[i + 2] + m * 16.0 * Math.Pow(argL2, 2) * Math.Pow(L2, 2) / a[i + 2]);
-                dyda[i + 3] = (-1.0) * a[i] * ((1.0 - m) * 2.0 * Math.Pow(argG, 2) * ln * G / a[i + 3]);
+                dyda[i + 3] = - a[i] * ((1.0 - m) * 2.0 * Math.Pow(argG, 2) * ln * G / a[i + 3]);
                 dyda[i + 4] = a[i] * (L - G);
+
+                if (x > 368.4 && x < 368.6)
+                {
+                    for (int h = 0; h < 5; h++)
+                    {
+                        Console.WriteLine(a[h]);
+                    }
+                    Console.WriteLine("");
+                    Console.WriteLine(dyda[i + 3]);
+                    Console.WriteLine(dyda[i + 2]);
+                    Console.WriteLine("");
+
+                }
 
                 V = (m * L + (1.0 - m) * G) * a[i];
 
@@ -207,15 +221,15 @@ namespace XPSFit
                 y = V;
             }
 
-
-
+            
             /***
+            
             y = 0.0;
             for (i = 0; i < na - 1; i += 5)
             {
                 argG = (x - a[i + 1]) / a[i + 3];
                 argL1 = (x - a[i + 1]) / a[i + 2];
-                argL2 = (x - a[i + 1] + 0.416) / a[i + 2];
+                argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
 
                 G = Math.Exp(ln * Math.Pow(argG, 2) * (1 - a[i + 4] * 0.01));
                 L = 1.0 / (1.0 + a[i + 4] * 0.04 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + a[i + 4] * 0.04 * Math.Pow(argL2, 2)) / 2.0;
@@ -237,7 +251,7 @@ namespace XPSFit
                 {
                     argG = (x - newParam[i + 1]) / newParam[i + 3];
                     argL1 = (x - newParam[i + 1]) / newParam[i + 2];
-                    argL2 = (x - newParam[i + 1] + 0.416) / newParam[i + 2];
+                    argL2 = (x - newParam[i + 1] - 0.416) / newParam[i + 2];
 
                     G = Math.Exp(ln * Math.Pow(argG, 2) * (1 - newParam[i + 4] * 0.01));
                     L = 1.0 / (1.0 + newParam[i + 4] * 0.04 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + newParam[i + 4] * 0.04 * Math.Pow(argL2, 2)) / 2.0;
@@ -254,7 +268,7 @@ namespace XPSFit
                 { 
                     argG = (x - newParam[i + 1]) / newParam[i + 3];
                     argL1 = (x - newParam[i + 1]) / newParam[i + 2];
-                    argL2 = (x - newParam[i + 1] + 0.416) / newParam[i + 2];
+                    argL2 = (x - newParam[i + 1] - 0.416) / newParam[i + 2];
 
                     G = Math.Exp(ln * Math.Pow(argG, 2) * (1.0 - newParam[i + 4] * 0.01));
                     L = 1.0 / (1.0 + newParam[i + 4] * 0.04 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + newParam[i + 4] * 0.04 * Math.Pow(argL2, 2)) / 2.0;
@@ -269,8 +283,8 @@ namespace XPSFit
                 newParam[s] += delta;
                 dyda[s] = (dplus - dminus) / (2.0 * delta);
             }
-             ***/
-
+             
+            ***/
 
 
 

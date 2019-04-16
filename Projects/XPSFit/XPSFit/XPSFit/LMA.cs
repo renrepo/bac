@@ -161,7 +161,8 @@ namespace XPSFit
 
             for (j = 0; j < mfit; j++)  // Initialize (symmetric) alpha, beta
             {
-                for (k = 0; k <= j; k++) alpha[j, k] = 0.0; beta[j] = 0.0;
+                for (k = 0; k <= j; k++) alpha[j, k] = 0.0;
+                beta[j] = 0.0;
             }
             chisq = 0.0;
             for (i = 0; i < ndat; i++)
@@ -227,7 +228,10 @@ namespace XPSFit
                 }
                 indxr[i] = irow;
                 indxc[i] = icol;
-                if (a[icol, icol] == 0.0) { MessageBox.Show("gaussj: Singular Matrix"); }
+                if (a[icol, icol] == 0.0)
+                {
+                    MessageBox.Show("gaussj: Singular Matrix");
+                }
                 pivinv = 1.0 / a[icol, icol];
                 a[icol, icol] = 1.0;
                 for (l = 0; l < n; l++) a[icol, l] *= pivinv;

@@ -62,7 +62,7 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {40000.0,368.4,1.2,1.0,10};
+            double[] a = new double[] {40000.0,368.4,1.2};
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
@@ -79,7 +79,7 @@ namespace XPSFit
                 if (sum != 0)
                 {
                     erg.Add(Curr_S.y[i] - sum);
-                    xx.Add(Curr_S.x[i]);
+                    xx.Add(x[i]);
                 }
                 //erg.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
                 sum = 0.0;
@@ -89,13 +89,14 @@ namespace XPSFit
             double[] w = new double[x.Length];
             for (int i = 0; i < x_crop.Count(); i++)
             {
-                w[i] = 1.0 / (y[i] * y[i]);
-                //w[i] = 1.0;
+                //w[i] = 1.0 / (y[i] * y[i]);
+                w[i] = 1.0;
+                //w[i] = y[i];
             }
             LMAFunction f = new CustomFunction();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w ,ref a);
-            //algorithm.hold(4,10);
+            //algorithm.hold(4,0.0); // zero pure gaussian
             //algorithm.hold(3, 1);
             //algorithm.hold(11, 0.0);
             Stopwatch sw = new Stopwatch();
@@ -113,19 +114,19 @@ namespace XPSFit
             }
             for (int l = 0; l < x.Length; l++)
             {
-                double ln = - 4.0 * Math.Log(2.0);
+                double ln = 4.0 * Math.Log(2.0);
                 int i, na = a.Count();
                 double fac, ex, argG,argL1,argL2,G,L,V,m, arg;
                 double yi = 0.0;
-                for (i = 0; i < na - 1; i += 5)
+                for (i = 0; i < na - 1; i += 3)
                 {
-                    /***
-                    arg = (x[l] - a[i + 1]) / a[i + 2];
+                    
+                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
                     ex = Math.Exp(-Math.Pow(arg, 2) * ln);
                     if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
-                    fac = a[i] * ex * 2.0 * arg;
-                    yi += a[i] * ex;
-                    ***/
+                    fac = paras[i] * ex * 2.0 * arg;
+                    yi += paras[i] * ex;
+                    /***
                     
                     m = paras[i + 4] * 0.01;
                     argG = (x[l] - paras[i + 1]) / paras[i + 3];
@@ -137,6 +138,7 @@ namespace XPSFit
 
                     V = (m * L + (1.0 - m) * G);
                     yi = paras[i] * V;
+                    ***/
                     
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
