@@ -206,7 +206,7 @@ namespace XPSFit
                 dyda[i + 4] = a[i] * (L - G);
 
 
-                y = a[i] * (m * L + (1.0 - m) * G);
+                y += a[i] * (m * L + (1.0 - m) * G);
             }
 
 

@@ -62,7 +62,7 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0};
+            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0, 40000.0, 374.2, 1.2, 1.0, 40.0 };
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
@@ -147,9 +147,8 @@ namespace XPSFit
                     G = Math.Exp(ln * Math.Pow(argG, 2));
                     L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
 
-                    V = (m * L + (1.0 - m) * G);
-                    yi = paras[i] * V;
-                    
+                    yi += paras[i] * (m * L + (1.0 - m) * G);
+
 
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);

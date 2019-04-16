@@ -64,6 +64,8 @@ namespace XPSFit
             tc_zgc = Tc_zgc;
             initial_zgc();
             Draw_Line(x,y,Data_name);
+            myPane_plots.XAxis.Scale.Min = x[0];
+            myPane_plots.XAxis.Scale.Max = x[x.Count - 1];
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -184,7 +186,7 @@ namespace XPSFit
                     new ZedGraph.PointD(X_right, Y_max),
                     new ZedGraph.PointD(X_left, Y_max)
                 },
-                    Fill = new ZedGraph.Fill(Color.FromArgb(225, 255, 225)),
+                    Fill = new ZedGraph.Fill(Color.FromArgb(240, 255, 240)),
                     ZOrder = ZedGraph.ZOrder.E_BehindCurves
                 };
                 PO_new.Border.Color = Color.FromArgb(140, 255, 140);
