@@ -21,7 +21,6 @@ namespace XPSFit
         List<stuff> list_stuff = new List<stuff>();
         List<DataGridView> List_DGV_bg = new List<DataGridView>();
         List<DataGridView> List_DGV_models = new List<DataGridView>();
-        List<double[]> para;
 
         int old_row_index = -1;
 
@@ -63,27 +62,41 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {45000.0,368.4,1.0,1.0,0};
+            double[] a = new double[] {40000.0,368.4,1.2,1.0,10};
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
-
+            double sum = 0.0;
+            List<double> erg = new List<double>();
+            List<double> bg = new List<double>();
             for (int i = 0; i < Curr_S.y.Count; i++)
             {
-                yy_calc.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
+                for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                {
+                    sum += Curr_S.Bg_Sub[j][i];
+                }
+                bg.Add(sum);
+                if (sum != 0)
+                {
+                    erg.Add(Curr_S.y[i] - sum);
+                    xx.Add(Curr_S.x[i]);
+                }
+                //erg.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
+                sum = 0.0;
             }
-            double[] y = yy_calc.ToArray();
+            double[] y = erg.ToArray();
+            double[] x_crop = xx.ToArray(); 
             double[] w = new double[x.Length];
-            for (int i = 0; i < x.Count(); i++)
+            for (int i = 0; i < x_crop.Count(); i++)
             {
                 w[i] = 1.0 / (y[i] * y[i]);
                 //w[i] = 1.0;
             }
             LMAFunction f = new CustomFunction();
 
-            LMA algorithm = new LMA(f, ref x, ref y, ref w ,ref a);
-            algorithm.hold(4,0);
-            algorithm.hold(2, 1);
+            LMA algorithm = new LMA(f, ref x_crop, ref y, ref w ,ref a);
+            //algorithm.hold(4,10);
+            //algorithm.hold(3, 1);
             //algorithm.hold(11, 0.0);
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -93,25 +106,27 @@ namespace XPSFit
                 algorithm.fit();
             }
             double[] paras = algorithm.A;
+            //double[] paras = a;
             foreach (var item in paras)
             {
                 Console.WriteLine(item);
             }
             for (int l = 0; l < x.Length; l++)
             {
-                double ln = 4.0 * Math.Log(2.0);
+                double ln = - 4.0 * Math.Log(2.0);
                 int i, na = a.Count();
                 double fac, ex, argG,argL1,argL2,G,L,V,m, arg;
                 double yi = 0.0;
                 for (i = 0; i < na - 1; i += 5)
                 {
-
+                    /***
                     arg = (x[l] - a[i + 1]) / a[i + 2];
                     ex = Math.Exp(-Math.Pow(arg, 2) * ln);
                     if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
                     fac = a[i] * ex * 2.0 * arg;
                     yi += a[i] * ex;
-                    /***
+                    ***/
+                    
                     m = paras[i + 4] * 0.01;
                     argG = (x[l] - paras[i + 1]) / paras[i + 3];
                     argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
@@ -122,9 +137,9 @@ namespace XPSFit
 
                     V = (m * L + (1.0 - m) * G);
                     yi = paras[i] * V;
-                    ***/
+                    
                 }
-                yy.Add(yi + Curr_S.Bg_Sub[l]);
+                yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
                 //yy.Add(yi);
             }
 
@@ -164,8 +179,16 @@ namespace XPSFit
             if (data == null) return;
             dgv_bg.Enabled = dgv_models.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
-            else { list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc)); Curr_S = list_stuff[list_stuff.Count - 1]; }
-            Curr_S.Bg_Sub = data.Item2.ToArray();
+            else
+            {
+                list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc));
+                Curr_S = list_stuff[list_stuff.Count - 1];
+                Curr_S.Bg_Sub.Add(new double[data.Item2.Count]);
+                for (int i = 0; i < data.Item2.Count; i++)
+                {
+                    Curr_S.Bg_Sub[0][i] = 0;
+                }
+            }
         }
 
 
@@ -211,6 +234,7 @@ namespace XPSFit
                     Curr_S.Bg_tag_num = (e.RowIndex);
                     Curr_S.Remove_PolyObj();
                     Curr_S.Remove_Line(e.RowIndex.ToString());
+                    Curr_S.Bg_Sub.RemoveAt(e.RowIndex);
                     //Curr_S.Remove_Line(null); //-------------------------------------------------------------------------------null????
                     Curr_S.Remove_Mouse_Events();
                     Curr_S.Bg_Bounds.RemoveRange(e.RowIndex * 2, 2);
@@ -290,6 +314,8 @@ namespace XPSFit
 
         private void cb_Bg_Sub_CheckedChanged(object sender, EventArgs e)
         {
+            double sum = 0.0;
+            List<double> res = new List<double>();
             if (cb_Bg_Sub.Checked)
             {
                 foreach (var item in Curr_S.List_LineItem)
@@ -299,10 +325,17 @@ namespace XPSFit
                 List<double> erg = new List<double>();
                 for (int i = 0; i < Curr_S.y.Count; i++)
                 {
-                    erg.Add(Curr_S.y[i] - Curr_S.Bg_Sub[i]);
+                    for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                    {
+                        sum += Curr_S.Bg_Sub[j][i];
+                    }
+                    erg.Add(sum);
+                    res.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
+                    sum = 0.0;
                 }
+                
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, erg , Curr_S.Data_name + "_bg_sub");
+                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub");
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 

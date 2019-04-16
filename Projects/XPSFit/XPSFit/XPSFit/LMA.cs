@@ -227,7 +227,7 @@ namespace XPSFit
                 }
                 indxr[i] = irow;
                 indxc[i] = icol;
-                if (a[icol, icol] == 0.0) MessageBox.Show("gaussj: Singular Matrix");
+                if (a[icol, icol] == 0.0) { MessageBox.Show("gaussj: Singular Matrix"); }
                 pivinv = 1.0 / a[icol, icol];
                 a[icol, icol] = 1.0;
                 for (l = 0; l < n; l++) a[icol, l] *= pivinv;

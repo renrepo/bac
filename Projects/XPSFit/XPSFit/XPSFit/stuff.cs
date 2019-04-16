@@ -25,6 +25,7 @@ namespace XPSFit
         public List<PolyObj> List_PolyObj = new List<PolyObj>();
         //public Dictionary<string, double> Bg_Bounds = new Dictionary<string, double>();
         public List<double> Bg_Bounds = new List<double>();
+        public List<double[]> Bg_Sub = new List<double[]>();
 
         bool bMouseDown = false;
         bool MouseEventExist = false;
@@ -46,7 +47,6 @@ namespace XPSFit
         public string Bg_tag_type { get; set; }
         public double x_bg_left { get; set; }
         public double x_bg_right { get; set; }
-        public double[] Bg_Sub { get; set; }
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -64,8 +64,6 @@ namespace XPSFit
             tc_zgc = Tc_zgc;
             initial_zgc();
             Draw_Line(x,y,Data_name);
-            Bg_Sub = new double[x.Count];
-            Bg_Sub = x.ToArray();
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -325,19 +323,26 @@ namespace XPSFit
                     break;
             }
 
-            for (int i = 0; i < x.Count; i++)
+            if (Bg_tag_num < Bg_Sub.Count)
             {
-                var item = x[i];
-                if (item > Bg_Bounds[Bg_tag_num * 2] && item < Bg_Bounds[Bg_tag_num * 2 + 1])
+                var bg = Bg_Sub[Bg_tag_num];
+                for (int i = 0; i < x.Count; i++)
                 {
-                    Bg_Sub[i] = erg[counter];
-                    counter += 1;
-                }
-                else
-                {
-                    Bg_Sub[i] = y[i];
+                    if (x[i] > Bg_Bounds[Bg_tag_num * 2] && x[i] < Bg_Bounds[Bg_tag_num * 2 + 1]) { bg[i] = erg[counter]; counter++; }
+                    else bg[i] = 0;
                 }
             }
+            else
+            {
+                double[] bg = new double[x.Count];
+                for (int i = 0; i < x.Count; i++)
+                {
+                    if (x[i] > Bg_Bounds[Bg_tag_num * 2] && x[i] < Bg_Bounds[Bg_tag_num * 2 + 1]) { bg[i] = erg[counter]; counter++; }
+                    else bg[i] = 0;
+                }
+                Bg_Sub.Add(bg);
+            }
+
             Cursor.Current = Cursors.Default;
 
             return false;
