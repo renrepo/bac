@@ -173,6 +173,92 @@ namespace XPSFit
             return result.ToList();
         }
 
+        public Tuple<List<double>, List<double>> discreter(List<double> x, List<double> y, int binsize)
+        {
+            List<double> x_bin = new List<double>();
+
+            int tester;
+            for (int i = 0; i < x.Count; i++)
+            {
+                tester = Convert.ToInt16((x[i] * 1000) / binsize);
+                x_bin.Add(((x[i] * 1000) % binsize < binsize/2 ? tester: tester + 1) * binsize / 1000.0);
+            }
+            var a1 = x_bin.ToArray();
+            var a2 = y.ToArray();
+            Array.Sort(a1, a2);
+            List<double> y_sort = new List<double>(a2);
+            List<double> x_sort = new List<double>(a1);
+
+            List<double> x_res = new List<double>();
+            List<double> y_res = new List<double>();
+            double y_ = y_sort[0]; ;
+            int ctn = 1;
+
+            for (int i = 0; i < x_sort.Count - 1; i++)
+            {
+                if (x_sort[i + 1] == x_sort[i])
+                {
+                    ctn++;
+                    y_ += y_sort[i + 1];
+                }
+                else
+                {
+                    x_res.Add(x_sort[i]);
+                    y_res.Add(y_ / ctn);
+                    ctn = 1;
+                    y_ = y_sort[i + 1];
+                }
+            }
+            return Tuple.Create(x_res, y_res);
+        }
+
+
+
+        public void SavGol(List<double> x, List<double> y, double[] c, int np, int nl, int nr, int ld, int m)
+        {
+            int j, k, imj, ipj, kk, mm;
+            double fac, sum;
+            if (np < nl + nr + 1 || nl < 0 || nr < 0 || ld > m || nl + nr < m)
+                MessageBox.Show("bad args in savgol");
+            int[] indx = new int[m + 1];
+            double[,] a = new double[m + 1,m + 1];
+            double[] b = new double[m + 1];
+
+            for (ipj = 0; ipj <= (m << 1); ipj++)
+            {
+
+                sum = ipj > 0 ? 0.0 : 1.0;
+                for (k = 1; k <= nr; k++) sum += Math.Pow((double)k, (double)ipj);
+                for (k = 1; k <= nl; k++) sum += Math.Pow((double)-k, (double)ipj);
+                mm = Math.Min(ipj, 2 * m - ipj);
+                for (imj = -mm; imj <= mm; imj += 2) a[(ipj + imj) / 2, (ipj - imj) / 2] = sum;
+            }
+
+            LUdcmp alud = new LUdcmp(ref a);
+
+            for (j = 0; j < m + 1; j++) b[j] = 0.0;
+            b[ld] = 1.0;
+
+            alud.solve(b, out b);
+            for (kk = 0; kk < np; kk++) c[kk] = 0.0;
+            for (k = -nl; k <= nr; k++)
+            {
+                sum = b[0];
+                fac = 1.0;
+                for (mm = 1; mm <= m; mm++) sum += b[mm] * (fac *= k);
+                kk = (np - k) % np;
+                c[kk] = sum;
+            }
+            
+        }
+
+
+
+
+
+
+
+
         #endregion //-------------------------------------------------------------------------------------
 
 

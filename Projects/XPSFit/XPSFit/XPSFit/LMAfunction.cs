@@ -171,7 +171,7 @@ namespace XPSFit
 
             double ln = -4.0 * Math.Log(2.0);
             int i, na = a.Count();
-            double G, L, argG, argL1, argL2, m, L1, L2, dL1, dL2, dG;
+            double G1, G2, L, argG1, argG2, argL1, argL2, m, L1, L2, dL1, dL2, dG1, dG2, G;
             y = 0.0;
 
             /*** --------------------------------------------------------------------------------- G L P
@@ -208,30 +208,34 @@ namespace XPSFit
            /*** --------------------------------------------------------------------------------- G L S
             * ***/
 
-           for (i = 0; i < na - 1; i += 5)
-           {
+            for (i = 0; i < na - 1; i += 5)
+            {
 
-               argG = (x - a[i + 1]) / a[i + 3];
-               argL1 = (x - a[i + 1]) / a[i + 2];
-               argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
+                argG1 = (x - a[i + 1]) / a[i + 3];
+                argG2 = (x - a[i + 1] - 0.416) / a[i + 3];
+                argL1 = (x - a[i + 1]) / a[i + 2];
+                argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
 
-               G = Math.Exp(ln * Math.Pow(argG, 2));
-               L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-               L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
-               L = L1 + L2;
-               m = a[i + 4] * 0.01;
-               dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
-               dL2 = m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
-               dG = (1 - m) * 2.0 * argG * ln * G / a[i + 3];
+                G1 = Math.Exp(ln * Math.Pow(argG1, 2));
+                G2 = Math.Exp(ln * Math.Pow(argG2, 2));
+                L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+                L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
+                L = L1 + L2;
+                G = G1 + G2;
+                m = a[i + 4] * 0.01;
+                dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
+                dL2 = m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
+                dG1 = (1 - m) * 2.0 * argG1 * ln * G1 / a[i + 3];
+                dG2 = (1 - m) * 2.0 * argG2 * ln * G2 / a[i + 3];
 
-               dyda[i] = m * L + (1.0 - m) * G;
-               dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
-               dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
-               dyda[i + 3] = -a[i] * dG * argG;
-               dyda[i + 4] = a[i] * (L - G);
+                dyda[i] = m * L + (1.0 - m) * G;
+                dyda[i + 1] = a[i] * (dL1 + dL2 - dG1 - dG2);
+                dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
+                dyda[i + 3] = -a[i] * (dG1 * argG1 + dG2 * argG2);
+                dyda[i + 4] = a[i] * (L - G);
 
-               y += a[i] * (m * L + (1.0 - m) * G);
-           }
+                y += a[i] * (m * L + (1.0 - m) * G);
+            }
 
 
            /***----------------------------------------------------------------------------- Shorter and slower

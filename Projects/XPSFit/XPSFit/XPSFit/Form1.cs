@@ -62,7 +62,7 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0, 40000.0, 374.2, 1.2, 1.0, 50.0 };
+            double[] a = new double[] {40000.0,368.4,0.5, 1.0, 70.0, 40000.0, 374.2, 0.5, 1.0, 70.0 };
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
@@ -92,21 +92,25 @@ namespace XPSFit
                 //w[i] = 1.0 / (y[i] * y[i]);
                 //w[i] = y[i];
                 //w[i] = y[i];
+                //w[i] = 1/ y[i];
                 w[i] = 1.0;
             }
             LMAFunction f = new CustomFunction();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w ,ref a);
             //algorithm.hold(4,50.0); // zero pure gaussian
-            //algorithm.hold(3, 1);
+            algorithm.hold(2, 0.5);
+            algorithm.hold(7, 0.5);
             //algorithm.hold(9, 50.0);
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
+            Cursor.Current = Cursors.WaitCursor;
             for (int i = 0; i < 1; i++)
             {              
                 algorithm.fit();
             }
+            Cursor.Current = Cursors.Default;
             double[] paras = algorithm.A;
             //double[] paras = a;
             foreach (var item in paras)
@@ -117,7 +121,7 @@ namespace XPSFit
             {
                 double ln = - 4.0 * Math.Log(2.0);
                 int i, na = a.Count();
-                double argG, argL1, argL2,G,L,m;
+                double argG1, argG2, argL1, argL2,G,L,m;
                 double yi = 0.0;
                 for (i = 0; i < na - 1; i += 5)
                 {
@@ -143,9 +147,10 @@ namespace XPSFit
                     
                     argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
                     argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
-                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
+                    argG1 = (x[l] - paras[i + 1]) / paras[i + 3];
+                    argG2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 3];
 
-                    G = Math.Exp(ln * Math.Pow(argG, 2));
+                    G = Math.Exp(ln * Math.Pow(argG1, 2)) + Math.Exp(ln * Math.Pow(argG2, 2));
                     L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
 
                     yi += paras[i] * (m * L + (1.0 - m) * G);
@@ -196,6 +201,8 @@ namespace XPSFit
             dgv_models[0, 0].Value = "Gauss-Lorentz";
             dgv_models[5, 0].Value = "#############";
             dgv_models[4, 0].Value = String.Empty;
+
+            comb_disc.SelectedIndex = 1;
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -203,7 +210,7 @@ namespace XPSFit
             var data = m.get_values_to_plot();
 
             if (data == null) return;
-            dgv_bg.Enabled = dgv_models.Enabled = true;
+            dgv_bg.Enabled = dgv_models.Enabled = cb_disc.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
             else
             {
@@ -452,6 +459,29 @@ namespace XPSFit
         }
 
 
+        private void cb_disc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_disc.Checked)
+            {
+                var erg = Curr_S.discreter(Curr_S.x, Curr_S.y, Convert.ToInt32(comb_disc.SelectedItem));
+                Curr_S.Hide_Line(Curr_S.Data_name);
+                Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc");
+                cb_disc.BackColor = Color.MediumSpringGreen;
+                Curr_S.x_temp = erg.Item1;
+                Curr_S.y_temp = erg.Item2;
+                //double[] c = new double[11];
+                //Curr_S.SavGol(Curr_S.x, Curr_S.y, c, 11, 5, 5, 0, 4);
+            }
+            else
+            {
+                Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name);
+                cb_disc.BackColor = System.Drawing.SystemColors.Control;
+            }
+
+        }
+
+
         #endregion //-------------------------------------------------------------------------------------
 
 
@@ -478,6 +508,7 @@ namespace XPSFit
         }
 
         #endregion
+
 
     }
 }

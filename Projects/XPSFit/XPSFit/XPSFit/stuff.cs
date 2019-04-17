@@ -47,6 +47,8 @@ namespace XPSFit
         public string Bg_tag_type { get; set; }
         public double x_bg_left { get; set; }
         public double x_bg_right { get; set; }
+        public List<double> x_temp { get; set; }
+        public List<double> y_temp { get; set; }
 
         #endregion //-------------------------------------------------------------------------------------
 

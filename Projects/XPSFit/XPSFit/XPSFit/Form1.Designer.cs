@@ -32,14 +32,11 @@
             this.btn_open = new System.Windows.Forms.Button();
             this.btn_close = new System.Windows.Forms.Button();
             this.dgv_bg = new System.Windows.Forms.DataGridView();
-            this.dgv_models = new System.Windows.Forms.DataGridView();
-            this.btn_tester = new System.Windows.Forms.Button();
-            this.cb_Bg_Sub = new System.Windows.Forms.CheckBox();
             this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_fit = new System.Windows.Forms.Button();
+            this.dgv_models = new System.Windows.Forms.DataGridView();
             this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +44,11 @@
             this.dgv_models_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_tail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_area = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_tester = new System.Windows.Forms.Button();
+            this.cb_Bg_Sub = new System.Windows.Forms.CheckBox();
+            this.btn_fit = new System.Windows.Forms.Button();
+            this.cb_disc = new System.Windows.Forms.CheckBox();
+            this.comb_disc = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -93,46 +95,6 @@
             this.dgv_bg.Size = new System.Drawing.Size(308, 119);
             this.dgv_bg.TabIndex = 3;
             // 
-            // dgv_models
-            // 
-            this.dgv_models.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_models.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgv_models_models,
-            this.dgv_models_amp,
-            this.dgv_models_cen,
-            this.dgv_models_wid,
-            this.dgv_models_mix,
-            this.dgv_models_tail,
-            this.dgv_models_area});
-            this.dgv_models.Enabled = false;
-            this.dgv_models.Location = new System.Drawing.Point(887, 13);
-            this.dgv_models.Name = "dgv_models";
-            this.dgv_models.Size = new System.Drawing.Size(494, 146);
-            this.dgv_models.TabIndex = 4;
-            this.dgv_models.MouseEnter += new System.EventHandler(this.dgv_models_MouseEnter);
-            // 
-            // btn_tester
-            // 
-            this.btn_tester.Location = new System.Drawing.Point(177, 13);
-            this.btn_tester.Name = "btn_tester";
-            this.btn_tester.Size = new System.Drawing.Size(75, 35);
-            this.btn_tester.TabIndex = 6;
-            this.btn_tester.Text = "TEST";
-            this.btn_tester.UseVisualStyleBackColor = true;
-            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
-            // 
-            // cb_Bg_Sub
-            // 
-            this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cb_Bg_Sub.AutoSize = true;
-            this.cb_Bg_Sub.Location = new System.Drawing.Point(572, 136);
-            this.cb_Bg_Sub.Name = "cb_Bg_Sub";
-            this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
-            this.cb_Bg_Sub.TabIndex = 8;
-            this.cb_Bg_Sub.Text = "BG-Sub.";
-            this.cb_Bg_Sub.UseVisualStyleBackColor = true;
-            this.cb_Bg_Sub.CheckedChanged += new System.EventHandler(this.cb_Bg_Sub_CheckedChanged);
-            // 
             // dgv_bg_sel
             // 
             this.dgv_bg_sel.HeaderText = "set";
@@ -162,16 +124,23 @@
             this.dgv_bg_to.Name = "dgv_bg_to";
             this.dgv_bg_to.Width = 80;
             // 
-            // btn_fit
+            // dgv_models
             // 
-            this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_fit.Location = new System.Drawing.Point(826, 136);
-            this.btn_fit.Name = "btn_fit";
-            this.btn_fit.Size = new System.Drawing.Size(55, 23);
-            this.btn_fit.TabIndex = 9;
-            this.btn_fit.Text = "F I T";
-            this.btn_fit.UseVisualStyleBackColor = true;
-            this.btn_fit.Click += new System.EventHandler(this.btn_fit_Click);
+            this.dgv_models.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_models.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_models_models,
+            this.dgv_models_amp,
+            this.dgv_models_cen,
+            this.dgv_models_wid,
+            this.dgv_models_mix,
+            this.dgv_models_tail,
+            this.dgv_models_area});
+            this.dgv_models.Enabled = false;
+            this.dgv_models.Location = new System.Drawing.Point(887, 13);
+            this.dgv_models.Name = "dgv_models";
+            this.dgv_models.Size = new System.Drawing.Size(494, 146);
+            this.dgv_models.TabIndex = 4;
+            this.dgv_models.MouseEnter += new System.EventHandler(this.dgv_models_MouseEnter);
             // 
             // dgv_models_models
             // 
@@ -222,11 +191,75 @@
             this.dgv_models_area.ReadOnly = true;
             this.dgv_models_area.Width = 70;
             // 
+            // btn_tester
+            // 
+            this.btn_tester.Location = new System.Drawing.Point(177, 13);
+            this.btn_tester.Name = "btn_tester";
+            this.btn_tester.Size = new System.Drawing.Size(75, 35);
+            this.btn_tester.TabIndex = 6;
+            this.btn_tester.Text = "TEST";
+            this.btn_tester.UseVisualStyleBackColor = true;
+            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
+            // 
+            // cb_Bg_Sub
+            // 
+            this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cb_Bg_Sub.AutoSize = true;
+            this.cb_Bg_Sub.Location = new System.Drawing.Point(572, 136);
+            this.cb_Bg_Sub.Name = "cb_Bg_Sub";
+            this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
+            this.cb_Bg_Sub.TabIndex = 8;
+            this.cb_Bg_Sub.Text = "BG-Sub.";
+            this.cb_Bg_Sub.UseVisualStyleBackColor = true;
+            this.cb_Bg_Sub.CheckedChanged += new System.EventHandler(this.cb_Bg_Sub_CheckedChanged);
+            // 
+            // btn_fit
+            // 
+            this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_fit.Location = new System.Drawing.Point(826, 136);
+            this.btn_fit.Name = "btn_fit";
+            this.btn_fit.Size = new System.Drawing.Size(55, 23);
+            this.btn_fit.TabIndex = 9;
+            this.btn_fit.Text = "F I T";
+            this.btn_fit.UseVisualStyleBackColor = true;
+            this.btn_fit.Click += new System.EventHandler(this.btn_fit_Click);
+            // 
+            // cb_disc
+            // 
+            this.cb_disc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cb_disc.AutoSize = true;
+            this.cb_disc.Enabled = false;
+            this.cb_disc.Location = new System.Drawing.Point(635, 136);
+            this.cb_disc.Name = "cb_disc";
+            this.cb_disc.Size = new System.Drawing.Size(36, 23);
+            this.cb_disc.TabIndex = 11;
+            this.cb_disc.Text = "disc";
+            this.cb_disc.UseVisualStyleBackColor = true;
+            this.cb_disc.CheckedChanged += new System.EventHandler(this.cb_disc_CheckedChanged);
+            // 
+            // comb_disc
+            // 
+            this.comb_disc.FormattingEnabled = true;
+            this.comb_disc.Items.AddRange(new object[] {
+            "20",
+            "50",
+            "100",
+            "200",
+            "400",
+            "500",
+            "1000"});
+            this.comb_disc.Location = new System.Drawing.Point(677, 138);
+            this.comb_disc.Name = "comb_disc";
+            this.comb_disc.Size = new System.Drawing.Size(47, 21);
+            this.comb_disc.TabIndex = 12;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 961);
+            this.Controls.Add(this.comb_disc);
+            this.Controls.Add(this.cb_disc);
             this.Controls.Add(this.btn_fit);
             this.Controls.Add(this.cb_Bg_Sub);
             this.Controls.Add(this.btn_tester);
@@ -266,6 +299,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_mix;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_tail;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_area;
+        private System.Windows.Forms.CheckBox cb_disc;
+        private System.Windows.Forms.ComboBox comb_disc;
     }
 }
 
