@@ -62,7 +62,7 @@ namespace XPSFit
             List<double> xx = new List<double>();
 
             double time = 0;
-            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0, 40000.0, 374.2, 1.2, 1.0, 40.0 };
+            double[] a = new double[] {40000.0,368.4,1.2, 1.0, 50.0, 40000.0, 374.2, 1.2, 1.0, 50.0 };
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
             //double[] y = Curr_S.y.ToArray();
@@ -90,15 +90,16 @@ namespace XPSFit
             for (int i = 0; i < x_crop.Count(); i++)
             {
                 //w[i] = 1.0 / (y[i] * y[i]);
-                w[i] = 1.0;
                 //w[i] = y[i];
+                //w[i] = y[i];
+                w[i] = 1.0;
             }
             LMAFunction f = new CustomFunction();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w ,ref a);
-            //algorithm.hold(4,0.0); // zero pure gaussian
+            //algorithm.hold(4,50.0); // zero pure gaussian
             //algorithm.hold(3, 1);
-            //algorithm.hold(11, 0.0);
+            //algorithm.hold(9, 50.0);
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
@@ -116,7 +117,7 @@ namespace XPSFit
             {
                 double ln = - 4.0 * Math.Log(2.0);
                 int i, na = a.Count();
-                double fac, ex, argG,argL1,argL2,G,L,V,m, arg,L1,L2;
+                double argG, argL1, argL2,G,L,m;
                 double yi = 0.0;
                 for (i = 0; i < na - 1; i += 5)
                 {
@@ -135,8 +136,8 @@ namespace XPSFit
                     L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
 
                     yi += paras[i] * (L1 + L2);
-
-                    /***-------------------------------------------------------------------------------------- G L 
+                    
+                   /***-------------------------------------------------------------------------------------- G L S
                     ***/
                     m = paras[i + 4] * 0.01;
                     
@@ -149,6 +150,19 @@ namespace XPSFit
 
                     yi += paras[i] * (m * L + (1.0 - m) * G);
 
+
+                    /*** -------------------------------------------------------------------------------------- G L P
+                    m = paras[i + 4] * 0.01;
+
+                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
+                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
+                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
+
+                    G = Math.Exp(ln * (1 - m) * Math.Pow(argG, 2));
+                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * m * Math.Pow(argL2, 2)) / 2.0;
+
+                    yi += paras[i] * G * L;
+                    ***/
 
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);

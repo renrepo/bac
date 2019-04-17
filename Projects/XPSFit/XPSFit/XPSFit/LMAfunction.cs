@@ -170,73 +170,97 @@ namespace XPSFit
 
 
             double ln = -4.0 * Math.Log(2.0);
-            double delta = 0.000001;
             int i, na = a.Count();
-            double fac, ex, arg, G, L, V, argG, argL1, argL2, m, L1, L2,dL1,dL2,dG,c, diff;
-            double T = 1.0;
-            double dplus, dminus;
+            double G, L, argG, argL1, argL2, m, L1, L2, dL1, dL2, dG;
             y = 0.0;
 
-            double[] erg = new double[1 + dyda.Length];
-            double[] newParam = new double[a.Length];
-            for (int l = 0; l < a.Length; l++)
-                newParam[l] = a[l];
-
+            /*** --------------------------------------------------------------------------------- G L P
 
             for (i = 0; i < na - 1; i += 5)
             {
+               m = a[i + 4] * 0.01;
+               argG = (x - a[i + 1]) / a[i + 3];
+               argL1 = (x - a[i + 1]) / a[i + 2];
+               argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
 
-                argG = (x - a[i + 1]) / a[i + 3];
-                argL1 = (x - a[i + 1]) / a[i + 2];
-                argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
+               G = Math.Exp((1 - m) * ln * Math.Pow(argG, 2));
+               L1 = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2));
+               L2 = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL2, 2)) / 2.0;
+               L = L1 + L2;
 
-                G = Math.Exp(ln * Math.Pow(argG, 2));
-                L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-                L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
-                L = L1 + L2;
-                m = a[i + 4] * 0.01;
-                dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
-                dL2 = m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
-                dG = (1 - m) * 2.0 * argG * ln * G / a[i + 3];
+               dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
+               dL2 = m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
+               dG = (1 - m) * 2.0 * argG * ln * G / a[i + 3];
 
-                dyda[i] = m * L + (1.0 - m) * G;
-                dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
-                dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
-                dyda[i + 3] = -a[i] * dG * argG;
-                dyda[i + 4] = a[i] * (L - G);
+               dyda[i] = L * G;
+               dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
+               dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
+               dyda[i + 3] = -a[i] * dG * argG;
+               dyda[i + 4] = -a[i] * (dL1 * argL1 * 0.5 + dL2 * argL2 * 0.5 - argG * ln * G * argG);
 
-
-                y += a[i] * (m * L + (1.0 - m) * G);
+               y += a[i] * L * G;
             }
 
+            
 
-            /***----------------------------------------------------------------------------- Shorter and slower
-             * for (i = 0; i < na - 1; i += 5)
-            {
-                c = x - a[i + 1];
-                argG = c / a[i + 3];
-                argL1 = c / a[i + 2];
-                argL2 = (c - 0.416) / a[i + 2];
 
-                G = Math.Exp(ln * Math.Pow(argG, 2));
-                L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-                L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2));;
-                diff = L1 + L2 * 0.5 - G;
-                m = a[i + 4] * 0.01;
-                dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
-                dL2 = m * 4.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
-                dG = (1.0 - m) * 2.0 * argG * ln * G / a[i + 3];
 
-                dyda[i] = m * diff - G;
-                dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
-                dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
-                dyda[i + 3] = -a[i] * dG * argG;
-                dyda[i + 4] = a[i] * diff;
+           /*** --------------------------------------------------------------------------------- G L S
+            * ***/
 
-                y = a[i] * m * diff - G;
-            }
+           for (i = 0; i < na - 1; i += 5)
+           {
 
-            ***/
+               argG = (x - a[i + 1]) / a[i + 3];
+               argL1 = (x - a[i + 1]) / a[i + 2];
+               argL2 = (x - a[i + 1] - 0.416) / a[i + 2];
+
+               G = Math.Exp(ln * Math.Pow(argG, 2));
+               L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+               L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
+               L = L1 + L2;
+               m = a[i + 4] * 0.01;
+               dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
+               dL2 = m * 16.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
+               dG = (1 - m) * 2.0 * argG * ln * G / a[i + 3];
+
+               dyda[i] = m * L + (1.0 - m) * G;
+               dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
+               dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
+               dyda[i + 3] = -a[i] * dG * argG;
+               dyda[i + 4] = a[i] * (L - G);
+
+               y += a[i] * (m * L + (1.0 - m) * G);
+           }
+
+
+           /***----------------------------------------------------------------------------- Shorter and slower
+            * for (i = 0; i < na - 1; i += 5)
+           {
+               c = x - a[i + 1];
+               argG = c / a[i + 3];
+               argL1 = c / a[i + 2];
+               argL2 = (c - 0.416) / a[i + 2];
+
+               G = Math.Exp(ln * Math.Pow(argG, 2));
+               L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+               L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2));;
+               diff = L1 + L2 * 0.5 - G;
+               m = a[i + 4] * 0.01;
+               dL1 = m * 8.0 * argL1 * Math.Pow(L1, 2) / a[i + 2];
+               dL2 = m * 4.0 * argL2 * Math.Pow(L2, 2) / a[i + 2];
+               dG = (1.0 - m) * 2.0 * argG * ln * G / a[i + 3];
+
+               dyda[i] = m * diff - G;
+               dyda[i + 1] = a[i] * (dL1 + dL2 - dG);
+               dyda[i + 2] = a[i] * (dL1 * argL1 + dL2 * argL2);
+               dyda[i + 3] = -a[i] * dG * argG;
+               dyda[i + 4] = a[i] * diff;
+
+               y = a[i] * m * diff - G;
+           }
+
+           ***/
 
 
 
