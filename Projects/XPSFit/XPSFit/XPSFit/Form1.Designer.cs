@@ -49,6 +49,7 @@
             this.btn_fit = new System.Windows.Forms.Button();
             this.cb_disc = new System.Windows.Forms.CheckBox();
             this.comb_disc = new System.Windows.Forms.ComboBox();
+            this.tb_chi2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -140,7 +141,7 @@
             this.dgv_models.Name = "dgv_models";
             this.dgv_models.Size = new System.Drawing.Size(494, 146);
             this.dgv_models.TabIndex = 4;
-            this.dgv_models.MouseEnter += new System.EventHandler(this.dgv_models_MouseEnter);
+            this.dgv_models.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_models_KeyUp);
             // 
             // dgv_models_models
             // 
@@ -253,11 +254,19 @@
             this.comb_disc.Size = new System.Drawing.Size(47, 21);
             this.comb_disc.TabIndex = 12;
             // 
+            // tb_chi2
+            // 
+            this.tb_chi2.Location = new System.Drawing.Point(520, 139);
+            this.tb_chi2.Name = "tb_chi2";
+            this.tb_chi2.Size = new System.Drawing.Size(46, 20);
+            this.tb_chi2.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 961);
+            this.Controls.Add(this.tb_chi2);
             this.Controls.Add(this.comb_disc);
             this.Controls.Add(this.cb_disc);
             this.Controls.Add(this.btn_fit);
@@ -301,6 +310,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_area;
         private System.Windows.Forms.CheckBox cb_disc;
         private System.Windows.Forms.ComboBox comb_disc;
+        private System.Windows.Forms.TextBox tb_chi2;
     }
 }
 

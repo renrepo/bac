@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="LMA.cs" />
     <Compile Include="LMAfunction.cs" />
+    <Compile Include="LUD.cs" />
     <Compile Include="methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

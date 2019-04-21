@@ -57,128 +57,7 @@ namespace XPSFit
 
         private void btn_tester_Click(object sender, EventArgs e)
         {
-            List<double> yy = new List<double>();
-            List<double> yy_calc = new List<double>();
-            List<double> xx = new List<double>();
-
-            double time = 0;
-            double[] a = new double[] {40000.0,368.4,0.5, 1.0, 70.0, 40000.0, 374.2, 0.5, 1.0, 70.0 };
-            //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
-            double[] x = Curr_S.x.ToArray();
-            //double[] y = Curr_S.y.ToArray();
-            double sum = 0.0;
-            List<double> erg = new List<double>();
-            List<double> bg = new List<double>();
-            for (int i = 0; i < Curr_S.y.Count; i++)
-            {
-                for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
-                {
-                    sum += Curr_S.Bg_Sub[j][i];
-                }
-                bg.Add(sum);
-                if (sum != 0)
-                {
-                    erg.Add(Curr_S.y[i] - sum);
-                    xx.Add(x[i]);
-                }
-                //erg.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
-                sum = 0.0;
-            }
-            double[] y = erg.ToArray();
-            double[] x_crop = xx.ToArray(); 
-            double[] w = new double[x.Length];
-            for (int i = 0; i < x_crop.Count(); i++)
-            {
-                //w[i] = 1.0 / (y[i] * y[i]);
-                //w[i] = y[i];
-                //w[i] = y[i];
-                //w[i] = 1/ y[i];
-                w[i] = 1.0;
-            }
-            LMAFunction f = new CustomFunction();
-
-            LMA algorithm = new LMA(f, ref x_crop, ref y, ref w ,ref a);
-            //algorithm.hold(4,50.0); // zero pure gaussian
-            algorithm.hold(2, 0.5);
-            algorithm.hold(7, 0.5);
-            //algorithm.hold(9, 50.0);
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            Cursor.Current = Cursors.WaitCursor;
-            for (int i = 0; i < 1; i++)
-            {              
-                algorithm.fit();
-            }
-            Cursor.Current = Cursors.Default;
-            double[] paras = algorithm.A;
-            //double[] paras = a;
-            foreach (var item in paras)
-            {
-                Console.WriteLine(item);
-            }
-            for (int l = 0; l < x.Length; l++)
-            {
-                double ln = - 4.0 * Math.Log(2.0);
-                int i, na = a.Count();
-                double argG1, argG2, argL1, argL2,G,L,m;
-                double yi = 0.0;
-                for (i = 0; i < na - 1; i += 5)
-                {
-                    /***--------------------------------------------------------------------------------------G A U S S I A N
-                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
-                    ex = Math.Exp(-Math.Pow(arg, 2) * ln);
-                    if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
-                    fac = paras[i] * ex * 2.0 * arg;
-                    yi += paras[i] * ex;
-                    ***/
-                    /***--------------------------------------------------------------------------------------L O R E N T Z I A N
-                    argL1 = (x[l] - paras[i + 1]) / a[i + 2];
-                    argL2 = (x[l] - paras[i + 1] - 0.416) / a[i + 2];
-
-                    L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-                    L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
-
-                    yi += paras[i] * (L1 + L2);
-                    
-                   /***-------------------------------------------------------------------------------------- G L S
-                    ***/
-                    m = paras[i + 4] * 0.01;
-                    
-                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
-                    argG1 = (x[l] - paras[i + 1]) / paras[i + 3];
-                    argG2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 3];
-
-                    G = Math.Exp(ln * Math.Pow(argG1, 2)) + Math.Exp(ln * Math.Pow(argG2, 2));
-                    L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
-
-                    yi += paras[i] * (m * L + (1.0 - m) * G);
-
-
-                    /*** -------------------------------------------------------------------------------------- G L P
-                    m = paras[i + 4] * 0.01;
-
-                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
-                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
-
-                    G = Math.Exp(ln * (1 - m) * Math.Pow(argG, 2));
-                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * m * Math.Pow(argL2, 2)) / 2.0;
-
-                    yi += paras[i] * G * L;
-                    ***/
-
-                }
-                yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
-                //yy.Add(yi);
-            }
-
-            time += sw.Elapsed.TotalMilliseconds;
-            btn_tester.Text = (time/1).ToString("0.00");
-            Curr_S.Draw_Line(x.ToList(),yy,"Fit");
-            
-
+            fit(new double[]{ 40000.0, 368.4, 1.0, 1.0, 82.0, 40000.0, 374.2, 1.0, 1.0, 22.0 });         
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -415,7 +294,7 @@ namespace XPSFit
 
                     case ("Gauss-Lorentz"):
                         dgv_models[5, e.RowIndex].Value = "##########";
-                        dgv_models[4, e.RowIndex].Value = String.Empty;
+                        dgv_models[4, e.RowIndex].Value = 50;
                         dgv_models[5, e.RowIndex].ReadOnly = false;
                         //if (get_paras(e.RowIndex, 4) != null) para.Add(get_paras(e.RowIndex, 4));
                         break;
@@ -433,6 +312,7 @@ namespace XPSFit
                             dgv_models[i, e.RowIndex].ReadOnly = false;
                         }
                         dgv_models.Rows.RemoveAt(e.RowIndex);
+                        if (Curr_S.paras.Count != 0) Curr_S.paras.RemoveRange(e.RowIndex, 4);
                         break;
                 }
                 dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
@@ -445,17 +325,6 @@ namespace XPSFit
         private void btn_fit_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dgv_models_MouseEnter(object sender, EventArgs e)
-        {
-            DataGridView dgv = sender as DataGridView;
-            //var row = dgv.CurrentCell.RowIndex;
-            //if (para.Count() < row)
-            //{
-                //para.Add(get_paras())
-            //}
-            
         }
 
 
@@ -491,24 +360,203 @@ namespace XPSFit
 
         #region Methods
 
-        private double[] get_paras(int rowindex, int numbers)
+        private double[] get_paras(int rowindex)
         {
             bool tryparse;
-            double[] paras = new double[numbers];
+            double[] paras = new double[4];
 
-            for (int i = 0; i < numbers; i++)
+            for (int i = 0; i < 4; i++)
             {
-                tryparse = double.TryParse(dgv_models[rowindex, i + 1].Value.ToString().Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double value);
-                
-                if (tryparse && value > 0) paras[i] = value;
-                else return null; MessageBox.Show("Type in Numbers for Fitparameters.");
-                
+                tryparse = double.TryParse(dgv_models[i + 1,rowindex].Value.ToString().Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double value);
+
+                if (tryparse && value >= 0)
+                {
+                    paras[i] = value;
+                }
+                else
+                {
+                    MessageBox.Show("Type in Numbers for Fitparameters."); return null;
+                }         
             }
             return paras;
         }
 
+
+
         #endregion
 
+
+
+
+
+
+        private void dgv_models_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                double[] erg = new double[4];
+                DataGridView dgv = sender as DataGridView;
+                int row = dgv.CurrentCell.RowIndex - 1;
+                if (dgv_models[0, row].Value != null && e.KeyData == Keys.Enter)
+                {
+                    for (int i = 1; i < 5; i++)
+                    {
+                        if (dgv[i, row].Value == null) return;
+                    }
+                    erg = get_paras(row);
+                    if (Curr_S.paras.Count > 4 * row)
+                    {
+                        Curr_S.paras.RemoveRange(row * 4, 4);
+                        Curr_S.paras.InsertRange(row * 4, erg);
+                    }
+                    else
+                    {
+                        Curr_S.paras.AddRange(erg);
+                        
+                    }
+                    fit(erg.ToArray());
+                }
+            }
+        }
+
+
+
+
+        private void fit(double[] a)
+        {
+            List<double> yy = new List<double>();
+            List<double> yy_calc = new List<double>();
+            List<double> xx = new List<double>();
+            List<double> residuals = new List<double>();
+
+            double time = 0;
+            var b = a.ToList();
+            b.Insert(3, 1.0);
+            a = b.ToArray();
+            //double[] a = new double[] { 40000.0, 368.4, 1.0, 1.0, 22.0, 40000.0, 374.2, 1.0, 1.0, 22.0 };
+            //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
+            double[] x = Curr_S.x.ToArray();
+            //double[] y = Curr_S.y.ToArray();
+            double sum = 0.0;
+            List<double> erg = new List<double>();
+            List<double> bg = new List<double>();
+            for (int i = 0; i < Curr_S.y.Count; i++)
+            {
+                for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                {
+                    sum += Curr_S.Bg_Sub[j][i];
+                }
+                bg.Add(sum);
+                if (sum != 0)
+                {
+                    erg.Add(Curr_S.y[i] - sum);
+                    xx.Add(x[i]);
+                }
+                //erg.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
+                sum = 0.0;
+            }
+            double[] y = erg.ToArray();
+            double[] x_crop = xx.ToArray();
+            double[] w = new double[x.Length];
+            for (int i = 0; i < x_crop.Count(); i++)
+            {
+                //w[i] = 1.0 / (y[i] * y[i]);
+                //w[i] = y[i];
+                //w[i] = 1/ y[i];
+                w[i] = 1.0;
+                //w[i] = Math.Sqrt(y[i]);
+            }
+            LMAFunction f = new CustomFunction();
+
+            LMA algorithm = new LMA(f, ref x_crop, ref y, ref w, ref a);
+            //algorithm.hold(4,2.0); // zero pure gaussian
+            //algorithm.hold(3, 1.0);
+            //algorithm.hold(8, 1.0);
+            // algorithm.hold(9, 2.0);
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            Cursor.Current = Cursors.WaitCursor;
+            for (int i = 0; i < 1; i++)
+            {
+                algorithm.fit();
+            }
+            Cursor.Current = Cursors.Default;
+            double[] paras = algorithm.A;
+            tb_chi2.Text = Math.Round(algorithm.Chi2, 2).ToString();
+            //double[] paras = a;
+            foreach (var item in paras)
+            {
+                Console.WriteLine(item);
+            }
+            double hwhm = algorithm.GetHWHM(a,0.2,10.0);
+            //double fwhm1 = 0.5346 * a[2] * 0.5 + Math.Pow(0.2166 * a[2] * a[2] * 0.25 + a[3] * a[3] / 2.0 / Math.Log(2.0), 0.5);
+            //double fwhm1 = Math.Pow(Math.Pow(a[3],5) + 2.69269 * Math.Pow(a[3], 4)*a[2] + 2.42843* Math.Pow(a[3],3)* Math.Pow(a[2], 2) + 4.47163 * Math.Pow(a[3], 2) * Math.Pow(a[2], 3) + 0.07842 * a[3] * Math.Pow(a[2], 4) + Math.Pow(a[2],5), 0.2);
+            Console.WriteLine(hwhm * 2.0);
+            for (int l = 0; l < x.Length; l++)
+            {
+                double ln = -4.0 * Math.Log(2.0);
+                int i, na = a.Count();
+                double argG1, argG2, argL1, argL2, G, L, m;
+                double yi = 0.0;
+                for (i = 0; i < na - 1; i += 5)
+                {
+                    /***--------------------------------------------------------------------------------------G A U S S I A N
+                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
+                    ex = Math.Exp(-Math.Pow(arg, 2) * ln);
+                    if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
+                    fac = paras[i] * ex * 2.0 * arg;
+                    yi += paras[i] * ex;
+                    ***/
+                    /***--------------------------------------------------------------------------------------L O R E N T Z I A N
+                    argL1 = (x[l] - paras[i + 1]) / a[i + 2];
+                    argL2 = (x[l] - paras[i + 1] - 0.416) / a[i + 2];
+
+                    L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+                    L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
+
+                    yi += paras[i] * (L1 + L2);
+                    
+                   /***-------------------------------------------------------------------------------------- G L S
+                    ***/
+                    m = paras[i + 4] * 0.01;
+
+                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
+                    //argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
+                    argG1 = (x[l] - paras[i + 1]) / paras[i + 3];
+                    //argG2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 3];
+
+                    G = Math.Exp(ln * Math.Pow(argG1, 2));
+                    L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
+
+                    yi += paras[i] * (m * L + (1.0 - m) * G);
+
+
+                    /*** -------------------------------------------------------------------------------------- G L P
+                    m = paras[i + 4] * 0.01;
+
+                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
+                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
+                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
+
+                    G = Math.Exp(ln * (1 - m) * Math.Pow(argG, 2));
+                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * m * Math.Pow(argL2, 2)) / 2.0;
+
+                    yi += paras[i] * G * L;
+                    ***/
+
+                }
+                yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
+                residuals.Add(bg[l] == 0 ? 0 : bg[l] + yi - Curr_S.y[l]);
+                //yy.Add(yi);
+            }
+
+            time += sw.Elapsed.TotalMilliseconds;
+            btn_tester.Text = (time / 1).ToString("0.00");
+            Curr_S.Draw_Line(x.ToList(), yy, "Fit");
+            //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
+            Curr_S.Draw_Line(x.ToList(), residuals, "residuals");
+        }
 
     }
 }

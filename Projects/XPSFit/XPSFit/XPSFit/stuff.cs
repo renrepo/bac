@@ -26,9 +26,10 @@ namespace XPSFit
         //public Dictionary<string, double> Bg_Bounds = new Dictionary<string, double>();
         public List<double> Bg_Bounds = new List<double>();
         public List<double[]> Bg_Sub = new List<double[]>();
+        public List<double> paras = new List<double>();
+        public List<bool> hold = new List<bool>();
 
         bool bMouseDown = false;
-        bool MouseEventExist = false;
 
 
         #endregion //-------------------------------------------------------------------------------------
@@ -87,8 +88,8 @@ namespace XPSFit
             tp = new TabPage();
             tlp = new TableLayoutPanel();
             tlp.RowCount = 2;
-            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 50));
-            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 500));
+            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 490));
             tlp.ColumnCount = 1;
             tc_zgc.TabPages.Add(tp);
             tp.Controls.Add(tlp);
@@ -107,14 +108,16 @@ namespace XPSFit
             myPane_residuals.Title.IsVisible = myPane_residuals.XAxis.IsVisible = false;
             myPane_plots.XAxis.Title.Text = "Binding energy [eV]";
             myPane_plots.XAxis.Title.FontSpec.Size = myPane_plots.XAxis.Scale.FontSpec.Size = 8;
-            myPane_residuals.YAxis.Scale.FontSpec.Size = 16;
+            myPane_residuals.YAxis.Scale.FontSpec.Size = 128;
+            myPane_residuals.YAxis.Title.Text = "y-fit";
+            myPane_residuals.YAxis.Title.FontSpec.Size = myPane_residuals.YAxis.Scale.FontSpec.Size = 128;
             myPane_plots.YAxis.Title.Text = "cps";
             myPane_plots.YAxis.Title.FontSpec.Size = myPane_plots.YAxis.Scale.FontSpec.Size = 8;
             myPane_plots.XAxis.Scale.FontSpec.FontColor = myPane_plots.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(20, 20, 20);
             myPane_plots.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane_plots.YAxis.MajorTic.Color = myPane_plots.YAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
             myPane_plots.XAxis.MajorTic.Color = myPane_plots.XAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
-            myPane_residuals.TitleGap = 0;           
+            //myPane_residuals.TitleGap = 0;           
         }
 
 
@@ -141,6 +144,33 @@ namespace XPSFit
             LI.IsSelectable = true;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
+
+        }
+
+
+        public void TEMP_Draw_Residuals(List<double> x_values, List<double> y_values, string tag)
+        {
+            LineItem LI;
+            if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
+            {
+                LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
+                var LI_tag = LI.Tag;
+                var index = List_LineItem.FindIndex(a => a == LI);
+                List_LineItem.Remove(LI);
+                myPane_plots.CurveList.Remove(LI);
+                var LI_new = myPane_residuals.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI_new.Tag = LI_tag;
+                List_LineItem.Insert(index, LI_new);
+            }
+            else
+            {
+                LI = myPane_residuals.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI.Tag = tag ?? Data_name;
+                List_LineItem.Add(LI);
+            }
+            LI.IsSelectable = true;
+            zgc_residuals.AxisChange();
+            zgc_residuals.Invalidate();
 
         }
 

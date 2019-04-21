@@ -12,7 +12,7 @@ namespace XPSFit
     {
         #region Fields
 
-        const int NDONE = 4, ITMAX = 1000;
+        const int NDONE = 8, ITMAX = 1000;
         int ndat, ma, mfit;
         private double[] x, y, sig;
         double tol;
@@ -61,7 +61,12 @@ namespace XPSFit
         {
             get { return a; }
             set { a = value; }
+        }
 
+        public double Chi2
+        {
+            get { return chisq / (ndat - ma); }
+            set { chisq = value; }
         }
 
         #endregion //-----------------------------------------------
@@ -71,7 +76,7 @@ namespace XPSFit
 
 
 
-    
+
         #region Methods
 
         public void hold(int i, double val) { ia[i] = false; a[i] = val; }  
@@ -118,19 +123,43 @@ namespace XPSFit
                 {
                     covstr(ref covar);
                     covstr(ref alpha);
-                    A = a;
+                    //A = a;
+                    //Chi2 = chisq;
                     return;
                 }
 
                 for (j = 0, l = 0; l < ma; l++) // Did the trial succeed?                
                 {
-                    if (ia[l]) atry[l] = a[l] + da[j++];
+                    if (ia[l])
+                    {
+                        if ((l == 2 && (a[l] > 4.0 || a[l] < 0.3)) || (l == 7 && (a[l] > 4.0 || a[l] < 0.3)))
+                        {
+                            //atry[l] = 3.0;
+                            a[l] = 1.9;
+                        }
+
+                        else if ((l == 3 && (a[l] > 4.0 || a[l] < 0.3)) || (l == 8 && (a[l] > 4.0 || a[l] < 0.3)))
+                        {
+                            //atry[l] = 3.0;
+                            a[l] = 1.9;
+                        }
+
+                        else if ((l == 4 && (a[l] > 99.0 || a[l] < 1.0)) || (l == 9 && (a[l] > 99.0 || a[l] < 1.0)))
+                        {
+                            a[l] = a[l] > 50 ? 80 : 20;
+                            //a[l] = 50.0;
+                        }
+                        else
+                        {
+                            atry[l] = a[l] + da[j++];
+                        }
+                    }//-------------------------------------------------------- ADD CONSTRAINTS HERE?!
                 }
                 mrqcof(ref atry, ref covar, ref da);
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.1;
+                    alambda *= 0.08;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
@@ -144,7 +173,7 @@ namespace XPSFit
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 10;
+                    alambda *= 8;
                     chisq = ochisq;
                 }
             }
@@ -231,6 +260,7 @@ namespace XPSFit
                 if (a[icol, icol] == 0.0)
                 {
                     MessageBox.Show("gaussj: Singular Matrix");
+                    break;
                 }
                 pivinv = 1.0 / a[icol, icol];
                 a[icol, icol] = 1.0;
@@ -282,6 +312,86 @@ namespace XPSFit
             var temp = a;
             a = b;
             b = temp;
+        }
+
+
+        public double SIGN(double a, double b)
+        {
+            return (b >= 0 ? (a >= 0 ? a : -a) : (a >= 0 ? -a : a));
+        }
+
+
+        public double result(double[] a, double x)
+        {
+            double G, L, m;
+            double f = 0.0;
+
+            for (int i = 0; i < a.Length - 1; i += 5)
+            {
+                G = Math.Exp(-4.0 * Math.Log(2) * Math.Pow(x / a[i + 3], 2));
+                L = 1.0 / (1.0 + 4.0 * Math.Pow(x / a[i + 3], 2));
+                m = a[i + 4] * 0.01;
+
+                f += (m * L + (1.0 - m) * G);
+            }
+            f -= 0.5;
+            return f;
+        }
+
+
+        public double GetHWHM(double[] a, double x1, double x2)
+        {
+            double fl = result(a, x1);
+            double fh = result(a, x2);
+            double xacc = 0.0001;
+            const int MAXIT = 60;
+            if ((fl > 0.0 && fh < 0.0) || (fl < 0.0 && fh > 0.0))
+            {
+                double xl = x1;
+                double xh = x2;
+                double ans = -9.99e99;
+                for (int j = 0; j < MAXIT; j++)
+                {
+                    double xm = 0.5 * (xl + xh);
+                    double fm = result(a, xm);
+                    double s = Math.Sqrt(fm * fm - fl * fh);
+                    if (s == 0.0) return ans;
+                    double xnew = xm + (xm - xl) * ((fl >= fh ? 1.0 : -1.0) * fm / s);
+                    if (Math.Abs(xnew - ans) <= xacc) return ans;
+                    ans = xnew;
+                    double fnew = result(a, ans);
+                    if (fnew == 0.0) return ans;
+                    if (SIGN(fm, fnew) != fm)
+                    {
+                        xl = xm;
+                        fl = fm;
+                        xh = ans;
+                        fh = fnew;
+                    }
+                    else if (SIGN(fl, fnew) != fl)
+                    {
+                        xh = ans;
+                        fh = fnew;
+                    }
+                    else if (SIGN(fh, fnew) != fh)
+                    {
+                        xl = ans;
+                        fl = fnew;
+                    }
+                    else MessageBox.Show("never get here.");
+                    if (Math.Abs(xh - xl) <= xacc) return ans;
+                    Console.WriteLine("FWHM Iteration {0} at value {1}", j, xm);
+                }
+                MessageBox.Show("zriddr exceed maximum iterations");
+            }
+            else
+            {
+                if (fl == 0.0) return x1;
+                if (fh == 0.0) return x2;
+                MessageBox.Show("root must be bracketed in zriddr.");
+                //return ans;
+            }
+            return 0;
         }
 
         #endregion //-----------------------------------------------

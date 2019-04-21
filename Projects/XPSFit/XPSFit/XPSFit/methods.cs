@@ -127,19 +127,22 @@ namespace XPSFit
                     B_n_old[t] = B_n[t];
                     B_n[t] = 0.0;
                 }
-                if (tester > data_length - 10) break;
+                if (tester > data_length - 5) break;
             }
             for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
-            for (int i = 2; i < 52; i++)
+            for (int i = 6; i < 15; i++)
             {
-                smooth_start += B_n_old[i];
-                smooth_end += B_n_old[data_length - i];
+                B_n_old[i] = (B_n_old[i - 5] + B_n_old[i - 4] + B_n_old[i - 3] + B_n_old[i - 2] + B_n_old[i - 1] + B_n_old[i] + B_n_old[i + 1] + B_n_old[i + 2] + B_n_old[i + 3] + B_n_old[i + 4] + B_n_old[i + 5] ) / 11.0;
+                B_n_old[data_length - i] = (B_n_old[data_length - i + 1] + B_n_old[data_length - i + 2] + B_n_old[data_length - i + 3] + B_n_old[data_length - i + 4] + B_n_old[data_length - i + 5] + B_n_old[data_length - i] +
+                    B_n_old[data_length - i - 1] + B_n_old[data_length - i - 2] + B_n_old[data_length - i - 3] + B_n_old[data_length - i - 4] + B_n_old[data_length - i - 5]) / 11.0 ;
             }
-            smooth_start /= 50;
-            smooth_end /= 50;
-            B_n_old[0] = smooth_start;
-            B_n_old[data_length - 1] = smooth_end;
-            smooth_start = smooth_end = 0;
+            B_n_old[0] = B_n_old[1];
+
+            //smooth_start /= 50;
+            //smooth_end /= 50;
+            //B_n_old[0] = smooth_start;
+            //B_n_old[data_length - 1] = smooth_end;
+            //smooth_start = smooth_end = 0;
 
             return B_n_old.ToList();
         }
