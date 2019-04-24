@@ -65,8 +65,8 @@ namespace XPSFit
                         foreach (var line in lines)
                         {
                             lin = line.Split('\t');
-                            list_energy.Add(Convert.ToDouble(lin[0], System.Globalization.CultureInfo.InvariantCulture));
-                            list_cps.Add(Convert.ToDouble(lin[1], System.Globalization.CultureInfo.InvariantCulture));
+                            list_energy.Add(Convert.ToDouble(lin[0].Replace(',','.'), System.Globalization.CultureInfo.InvariantCulture));
+                            list_cps.Add(Convert.ToDouble(lin[1].Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture));
                         }
                         file_name = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                     }
@@ -91,8 +91,6 @@ namespace XPSFit
             double[] B_n_old = new double[data_length];
             double fak = 1.0;
             int tester = 0;
-            double smooth_start = 0;
-            double smooth_end = 0;
 
             for (int k = 0; k < data_length; k++)
             {
@@ -130,11 +128,16 @@ namespace XPSFit
                 if (tester > data_length - 5) break;
             }
             for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
-            for (int i = 6; i < 15; i++)
+
+            if (x_data.Count() > 50)
             {
-                B_n_old[i] = (B_n_old[i - 5] + B_n_old[i - 4] + B_n_old[i - 3] + B_n_old[i - 2] + B_n_old[i - 1] + B_n_old[i] + B_n_old[i + 1] + B_n_old[i + 2] + B_n_old[i + 3] + B_n_old[i + 4] + B_n_old[i + 5] ) / 11.0;
-                B_n_old[data_length - i] = (B_n_old[data_length - i + 1] + B_n_old[data_length - i + 2] + B_n_old[data_length - i + 3] + B_n_old[data_length - i + 4] + B_n_old[data_length - i + 5] + B_n_old[data_length - i] +
-                    B_n_old[data_length - i - 1] + B_n_old[data_length - i - 2] + B_n_old[data_length - i - 3] + B_n_old[data_length - i - 4] + B_n_old[data_length - i - 5]) / 11.0 ;
+                for (int i = 6; i < 15; i++)
+                {
+                    B_n_old[i] = (B_n_old[i - 5] + B_n_old[i - 4] + B_n_old[i - 3] + B_n_old[i - 2] + B_n_old[i - 1] + B_n_old[i] + B_n_old[i + 1] + B_n_old[i + 2] + B_n_old[i + 3] + B_n_old[i + 4] + B_n_old[i + 5]) / 11.0;
+                    B_n_old[data_length - i] = (B_n_old[data_length - i + 1] + B_n_old[data_length - i + 2] + B_n_old[data_length - i + 3] + B_n_old[data_length - i + 4] + B_n_old[data_length - i + 5] + B_n_old[data_length - i] +
+                        B_n_old[data_length - i - 1] + B_n_old[data_length - i - 2] + B_n_old[data_length - i - 3] + B_n_old[data_length - i - 4] + B_n_old[data_length - i - 5]) / 11.0;
+
+                }
             }
             B_n_old[0] = B_n_old[1];
 

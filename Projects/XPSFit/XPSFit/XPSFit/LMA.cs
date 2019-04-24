@@ -89,6 +89,7 @@ namespace XPSFit
         {
             int j, k, l, iter, done = 0;
             double alambda = 0.001;
+            //double alambda = 0.1;
             double ochisq;
             double[] atry = new double[ma];
             double[] beta = new double[ma];
@@ -135,34 +136,38 @@ namespace XPSFit
                 {
                     if (ia[l])
                     {
-                        if ((l == 2 && (a[l] > 4.0 || a[l] < 0.3)) || (l == 7 && (a[l] > 4.0 || a[l] < 0.3)))
+                        //atry[l] = a[l] + da[j++];
+                        
+                        if ((l == 2 && (atry[l] > 4.0 || atry[l] < 0.5)) || (l == 7 && (atry[l] > 4.0 || atry[l] < 0.5)))
                         {
-                            //atry[l] = 3.0;
-                            a[l] = 1.9;
+                            atry[l] = 1.0;
+                            //a[l] = 1.9;
                         }
 
-                        else if ((l == 3 && (a[l] > 4.0 || a[l] < 0.3)) || (l == 8 && (a[l] > 4.0 || a[l] < 0.3)))
+                        else if ((l == 3 && (atry[l] > 4.0 || atry[l] < 0.5)) || (l == 8 && (atry[l] > 4.0 || atry[l] < 0.5)))
                         {
-                            //atry[l] = 3.0;
-                            a[l] = 1.9;
+                            atry[l] = 1.0;
+                            //a[l] = 1.9;
                         }
 
-                        else if ((l == 4 && (a[l] > 99.0 || a[l] < 1.0)) || (l == 9 && (a[l] > 99.0 || a[l] < 1.0)))
+                        else if ((l == 4 && (atry[l] > 100.0 || atry[l] < 0.0)) || (l == 9 && (atry[l] > 100.0 || atry[l] < 0.0)))
                         {
-                            a[l] = a[l] > 50 ? 80 : 20;
+                            //a[l] = a[l] > 50 ? 80 : 20;
+                            atry[l] = atry[l] > 50.0 ? 80.0 : 20.0;
                             //a[l] = 50.0;
                         }
                         else
                         {
                             atry[l] = a[l] + da[j++];
                         }
+                        
                     }//-------------------------------------------------------- ADD CONSTRAINTS HERE?!
                 }
                 mrqcof(ref atry, ref covar, ref da);
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.08;
+                    alambda *= 0.05;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
@@ -176,7 +181,7 @@ namespace XPSFit
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 8;
+                    alambda *= 5;
                     chisq = ochisq;
                 }
             }
@@ -357,7 +362,7 @@ namespace XPSFit
                 for (int j = 0; j < MAXIT; j++)
                 {
                     double xm = 0.5 * (xl + xh);
-                    Console.WriteLine("FWHM Iteration {0} at value {1}", j, xm);
+                    //Console.WriteLine("FWHM Iteration {0} at value {1}", j, xm);
                     double fm = result(a, xm);
                     double s = Math.Sqrt(fm * fm - fl * fh);
                     if (s == 0.0) return ans;

@@ -70,12 +70,12 @@ namespace XPSFit
                     y_stripped.Add(y[i]);
                 }
             }
-            int lag = 30;
-            double threshold = 5.0;
+            int lag = 15;
+            double threshold = 4.0;
             double influence = 0.5;
 
             var output = ZScore.StartAlgo(y_stripped, lag, threshold, influence);
-            Curr_S.Draw_Line(x_stripped, output.signals.Select(i => (double)i).ToList(), "zscore");
+            Curr_S.Draw_Line(x_stripped, output.signals.Select(i => (double)i).ToList(), "zscore", "dot", "line");
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -265,7 +265,7 @@ namespace XPSFit
                 }
                 
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub");
+                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", "dot", "noline");
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
@@ -276,7 +276,7 @@ namespace XPSFit
                     item.IsVisible = true;
                 }
                 Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, "dot", "noline");
                 cb_Bg_Sub.BackColor = SystemColors.Control;
             }
         }
@@ -342,7 +342,9 @@ namespace XPSFit
 
         private void btn_fit_Click(object sender, EventArgs e)
         {
-
+            if (Curr_S.paras == null) return;
+            if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray());
+            
         }
 
 
@@ -352,7 +354,7 @@ namespace XPSFit
             {
                 var erg = Curr_S.discreter(Curr_S.x, Curr_S.y, Convert.ToInt32(comb_disc.SelectedItem));
                 Curr_S.Hide_Line(Curr_S.Data_name);
-                Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc");
+                Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", "dot", "noline");
                 cb_disc.BackColor = Color.MediumSpringGreen;
                 Curr_S.x_temp = erg.Item1;
                 Curr_S.y_temp = erg.Item2;
@@ -362,7 +364,7 @@ namespace XPSFit
             else
             {
                 Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, "dot", "noline");
                 cb_disc.BackColor = System.Drawing.SystemColors.Control;
             }
 
@@ -476,13 +478,14 @@ namespace XPSFit
             }
             double[] y = erg.ToArray();
             double[] x_crop = xx.ToArray();
-            double[] w = new double[x.Length];
+            double[] w = new double[x_crop.Length];
+            var ymax = y.Max();
             for (int i = 0; i < x_crop.Count(); i++)
             {
                 //w[i] = 1.0 / (y[i] * y[i]);
-                //w[i] = y[i];
+                w[i] = Math.Max(0.001, Math.Pow(Math.Abs(y[i]),0.5));
                 //w[i] = 1/ y[i];
-                w[i] = 1.0;
+                //w[i] = y[i] / ymax;
                 //w[i] = Math.Sqrt(y[i]);
             }
             LMAFunction f = new CustomFunction();
@@ -502,14 +505,13 @@ namespace XPSFit
             }
             Cursor.Current = Cursors.Default;
             double[] paras = algorithm.A;
-            tb_chi2.Text = Math.Round(algorithm.Chi2, 2).ToString();
+            tb_chi2.Text = Math.Round(algorithm.Chi2 / (x_crop.Length - paras.Length), 2).ToString();
             //double[] paras = a;
             foreach (var item in paras)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(Math.Round(item,3));
             }
-            double fwhm = algorithm.GetHWHM(a,0.2,5.0) * 2.0;
-            Console.WriteLine(fwhm);
+            Console.WriteLine(algorithm.GetHWHM(a, 0.2, 5.0) * 2.0);
             for (int l = 0; l < x.Length; l++)
             {
                 double ln = -4.0 * Math.Log(2.0);
@@ -570,7 +572,7 @@ namespace XPSFit
 
             time += sw.Elapsed.TotalMilliseconds;
             btn_tester.Text = (time / 1).ToString("0.00");
-            Curr_S.Draw_Line(x.ToList(), yy, "Fit");
+            Curr_S.Draw_Line(x.ToList(), yy, "Fit", "none", "line");
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
             Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
         }

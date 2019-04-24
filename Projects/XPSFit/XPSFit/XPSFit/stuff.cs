@@ -66,7 +66,7 @@ namespace XPSFit
             Data_name = Name;
             tc_zgc = Tc_zgc;
             initial_zgc();
-            Draw_Line(x,y,Data_name);
+            Draw_Line(x,y,Data_name, "dot", "noline");
             myPane_plots.XAxis.Scale.Min = x[0];
             myPane_plots.XAxis.Scale.Max = x[x.Count - 1];
         }
@@ -88,8 +88,8 @@ namespace XPSFit
             tp = new TabPage();
             tlp = new TableLayoutPanel();
             tlp.RowCount = 2;
-            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
-            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 490));
+            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 80));
+            tlp.RowStyles.Add(new RowStyle(SizeType.Absolute, 470));
             tlp.ColumnCount = 1;
             tc_zgc.TabPages.Add(tp);
             tp.Controls.Add(tlp);
@@ -105,27 +105,59 @@ namespace XPSFit
             int blue = 200;
             myPane_plots.Title.Text = "";
             myPane_plots.Title.IsVisible = false;
-            myPane_residuals.Title.IsVisible = myPane_residuals.YAxis.Title.IsVisible = myPane_residuals.XAxis.IsVisible = myPane_residuals.YAxis.IsVisible = false;
+            myPane_residuals.Title.IsVisible = myPane_residuals.YAxis.Title.IsVisible = myPane_residuals.XAxis.Title.IsVisible = false;
+            myPane_residuals.YAxis.Scale.IsSkipFirstLabel = true;
+            myPane_residuals.YAxis.Scale.IsSkipLastLabel = true;
+            myPane_residuals.YAxis.IsVisible = false;
+            //myPane_residuals.XAxis.IsVisible = true;
+            //myPane_residuals.YAxis.Scale.Mag = (int)Math.Floor(Math.Log10(myPane_residuals.YAxis.Scale.Max));
+            //myPane_residuals.YAxis.Scale.Mag = 0;
+            //myPane_residuals.YAxis.Type = AxisType.Log;
+            myPane_residuals.XAxis.MajorTic.IsAllTics = myPane_residuals.XAxis.MinorTic.IsAllTics = false;
             myPane_plots.XAxis.Title.Text = "Binding energy [eV]";
             myPane_plots.XAxis.Title.FontSpec.Size = myPane_plots.XAxis.Scale.FontSpec.Size = 8;
             myPane_residuals.YAxis.Scale.FontSpec.Size = 80;
-            myPane_residuals.Margin.Right = 250;
-            myPane_residuals.Margin.Left = 350;
-            myPane_residuals.Margin.Bottom = 50;
-            myPane_residuals.Margin.Top = 50;
+            myPane_residuals.Margin.Right = 160;
+            myPane_residuals.Margin.Left = 380;
+            myPane_residuals.Margin.Bottom = -10;
+            myPane_residuals.Margin.Top = 10;
             myPane_plots.YAxis.Title.Text = "cps";
             myPane_plots.YAxis.Title.FontSpec.Size = myPane_plots.YAxis.Scale.FontSpec.Size = 8;
             myPane_plots.XAxis.Scale.FontSpec.FontColor = myPane_plots.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(20, 20, 20);
             myPane_plots.Title.FontSpec.FontColor = Color.FromArgb(red, green, blue);
             myPane_plots.YAxis.MajorTic.Color = myPane_plots.YAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
             myPane_plots.XAxis.MajorTic.Color = myPane_plots.XAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
-            //myPane_residuals.TitleGap = 0;           
+
+            zgc_plots.ZoomEvent += new ZedGraphControl.ZoomEventHandler(zgc_plots_ZoomEvent);
         }
 
+        public void zgc_plots_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)
+        {
+            myPane_residuals.XAxis.Scale.Min = sender.GraphPane.XAxis.Scale.Min;
+            myPane_residuals.XAxis.Scale.Max = sender.GraphPane.XAxis.Scale.Max;
+            myPane_residuals.YAxis.Scale.Mag = (int)Math.Floor(Math.Log10(myPane_residuals.YAxis.Scale.Max));
+            zgc_residuals.Invalidate();
+            zgc_residuals.AxisChange();
+        }
 
-        public void Draw_Line(List<double> x_values, List<double> y_values, string tag)
+        public void Draw_Line(List<double> x_values, List<double> y_values, string tag, string Symboltype, string Line)
         {
             LineItem LI;
+            SymbolType st = SymbolType.None;
+            Color col = Color.Black;
+            
+            switch (Symboltype)
+            {
+                case "none":
+                    st = SymbolType.None;
+                    col = Color.Black;
+                    break;
+                case "dot":
+                    st = SymbolType.Plus;
+                    col = Color.ForestGreen;
+                    break;                
+            }
+
             if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
             {
                 LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
@@ -133,17 +165,27 @@ namespace XPSFit
                 var index = List_LineItem.FindIndex(a => a == LI);
                 List_LineItem.Remove(LI);
                 myPane_plots.CurveList.Remove(LI);
-                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
                 LI_new.Tag = LI_tag;
                 List_LineItem.Insert(index, LI_new);
             }
             else
             {
-                LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
+                LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
                 LI.Tag = tag ?? Data_name;
                 List_LineItem.Add(LI);
             }
+            switch (Line)
+            {
+                case "line":
+                    LI.Line.IsVisible = true;
+                    break;
+                case "noline":
+                    LI.Line.IsVisible = false;
+                    break;
+            }
             LI.IsSelectable = true;
+            LI.Symbol.Size = 1;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
 
@@ -153,21 +195,28 @@ namespace XPSFit
         public void Draw_Residuals(List<double> x_values, List<double> y_values, string tag)
         {
             myPane_residuals.CurveList.Clear();
-            double[] y_plus = new double[y_values.Count];
-            double[] y_minus = new double[y_values.Count];
+            List<double> y_plus = new List<double>();
+            List<double> y_minus = new List<double>();
+            List<double> x = new List<double>();
 
             for (int i = 0; i < y_values.Count; i++)
             {
                 var yi = y_values[i];
-                var err = Math.Sqrt(Math.Max(0.0,Math.Abs(yi)));
-                y_plus[i] = yi + err;
-                y_minus[i] = yi - err;
+                var xi = x_values[i];
+                if (yi != 0)
+                {
+                    var err = Math.Sqrt(Math.Abs(yi));
+                    y_plus.Add(yi + err);
+                    y_minus.Add(yi - err);
+                    x.Add(xi);
+                }
             }
 
             ErrorBarItem errorcurve = new ErrorBarItem("");
             errorcurve.Bar.Symbol.Type = SymbolType.Circle;
             errorcurve.Bar.Symbol.Size = 5;
-            errorcurve = myPane_residuals.AddErrorBar("", x_values.ToArray(), y_minus, y_plus, Color.Red);
+            errorcurve = myPane_residuals.AddErrorBar("", x.ToArray(), y_minus.ToArray(), y_plus.ToArray(), Color.Tomato);
+            var ZeroLine = myPane_residuals.AddCurve("", new double[] {-10000, 10000}, new double[] { 0, 0}, Color.Black);
             
 
             myPane_residuals.XAxis.Scale.Min = x_values[0];
@@ -209,8 +258,8 @@ namespace XPSFit
             else
             {
                 var max = x[y.IndexOf(y.Max())];
-                Bg_Bounds.Add(max - 1.0);
-                Bg_Bounds.Add(max + 1.0);
+                Bg_Bounds.Add(max - 2.0);
+                Bg_Bounds.Add(max + 2.0);
                 X_left = max - 1.0;
                 X_right = max + 1.0;
 
@@ -355,11 +404,11 @@ namespace XPSFit
             {
                 case "Shirley":
                     erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString());
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), "none", "line");
                     break;
                 case "Linear":
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString());
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), "none", "line");
                     break;
             }
 
