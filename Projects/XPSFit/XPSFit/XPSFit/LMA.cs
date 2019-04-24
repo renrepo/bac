@@ -22,6 +22,7 @@ namespace XPSFit
         double[,] covar;
         double[,] alpha;
         double chisq;
+        bool singular_matrix;
 
         #endregion //-----------------------------------------------
 
@@ -45,6 +46,7 @@ namespace XPSFit
 
             this.chisq = 0; //-------------------------------------------------------------------------- mandatory when using struct! (+ performance?)
             this.mfit = 0;
+            this.singular_matrix = false;
 
             for (int i = 0; i < ma; i++) ia[i] = true;
         }
@@ -112,6 +114,7 @@ namespace XPSFit
                 }
 
                 gaussj(ref temp, ref oneda); // Matrix solution.
+                if (singular_matrix) return;
                 
                 for (j = 0; j < mfit; j++) 
                 {
@@ -260,6 +263,7 @@ namespace XPSFit
                 if (a[icol, icol] == 0.0)
                 {
                     MessageBox.Show("gaussj: Singular Matrix");
+                    singular_matrix = true;
                     break;
                 }
                 pivinv = 1.0 / a[icol, icol];
@@ -329,7 +333,7 @@ namespace XPSFit
             for (int i = 0; i < a.Length - 1; i += 5)
             {
                 G = Math.Exp(-4.0 * Math.Log(2) * Math.Pow(x / a[i + 3], 2));
-                L = 1.0 / (1.0 + 4.0 * Math.Pow(x / a[i + 3], 2));
+                L = 1.0 / (1.0 + 4.0 * Math.Pow(x / a[i + 2], 2));
                 m = a[i + 4] * 0.01;
 
                 f += (m * L + (1.0 - m) * G);
@@ -343,7 +347,7 @@ namespace XPSFit
         {
             double fl = result(a, x1);
             double fh = result(a, x2);
-            double xacc = 0.0001;
+            double xacc = 0.00001;
             const int MAXIT = 60;
             if ((fl > 0.0 && fh < 0.0) || (fl < 0.0 && fh > 0.0))
             {
@@ -353,6 +357,7 @@ namespace XPSFit
                 for (int j = 0; j < MAXIT; j++)
                 {
                     double xm = 0.5 * (xl + xh);
+                    Console.WriteLine("FWHM Iteration {0} at value {1}", j, xm);
                     double fm = result(a, xm);
                     double s = Math.Sqrt(fm * fm - fl * fh);
                     if (s == 0.0) return ans;
@@ -380,7 +385,7 @@ namespace XPSFit
                     }
                     else MessageBox.Show("never get here.");
                     if (Math.Abs(xh - xl) <= xacc) return ans;
-                    Console.WriteLine("FWHM Iteration {0} at value {1}", j, xm);
+                    
                 }
                 MessageBox.Show("zriddr exceed maximum iterations");
             }
@@ -389,8 +394,92 @@ namespace XPSFit
                 if (fl == 0.0) return x1;
                 if (fh == 0.0) return x2;
                 MessageBox.Show("root must be bracketed in zriddr.");
-                //return ans;
             }
+            return 0;
+        }
+
+
+
+
+        public double GetHWHM_WDB(double[] aa, double x1, double x2)
+        {
+            const int ITMAX = 100;
+            double EPS = Math.Pow(2, -52);
+            double Tol = 0.00001;
+            
+            double a = x1, b = x2, c = x2, fa = result(aa, a), fb = result(aa, b), fc, p, q, r, s, tol1, xm;
+            double e = 0.0;
+            double d = 0.0;
+            if ((fa > 0.0 && fb > 0.0) || (fa < 0.0 && fb < 0.0))
+                MessageBox.Show("Root must be bracketed in zbrent");
+            fc = fb;
+            for (int iter = 0; iter < ITMAX; iter++)
+            {
+                if ((fb > 0.0 && fc > 0.0) || (fb < 0.0 && fc < 0.0))
+                {
+                    c = a;
+                    fc = fa;
+                    e = d = b - a;
+                }
+                if (Math.Abs(fc) < Math.Abs(fb))
+                {
+                    a = b;
+                    b = c;
+                    c = a;
+                    fa = fb;
+                    fb = fc;
+                    fc = fa;
+                }
+                tol1 = 2.0 * EPS * Math.Abs(b) + 0.5 * Tol;
+                xm = 0.5 * (c - b);
+                Console.WriteLine("FWHM Iteration {0} at value {1}", iter, b);
+                if (Math.Abs(xm) <= tol1 || fb == 0.0) return b;
+                if (Math.Abs(e) >= tol1 && Math.Abs(fa) > Math.Abs(fb))
+                {
+                    s = fb / fa;
+                    if (a == c)
+                    {
+                        p = 2.0 * xm * s;
+                        q = 1.0 - s;
+                    }
+                    else
+                    {
+                        q = fa / fc;
+                        r = fb / fc;
+                        p = s * (2.0 * xm * q * (q - r) - (b - a) * (r - 1.0));
+                        q = (q - 1.0) * (r - 1.0) * (s - 1.0);
+                    }
+                    if (p > 0.0) q = -q;
+                    p = Math.Abs(p);
+                    double min1 = 3.0 * xm * q - Math.Abs(tol1 * q);
+                    double min2 = Math.Abs(e * q);
+                    if (2.0 * p < (min1 < min2 ? min1 : min2))
+                    {
+                        e = d; 
+                        d = p / q;
+                    }
+                    else
+                    {
+                        d = xm;
+                        e = d;
+                    }
+                }
+                else
+                {                   
+                    d = xm;
+                    e = d;
+                }
+                a = b;
+                fa = fb;
+                if (Math.Abs(d) > tol1) b += d;
+                else
+                {
+                    b += SIGN(tol1, xm);
+                    fb = result(aa, b);
+                }
+
+            }
+           MessageBox.Show("Maximum number of iterations exceeded in zbrent");
             return 0;
         }
 

@@ -105,12 +105,14 @@ namespace XPSFit
             int blue = 200;
             myPane_plots.Title.Text = "";
             myPane_plots.Title.IsVisible = false;
-            myPane_residuals.Title.IsVisible = myPane_residuals.XAxis.IsVisible = false;
+            myPane_residuals.Title.IsVisible = myPane_residuals.YAxis.Title.IsVisible = myPane_residuals.XAxis.IsVisible = myPane_residuals.YAxis.IsVisible = false;
             myPane_plots.XAxis.Title.Text = "Binding energy [eV]";
             myPane_plots.XAxis.Title.FontSpec.Size = myPane_plots.XAxis.Scale.FontSpec.Size = 8;
-            myPane_residuals.YAxis.Scale.FontSpec.Size = 128;
-            myPane_residuals.YAxis.Title.Text = "y-fit";
-            myPane_residuals.YAxis.Title.FontSpec.Size = myPane_residuals.YAxis.Scale.FontSpec.Size = 128;
+            myPane_residuals.YAxis.Scale.FontSpec.Size = 80;
+            myPane_residuals.Margin.Right = 250;
+            myPane_residuals.Margin.Left = 350;
+            myPane_residuals.Margin.Bottom = 50;
+            myPane_residuals.Margin.Top = 50;
             myPane_plots.YAxis.Title.Text = "cps";
             myPane_plots.YAxis.Title.FontSpec.Size = myPane_plots.YAxis.Scale.FontSpec.Size = 8;
             myPane_plots.XAxis.Scale.FontSpec.FontColor = myPane_plots.YAxis.Scale.FontSpec.FontColor = Color.FromArgb(20, 20, 20);
@@ -148,27 +150,31 @@ namespace XPSFit
         }
 
 
-        public void TEMP_Draw_Residuals(List<double> x_values, List<double> y_values, string tag)
+        public void Draw_Residuals(List<double> x_values, List<double> y_values, string tag)
         {
-            LineItem LI;
-            if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
+            myPane_residuals.CurveList.Clear();
+            double[] y_plus = new double[y_values.Count];
+            double[] y_minus = new double[y_values.Count];
+
+            for (int i = 0; i < y_values.Count; i++)
             {
-                LI = List_LineItem.Find(a => a.Tag.ToString() == tag);
-                var LI_tag = LI.Tag;
-                var index = List_LineItem.FindIndex(a => a == LI);
-                List_LineItem.Remove(LI);
-                myPane_plots.CurveList.Remove(LI);
-                var LI_new = myPane_residuals.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
-                LI_new.Tag = LI_tag;
-                List_LineItem.Insert(index, LI_new);
+                var yi = y_values[i];
+                var err = Math.Sqrt(Math.Max(0.0,Math.Abs(yi)));
+                y_plus[i] = yi + err;
+                y_minus[i] = yi - err;
             }
-            else
-            {
-                LI = myPane_residuals.AddCurve("", x_values.ToArray(), y_values.ToArray(), Color.Green, SymbolType.None);
-                LI.Tag = tag ?? Data_name;
-                List_LineItem.Add(LI);
-            }
-            LI.IsSelectable = true;
+
+            ErrorBarItem errorcurve = new ErrorBarItem("");
+            errorcurve.Bar.Symbol.Type = SymbolType.Circle;
+            errorcurve.Bar.Symbol.Size = 5;
+            errorcurve = myPane_residuals.AddErrorBar("", x_values.ToArray(), y_minus, y_plus, Color.Red);
+            
+
+            myPane_residuals.XAxis.Scale.Min = x_values[0];
+            myPane_residuals.XAxis.Scale.Max = x_values[x_values.Count - 1];
+            myPane_residuals.YAxis.Scale.Min = y_minus.Min() * 1.1;
+            myPane_residuals.YAxis.Scale.Max = y_plus.Max() * 1.1;
+
             zgc_residuals.AxisChange();
             zgc_residuals.Invalidate();
 

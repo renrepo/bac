@@ -240,11 +240,6 @@ namespace XPSFit
 
                 peak = (m * L1 + (1.0 - m) * G1);
                 //y += a[i] * (peak + (1.0 - peak) * T);
-
-                if (x > 367.5)
-                {
-
-                }
                 
                 y += a[i] * peak;
             }

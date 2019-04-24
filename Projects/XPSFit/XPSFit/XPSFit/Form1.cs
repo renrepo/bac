@@ -57,7 +57,25 @@ namespace XPSFit
 
         private void btn_tester_Click(object sender, EventArgs e)
         {
-            fit(new double[]{ 40000.0, 368.4, 1.0, 1.0, 82.0, 40000.0, 374.2, 1.0, 1.0, 22.0 });         
+            //fit(new double[]{ 40000.0, 368.4, 1.0, 1.0, 82.0, 40000.0, 374.2, 1.0, 1.0, 22.0 }); 
+            var x = Curr_S.x;
+            var y = Curr_S.y;
+            List<double> x_stripped = new List<double>();
+            List<double> y_stripped = new List<double>();
+            for (int i = 0; i < x.Count; i++)
+            {
+                if (i % 10 == 0)
+                {
+                    x_stripped.Add(x[i]);
+                    y_stripped.Add(y[i]);
+                }
+            }
+            int lag = 30;
+            double threshold = 5.0;
+            double influence = 0.5;
+
+            var output = ZScore.StartAlgo(y_stripped, lag, threshold, influence);
+            Curr_S.Draw_Line(x_stripped, output.signals.Select(i => (double)i).ToList(), "zscore");
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -378,6 +396,9 @@ namespace XPSFit
                     MessageBox.Show("Type in Numbers for Fitparameters."); return null;
                 }         
             }
+            var b = paras.ToList();
+            b.Insert(3, b[2]);
+            paras = b.ToArray();
             return paras;
         }
 
@@ -394,27 +415,27 @@ namespace XPSFit
         {
             if (e.KeyCode == Keys.Enter)
             {
-                double[] erg = new double[4];
+                double[] erg = new double[5];
                 DataGridView dgv = sender as DataGridView;
                 int row = dgv.CurrentCell.RowIndex - 1;
                 if (dgv_models[0, row].Value != null && e.KeyData == Keys.Enter)
                 {
-                    for (int i = 1; i < 5; i++)
+                    for (int i = 1; i < 6; i++)
                     {
                         if (dgv[i, row].Value == null) return;
                     }
                     erg = get_paras(row);
-                    if (Curr_S.paras.Count > 4 * row)
+                    if (Curr_S.paras.Count > 5 * row)
                     {
-                        Curr_S.paras.RemoveRange(row * 4, 4);
-                        Curr_S.paras.InsertRange(row * 4, erg);
+                        Curr_S.paras.RemoveRange(row * 5, 5);
+                        Curr_S.paras.InsertRange(row * 5, erg);
                     }
                     else
                     {
                         Curr_S.paras.AddRange(erg);
                         
                     }
-                    fit(erg.ToArray());
+                    fit(Curr_S.paras.ToArray());
                 }
             }
         }
@@ -430,9 +451,7 @@ namespace XPSFit
             List<double> residuals = new List<double>();
 
             double time = 0;
-            var b = a.ToList();
-            b.Insert(3, 1.0);
-            a = b.ToArray();
+            
             //double[] a = new double[] { 40000.0, 368.4, 1.0, 1.0, 22.0, 40000.0, 374.2, 1.0, 1.0, 22.0 };
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
@@ -489,10 +508,8 @@ namespace XPSFit
             {
                 Console.WriteLine(item);
             }
-            double hwhm = algorithm.GetHWHM(a,0.2,10.0);
-            //double fwhm1 = 0.5346 * a[2] * 0.5 + Math.Pow(0.2166 * a[2] * a[2] * 0.25 + a[3] * a[3] / 2.0 / Math.Log(2.0), 0.5);
-            //double fwhm1 = Math.Pow(Math.Pow(a[3],5) + 2.69269 * Math.Pow(a[3], 4)*a[2] + 2.42843* Math.Pow(a[3],3)* Math.Pow(a[2], 2) + 4.47163 * Math.Pow(a[3], 2) * Math.Pow(a[2], 3) + 0.07842 * a[3] * Math.Pow(a[2], 4) + Math.Pow(a[2],5), 0.2);
-            Console.WriteLine(hwhm * 2.0);
+            double fwhm = algorithm.GetHWHM(a,0.2,5.0) * 2.0;
+            Console.WriteLine(fwhm);
             for (int l = 0; l < x.Length; l++)
             {
                 double ln = -4.0 * Math.Log(2.0);
@@ -555,7 +572,7 @@ namespace XPSFit
             btn_tester.Text = (time / 1).ToString("0.00");
             Curr_S.Draw_Line(x.ToList(), yy, "Fit");
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
-            Curr_S.Draw_Line(x.ToList(), residuals, "residuals");
+            Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
         }
 
     }
