@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace XPSFit
 {
-    struct LMA
+    class LMA
     {
         #region Fields
 
@@ -44,8 +44,8 @@ namespace XPSFit
             this.a = aa;
             this.covar = new double[ma,ma];
 
-            this.chisq = 0; //-------------------------------------------------------------------------- mandatory when using struct! (+ performance?)
-            this.mfit = 0;
+            //this.chisq = 0; //-------------------------------------------------------------------------- mandatory when using struct! (+ performance?)
+            //this.mfit = 0;
             this.singular_matrix = false;
 
             for (int i = 0; i < ma; i++) ia[i] = true;
@@ -89,7 +89,6 @@ namespace XPSFit
         {
             int j, k, l, iter, done = 0;
             double alambda = 0.001;
-            //double alambda = 0.1;
             double ochisq;
             double[] atry = new double[ma];
             double[] beta = new double[ma];
@@ -136,52 +135,28 @@ namespace XPSFit
                 {
                     if (ia[l])
                     {
-                        //atry[l] = a[l] + da[j++];
-                        
-                        if ((l == 2 && (atry[l] > 4.0 || atry[l] < 0.5)) || (l == 7 && (atry[l] > 4.0 || atry[l] < 0.5)))
-                        {
-                            atry[l] = 1.0;
-                            //a[l] = 1.9;
-                        }
-
-                        else if ((l == 3 && (atry[l] > 4.0 || atry[l] < 0.5)) || (l == 8 && (atry[l] > 4.0 || atry[l] < 0.5)))
-                        {
-                            atry[l] = 1.0;
-                            //a[l] = 1.9;
-                        }
-
-                        else if ((l == 4 && (atry[l] > 100.0 || atry[l] < 0.0)) || (l == 9 && (atry[l] > 100.0 || atry[l] < 0.0)))
-                        {
-                            //a[l] = a[l] > 50 ? 80 : 20;
-                            atry[l] = atry[l] > 50.0 ? 80.0 : 20.0;
-                            //a[l] = 50.0;
-                        }
-                        else
-                        {
-                            atry[l] = a[l] + da[j++];
-                        }
-                        
-                    }//-------------------------------------------------------- ADD CONSTRAINTS HERE?!
+                        atry[l] = a[l] + da[j++];
+                    }
                 }
                 mrqcof(ref atry, ref covar, ref da);
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.05;
+                    alambda *= 0.04;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
                         for (k = 0; k < mfit; k++)
                         {
                             alpha[j, k] = covar[j, k];
-                            beta[j] = da[j];
                         }
+                        beta[j] = da[j];
                     }
                     for (l = 0; l < ma; l++) a[l] = atry[l];
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 5;
+                    alambda *= 4;
                     chisq = ochisq;
                 }
             }
@@ -335,11 +310,11 @@ namespace XPSFit
             double G, L, m;
             double f = 0.0;
 
-            for (int i = 0; i < a.Length - 1; i += 5)
+            for (int i = 0; i < a.Length - 1; i += 4)
             {
-                G = Math.Exp(-4.0 * Math.Log(2) * Math.Pow(x / a[i + 3], 2));
+                G = Math.Exp(-4.0 * Math.Log(2) * Math.Pow(x / a[i + 2], 2));
                 L = 1.0 / (1.0 + 4.0 * Math.Pow(x / a[i + 2], 2));
-                m = a[i + 4] * 0.01;
+                m = a[i + 3] * 0.01;
 
                 f += (m * L + (1.0 - m) * G);
             }

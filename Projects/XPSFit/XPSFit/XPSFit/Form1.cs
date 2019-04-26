@@ -398,9 +398,9 @@ namespace XPSFit
                     MessageBox.Show("Type in Numbers for Fitparameters."); return null;
                 }         
             }
-            var b = paras.ToList();
-            b.Insert(3, b[2]);
-            paras = b.ToArray();
+            //var b = paras.ToList();
+            //b.Insert(3, b[2]);
+            //paras = b.ToArray();
             return paras;
         }
 
@@ -417,20 +417,20 @@ namespace XPSFit
         {
             if (e.KeyCode == Keys.Enter)
             {
-                double[] erg = new double[5];
+                double[] erg = new double[4];
                 DataGridView dgv = sender as DataGridView;
                 int row = dgv.CurrentCell.RowIndex - 1;
                 if (dgv_models[0, row].Value != null && e.KeyData == Keys.Enter)
                 {
-                    for (int i = 1; i < 6; i++)
+                    for (int i = 1; i < 5; i++)
                     {
                         if (dgv[i, row].Value == null) return;
                     }
                     erg = get_paras(row);
                     if (Curr_S.paras.Count > 5 * row)
                     {
-                        Curr_S.paras.RemoveRange(row * 5, 5);
-                        Curr_S.paras.InsertRange(row * 5, erg);
+                        Curr_S.paras.RemoveRange(row * 4, 4);
+                        Curr_S.paras.InsertRange(row * 4, erg);
                     }
                     else
                     {
@@ -483,15 +483,16 @@ namespace XPSFit
             for (int i = 0; i < x_crop.Count(); i++)
             {
                 //w[i] = 1.0 / (y[i] * y[i]);
-                w[i] = Math.Max(0.001, Math.Pow(Math.Abs(y[i]),0.5));
+                w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y[i]))));
                 //w[i] = 1/ y[i];
                 //w[i] = y[i] / ymax;
                 //w[i] = Math.Sqrt(y[i]);
+                //w[i] = 1.0;
             }
             LMAFunction f = new CustomFunction();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w, ref a);
-            //algorithm.hold(4,2.0); // zero pure gaussian
+            //algorithm.hold(4,Curr_S.paras[4]); // zero pure gaussian
             //algorithm.hold(3, 1.0);
             //algorithm.hold(8, 1.0);
             // algorithm.hold(9, 2.0);
@@ -511,14 +512,18 @@ namespace XPSFit
             {
                 Console.WriteLine(Math.Round(item,3));
             }
-            Console.WriteLine(algorithm.GetHWHM(a, 0.2, 5.0) * 2.0);
+            //Console.WriteLine(algorithm.GetHWHM(a, 0.2, 5.0) * 2.0);
             for (int l = 0; l < x.Length; l++)
             {
-                double ln = -4.0 * Math.Log(2.0);
+                //double ln = -4.0 * Math.Log(2.0);
                 int i, na = a.Count();
-                double argG1, argG2, argL1, argL2, G, L, m;
+                double argG1, argG2, argL1, argL2, G, L, m, argG, arg;
                 double yi = 0.0;
-                for (i = 0; i < na - 1; i += 5)
+                double ln = Math.Log(2.0);
+                double sqln = Math.Sqrt(ln);
+                double pi = Math.PI;
+                double sqpi = Math.Sqrt(pi);               
+                for (i = 0; i < na - 1; i += 4)
                 {
                     /***--------------------------------------------------------------------------------------G A U S S I A N
                     arg = (x[l] - paras[i + 1]) / paras[i + 2];
@@ -536,32 +541,49 @@ namespace XPSFit
 
                     yi += paras[i] * (L1 + L2);
                     
-                   /***-------------------------------------------------------------------------------------- G L S
                     ***/
-                    m = paras[i + 4] * 0.01;
+                    //-------------------------------------------------------------------------------------- G L S
 
+
+                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
+                    G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
+                    L = 1.0 / (1.0 + arg * arg) / pi;
+                    m = paras[i + 3];
+
+
+                    yi += paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2]; // + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2] + 1.0 / a[i+2]) * 100;
+
+
+
+                    /***
+                    m = paras[i + 3];
+
+                    
                     argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
                     //argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
-                    argG1 = (x[l] - paras[i + 1]) / paras[i + 3];
+                    argG1 = (x[l] - paras[i + 1]) / paras[i + 2];
                     //argG2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 3];
 
                     G = Math.Exp(ln * Math.Pow(argG1, 2));
                     L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
 
                     yi += paras[i] * (m * L + (1.0 - m) * G);
+                    ***/
 
+                    /***
 
-                    /*** -------------------------------------------------------------------------------------- G L P
-                    m = paras[i + 4] * 0.01;
+                    // -------------------------------------------------------------------------------------- G L P
+                    m = paras[i + 4];
 
                     argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
                     argG = (x[l] - paras[i + 1]) / paras[i + 3];
 
                     G = Math.Exp(ln * (1 - m) * Math.Pow(argG, 2));
-                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2)) + 1.0 / (1.0 + 4.0 * m * Math.Pow(argL2, 2)) / 2.0;
+                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2));
 
                     yi += paras[i] * G * L;
+                    
+
                     ***/
 
                 }
@@ -576,6 +598,5 @@ namespace XPSFit
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
             Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
         }
-
     }
 }
