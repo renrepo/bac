@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using ZedGraph;
 
 namespace XPSFit
 {
@@ -426,6 +427,8 @@ namespace XPSFit
                     {
                         if (dgv[i, row].Value == null) return;
                     }
+                    double[] x = Curr_S.x.ToArray();
+                    double[] y = Curr_S.y.ToArray();
                     erg = get_paras(row);
                     if (Curr_S.paras.Count > 5 * row)
                     {
@@ -437,7 +440,26 @@ namespace XPSFit
                         Curr_S.paras.AddRange(erg);
                         
                     }
-                    fit(Curr_S.paras.ToArray());
+                    //fit(Curr_S.paras.ToArray());
+                    LMAFunction f = new CustomFunction();
+                    double[] parameters = Curr_S.paras.ToArray();
+                    double[] dy = new double[Curr_S.paras.Count()];
+                    List<double> bg = new List<double>();
+                    double sum = 0.0;
+                    for (int i = 0; i < Curr_S.y.Count; i++)
+                    {
+                        for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                        {
+                            sum += Curr_S.Bg_Sub[j][i];
+                        }
+                        f.GetY(x[i], ref parameters, ref y[i], ref dy);
+                        y[i] += sum;
+                        sum = 0.0;
+                    }
+                    var LI = Curr_S.Draw_Line(x.ToList(),y.ToList(),"kommt noch", "none", "line");
+                    LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
+                    Curr_S.zgc_plots.Invalidate();
+                    Curr_S.zgc_plots.AxisChange();
                 }
             }
         }
@@ -479,11 +501,11 @@ namespace XPSFit
             double[] y = erg.ToArray();
             double[] x_crop = xx.ToArray();
             double[] w = new double[x_crop.Length];
-            var ymax = y.Max();
             for (int i = 0; i < x_crop.Count(); i++)
             {
                 //w[i] = 1.0 / (y[i] * y[i]);
                 w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y[i]))));
+                //w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y[i])));
                 //w[i] = 1/ y[i];
                 //w[i] = y[i] / ymax;
                 //w[i] = Math.Sqrt(y[i]);
@@ -512,8 +534,11 @@ namespace XPSFit
             {
                 Console.WriteLine(Math.Round(item,3));
             }
+
+            double[] Area = new double[paras.Count() / 4];
+
             //Console.WriteLine(algorithm.GetHWHM(a, 0.2, 5.0) * 2.0);
-            for (int l = 0; l < x.Length; l++)
+            for (int l = 0; l < x.Length - 1; l++)
             {
                 //double ln = -4.0 * Math.Log(2.0);
                 int i, na = a.Count();
@@ -522,7 +547,15 @@ namespace XPSFit
                 double ln = Math.Log(2.0);
                 double sqln = Math.Sqrt(ln);
                 double pi = Math.PI;
-                double sqpi = Math.Sqrt(pi);               
+                double sqpi = Math.Sqrt(pi);
+
+                double ym = 0.0;
+                double yp = 0.0;
+                double xm = 0.0;
+                double xp = 0.0;
+                double nom = 0.0;
+
+                
                 for (i = 0; i < na - 1; i += 4)
                 {
                     /***--------------------------------------------------------------------------------------G A U S S I A N
@@ -550,10 +583,18 @@ namespace XPSFit
                     L = 1.0 / (1.0 + arg * arg) / pi;
                     m = paras[i + 3];
 
+                    ym = paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2];
 
-                    yi += paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2]; // + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2] + 1.0 / a[i+2]) * 100;
+                    yi += ym; // + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2] + 1.0 / a[i+2]) * 100;
 
-
+                    //ym = y[l];
+                    //yp = y[l + 1];
+                    xm = x[l];
+                    xp = x[l + 1];
+                    //nom = ym > 0 ? ym : -ym;
+                    //nom = (((yp > 0 ? yp : -yp) + (ym > 0 ? ym : -ym))) / 2.0;
+                    //Area[i] += (nom > 0 ? nom : -nom) * (xp > xm ? (xp - xm) : (xm - xp));
+                    Area[i/4] += (ym > 0 ? ym : -ym) * (xp > xm ? (xp - xm) : (xm - xp));
 
                     /***
                     m = paras[i + 3];
@@ -592,11 +633,24 @@ namespace XPSFit
                 //yy.Add(yi);
             }
 
+            //Console.WriteLine(m.GetArea(x.ToList(), yy));
+            var AreaSum = 0.0;
+            foreach (var item in Area) AreaSum += item;
+
+            foreach (var item in Area) Console.WriteLine("Area = {0},   Anteil = {1}", Math.Floor(item), Math.Floor(item) / AreaSum);
+
             time += sw.Elapsed.TotalMilliseconds;
             btn_tester.Text = (time / 1).ToString("0.00");
             Curr_S.Draw_Line(x.ToList(), yy, "Fit", "none", "line");
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
             Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
+        }
+
+        private void dgv_models_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            var erg = dgv_models[e.ColumnIndex,e.RowIndex].Value;
+            //if (erg != null) Console.WriteLine("Row {0}   Column {1}    Value {2}", e.RowIndex, e.ColumnIndex, erg.ToString());
         }
     }
 }

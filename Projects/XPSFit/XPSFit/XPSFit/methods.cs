@@ -260,7 +260,30 @@ namespace XPSFit
 
 
 
-
+        public double GetArea(List<double> xvals, List<double> yvals)
+        {
+            if (xvals.Count != yvals.Count)
+            {
+                MessageBox.Show("x and y must have the same length");
+                return 0;
+            }
+            double Area = 0.0;
+            double ym = 0.0;
+            double yp = 0.0;
+            double xm = 0.0;
+            double xp = 0.0;
+            double nom = 0.0;
+            for (int i = 0; i < xvals.Count - 2; i++)
+            {
+                ym = yvals[i];
+                yp = yvals[i + 1];
+                xm = xvals[i];
+                xp = xvals[i + 1];
+                nom = (((yp > 0 ? yp : -yp) + (ym > 0 ? ym : -ym))) / 2.0;
+                Area += (nom > 0 ? nom : -nom) * (xp > xm ? (xp - xm) : (xm - xp));
+            }
+            return Area;
+        }
 
 
 

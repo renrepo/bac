@@ -12,7 +12,7 @@ namespace XPSFit
     {
         #region Fields
 
-        const int NDONE = 8, ITMAX = 1000;
+        const int NDONE = 4, ITMAX = 1000;
         int ndat, ma, mfit;
         private double[] x, y, sig;
         double tol;
@@ -142,7 +142,7 @@ namespace XPSFit
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.04;
+                    alambda *= 0.1;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
@@ -156,7 +156,7 @@ namespace XPSFit
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 4;
+                    alambda *= 10;
                     chisq = ochisq;
                 }
             }

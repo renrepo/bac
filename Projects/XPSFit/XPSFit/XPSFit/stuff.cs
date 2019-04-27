@@ -14,8 +14,8 @@ namespace XPSFit
     {
         #region Fields
 
-        ZedGraphControl zgc_plots;
-        ZedGraphControl zgc_residuals;
+        public ZedGraphControl zgc_plots;
+        public ZedGraphControl zgc_residuals;
         GraphPane myPane_plots;
         GraphPane myPane_residuals;
         TabPage tp;
@@ -140,7 +140,7 @@ namespace XPSFit
             zgc_residuals.AxisChange();
         }
 
-        public void Draw_Line(List<double> x_values, List<double> y_values, string tag, string Symboltype, string Line)
+        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, string Symboltype, string Line)
         {
             LineItem LI;
             SymbolType st = SymbolType.None;
@@ -168,17 +168,20 @@ namespace XPSFit
                 var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
                 LI_new.Tag = LI_tag;
                 List_LineItem.Insert(index, LI_new);
+                LI = LI_new;
             }
             else
             {
                 LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
                 LI.Tag = tag ?? Data_name;
                 List_LineItem.Add(LI);
+                
             }
             switch (Line)
             {
                 case "line":
                     LI.Line.IsVisible = true;
+                    //LI.Line.Fill = new Fill(Color.White, Color.DarkMagenta, 45F);
                     break;
                 case "noline":
                     LI.Line.IsVisible = false;
@@ -188,7 +191,7 @@ namespace XPSFit
             LI.Symbol.Size = 1;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
-
+            return LI;
         }
 
 
@@ -205,7 +208,7 @@ namespace XPSFit
                 var xi = x_values[i];
                 if (yi != 0)
                 {
-                    var err = Math.Sqrt(Math.Abs(yi));
+                    var err = Math.Sqrt(Math.Abs(y[i]));
                     y_plus.Add(yi + err);
                     y_minus.Add(yi - err);
                     x.Add(xi);

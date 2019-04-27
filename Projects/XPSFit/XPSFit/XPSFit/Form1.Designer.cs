@@ -34,8 +34,6 @@
             this.dgv_bg = new System.Windows.Forms.DataGridView();
             this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_bg_from = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_bg_to = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models = new System.Windows.Forms.DataGridView();
             this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +54,8 @@
             // 
             // tc_zgc
             // 
+            this.tc_zgc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tc_zgc.Location = new System.Drawing.Point(3, 161);
             this.tc_zgc.Name = "tc_zgc";
             this.tc_zgc.SelectedIndex = 0;
@@ -87,13 +87,11 @@
             this.dgv_bg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_bg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_bg_sel,
-            this.dgv_bg_model,
-            this.dgv_bg_from,
-            this.dgv_bg_to});
+            this.dgv_bg_model});
             this.dgv_bg.Enabled = false;
-            this.dgv_bg.Location = new System.Drawing.Point(573, 13);
+            this.dgv_bg.Location = new System.Drawing.Point(726, 5);
             this.dgv_bg.Name = "dgv_bg";
-            this.dgv_bg.Size = new System.Drawing.Size(308, 119);
+            this.dgv_bg.Size = new System.Drawing.Size(155, 101);
             this.dgv_bg.TabIndex = 3;
             // 
             // dgv_bg_sel
@@ -104,7 +102,7 @@
             // 
             // dgv_bg_model
             // 
-            this.dgv_bg_model.HeaderText = "Model";
+            this.dgv_bg_model.HeaderText = "Background";
             this.dgv_bg_model.Items.AddRange(new object[] {
             "Shirley",
             "Linear",
@@ -112,18 +110,6 @@
             this.dgv_bg_model.Name = "dgv_bg_model";
             this.dgv_bg_model.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_bg_model.Width = 80;
-            // 
-            // dgv_bg_from
-            // 
-            this.dgv_bg_from.HeaderText = "from";
-            this.dgv_bg_from.Name = "dgv_bg_from";
-            this.dgv_bg_from.Width = 80;
-            // 
-            // dgv_bg_to
-            // 
-            this.dgv_bg_to.HeaderText = "to";
-            this.dgv_bg_to.Name = "dgv_bg_to";
-            this.dgv_bg_to.Width = 80;
             // 
             // dgv_models
             // 
@@ -137,15 +123,16 @@
             this.dgv_models_tail,
             this.dgv_models_area});
             this.dgv_models.Enabled = false;
-            this.dgv_models.Location = new System.Drawing.Point(887, 13);
+            this.dgv_models.Location = new System.Drawing.Point(887, 5);
             this.dgv_models.Name = "dgv_models";
-            this.dgv_models.Size = new System.Drawing.Size(494, 146);
+            this.dgv_models.Size = new System.Drawing.Size(494, 154);
             this.dgv_models.TabIndex = 4;
+            this.dgv_models.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_models_CellClick);
             this.dgv_models.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_models_KeyUp);
             // 
             // dgv_models_models
             // 
-            this.dgv_models_models.HeaderText = "Model";
+            this.dgv_models_models.HeaderText = "Fitmodel";
             this.dgv_models_models.Items.AddRange(new object[] {
             "Lorentz",
             "Gauss",
@@ -194,9 +181,9 @@
             // 
             // btn_tester
             // 
-            this.btn_tester.Location = new System.Drawing.Point(177, 13);
+            this.btn_tester.Location = new System.Drawing.Point(166, 13);
             this.btn_tester.Name = "btn_tester";
-            this.btn_tester.Size = new System.Drawing.Size(75, 35);
+            this.btn_tester.Size = new System.Drawing.Size(70, 35);
             this.btn_tester.TabIndex = 6;
             this.btn_tester.Text = "TEST";
             this.btn_tester.UseVisualStyleBackColor = true;
@@ -206,7 +193,7 @@
             // 
             this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
             this.cb_Bg_Sub.AutoSize = true;
-            this.cb_Bg_Sub.Location = new System.Drawing.Point(572, 136);
+            this.cb_Bg_Sub.Location = new System.Drawing.Point(726, 136);
             this.cb_Bg_Sub.Name = "cb_Bg_Sub";
             this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
             this.cb_Bg_Sub.TabIndex = 8;
@@ -217,9 +204,9 @@
             // btn_fit
             // 
             this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_fit.Location = new System.Drawing.Point(826, 136);
+            this.btn_fit.Location = new System.Drawing.Point(826, 112);
             this.btn_fit.Name = "btn_fit";
-            this.btn_fit.Size = new System.Drawing.Size(55, 23);
+            this.btn_fit.Size = new System.Drawing.Size(55, 47);
             this.btn_fit.TabIndex = 9;
             this.btn_fit.Text = "F I T";
             this.btn_fit.UseVisualStyleBackColor = true;
@@ -230,7 +217,7 @@
             this.cb_disc.Appearance = System.Windows.Forms.Appearance.Button;
             this.cb_disc.AutoSize = true;
             this.cb_disc.Enabled = false;
-            this.cb_disc.Location = new System.Drawing.Point(635, 136);
+            this.cb_disc.Location = new System.Drawing.Point(786, 136);
             this.cb_disc.Name = "cb_disc";
             this.cb_disc.Size = new System.Drawing.Size(36, 23);
             this.cb_disc.TabIndex = 11;
@@ -249,14 +236,14 @@
             "400",
             "500",
             "1000"});
-            this.comb_disc.Location = new System.Drawing.Point(677, 138);
+            this.comb_disc.Location = new System.Drawing.Point(775, 111);
             this.comb_disc.Name = "comb_disc";
             this.comb_disc.Size = new System.Drawing.Size(47, 21);
             this.comb_disc.TabIndex = 12;
             // 
             // tb_chi2
             // 
-            this.tb_chi2.Location = new System.Drawing.Point(520, 139);
+            this.tb_chi2.Location = new System.Drawing.Point(726, 112);
             this.tb_chi2.Name = "tb_chi2";
             this.tb_chi2.Size = new System.Drawing.Size(46, 20);
             this.tb_chi2.TabIndex = 13;
@@ -296,11 +283,12 @@
         private System.Windows.Forms.DataGridView dgv_models;
         private System.Windows.Forms.Button btn_tester;
         private System.Windows.Forms.CheckBox cb_Bg_Sub;
+        private System.Windows.Forms.Button btn_fit;
+        private System.Windows.Forms.CheckBox cb_disc;
+        private System.Windows.Forms.ComboBox comb_disc;
+        private System.Windows.Forms.TextBox tb_chi2;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_bg_sel;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_bg_model;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_from;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_bg_to;
-        private System.Windows.Forms.Button btn_fit;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_models_models;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_amp;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_cen;
@@ -308,9 +296,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_mix;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_tail;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_area;
-        private System.Windows.Forms.CheckBox cb_disc;
-        private System.Windows.Forms.ComboBox comb_disc;
-        private System.Windows.Forms.TextBox tb_chi2;
     }
 }
 
