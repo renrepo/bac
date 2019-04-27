@@ -22,6 +22,7 @@ namespace XPSFit
         List<stuff> list_stuff = new List<stuff>();
         List<DataGridView> List_DGV_bg = new List<DataGridView>();
         List<DataGridView> List_DGV_models = new List<DataGridView>();
+        List<List<double>> DgvData = new List<List<double>>();
 
         int old_row_index = -1;
 
@@ -90,6 +91,8 @@ namespace XPSFit
         private void Form1_Load(object sender, EventArgs e)
         {
             tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_SelectedIndexChanged);
+            tc_zgc.Selecting += new TabControlCancelEventHandler(Tc_zgc_Selecting);
+            tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_Selected);
             dgv_bg.CurrentCellDirtyStateChanged += new EventHandler(dgv_bg_CurrentCellDirtyStateChanged);
             dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
             dgv_bg[1, 0].Value = "Shirley";
@@ -112,6 +115,7 @@ namespace XPSFit
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
             else
             {
+                //if (Curr_S != null) save_input();
                 list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc));
                 Curr_S = list_stuff[list_stuff.Count - 1];
                 Curr_S.Bg_Sub.Add(new double[data.Item2.Count]);
@@ -119,6 +123,8 @@ namespace XPSFit
                 {
                     Curr_S.Bg_Sub[0][i] = 0;
                 }
+                dgv_models.Rows.Clear();
+                dgv_models[0, 0].Value = "Gauss-Lorentz";
             }
         }
 
@@ -241,6 +247,32 @@ namespace XPSFit
         private void Tc_zgc_SelectedIndexChanged(object sender, TabControlEventArgs e)
         {
             Curr_S = tc_zgc.TabPages.Count > 0 ?  list_stuff.Find(a => a.Data_name == (sender as TabControl).SelectedTab.Name) : null; // select current stuff-instance
+            /***
+            if (Curr_S != null)
+            {
+                var rows = Curr_S.data.GetLength(0);
+                var cols = Curr_S.data.GetLength(1);
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++)
+                    {
+                        dgv_models[j, i].Value = Curr_S.data[i, j];
+                    }
+                }
+            }
+            ***/
+        }
+
+
+        private void Tc_zgc_Selected(object sender, TabControlEventArgs e)
+        {
+            //Curr_S = tc_zgc.TabPages.Count > 0 ? list_stuff.Find(a => a.Data_name == (sender as TabControl).SelectedTab.Name) : null; // select current stuff-instance
+            load_input();
+        }
+
+        private void Tc_zgc_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            save_input();
         }
 
         private void cb_Bg_Sub_CheckedChanged(object sender, EventArgs e)
@@ -410,6 +442,41 @@ namespace XPSFit
         }
 
 
+        public void save_input()
+        {
+            var rows = dgv_models.RowCount;
+            var cols = dgv_models.ColumnCount;
+            Curr_S.data = new string[rows, cols];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                {
+                    var d = dgv_models[j, i].Value ?? "";
+                    Curr_S.data[i, j] = d.ToString();
+                }
+            }
+            dgv_models.Rows.Clear();
+            dgv_models[0, 0].Value = "Gauss-Lorentz";
+            //Console.WriteLine("Saved {0}", Curr_S.Data_name);
+        }
+
+
+        public void load_input()
+        {
+            if (Curr_S != null)
+            {
+                var rows = Curr_S.data.GetLength(0);
+                var cols = Curr_S.data.GetLength(1);
+                for (int i = 0; i < rows - 1; i++) dgv_models.Rows.Add();
+                for (int i = 0; i < rows; i++)
+                {
+                    for (int j = 0; j < cols; j++) dgv_models[j, i].Value = Curr_S.data[i, j];
+                }
+                //Console.WriteLine("Loaded {0}", Curr_S.Data_name);
+            }
+        }
+
+
 
         #endregion
 
@@ -429,7 +496,7 @@ namespace XPSFit
                 {
                     for (int i = 1; i < 5; i++)
                     {
-                        if (dgv[i, row].Value == null) return;
+                        if (dgv[i, row].Value == null || dgv[i, row].Value.ToString() == "") return;
                     }
                     double[] x = Curr_S.x.ToArray();
                     double[] y = Curr_S.y.ToArray();
@@ -652,7 +719,7 @@ namespace XPSFit
         private void dgv_models_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            var erg = dgv_models[e.ColumnIndex,e.RowIndex].Value;
+            //var erg = dgv_models[e.ColumnIndex,e.RowIndex].Value;
             //if (erg != null) Console.WriteLine("Row {0}   Column {1}    Value {2}", e.RowIndex, e.ColumnIndex, erg.ToString());
         }
     }

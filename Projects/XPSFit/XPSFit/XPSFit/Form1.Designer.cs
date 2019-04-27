@@ -193,7 +193,7 @@
             // 
             this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
             this.cb_Bg_Sub.AutoSize = true;
-            this.cb_Bg_Sub.Location = new System.Drawing.Point(726, 136);
+            this.cb_Bg_Sub.Location = new System.Drawing.Point(376, 63);
             this.cb_Bg_Sub.Name = "cb_Bg_Sub";
             this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
             this.cb_Bg_Sub.TabIndex = 8;
@@ -204,7 +204,7 @@
             // btn_fit
             // 
             this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_fit.Location = new System.Drawing.Point(826, 112);
+            this.btn_fit.Location = new System.Drawing.Point(476, 39);
             this.btn_fit.Name = "btn_fit";
             this.btn_fit.Size = new System.Drawing.Size(55, 47);
             this.btn_fit.TabIndex = 9;
@@ -217,7 +217,7 @@
             this.cb_disc.Appearance = System.Windows.Forms.Appearance.Button;
             this.cb_disc.AutoSize = true;
             this.cb_disc.Enabled = false;
-            this.cb_disc.Location = new System.Drawing.Point(786, 136);
+            this.cb_disc.Location = new System.Drawing.Point(436, 63);
             this.cb_disc.Name = "cb_disc";
             this.cb_disc.Size = new System.Drawing.Size(36, 23);
             this.cb_disc.TabIndex = 11;
@@ -236,14 +236,14 @@
             "400",
             "500",
             "1000"});
-            this.comb_disc.Location = new System.Drawing.Point(775, 111);
+            this.comb_disc.Location = new System.Drawing.Point(425, 38);
             this.comb_disc.Name = "comb_disc";
             this.comb_disc.Size = new System.Drawing.Size(47, 21);
             this.comb_disc.TabIndex = 12;
             // 
             // tb_chi2
             // 
-            this.tb_chi2.Location = new System.Drawing.Point(726, 112);
+            this.tb_chi2.Location = new System.Drawing.Point(376, 39);
             this.tb_chi2.Name = "tb_chi2";
             this.tb_chi2.Size = new System.Drawing.Size(46, 20);
             this.tb_chi2.TabIndex = 13;
