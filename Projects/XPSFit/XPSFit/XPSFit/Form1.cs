@@ -357,13 +357,17 @@ namespace XPSFit
                 Curr_S.Hide_Line(Curr_S.Data_name);
                 Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", "dot", "noline");
                 cb_disc.BackColor = Color.MediumSpringGreen;
-                Curr_S.x_temp = erg.Item1;
-                Curr_S.y_temp = erg.Item2;
+                Curr_S.x_temp = Curr_S.x;
+                Curr_S.y_temp = Curr_S.y;
+                Curr_S.x = erg.Item1;
+                Curr_S.y = erg.Item2;
                 //double[] c = new double[11];
                 //Curr_S.SavGol(Curr_S.x, Curr_S.y, c, 11, 5, 5, 0, 4);
             }
             else
             {
+                Curr_S.x = Curr_S.x_temp;
+                Curr_S.y = Curr_S.y_temp;
                 Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
                 Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, "dot", "noline");
                 cb_disc.BackColor = System.Drawing.SystemColors.Control;
@@ -437,8 +441,7 @@ namespace XPSFit
                     }
                     else
                     {
-                        Curr_S.paras.AddRange(erg);
-                        
+                        Curr_S.paras.AddRange(erg);                       
                     }
                     //fit(Curr_S.paras.ToArray());
                     LMAFunction f = new CustomFunction();

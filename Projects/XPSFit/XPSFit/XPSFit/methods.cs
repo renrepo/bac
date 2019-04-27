@@ -187,7 +187,8 @@ namespace XPSFit
             for (int i = 0; i < x.Count; i++)
             {
                 tester = Convert.ToInt16((x[i] * 1000) / binsize);
-                x_bin.Add(((x[i] * 1000) % binsize < binsize/2 ? tester: tester + 1) * binsize / 1000.0);
+                //x_bin.Add(((x[i] * 1000) % binsize < binsize/2 ? tester : tester + 1) * binsize / 1000.0);
+                x_bin.Add(tester  * binsize / 1000.0);
             }
             var a1 = x_bin.ToArray();
             var a2 = y.ToArray();
