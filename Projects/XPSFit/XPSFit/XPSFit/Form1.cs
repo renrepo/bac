@@ -172,7 +172,6 @@ namespace XPSFit
                     Curr_S.Remove_PolyObj();
                     Curr_S.Remove_Line(e.RowIndex.ToString());
                     Curr_S.Bg_Sub.RemoveAt(e.RowIndex);
-                    //Curr_S.Remove_Line(null); //-------------------------------------------------------------------------------null????
                     Curr_S.Remove_Mouse_Events();
                     Curr_S.Bg_Bounds.RemoveRange(e.RowIndex * 2, 2);
                     dgv_bg.Rows.RemoveAt(e.RowIndex);                   
@@ -509,7 +508,10 @@ namespace XPSFit
                     }
                     //fit(Curr_S.paras.ToArray());
                     LMAFunction f = new CustomFunction();
-                    double[] parameters = Curr_S.paras.ToArray();
+
+                    //double[] parameters = Curr_S.paras.ToArray();
+                    double[] parameters = Curr_S.paras.GetRange(row * 4 ,4).ToArray();
+
                     double[] dy = new double[Curr_S.paras.Count()];
                     List<double> bg = new List<double>();
                     double sum = 0.0;
@@ -523,8 +525,13 @@ namespace XPSFit
                         y[i] += sum;
                         sum = 0.0;
                     }
+                    Curr_S.Remove_Line("kommt noch");
                     var LI = Curr_S.Draw_Line(x.ToList(),y.ToList(),"kommt noch", "none", "line");
-                    LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
+                    //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
+                    //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
+                    LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
+                    var BG = Curr_S.List_LineItem.Find(a=> a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
+                    BG.Line.Fill = new Fill(Color.White);
                     Curr_S.zgc_plots.Invalidate();
                     Curr_S.zgc_plots.AxisChange();
                 }
@@ -599,7 +606,7 @@ namespace XPSFit
             
             for (int i = 0; i < paras.Count(); i+=4)
             {
-                dgv_models[7, i / 4].Value = Math.Floor(paras[i] * paras[i + 2]); // Amplitude
+                dgv_models[7, i / 4].Value = Math.Floor(paras[i] * paras[i + 2] * 2.0); // Amplitude
                 dgv_models.Rows[i / 4].Cells[7].Style.ForeColor = Color.Gray;
                 dgv_models[8, i / 4].Value = Math.Round(paras[i + 1],3); // Center
                 dgv_models.Rows[i / 4].Cells[8].Style.ForeColor = Color.Gray;
@@ -715,7 +722,7 @@ namespace XPSFit
             {
                 dgv_models[5, i].Value = Math.Floor(Area[i]);
                 dgv_models.Rows[i].Cells[5].Style.ForeColor = Color.Gray;
-                dgv_models[6, i].Value = Math.Round(Area[i] / AreaSum * 100.0, 1);
+                dgv_models[6, i].Value = Math.Floor(Area[i] / AreaSum * 100.0);
                 dgv_models.Rows[i].Cells[6].Style.ForeColor = Color.Gray;
             }
             time += sw.Elapsed.TotalMilliseconds;
