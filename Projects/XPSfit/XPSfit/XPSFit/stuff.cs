@@ -50,6 +50,8 @@ namespace XPSFit
         public double x_bg_right { get; set; }
         public List<double> x_temp { get; set; }
         public List<double> y_temp { get; set; }
+        //public List<List<string>> data { get; set; }
+        public string[,] data { get; set; }
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -98,6 +100,7 @@ namespace XPSFit
             tlp.Dock = zgc_residuals.Dock = zgc_plots.Dock = DockStyle.Fill;
 
             tp.Name = tp.Text = Data_name;
+            //tp.Tag = tc_zgc.TabPages.Count;
             tc_zgc.SelectedTab = tp;
 
             int red = 200;
@@ -128,7 +131,7 @@ namespace XPSFit
             myPane_plots.YAxis.MajorTic.Color = myPane_plots.YAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
             myPane_plots.XAxis.MajorTic.Color = myPane_plots.XAxis.MinorTic.Color = Color.FromArgb(red, green, blue);
 
-            zgc_plots.ZoomEvent += new ZedGraphControl.ZoomEventHandler(zgc_plots_ZoomEvent);
+            zgc_plots.ZoomEvent += new ZedGraphControl.ZoomEventHandler(zgc_plots_ZoomEvent); // Adjust Graph to the full graphpane        
         }
 
         public void zgc_plots_ZoomEvent(ZedGraphControl sender, ZoomState oldState, ZoomState newState)

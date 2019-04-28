@@ -338,13 +338,13 @@ namespace XPSFit
                     case ("Gauss"):
                     case ("Lorentz"):
                         dgv_models[4, e.RowIndex].Value = (cb.Value.ToString() == "Gauss") ? 100 : 0;
-                        dgv_models[5, e.RowIndex].Value = "##########";
+                        //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].ReadOnly = dgv_models[5, e.RowIndex].ReadOnly = true;
                         //if (get_paras(e.RowIndex, 3) != null) para.Add(get_paras(e.RowIndex, 3));
                         break;
 
                     case ("Gauss-Lorentz"):
-                        dgv_models[5, e.RowIndex].Value = "##########";
+                        //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].Value = 50;
                         dgv_models[5, e.RowIndex].ReadOnly = false;
                         //if (get_paras(e.RowIndex, 4) != null) para.Add(get_paras(e.RowIndex, 4));
@@ -369,15 +369,13 @@ namespace XPSFit
                 dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
                 dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
             }
-
         }
 
 
         private void btn_fit_Click(object sender, EventArgs e)
         {
             if (Curr_S.paras == null) return;
-            if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray());
-            
+            if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray());     
         }
 
 
@@ -428,7 +426,8 @@ namespace XPSFit
 
                 if (tryparse && value >= 0)
                 {
-                    paras[i] = value;
+                    //paras[i] = i == 0 ? value / 100.0 : value;
+                    paras[i] = i == 3 ? value / 100.0 : value;
                 }
                 else
                 {
@@ -457,7 +456,6 @@ namespace XPSFit
             }
             dgv_models.Rows.Clear();
             dgv_models[0, 0].Value = "Gauss-Lorentz";
-            //Console.WriteLine("Saved {0}", Curr_S.Data_name);
         }
 
 
@@ -472,7 +470,6 @@ namespace XPSFit
                 {
                     for (int j = 0; j < cols; j++) dgv_models[j, i].Value = Curr_S.data[i, j];
                 }
-                //Console.WriteLine("Loaded {0}", Curr_S.Data_name);
             }
         }
 
@@ -599,15 +596,21 @@ namespace XPSFit
             Cursor.Current = Cursors.Default;
             double[] paras = algorithm.A;
             tb_chi2.Text = Math.Round(algorithm.Chi2 / (x_crop.Length - paras.Length), 2).ToString();
-            //double[] paras = a;
-            foreach (var item in paras)
+            
+            for (int i = 0; i < paras.Count(); i+=4)
             {
-                Console.WriteLine(Math.Round(item,3));
+                dgv_models[7, i / 4].Value = Math.Floor(paras[i] * paras[i + 2]); // Amplitude
+                dgv_models.Rows[i / 4].Cells[7].Style.ForeColor = Color.Gray;
+                dgv_models[8, i / 4].Value = Math.Round(paras[i + 1],3); // Center
+                dgv_models.Rows[i / 4].Cells[8].Style.ForeColor = Color.Gray;
+                dgv_models[9, i / 4].Value = Math.Round(paras[i + 2] * 2.0, 2); // Sigma
+                dgv_models.Rows[i / 4].Cells[9].Style.ForeColor = Color.Gray;
+                dgv_models[10, i / 4].Value = Math.Round(paras[i + 2] * 100.0 , 1); // mixing-Ratio
+                dgv_models.Rows[i / 4].Cells[10].Style.ForeColor = Color.Gray;
             }
 
             double[] Area = new double[paras.Count() / 4];
 
-            //Console.WriteLine(algorithm.GetHWHM(a, 0.2, 5.0) * 2.0);
             for (int l = 0; l < x.Length - 1; l++)
             {
                 //double ln = -4.0 * Math.Log(2.0);
@@ -708,7 +711,13 @@ namespace XPSFit
             foreach (var item in Area) AreaSum += item;
 
             foreach (var item in Area) Console.WriteLine("Area = {0},   Anteil = {1}", Math.Floor(item), Math.Floor(item) / AreaSum);
-
+            for (int i = 0; i < Area.Length; i++)
+            {
+                dgv_models[5, i].Value = Math.Floor(Area[i]);
+                dgv_models.Rows[i].Cells[5].Style.ForeColor = Color.Gray;
+                dgv_models[6, i].Value = Math.Round(Area[i] / AreaSum * 100.0, 1);
+                dgv_models.Rows[i].Cells[6].Style.ForeColor = Color.Gray;
+            }
             time += sw.Elapsed.TotalMilliseconds;
             btn_tester.Text = (time / 1).ToString("0.00");
             Curr_S.Draw_Line(x.ToList(), yy, "Fit", "none", "line");
