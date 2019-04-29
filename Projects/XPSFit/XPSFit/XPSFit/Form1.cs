@@ -490,12 +490,14 @@ namespace XPSFit
                 int row = dgv.CurrentCell.RowIndex - 1;
                 if (dgv_models[0, row].Value != null && e.KeyData == Keys.Enter)
                 {
+                    List<double> x_crop = new List<double>();
+                    List<double> y_crop = new List<double>();
                     for (int i = 1; i < 5; i++)
                     {
                         if (dgv[i, row].Value == null || dgv[i, row].Value.ToString() == "") return;
                     }
-                    double[] x = Curr_S.x.ToArray();
-                    double[] y = Curr_S.y.ToArray();
+                    //double[] x = Curr_S.x.ToArray();
+                    //double[] y = Curr_S.y.ToArray();
                     erg = get_paras(row);
                     if (Curr_S.paras.Count > 5 * row)
                     {
@@ -517,16 +519,22 @@ namespace XPSFit
                     double sum = 0.0;
                     for (int i = 0; i < Curr_S.y.Count; i++)
                     {
+                        var yi = Curr_S.y[i];
                         for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                         {
                             sum += Curr_S.Bg_Sub[j][i];
                         }
-                        f.GetY(x[i], ref parameters, ref y[i], ref dy);
-                        y[i] += sum;
-                        sum = 0.0;
-                    }
+                        if (sum != 0)
+                        {
+                            f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy);
+                            yi += sum;
+                            y_crop.Add(yi);
+                            x_crop.Add(Curr_S.x[i]);
+                            sum = 0.0;
+                        }                                                                                      
+                    }               
                     Curr_S.Remove_Line("kommt noch");
-                    var LI = Curr_S.Draw_Line(x.ToList(),y.ToList(),"kommt noch", "none", "line");
+                    var LI = Curr_S.Draw_Line(x_crop,y_crop,"kommt noch", "none", "line");
                     //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
                     //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
                     LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
@@ -612,7 +620,7 @@ namespace XPSFit
                 dgv_models.Rows[i / 4].Cells[8].Style.ForeColor = Color.Gray;
                 dgv_models[9, i / 4].Value = Math.Round(paras[i + 2] * 2.0, 2); // Sigma
                 dgv_models.Rows[i / 4].Cells[9].Style.ForeColor = Color.Gray;
-                dgv_models[10, i / 4].Value = Math.Round(paras[i + 2] * 100.0 , 1); // mixing-Ratio
+                dgv_models[10, i / 4].Value = Math.Floor(paras[i + 2] * 100.0); // mixing-Ratio
                 dgv_models.Rows[i / 4].Cells[10].Style.ForeColor = Color.Gray;
             }
 
@@ -720,9 +728,9 @@ namespace XPSFit
             foreach (var item in Area) Console.WriteLine("Area = {0},   Anteil = {1}", Math.Floor(item), Math.Floor(item) / AreaSum);
             for (int i = 0; i < Area.Length; i++)
             {
-                dgv_models[5, i].Value = Math.Floor(Area[i]);
+                dgv_models[5, i].Value = Math.Floor(Area[i]); // Area
                 dgv_models.Rows[i].Cells[5].Style.ForeColor = Color.Gray;
-                dgv_models[6, i].Value = Math.Floor(Area[i] / AreaSum * 100.0);
+                dgv_models[6, i].Value = Math.Round(Area[i] / AreaSum * 100.0, 1); // Area in %
                 dgv_models.Rows[i].Cells[6].Style.ForeColor = Color.Gray;
             }
             time += sw.Elapsed.TotalMilliseconds;
@@ -734,9 +742,19 @@ namespace XPSFit
 
         private void dgv_models_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            for (int i = 0; i < Curr_S.List_PolyObj.Count; i++)
+            {
+                if (dgv_bg.Rows[i].Cells[0].State == DataGridViewElementStates.Selected)
+                {
+                    dgv_bg[0, i].Value = "false";
+                    Curr_S.Hide_PolyObj(i);
+                }
+            }
+        }
 
-            //var erg = dgv_models[e.ColumnIndex,e.RowIndex].Value;
-            //if (erg != null) Console.WriteLine("Row {0}   Column {1}    Value {2}", e.RowIndex, e.ColumnIndex, erg.ToString());
+        private void Form1_Click(object sender, EventArgs e)
+        {
+            if (Curr_S != null) Curr_S.Remove_Line("kommt noch");
         }
     }
 }

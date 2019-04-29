@@ -304,6 +304,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Click += new System.EventHandler(this.Form1_Click);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).EndInit();
             this.ResumeLayout(false);
