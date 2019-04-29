@@ -173,8 +173,8 @@ namespace XPSFit
             //double ln = -4.0 * Math.Log(2.0);
             int i, na = a.Count();
             double L, m, G, arg, c, s;
-            double u = 367.0;
-            double o = 369.0;
+            double u;
+            double o;
             y = 0.0;
             double ln = Math.Log(2.0);
             double sqln = Math.Sqrt(ln);
@@ -221,13 +221,16 @@ namespace XPSFit
                 c = 2.0 * a[i] * arg / a[i + 2];
                 s = sqln * G * (1.0 - m) + m * pi * L * L;
 
+                u = a[i + 1] - 2.0;
+                o = a[i + 1] + 2.0;
+
                 dyda[i] = (m * L + (1.0 - m) * G) / a[i + 2];// - 1.0 / a[i] * a[i];
                 dyda[i + 1] = c * s / a[i + 2];// - (o-u)*(o+u-2.0*a[i+1])/((Math.Pow(a[i + 1]-o,2))*Math.Pow(u- a[i + 1],2));
                 dyda[i + 2] = - 1.0 / a[i + 2] / a[i + 2] * a[i] * (m * L + (1.0 - m) * G) + c * arg * s;// - 1.0 / a[i + 2];
                 dyda[i + 3] = a[i] * (L - G) / a[i + 2];// + (2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m));
 
                 //y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2];// + (100.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2]);
-                y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2];// + (1.0 / (m * (1.0 - m)));       
+                y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2] + ((1.0 / (m * (1.0 - m))) + 1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o)));       
 
             }
 

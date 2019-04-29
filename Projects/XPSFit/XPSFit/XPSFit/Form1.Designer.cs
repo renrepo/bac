@@ -88,6 +88,8 @@
             // 
             // dgv_bg
             // 
+            this.dgv_bg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_bg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_bg.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_bg_sel,
@@ -117,6 +119,8 @@
             // 
             // dgv_models
             // 
+            this.dgv_models.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_models.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_models.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_models_models,
@@ -233,7 +237,7 @@
             // 
             // dgv_models_wid
             // 
-            this.dgv_models_wid.HeaderText = "Sigma";
+            this.dgv_models_wid.HeaderText = "FWHM";
             this.dgv_models_wid.Name = "dgv_models_wid";
             this.dgv_models_wid.Width = 60;
             // 
@@ -273,7 +277,7 @@
             // 
             // dgv_models_s
             // 
-            this.dgv_models_s.HeaderText = "sig";
+            this.dgv_models_s.HeaderText = "FWHM";
             this.dgv_models_s.Name = "dgv_models_s";
             this.dgv_models_s.ReadOnly = true;
             this.dgv_models_s.Width = 60;

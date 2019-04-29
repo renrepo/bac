@@ -425,8 +425,8 @@ namespace XPSFit
 
                 if (tryparse && value >= 0)
                 {
-                    //paras[i] = i == 0 ? value / 100.0 : value;
-                    paras[i] = i == 3 ? value / 100.0 : value;
+                    paras[i] = i == 2 ? (value / 2.0) : value;
+                    paras[i] = i == 3 ? (value / 100.0) : value;
                 }
                 else
                 {
@@ -485,64 +485,9 @@ namespace XPSFit
         {
             if (e.KeyCode == Keys.Enter)
             {
-                double[] erg = new double[4];
                 DataGridView dgv = sender as DataGridView;
                 int row = dgv.CurrentCell.RowIndex - 1;
-                if (dgv_models[0, row].Value != null && e.KeyData == Keys.Enter)
-                {
-                    List<double> x_crop = new List<double>();
-                    List<double> y_crop = new List<double>();
-                    for (int i = 1; i < 5; i++)
-                    {
-                        if (dgv[i, row].Value == null || dgv[i, row].Value.ToString() == "") return;
-                    }
-                    //double[] x = Curr_S.x.ToArray();
-                    //double[] y = Curr_S.y.ToArray();
-                    erg = get_paras(row);
-                    if (Curr_S.paras.Count > 5 * row)
-                    {
-                        Curr_S.paras.RemoveRange(row * 4, 4);
-                        Curr_S.paras.InsertRange(row * 4, erg);
-                    }
-                    else
-                    {
-                        Curr_S.paras.AddRange(erg);                       
-                    }
-                    //fit(Curr_S.paras.ToArray());
-                    LMAFunction f = new CustomFunction();
-
-                    //double[] parameters = Curr_S.paras.ToArray();
-                    double[] parameters = Curr_S.paras.GetRange(row * 4 ,4).ToArray();
-
-                    double[] dy = new double[Curr_S.paras.Count()];
-                    List<double> bg = new List<double>();
-                    double sum = 0.0;
-                    for (int i = 0; i < Curr_S.y.Count; i++)
-                    {
-                        var yi = Curr_S.y[i];
-                        for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
-                        {
-                            sum += Curr_S.Bg_Sub[j][i];
-                        }
-                        if (sum != 0)
-                        {
-                            f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy);
-                            yi += sum;
-                            y_crop.Add(yi);
-                            x_crop.Add(Curr_S.x[i]);
-                            sum = 0.0;
-                        }                                                                                      
-                    }               
-                    Curr_S.Remove_Line("kommt noch");
-                    var LI = Curr_S.Draw_Line(x_crop,y_crop,"kommt noch", "none", "line");
-                    //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
-                    //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
-                    LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
-                    var BG = Curr_S.List_LineItem.Find(a=> a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
-                    BG.Line.Fill = new Fill(Color.White);
-                    Curr_S.zgc_plots.Invalidate();
-                    Curr_S.zgc_plots.AxisChange();
-                }
+                Draw_initial(dgv, row);
             }
         }
 
@@ -614,7 +559,7 @@ namespace XPSFit
             
             for (int i = 0; i < paras.Count(); i+=4)
             {
-                dgv_models[7, i / 4].Value = Math.Floor(paras[i] * paras[i + 2] * 2.0); // Amplitude
+                dgv_models[7, i / 4].Value = Math.Floor(paras[i] / paras[i + 2] / 2.0); // Amplitude
                 dgv_models.Rows[i / 4].Cells[7].Style.ForeColor = Color.Gray;
                 dgv_models[8, i / 4].Value = Math.Round(paras[i + 1],3); // Center
                 dgv_models.Rows[i / 4].Cells[8].Style.ForeColor = Color.Gray;
@@ -750,11 +695,80 @@ namespace XPSFit
                     Curr_S.Hide_PolyObj(i);
                 }
             }
+
+            DataGridView dgv = sender as DataGridView;
+            int row = dgv.CurrentCell.RowIndex;
+            Draw_initial(dgv, row);
+
         }
 
         private void Form1_Click(object sender, EventArgs e)
         {
             if (Curr_S != null) Curr_S.Remove_Line("kommt noch");
+        }
+
+
+        private void Draw_initial(DataGridView dgv, int row)
+        {
+            double[] erg = new double[4];
+            if (dgv_models[0, row].Value != null)
+            {
+                List<double> x_crop = new List<double>();
+                List<double> y_crop = new List<double>();
+                for (int i = 1; i < 5; i++)
+                {
+                    if (dgv[i, row].Value == null || dgv[i, row].Value.ToString() == "") return;
+                }
+                //double[] x = Curr_S.x.ToArray();
+                //double[] y = Curr_S.y.ToArray();
+                erg = get_paras(row);
+                if (Curr_S.paras.Count > 5 * row)
+                {
+                    Curr_S.paras.RemoveRange(row * 4, 4);
+                    Curr_S.paras.InsertRange(row * 4, erg);
+                }
+                else
+                {
+                    Curr_S.paras.AddRange(erg);
+                }
+                //fit(Curr_S.paras.ToArray());
+                LMAFunction f = new CustomFunction();
+
+                //double[] parameters = Curr_S.paras.ToArray();
+                double[] parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray(); //----------------------------------------------------------0.75 va 1.5 SIGMA???????
+
+                double[] dy = new double[Curr_S.paras.Count()];
+                List<double> bg = new List<double>();
+                double sum = 0.0;
+                for (int i = 0; i < Curr_S.y.Count; i++)
+                {
+                    var yi = Curr_S.y[i];
+                    for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                    {
+                        sum += Curr_S.Bg_Sub[j][i];
+                    }
+                    if (sum != 0)
+                    {
+                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy);
+                        yi += sum;
+                        y_crop.Add(yi);
+                        x_crop.Add(Curr_S.x[i]);
+                        sum = 0.0;
+                    }
+                }
+                Curr_S.Remove_Line("kommt noch");
+                var LI = Curr_S.Draw_Line(x_crop, y_crop, "kommt noch", "none", "line");
+                //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
+                //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
+                //LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
+                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue, 90F);
+                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue);
+                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
+                var BG = Curr_S.List_LineItem.Find(a => a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
+                BG.Line.Fill = new Fill(Color.White);
+                Curr_S.zgc_plots.Invalidate();
+                Curr_S.zgc_plots.AxisChange();
+            }
         }
     }
 }
