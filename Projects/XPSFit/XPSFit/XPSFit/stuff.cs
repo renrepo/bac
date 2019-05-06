@@ -27,6 +27,7 @@ namespace XPSFit
         public List<double> Bg_Bounds = new List<double>();
         public List<double[]> Bg_Sub = new List<double[]>();
         public List<double> paras = new List<double>();
+        public List<double> fit_results = new List<double>();
         public List<bool> hold = new List<bool>();
 
         bool bMouseDown = false;

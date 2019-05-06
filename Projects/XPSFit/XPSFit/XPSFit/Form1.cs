@@ -487,7 +487,8 @@ namespace XPSFit
             {
                 DataGridView dgv = sender as DataGridView;
                 int row = dgv.CurrentCell.RowIndex - 1;
-                Draw_initial(dgv, row);
+                int column = dgv.CurrentCell.ColumnIndex;
+                Draw_initial(dgv, row, column);
             }
         }
 
@@ -555,6 +556,8 @@ namespace XPSFit
             }
             Cursor.Current = Cursors.Default;
             double[] paras = algorithm.A;
+            Curr_S.fit_results.Clear();
+            Curr_S.fit_results.AddRange(algorithm.A);
             tb_chi2.Text = Math.Round(algorithm.Chi2 / (x_crop.Length - paras.Length), 2).ToString();
             
             for (int i = 0; i < paras.Count(); i+=4)
@@ -698,7 +701,8 @@ namespace XPSFit
 
             DataGridView dgv = sender as DataGridView;
             int row = dgv.CurrentCell.RowIndex;
-            Draw_initial(dgv, row);
+            int column = dgv.CurrentCell.ColumnIndex;
+            Draw_initial(dgv, row, column);
 
         }
 
@@ -708,7 +712,7 @@ namespace XPSFit
         }
 
 
-        private void Draw_initial(DataGridView dgv, int row)
+        private void Draw_initial(DataGridView dgv, int row, int column)
         {
             double[] erg = new double[4];
             if (dgv_models[0, row].Value != null)
@@ -721,6 +725,7 @@ namespace XPSFit
                 }
                 //double[] x = Curr_S.x.ToArray();
                 //double[] y = Curr_S.y.ToArray();
+
                 erg = get_paras(row);
                 if (Curr_S.paras.Count > 5 * row)
                 {
@@ -734,8 +739,16 @@ namespace XPSFit
                 //fit(Curr_S.paras.ToArray());
                 LMAFunction f = new CustomFunction();
 
-                //double[] parameters = Curr_S.paras.ToArray();
-                double[] parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray(); //----------------------------------------------------------0.75 va 1.5 SIGMA???????
+                double[] parameters;
+                if (Curr_S.fit_results.Count > 5 * row && column > 4)
+                {
+                    parameters = Curr_S.fit_results.GetRange(row * 4, 4).ToArray();
+                }
+                else
+                {
+                    parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray();
+                }
+                //double[] parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray(); //----------------------------------------------------------0.75 va 1.5 SIGMA???????
 
                 double[] dy = new double[Curr_S.paras.Count()];
                 List<double> bg = new List<double>();
@@ -762,8 +775,8 @@ namespace XPSFit
                 //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
                 //LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
                 //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue, 90F);
-                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue);
-                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
+                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.CornflowerBlue, 90F);
+                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
                 var BG = Curr_S.List_LineItem.Find(a => a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
                 BG.Line.Fill = new Fill(Color.White);
                 Curr_S.zgc_plots.Invalidate();
