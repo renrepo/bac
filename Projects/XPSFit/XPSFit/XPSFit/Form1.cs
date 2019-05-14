@@ -99,7 +99,7 @@ namespace XPSFit
 
             dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
             dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
-            dgv_models[0, 0].Value = "Gauss-Lorentz";
+            dgv_models[0, 0].Value = "GLS";
             dgv_models[5, 0].Value = "#############";
             dgv_models[4, 0].Value = String.Empty;
 
@@ -110,7 +110,7 @@ namespace XPSFit
         {
             var data = m.get_values_to_plot();
 
-            if (data == null) return;
+            if (data == null || data.Item1.Count == 0 || data.Item2.Count == 0) return;
             dgv_bg.Enabled = dgv_models.Enabled = cb_disc.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
             else
@@ -124,7 +124,7 @@ namespace XPSFit
                     Curr_S.Bg_Sub[0][i] = 0;
                 }
                 dgv_models.Rows.Clear();
-                dgv_models[0, 0].Value = "Gauss-Lorentz";
+                dgv_models[0, 0].Value = "GLS";
             }
         }
 
@@ -334,15 +334,15 @@ namespace XPSFit
 
                 switch (cb.Value)
                 {
-                    case ("Gauss"):
-                    case ("Lorentz"):
-                        dgv_models[4, e.RowIndex].Value = (cb.Value.ToString() == "Gauss") ? 100 : 0;
+                    case ("G"):
+                    case ("L"):
+                        dgv_models[4, e.RowIndex].Value = (cb.Value.ToString() == "G") ? 100 : 0;
                         //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].ReadOnly = dgv_models[5, e.RowIndex].ReadOnly = true;
                         //if (get_paras(e.RowIndex, 3) != null) para.Add(get_paras(e.RowIndex, 3));
                         break;
 
-                    case ("Gauss-Lorentz"):
+                    case ("GLS"):
                         //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].Value = 50;
                         dgv_models[5, e.RowIndex].ReadOnly = false;
@@ -374,7 +374,7 @@ namespace XPSFit
         private void btn_fit_Click(object sender, EventArgs e)
         {
             if (Curr_S.paras == null) return;
-            if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray());     
+            if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray(), -1.0);     
         }
 
 
@@ -425,8 +425,18 @@ namespace XPSFit
 
                 if (tryparse && value >= 0)
                 {
-                    paras[i] = i == 2 ? (value / 2.0) : value;
-                    paras[i] = i == 3 ? (value / 100.0) : value;
+                    if (i == 2)
+                    {
+                        paras[i] = value / 2.0;
+                    }
+                    else if (i == 3)
+                    {
+                        paras[i] = value / 100.0;
+                    }
+                    else
+                    {
+                        paras[i] = value;
+                    }
                 }
                 else
                 {
@@ -454,7 +464,7 @@ namespace XPSFit
                 }
             }
             dgv_models.Rows.Clear();
-            dgv_models[0, 0].Value = "Gauss-Lorentz";
+            dgv_models[0, 0].Value = "GLS";
         }
 
 
@@ -495,7 +505,7 @@ namespace XPSFit
 
 
 
-        private void fit(double[] a)
+        private double fit(double[] a, double p)
         {
             List<double> yy = new List<double>();
             List<double> yy_calc = new List<double>();
@@ -503,7 +513,7 @@ namespace XPSFit
             List<double> residuals = new List<double>();
 
             double time = 0;
-            
+
             //double[] a = new double[] { 40000.0, 368.4, 1.0, 1.0, 22.0, 40000.0, 374.2, 1.0, 1.0, 22.0 };
             //double[] a = new double[] { 50000.0, 368.4, 5.0, 40000.0, 372.4, 5.0};
             double[] x = Curr_S.x.ToArray();
@@ -531,44 +541,58 @@ namespace XPSFit
             double[] w = new double[x_crop.Length];
             for (int i = 0; i < x_crop.Count(); i++)
             {
-                //w[i] = 1.0 / (y[i] * y[i]);
-                w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y[i]))));
-                //w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y[i])));
-                //w[i] = 1/ y[i];
+                //w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y[i]))));
+                //w[i] = 1.0 / Math.Max(0.01, Math.Sqrt(Math.Abs(y[i])));
                 //w[i] = y[i] / ymax;
                 //w[i] = Math.Sqrt(y[i]);
                 //w[i] = 1.0;
+                w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y[i]))));
+                //w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y[i]))); // ----------------------------------------------------------------- seems to be the same as in CASA XPS
             }
-            LMAFunction f = new CustomFunction();
+
+            LMAFunction f;
+            if (dgv_models[0, 0].Value.ToString() == "GLP") f = new GLP();
+            else if (dgv_models[0, 0].Value.ToString() == "GLS") f = new GLS();
+            else f = new GLP();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w, ref a);
-            //algorithm.hold(4,Curr_S.paras[4]); // zero pure gaussian
-            //algorithm.hold(3, 1.0);
-            //algorithm.hold(8, 1.0);
-            // algorithm.hold(9, 2.0);
+
+            for (int i = 0; i < a.Count() - 1; i+= 4)
+            {
+                if (p > -1.0)
+                {
+                    algorithm.hold(i + 3, p); // zero pure gaussian
+                }
+                else
+                {
+                    algorithm.hold(i + 3, a[i + 3]); // zero pure gaussian
+                }
+            }        
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
             Cursor.Current = Cursors.WaitCursor;
-            for (int i = 0; i < 1; i++)
-            {
-                algorithm.fit();
-            }
+            algorithm.fit();
             Cursor.Current = Cursors.Default;
+            //Redchi_list.Add(Math.Round(algorithm.RedChi2, 2));
+
+
             double[] paras = algorithm.A;
             Curr_S.fit_results.Clear();
             Curr_S.fit_results.AddRange(algorithm.A);
-            tb_chi2.Text = Math.Round(algorithm.Chi2 / (x_crop.Length - paras.Length), 2).ToString();
-            
-            for (int i = 0; i < paras.Count(); i+=4)
+            //tb_chi2.Text = Math.Round(algorithm.RedChi2 / (x_crop.Length - paras.Length), 2).ToString();
+            tb_chi2.Text = Math.Round(algorithm.RedChi2, 2).ToString();
+
+            for (int i = 0; i < paras.Count(); i += 4)
             {
                 dgv_models[7, i / 4].Value = Math.Floor(paras[i] / paras[i + 2] / 2.0); // Amplitude
                 dgv_models.Rows[i / 4].Cells[7].Style.ForeColor = Color.Gray;
-                dgv_models[8, i / 4].Value = Math.Round(paras[i + 1],3); // Center
+                dgv_models[8, i / 4].Value = Math.Round(paras[i + 1], 3); // Center
                 dgv_models.Rows[i / 4].Cells[8].Style.ForeColor = Color.Gray;
                 dgv_models[9, i / 4].Value = Math.Round(paras[i + 2] * 2.0, 2); // Sigma
                 dgv_models.Rows[i / 4].Cells[9].Style.ForeColor = Color.Gray;
-                dgv_models[10, i / 4].Value = Math.Floor(paras[i + 2] * 100.0); // mixing-Ratio
+                dgv_models[10, i / 4].Value = Math.Floor(paras[i + 3] * 100.0); // mixing-Ratio
                 dgv_models.Rows[i / 4].Cells[10].Style.ForeColor = Color.Gray;
             }
 
@@ -578,22 +602,44 @@ namespace XPSFit
             {
                 //double ln = -4.0 * Math.Log(2.0);
                 int i, na = a.Count();
-                double argG1, argG2, argL1, argL2, G, L, m, argG, arg;
+                double G, L, m, arg;
                 double yi = 0.0;
                 double ln = Math.Log(2.0);
+                double ln2 = 4.0 * Math.Log(2.0);
                 double sqln = Math.Sqrt(ln);
                 double pi = Math.PI;
                 double sqpi = Math.Sqrt(pi);
 
                 double ym = 0.0;
-                double yp = 0.0;
                 double xm = 0.0;
                 double xp = 0.0;
-                double nom = 0.0;
 
                 
+
                 for (i = 0; i < na - 1; i += 4)
                 {
+                    m = paras[i + 3];
+                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
+                    xm = x[l];
+                    xp = x[l + 1];
+
+                    if (dgv_models[0, 0].Value.ToString() == "GLP")
+                    {
+                        G = Math.Exp(-ln2 * (1.0 - m) * arg * arg);
+                        L = 1.0 / (1.0 + 4.0 * m * arg * arg);
+                        ym = paras[i] * L * G;
+                    }
+
+                    else if (dgv_models[0, 0].Value.ToString() == "GLS")
+                    {
+                        G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
+                        L = 1.0 / (1.0 + arg * arg) / pi;
+                        ym = paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2];
+                    }
+
+                    yi += ym;
+                    Area[i / 4] += (ym > 0 ? ym : -ym) * (xp > xm ? (xp - xm) : (xm - xp));
+
                     /***--------------------------------------------------------------------------------------G A U S S I A N
                     arg = (x[l] - paras[i + 1]) / paras[i + 2];
                     ex = Math.Exp(-Math.Pow(arg, 2) * ln);
@@ -609,60 +655,9 @@ namespace XPSFit
                     L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
 
                     yi += paras[i] * (L1 + L2);
-                    
-                    ***/
-                    //-------------------------------------------------------------------------------------- G L S
-
-
-                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
-                    G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
-                    L = 1.0 / (1.0 + arg * arg) / pi;
-                    m = paras[i + 3];
-
-                    ym = paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2];
-
-                    yi += ym; // + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2] + 1.0 / a[i+2]) * 100;
-
-                    //ym = y[l];
-                    //yp = y[l + 1];
-                    xm = x[l];
-                    xp = x[l + 1];
-                    //nom = ym > 0 ? ym : -ym;
-                    //nom = (((yp > 0 ? yp : -yp) + (ym > 0 ? ym : -ym))) / 2.0;
-                    //Area[i] += (nom > 0 ? nom : -nom) * (xp > xm ? (xp - xm) : (xm - xp));
-                    Area[i/4] += (ym > 0 ? ym : -ym) * (xp > xm ? (xp - xm) : (xm - xp));
-
-                    /***
-                    m = paras[i + 3];
-
-                    
-                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    //argL2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 2];
-                    argG1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    //argG2 = (x[l] - paras[i + 1] - 0.416) / paras[i + 3];
-
-                    G = Math.Exp(ln * Math.Pow(argG1, 2));
-                    L = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-
-                    yi += paras[i] * (m * L + (1.0 - m) * G);
-                    ***/
-
-                    /***
-
-                    // -------------------------------------------------------------------------------------- G L P
-                    m = paras[i + 4];
-
-                    argL1 = (x[l] - paras[i + 1]) / paras[i + 2];
-                    argG = (x[l] - paras[i + 1]) / paras[i + 3];
-
-                    G = Math.Exp(ln * (1 - m) * Math.Pow(argG, 2));
-                    L = 1.0 / (1.0 + 4.0 * m * Math.Pow(argL1, 2));
-
-                    yi += paras[i] * G * L;
-                    
 
                     ***/
-
+                  
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
                 residuals.Add(bg[l] == 0 ? 0 : bg[l] + yi - Curr_S.y[l]);
@@ -681,12 +676,16 @@ namespace XPSFit
                 dgv_models[6, i].Value = Math.Round(Area[i] / AreaSum * 100.0, 1); // Area in %
                 dgv_models.Rows[i].Cells[6].Style.ForeColor = Color.Gray;
             }
-            time += sw.Elapsed.TotalMilliseconds;
-            btn_tester.Text = (time / 1).ToString("0.00");
+            time = sw.Elapsed.TotalMilliseconds;
+            lb_time.Text = time.ToString("0.00");
+            lb_iter.Text = algorithm.Iter.ToString();
             Curr_S.Draw_Line(x.ToList(), yy, "Fit", "none", "line");
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");
             Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
+
+            return algorithm.RedChi2;
         }
+
 
         private void dgv_models_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -737,7 +736,7 @@ namespace XPSFit
                     Curr_S.paras.AddRange(erg);
                 }
                 //fit(Curr_S.paras.ToArray());
-                LMAFunction f = new CustomFunction();
+                LMAFunction f = new GLS();
 
                 double[] parameters;
                 if (Curr_S.fit_results.Count > 5 * row && column > 4)
@@ -762,7 +761,7 @@ namespace XPSFit
                     }
                     if (sum != 0)
                     {
-                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy);
+                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy, 0.0);
                         yi += sum;
                         y_crop.Add(yi);
                         x_crop.Add(Curr_S.x[i]);
@@ -772,10 +771,10 @@ namespace XPSFit
                 Curr_S.Remove_Line("kommt noch");
                 var LI = Curr_S.Draw_Line(x_crop, y_crop, "kommt noch", "none", "line");
                 //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
-                //LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
+                LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
                 //LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
                 //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue, 90F);
-                LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.CornflowerBlue, 90F);
+                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.CornflowerBlue, 90F);
                 //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
                 var BG = Curr_S.List_LineItem.Find(a => a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
                 BG.Line.Fill = new Fill(Color.White);
@@ -783,5 +782,56 @@ namespace XPSFit
                 Curr_S.zgc_plots.AxisChange();
             }
         }
+
+        private void btn_save_fig_Click(object sender, EventArgs e)
+        {
+            Curr_S.save_data();
+        }
+
+        private void btn_find_m_Click(object sender, EventArgs e)
+        {
+            if (Curr_S.paras == null) return;
+            if (Curr_S.paras.Count > 0)
+            {
+                List<double> Redchi_list = new List<double>();
+                double[] pars = Curr_S.paras.ToArray();
+                for (int i = 1; i < 100; i+= 7)
+                {
+                    double p = i / 100.0;
+                    double redchi = fit(pars, p);
+                    Redchi_list.Add(redchi);
+                    tc_zgc.Refresh();
+                    dgv_models.Refresh();
+                }
+                int min = 1 + Redchi_list.IndexOf(Redchi_list.Min()) * 7;
+                int start = (min == 99) ? (min == 1) ? 93 : 0 : min - 6;
+                Redchi_list.Clear();
+                for (int i = start; i < start + 13; i++)
+                {
+                    double p = i / 100.0;
+                    double redchi = fit(pars, p);
+                    Redchi_list.Add(redchi);
+                    tc_zgc.Refresh();
+                    dgv_models.Refresh();
+                    lb_iter.Refresh();
+                    lb_time.Refresh();
+                }
+                int result = Redchi_list.IndexOf(Redchi_list.Min()) + start;
+                Console.WriteLine("Minimum m = {0} at Residual STD {1}", result, Redchi_list.Min());
+                fit(pars, result / 100.0); // Plot final result
+            }
+            
+        }
     }
 }
+
+
+/***
+ * 
+ * --- TODO ---
+ * HOLD in fit()
+ * weights
+ * 
+ * ***/
+
+

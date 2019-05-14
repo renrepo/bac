@@ -12,7 +12,7 @@ namespace XPSFit
     {
         #region Fields
 
-        const int NDONE = 4, ITMAX = 1000;
+        const int NDONE = 8, ITMAX = 256;
         int ndat, ma, mfit;
         private double[] x, y, sig;
         double tol;
@@ -22,6 +22,7 @@ namespace XPSFit
         double[,] covar;
         double[,] alpha;
         double chisq;
+        int num_interations;
         bool singular_matrix;
 
         #endregion //-----------------------------------------------
@@ -30,7 +31,7 @@ namespace XPSFit
         #region Constructor
 
         public LMA(LMAFunction f, ref double[] xx, ref double[] yy, ref double[] ssig,
-                ref double[] aa, double TOL = 0.001 )
+                ref double[] aa, double TOL = 0.001)
         {
             this.ndat = xx.Count();
             this.ma = aa.Count();
@@ -65,10 +66,16 @@ namespace XPSFit
             set { a = value; }
         }
 
-        public double Chi2
+        public double RedChi2
         {
             get { return chisq / (ndat - ma); }
             set { chisq = value; }
+        }
+
+        public double Iter
+        {
+            get { return num_interations; }
+            set { num_interations = Convert.ToInt16(value); }
         }
 
         #endregion //-----------------------------------------------
@@ -97,13 +104,13 @@ namespace XPSFit
             for (j = 0; j < ma; j++) if (ia[j]) mfit++;
             double[,] oneda = new double[mfit,1];
             double[,] temp = new double[mfit, mfit];
-            mrqcof(ref a, ref alpha, ref beta);
+            mrqcof(ref a, ref alpha, ref beta, 0);
 
             for (j = 0; j < ma; j++) atry[j] = a[j];
             ochisq = chisq;
             for (iter = 0; iter < ITMAX; iter++)
             {
-                Console.WriteLine(iter);
+                //Console.WriteLine("Iteration   {0}",iter);
                 if (done == NDONE) alambda = 0.0;
                 for (j = 0; j < mfit; j++)
                 {
@@ -138,11 +145,11 @@ namespace XPSFit
                         atry[l] = a[l] + da[j++];
                     }
                 }
-                mrqcof(ref atry, ref covar, ref da);
+                mrqcof(ref atry, ref covar, ref da, iter);
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.1;
+                    alambda *= 0.5;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
@@ -156,18 +163,24 @@ namespace XPSFit
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 10;
+                    alambda *= 2;
                     chisq = ochisq;
                 }
             }
-            MessageBox.Show("Fitmrq too many iterations");        
+            //MessageBox.Show("Fitmrq too many iterations");        
         }
 
 
-        private void mrqcof(ref double[] a, ref double[,] alpha, ref double[] beta)
+        private void mrqcof(ref double[] a, ref double[,] alpha, ref double[] beta, int iter)
         {
+            //double r = (iter > 2) ? (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001 : 1.0;
+            double r = (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001;
+            //double r = 1.0 / Math.Pow(2, iter - 2);
+            Iter = iter;
+            Console.WriteLine("Iteration   {0}, Factor   {1}" ,iter, r);
+            //double r = 1.0 / Math.Pow(10, done); //------------------------------------------------------------------------- Vary r-factor in penalty function
             int i, j, k, l, m = 0;
-            double ymod = 0.0; //----------------------------------------------------------------------------OK????
+            double ymod = 0.0;
             double wt, sig2i, dy;
             double[] dyda = new double[ma];
 
@@ -179,7 +192,7 @@ namespace XPSFit
             chisq = 0.0;
             for (i = 0; i < ndat; i++)
             {
-                func.GetY(x[i], ref a, ref ymod, ref dyda);
+                func.GetY(x[i], ref a, ref ymod, ref dyda, r);
                 sig2i = 1.0 / (sig[i] * sig[i]);
                 dy = y[i] - ymod;
                 for (j = 0, l = 0; l < ma; l++)
@@ -196,6 +209,7 @@ namespace XPSFit
                 }
                 chisq += dy * dy * sig2i;
             }
+            Console.WriteLine("m = {0}",a[3]);
             for (j = 1; j < mfit; j++)
             {
                 for (k = 0; k < j; k++) alpha[k, j] = alpha[j, k];
@@ -412,7 +426,7 @@ namespace XPSFit
                 }
                 tol1 = 2.0 * EPS * Math.Abs(b) + 0.5 * Tol;
                 xm = 0.5 * (c - b);
-                Console.WriteLine("FWHM Iteration {0} at value {1}", iter, b);
+                //Console.WriteLine("FWHM Iteration {0} at value {1}", iter, b);
                 if (Math.Abs(xm) <= tol1 || fb == 0.0) return b;
                 if (Math.Abs(e) >= tol1 && Math.Abs(fa) > Math.Abs(fb))
                 {
