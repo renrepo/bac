@@ -22,6 +22,7 @@ namespace XPSFit
         double[,] covar;
         double[,] alpha;
         double chisq;
+        double ressq;
         int num_interations;
         bool singular_matrix;
 
@@ -69,6 +70,7 @@ namespace XPSFit
         public double RedChi2
         {
             get { return chisq / (ndat - ma); }
+            //get { return Math.Sqrt(ressq / (ndat - ma)); }
             set { chisq = value; }
         }
 
@@ -189,7 +191,7 @@ namespace XPSFit
                 for (k = 0; k <= j; k++) alpha[j, k] = 0.0;
                 beta[j] = 0.0;
             }
-            chisq = 0.0;
+            chisq = ressq = 0.0;
             for (i = 0; i < ndat; i++)
             {
                 func.GetY(x[i], ref a, ref ymod, ref dyda, r);
@@ -207,9 +209,10 @@ namespace XPSFit
                         beta[j++] += dy * wt;
                     }
                 }
-                chisq += dy * dy * sig2i;
+                ressq += dy * dy;
+                chisq += ressq * sig2i;
             }
-            Console.WriteLine("m = {0}",a[3]);
+            //Console.WriteLine("m = {0}",a[3]);
             for (j = 1; j < mfit; j++)
             {
                 for (k = 0; k < j; k++) alpha[k, j] = alpha[j, k];

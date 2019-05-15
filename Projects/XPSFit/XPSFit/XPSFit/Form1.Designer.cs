@@ -43,6 +43,10 @@
             this.tb_chi2 = new System.Windows.Forms.TextBox();
             this.btn_save_fig = new System.Windows.Forms.Button();
             this.btn_find_m = new System.Windows.Forms.Button();
+            this.lb_iter_text = new System.Windows.Forms.Label();
+            this.lb_iter = new System.Windows.Forms.Label();
+            this.lb_time_text = new System.Windows.Forms.Label();
+            this.lb_time = new System.Windows.Forms.Label();
             this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,10 +58,6 @@
             this.dgv_models_c = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_s = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_models_m = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lb_iter_text = new System.Windows.Forms.Label();
-            this.lb_iter = new System.Windows.Forms.Label();
-            this.lb_time_text = new System.Windows.Forms.Label();
-            this.lb_time = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -237,9 +237,49 @@
             this.btn_find_m.UseVisualStyleBackColor = true;
             this.btn_find_m.Click += new System.EventHandler(this.btn_find_m_Click);
             // 
+            // lb_iter_text
+            // 
+            this.lb_iter_text.AutoSize = true;
+            this.lb_iter_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_iter_text.Location = new System.Drawing.Point(403, 13);
+            this.lb_iter_text.Name = "lb_iter_text";
+            this.lb_iter_text.Size = new System.Drawing.Size(60, 15);
+            this.lb_iter_text.TabIndex = 16;
+            this.lb_iter_text.Text = "Iterations:";
+            // 
+            // lb_iter
+            // 
+            this.lb_iter.AutoSize = true;
+            this.lb_iter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_iter.Location = new System.Drawing.Point(465, 13);
+            this.lb_iter.Name = "lb_iter";
+            this.lb_iter.Size = new System.Drawing.Size(19, 15);
+            this.lb_iter.TabIndex = 17;
+            this.lb_iter.Text = "---";
+            // 
+            // lb_time_text
+            // 
+            this.lb_time_text.AutoSize = true;
+            this.lb_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time_text.Location = new System.Drawing.Point(403, 26);
+            this.lb_time_text.Name = "lb_time_text";
+            this.lb_time_text.Size = new System.Drawing.Size(64, 15);
+            this.lb_time_text.TabIndex = 18;
+            this.lb_time_text.Text = "Time [ms]:";
+            // 
+            // lb_time
+            // 
+            this.lb_time.AutoSize = true;
+            this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time.Location = new System.Drawing.Point(465, 26);
+            this.lb_time.Name = "lb_time";
+            this.lb_time.Size = new System.Drawing.Size(19, 15);
+            this.lb_time.TabIndex = 19;
+            this.lb_time.Text = "---";
+            // 
             // dgv_models_models
             // 
-            this.dgv_models_models.HeaderText = "Fitmodel";
+            this.dgv_models_models.HeaderText = "Model";
             this.dgv_models_models.Items.AddRange(new object[] {
             "L",
             "G",
@@ -251,31 +291,31 @@
             // 
             // dgv_models_amp
             // 
-            this.dgv_models_amp.HeaderText = "Amplitude";
+            this.dgv_models_amp.HeaderText = "A_init";
             this.dgv_models_amp.Name = "dgv_models_amp";
             this.dgv_models_amp.Width = 60;
             // 
             // dgv_models_cen
             // 
-            this.dgv_models_cen.HeaderText = "Center";
+            this.dgv_models_cen.HeaderText = "c_init";
             this.dgv_models_cen.Name = "dgv_models_cen";
             this.dgv_models_cen.Width = 60;
             // 
             // dgv_models_wid
             // 
-            this.dgv_models_wid.HeaderText = "FWHM";
+            this.dgv_models_wid.HeaderText = "FWHM_i.";
             this.dgv_models_wid.Name = "dgv_models_wid";
             this.dgv_models_wid.Width = 60;
             // 
             // dgv_models_mix
             // 
-            this.dgv_models_mix.HeaderText = "Mixing";
+            this.dgv_models_mix.HeaderText = "m_init";
             this.dgv_models_mix.Name = "dgv_models_mix";
             this.dgv_models_mix.Width = 60;
             // 
             // dgv_models_area
             // 
-            this.dgv_models_area.HeaderText = "Area";
+            this.dgv_models_area.HeaderText = "Area_i.";
             this.dgv_models_area.Name = "dgv_models_area";
             this.dgv_models_area.ReadOnly = true;
             this.dgv_models_area.Width = 60;
@@ -314,46 +354,6 @@
             this.dgv_models_m.Name = "dgv_models_m";
             this.dgv_models_m.ReadOnly = true;
             this.dgv_models_m.Width = 60;
-            // 
-            // lb_iter_text
-            // 
-            this.lb_iter_text.AutoSize = true;
-            this.lb_iter_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_iter_text.Location = new System.Drawing.Point(397, 13);
-            this.lb_iter_text.Name = "lb_iter_text";
-            this.lb_iter_text.Size = new System.Drawing.Size(60, 15);
-            this.lb_iter_text.TabIndex = 16;
-            this.lb_iter_text.Text = "Iterations:";
-            // 
-            // lb_iter
-            // 
-            this.lb_iter.AutoSize = true;
-            this.lb_iter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_iter.Location = new System.Drawing.Point(459, 13);
-            this.lb_iter.Name = "lb_iter";
-            this.lb_iter.Size = new System.Drawing.Size(19, 15);
-            this.lb_iter.TabIndex = 17;
-            this.lb_iter.Text = "---";
-            // 
-            // lb_time_text
-            // 
-            this.lb_time_text.AutoSize = true;
-            this.lb_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time_text.Location = new System.Drawing.Point(397, 26);
-            this.lb_time_text.Name = "lb_time_text";
-            this.lb_time_text.Size = new System.Drawing.Size(64, 15);
-            this.lb_time_text.TabIndex = 18;
-            this.lb_time_text.Text = "Time [ms]:";
-            // 
-            // lb_time
-            // 
-            this.lb_time.AutoSize = true;
-            this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time.Location = new System.Drawing.Point(459, 26);
-            this.lb_time.Name = "lb_time";
-            this.lb_time.Size = new System.Drawing.Size(19, 15);
-            this.lb_time.TabIndex = 19;
-            this.lb_time.Text = "---";
             // 
             // Form1
             // 
@@ -405,6 +405,10 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_bg_model;
         private System.Windows.Forms.Button btn_save_fig;
         private System.Windows.Forms.Button btn_find_m;
+        private System.Windows.Forms.Label lb_iter_text;
+        private System.Windows.Forms.Label lb_iter;
+        private System.Windows.Forms.Label lb_time_text;
+        private System.Windows.Forms.Label lb_time;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_models_models;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_amp;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_cen;
@@ -416,10 +420,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_c;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_s;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_m;
-        private System.Windows.Forms.Label lb_iter_text;
-        private System.Windows.Forms.Label lb_iter;
-        private System.Windows.Forms.Label lb_time_text;
-        private System.Windows.Forms.Label lb_time;
     }
 }
 

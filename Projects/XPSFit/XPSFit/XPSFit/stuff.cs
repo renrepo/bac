@@ -7,6 +7,7 @@ using ZedGraph;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace XPSFit
 {
@@ -446,11 +447,12 @@ namespace XPSFit
         }
 
 
-        public void save_data()
+        public string save_data()
         {
+            string path = String.Empty;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Png Image|*.png";
-            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Png Image|*.png";
+            saveFileDialog1.Title = Data_name.ToString();
             saveFileDialog1.ShowDialog();
 
             // If the file name is not an empty string open it for saving.  
@@ -467,20 +469,21 @@ namespace XPSFit
                     case 1:
                         myPane_plots.GetImage().Save(fs,
                            System.Drawing.Imaging.ImageFormat.Jpeg);
+                        myPane_residuals.GetImage().Save(fs,
+                          System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
 
                     case 2:
                         myPane_plots.GetImage().Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-
-                    case 3:
-                        myPane_plots.GetImage().Save(fs,
                            System.Drawing.Imaging.ImageFormat.Png);
+                        myPane_residuals.GetImage().Save(fs,
+                          System.Drawing.Imaging.ImageFormat.Png);
                         break;
                 }
+                path = fs.Name;
                 fs.Close();
             }
+            return path;
         }
 
         #endregion //-------------------------------------------------------------------------------------
