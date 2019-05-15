@@ -553,6 +553,8 @@ namespace XPSFit
             LMAFunction f;
             if (dgv_models[0, 0].Value.ToString() == "GLP") f = new GLP();
             else if (dgv_models[0, 0].Value.ToString() == "GLS") f = new GLS();
+            else if (dgv_models[0, 0].Value.ToString() == "L") f = new LorentzianFunction();
+            else if (dgv_models[0, 0].Value.ToString() == "G") f = new GaussianFunction();
             else f = new GLP();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y, ref w, ref a);
@@ -637,26 +639,20 @@ namespace XPSFit
                         ym = paras[i] * (m * L + (1.0 - m) * G) / paras[i + 2];
                     }
 
+                    else if (dgv_models[0, 0].Value.ToString() == "L")
+                    {
+                        L = 1.0 / (1.0 + 4.0 * arg * arg);
+                        ym = paras[i] * L;
+                    }
+
+                    else if (dgv_models[0, 0].Value.ToString() == "G")
+                    {
+                        G = Math.Exp(-ln2 * arg * arg);
+                        ym = paras[i] * G;
+                    }
+
                     yi += ym;
                     Area[i / 4] += (ym > 0 ? ym : -ym) * (xp > xm ? (xp - xm) : (xm - xp));
-
-                    /***--------------------------------------------------------------------------------------G A U S S I A N
-                    arg = (x[l] - paras[i + 1]) / paras[i + 2];
-                    ex = Math.Exp(-Math.Pow(arg, 2) * ln);
-                    if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
-                    fac = paras[i] * ex * 2.0 * arg;
-                    yi += paras[i] * ex;
-                    ***/
-                    /***--------------------------------------------------------------------------------------L O R E N T Z I A N
-                    argL1 = (x[l] - paras[i + 1]) / a[i + 2];
-                    argL2 = (x[l] - paras[i + 1] - 0.416) / a[i + 2];
-
-                    L1 = 1.0 / (1.0 + 4.0 * Math.Pow(argL1, 2));
-                    L2 = 1.0 / (1.0 + 4.0 * Math.Pow(argL2, 2)) / 2.0;
-
-                    yi += paras[i] * (L1 + L2);
-
-                    ***/
                   
                 }
                 yy.Add(bg[l] == 0 ? bg[l] : bg[l] + yi);
@@ -677,7 +673,7 @@ namespace XPSFit
                 dgv_models.Rows[i].Cells[6].Style.ForeColor = Color.Gray;
             }
             time = sw.Elapsed.TotalMilliseconds;
-            lb_time.Text = time.ToString("0.00");
+            lb_time.Text = time.ToString("0");
             lb_iter.Text = algorithm.Iter.ToString();
             Curr_S.Draw_Line(x.ToList(), yy, "Fit", "none", "line");
             //Curr_S.TEMP_Draw_Residuals(x.ToList(), residuals, "residuals");

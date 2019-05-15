@@ -109,11 +109,10 @@ namespace XPSFit
             int i, na = a.Count();
             double fac, ex, arg;
             y = 0.0;
-            for (i = 0; i < na - 1; i += 3)
+            for (i = 0; i < na - 1; i += 4)
             {
                 arg = (x - a[i + 1]) / a[i + 2];
                 ex = Math.Exp(-Math.Pow(arg, 2) * ln);
-                if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
                 fac = a[i] * ex * 2.0 * arg;
                 y += a[i] * ex;
                 dyda[i] = ex;
@@ -130,36 +129,25 @@ namespace XPSFit
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
             int i, na = a.Count();
-            double fac, ex, arg;
+            double arg, L, c, s, o ,u;
             y = 0.0;
-            for (i = 0; i < na - 1; i += 3)
+            for (i = 0; i < na - 1; i += 4)
             {
                 arg = (x - a[i + 1]) / a[i + 2];
-                ex = Math.Exp(-Math.Pow(arg, 2));
-                //if (a.Length % 3 != 0) MessageBox.Show("Invalid number of parameters for Gaussian");
-                fac = a[i] * ex * 2.0 * arg;
-                y += a[i] * ex;
-                dyda[i] = ex;
-                dyda[i + 1] = fac / a[i + 2];
-                dyda[i + 2] = fac * arg / a[i + 2];
+                L = 1.0 / (1.0 + 4.0 * arg * arg);
+
+                c = 2.0 * a[i] * arg / a[i + 2];
+                s = L * L;
+
+                u = a[i + 1] - 2.0;
+                o = a[i + 1] + 2.0;
+
+                dyda[i] = L - r / (a[i] * a[i]);
+                dyda[i + 1] = c * s - r * (o - u) * (o + u - 2.0 * a[i + 1]) / ((a[i + 1] - o) * (a[i + 1] - o) * (u - a[i + 1]) * (u - a[i + 1]));
+                dyda[i + 2] = c * arg * s - r / (a[i + 2] * a[i + 2]);
+
+                y += a[i] * L + r * (1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o)));
             }
-
-            /***
-            double delta = 0.000000001;
-            double[] newParam = new double[a.Length];
-            for (int i = 0; i < a.Length; i++)
-                newParam[i] = a[i];
-
-            newParam[parameterIndex] = a[parameterIndex] + delta;
-            double dplusResult = GetY(x, newParam);
-
-            newParam[parameterIndex] = a[parameterIndex] - delta;
-            double dminusResult = GetY(x, newParam);
-
-            double result = (dplusResult - dminusResult) / (2 * delta);
-
-            return result;
-            ***/
         }
     }
 
