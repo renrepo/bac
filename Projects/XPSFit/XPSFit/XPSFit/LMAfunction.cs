@@ -27,131 +27,116 @@ namespace XPSFit
 
     public class GaussianFunction : LMAFunction
     {
-        int i, na;
+        int na;
         double fac, ex, arg;
 
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
             na = a.Count();
-            y = 0.0;
-            for (i = 0; i < na - 1; i += 4)
-            {
-                arg = (x - a[i + 1]) / a[i + 2];
-                ex = Math.Exp(- arg * arg * ln);
-                fac = a[i] * ex * 2.0 * arg;
-                y += a[i] * ex;
-                dyda[i] = ex;
-                dyda[i + 1] = fac / a[i + 2];
-                dyda[i + 2] = fac * arg / a[i + 2];
-            }
+            arg = (x - a[1]) / a[2];
+            ex = Math.Exp(- arg * arg * ln);
+            fac = a[0] * ex * 2.0 * arg;
+            y = a[0] * ex;
+            dyda[0] = ex;
+            dyda[1] = fac / a[2];
+            dyda[2] = fac * arg / a[2];            
         }
     }
 
 
     public class LorentzianFunction : LMAFunction
     {
-        int i, na;
+        int na;
         double arg, L, c, s, o, u;
 
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
             na = a.Count();
-            y = 0.0;
-            for (i = 0; i < na - 1; i += 4)
-            {
-                arg = (x - a[i + 1]) / a[i + 2];
-                L = 1.0 / (1.0 + 4.0 * arg * arg);
+            arg = (x - a[1]) / a[2];
+            L = 1.0 / (1.0 + 4.0 * arg * arg);
 
-                c = 2.0 * a[i] * arg / a[i + 2];
-                s = L * L;
+            c = 2.0 * a[0] * arg / a[2];
+            s = L * L;
 
-                u = a[i + 1] - 2.0;
-                o = a[i + 1] + 2.0;
+            u = a[1] - 2.0;
+            o = a[1] + 2.0;
 
-                dyda[i] = L - r / (a[i] * a[i]);
-                dyda[i + 1] = c * s - r * (o - u) * (o + u - 2.0 * a[i + 1]) / ((a[i + 1] - o) * (a[i + 1] - o) * (u - a[i + 1]) * (u - a[i + 1]));
-                dyda[i + 2] = c * arg * s - r / (a[i + 2] * a[i + 2]);
+            dyda[0] = L - r / (a[0] * a[0]);
+            dyda[1] = c * s - r * (o - u) * (o + u - 2.0 * a[1]) / ((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
+            dyda[2] = c * arg * s - r / (a[2] * a[2]);
 
-                y += a[i] * L + r * (1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o)));
-            }
+            y = a[0] * L + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));         
         }
     }
 
 
     public class GLP : LMAFunction
     {
-        int i, na;
+        int na;
         double L, m, G, arg, c, sg, sl, o, u;
 
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
             na = a.Count();
-            y = 0.0;         
-            for (i = 0; i < na - 1; i += 4)
-            {
-                m = a[i + 3];
-                arg = (x - a[i + 1]) / a[i + 2];
-                G = Math.Exp(- ln2 * (1.0 - m) * arg * arg);
-                L = 1.0 / (1.0 + 4.0 * m * arg * arg);
-                c = 2.0 * a[i] * arg / a[i + 2];
-                sg =  G * (1.0 - m) * ln2;
-                sl = 4.0 * m * L * L;
+            m = a[3];
+            arg = (x - a[1]) / a[2];
+            G = Math.Exp(- ln2 * (1.0 - m) * arg * arg);
+            L = 1.0 / (1.0 + 4.0 * m * arg * arg);
+            c = 2.0 * a[0] * arg / a[2];
+            sg =  G * (1.0 - m) * ln2;
+            sl = 4.0 * m * L * L;
 
-                u = a[i + 1] - 2.0;
-                o = a[i + 1] + 2.0;
+            u = a[1] - 2.0;
+            o = a[1] + 2.0;
 
-                // derivatives OK -- checked with wolframalpha 14.05.2019
-                dyda[i] = L * G - r / (a[i] * a[i]);
-                dyda[i + 1] = c * sg * L + c * sl * G - r * (o - u) * (o + u - 2.0 * a[i + 1]) / ((a[i + 1] - o) * (a[i + 1] - o) * (u - a[i + 1]) * (u - a[i + 1]));
-                dyda[i + 2] = c * arg * sl * G + c * arg * sg * L - r / (a[i + 2] * a[i + 2]);
-                dyda[i + 3] = -4.0 * a[i] * arg * arg * L * L * G + a[i] * ln2 * arg * arg * G * L;// + r * (2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m));
+            // derivatives OK -- checked with wolframalpha 14.05.2019
+            dyda[0] = L * G - r / (a[0] * a[0]);
+            dyda[1] = c * sg * L + c * sl * G - r * (o - u) * (o + u - 2.0 * a[1]) / ((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
+            dyda[2] = c * arg * sl * G + c * arg * sg * L - r / (a[2] * a[2]);
+            dyda[3] = -4.0 * a[0] * arg * arg * L * L * G + a[0] * ln2 * arg * arg * G * L;// + r * (2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m));
 
-                //y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2];// + (100.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2]);
-                y += a[i] * L * G + r * (1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o)));// + (1.0 / (m * (1.0 - m))));       
-            }
+            //y += a[0] * (m * L + (1.0 - m) * G) / a[2];// + (100.0/(m * (1.0 -m )) + 1.0/a[0] + (u - o)/((a[i+1]-u)*(a[1]-o)) + 1.0 / a[i+2]);
+            y = a[0] * L * G + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));// + (1.0 / (m * (1.0 - m))));                  
         }
     }
 
 
     public class GLS : LMAFunction
     {
-        int i, na;
+        int na;
         double L, m, G, arg, c, s, u, o;
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
             na = a.Count();
-            y = 0.0;
-            for (i = 0; i < na - 1; i += 4)
-            {
-                arg = (x - a[i + 1]) / a[i + 2];
-                //G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
-                //L = 1.0 / (1.0 + arg * arg) / pi;
-                G = Math.Exp(-ln2 * arg * arg);
-                L = 1.0 / (1.0 + 4.0 * arg * arg);
-                m = a[i + 3];
-                c = 2.0 * a[i] * arg / a[i + 2];
-                s = sqln * G * (1.0 - m) + m * pi * L * L;
+            arg = (x - a[1]) / a[2];
+            //G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
+            //L = 1.0 / (1.0 + arg * arg) / pi;
+            G = Math.Exp(-ln2 * arg * arg);
+            L = 1.0 / (1.0 + 4.0 * arg * arg);
+            m = a[3];
+            c = 2.0 * a[0] * arg / a[2];
+            s = sqln * G * (1.0 - m) + m * pi * L * L;
 
-                u = a[i + 1] - 2.0;
-                o = a[i + 1] + 2.0;
+            u = a[1] - 2.0;
+            o = a[1] + 2.0;
 
-                dyda[i] = (m * L + (1.0 - m) * G) / a[i + 2] - r / (a[i] * a[i]);
-                //dyda[i] = (m * L + (1.0 - m) * G) / a[i + 2] - r / (a[i] * a[i]); //old version with pi and so on
-                //dyda[i + 1] = c * s / a[i + 2] - r * (o-u)*(o+u-2.0*a[i+1])/((a[i + 1] - o) * (a[i + 1] - o) * (u - a[i + 1]) * (u - a[i + 1]));
-                dyda[i + 1] = c * s - r * (o - u) * (o + u - 2.0 * a[i + 1]) / ((a[i + 1] - o) * (a[i + 1] - o) * (u - a[i + 1]) * (u - a[i + 1]));
-                //dyda[i + 2] = - 1.0 / a[i + 2] / a[i + 2] * a[i] * (m * L + (1.0 - m) * G) + c * arg * s - r / (a[i + 2] * a[i + 2]); //old version with pi and so on
-                dyda[i + 2] = c * arg * s - r / (a[i + 2] * a[i + 2]);
-                dyda[i + 3] = a[i] * (L - G) / a[i + 2];// + r * Math.Pow((2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m)), 9);
+            dyda[0] = (m * L + (1.0 - m) * G) / a[2] - r / (a[0] * a[0]);
+            //dyda[i] = (m * L + (1.0 - m) * G) / a[2] - r / (a[i] * a[i]); //old version with pi and so on
+            //dyda[1] = c * s / a[2] - r * (o-u)*(o+u-2.0*a[i+1])/((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
+            dyda[1] = c * s - r * (o - u) * (o + u - 2.0 * a[1]) / ((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
+            //dyda[2] = - 1.0 / a[2] / a[2] * a[i] * (m * L + (1.0 - m) * G) + c * arg * s - r / (a[2] * a[2]); //old version with pi and so on
+            dyda[2] = c * arg * s - r / (a[2] * a[2]);
+            dyda[3] = a[0] * (L - G) / a[2];// + r * Math.Pow((2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m)), 9);
 
-                //y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2] + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2]); //old version with pi and so on
-                y += a[i] * (m * L + (1.0 - m) * G) + r * (1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o))) ;// + (1.0 / (m * (1.0 - m))));       
-            }
+            //y += a[i] * (m * L + (1.0 - m) * G) / a[2] + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[1]-o)) + 1.0 / a[i+2]); //old version with pi and so on
+            y = a[0] * (m * L + (1.0 - m) * G) + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o))) ;// + (1.0 / (m * (1.0 - m))));       
         }
     }
 
 
     public class custom : LMAFunction
     {
+        LMAFunction f;
         GLS GLS = new GLS();
         GLP GLP = new GLP();
         GaussianFunction G_raw = new GaussianFunction();
@@ -172,18 +157,19 @@ namespace XPSFit
                 switch (Models[i / 4])
                 {
                     case "GLS":
-                        GLS.GetY(x, ref a_part, ref y, ref dyda_part, r);
+                        f = GLS;
                         break;
                     case "GLP":
-                        GLP.GetY(x, ref a_part, ref y, ref dyda_part, r);
+                        f = GLP;
                         break;
                     case "G":
-                        G_raw.GetY(x, ref a_part, ref y, ref dyda_part, r);
+                        f = G_raw;
                         break;
                     case "L":
-                        L_raw.GetY(x, ref a_part, ref y, ref dyda_part, r);
+                        f = L_raw;
                         break;                   
                 }
+                f.GetY(x, ref a_part, ref y, ref dyda_part, r);
                 y_old += y;
                 dyda[i] = dyda_part[0];
                 dyda[i + 1] = dyda_part[1];

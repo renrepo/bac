@@ -322,13 +322,8 @@ namespace XPSFit
                         break;
 
                     case ("GLS"):
-                        dgv_models[4, e.RowIndex].Value = 50;
-                        dgv_models[5, e.RowIndex].ReadOnly = true;
-                        dgv_models[4, e.RowIndex].ReadOnly = false;
-                        break;
-
                     case ("GLP"):
-                        dgv_models[4, e.RowIndex].Value = 70;
+                        dgv_models[4, e.RowIndex].Value = 50;
                         dgv_models[5, e.RowIndex].ReadOnly = true;
                         dgv_models[4, e.RowIndex].ReadOnly = false;
                         break;
