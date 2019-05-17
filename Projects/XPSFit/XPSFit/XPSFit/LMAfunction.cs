@@ -1,118 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace XPSFit
 {
+    /***
     interface ILMAFunction
     {
-        /// <summary>
-        /// Returns the y value of the function for
-        /// the given x and vector of parameters
-        /// </summary>
-        /// <param name="x">The <i>x</i>-value for which the <i>y</i>-value is calculated.</param>
-        /// <param name="a">The fitting parameters. </param>
-        /// <returns></returns>
         void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r);
-
-        /// <summary>
-        /// The method which gives the partial derivates used in the LMA fit.
-        /// If you can't calculate the derivate, use a small <code>a</code>-step (e.g., <i>da</i> = 1e-20)
-        /// and return <i>dy/da</i> at the given <i>x</i> for each fit parameter.
-        /// </summary>
-        /// <param name="x">The <i>x</i>-value for which the partial derivate is calculated.</param>
-        /// <param name="a">The fitting parameters.</param>
-        /// <param name="parameterIndex">The parameter index for which the partial derivate is calculated.</param>
-        /// <returns>The partial derivate of the function with respect to parameter <code>parameterIndex</code> at <i>x</i>.</returns>
-        //double GetPartialDerivative(double x, double[] a, int parameterIndex);
-
     }
+    ***/
 
-    public abstract class LMAFunction : ILMAFunction
+    public abstract class LMAFunction //: ILMAFunction
     {
-        /// <summary>
-        /// Returns the y value of the function for
-        /// the given x and vector of parameters
-        /// </summary>
-        /// <param name="x">The <i>x</i>-value for which the <i>y</i>-value is calculated.</param>
-        /// <param name="a">The fitting parameters. </param>
-        /// <returns></returns>
+        static public double ln = Math.Log(2.0);
+        static public double sqln = Math.Sqrt(ln);
+        static public double pi = Math.PI;
+        static public double sqpi = Math.Sqrt(pi);
+        static public double ln2 = 4.0 * ln;
+
         public abstract void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r);
-
-        /***
-        /// <summary>
-        /// The method which gives the partial derivates used in the LMA fit.
-        /// If you can't provide the functional derivative, use a small <code>a</code>-step (e.g., <i>da</i> = 1e-20)
-        /// and return <i>dy/da</i> at the given <i>x</i> for each fit parameter.
-        /// This is provided in the method below as a default implementation
-        /// </summary>
-        /// <param name="x">The <i>x</i>-value for which the partial derivate is calculated.</param>
-        /// <param name="a">The fitting parameters.</param>
-        /// <param name="parameterIndex">The parameter index for which the partial derivate is calculated.</param>
-        /// <returns>The partial derivative of the function with respect to parameter <code>parameterIndex</code> at <i>x</i>.</returns>
-        public virtual double GetPartialDerivative(double x, double[] a, int parameterIndex)
-        {
-            //kk 25 Jun 2010
-            //this value has been changed to 1*10-9 from 1*10-14 after a hint by a user
-            //who was having issues with convergence on some gaussian function
-
-            double delta = 0.000000001;
-            double[] newParam = new double[a.Length];
-            for (int i = 0; i < a.Length; i++)
-                newParam[i] = a[i];
-
-            newParam[parameterIndex] = a[parameterIndex] + delta;
-            double dplusResult = GetY(x, newParam);
-
-            newParam[parameterIndex] = a[parameterIndex] - delta;
-            double dminusResult = GetY(x, newParam);
-
-            double result = (dplusResult - dminusResult) / (2 * delta);
-
-            return result;
-        }
-        ***/
-
-        /// <summary>
-        /// Returns array of x,y values, given x and fitting parameters
-        /// used by all tests to generate test data for exact fits
-        /// </summary>
-        /// <param name="xValues">x values</param>
-        /// <param name="a">fitting parameters</param>
-        /// <returns>point values</returns>
-        public double[][] GenerateData(double[] a, double[] xValues)
-        {
-            double[] yValues = new double[xValues.Length];
-            double[] dy = new double[a.Length];
-
-            for (int i = 0; i < xValues.Length; i++)
-            {
-                GetY(xValues[i], ref a, ref yValues[i], ref dy, 0.0);
-                //yValues[i] = GetY(xValues[i], a) + i / 500.0;
-            }
-
-            return new double[][] { xValues, yValues };
-        }
-
-
     }
 
 
     public class GaussianFunction : LMAFunction
     {
+        int i, na;
+        double fac, ex, arg;
+
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
-            double ln = 4.0 * Math.Log(2.0);
-            int i, na = a.Count();
-            double fac, ex, arg;
+            na = a.Count();
             y = 0.0;
             for (i = 0; i < na - 1; i += 4)
             {
                 arg = (x - a[i + 1]) / a[i + 2];
-                ex = Math.Exp(-Math.Pow(arg, 2) * ln);
+                ex = Math.Exp(- arg * arg * ln);
                 fac = a[i] * ex * 2.0 * arg;
                 y += a[i] * ex;
                 dyda[i] = ex;
@@ -123,13 +45,14 @@ namespace XPSFit
     }
 
 
-
     public class LorentzianFunction : LMAFunction
     {
+        int i, na;
+        double arg, L, c, s, o, u;
+
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
-            int i, na = a.Count();
-            double arg, L, c, s, o ,u;
+            na = a.Count();
             y = 0.0;
             for (i = 0; i < na - 1; i += 4)
             {
@@ -154,16 +77,13 @@ namespace XPSFit
 
     public class GLP : LMAFunction
     {
+        int i, na;
+        double L, m, G, arg, c, sg, sl, o, u;
+
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
-            int i, na = a.Count();
-            double L, m, G, arg, c, s, sg, sl;
-            double u;
-            double o;
-            y = 0.0;
-            double ln2 =  4.0 * Math.Log(2.0);
-
-            
+            na = a.Count();
+            y = 0.0;         
             for (i = 0; i < na - 1; i += 4)
             {
                 m = a[i + 3];
@@ -186,26 +106,19 @@ namespace XPSFit
                 //y += a[i] * (m * L + (1.0 - m) * G) / a[i + 2];// + (100.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[i + 1]-o)) + 1.0 / a[i+2]);
                 y += a[i] * L * G + r * (1.0 / a[i] + 1.0 / a[i + 2] + (u - o) / ((a[i + 1] - u) * (a[i + 1] - o)));// + (1.0 / (m * (1.0 - m))));       
             }
-
         }
     }
 
 
     public class GLS : LMAFunction
     {
+        int i, na;
+        double L, m, G, arg, c, s, u, o;
+
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
-            int i, na = a.Count();
-            double L, m, G, arg, c, s, sg, sl;
-            double u;
-            double o;
+            na = a.Count();
             y = 0.0;
-            double ln = Math.Log(2.0);
-            double sqln = Math.Sqrt(ln);
-            double pi = Math.PI;
-            double sqpi = Math.Sqrt(pi);
-
-
             for (i = 0; i < na - 1; i += 4)
             {
                 arg = (x - a[i + 1]) / a[i + 2];

@@ -29,10 +29,13 @@ namespace XPSFit
         #endregion //-----------------------------------------------
 
 
+
+
+
         #region Constructor
 
         public LMA(LMAFunction f, ref double[] xx, ref double[] yy, ref double[] ssig,
-                ref double[] aa, double TOL = 0.001)
+                ref double[] aa, double TOL = 0.002)
         {
             this.ndat = xx.Count();
             this.ma = aa.Count();
@@ -81,8 +84,6 @@ namespace XPSFit
         }
 
         #endregion //-----------------------------------------------
-
-
 
 
 

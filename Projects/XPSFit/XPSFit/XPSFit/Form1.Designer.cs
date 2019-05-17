@@ -35,6 +35,17 @@
             this.dgv_bg_sel = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_bg_model = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_models = new System.Windows.Forms.DataGridView();
+            this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_area = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_area_perc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_c = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_s = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_models_m = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_tester = new System.Windows.Forms.Button();
             this.cb_Bg_Sub = new System.Windows.Forms.CheckBox();
             this.btn_fit = new System.Windows.Forms.Button();
@@ -47,17 +58,8 @@
             this.lb_iter = new System.Windows.Forms.Label();
             this.lb_time_text = new System.Windows.Forms.Label();
             this.lb_time = new System.Windows.Forms.Label();
-            this.dgv_models_models = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_models_amp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_cen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_wid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_mix = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_area = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_area_perc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_A = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_c = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_s = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_models_m = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lb_chisq_text = new System.Windows.Forms.Label();
+            this.lb_chisq = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +76,7 @@
             // 
             // btn_open
             // 
-            this.btn_open.Location = new System.Drawing.Point(13, 13);
+            this.btn_open.Location = new System.Drawing.Point(13, 12);
             this.btn_open.Name = "btn_open";
             this.btn_open.Size = new System.Drawing.Size(70, 35);
             this.btn_open.TabIndex = 1;
@@ -84,7 +86,7 @@
             // 
             // btn_close
             // 
-            this.btn_close.Location = new System.Drawing.Point(90, 13);
+            this.btn_close.Location = new System.Drawing.Point(12, 53);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(70, 35);
             this.btn_close.TabIndex = 2;
@@ -146,136 +148,8 @@
             this.dgv_models.Size = new System.Drawing.Size(710, 154);
             this.dgv_models.TabIndex = 4;
             this.dgv_models.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_models_CellClick);
+            this.dgv_models.CellStateChanged += new System.Windows.Forms.DataGridViewCellStateChangedEventHandler(this.dgv_models_CellStateChanged);
             this.dgv_models.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgv_models_KeyUp);
-            // 
-            // btn_tester
-            // 
-            this.btn_tester.Location = new System.Drawing.Point(166, 13);
-            this.btn_tester.Name = "btn_tester";
-            this.btn_tester.Size = new System.Drawing.Size(70, 35);
-            this.btn_tester.TabIndex = 6;
-            this.btn_tester.Text = "TEST";
-            this.btn_tester.UseVisualStyleBackColor = true;
-            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
-            // 
-            // cb_Bg_Sub
-            // 
-            this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cb_Bg_Sub.AutoSize = true;
-            this.cb_Bg_Sub.Location = new System.Drawing.Point(508, 136);
-            this.cb_Bg_Sub.Name = "cb_Bg_Sub";
-            this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
-            this.cb_Bg_Sub.TabIndex = 8;
-            this.cb_Bg_Sub.Text = "BG-Sub.";
-            this.cb_Bg_Sub.UseVisualStyleBackColor = true;
-            this.cb_Bg_Sub.CheckedChanged += new System.EventHandler(this.cb_Bg_Sub_CheckedChanged);
-            // 
-            // btn_fit
-            // 
-            this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_fit.Location = new System.Drawing.Point(608, 112);
-            this.btn_fit.Name = "btn_fit";
-            this.btn_fit.Size = new System.Drawing.Size(55, 47);
-            this.btn_fit.TabIndex = 9;
-            this.btn_fit.Text = "F I T";
-            this.btn_fit.UseVisualStyleBackColor = true;
-            this.btn_fit.Click += new System.EventHandler(this.btn_fit_Click);
-            // 
-            // cb_disc
-            // 
-            this.cb_disc.Appearance = System.Windows.Forms.Appearance.Button;
-            this.cb_disc.AutoSize = true;
-            this.cb_disc.Enabled = false;
-            this.cb_disc.Location = new System.Drawing.Point(568, 136);
-            this.cb_disc.Name = "cb_disc";
-            this.cb_disc.Size = new System.Drawing.Size(36, 23);
-            this.cb_disc.TabIndex = 11;
-            this.cb_disc.Text = "disc";
-            this.cb_disc.UseVisualStyleBackColor = true;
-            this.cb_disc.CheckedChanged += new System.EventHandler(this.cb_disc_CheckedChanged);
-            // 
-            // comb_disc
-            // 
-            this.comb_disc.FormattingEnabled = true;
-            this.comb_disc.Items.AddRange(new object[] {
-            "20",
-            "50",
-            "100",
-            "200",
-            "400",
-            "500",
-            "1000"});
-            this.comb_disc.Location = new System.Drawing.Point(557, 111);
-            this.comb_disc.Name = "comb_disc";
-            this.comb_disc.Size = new System.Drawing.Size(47, 21);
-            this.comb_disc.TabIndex = 12;
-            // 
-            // tb_chi2
-            // 
-            this.tb_chi2.Location = new System.Drawing.Point(508, 112);
-            this.tb_chi2.Name = "tb_chi2";
-            this.tb_chi2.Size = new System.Drawing.Size(46, 20);
-            this.tb_chi2.TabIndex = 13;
-            // 
-            // btn_save_fig
-            // 
-            this.btn_save_fig.Location = new System.Drawing.Point(243, 13);
-            this.btn_save_fig.Name = "btn_save_fig";
-            this.btn_save_fig.Size = new System.Drawing.Size(74, 35);
-            this.btn_save_fig.TabIndex = 14;
-            this.btn_save_fig.Text = "Save Fig.";
-            this.btn_save_fig.UseVisualStyleBackColor = true;
-            this.btn_save_fig.Click += new System.EventHandler(this.btn_save_fig_Click);
-            // 
-            // btn_find_m
-            // 
-            this.btn_find_m.Location = new System.Drawing.Point(429, 124);
-            this.btn_find_m.Name = "btn_find_m";
-            this.btn_find_m.Size = new System.Drawing.Size(73, 35);
-            this.btn_find_m.TabIndex = 15;
-            this.btn_find_m.Text = "Find m";
-            this.btn_find_m.UseVisualStyleBackColor = true;
-            this.btn_find_m.Click += new System.EventHandler(this.btn_find_m_Click);
-            // 
-            // lb_iter_text
-            // 
-            this.lb_iter_text.AutoSize = true;
-            this.lb_iter_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_iter_text.Location = new System.Drawing.Point(403, 13);
-            this.lb_iter_text.Name = "lb_iter_text";
-            this.lb_iter_text.Size = new System.Drawing.Size(60, 15);
-            this.lb_iter_text.TabIndex = 16;
-            this.lb_iter_text.Text = "Iterations:";
-            // 
-            // lb_iter
-            // 
-            this.lb_iter.AutoSize = true;
-            this.lb_iter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_iter.Location = new System.Drawing.Point(465, 13);
-            this.lb_iter.Name = "lb_iter";
-            this.lb_iter.Size = new System.Drawing.Size(19, 15);
-            this.lb_iter.TabIndex = 17;
-            this.lb_iter.Text = "---";
-            // 
-            // lb_time_text
-            // 
-            this.lb_time_text.AutoSize = true;
-            this.lb_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time_text.Location = new System.Drawing.Point(403, 26);
-            this.lb_time_text.Name = "lb_time_text";
-            this.lb_time_text.Size = new System.Drawing.Size(64, 15);
-            this.lb_time_text.TabIndex = 18;
-            this.lb_time_text.Text = "Time [ms]:";
-            // 
-            // lb_time
-            // 
-            this.lb_time.AutoSize = true;
-            this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time.Location = new System.Drawing.Point(465, 26);
-            this.lb_time.Name = "lb_time";
-            this.lb_time.Size = new System.Drawing.Size(19, 15);
-            this.lb_time.TabIndex = 19;
-            this.lb_time.Text = "---";
             // 
             // dgv_models_models
             // 
@@ -355,11 +229,168 @@
             this.dgv_models_m.ReadOnly = true;
             this.dgv_models_m.Width = 60;
             // 
+            // btn_tester
+            // 
+            this.btn_tester.Location = new System.Drawing.Point(166, 13);
+            this.btn_tester.Name = "btn_tester";
+            this.btn_tester.Size = new System.Drawing.Size(70, 35);
+            this.btn_tester.TabIndex = 6;
+            this.btn_tester.Text = "TEST";
+            this.btn_tester.UseVisualStyleBackColor = true;
+            this.btn_tester.Click += new System.EventHandler(this.btn_tester_Click);
+            // 
+            // cb_Bg_Sub
+            // 
+            this.cb_Bg_Sub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_Bg_Sub.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cb_Bg_Sub.AutoSize = true;
+            this.cb_Bg_Sub.Location = new System.Drawing.Point(508, 136);
+            this.cb_Bg_Sub.Name = "cb_Bg_Sub";
+            this.cb_Bg_Sub.Size = new System.Drawing.Size(57, 23);
+            this.cb_Bg_Sub.TabIndex = 8;
+            this.cb_Bg_Sub.Text = "BG-Sub.";
+            this.cb_Bg_Sub.UseVisualStyleBackColor = true;
+            this.cb_Bg_Sub.CheckedChanged += new System.EventHandler(this.cb_Bg_Sub_CheckedChanged);
+            // 
+            // btn_fit
+            // 
+            this.btn_fit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_fit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_fit.Location = new System.Drawing.Point(608, 112);
+            this.btn_fit.Name = "btn_fit";
+            this.btn_fit.Size = new System.Drawing.Size(55, 47);
+            this.btn_fit.TabIndex = 9;
+            this.btn_fit.Text = "F I T";
+            this.btn_fit.UseVisualStyleBackColor = true;
+            this.btn_fit.Click += new System.EventHandler(this.btn_fit_Click);
+            // 
+            // cb_disc
+            // 
+            this.cb_disc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cb_disc.Appearance = System.Windows.Forms.Appearance.Button;
+            this.cb_disc.AutoSize = true;
+            this.cb_disc.Enabled = false;
+            this.cb_disc.Location = new System.Drawing.Point(568, 136);
+            this.cb_disc.Name = "cb_disc";
+            this.cb_disc.Size = new System.Drawing.Size(36, 23);
+            this.cb_disc.TabIndex = 11;
+            this.cb_disc.Text = "disc";
+            this.cb_disc.UseVisualStyleBackColor = true;
+            this.cb_disc.CheckedChanged += new System.EventHandler(this.cb_disc_CheckedChanged);
+            // 
+            // comb_disc
+            // 
+            this.comb_disc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.comb_disc.FormattingEnabled = true;
+            this.comb_disc.Items.AddRange(new object[] {
+            "20",
+            "50",
+            "100",
+            "200",
+            "400",
+            "500",
+            "1000"});
+            this.comb_disc.Location = new System.Drawing.Point(557, 111);
+            this.comb_disc.Name = "comb_disc";
+            this.comb_disc.Size = new System.Drawing.Size(47, 21);
+            this.comb_disc.TabIndex = 12;
+            // 
+            // tb_chi2
+            // 
+            this.tb_chi2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_chi2.Location = new System.Drawing.Point(508, 112);
+            this.tb_chi2.Name = "tb_chi2";
+            this.tb_chi2.Size = new System.Drawing.Size(46, 20);
+            this.tb_chi2.TabIndex = 13;
+            // 
+            // btn_save_fig
+            // 
+            this.btn_save_fig.Location = new System.Drawing.Point(13, 94);
+            this.btn_save_fig.Name = "btn_save_fig";
+            this.btn_save_fig.Size = new System.Drawing.Size(70, 35);
+            this.btn_save_fig.TabIndex = 14;
+            this.btn_save_fig.Text = "Save Fig.";
+            this.btn_save_fig.UseVisualStyleBackColor = true;
+            this.btn_save_fig.Click += new System.EventHandler(this.btn_save_fig_Click);
+            // 
+            // btn_find_m
+            // 
+            this.btn_find_m.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_find_m.Location = new System.Drawing.Point(429, 124);
+            this.btn_find_m.Name = "btn_find_m";
+            this.btn_find_m.Size = new System.Drawing.Size(73, 35);
+            this.btn_find_m.TabIndex = 15;
+            this.btn_find_m.Text = "Find m";
+            this.btn_find_m.UseVisualStyleBackColor = true;
+            this.btn_find_m.Click += new System.EventHandler(this.btn_find_m_Click);
+            // 
+            // lb_iter_text
+            // 
+            this.lb_iter_text.AutoSize = true;
+            this.lb_iter_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_iter_text.Location = new System.Drawing.Point(403, 13);
+            this.lb_iter_text.Name = "lb_iter_text";
+            this.lb_iter_text.Size = new System.Drawing.Size(60, 15);
+            this.lb_iter_text.TabIndex = 16;
+            this.lb_iter_text.Text = "Iterations:";
+            // 
+            // lb_iter
+            // 
+            this.lb_iter.AutoSize = true;
+            this.lb_iter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_iter.Location = new System.Drawing.Point(465, 13);
+            this.lb_iter.Name = "lb_iter";
+            this.lb_iter.Size = new System.Drawing.Size(19, 15);
+            this.lb_iter.TabIndex = 17;
+            this.lb_iter.Text = "---";
+            // 
+            // lb_time_text
+            // 
+            this.lb_time_text.AutoSize = true;
+            this.lb_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time_text.Location = new System.Drawing.Point(403, 26);
+            this.lb_time_text.Name = "lb_time_text";
+            this.lb_time_text.Size = new System.Drawing.Size(64, 15);
+            this.lb_time_text.TabIndex = 18;
+            this.lb_time_text.Text = "Time [ms]:";
+            // 
+            // lb_time
+            // 
+            this.lb_time.AutoSize = true;
+            this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_time.Location = new System.Drawing.Point(465, 26);
+            this.lb_time.Name = "lb_time";
+            this.lb_time.Size = new System.Drawing.Size(19, 15);
+            this.lb_time.TabIndex = 19;
+            this.lb_time.Text = "---";
+            // 
+            // lb_chisq_text
+            // 
+            this.lb_chisq_text.AutoSize = true;
+            this.lb_chisq_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_chisq_text.Location = new System.Drawing.Point(406, 45);
+            this.lb_chisq_text.Name = "lb_chisq_text";
+            this.lb_chisq_text.Size = new System.Drawing.Size(41, 15);
+            this.lb_chisq_text.TabIndex = 20;
+            this.lb_chisq_text.Text = "Chisq:";
+            // 
+            // lb_chisq
+            // 
+            this.lb_chisq.AutoSize = true;
+            this.lb_chisq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_chisq.Location = new System.Drawing.Point(465, 45);
+            this.lb_chisq.Name = "lb_chisq";
+            this.lb_chisq.Size = new System.Drawing.Size(19, 15);
+            this.lb_chisq.TabIndex = 21;
+            this.lb_chisq.Text = "---";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 961);
+            this.Controls.Add(this.lb_chisq);
+            this.Controls.Add(this.lb_chisq_text);
             this.Controls.Add(this.lb_time);
             this.Controls.Add(this.lb_time_text);
             this.Controls.Add(this.lb_iter);
@@ -420,6 +451,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_c;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_s;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_models_m;
+        private System.Windows.Forms.Label lb_chisq_text;
+        private System.Windows.Forms.Label lb_chisq;
     }
 }
 
