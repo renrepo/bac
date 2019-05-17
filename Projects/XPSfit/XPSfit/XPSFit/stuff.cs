@@ -7,6 +7,7 @@ using ZedGraph;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
 
 namespace XPSFit
 {
@@ -70,7 +71,7 @@ namespace XPSFit
             Data_name = Name;
             tc_zgc = Tc_zgc;
             initial_zgc();
-            Draw_Line(x,y,Data_name, "dot", "noline");
+            Draw_Line(x,y,Data_name, SymbolType.Plus, false, Color.ForestGreen);
             myPane_plots.XAxis.Scale.Min = x[0];
             myPane_plots.XAxis.Scale.Max = x[x.Count - 1];
         }
@@ -145,23 +146,11 @@ namespace XPSFit
             zgc_residuals.AxisChange();
         }
 
-        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, string Symboltype, string Line)
+        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, SymbolType Symboltype, bool Line, Color col)
         {
             LineItem LI;
-            SymbolType st = SymbolType.None;
-            Color col = Color.Black;
-            
-            switch (Symboltype)
-            {
-                case "none":
-                    st = SymbolType.None;
-                    col = Color.Black;
-                    break;
-                case "dot":
-                    st = SymbolType.Plus;
-                    col = Color.ForestGreen;
-                    break;                
-            }
+            //SymbolType st = SymbolType.None;
+           
 
             if (List_LineItem.Contains(List_LineItem.Find(a => a.Tag.ToString() == tag)))
             {
@@ -170,30 +159,23 @@ namespace XPSFit
                 var index = List_LineItem.FindIndex(a => a == LI);
                 List_LineItem.Remove(LI);
                 myPane_plots.CurveList.Remove(LI);
-                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
+                var LI_new = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, Symboltype);
                 LI_new.Tag = LI_tag;
                 List_LineItem.Insert(index, LI_new);
                 LI = LI_new;
             }
             else
             {
-                LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, st);
+                LI = myPane_plots.AddCurve("", x_values.ToArray(), y_values.ToArray(), col, Symboltype);
                 LI.Tag = tag ?? Data_name;
                 List_LineItem.Add(LI);
                 
             }
-            switch (Line)
-            {
-                case "line":
-                    LI.Line.IsVisible = true;
-                    //LI.Line.Fill = new Fill(Color.White, Color.DarkMagenta, 45F);
-                    break;
-                case "noline":
-                    LI.Line.IsVisible = false;
-                    break;
-            }
+
+            LI.Line.IsVisible = Line;
+
             LI.IsSelectable = true;
-            LI.Symbol.Size = 1;
+            LI.Symbol.Size = 2;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
             return LI;
@@ -412,11 +394,11 @@ namespace XPSFit
             {
                 case "Shirley":
                     erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), "none", "line");
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
                     break;
                 case "Linear":
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), "none", "line");
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
                     break;
             }
 
@@ -446,11 +428,12 @@ namespace XPSFit
         }
 
 
-        public void save_data()
+        public string save_data()
         {
+            string path = String.Empty;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Png Image|*.png";
-            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.Filter = "JPeg Image|*.jpg|Png Image|*.png";
+            saveFileDialog1.Title = Data_name.ToString();
             saveFileDialog1.ShowDialog();
 
             // If the file name is not an empty string open it for saving.  
@@ -467,20 +450,21 @@ namespace XPSFit
                     case 1:
                         myPane_plots.GetImage().Save(fs,
                            System.Drawing.Imaging.ImageFormat.Jpeg);
+                        myPane_residuals.GetImage().Save(fs,
+                          System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
 
                     case 2:
                         myPane_plots.GetImage().Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-
-                    case 3:
-                        myPane_plots.GetImage().Save(fs,
                            System.Drawing.Imaging.ImageFormat.Png);
+                        myPane_residuals.GetImage().Save(fs,
+                          System.Drawing.Imaging.ImageFormat.Png);
                         break;
                 }
+                path = fs.Name;
                 fs.Close();
             }
+            return path;
         }
 
         #endregion //-------------------------------------------------------------------------------------

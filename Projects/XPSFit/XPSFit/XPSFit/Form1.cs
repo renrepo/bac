@@ -63,8 +63,7 @@ namespace XPSFit
 
 
         private void btn_tester_Click(object sender, EventArgs e)
-        {
-            //fit(new double[]{ 40000.0, 368.4, 1.0, 1.0, 82.0, 40000.0, 374.2, 1.0, 1.0, 22.0 }); 
+        { 
             var x = Curr_S.x;
             var y = Curr_S.y;
             List<double> x_stripped = new List<double>();
@@ -101,37 +100,34 @@ namespace XPSFit
             tc_zgc.Selecting += new TabControlCancelEventHandler(Tc_zgc_Selecting);
             tc_zgc.Selected += new TabControlEventHandler(Tc_zgc_Selected);
             dgv_bg.CurrentCellDirtyStateChanged += new EventHandler(dgv_bg_CurrentCellDirtyStateChanged);
-            dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);
-            dgv_bg[1, 0].Value = "Shirley";
-
+            dgv_bg.CellValueChanged += new DataGridViewCellEventHandler(dgv_bg_CellValueChanged);          
             dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
             dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
-            dgv_models[0, 0].Value = "GLS";
-            //dgv_models[5, 0].Value = "#############";
-            dgv_models[4, 0].Value = String.Empty;
 
+            dgv_bg[1, 0].Value = "Shirley"; // some default values;
+            dgv_models[0, 0].Value = "GLS";
+            dgv_models[4, 0].Value = String.Empty;
             comb_disc.SelectedIndex = 1;
         }
 
         private void btn_open_Click(object sender, EventArgs e)
         {
-            var data = m.get_values_to_plot();
+            var data = m.get_values_to_plot(); // get x and y values and filename
 
             if (data == null || data.Item1.Count == 0 || data.Item2.Count == 0) return;
             dgv_bg.Enabled = dgv_models.Enabled = cb_disc.Enabled = true;
-            if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3);
+            if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3); // switch to tab if dataset is already loaded
             else
             {
-                //if (Curr_S != null) save_input();
-                list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc));
-                Curr_S = list_stuff[list_stuff.Count - 1];
-                Curr_S.Bg_Sub.Add(new double[data.Item2.Count]);
+                list_stuff.Add(new stuff(data.Item1, data.Item2, data.Item3, tc_zgc)); // create new instance of stuff-class
+                Curr_S = list_stuff[list_stuff.Count - 1];                              // Curr_S = this new instance
+                Curr_S.Bg_Sub.Add(new double[data.Item2.Count]); // Bg array with length = number of datapoints, each element = 0
                 for (int i = 0; i < data.Item2.Count; i++)
                 {
                     Curr_S.Bg_Sub[0][i] = 0;
                 }
-                dgv_models.Rows.Clear();
-                dgv_models[0, 0].Value = "GLS";
+                dgv_models.Rows.Clear();    // clear dgv_models, remove entries from previous fits
+                dgv_models[0, 0].Value = "GLS"; // default 
             }
         }
 
@@ -155,10 +151,7 @@ namespace XPSFit
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_bg.Rows[e.RowIndex].Cells[1];
             DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_bg.Rows[e.RowIndex].Cells[0];
 
-            if (cb.Value == null)
-            {
-                return;
-            }
+            if (cb.Value == null) return;
 
             if (cb.State == DataGridViewElementStates.Selected)
             {
@@ -253,33 +246,20 @@ namespace XPSFit
         private void Tc_zgc_SelectedIndexChanged(object sender, TabControlEventArgs e)
         {
             Curr_S = tc_zgc.TabPages.Count > 0 ?  list_stuff.Find(a => a.Data_name == (sender as TabControl).SelectedTab.Name) : null; // select current stuff-instance
-            /***
-            if (Curr_S != null)
-            {
-                var rows = Curr_S.data.GetLength(0);
-                var cols = Curr_S.data.GetLength(1);
-                for (int i = 0; i < rows; i++)
-                {
-                    for (int j = 0; j < cols; j++)
-                    {
-                        dgv_models[j, i].Value = Curr_S.data[i, j];
-                    }
-                }
-            }
-            ***/
         }
 
 
         private void Tc_zgc_Selected(object sender, TabControlEventArgs e)
         {
-            //Curr_S = tc_zgc.TabPages.Count > 0 ? list_stuff.Find(a => a.Data_name == (sender as TabControl).SelectedTab.Name) : null; // select current stuff-instance
             load_input();
         }
+
 
         private void Tc_zgc_Selecting(object sender, TabControlCancelEventArgs e)
         {
             save_input();
         }
+
 
         private void cb_Bg_Sub_CheckedChanged(object sender, EventArgs e)
         {
@@ -301,8 +281,7 @@ namespace XPSFit
                     erg.Add(sum);
                     res.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
                     sum = 0.0;
-                }
-                
+                }              
                 tc_zgc.Refresh();
                 Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
@@ -310,10 +289,8 @@ namespace XPSFit
 
             if (!cb_Bg_Sub.Checked)
             {
-                foreach (var item in Curr_S.List_LineItem)
-                {
-                    item.IsVisible = true;
-                }
+                foreach (var item in Curr_S.List_LineItem) item.IsVisible = true;
+
                 Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
                 Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = SystemColors.Control;
@@ -330,36 +307,30 @@ namespace XPSFit
         private void dgv_models_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewComboBoxCell cb = (DataGridViewComboBoxCell)dgv_models.Rows[e.RowIndex].Cells[0];
-            //DataGridViewCheckBoxCell cc = (DataGridViewCheckBoxCell)dgv_models.Rows[e.RowIndex].Cells[0];
-
 
             if (cb.State == DataGridViewElementStates.Selected && cb.Value != null)
             {
                 dgv_models.CurrentCellDirtyStateChanged -= new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
                 dgv_models.CellValueChanged -= new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
 
-
                 switch (cb.Value)
                 {
                     case ("G"):
                     case ("L"):
                         dgv_models[4, e.RowIndex].Value = (cb.Value.ToString() == "G") ? 100 : 0;
-                        //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].ReadOnly = dgv_models[5, e.RowIndex].ReadOnly = true;
-                        //if (get_paras(e.RowIndex, 3) != null) para.Add(get_paras(e.RowIndex, 3));
                         break;
 
                     case ("GLS"):
-                        //dgv_models[5, e.RowIndex].Value = "##########";
                         dgv_models[4, e.RowIndex].Value = 50;
                         dgv_models[5, e.RowIndex].ReadOnly = true;
-                        //if (get_paras(e.RowIndex, 4) != null) para.Add(get_paras(e.RowIndex, 4));
+                        dgv_models[4, e.RowIndex].ReadOnly = false;
                         break;
 
                     case ("GLP"):
                         dgv_models[4, e.RowIndex].Value = 70;
                         dgv_models[5, e.RowIndex].ReadOnly = true;
-                        //if (get_paras(e.RowIndex, 5) != null) para.Add(get_paras(e.RowIndex, 5));
+                        dgv_models[4, e.RowIndex].ReadOnly = false;
                         break;
 
                     case ("Remove"):                       
@@ -400,8 +371,6 @@ namespace XPSFit
                 Curr_S.x = erg.Item1;
                 Curr_S.y = erg.Item2;
                 discret = true;
-                //double[] c = new double[11];
-                //Curr_S.SavGol(Curr_S.x, Curr_S.y, c, 11, 5, 5, 0, 4);
             }
             else
             {
@@ -412,7 +381,6 @@ namespace XPSFit
                 cb_disc.BackColor = System.Drawing.SystemColors.Control;
                 discret = false;
             }
-
         }
 
 
@@ -429,6 +397,7 @@ namespace XPSFit
             List<double> residuals = new List<double>();
             List<double> x_temp = new List<double>();
             List<double> y_temp = new List<double>();
+            List<string> models = new List<string>();
             List<double> bg = new List<double>(); // total background (sum of all partial backgrounds)
 
             Stopwatch sw = new Stopwatch();
@@ -462,14 +431,21 @@ namespace XPSFit
             double[] x_crop = x_temp.ToArray();
 
             double[] w = new double[x_crop.Length];
-            //for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y_crop[i])))); // weighting
             for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i]))); // weighting
 
+            /***
             if (dgv_models[0, 0].Value.ToString() == "GLP") f = new GLP();
             else if (dgv_models[0, 0].Value.ToString() == "GLS") f = new GLS();
             else if (dgv_models[0, 0].Value.ToString() == "L") f = new LorentzianFunction();
             else if (dgv_models[0, 0].Value.ToString() == "G") f = new GaussianFunction();
             else f = new GLS();
+            ***/
+
+            f = new custom();
+
+            for (int i = 0; i < num_models; i++) models.Add(dgv_models[0,i].Value.ToString());
+
+            f.Models = models.ToArray();
 
             LMA algorithm = new LMA(f, ref x_crop, ref y_crop, ref w, ref a);
 
@@ -490,7 +466,7 @@ namespace XPSFit
             lb_iter.Text = algorithm.Iter.ToString();
 
             // get 2D-List containing each model-parameters
-            for (int i = 0; i < num_models; i++) a_split[i] = new double[] { a[i * 4], a[i * 4 + 1], a[i * 4 + 2], a[i * 4 + 3] }; 
+            for (int i = 0; i < num_models; i++) a_split[i] = new double[] { paras[i * 4], paras[i * 4 + 1], paras[i * 4 + 2], paras[i * 4 + 3] }; 
 
             double[] dummy = new double[na]; // dummy parameters for dyda in f.GetY (not needed here)
 
@@ -546,15 +522,10 @@ namespace XPSFit
 
        
         private void dgv_models_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
+        {           
            Hide_Bg_Selection();
-
            DataGridView dgv = sender as DataGridView;
-           int row = dgv.CurrentCell.RowIndex;
-           int column = dgv.CurrentCell.ColumnIndex;
-           Draw_initial(dgv, row, column);
-           
+           Draw_initial(dgv, dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex);        
         }
 
 
@@ -619,13 +590,12 @@ namespace XPSFit
             {
                 tryparse = double.TryParse(dgv_models[i + 1,rowindex].Value.ToString().Replace(",", "."), System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double value);
 
-                if (tryparse && value >= 0)
-                {
-                    paras[i] = (i == 2) ? (value / 2.0) : (i == 3) ? (value / 100.0) : value;
-                }
+                //if (tryparse && value >= 0) paras[i] = (i == 2) ? (value / 2.0) : (i == 3) ? (value / 100.0) : value;
+                if (tryparse && value >= 0) paras[i] = (i == 3) ? (value / 100.0) : value;
                 else
                 {
-                    MessageBox.Show("Type in Numbers for Fitparameters."); return null;
+                    MessageBox.Show("Type in Numbers for Fitparameters.");
+                    return null;
                 }         
             }
             return paras;
@@ -677,8 +647,6 @@ namespace XPSFit
                 {
                     if (dgv[i, row].Value == null || dgv[i, row].Value.ToString() == "") return;
                 }
-                //double[] x = Curr_S.x.ToArray();
-                //double[] y = Curr_S.y.ToArray();
 
                 erg = get_paras(row);
                 if (Curr_S.paras.Count > 5 * row)
