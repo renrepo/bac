@@ -35,7 +35,7 @@ namespace XPSFit
         #region Constructor
 
         public LMA(LMAFunction f, ref double[] xx, ref double[] yy, ref double[] ssig,
-                ref double[] aa, double TOL = 0.002)
+                ref double[] aa, double TOL = 0.005)
         {
             this.ndat = xx.Count();
             this.ma = aa.Count();
@@ -149,6 +149,7 @@ namespace XPSFit
                     }
                 }
                 mrqcof(ref atry, ref covar, ref da, iter);
+                Console.WriteLine("Diff {0}    Max {1}",Math.Abs(chisq - ochisq), tol * chisq);
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {

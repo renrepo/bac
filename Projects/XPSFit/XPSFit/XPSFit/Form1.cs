@@ -93,6 +93,9 @@ namespace XPSFit
 
 
         #region Events
+        
+
+        
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -108,6 +111,13 @@ namespace XPSFit
             dgv_models[0, 0].Value = "GLS";
             dgv_models[4, 0].Value = String.Empty;
             comb_disc.SelectedIndex = 1;
+
+            System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
+            toolTip1.SetToolTip(btn_open, "Open file");
+            toolTip1.SetToolTip(btn_save_fig, "Save data");
+            toolTip1.SetToolTip(btn_close, "Close Tab");
+            toolTip1.SetToolTip(btn_fit, "Start Fit \n[Strg + Enter]");
+            cb_weight.SelectedIndex = 0;
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -426,21 +436,26 @@ namespace XPSFit
             double[] x_crop = x_temp.ToArray();
 
             double[] w = new double[x_crop.Length];
-            for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i]))); // weighting
 
-            /***
-            if (dgv_models[0, 0].Value.ToString() == "GLP") f = new GLP();
-            else if (dgv_models[0, 0].Value.ToString() == "GLS") f = new GLS();
-            else if (dgv_models[0, 0].Value.ToString() == "L") f = new LorentzianFunction();
-            else if (dgv_models[0, 0].Value.ToString() == "G") f = new GaussianFunction();
-            else f = new GLS();
-            ***/
+            switch (cb_weight.Text.ToString())
+            {
+                case "sq":
+                    for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i])));
+                    break;
+                case "sqsq":
+                    for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y_crop[i]))));
+                    break;
+                case "one":
+                    for (int i = 0; i < x_crop.Count(); i++) w[i] = 1.0;
+                    break;
+            }
 
-            f = new custom();
+            for (int i = 0; i < num_models; i++) models.Add(dgv_models[0, i].Value.ToString());
 
-            for (int i = 0; i < num_models; i++) models.Add(dgv_models[0,i].Value.ToString());
-
-            f.Models = models.ToArray();
+            f = new custom
+            {
+                Models = models.ToArray()
+            };
 
             LMA algorithm = new LMA(f, ref x_crop, ref y_crop, ref w, ref a);
 
@@ -457,8 +472,21 @@ namespace XPSFit
             Curr_S.fit_results.Clear(); // fit results needed for Draw_initial method (switch between initial and final plot when mouse on dgv_models cells)
             Curr_S.fit_results.AddRange(paras);
 
-            tb_chi2.Text = Math.Round(algorithm.RedChi2, 2).ToString();
+            lb_chisq.Text = Math.Round(algorithm.RedChi2, 2).ToString();
             lb_iter.Text = algorithm.Iter.ToString();
+
+            if (algorithm.Iter == 255) // pictures showing fit ok/not ok
+            {
+                pb_fit_result.Image = new Bitmap("not_ok.png");
+                lb_fit_converge.Text = "Max \nIteration";
+                lb_fit_converge.BackColor = Color.Transparent;
+            }
+            else
+            {
+                pb_fit_result.Image = new Bitmap("ok.png");
+                lb_fit_converge.Text = "Fit OK";
+                lb_fit_converge.BackColor = Color.Transparent;
+            }
 
             // get 2D-List containing each model-parameters
             for (int i = 0; i < num_models; i++) a_split[i] = new double[] { paras[i * 4], paras[i * 4 + 1], paras[i * 4 + 2], paras[i * 4 + 3] }; 
@@ -509,6 +537,14 @@ namespace XPSFit
             }
 
             lb_time.Text = sw.Elapsed.TotalMilliseconds.ToString("0");
+            tc_zgc.Refresh();
+            dgv_models.Refresh();
+            lb_iter.Refresh();
+            lb_time.Refresh();
+            lb_chisq.Refresh();
+            lb_fit_converge.Refresh();
+            pb_fit_result.Refresh();
+
             Cursor.Current = Cursors.Default;
 
             return algorithm.RedChi2;
@@ -552,6 +588,25 @@ namespace XPSFit
             }
             oldrow = curr_row;
             oldcol = curr_col;
+        }
+
+
+        private void cb_energy_calib_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_energy_calib.Checked)
+            {
+                bool m = Double.TryParse(tb_energy_calib_meas.Text, out double meas);
+                bool t = Double.TryParse(tb_energy_calib_true.Text, out double truee);
+                if (m && t)
+                {
+                    Console.WriteLine("OK");
+                }
+            }
+
+            if (!cb_energy_calib.Checked)
+            {
+
+            }
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -654,7 +709,10 @@ namespace XPSFit
                     Curr_S.paras.AddRange(erg);
                 }
 
-                LMAFunction f = new GLS();
+                LMAFunction f = new custom
+                {
+                    Models = new string[] { dgv_models[0, row].Value.ToString() }
+                };
 
                 double[] parameters;
                 if (Curr_S.fit_results.Count > 5 * row && column > 4)
@@ -703,6 +761,7 @@ namespace XPSFit
 
         private void btn_save_fig_Click(object sender, EventArgs e)
         {
+            if (Curr_S == null) return;
             var path = Curr_S.save_data();
             if (path == String.Empty) return;
             using (var file = new StreamWriter(path + ".txt", true))
@@ -744,8 +803,6 @@ namespace XPSFit
                     double p = i / 100.0;
                     double redchi = fit(pars, p);
                     Redchi_list.Add(redchi);
-                    tc_zgc.Refresh();
-                    dgv_models.Refresh();
                 }
                 int min = 1 + Redchi_list.IndexOf(Redchi_list.Min()) * 7;
                 int start = (min == 99) ? (min == 1) ? 93 : 0 : min - 6;
@@ -755,10 +812,6 @@ namespace XPSFit
                     double p = i / 100.0;
                     double redchi = fit(pars, p);
                     Redchi_list.Add(redchi);
-                    tc_zgc.Refresh();
-                    dgv_models.Refresh();
-                    lb_iter.Refresh();
-                    lb_time.Refresh();
                 }
                 int result = Redchi_list.IndexOf(Redchi_list.Min()) + start;
                 Console.WriteLine("Minimum m = {0} at Residual STD {1}", result, Redchi_list.Min());
@@ -768,9 +821,26 @@ namespace XPSFit
         }
 
 
+
         #endregion
-        
-        
+
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (Control.ModifierKeys == Keys.Control)
+                {
+                    if (Curr_S == null || Curr_S.paras == null) return;
+                    if (Curr_S != null && Curr_S.paras.Count > 0)
+                    {
+                        Hide_Bg_Selection();
+                        Curr_S.Remove_Line("kommt noch");
+                        fit(Curr_S.paras.ToArray(), -1.0);
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -780,6 +850,8 @@ namespace XPSFit
  * --- TODO ---
  * weights
  * Sicherung Shirley-BG-Range > Fitrange !
+ * m-fit fnzt noch nicht ganz..
+ * Models cb Änderung -> Plot ändern
  * ***/
 
 
