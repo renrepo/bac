@@ -30,9 +30,6 @@ namespace XPSFit
         int oldcol = -1;
         bool discret = false;
 
-        List<double> x; // "global" x and y values;
-        List<double> y;
-
         #endregion //-------------------------------------------------------------------------------------
 
 
@@ -91,18 +88,7 @@ namespace XPSFit
             if (m && t)
             {
                 Curr_S.Shift(truee - meas);
-
-
-                /***
-                double[] x_shift = x.ToArray();
-                for (int i = 0; i < x_shift.Length; i++) // calcuölate shifted datapoints
-                {
-                    x_shift[i] += (truee - meas);
-                }
-                Curr_S.Draw_Line(x_shift.ToList(), y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen); //draw shifted datapoints
-                ***/
-            }
-            
+            }          
         }
 
 
@@ -145,8 +131,6 @@ namespace XPSFit
             var data = m.get_values_to_plot(); // get x and y values and filename
 
             if (data == null || data.Item1.Count == 0 || data.Item2.Count == 0) return;
-            x = data.Item1;
-            y = data.Item2;
             dgv_bg.Enabled = dgv_models.Enabled = cb_disc.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3); // switch to tab if dataset is already loaded
             else
@@ -168,6 +152,10 @@ namespace XPSFit
         {
             if (tc_zgc.SelectedTab != null) { list_stuff.Remove(Curr_S); tc_zgc.SelectedTab.Dispose(); }
             if (tc_zgc.TabPages.Count == 0) dgv_bg.Enabled = dgv_models.Enabled = false;
+            pb_fit_result.Image = null; // no image
+            lb_iter.Text = lb_time.Text = lb_chisq.Text = "---";
+            lb_fit_converge.Text = tb_energy_calib_meas.Text = tb_energy_calib_true.Text = string.Empty;
+            cb_energy_calib.CheckState = CheckState.Unchecked;
         }
 
 
@@ -305,18 +293,18 @@ namespace XPSFit
                     item.IsVisible = false;
                 }
                 List<double> erg = new List<double>();
-                for (int i = 0; i < y.Count; i++)
+                for (int i = 0; i < Curr_S.y.Count; i++)
                 {
                     for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                     {
                         sum += Curr_S.Bg_Sub[j][i];
                     }
                     erg.Add(sum);
-                    res.Add(sum == 0 ? 0 : y[i] - sum);
+                    res.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
                     sum = 0.0;
                 }              
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
@@ -325,7 +313,7 @@ namespace XPSFit
                 foreach (var item in Curr_S.List_LineItem) item.IsVisible = true;
 
                 Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
-                Curr_S.Draw_Line(x, y, Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = SystemColors.Control;
             }
         }
@@ -390,21 +378,21 @@ namespace XPSFit
         {
             if (cb_disc.Checked)
             {
-                var erg = Curr_S.discreter(x, y, Convert.ToInt32(comb_disc.SelectedItem));
+                var erg = Curr_S.discreter(Curr_S.x, Curr_S.y, Convert.ToInt32(comb_disc.SelectedItem));
                 Curr_S.Hide_Line(Curr_S.Data_name);
                 Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", SymbolType.Plus, false, Color.ForestGreen);
-                Curr_S.x_temp = x;
-                Curr_S.y_temp = y;
-                x = erg.Item1;
-                y = erg.Item2;
+                Curr_S.x_temp = Curr_S.x;
+                Curr_S.y_temp = Curr_S.y;
+                Curr_S.x = erg.Item1;
+                Curr_S.y = erg.Item2;
                 discret = true;
             }
             else
             {
-                x = Curr_S.x_temp;
-                y = Curr_S.y_temp;
+                Curr_S.x = Curr_S.x_temp;
+                Curr_S.y = Curr_S.y_temp;
                 Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
-                Curr_S.Draw_Line(x, y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen);
                 discret = false;
             }
         }
@@ -435,8 +423,8 @@ namespace XPSFit
             var AreaSum = 0.0;
             double sum = 0.0;
 
-            double[] x_arr = x.ToArray();
-            double[] y_arr = y.ToArray();
+            double[] x_arr = Curr_S.x.ToArray();
+            double[] y_arr = Curr_S.y.ToArray();
 
 
             for (int i = 0; i < y_arr.Length; i++)
@@ -448,8 +436,8 @@ namespace XPSFit
                 bg.Add(sum);
                 if (sum != 0) // fit only values for which a background is selected
                 {
-                    y_temp.Add(y[i] - sum);
-                    x_temp.Add(x[i]);
+                    y_temp.Add(Curr_S.y[i] - sum);
+                    x_temp.Add(Curr_S.x[i]);
                 }
                 sum = 0.0;
             }
@@ -517,32 +505,32 @@ namespace XPSFit
             double yi = 0.0;
             for (int l = 0; l < x_arr.Length - 1; l++) // Calculate plot-values
             {
-                double xm = x[l];
-                double xp = x[l + 1];
+                double xm = Curr_S.x[l];
+                double xp = Curr_S.x[l + 1];
                 double y_sum = 0.0;
 
 
                 for (int j = 0; j < num_models; j++)
                 {
-                    f.GetY(x[l], ref a_split[j], ref yi, ref dummy, 0.0);
+                    f.GetY(Curr_S.x[l], ref a_split[j], ref yi, ref dummy, 0.0);
                     y_sum += yi;
                     Area[j] += (yi > 0 ? yi : -yi) * (xp > xm ? (xp - xm) : (xm - xp)); // calculate area of each peak seperately
                 }
 
                 if (bg[l] == 0) //fit values where no bg is selected
                 {
-                    y_fit_out.Add(y[l] + y_sum);
-                    x_fit_out.Add(x[l]);
+                    y_fit_out.Add(Curr_S.y[l] + y_sum);
+                    x_fit_out.Add(Curr_S.x[l]);
                 }
                 else
                 {
                     y_fit_in.Add(bg[l] + y_sum);
                 }
-                residuals.Add(bg[l] == 0 ? 0 : bg[l] + y_sum - y[l]); // full x-range damit residual-plot senkrecht über fit sichtbar              
+                residuals.Add(bg[l] == 0 ? 0 : bg[l] + y_sum - Curr_S.y[l]); // full x-range damit residual-plot senkrecht über fit sichtbar              
             }
             Curr_S.Draw_Line(x_crop.ToList(), y_fit_in, "Fit_in", SymbolType.None, true, Color.Black);
             Curr_S.Draw_Line(x_fit_out.ToList(), y_fit_out, "Fit_out", SymbolType.Circle, false, Color.LimeGreen);
-            Curr_S.Draw_Residuals(x.ToList(), residuals, "residuals");
+            Curr_S.Draw_Residuals(Curr_S.x.ToList(), residuals, "residuals");
 
             foreach (var item in Area) AreaSum += item; // Full area (sum of all peaks)
 
@@ -614,16 +602,7 @@ namespace XPSFit
 
         private void cb_energy_calib_CheckedChanged(object sender, EventArgs e)
         {
-            if (cb_energy_calib.Checked)
-            {
-                btn_tester.PerformClick();
-                
-            }
-
-            if (!cb_energy_calib.Checked)
-            {
-
-            }
+            if (cb_energy_calib.Checked) btn_tester.PerformClick();
         }
 
         #endregion //-------------------------------------------------------------------------------------
@@ -671,6 +650,7 @@ namespace XPSFit
 
         public void save_input()
         {
+            // Fit-Model stuff
             var rows = dgv_models.RowCount;
             var cols = dgv_models.ColumnCount;
             Curr_S.data = new string[rows, cols];
@@ -684,6 +664,24 @@ namespace XPSFit
             }
             dgv_models.Rows.Clear();
             dgv_models[0, 0].Value = "GLS";
+
+            // BG-stuff
+            var bg_rows = dgv_bg.RowCount; 
+            Curr_S.Bg_CheckState = new DataGridViewElementStates[bg_rows];
+            Curr_S.Bg_Labels = new string[bg_rows];
+            for (int i = 0; i < bg_rows; i++)
+            {
+                Curr_S.Bg_CheckState[i] = dgv_bg[0, i].State;
+                Curr_S.Bg_Labels[i] = dgv_bg[1, i].Value.ToString();
+            }
+            dgv_bg.Rows.Clear();
+            dgv_bg[1, 0].Value = "Shirley";
+
+            // Labels, Checkbox states, etc.
+            Curr_S.Energy_calib = new string[] { tb_energy_calib_meas.Text.ToString(), tb_energy_calib_true.Text.ToString() };
+            Curr_S.CheckState = new CheckState[] {cb_energy_calib.CheckState, cb_disc.CheckState, chb_weight.CheckState };
+            Curr_S.Labels = new string[] {lb_iter.Text, lb_time.Text, lb_chisq.Text, lb_fit_converge.Text};
+            Curr_S.Comboboxes = new string[] { cb_disc.Text.ToString() };
         }
 
 
@@ -698,6 +696,24 @@ namespace XPSFit
                 {
                     for (int j = 0; j < cols; j++) dgv_models[j, i].Value = Curr_S.data[i, j];
                 }
+                var bg_rows = Curr_S.Bg_Labels.Length;
+                for (int i = 0; i < bg_rows - 1; i++) dgv_bg.Rows.Add();
+                for (int j = 0; j < bg_rows; j++)
+                {
+                    dgv_bg[0, j].Value = Curr_S.Bg_CheckState[j] == DataGridViewElementStates.Selected ? "True" : "False";
+                    dgv_bg[1, j].Value = Curr_S.Bg_Labels[j];
+                }
+
+                tb_energy_calib_meas.Text = Curr_S.Energy_calib[0].ToString();
+                tb_energy_calib_true.Text = Curr_S.Energy_calib[1].ToString();
+                cb_energy_calib.CheckState = Curr_S.CheckState[0];
+                cb_disc.CheckState = Curr_S.CheckState[1];
+                chb_weight.CheckState = Curr_S.CheckState[2];
+                lb_iter.Text = Curr_S.Labels[0];
+                lb_time.Text = Curr_S.Labels[1];
+                lb_chisq.Text = Curr_S.Labels[2];
+                lb_fit_converge.Text = Curr_S.Labels[3];
+                cb_disc.Text = Curr_S.Comboboxes[0];
             }
         }
 
@@ -745,19 +761,19 @@ namespace XPSFit
                 double[] dy = new double[Curr_S.paras.Count()];
                 List<double> bg = new List<double>();
                 double sum = 0.0;
-                for (int i = 0; i < y.Count; i++)
+                for (int i = 0; i < Curr_S.y.Count; i++)
                 {
-                    var yi = y[i];
+                    var yi = Curr_S.y[i];
                     for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                     {
                         sum += Curr_S.Bg_Sub[j][i];
                     }
                     if (sum != 0)
                     {
-                        f.GetY(x[i], ref parameters, ref yi, ref dy, 0.0);
+                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy, 0.0);
                         yi += sum;
                         y_crop.Add(yi);
-                        x_crop.Add(x[i]);
+                        x_crop.Add(Curr_S.x[i]);
                         sum = 0.0;
                     }
                 }
@@ -784,7 +800,7 @@ namespace XPSFit
             using (var file = new StreamWriter(path + ".txt", true))
             {
                 file.WriteLine("Filename: {0}", Curr_S.Data_name);
-                file.WriteLine("Number of datapoints: {0}", x.Count() + "\n");
+                file.WriteLine("Number of datapoints: {0}", Curr_S.x.Count() + "\n");
                 if (discret) file.WriteLine("Energy stepwidth: {0}", cb_disc.Text.ToString());
 
                 for (int i = 0; i < dgv_models.ColumnCount; i++) file.Write(dgv_models.Columns[i].HeaderText.ToString() + "\t");
@@ -861,19 +877,9 @@ namespace XPSFit
 
         private void chb_weight_CheckStateChanged(object sender, EventArgs e)
         {
-            if (chb_weight.CheckState == CheckState.Indeterminate)
-            {
-                chb_weight.Text = "Weight SQ";
-            }
-            if (chb_weight.CheckState == CheckState.Checked)
-            {
-                chb_weight.Text = "Weight SQSQ";
-            }
-        
-            if (chb_weight.CheckState == CheckState.Unchecked)
-            {
-                chb_weight.Text = "Weight unity";
-            }
+            if (chb_weight.CheckState == CheckState.Indeterminate) chb_weight.Text = "Weight SQ";
+            if (chb_weight.CheckState == CheckState.Checked) chb_weight.Text = "Weight SQSQ";    
+            if (chb_weight.CheckState == CheckState.Unchecked) chb_weight.Text = "Weight unity";
             btn_fit.PerformClick();
         }
 

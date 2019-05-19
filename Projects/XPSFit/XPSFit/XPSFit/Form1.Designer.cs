@@ -146,7 +146,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgv_bg.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_bg.Enabled = false;
-            this.dgv_bg.Location = new System.Drawing.Point(508, 5);
+            this.dgv_bg.Location = new System.Drawing.Point(489, 5);
             this.dgv_bg.Name = "dgv_bg";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -156,7 +156,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_bg.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgv_bg.Size = new System.Drawing.Size(155, 79);
+            this.dgv_bg.Size = new System.Drawing.Size(174, 86);
             this.dgv_bg.TabIndex = 3;
             // 
             // dgv_bg_sel
@@ -475,7 +475,7 @@
             this.tableLayoutPanel1.Controls.Add(this.lb_time_text, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lb_chisq_text, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lb_time, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(508, 90);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(508, 98);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -486,7 +486,7 @@
             // 
             // pb_fit_result
             // 
-            this.pb_fit_result.Location = new System.Drawing.Point(629, 91);
+            this.pb_fit_result.Location = new System.Drawing.Point(629, 99);
             this.pb_fit_result.Name = "pb_fit_result";
             this.pb_fit_result.Size = new System.Drawing.Size(25, 25);
             this.pb_fit_result.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -497,7 +497,7 @@
             // 
             this.lb_fit_converge.AutoSize = true;
             this.lb_fit_converge.BackColor = System.Drawing.Color.Transparent;
-            this.lb_fit_converge.Location = new System.Drawing.Point(627, 123);
+            this.lb_fit_converge.Location = new System.Drawing.Point(627, 131);
             this.lb_fit_converge.Name = "lb_fit_converge";
             this.lb_fit_converge.Size = new System.Drawing.Size(0, 13);
             this.lb_fit_converge.TabIndex = 25;
@@ -594,7 +594,7 @@
             this.chb_weight.AutoSize = true;
             this.chb_weight.Checked = true;
             this.chb_weight.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chb_weight.Location = new System.Drawing.Point(409, 5);
+            this.chb_weight.Location = new System.Drawing.Point(145, 64);
             this.chb_weight.Name = "chb_weight";
             this.chb_weight.Size = new System.Drawing.Size(93, 17);
             this.chb_weight.TabIndex = 30;
