@@ -30,6 +30,9 @@ namespace XPSFit
         int oldcol = -1;
         bool discret = false;
 
+        List<double> x; // "global" x and y values;
+        List<double> y;
+
         #endregion //-------------------------------------------------------------------------------------
 
 
@@ -63,17 +66,17 @@ namespace XPSFit
 
 
         private void btn_tester_Click(object sender, EventArgs e)
-        { 
-            var x = Curr_S.x;
-            var y = Curr_S.y;
+        { /***
+            var x_ = Curr_S.x;
+            var y_ = Curr_S.y;
             List<double> x_stripped = new List<double>();
             List<double> y_stripped = new List<double>();
-            for (int i = 0; i < x.Count; i++)
+            for (int i = 0; i < x_.Count; i++)
             {
                 if (i % 10 == 0)
                 {
-                    x_stripped.Add(x[i]);
-                    y_stripped.Add(y[i]);
+                    x_stripped.Add(x_[i]);
+                    y_stripped.Add(y_[i]);
                 }
             }
             int lag = 15;
@@ -82,6 +85,24 @@ namespace XPSFit
 
             var output = ZScore.StartAlgo(y_stripped, lag, threshold, influence);
             Curr_S.Draw_Line(x_stripped, output.signals.Select(i => (double)i).ToList(), "zscore", SymbolType.Plus, true, Color.DarkOrange);
+            ***/
+            bool m = Double.TryParse(tb_energy_calib_meas.Text, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double meas);
+            bool t = Double.TryParse(tb_energy_calib_true.Text, System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.CultureInfo.InvariantCulture, out double truee);
+            if (m && t)
+            {
+                Curr_S.Shift(truee - meas);
+
+
+                /***
+                double[] x_shift = x.ToArray();
+                for (int i = 0; i < x_shift.Length; i++) // calcuölate shifted datapoints
+                {
+                    x_shift[i] += (truee - meas);
+                }
+                Curr_S.Draw_Line(x_shift.ToList(), y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen); //draw shifted datapoints
+                ***/
+            }
+            
         }
 
 
@@ -117,7 +138,6 @@ namespace XPSFit
             toolTip1.SetToolTip(btn_save_fig, "Save data");
             toolTip1.SetToolTip(btn_close, "Close Tab");
             toolTip1.SetToolTip(btn_fit, "Start Fit \n[Strg + Enter]");
-            cb_weight.SelectedIndex = 0;
         }
 
         private void btn_open_Click(object sender, EventArgs e)
@@ -125,6 +145,8 @@ namespace XPSFit
             var data = m.get_values_to_plot(); // get x and y values and filename
 
             if (data == null || data.Item1.Count == 0 || data.Item2.Count == 0) return;
+            x = data.Item1;
+            y = data.Item2;
             dgv_bg.Enabled = dgv_models.Enabled = cb_disc.Enabled = true;
             if (list_stuff.Contains(list_stuff.Find(a => a.Data_name == data.Item3))) tc_zgc.SelectTab(data.Item3); // switch to tab if dataset is already loaded
             else
@@ -273,6 +295,7 @@ namespace XPSFit
 
         private void cb_Bg_Sub_CheckedChanged(object sender, EventArgs e)
         {
+            if (Curr_S == null || Curr_S.paras.Count == 0) return;
             double sum = 0.0;
             List<double> res = new List<double>();
             if (cb_Bg_Sub.Checked)
@@ -282,18 +305,18 @@ namespace XPSFit
                     item.IsVisible = false;
                 }
                 List<double> erg = new List<double>();
-                for (int i = 0; i < Curr_S.y.Count; i++)
+                for (int i = 0; i < y.Count; i++)
                 {
                     for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                     {
                         sum += Curr_S.Bg_Sub[j][i];
                     }
                     erg.Add(sum);
-                    res.Add(sum == 0 ? 0 : Curr_S.y[i] - sum);
+                    res.Add(sum == 0 ? 0 : y[i] - sum);
                     sum = 0.0;
                 }              
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
@@ -302,7 +325,7 @@ namespace XPSFit
                 foreach (var item in Curr_S.List_LineItem) item.IsVisible = true;
 
                 Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(x, y, Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
                 cb_Bg_Sub.BackColor = SystemColors.Control;
             }
         }
@@ -367,23 +390,21 @@ namespace XPSFit
         {
             if (cb_disc.Checked)
             {
-                var erg = Curr_S.discreter(Curr_S.x, Curr_S.y, Convert.ToInt32(comb_disc.SelectedItem));
+                var erg = Curr_S.discreter(x, y, Convert.ToInt32(comb_disc.SelectedItem));
                 Curr_S.Hide_Line(Curr_S.Data_name);
                 Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", SymbolType.Plus, false, Color.ForestGreen);
-                cb_disc.BackColor = Color.MediumSpringGreen;
-                Curr_S.x_temp = Curr_S.x;
-                Curr_S.y_temp = Curr_S.y;
-                Curr_S.x = erg.Item1;
-                Curr_S.y = erg.Item2;
+                Curr_S.x_temp = x;
+                Curr_S.y_temp = y;
+                x = erg.Item1;
+                y = erg.Item2;
                 discret = true;
             }
             else
             {
-                Curr_S.x = Curr_S.x_temp;
-                Curr_S.y = Curr_S.y_temp;
+                x = Curr_S.x_temp;
+                y = Curr_S.y_temp;
                 Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y.ToList(), Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen);
-                cb_disc.BackColor = System.Drawing.SystemColors.Control;
+                Curr_S.Draw_Line(x, y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen);
                 discret = false;
             }
         }
@@ -414,11 +435,11 @@ namespace XPSFit
             var AreaSum = 0.0;
             double sum = 0.0;
 
-            double[] x = Curr_S.x.ToArray();
-            double[] y = Curr_S.y.ToArray();
+            double[] x_arr = x.ToArray();
+            double[] y_arr = y.ToArray();
 
 
-            for (int i = 0; i < y.Length; i++)
+            for (int i = 0; i < y_arr.Length; i++)
             {
                 for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                 {
@@ -437,17 +458,17 @@ namespace XPSFit
 
             double[] w = new double[x_crop.Length];
 
-            switch (cb_weight.Text.ToString())
+            if (chb_weight.CheckState == CheckState.Checked)
             {
-                case "sq":
-                    for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i])));
-                    break;
-                case "sqsq":
-                    for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y_crop[i]))));
-                    break;
-                case "one":
-                    for (int i = 0; i < x_crop.Count(); i++) w[i] = 1.0;
-                    break;
+                for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Sqrt(Math.Abs(y_crop[i]))));
+            }
+            if (chb_weight.CheckState == CheckState.Unchecked)
+            {
+                for (int i = 0; i < x_crop.Count(); i++) w[i] = 1.0;
+            }
+            if (chb_weight.CheckState == CheckState.Indeterminate)
+            {
+                for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i])));
             }
 
             for (int i = 0; i < num_models; i++) models.Add(dgv_models[0, i].Value.ToString());
@@ -478,7 +499,7 @@ namespace XPSFit
             if (algorithm.Iter == 255) // pictures showing fit ok/not ok
             {
                 pb_fit_result.Image = new Bitmap("not_ok.png");
-                lb_fit_converge.Text = "Max \nIteration";
+                lb_fit_converge.Text = "Max \nIter.";
                 lb_fit_converge.BackColor = Color.Transparent;
             }
             else
@@ -494,7 +515,7 @@ namespace XPSFit
             double[] dummy = new double[na]; // dummy parameters for dyda in f.GetY (not needed here)
 
             double yi = 0.0;
-            for (int l = 0; l < x.Length - 1; l++) // Calculate plot-values
+            for (int l = 0; l < x_arr.Length - 1; l++) // Calculate plot-values
             {
                 double xm = x[l];
                 double xp = x[l + 1];
@@ -595,12 +616,8 @@ namespace XPSFit
         {
             if (cb_energy_calib.Checked)
             {
-                bool m = Double.TryParse(tb_energy_calib_meas.Text, out double meas);
-                bool t = Double.TryParse(tb_energy_calib_true.Text, out double truee);
-                if (m && t)
-                {
-                    Console.WriteLine("OK");
-                }
+                btn_tester.PerformClick();
+                
             }
 
             if (!cb_energy_calib.Checked)
@@ -728,19 +745,19 @@ namespace XPSFit
                 double[] dy = new double[Curr_S.paras.Count()];
                 List<double> bg = new List<double>();
                 double sum = 0.0;
-                for (int i = 0; i < Curr_S.y.Count; i++)
+                for (int i = 0; i < y.Count; i++)
                 {
-                    var yi = Curr_S.y[i];
+                    var yi = y[i];
                     for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
                     {
                         sum += Curr_S.Bg_Sub[j][i];
                     }
                     if (sum != 0)
                     {
-                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy, 0.0);
+                        f.GetY(x[i], ref parameters, ref yi, ref dy, 0.0);
                         yi += sum;
                         y_crop.Add(yi);
-                        x_crop.Add(Curr_S.x[i]);
+                        x_crop.Add(x[i]);
                         sum = 0.0;
                     }
                 }
@@ -767,7 +784,7 @@ namespace XPSFit
             using (var file = new StreamWriter(path + ".txt", true))
             {
                 file.WriteLine("Filename: {0}", Curr_S.Data_name);
-                file.WriteLine("Number of datapoints: {0}", Curr_S.x.Count() + "\n");
+                file.WriteLine("Number of datapoints: {0}", x.Count() + "\n");
                 if (discret) file.WriteLine("Energy stepwidth: {0}", cb_disc.Text.ToString());
 
                 for (int i = 0; i < dgv_models.ColumnCount; i++) file.Write(dgv_models.Columns[i].HeaderText.ToString() + "\t");
@@ -841,6 +858,26 @@ namespace XPSFit
                 }
             }
         }
+
+        private void chb_weight_CheckStateChanged(object sender, EventArgs e)
+        {
+            if (chb_weight.CheckState == CheckState.Indeterminate)
+            {
+                chb_weight.Text = "Weight SQ";
+            }
+            if (chb_weight.CheckState == CheckState.Checked)
+            {
+                chb_weight.Text = "Weight SQSQ";
+            }
+        
+            if (chb_weight.CheckState == CheckState.Unchecked)
+            {
+                chb_weight.Text = "Weight unity";
+            }
+            btn_fit.PerformClick();
+        }
+
+
     }
 }
 

@@ -478,5 +478,27 @@ namespace XPSFit
 
 
         #endregion //-------------------------------------------------------------------------------------
+
+        public void Shift(double diff)
+        {
+            int n = 0;
+            PointPairList ppl = new PointPairList() ;
+            CurveList cl = myPane_plots.CurveList;
+
+            foreach (var item in cl)
+            {
+                var points = item.Points;
+                for (int i = 0; i < points.Count; i++)
+                {
+                    //points = new PointPairList(points[0], points[1]);
+                    ppl.Add(new PointPair(points[i].X + diff, points[i].Y));
+                }
+                points = ppl;
+                myPane_plots.CurveList[n].Points = ppl;
+                n++;
+            }
+            zgc_plots.Invalidate();
+            zgc_plots.AxisChange();
+        }
     }
 }
