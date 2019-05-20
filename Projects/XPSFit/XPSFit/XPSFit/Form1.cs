@@ -307,7 +307,7 @@ namespace XPSFit
                     sum = 0.0;
                 }              
                 tc_zgc.Refresh();
-                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(Curr_S.x, res , Curr_S.Data_name + "_bg_sub", SymbolType.Plus, false, Color.Black, -1);
                 cb_Bg_Sub.BackColor = Color.MediumSpringGreen;
             }
 
@@ -316,7 +316,7 @@ namespace XPSFit
                 foreach (var item in Curr_S.List_LineItem) item.IsVisible = true;
 
                 Curr_S.Hide_Line(Curr_S.Data_name + "_bg_sub");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.Black);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.Black, -1);
                 cb_Bg_Sub.BackColor = SystemColors.Control;
             }
         }
@@ -372,7 +372,11 @@ namespace XPSFit
         {
             if (Curr_S == null || Curr_S.paras == null) return;
             Hide_Bg_Selection();
-            if (Curr_S != null) Curr_S.Remove_Line("kommt noch");
+            if (Curr_S != null)
+            {
+                Curr_S.Remove_Line("kommt noch");
+                Curr_S.Remove_Line("Initial");
+            }
             if (Curr_S.paras.Count > 0) fit(Curr_S.paras.ToArray(), -1.0);     
         }
 
@@ -383,7 +387,7 @@ namespace XPSFit
             {
                 var erg = Curr_S.discreter(Curr_S.x, Curr_S.y, Convert.ToInt32(comb_disc.SelectedItem));
                 Curr_S.Hide_Line(Curr_S.Data_name);
-                Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", SymbolType.Plus, false, Color.ForestGreen);
+                Curr_S.Draw_Line(erg.Item1, erg.Item2, Curr_S.Data_name + "_disc", SymbolType.Plus, false, Color.ForestGreen, -1);
                 Curr_S.x_temp = Curr_S.x;
                 Curr_S.y_temp = Curr_S.y;
                 Curr_S.x = erg.Item1;
@@ -395,7 +399,7 @@ namespace XPSFit
                 Curr_S.x = Curr_S.x_temp;
                 Curr_S.y = Curr_S.y_temp;
                 Curr_S.Hide_Line(Curr_S.Data_name + "_disc");
-                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen);
+                Curr_S.Draw_Line(Curr_S.x, Curr_S.y, Curr_S.Data_name, SymbolType.Plus, false, Color.ForestGreen, -1);
                 discret = false;
             }
         }
@@ -462,7 +466,7 @@ namespace XPSFit
                 for (int i = 0; i < x_crop.Count(); i++) w[i] = Math.Max(1.0, Math.Sqrt(Math.Abs(y_crop[i])));
             }
 
-            for (int i = 0; i < num_models; i++) models.Add(dgv_models[0, i].Value.ToString());
+            for (int i = 0; i < num_models; i++) models.Add((dgv_models[0, i].Value ?? "").ToString());
 
             f = new custom { Models = models.ToArray() };
 
@@ -528,8 +532,8 @@ namespace XPSFit
                 }
                 residuals.Add(bg[l] == 0 ? 0 : bg[l] + y_sum - Curr_S.y[l]); // full x-range damit residual-plot senkrecht über fit sichtbar              
             }
-            Curr_S.Draw_Line(x_crop.ToList(), y_fit_in, "Fit_in", SymbolType.None, true, Color.Black);
-            Curr_S.Draw_Line(x_fit_out.ToList(), y_fit_out, "Fit_out", SymbolType.Circle, false, Color.LimeGreen);
+            Curr_S.Draw_Line(x_crop.ToList(), y_fit_in, "Fit_in", SymbolType.None, true, Color.Black, 1);
+            Curr_S.Draw_Line(x_fit_out.ToList(), y_fit_out, "Fit_out", SymbolType.Circle, false, Color.LimeGreen, -1);
             Curr_S.Draw_Residuals(Curr_S.x.ToList(), residuals, "residuals");
 
             foreach (var item in Area) AreaSum += item; // Full area (sum of all peaks)
@@ -571,7 +575,11 @@ namespace XPSFit
 
         private void Form1_Click(object sender, EventArgs e)
         {
-            if (Curr_S != null) Curr_S.Remove_Line("kommt noch");
+            if (Curr_S != null)
+            {
+                Curr_S.Remove_Line("kommt noch");
+                Curr_S.Remove_Line("Initial");
+            }         
         }
 
 
@@ -718,6 +726,10 @@ namespace XPSFit
         {
             if (Curr_S.Bg_Bounds.Count() < 2) return;
             double[] erg = new double[4];
+            int num_models = Curr_S.paras.Count() / 4;
+            double[][] a_split = new double[num_models][];
+            List<string> models = new List<string>();
+            List<double> y_all = new List<double>();
             if (dgv_models[0, row].Value != null)
             {
                 List<double> x_crop = new List<double>();
@@ -738,10 +750,11 @@ namespace XPSFit
                     Curr_S.paras.AddRange(erg);
                 }
 
-                LMAFunction f = new custom
-                {
-                    Models = new string[] { dgv_models[0, row].Value.ToString() }
-                };
+                LMAFunction f = new custom { Models = new string[] { dgv_models[0, row].Value.ToString() } };
+
+                for (int i = 0; i < num_models; i++) models.Add((dgv_models[0, i].Value ?? "").ToString());
+                LMAFunction fi = new custom { Models = models.ToArray() };
+                for (int i = 0; i < num_models; i++) a_split[i] = new double[] { Curr_S.paras[i * 4], Curr_S.paras[i * 4 + 1], Curr_S.paras[i * 4 + 2], Curr_S.paras[i * 4 + 3] };
 
                 double[] parameters;
                 if (Curr_S.fit_results.Count > 5 * row && column > 4)
@@ -757,6 +770,8 @@ namespace XPSFit
                 double[] dy = new double[Curr_S.paras.Count()];
                 List<double> bg = new List<double>();
                 double sum = 0.0;
+                double y_i = 0.0;
+                double y_sum = 0.0;
                 for (int i = 0; i < Curr_S.y.Count; i++)
                 {
                     var yi = Curr_S.y[i];
@@ -770,11 +785,19 @@ namespace XPSFit
                         yi += sum;
                         y_crop.Add(yi);
                         x_crop.Add(Curr_S.x[i]);
-                        sum = 0.0;
+                        
+                        for (int k = 0; k < num_models; k++)
+                        {
+                            fi.GetY(Curr_S.x[i], ref a_split[k], ref y_i, ref dy, 0.0);
+                            y_sum += y_i;
+                        }
+                        y_sum += sum;
+                        y_all.Add(y_sum);
+                        sum = y_sum = 0.0;
                     }
                 }
                 Curr_S.Remove_Line("kommt noch");
-                var LI = Curr_S.Draw_Line(x_crop, y_crop, "kommt noch", SymbolType.None, true, Color.Gold);
+                var LI = Curr_S.Draw_Line(x_crop, y_crop, "kommt noch", SymbolType.None, true, Color.Gold, 1);
                 //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
                 LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
                 //LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
@@ -783,9 +806,50 @@ namespace XPSFit
                 //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
                 var BG = Curr_S.List_LineItem.Find(a => a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
                 BG.Line.Fill = new Fill(Color.White);
+                Curr_S.Remove_Line("Initial");
+                var Initial = Curr_S.Draw_Line(Curr_S.x, y_all, "Initial", SymbolType.None, true, Color.DarkOrange, 1);
                 Curr_S.zgc_plots.Invalidate();
                 Curr_S.zgc_plots.AxisChange();
             }
+
+
+            /***
+            // Draw All
+            // get 2D-List containing each model-parameters ----------------------------------------------------------------------------------------------- TO BE IMPROVED!!!
+            List<string> models = new List<string>();
+            List<double> y_all = new List<double>();
+            int na = Curr_S.paras.Count();
+            int num_models = na / 4;
+            double[][] a_split = new double[num_models][];
+            double y_i = 0.0;
+            for (int i = 0; i < num_models; i++) a_split[i] = new double[] { Curr_S.paras[i * 4], Curr_S.paras[i * 4 + 1], Curr_S.paras[i * 4 + 2], Curr_S.paras[i * 4 + 3] };
+            double[] dummy = new double[na]; // dummy parameters for dyda in f.GetY (not needed here)
+
+            for (int i = 0; i < num_models; i++) models.Add((dgv_models[0, i].Value ?? "").ToString());
+
+            LMAFunction fi = new custom { Models = models.ToArray() };
+
+            double summ = 0.0;
+            for (int l = 0; l < Curr_S.x.Count() - 1; l++) // Calculate plot-values
+            {
+                var yi = Curr_S.y[l];
+                for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
+                {
+                    summ += Curr_S.Bg_Sub[j][l];
+                }
+                double y_sum = 0.0;
+                for (int j = 0; j < num_models; j++)
+                {
+                    fi.GetY(Curr_S.x[l], ref a_split[j], ref y_i, ref dummy, 0.0);
+                    y_sum += y_i;
+                }
+                y_sum += summ;
+                y_all.Add(y_sum);
+                y_sum = summ = 0.0;
+            }
+            Curr_S.Remove_Line("Initial");
+            var Initial = Curr_S.Draw_Line(Curr_S.x, y_all, "Initial", SymbolType.None, true, Color.Red);
+            ***/
         }
 
         private void btn_save_fig_Click(object sender, EventArgs e)
@@ -865,6 +929,7 @@ namespace XPSFit
                     {
                         Hide_Bg_Selection();
                         Curr_S.Remove_Line("kommt noch");
+                        Curr_S.Remove_Line("Initial");
                         fit(Curr_S.paras.ToArray(), -1.0);
                     }
                 }

@@ -81,7 +81,7 @@ namespace XPSFit
             Data_name = Name;
             tc_zgc = Tc_zgc;
             initial_zgc();
-            Draw_Line(x,y,Data_name, SymbolType.Plus, false, Color.ForestGreen);
+            Draw_Line(x,y,Data_name, SymbolType.Plus, false, Color.ForestGreen, -1);
             myPane_plots.XAxis.Scale.Min = x[0];
             myPane_plots.XAxis.Scale.Max = x[x.Count - 1];
         }
@@ -156,7 +156,7 @@ namespace XPSFit
             zgc_residuals.AxisChange();
         }
 
-        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, SymbolType Symboltype, bool Line, Color col)
+        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, SymbolType Symboltype, bool Line, Color col, int width)
         {
             LineItem LI;
             //SymbolType st = SymbolType.None;
@@ -183,6 +183,7 @@ namespace XPSFit
             }
 
             LI.Line.IsVisible = Line;
+            if (width != -1) LI.Line.Width = width;
 
             LI.IsSelectable = true;
             LI.Symbol.Size = 2;
@@ -404,11 +405,11 @@ namespace XPSFit
             {
                 case "Shirley":
                     erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black, 1);
                     break;
                 case "Linear":
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black, 1);
                     break;
             }
 
