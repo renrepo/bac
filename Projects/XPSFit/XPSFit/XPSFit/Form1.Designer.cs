@@ -80,6 +80,8 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.chb_weight = new System.Windows.Forms.CheckBox();
+            this.btn_copy_rows = new System.Windows.Forms.Button();
+            this.btn_paste_rows = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_bg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_models)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -404,7 +406,7 @@
             this.lb_iter_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_iter_text.Location = new System.Drawing.Point(3, 0);
             this.lb_iter_text.Name = "lb_iter_text";
-            this.lb_iter_text.Size = new System.Drawing.Size(54, 20);
+            this.lb_iter_text.Size = new System.Drawing.Size(64, 18);
             this.lb_iter_text.TabIndex = 16;
             this.lb_iter_text.Text = "Iterations:";
             // 
@@ -413,9 +415,9 @@
             this.lb_iter.AutoSize = true;
             this.lb_iter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_iter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_iter.Location = new System.Drawing.Point(63, 0);
+            this.lb_iter.Location = new System.Drawing.Point(73, 0);
             this.lb_iter.Name = "lb_iter";
-            this.lb_iter.Size = new System.Drawing.Size(39, 20);
+            this.lb_iter.Size = new System.Drawing.Size(39, 18);
             this.lb_iter.TabIndex = 17;
             this.lb_iter.Text = "---";
             // 
@@ -424,9 +426,9 @@
             this.lb_time_text.AutoSize = true;
             this.lb_time_text.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_time_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time_text.Location = new System.Drawing.Point(3, 20);
+            this.lb_time_text.Location = new System.Drawing.Point(3, 18);
             this.lb_time_text.Name = "lb_time_text";
-            this.lb_time_text.Size = new System.Drawing.Size(54, 20);
+            this.lb_time_text.Size = new System.Drawing.Size(64, 18);
             this.lb_time_text.TabIndex = 18;
             this.lb_time_text.Text = "Time [ms]:";
             // 
@@ -435,9 +437,9 @@
             this.lb_time.AutoSize = true;
             this.lb_time.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time.Location = new System.Drawing.Point(63, 20);
+            this.lb_time.Location = new System.Drawing.Point(73, 18);
             this.lb_time.Name = "lb_time";
-            this.lb_time.Size = new System.Drawing.Size(39, 20);
+            this.lb_time.Size = new System.Drawing.Size(39, 18);
             this.lb_time.TabIndex = 19;
             this.lb_time.Text = "---";
             // 
@@ -446,9 +448,9 @@
             this.lb_chisq_text.AutoSize = true;
             this.lb_chisq_text.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_chisq_text.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_chisq_text.Location = new System.Drawing.Point(3, 40);
+            this.lb_chisq_text.Location = new System.Drawing.Point(3, 36);
             this.lb_chisq_text.Name = "lb_chisq_text";
-            this.lb_chisq_text.Size = new System.Drawing.Size(54, 20);
+            this.lb_chisq_text.Size = new System.Drawing.Size(64, 18);
             this.lb_chisq_text.TabIndex = 20;
             this.lb_chisq_text.Text = "Chisq:";
             // 
@@ -457,9 +459,9 @@
             this.lb_chisq.AutoSize = true;
             this.lb_chisq.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lb_chisq.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_chisq.Location = new System.Drawing.Point(63, 40);
+            this.lb_chisq.Location = new System.Drawing.Point(73, 36);
             this.lb_chisq.Name = "lb_chisq";
-            this.lb_chisq.Size = new System.Drawing.Size(39, 20);
+            this.lb_chisq.Size = new System.Drawing.Size(39, 18);
             this.lb_chisq.TabIndex = 21;
             this.lb_chisq.Text = "---";
             // 
@@ -467,7 +469,7 @@
             // 
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.Controls.Add(this.lb_iter_text, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lb_iter, 1, 0);
@@ -475,13 +477,13 @@
             this.tableLayoutPanel1.Controls.Add(this.lb_time_text, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lb_chisq_text, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.lb_time, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(508, 98);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(505, 98);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(105, 60);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 18F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(115, 54);
             this.tableLayoutPanel1.TabIndex = 23;
             // 
             // pb_fit_result
@@ -603,11 +605,33 @@
             this.chb_weight.UseVisualStyleBackColor = true;
             this.chb_weight.CheckStateChanged += new System.EventHandler(this.chb_weight_CheckStateChanged);
             // 
+            // btn_copy_rows
+            // 
+            this.btn_copy_rows.Location = new System.Drawing.Point(408, 5);
+            this.btn_copy_rows.Name = "btn_copy_rows";
+            this.btn_copy_rows.Size = new System.Drawing.Size(75, 23);
+            this.btn_copy_rows.TabIndex = 31;
+            this.btn_copy_rows.Text = "Copy rows";
+            this.btn_copy_rows.UseVisualStyleBackColor = true;
+            this.btn_copy_rows.Click += new System.EventHandler(this.btn_copy_rows_Click);
+            // 
+            // btn_paste_rows
+            // 
+            this.btn_paste_rows.Location = new System.Drawing.Point(408, 31);
+            this.btn_paste_rows.Name = "btn_paste_rows";
+            this.btn_paste_rows.Size = new System.Drawing.Size(75, 23);
+            this.btn_paste_rows.TabIndex = 32;
+            this.btn_paste_rows.Text = "Paste rows";
+            this.btn_paste_rows.UseVisualStyleBackColor = true;
+            this.btn_paste_rows.Click += new System.EventHandler(this.btn_paste_rows_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 961);
+            this.Controls.Add(this.btn_paste_rows);
+            this.Controls.Add(this.btn_copy_rows);
             this.Controls.Add(this.chb_weight);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.tableLayoutPanel2);
@@ -692,6 +716,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.CheckBox chb_weight;
+        private System.Windows.Forms.Button btn_copy_rows;
+        private System.Windows.Forms.Button btn_paste_rows;
     }
 }
 

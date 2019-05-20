@@ -65,7 +65,7 @@ namespace XPSFit
             dyda[1] = c * s - r * (o - u) * (o + u - 2.0 * a[1]) / ((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
             dyda[2] = c * arg * s - r / (a[2] * a[2]);
 
-            y = a[0] * L + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));         
+            y = a[0] * L;// + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));         
         }
     }
 
@@ -96,7 +96,7 @@ namespace XPSFit
             dyda[3] = -4.0 * a[0] * arg * arg * L * L * G + a[0] * ln2 * arg * arg * G * L;// + r * (2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m));
 
             //y += a[0] * (m * L + (1.0 - m) * G) / a[2];// + (100.0/(m * (1.0 -m )) + 1.0/a[0] + (u - o)/((a[i+1]-u)*(a[1]-o)) + 1.0 / a[i+2]);
-            y = a[0] * L * G + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));// + (1.0 / (m * (1.0 - m))));                  
+            y = a[0] * L * G;// + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o)));// + (1.0 / (m * (1.0 - m))));                  
         }
     }
 
@@ -105,8 +105,12 @@ namespace XPSFit
     {
         int na;
         double L, m, G, arg, c, s, u, o;
+        double a2, a0;
         public override void GetY(double x, ref double[] a, ref double y, ref double[] dyda, double r)
         {
+            a2 = (a[2] > 0) ? a[2] : 0.00001;
+            a0 = (a[0] > 0) ? a[0] : 0.00001;
+
             na = a.Count();
             arg = (x - a[1]) / a[2];
             //G = Math.Exp(-ln * arg * arg) * sqln / sqpi;
@@ -114,22 +118,22 @@ namespace XPSFit
             G = Math.Exp(-ln2 * arg * arg);
             L = 1.0 / (1.0 + 4.0 * arg * arg);
             m = a[3];
-            c = 2.0 * a[0] * arg / a[2];
+            c = 2.0 * a0 * arg / a[2];
             s = sqln * G * (1.0 - m) + m * pi * L * L;
 
             u = a[1] - 2.0;
             o = a[1] + 2.0;
 
-            dyda[0] = (m * L + (1.0 - m) * G) / a[2] - r / (a[0] * a[0]);
+            dyda[0] = (m * L + (1.0 - m) * G) / a[2] - r / (a0 * a0);
             //dyda[i] = (m * L + (1.0 - m) * G) / a[2] - r / (a[i] * a[i]); //old version with pi and so on
             //dyda[1] = c * s / a[2] - r * (o-u)*(o+u-2.0*a[i+1])/((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
             dyda[1] = c * s - r * (o - u) * (o + u - 2.0 * a[1]) / ((a[1] - o) * (a[1] - o) * (u - a[1]) * (u - a[1]));
             //dyda[2] = - 1.0 / a[2] / a[2] * a[i] * (m * L + (1.0 - m) * G) + c * arg * s - r / (a[2] * a[2]); //old version with pi and so on
-            dyda[2] = c * arg * s - r / (a[2] * a[2]);
-            dyda[3] = a[0] * (L - G) / a[2];// + r * Math.Pow((2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m)), 9);
+            dyda[2] = c * arg * s - r / (a2 * a2);
+            dyda[3] = a0 * (L - G) / a2;// + r * Math.Pow((2.0 * m - 1.0) / (m * m * (1.0 - m) * (1.0 - m)), 9);
 
             //y += a[i] * (m * L + (1.0 - m) * G) / a[2] + (1.0/(m * (1.0 -m )) + 1.0/a[i] + (u - o)/((a[i+1]-u)*(a[1]-o)) + 1.0 / a[i+2]); //old version with pi and so on
-            y = a[0] * (m * L + (1.0 - m) * G) + r * (1.0 / a[0] + 1.0 / a[2] + (u - o) / ((a[1] - u) * (a[1] - o))) ;// + (1.0 / (m * (1.0 - m))));       
+            y = a0 * (m * L + (1.0 - m) * G);// + r * (1.0 / a0 + 1.0 / a2 + (u - o) / ((a[1] - u) * (a[1] - o))) ;// + (1.0 / (m * (1.0 - m))));       
         }
     }
 

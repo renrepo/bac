@@ -29,6 +29,7 @@ namespace XPSFit
         int oldrow = -1;
         int oldcol = -1;
         bool discret = false;
+        List<string[]> Rows_copy = new List<string[]>();
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -144,6 +145,8 @@ namespace XPSFit
                 }
                 dgv_models.Rows.Clear();    // clear dgv_models, remove entries from previous fits
                 dgv_models[0, 0].Value = "GLS"; // default 
+
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ To be added
             }
         }
 
@@ -461,10 +464,7 @@ namespace XPSFit
 
             for (int i = 0; i < num_models; i++) models.Add(dgv_models[0, i].Value.ToString());
 
-            f = new custom
-            {
-                Models = models.ToArray()
-            };
+            f = new custom { Models = models.ToArray() };
 
             LMA algorithm = new LMA(f, ref x_crop, ref y_crop, ref w, ref a);
 
@@ -656,11 +656,7 @@ namespace XPSFit
             Curr_S.data = new string[rows, cols];
             for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols; j++)
-                {
-                    var d = dgv_models[j, i].Value ?? "";
-                    Curr_S.data[i, j] = d.ToString();
-                }
+                for (int j = 0; j < cols; j++) Curr_S.data[i, j] = (dgv_models[j, i].Value ?? "").ToString();
             }
             dgv_models.Rows.Clear();
             dgv_models[0, 0].Value = "GLS";
@@ -883,7 +879,39 @@ namespace XPSFit
             btn_fit.PerformClick();
         }
 
+        private void btn_copy_rows_Click(object sender, EventArgs e)
+        {
+            Rows_copy.Clear();
+            var d = dgv_models.Rows;
+            string[] s;
+            for (int i = 0; i < d.Count; i++)
+            {
+                if (d[i].Selected && dgv_models[0, i].Value != null)
+                {
+                    s = new string[5];
+                    for (int j = 0; j < s.Count(); j++)
+                    {
+                        s[j] = (dgv_models[j, i].Value ?? "").ToString();
+                    }
+                    Rows_copy.Add(s);
+                }
+            }
+        }
 
+        private void btn_paste_rows_Click(object sender, EventArgs e)
+        {
+            if (Rows_copy == null || Rows_copy.Count() == 0) return;
+            int curr_rows = dgv_models.Rows.Count;
+            for (int i = 0; i < Rows_copy.Count(); i++) dgv_models.Rows.Add();
+            for (int i = 0; i < Rows_copy.Count(); i++)
+            {
+                for (int j = 0; j < Rows_copy[0].Count(); j++)
+                {
+                    dgv_models[j, curr_rows + i].Value = Rows_copy[i][j];
+                }               
+            }
+            dgv_models.Invalidate();
+        }
     }
 }
 

@@ -52,14 +52,18 @@ namespace XPSFit
         public double x_bg_right { get; set; }
         public List<double> x_temp { get; set; }
         public List<double> y_temp { get; set; }
-        //public List<List<string>> data { get; set; }
-        public string[,] data { get; set; }
+
+
+        public string[,] data { get; set; } // Saving Form1 entries for tab-switching
         public string[] Energy_calib { get; set; }
         public CheckState[] CheckState { get; set; }
         public string[] Labels { get; set; }
         public string[] Comboboxes { get; set; }
         public DataGridViewElementStates[] Bg_CheckState { get; set; }
         public string[] Bg_Labels { get; set; }
+
+        public List<string[]> Rows_copy { get; set; } // Copy and Paste entries in dgv_models
+
 
         #endregion //-------------------------------------------------------------------------------------
 

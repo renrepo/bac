@@ -35,7 +35,7 @@ namespace XPSFit
         #region Constructor
 
         public LMA(LMAFunction f, ref double[] xx, ref double[] yy, ref double[] ssig,
-                ref double[] aa, double TOL = 0.005)
+                ref double[] aa, double TOL = 0.001)
         {
             this.ndat = xx.Count();
             this.ma = aa.Count();
@@ -108,12 +108,14 @@ namespace XPSFit
             double[,] oneda = new double[mfit,1];
             double[,] temp = new double[mfit, mfit];
             mrqcof(ref a, ref alpha, ref beta, 0);
+            double r;
+            double frac_old = 0.0; //--------------------------Test
+            double frac = 0.0; //--------------------------Test
 
             for (j = 0; j < ma; j++) atry[j] = a[j];
             ochisq = chisq;
             for (iter = 0; iter < ITMAX; iter++)
             {
-                //Console.WriteLine("Iteration   {0}",iter);
                 if (done == NDONE) alambda = 0.0;
                 for (j = 0; j < mfit; j++)
                 {
@@ -136,8 +138,6 @@ namespace XPSFit
                 {
                     covstr(ref covar);
                     covstr(ref alpha);
-                    //A = a;
-                    //Chi2 = chisq;
                     return;
                 }
 
@@ -146,14 +146,25 @@ namespace XPSFit
                     if (ia[l])
                     {
                         atry[l] = a[l] + da[j++];
+                        //Console.WriteLine("i:  {0}, a[{0}]:  {1}, sum:  {2}", l, a[l], atry[l]);
                     }
                 }
-                mrqcof(ref atry, ref covar, ref da, iter);
-                Console.WriteLine("Diff {0}    Max {1}",Math.Abs(chisq - ochisq), tol * chisq);
+                //double r = (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001;
+                r = (done < 7) ? Math.Pow(2, 1 - done) : 0;
+                //r = (done < 13) ? Math.Pow(2,  - done) : 0;
+
+                Console.WriteLine("{0}---{1}---{2}----------------------",iter, r, done);
+                Console.WriteLine("{0}   {1}   {2}", a[0], a[1], a[2]);              
+                Console.WriteLine("Diff/Max {0}", frac);
+
+                mrqcof(ref atry, ref covar, ref da, r);
+
+                frac = Math.Abs(chisq - ochisq) / (tol * chisq);
+
                 if (Math.Abs(chisq - ochisq) < Math.Max(tol, tol * chisq)) done++;
                 if (chisq < ochisq) // success, accept new solution
                 {
-                    alambda *= 0.5;
+                    alambda *= 0.2;
                     ochisq = chisq;
                     for (j = 0; j < mfit; j++)
                     {
@@ -167,22 +178,19 @@ namespace XPSFit
                 }
                 else     // Failure, increase alambda.
                 {
-                    alambda *= 2;
+                    alambda *= 5;
                     chisq = ochisq;
                 }
+                Iter = iter;
+                
+                //Console.WriteLine("Iteration   {0}, Factor   {1}", iter, r);
             }
             //MessageBox.Show("Fitmrq too many iterations");        
         }
 
 
-        private void mrqcof(ref double[] a, ref double[,] alpha, ref double[] beta, int iter)
-        {
-            //double r = (iter > 2) ? (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001 : 1.0;
-            double r = (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001;
-            //double r = 1.0 / Math.Pow(2, iter - 2);
-            Iter = iter;
-            Console.WriteLine("Iteration   {0}, Factor   {1}" ,iter, r);
-            //double r = 1.0 / Math.Pow(10, done); //------------------------------------------------------------------------- Vary r-factor in penalty function
+        private void mrqcof(ref double[] a, ref double[,] alpha, ref double[] beta, double r)
+        {          
             int i, j, k, l, m = 0;
             double ymod = 0.0;
             double wt, sig2i, dy;
@@ -263,7 +271,7 @@ namespace XPSFit
                 {
                     MessageBox.Show("gaussj: Singular Matrix");
                     singular_matrix = true;
-                    break;
+                    return;
                 }
                 pivinv = 1.0 / a[icol, icol];
                 a[icol, icol] = 1.0;
