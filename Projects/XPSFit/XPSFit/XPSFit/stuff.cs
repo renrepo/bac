@@ -61,6 +61,7 @@ namespace XPSFit
         public string[] Comboboxes { get; set; }
         public DataGridViewElementStates[] Bg_CheckState { get; set; }
         public string[] Bg_Labels { get; set; }
+        public Image Image_Fit { get; set; }
 
         public List<string[]> Rows_copy { get; set; } // Copy and Paste entries in dgv_models
 
@@ -186,7 +187,7 @@ namespace XPSFit
             if (width != -1) LI.Line.Width = width;
 
             LI.IsSelectable = true;
-            LI.Symbol.Size = 2;
+            LI.Symbol.Size = 1;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
             return LI;

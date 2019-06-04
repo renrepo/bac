@@ -98,7 +98,7 @@ namespace XPSFit
         public void fit()
         {
             int j, k, l, iter, done = 0;
-            double alambda = 0.001;
+            double r, frac = 0.0, alambda = 0.001;
             double ochisq;
             double[] atry = new double[ma];
             double[] beta = new double[ma];
@@ -108,9 +108,6 @@ namespace XPSFit
             double[,] oneda = new double[mfit,1];
             double[,] temp = new double[mfit, mfit];
             mrqcof(ref a, ref alpha, ref beta, 0);
-            double r;
-            double frac_old = 0.0; //--------------------------Test
-            double frac = 0.0; //--------------------------Test
 
             for (j = 0; j < ma; j++) atry[j] = a[j];
             ochisq = chisq;
@@ -149,14 +146,15 @@ namespace XPSFit
                         //Console.WriteLine("i:  {0}, a[{0}]:  {1}, sum:  {2}", l, a[l], atry[l]);
                     }
                 }
-                //double r = (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001;
-                r = (done < 7) ? Math.Pow(2, 1 - done) : 0;
+                //double r = (iter < 16) ? 1.0 / Math.Pow(2, iter - 2) : 0.0001;              // Abhängigkeit von iter plus barrier function?
+                r = (done < 7) ? Math.Pow(2, 1 - done) : 0;                                   // vs. done ohne iter function? (done + barrier gibt max iter probleme)
                 //r = (done < 13) ? Math.Pow(2,  - done) : 0;
 
+                /***
                 Console.WriteLine("{0}---{1}---{2}----------------------",iter, r, done);
                 Console.WriteLine("{0}   {1}   {2}", a[0], a[1], a[2]);              
                 Console.WriteLine("Diff/Max {0}", frac);
-
+                ***/
                 mrqcof(ref atry, ref covar, ref da, r);
 
                 frac = Math.Abs(chisq - ochisq) / (tol * chisq);
@@ -182,8 +180,6 @@ namespace XPSFit
                     chisq = ochisq;
                 }
                 Iter = iter;
-                
-                //Console.WriteLine("Iteration   {0}, Factor   {1}", iter, r);
             }
             //MessageBox.Show("Fitmrq too many iterations");        
         }

@@ -115,10 +115,7 @@ namespace XPSFit
             dgv_models.CurrentCellDirtyStateChanged += new EventHandler(dgv_models_CurrentCellDirtyStateChanged);
             dgv_models.CellValueChanged += new DataGridViewCellEventHandler(dgv_models_CellValueChanged);
 
-            dgv_bg[1, 0].Value = "Shirley"; // some default values;
-            dgv_models[0, 0].Value = "GLS";
-            dgv_models[4, 0].Value = String.Empty;
-            comb_disc.SelectedIndex = 1;
+            clear_all();
 
             System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
             toolTip1.SetToolTip(btn_open, "Open file");
@@ -143,8 +140,11 @@ namespace XPSFit
                 {
                     Curr_S.Bg_Sub[0][i] = 0;
                 }
+                /***
                 dgv_models.Rows.Clear();    // clear dgv_models, remove entries from previous fits
                 dgv_models[0, 0].Value = "GLS"; // default 
+                ***/
+                clear_all();
 
                 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ To be added
             }
@@ -155,10 +155,13 @@ namespace XPSFit
         {
             if (tc_zgc.SelectedTab != null) { list_stuff.Remove(Curr_S); tc_zgc.SelectedTab.Dispose(); }
             if (tc_zgc.TabPages.Count == 0) dgv_bg.Enabled = dgv_models.Enabled = false;
+            /***
             pb_fit_result.Image = null; // no image
             lb_iter.Text = lb_time.Text = lb_chisq.Text = "---";
             lb_fit_converge.Text = tb_energy_calib_meas.Text = tb_energy_calib_true.Text = string.Empty;
             cb_energy_calib.CheckState = CheckState.Unchecked;
+            ***/
+            clear_all();
         }
 
 
@@ -535,12 +538,15 @@ namespace XPSFit
             Curr_S.Draw_Line(x_crop.ToList(), y_fit_in, "Fit_in", SymbolType.None, true, Color.Black, 1);
             Curr_S.Draw_Line(x_fit_out.ToList(), y_fit_out, "Fit_out", SymbolType.Circle, false, Color.LimeGreen, -1);
             Curr_S.Draw_Residuals(Curr_S.x.ToList(), residuals, "residuals");
+            double average = residuals.ToArray().Average();
+            double sd = Math.Sqrt(residuals.ToArray().Select(x => (x - average) * (x - average)).Sum() / (residuals.ToArray().Length - 1));
+            lb_res_std.Text = sd.ToString();
 
             foreach (var item in Area) AreaSum += item; // Full area (sum of all peaks)
 
             for (int i = 0; i < na; i += 4) // show fit results in dgv_models table
             {
-                for (int j = 5; j < 11; j++) dgv_models.Rows[i / 4].Cells[j].Style.ForeColor = Color.Gray;
+                //for (int j = 5; j < 11; j++) dgv_models.Rows[i / 4].Cells[j].Style.ForeColor = Color.Gray;
                 dgv_models[5, i / 4].Value = Math.Floor(Area[i / 4]); // Area              
                 dgv_models[6, i / 4].Value = Math.Round(Area[i / 4] / AreaSum * 100.0, 1); // Area in %
                 dgv_models[7, i / 4].Value = Math.Floor(paras[i]); // Amplitude
@@ -550,6 +556,7 @@ namespace XPSFit
             }
 
             lb_time.Text = sw.Elapsed.TotalMilliseconds.ToString("0");
+            /***
             tc_zgc.Refresh();
             dgv_models.Refresh();
             lb_iter.Refresh();
@@ -557,7 +564,8 @@ namespace XPSFit
             lb_chisq.Refresh();
             lb_fit_converge.Refresh();
             pb_fit_result.Refresh();
-
+            ***/
+            this.Refresh();
             Cursor.Current = Cursors.Default;
 
             return algorithm.RedChi2;
@@ -588,8 +596,20 @@ namespace XPSFit
             if (e.KeyCode == Keys.Enter)
             {
                 DataGridView dgv = sender as DataGridView;
-                Draw_initial(dgv, dgv.CurrentCell.RowIndex - 1, dgv.CurrentCell.ColumnIndex);
+                int row = dgv.CurrentCell.RowIndex - (dgv.CurrentCell.RowIndex) < 1 ? 0 : 1;
+                Draw_initial(dgv, row, dgv.CurrentCell.ColumnIndex); //here
             }
+        }
+
+        private void dgv_models_KeyDown(object sender, KeyEventArgs e)
+        {
+            /***
+            if (e.KeyCode == Keys.Enter)
+            {
+                DataGridView dgv = sender as DataGridView;
+                Draw_initial(dgv, dgv.CurrentCell.RowIndex, dgv.CurrentCell.ColumnIndex); //here
+            }
+            ***/
         }
 
 
@@ -666,9 +686,10 @@ namespace XPSFit
             {
                 for (int j = 0; j < cols; j++) Curr_S.data[i, j] = (dgv_models[j, i].Value ?? "").ToString();
             }
+            /***
             dgv_models.Rows.Clear();
             dgv_models[0, 0].Value = "GLS";
-
+            ***/
             // BG-stuff
             var bg_rows = dgv_bg.RowCount; 
             Curr_S.Bg_CheckState = new DataGridViewElementStates[bg_rows];
@@ -678,14 +699,17 @@ namespace XPSFit
                 Curr_S.Bg_CheckState[i] = dgv_bg[0, i].State;
                 Curr_S.Bg_Labels[i] = dgv_bg[1, i].Value.ToString();
             }
+            /***
             dgv_bg.Rows.Clear();
             dgv_bg[1, 0].Value = "Shirley";
-
+            ***/
             // Labels, Checkbox states, etc.
             Curr_S.Energy_calib = new string[] { tb_energy_calib_meas.Text.ToString(), tb_energy_calib_true.Text.ToString() };
             Curr_S.CheckState = new CheckState[] {cb_energy_calib.CheckState, cb_disc.CheckState, chb_weight.CheckState };
-            Curr_S.Labels = new string[] {lb_iter.Text, lb_time.Text, lb_chisq.Text, lb_fit_converge.Text};
-            Curr_S.Comboboxes = new string[] { cb_disc.Text.ToString() };
+            Curr_S.Labels = new string[] {lb_iter.Text, lb_time.Text, lb_chisq.Text, lb_fit_converge.Text, lb_res_std.Text};
+            Curr_S.Comboboxes = new string[] { comb_disc.Text.ToString() };
+            Curr_S.Image_Fit = pb_fit_result.Image;
+            clear_all();
         }
 
 
@@ -716,9 +740,30 @@ namespace XPSFit
                 lb_iter.Text = Curr_S.Labels[0];
                 lb_time.Text = Curr_S.Labels[1];
                 lb_chisq.Text = Curr_S.Labels[2];
+                lb_res_std.Text = Curr_S.Labels[3];
                 lb_fit_converge.Text = Curr_S.Labels[3];
-                cb_disc.Text = Curr_S.Comboboxes[0];
+                comb_disc.Text = Curr_S.Comboboxes[0];
+                pb_fit_result.Image = Curr_S.Image_Fit;
+                this.Refresh();
             }
+        }
+
+        private void clear_all()
+        {
+            dgv_bg.Rows.Clear();
+            dgv_models.Rows.Clear();
+            dgv_bg[1, 0].Value = "Shirley"; // some default values;
+            dgv_models[0, 0].Value = "GLS";
+            dgv_models[4, 0].Value = String.Empty;
+            comb_disc.SelectedIndex = 1;
+            tb_energy_calib_meas.Text = tb_energy_calib_true.Text = String.Empty;
+            chb_weight.CheckState = CheckState.Checked;
+            lb_iter.Text = lb_time.Text = lb_chisq.Text = "---";
+            lb_fit_converge.Text = String.Empty;
+            pb_fit_result.Image = null;
+            cb_energy_calib.CheckState = CheckState.Unchecked;
+            cb_disc.CheckState = CheckState.Unchecked;
+            this.Refresh();
         }
 
 
@@ -764,8 +809,7 @@ namespace XPSFit
                 else
                 {
                     parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray();
-                }
-                //double[] parameters = Curr_S.paras.GetRange(row * 4, 4).ToArray(); //----------------------------------------------------------0.75 va 1.5 SIGMA???????
+                }                
 
                 double[] dy = new double[Curr_S.paras.Count()];
                 List<double> bg = new List<double>();
@@ -781,12 +825,12 @@ namespace XPSFit
                     }
                     if (sum != 0)
                     {
-                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy, 0.0);
+                        f.GetY(Curr_S.x[i], ref parameters, ref yi, ref dy, 0.0); // selected curve
                         yi += sum;
                         y_crop.Add(yi);
                         x_crop.Add(Curr_S.x[i]);
                         
-                        for (int k = 0; k < num_models; k++)
+                        for (int k = 0; k < num_models; k++) // complete initial curve
                         {
                             fi.GetY(Curr_S.x[i], ref a_split[k], ref y_i, ref dy, 0.0);
                             y_sum += y_i;
@@ -798,58 +842,14 @@ namespace XPSFit
                 }
                 Curr_S.Remove_Line("kommt noch");
                 var LI = Curr_S.Draw_Line(x_crop, y_crop, "kommt noch", SymbolType.None, true, Color.Gold, 1);
-                //LI.Line.Fill = new Fill(Color.Coral, Color.LightCoral, 90F);
                 LI.Line.Fill = new Fill(Color.Gold, Color.Goldenrod, 90F);
-                //LI.Line.Fill = new Fill(Color.PeachPuff, Color.Peru, 90F);
-                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.DeepSkyBlue, 90F);
-                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.CornflowerBlue, 90F);
-                //LI.Line.Fill = new Fill(Color.LightSkyBlue, Color.SkyBlue, Color.DeepSkyBlue, 90F);
                 var BG = Curr_S.List_LineItem.Find(a => a.Tag.ToString() == Curr_S.Bg_tag_num.ToString());
                 BG.Line.Fill = new Fill(Color.White);
                 Curr_S.Remove_Line("Initial");
-                var Initial = Curr_S.Draw_Line(Curr_S.x, y_all, "Initial", SymbolType.None, true, Color.DarkOrange, 1);
+                var Initial = Curr_S.Draw_Line(x_crop, y_all, "Initial", SymbolType.None, true, Color.DarkOrange, 1);
                 Curr_S.zgc_plots.Invalidate();
                 Curr_S.zgc_plots.AxisChange();
             }
-
-
-            /***
-            // Draw All
-            // get 2D-List containing each model-parameters ----------------------------------------------------------------------------------------------- TO BE IMPROVED!!!
-            List<string> models = new List<string>();
-            List<double> y_all = new List<double>();
-            int na = Curr_S.paras.Count();
-            int num_models = na / 4;
-            double[][] a_split = new double[num_models][];
-            double y_i = 0.0;
-            for (int i = 0; i < num_models; i++) a_split[i] = new double[] { Curr_S.paras[i * 4], Curr_S.paras[i * 4 + 1], Curr_S.paras[i * 4 + 2], Curr_S.paras[i * 4 + 3] };
-            double[] dummy = new double[na]; // dummy parameters for dyda in f.GetY (not needed here)
-
-            for (int i = 0; i < num_models; i++) models.Add((dgv_models[0, i].Value ?? "").ToString());
-
-            LMAFunction fi = new custom { Models = models.ToArray() };
-
-            double summ = 0.0;
-            for (int l = 0; l < Curr_S.x.Count() - 1; l++) // Calculate plot-values
-            {
-                var yi = Curr_S.y[l];
-                for (int j = 0; j < Curr_S.Bg_Sub.Count; j++)
-                {
-                    summ += Curr_S.Bg_Sub[j][l];
-                }
-                double y_sum = 0.0;
-                for (int j = 0; j < num_models; j++)
-                {
-                    fi.GetY(Curr_S.x[l], ref a_split[j], ref y_i, ref dummy, 0.0);
-                    y_sum += y_i;
-                }
-                y_sum += summ;
-                y_all.Add(y_sum);
-                y_sum = summ = 0.0;
-            }
-            Curr_S.Remove_Line("Initial");
-            var Initial = Curr_S.Draw_Line(Curr_S.x, y_all, "Initial", SymbolType.None, true, Color.Red);
-            ***/
         }
 
         private void btn_save_fig_Click(object sender, EventArgs e)
@@ -909,6 +909,10 @@ namespace XPSFit
                 int result = Redchi_list.IndexOf(Redchi_list.Min()) + start;
                 Console.WriteLine("Minimum m = {0} at Residual STD {1}", result, Redchi_list.Min());
                 fit(pars, result / 100.0); // Plot final result
+                for (int i = 0; i < dgv_models.Rows.Count; i++)
+                {
+                    if (dgv_models[10, i].Value != null) dgv_models[4, i].Value = result;
+                }
             }
 
         }
@@ -988,6 +992,8 @@ namespace XPSFit
  * Sicherung Shirley-BG-Range > Fitrange !
  * m-fit fnzt noch nicht ganz..
  * Models cb Änderung -> Plot ändern
+ * strg + enter wrong initial-plot
+ * save load does not work for labels
  * ***/
 
 

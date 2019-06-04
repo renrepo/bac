@@ -62,11 +62,15 @@ namespace XPSFit
                     {
                         var lines = File.ReadLines(openFileDialog.FileName);
                         string[] lin;
+                        char[] delimiterChars = { ' ', ',', '\t' }; // allowed delimiter chars
                         foreach (var line in lines)
                         {
-                            lin = line.Split('\t');
-                            list_energy.Add(Convert.ToDouble(lin[0].Replace(',','.'), System.Globalization.CultureInfo.InvariantCulture));
-                            list_cps.Add(Convert.ToDouble(lin[1].Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture));
+                            if (line != null && line != "" && line != String.Empty)
+                            {
+                                lin = line.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+                                list_energy.Add(Convert.ToDouble(lin[0].Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture));
+                                list_cps.Add(Convert.ToDouble(lin[1].Replace(',', '.'), System.Globalization.CultureInfo.InvariantCulture));                          
+                            }
                         }
                         file_name = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
                     }
