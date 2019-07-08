@@ -176,7 +176,7 @@ namespace XPS
             cb_pass.SelectedIndex = 1;
             cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
             cb_samp_ev.SelectedIndex = 2;
-            cb_DAC.SelectedIndex = 1;
+            cb_DAC.SelectedIndex = 0;
             cb_scanrange.SelectedIndex = 1;
 
             // proportionality between the voltage applied to the hemispheres and the pass energy
@@ -760,11 +760,11 @@ namespace XPS
         {
             try
             {
-                Double.TryParse(tb_lens.Text, out double set_voltage_lens);
+                //Double.TryParse(tb_lens.Text, out double set_voltage_lens);
                 double vpass = Convert.ToDouble(cb_pass.SelectedItem);
                 //double vbias = Convert.ToDouble(cb_bias.SelectedItem);
                 double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
-                double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4;
+                double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4 - vpass * 0.8 - 5;
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
                 double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
                 double set_voltage_Stabi_UPS = set_voltage_hemo + 180;
@@ -791,10 +791,10 @@ namespace XPS
                     LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
                     LJM.eWriteName(handle_tdac, "TDAC1", (set_voltage_hemo + UPS_delta) / fac_amp);
                     
-                    await DPS.set_voltage(set_voltage_lens - E_bind - 1487, 2);
+                    //await DPS.set_voltage(set_voltage_lens - E_bind - 1487, 2);
                     await DPS.set_voltage(set_voltage_channeltron, 4);
                     await DPS.set_voltage(set_voltage_Stabi_UPS, 5);
-                    await DPS.channel_on(2);
+                    //await DPS.channel_on(2);
                     await DPS.channel_on(4);
                     await DPS.channel_on(5);
                 }
@@ -1107,6 +1107,20 @@ namespace XPS
 
             Analyser_form.Show();
             //Form Analyser = new Form();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int handle_test = 0;
+            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_test);
+            LJM.eWriteName(handle_test, "DIO2", 1);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int handle_test = 0;
+            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_test);
+            LJM.eWriteName(handle_test, "DIO2", 0);
         }
     }
 }

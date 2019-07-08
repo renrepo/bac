@@ -52,6 +52,9 @@ namespace XPS
 
         Dictionary<string, double[]> sav_gol_coeff = new Dictionary<string, double[]>
         {
+            {"smooth_deg_4_num_points_3", new [] {0.0, 1.0, 0.0} },
+            {"deriv_deg_4_num_points_3", new [] {-0.66666667, 0.0 , 0.66666667 } },
+
             {"smooth_deg_4_num_points_5", new [] { 0.0, 0.0, 1.0, 0.0, 0.0} },
             {"deriv_deg_4_num_points_5", new [] { 0.08333333, -0.66666667, 0.0 , 0.66666667, -0.08333333 } },
 

@@ -493,13 +493,13 @@ namespace XPSFit
 
             if (algorithm.Iter == 255) // pictures showing fit ok/not ok
             {
-                pb_fit_result.Image = new Bitmap("not_ok.png");
+                //pb_fit_result.Image = new Bitmap("not_ok.png");
                 lb_fit_converge.Text = "Max \nIter.";
                 lb_fit_converge.BackColor = Color.Transparent;
             }
             else
             {
-                pb_fit_result.Image = new Bitmap("ok.png");
+                //pb_fit_result.Image = new Bitmap("ok.png");
                 lb_fit_converge.Text = "Fit OK";
                 lb_fit_converge.BackColor = Color.Transparent;
             }

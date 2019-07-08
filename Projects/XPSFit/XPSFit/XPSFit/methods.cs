@@ -125,7 +125,7 @@ namespace XPSFit
 
                 for (int t = 0; t < data_length; t++)
                 {
-                    if (Math.Abs(B_n_old[t] - B_n[t]) < 0.0001) tester += 1;
+                    if (Math.Abs(B_n_old[t] - B_n[t]) < 1) tester += 1;
                     B_n_old[t] = B_n[t];
                     B_n[t] = 0.0;
                 }

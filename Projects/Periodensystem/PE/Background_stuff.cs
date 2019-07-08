@@ -104,8 +104,8 @@ namespace XPS
                         //vmeas2[j - 1].BackColor = (arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
                     }             
                 }
-                Double.TryParse(arr_voltages_H150666[0], out volt);
-                Double.TryParse(arr_voltages_H150666[1], out curr);
+                double.TryParse(arr_voltages_H150666[0], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out volt);
+                double.TryParse(arr_voltages_H150666[2], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out curr);
                 tb_power.Text = ((volt * curr / 1000.0) > 2.0 ? (volt * curr / 1000.0).ToString("0.0") : "0.0") + " W";
                 //meas_H150666[0].BackColor = (arr_voltages_H150666[0] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages_H150666[0])) > 1000) ? Color.Khaki : SystemColors.Control;
             });
@@ -120,6 +120,7 @@ namespace XPS
                         for (int s = 0; s < 6 ; s++)
                         {
                             //_cts_volt_dps.Token.ThrowIfCancellationRequested();
+                            //arr_voltages[s] = (s == 1) ? arr_voltages[0] - Convert.ToDouble(cb_pass.SelectedItem) : 
                             arr_voltages[s] = DPS.raw_read_syn(s, "U") + " V";
                         }             
                         arr_voltages_H150666[0] = H150666.raw_read_syn(0, "U");
@@ -418,7 +419,8 @@ namespace XPS
                         switch (cb_scanrange.SelectedItem.ToString())
                         {
                             case ("Full"):
-                                E_B_end = V_photon;
+                                //E_B_end = V_photon;
+                                E_B_end = 1200;
                                 set_all_control_voltages(0, 15, 100, vbias, 0, "XPS");
                                 pb_hv_icon.Visible = true;
                                 E_B_starting = 0;
@@ -541,7 +543,7 @@ namespace XPS
                     file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
                     file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
                     file.WriteLine("#TDAC V_Ref: \t{0} \t{1}", tb_dac.Text.ToString(), "\t V");
-                    file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens.Text.ToString(), "\t V");
+                    //file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens.Text.ToString(), "\t V");
                     file.WriteLine("#Factor k: \t{0} \t{1}", k_fac.ToString(), "\t ");
                     file.WriteLine("#Slope: \t{0} \t{1}", (voltramp * 4000 / 100).ToString("0.0000"), "\t V/s");
                     file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
@@ -595,7 +597,7 @@ namespace XPS
 
                     if (cb_select.SelectedIndex != 2)
                     {
-                        set_all_control_voltages(E_B_end, voltramp, 100, vbias, 0, "XPS");
+                        set_all_control_voltages(E_B_end + 10, voltramp, 100, vbias, 0, "XPS");
                     }
 
                     await Task.Run(() =>
@@ -624,7 +626,7 @@ namespace XPS
                         while (true)
                         {
                             //if (oldtime > 20)
-                            if ((E_B_end < (curr_E_B + 1.5)))
+                            if (E_B_end < curr_E_B)
                             {
                                 break; //jumps out of await Task.Run();
                             }
@@ -819,6 +821,7 @@ namespace XPS
                 p_ak = aData[inc + 5];
 
                 ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 40000000 + 1;
+                ctn = ctn < 0 ? 0 : ctn;
 
                 //int p = 0;
                 while (l <= i * samples_for_mean - 1)
@@ -847,7 +850,7 @@ namespace XPS
                 //mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
 
                ////E_bind = V_photon - workfunction - vbias + mean_volt_hemo * voltage_divider - vpass / k_fac + vpass * 0.4;
-                E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4;
+                E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4 + 0.77 * vpass;
 
                 // because ctn is measured only for 1/samples_per_second time intervall, and so total poisson-error is samples_per_sec * ctn_in_meas_interval
                 error = Math.Sqrt(samples_per_second) * Math.Sqrt(ctn);

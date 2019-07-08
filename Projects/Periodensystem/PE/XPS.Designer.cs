@@ -260,6 +260,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tb_testtab = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_stop_UPS_test = new System.Windows.Forms.Button();
             this.btn_UPS = new System.Windows.Forms.Button();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
@@ -397,13 +399,13 @@
             this.label76 = new System.Windows.Forms.Label();
             this.label72 = new System.Windows.Forms.Label();
             this.btn_clear_fig = new System.Windows.Forms.Button();
-            this.label110 = new System.Windows.Forms.Label();
-            this.tb_lens = new System.Windows.Forms.TextBox();
             this.cb_bias = new System.Windows.Forms.ComboBox();
             this.label74 = new System.Windows.Forms.Label();
             this.tb_dac = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_settings = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_energy_cali = new System.Windows.Forms.Button();
             this.btn_reset_LJM = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.tb_num_spectra = new System.Windows.Forms.TextBox();
@@ -440,6 +442,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tb_settings.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             this.tb_binding_energies.SuspendLayout();
@@ -2432,6 +2435,8 @@
             // tb_testtab
             // 
             this.tb_testtab.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_testtab.Controls.Add(this.button2);
+            this.tb_testtab.Controls.Add(this.button1);
             this.tb_testtab.Controls.Add(this.btn_stop_UPS_test);
             this.tb_testtab.Controls.Add(this.btn_UPS);
             this.tb_testtab.Controls.Add(this.groupBox11);
@@ -2447,6 +2452,20 @@
             this.tb_testtab.Controls.Add(this.btn_hv);
             resources.ApplyResources(this.tb_testtab, "tb_testtab");
             this.tb_testtab.Name = "tb_testtab";
+            // 
+            // button2
+            // 
+            resources.ApplyResources(this.button2, "button2");
+            this.button2.Name = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_stop_UPS_test
             // 
@@ -3106,8 +3125,10 @@
             // cb_H150666
             // 
             resources.ApplyResources(this.cb_H150666, "cb_H150666");
+            this.cb_H150666.BackColor = System.Drawing.Color.LightCoral;
+            this.cb_H150666.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cb_H150666.Name = "cb_H150666";
-            this.cb_H150666.UseVisualStyleBackColor = true;
+            this.cb_H150666.UseVisualStyleBackColor = false;
             this.cb_H150666.CheckedChanged += new System.EventHandler(this.cb_H150666_CheckedChanged);
             // 
             // groupBox7
@@ -3178,7 +3199,7 @@
             // Iseg_Xray_session
             // 
             resources.ApplyResources(this.Iseg_Xray_session, "Iseg_Xray_session");
-            this.Iseg_Xray_session.BackColor = System.Drawing.Color.IndianRed;
+            this.Iseg_Xray_session.BackColor = System.Drawing.Color.LightCoral;
             this.Iseg_Xray_session.Name = "Iseg_Xray_session";
             this.Iseg_Xray_session.UseVisualStyleBackColor = false;
             this.Iseg_Xray_session.CheckedChanged += new System.EventHandler(this.Iseg_Xray_session_CheckedChanged);
@@ -3186,7 +3207,7 @@
             // Iseg_DPS_session
             // 
             resources.ApplyResources(this.Iseg_DPS_session, "Iseg_DPS_session");
-            this.Iseg_DPS_session.BackColor = System.Drawing.Color.IndianRed;
+            this.Iseg_DPS_session.BackColor = System.Drawing.Color.LightCoral;
             this.Iseg_DPS_session.FlatAppearance.BorderSize = 0;
             this.Iseg_DPS_session.Name = "Iseg_DPS_session";
             this.Iseg_DPS_session.UseVisualStyleBackColor = false;
@@ -3230,13 +3251,14 @@
             resources.GetString("cb_samp_ev.Items1"),
             resources.GetString("cb_samp_ev.Items2"),
             resources.GetString("cb_samp_ev.Items3"),
-            resources.GetString("cb_samp_ev.Items4")});
+            resources.GetString("cb_samp_ev.Items4"),
+            resources.GetString("cb_samp_ev.Items5")});
             resources.ApplyResources(this.cb_samp_ev, "cb_samp_ev");
             this.cb_samp_ev.Name = "cb_samp_ev";
             // 
             // cb_select
             // 
-            this.cb_select.BackColor = System.Drawing.Color.IndianRed;
+            this.cb_select.BackColor = System.Drawing.Color.LightCoral;
             this.cb_select.Items.AddRange(new object[] {
             resources.GetString("cb_select.Items"),
             resources.GetString("cb_select.Items1"),
@@ -3428,17 +3450,6 @@
             this.btn_clear_fig.UseVisualStyleBackColor = true;
             this.btn_clear_fig.Click += new System.EventHandler(this.btn_clear_fig_Click);
             // 
-            // label110
-            // 
-            resources.ApplyResources(this.label110, "label110");
-            this.label110.Name = "label110";
-            // 
-            // tb_lens
-            // 
-            resources.ApplyResources(this.tb_lens, "tb_lens");
-            this.tb_lens.Name = "tb_lens";
-            this.tb_lens.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.integer_filter_KeyPress);
-            // 
             // cb_bias
             // 
             this.cb_bias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -3481,12 +3492,26 @@
             // tb_settings
             // 
             this.tb_settings.BackColor = System.Drawing.SystemColors.Control;
+            this.tb_settings.Controls.Add(this.groupBox4);
             this.tb_settings.Controls.Add(this.btn_reset_LJM);
             this.tb_settings.Controls.Add(this.groupBox9);
             this.tb_settings.Controls.Add(this.groupBox8);
             this.tb_settings.Controls.Add(this.btn_clear_fig);
             resources.ApplyResources(this.tb_settings, "tb_settings");
             this.tb_settings.Name = "tb_settings";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btn_energy_cali);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.TabStop = false;
+            // 
+            // btn_energy_cali
+            // 
+            resources.ApplyResources(this.btn_energy_cali, "btn_energy_cali");
+            this.btn_energy_cali.Name = "btn_energy_cali";
+            this.btn_energy_cali.UseVisualStyleBackColor = true;
             // 
             // btn_reset_LJM
             // 
@@ -3509,8 +3534,6 @@
             this.groupBox9.Controls.Add(this.label74);
             this.groupBox9.Controls.Add(this.tb_slit);
             this.groupBox9.Controls.Add(this.cb_bias);
-            this.groupBox9.Controls.Add(this.tb_lens);
-            this.groupBox9.Controls.Add(this.label110);
             this.groupBox9.Controls.Add(this.tb_dac);
             resources.ApplyResources(this.groupBox9, "groupBox9");
             this.groupBox9.Name = "groupBox9";
@@ -3733,6 +3756,7 @@
             this.tableLayoutPanel2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tb_settings.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox8.ResumeLayout(false);
@@ -4079,8 +4103,6 @@
         private System.Windows.Forms.TextBox tb_dac;
         private System.Windows.Forms.TextBox tb_set_E_B;
         private System.Windows.Forms.Label label78;
-        private System.Windows.Forms.Label label110;
-        private System.Windows.Forms.TextBox tb_lens;
         private System.Windows.Forms.TextBox tb_slit;
         private System.Windows.Forms.Button btn_clear_fig;
         private System.Windows.Forms.TabPage tb_settings;
@@ -4140,6 +4162,10 @@
         private System.Windows.Forms.TextBox tb_power;
         private System.Windows.Forms.Label lb_power;
         private System.Windows.Forms.Button btn_fit;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btn_energy_cali;
     }
 }
 

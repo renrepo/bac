@@ -52,8 +52,19 @@ namespace XPSFit
         public double x_bg_right { get; set; }
         public List<double> x_temp { get; set; }
         public List<double> y_temp { get; set; }
-        //public List<List<string>> data { get; set; }
-        public string[,] data { get; set; }
+
+
+        public string[,] data { get; set; } // Saving Form1 entries for tab-switching
+        public string[] Energy_calib { get; set; }
+        public CheckState[] CheckState { get; set; }
+        public string[] Labels { get; set; }
+        public string[] Comboboxes { get; set; }
+        public DataGridViewElementStates[] Bg_CheckState { get; set; }
+        public string[] Bg_Labels { get; set; }
+        public Image Image_Fit { get; set; }
+
+        public List<string[]> Rows_copy { get; set; } // Copy and Paste entries in dgv_models
+
 
         #endregion //-------------------------------------------------------------------------------------
 
@@ -71,7 +82,7 @@ namespace XPSFit
             Data_name = Name;
             tc_zgc = Tc_zgc;
             initial_zgc();
-            Draw_Line(x,y,Data_name, SymbolType.Plus, false, Color.ForestGreen);
+            Draw_Line(x,y,Data_name, SymbolType.Plus, false, Color.ForestGreen, -1);
             myPane_plots.XAxis.Scale.Min = x[0];
             myPane_plots.XAxis.Scale.Max = x[x.Count - 1];
         }
@@ -146,7 +157,7 @@ namespace XPSFit
             zgc_residuals.AxisChange();
         }
 
-        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, SymbolType Symboltype, bool Line, Color col)
+        public LineItem Draw_Line(List<double> x_values, List<double> y_values, string tag, SymbolType Symboltype, bool Line, Color col, int width)
         {
             LineItem LI;
             //SymbolType st = SymbolType.None;
@@ -173,9 +184,10 @@ namespace XPSFit
             }
 
             LI.Line.IsVisible = Line;
+            if (width != -1) LI.Line.Width = width;
 
             LI.IsSelectable = true;
-            LI.Symbol.Size = 2;
+            LI.Symbol.Size = 1;
             zgc_plots.AxisChange();
             zgc_plots.Invalidate();
             return LI;
@@ -394,11 +406,11 @@ namespace XPSFit
             {
                 case "Shirley":
                     erg = Shirley(x_vals_crop.ToArray(), y_vals_crop.ToArray(), 10);
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black, 1);
                     break;
                 case "Linear":
                     erg = Linear(x_vals_crop.ToArray(), y_vals_crop.ToArray());
-                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black);
+                    Draw_Line(x_vals_crop, erg, Bg_tag_num.ToString(), SymbolType.None, true, Color.Black, 1);
                     break;
             }
 
@@ -478,5 +490,33 @@ namespace XPSFit
 
 
         #endregion //-------------------------------------------------------------------------------------
+
+        public void Shift(double diff)
+        {
+            int n = 0;
+            //PointPairList ppl = new PointPairList() ;
+            //CurveList cl = myPane_plots.CurveList;
+
+            foreach (var item in myPane_plots.CurveList)
+            {
+                var points = item.Points;
+                int num_points = points.Count;
+                for (int i = 0; i < num_points; i++)
+                {
+                    myPane_plots.CurveList[n].AddPoint(new PointPair(points[0].X + diff, points[0].Y));
+                    myPane_plots.CurveList[n].RemovePoint(0);
+                }
+                //myPane_plots.CurveList[n].Points = ppl;
+                //ppl.Clear();
+                n++;
+            }           
+            myPane_plots.XAxis.Scale.Min = x.Min() + diff; // Plot new range;
+            myPane_plots.XAxis.Scale.Max = x.Max() + diff;
+            zgc_plots.Invalidate();
+            zgc_plots.AxisChange();
+
+            for (int i = 0; i < x.Count; i++) x[i] += diff;
+            
+        }
     }
 }

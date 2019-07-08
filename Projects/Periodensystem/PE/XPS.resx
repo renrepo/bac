@@ -8814,6 +8814,54 @@
   <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="button2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 178</value>
+  </data>
+  <data name="button2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button2.TabIndex" type="System.Int32, mscorlib">
+    <value>346</value>
+  </data>
+  <data name="button2.Text" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Name" xml:space="preserve">
+    <value>button2</value>
+  </data>
+  <data name="&gt;&gt;button2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button2.Parent" xml:space="preserve">
+    <value>tb_testtab</value>
+  </data>
+  <data name="&gt;&gt;button2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 178</value>
+  </data>
+  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="button1.TabIndex" type="System.Int32, mscorlib">
+    <value>345</value>
+  </data>
+  <data name="button1.Text" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Name" xml:space="preserve">
+    <value>button1</value>
+  </data>
+  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+    <value>tb_testtab</value>
+  </data>
+  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="btn_stop_UPS_test.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 185</value>
   </data>
@@ -8836,7 +8884,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_stop_UPS_test.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="btn_UPS.Location" type="System.Drawing.Point, System.Drawing">
     <value>410, 144</value>
@@ -8860,7 +8908,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_UPS.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="groupBox11.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 103</value>
@@ -8884,7 +8932,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;groupBox11.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="label66.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9022,7 +9070,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;groupBox10.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="label80.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -9178,7 +9226,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="btn_hv_ramp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9205,7 +9253,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_ramp.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="tb_hv.Location" type="System.Drawing.Point, System.Drawing">
     <value>285, 123</value>
@@ -9229,7 +9277,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;tb_hv.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="btn_hv_on.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9256,7 +9304,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_on.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="btn_hv_reload.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9283,7 +9331,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_reload.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="btn_reload_fil_curr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9310,7 +9358,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_reload_fil_curr.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="tb_fil_curr.Location" type="System.Drawing.Point, System.Drawing">
     <value>370, 93</value>
@@ -9334,7 +9382,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;tb_fil_curr.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="btn_hv_2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9361,7 +9409,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv_2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="btn_hv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -9388,7 +9436,7 @@
     <value>tb_testtab</value>
   </data>
   <data name="&gt;&gt;btn_hv.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="tb_testtab.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -9652,7 +9700,7 @@
     <value>330</value>
   </data>
   <data name="tb_KD.Text" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tb_KD.Name" xml:space="preserve">
     <value>tb_KD</value>
@@ -9679,7 +9727,7 @@
     <value>329</value>
   </data>
   <data name="tb_KI.Text" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tb_KI.Name" xml:space="preserve">
     <value>tb_KI</value>
@@ -9706,7 +9754,7 @@
     <value>328</value>
   </data>
   <data name="tb_KP.Text" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tb_KP.Name" xml:space="preserve">
     <value>tb_KP</value>
@@ -9943,7 +9991,7 @@
     <value>315</value>
   </data>
   <data name="tb_emi.Text" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;tb_emi.Name" xml:space="preserve">
     <value>tb_emi</value>
@@ -11944,13 +11992,13 @@
     <value>Button</value>
   </data>
   <data name="cb_H150666.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>System</value>
+    <value>Flat</value>
   </data>
   <data name="cb_H150666.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 89</value>
+    <value>338, 89</value>
   </data>
   <data name="cb_H150666.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 28</value>
+    <value>74, 28</value>
   </data>
   <data name="cb_H150666.TabIndex" type="System.Int32, mscorlib">
     <value>328</value>
@@ -12370,10 +12418,10 @@
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="cb_scanrange.Items" xml:space="preserve">
-    <value>Full</value>
+    <value>survey</value>
   </data>
   <data name="cb_scanrange.Items1" xml:space="preserve">
-    <value>Detail</value>
+    <value>detail</value>
   </data>
   <data name="cb_scanrange.Items2" xml:space="preserve">
     <value>Spot</value>
@@ -12430,18 +12478,21 @@
     <value>1</value>
   </data>
   <data name="cb_samp_ev.Items" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="cb_samp_ev.Items1" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="cb_samp_ev.Items2" xml:space="preserve">
-    <value>10</value>
+    <value>5</value>
   </data>
   <data name="cb_samp_ev.Items3" xml:space="preserve">
-    <value>16</value>
+    <value>10</value>
   </data>
   <data name="cb_samp_ev.Items4" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cb_samp_ev.Items5" xml:space="preserve">
     <value>25</value>
   </data>
   <data name="cb_samp_ev.Location" type="System.Drawing.Point, System.Drawing">
@@ -12502,19 +12553,19 @@
     <value>3</value>
   </data>
   <data name="cb_pass.Items" xml:space="preserve">
-    <value>14.458</value>
+    <value>7.44</value>
   </data>
   <data name="cb_pass.Items1" xml:space="preserve">
-    <value>27.527</value>
+    <value>14.46</value>
   </data>
   <data name="cb_pass.Items2" xml:space="preserve">
-    <value>43.30</value>
+    <value>27.53</value>
   </data>
   <data name="cb_pass.Items3" xml:space="preserve">
-    <value>62.31</value>
+    <value>43.4</value>
   </data>
   <data name="cb_pass.Items4" xml:space="preserve">
-    <value>7.438</value>
+    <value>91.5</value>
   </data>
   <data name="cb_pass.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 50</value>
@@ -13435,70 +13486,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;btn_clear_fig.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label110.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label110.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
-  </data>
-  <data name="label110.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label110.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 76</value>
-  </data>
-  <data name="label110.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 15</value>
-  </data>
-  <data name="label110.TabIndex" type="System.Int32, mscorlib">
-    <value>301</value>
-  </data>
-  <data name="label110.Text" xml:space="preserve">
-    <value>U_Lens [V]</value>
-  </data>
-  <data name="&gt;&gt;label110.Name" xml:space="preserve">
-    <value>label110</value>
-  </data>
-  <data name="&gt;&gt;label110.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label110.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label110.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="tb_lens.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 70</value>
-  </data>
-  <data name="tb_lens.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tb_lens.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 22</value>
-  </data>
-  <data name="tb_lens.TabIndex" type="System.Int32, mscorlib">
-    <value>301</value>
-  </data>
-  <data name="tb_lens.Text" xml:space="preserve">
-    <value>3200</value>
-  </data>
-  <data name="tb_lens.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
-    <value>Center</value>
-  </data>
-  <data name="&gt;&gt;tb_lens.Name" xml:space="preserve">
-    <value>tb_lens</value>
-  </data>
-  <data name="&gt;&gt;tb_lens.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tb_lens.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;tb_lens.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>4</value>
   </data>
   <data name="cb_bias.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -13591,7 +13579,7 @@
     <value>295</value>
   </data>
   <data name="tb_dac.Text" xml:space="preserve">
-    <value>1.203</value>
+    <value>1.175</value>
   </data>
   <data name="tb_dac.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -13606,10 +13594,58 @@
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;tb_dac.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="btn_energy_cali.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 25</value>
+  </data>
+  <data name="btn_energy_cali.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btn_energy_cali.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="btn_energy_cali.Text" xml:space="preserve">
+    <value>button3</value>
+  </data>
+  <data name="&gt;&gt;btn_energy_cali.Name" xml:space="preserve">
+    <value>btn_energy_cali</value>
+  </data>
+  <data name="&gt;&gt;btn_energy_cali.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btn_energy_cali.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;btn_energy_cali.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 170</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 68</value>
+  </data>
+  <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>306</value>
+  </data>
+  <data name="groupBox4.Text" xml:space="preserve">
+    <value>Energy calibration</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
+    <value>tb_settings</value>
+  </data>
+  <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="btn_reset_LJM.Location" type="System.Drawing.Point, System.Drawing">
     <value>322, 11</value>
@@ -13633,7 +13669,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;btn_reset_LJM.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="tb_num_spectra.Location" type="System.Drawing.Point, System.Drawing">
     <value>122, 190</value>
@@ -13840,7 +13876,7 @@
     <value>306</value>
   </data>
   <data name="tb_samples_for_mean.Text" xml:space="preserve">
-    <value>16</value>
+    <value>32</value>
   </data>
   <data name="tb_samples_for_mean.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -13870,7 +13906,7 @@
     <value>305</value>
   </data>
   <data name="tb_samples_per_second.Text" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tb_samples_per_second.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Center</value>
@@ -13963,7 +13999,7 @@
     <value>162, 4</value>
   </data>
   <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 233</value>
+    <value>154, 234</value>
   </data>
   <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
     <value>304</value>
@@ -13981,7 +14017,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="groupBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 4</value>
@@ -14005,7 +14041,7 @@
     <value>tb_settings</value>
   </data>
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tb_settings.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
