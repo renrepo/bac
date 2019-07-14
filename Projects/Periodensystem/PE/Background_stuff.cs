@@ -84,29 +84,22 @@ namespace XPS
             double volt, curr = 0;
             var progressHandler2 = new Progress<string>(value =>
             {
+                vmeas2[0].Text = arr_voltages[0];
+                vmeas2[1].Text = arr_voltages[5];
+
+                for (int i = 0; i < 3; i++)
+                {
+                    meas_H150666[i].Text = i == 0 ? arr_voltages_H150666[i] + " V" : arr_voltages_H150666[i] + " mA";
+                }
+
                 for (int j = 0; j < 6; j++)
                 {
-                    vmeas[j].Text = arr_voltages[j];
-                    //vmeas[j].BackColor = (arr_voltages[j] != String.Empty &&  Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
-                    //pb_hv_icon.Visible = ((arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) || (arr_voltages_H150666[0] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages_H150666[0])) > 1000)) ? true : false;
-
-                    if (j < 3)
-                    {
-                        //vmeas2[j].Text = String.Format("{0:.##}" + " V", arr_voltages[j]);
-                        vmeas2[j].Text = arr_voltages[j];
-                        //vmeas2[j].BackColor = (arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
-                        meas_H150666[j].Text = j < 1 ? arr_voltages_H150666[j] + " V" : arr_voltages_H150666[j] + " mA";
-                    }
-
-                    if (j == 4|| j == 5)
-                    {
-                        vmeas2[j - 1].Text = arr_voltages[j];
-                        //vmeas2[j - 1].BackColor = (arr_voltages[j] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages[j])) > 1000) ? Color.Khaki : SystemColors.Control;
-                    }             
+                    vmeas[j].Text = arr_voltages[j];         
                 }
+
                 double.TryParse(arr_voltages_H150666[0], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out volt);
                 double.TryParse(arr_voltages_H150666[2], System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out curr);
-                tb_power.Text = ((volt * curr / 1000.0) > 2.0 ? (volt * curr / 1000.0).ToString("0.0") : "0.0") + " W";
+                tb_power.Text = ((volt * curr / 1.0e6) > 2.0 ? (volt * curr / 1.0e6).ToString("0.0") : "0.0") + " W";
                 //meas_H150666[0].BackColor = (arr_voltages_H150666[0] != String.Empty && Math.Abs(Convert.ToDouble(arr_voltages_H150666[0])) > 1000) ? Color.Khaki : SystemColors.Control;
             });
             var progress = progressHandler2 as IProgress<string>;
@@ -342,9 +335,9 @@ namespace XPS
 
             double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
 
-            for (int i = 0; i < num_spectra; i++)
+            for (int i = 1; i <= num_spectra; i++)
             {
-                lb_num_spectra.Text = (i + 1 + '/' + num_spectra) .ToString();
+                lb_num_spectra.Text = (i + "/" + num_spectra).ToString();
                 _cts_XPS = new CancellationTokenSource();
                 
                 btn_start.Enabled = tb_safe.Enabled = false;
@@ -371,12 +364,13 @@ namespace XPS
                 var token = _cts_XPS.Token;
                 var progressHandler = new Progress<string>(value =>
                 {
-                tb_cps.Text = value;
-                progressBar1.Value = Math.Min(Math.Max(100 - Convert.ToInt32(((E_B_end - curr_E_B) / (E_B_end - E_B_starting + 0.01)) * 100), 0), 100); 
-                lb_progress.Text = progressBar1.Value.ToString() + "%";
-                //lb_progress.Text = Convert.ToInt32(timee).ToString("0") + "ms";
-                tb_pressure.Text = Math.Pow(10, ((Convert.ToDouble(p_ak) - 7.75)) / 0.75).ToString("0.00E0") + " mbar";
-                tb_flow.Text = flow_rate.ToString("0.0") + " l/min";
+                    tb_cps.Text = value;
+                    tb_E_B.Text = curr_E_B.ToString("0.00") + " eV";
+                    progressBar1.Value = Math.Min(Math.Max(100 - Convert.ToInt32(((E_B_end - curr_E_B) / (E_B_end - E_B_starting + 0.01)) * 100), 0), 100); 
+                    lb_progress.Text = progressBar1.Value.ToString() + "%";
+                    //lb_progress.Text = Convert.ToInt32(timee).ToString("0") + "ms";
+                    tb_pressure.Text = Math.Pow(10, ((Convert.ToDouble(p_ak) - 7.75)) / 0.75).ToString("0.00E0") + " mbar";
+                    tb_flow.Text = flow_rate.ToString("0.0") + " l/min";
                 });
                 var progress = progressHandler as IProgress<string>;
 
@@ -418,14 +412,14 @@ namespace XPS
                     {
                         switch (cb_scanrange.SelectedItem.ToString())
                         {
-                            case ("Full"):
+                            case ("survey"):
                                 //E_B_end = V_photon;
                                 E_B_end = 1200;
                                 set_all_control_voltages(0, 15, 100, vbias, 0, "XPS");
                                 pb_hv_icon.Visible = true;
                                 E_B_starting = 0;
                                 break;
-                            case ("Detail"):
+                            case ("detail"):
                                 //Double.TryParse(tb_detailscan_start.Text, out double E_B_start);
                                 //Double.TryParse(tb_detailscan_stop.Text, out double E_B_tb_end);
                                 if ((E_B_start >= 0) && (E_B_start <= V_photon) && (E_B_end >= 0) && (E_B_end <= V_photon))
@@ -531,27 +525,27 @@ namespace XPS
                 fig_name.Text = name;
                 using (var file = new StreamWriter(path_logfile + name + "_header.txt", true))
                 {
-                    file.WriteLine("#XPS-spectrum" + Environment.NewLine);
-                    file.WriteLine("#Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
+                    file.WriteLine("XPS-spectrum" + Environment.NewLine);
+                    file.WriteLine("Date/time: \t{0}", DateTime.Now.ToString("\t yyyy-MM-dd__HH-mm-ss"));
                     file.WriteLine("" + Environment.NewLine);
-                    file.WriteLine("#AK pressure: \t{0} \t{1}", tb_pressure.Text, " mbar");
-                    file.WriteLine("#Pass energy: \t{0} \t{1}", vpass.ToString("0.0"), "\t eV");
-                    file.WriteLine("#Volt. bias: \t{0} \t{1}", vbias.ToString("0.000"), "\t V");
-                    file.WriteLine("#E_Photon: \t{0} \t{1}", V_photon.ToString("0.0"), "\t V");
-                    file.WriteLine("#I_Emission: \t{0} \t{1}", tb_emi.Text, "\t mA");
-                    file.WriteLine("#V_Anode: \t{0} \t{1}", tb_anode_voltage.Text, "\t V");
-                    file.WriteLine("#Workfunction: \t{0} \t{1}", workfunction, "\t eV");
-                    file.WriteLine("#Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
-                    file.WriteLine("#TDAC V_Ref: \t{0} \t{1}", tb_dac.Text.ToString(), "\t V");
+                    file.WriteLine("AK pressure: \t{0} \t{1}", tb_pressure.Text, " mbar");
+                    file.WriteLine("Pass energy: \t{0} \t{1}", vpass.ToString("0.0"), "\t eV");
+                    file.WriteLine("Volt. bias: \t{0} \t{1}", vbias.ToString("0.000"), "\t V");
+                    file.WriteLine("E_Photon: \t{0} \t{1}", V_photon.ToString("0.0"), "\t V");
+                    file.WriteLine("I_Emission: \t{0} \t{1}", tb_emi.Text, "\t mA");
+                    file.WriteLine("V_Anode: \t{0} \t{1}", tb_anode_voltage.Text, "\t V");
+                    file.WriteLine("Workfunction: \t{0} \t{1}", workfunction, "\t eV");
+                    file.WriteLine("Samples/eV: \t{0} \t{1}", Convert.ToDouble(cb_samp_ev.SelectedItem), "\t 1/s");
+                    file.WriteLine("TDAC V_Ref: \t{0} \t{1}", tb_dac.Text.ToString(), "\t V");
                     //file.WriteLine("#V_Lens: \t{0} \t{1}", tb_lens.Text.ToString(), "\t V");
-                    file.WriteLine("#Factor k: \t{0} \t{1}", k_fac.ToString(), "\t ");
-                    file.WriteLine("#Slope: \t{0} \t{1}", (voltramp * 4000 / 100).ToString("0.0000"), "\t V/s");
-                    file.WriteLine("#V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
-                    file.WriteLine("#Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
-                    file.WriteLine("#Ana. Slit: \t{0} \t{1}", tb_slit.Text, "");
-                    file.WriteLine("#ADC_factor: \t{0} \t{1}", voltage_divider.ToString(), "");
-                    file.WriteLine("#Samp_mean: \t{0} \t{1}", samples_for_mean.ToString(), "");
-                    file.WriteLine("#Samp/sec: \t{0} \t{1}", samples_per_second.ToString(), "");
+                    file.WriteLine("Factor k: \t{0} \t{1}", k_fac.ToString(), "\t ");
+                    file.WriteLine("Slope: \t{0} \t{1}", (voltramp * 4000 / 100).ToString("0.0000"), "\t V/s");
+                    file.WriteLine("V_Channelt.: \t{0} \t{1}", vchanneltron, "\t V");
+                    file.WriteLine("Flow cooling: \t{0} \t{1}", tb_flow.Text, "\t l/min");
+                    file.WriteLine("Ana. Slit: \t{0} \t{1}", tb_slit.Text, "");
+                    file.WriteLine("ADC_factor: \t{0} \t{1}", voltage_divider.ToString(), "");
+                    file.WriteLine("Samp_mean: \t{0} \t{1}", samples_for_mean.ToString(), "");
+                    file.WriteLine("Samp/sec: \t{0} \t{1}", samples_per_second.ToString(), "");
                     //file.WriteLine("#Sav_Gol deg: \t{0}", "4", "");
                     //file.WriteLine("#Sav_Gol Samp: \t{0} ", (samples_per_second * 2).ToString(), "");
                     file.WriteLine("" + Environment.NewLine);
@@ -780,7 +774,7 @@ namespace XPS
                     LJM.CloseAll();
                 }
 
-                if (i+1 != num_spectra)
+                if (i != num_spectra)
                 {
                     Clear();
                 }

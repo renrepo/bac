@@ -17,6 +17,7 @@ namespace XPS
     {
         private string IP_adress;
         public bool Is_session_open { get; set; }
+        public bool Is_HV_on { get; set; }
         ManualResetEvent _suspend_background_measurement = new ManualResetEvent(true);
         Ivi.Visa.IMessageBasedSession session;
 
@@ -80,6 +81,13 @@ namespace XPS
         public async Task<int> clear()
         {
             await write_to_iseg("*CLS\n");
+            return 1;
+        }
+
+
+        public async Task<int> Enable_Kill()
+        {
+            await write_to_iseg(":CONF:KILL 1\n");
             return 1;
         }
 
@@ -174,6 +182,14 @@ namespace XPS
             //session.RawIO.Write(String.Format("*IDN?\n"));
             //Task.Delay(25);
             session.RawIO.Write(String.Format(":CONF:ARC:RAMP?\n"));
+            string reading = session.RawIO.ReadString();
+            return reading;
+        }
+
+
+        public string read_kill()
+        {
+            session.RawIO.Write(String.Format(":CONF:KILL?\n"));
             string reading = session.RawIO.ReadString();
             return reading;
         }

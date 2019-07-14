@@ -174,7 +174,7 @@ namespace XPS
 
             // default values for pass-energy, bias-voltage,... shown in the "XPS and UPS settings"
             cb_pass.SelectedIndex = 1;
-            cb_bias.SelectedIndex = cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
+            cb_select.SelectedIndex = cb_scanrange.SelectedIndex = cb_DAC.SelectedIndex = 0;
             cb_samp_ev.SelectedIndex = 2;
             cb_DAC.SelectedIndex = 0;
             cb_scanrange.SelectedIndex = 1;
@@ -214,7 +214,7 @@ namespace XPS
             // textboxes and buttons for the "Iseg Control" panel (controlling of the 6-chanel-HV-device)
             vset = new TextBox[] { ch1_v, ch2_v, ch3_v, ch4_v, ch5_v, ch6_v };
             vmeas = new TextBox[] { ch1_meas, ch2_meas, ch3_meas, ch4_meas, ch5_meas, ch6_meas };
-            vmeas2 = new TextBox[] { vm1, vm2, vm3, vm5, vm6 };
+            vmeas2 = new TextBox[] { vm_ref, vm_stabi};
             meas_H150666 = new TextBox[] { tb_v_anode, tb_i_fila, tb_i_emi};
             reload = new Button[] { btn_reload1, btn_reload2, btn_reload3, btn_reload4, btn_reload5, btn_reload6 };
             reset = new Button[] { rs1, rs2, rs3, rs4, rs5, rs6 };
@@ -339,10 +339,12 @@ namespace XPS
                 try
                 {
                     await H150666.open_session("132.195.109.241");
+                    await H150666.Enable_Kill();
                     await H150666.set_current(0, 1);
                     c.Text = "Iseg Xray connected";
                     c.BackColor = Color.LightGreen;
                     btn_start.Enabled = ((cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) && DPS.Is_session_open == true) ? true : false;
+                    cb_H150666.Enabled = true;
                 
                 }
                 catch (Exception exp)
@@ -366,7 +368,7 @@ namespace XPS
                     await H150666.dispose();
                     c.Text = "Iseg Xray disconnected";
                     c.BackColor = Color.Silver;
-                    btn_start.Enabled = false;
+                    btn_start.Enabled = cb_H150666.Enabled = false;
                 }
                 catch (Exception exp)
                 {
@@ -712,48 +714,7 @@ namespace XPS
             btn_start.Enabled = (DPS.Is_session_open == true & H150666.Is_session_open == true) ? true : false;
             cb_select.BackColor = System.Drawing.Color.MediumSpringGreen;
         }
-
-
-
-        private async void btn_reload_fil_curr_Click(object sender, EventArgs e)
-        {
-            await H150666.set_current(Double.Parse(tb_fil_curr.Text), 1);
-        }
-
-        private async void btn_hv_Click(object sender, EventArgs e)
-        {
-            await H150666.current_ramp(3);
-            await H150666.select_cathode(0);
-            await H150666.channel_on(1);
-        }
-
-        private async void btn_hv_2_Click(object sender, EventArgs e)
-        {
-            //await write_to_Iseg(String.Format(":VOLT 600.89, (@0)\n"), "XRAY");
-            await H150666.current_ramp(3);
-            await H150666.channel_off(1);
-            await H150666.set_current(0, 1);
-        }
-
-
-        private async void btn_hv_on_Click(object sender, EventArgs e)
-        {
-            //await H150666.limit_current(100);
-            await H150666.channel_on(0);
-        }
-
-        private async void btn_hv_reload_Click(object sender, EventArgs e)
-        {
-            await H150666.set_voltage(Double.Parse(tb_hv.Text), 0);
-        }
-
-
-        private async void btn_hv_ramp_Click(object sender, EventArgs e)
-        {
-            await H150666.voltage_ramp(10);
-            await H150666.set_voltage(12000, 0);
-            await H150666.channel_on(0);
-        }
+        
 
 
         private async void set_all_control_voltages(double E_bind, double ramp, int sleeptime, double vbias, int handle_tdac, string mode)
@@ -922,6 +883,7 @@ namespace XPS
             }
         }
 
+        /***
         private async void tb_dps_ramp_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && Double.TryParse(tb_dps_ramp.Text.Replace(",", "."), out double ramp))
@@ -931,6 +893,7 @@ namespace XPS
                 tb_dps_ramp.Text = ramp.ToString();
             }
         }
+        ***/
 
         private void tb_set_E_B_KeyDown(object sender, KeyEventArgs e)
         {
@@ -969,10 +932,6 @@ namespace XPS
 
         }
 
-        private void btn_reset_LJM_Click(object sender, EventArgs e)
-        {
-            LJM.CloseAll();
-        }
 
         public void safe_spectra_fig(string path)
         {
@@ -991,15 +950,15 @@ namespace XPS
             }      
         }
 
+
         private async void cb_H150666_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox c = sender as CheckBox;
             Cursor.Current = Cursors.WaitCursor;
-            if (c.Checked == false)
+            if (H150666.Is_HV_on == false)
             {
                 try
-                {
-                    
+                {         
                     Int32.TryParse(tb_anode_voltage.Text, out int anode_voltage);
                     //int anode_voltage = int.TryParse(tb_anode_voltage.Text, out anode_voltage) ? anode_voltage : false;
                     Double.TryParse(tb_emi.Text, out double emission_current);
@@ -1028,11 +987,10 @@ namespace XPS
                     await H150666.channel_on(1);
                     await H150666.set_current(emission_current, 2);
                     await H150666.channel_on(2);
-                    
 
-                    c.Text = "PID on";
+                    c.Text = "HV on";
                     c.BackColor = Color.LightGreen;
-                    return;
+                    H150666.Is_HV_on = true;
                 }
                 catch (Exception exp)
                 {
@@ -1043,23 +1001,27 @@ namespace XPS
                     Cursor.Current = Cursors.Default;
                 }
             }
-            else if (c.Checked == true)
+
+            else
             {
                 try
                 {
+                    H150666.Is_HV_on = false;
                     
                     await H150666.current_ramp(3);
-                    await H150666.set_current(0, 1);
+                    await Task.Delay(30); // sometimes, current does not get switched off
+                    await H150666.set_current(0.0, 1);
+                    await Task.Delay(30);
                     await H150666.channel_off(0);
                     await H150666.voltage_ramp(20);                    
                     await H150666.set_voltage(0, 0);
                     await H150666.channel_off(0);
+                    await Task.Delay(30); // sometimes, current does not get switched off
+                    await H150666.set_current(0.0, 1);
                     //await H150666.reset_channels();
-                    await H150666.set_current(0, 1);
 
-
-                    c.Text = "PID off";
-                    c.BackColor = SystemColors.Control;
+                    c.Text = "HV off";
+                    c.BackColor = Color.LightCoral;
                 }
                 catch (Exception exp)
                 {
@@ -1076,51 +1038,6 @@ namespace XPS
         {
             //Environment.GetFolderPath(Environment.SpecialFolder.Desktop)++ @"\Logfiles_PES\";
             System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Logfiles_PES\");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        Analyser Analyser_form = new Analyser();
-        private void btn_fit_Click(object sender, EventArgs e)
-        {
-            if (Analyser_form.IsDisposed)
-            {
-                Analyser_form = new Analyser();
-            }
-
-            Analyser_form.Show();
-            //Form Analyser = new Form();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int handle_test = 0;
-            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_test);
-            LJM.eWriteName(handle_test, "DIO2", 1);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            int handle_test = 0;
-            LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_test);
-            LJM.eWriteName(handle_test, "DIO2", 0);
         }
     }
 }
