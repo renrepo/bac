@@ -843,8 +843,9 @@ namespace XPS
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
                 //mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
 
-               ////E_bind = V_photon - workfunction - vbias + mean_volt_hemo * voltage_divider - vpass / k_fac + vpass * 0.4;
+                ////E_bind = V_photon - workfunction - vbias + mean_volt_hemo * voltage_divider - vpass / k_fac + vpass * 0.4;
                 E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4 + 0.77 * vpass;
+                //E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass;
 
                 // because ctn is measured only for 1/samples_per_second time intervall, and so total poisson-error is samples_per_sec * ctn_in_meas_interval
                 error = Math.Sqrt(samples_per_second) * Math.Sqrt(ctn);

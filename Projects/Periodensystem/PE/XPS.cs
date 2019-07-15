@@ -397,7 +397,7 @@ namespace XPS
                     await DPS.voltage_ramp(5.0);
 
 
-                    groupBox3.Enabled = rs_all.Enabled = btn_emcy.Enabled = tableLayoutPanel3.Enabled = groupBox6.Enabled = groupBox7.Enabled = groupBox2.Enabled = true;
+                    groupBox3.Enabled = rs_all.Enabled = btn_emcy.Enabled = tableLayoutPanel3.Enabled = gb_scanarea.Enabled = groupBox7.Enabled = groupBox2.Enabled = true;
                     //background_meas_volt_DPS();
                     c.Text = "Iseg DPS connected";
                     c.BackColor = Color.LightGreen;
@@ -424,7 +424,7 @@ namespace XPS
                     await DPS.dispose();
                     c.Text = "Iseg DPS disconnected";
                     c.BackColor = Color.Silver;
-                    tableLayoutPanel3.Enabled = groupBox6.Enabled = groupBox7.Enabled = groupBox2.Enabled = false;
+                    tableLayoutPanel3.Enabled = gb_scanarea.Enabled = groupBox7.Enabled = groupBox2.Enabled = false;
                 }
                 catch (Exception exp)
                 {
@@ -573,9 +573,25 @@ namespace XPS
             _suspend_background_measurement.Set();
         }
 
+        public static bool CloseCancel()
+        {
+            const string message = "Really?";
+            const string caption = "Cancel Application";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            return result == DialogResult.Yes ? true : false;
+        }
 
         private async void XPS_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (CloseCancel() == false)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             if (_cts_XPS != null)
             {
                 _cts_XPS.Cancel();
@@ -585,13 +601,13 @@ namespace XPS
                 //LJM.Close(handle_stream);
             }
 
-           // _cts_pressure_labjack?.Cancel();
+            // _cts_pressure_labjack?.Cancel();
 
             if (_cts_pressure_labjack != null)
             {
                 _cts_pressure_labjack.Cancel();
                 _cts_pressure_labjack.Token.WaitHandle.WaitOne();
-            }      
+            }
 
             if (_cts_volt_dps != null)
             {
@@ -624,14 +640,14 @@ namespace XPS
                 await H150666.reset_channels();
                 await H150666.dispose();
             }
-            
+
             try
-            {  
+            {
                 LJM.CloseAll();
             }
             catch (Exception)
             {
-                AutoClosingMessageBox.Show("Can't close Labjack device","LJM Closing Error",1000);
+                AutoClosingMessageBox.Show("Can't close Labjack device", "LJM Closing Error", 1000);
             }
             //await Task.Delay(500);
             //Thread.Sleep(500);
@@ -639,6 +655,7 @@ namespace XPS
             values_to_plot_svg.Clear();
             errorlist.Clear();
             values_to_plot_svg_deriv.Clear();
+                                 
         }
 
 
@@ -725,7 +742,7 @@ namespace XPS
                 double vpass = Convert.ToDouble(cb_pass.SelectedItem);
                 //double vbias = Convert.ToDouble(cb_bias.SelectedItem);
                 double V_photon = (cb_select.SelectedIndex == 0) ? E_Al_Ka : (cb_select.SelectedIndex == 1) ? E_Mg_Ka : E_HeI;
-                double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4 - vpass * 0.8 - 5;
+                double set_voltage_hemo = -V_photon + vbias + vpass / k_fac + workfunction + E_bind - vpass * 0.4 - vpass * 0.8;
                 double set_voltage_channeltron = set_voltage_hemo + vpass * 0.4 + vchanneltron;
                 double set_voltage_Stabi = set_voltage_hemo + v_stabi_volt;
                 double set_voltage_Stabi_UPS = set_voltage_hemo + 180;
@@ -1038,6 +1055,11 @@ namespace XPS
         {
             //Environment.GetFolderPath(Environment.SpecialFolder.Desktop)++ @"\Logfiles_PES\";
             System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Logfiles_PES\");
+        }
+
+        private void cb_scanrange_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gb_scanarea.Enabled = cb_scanrange.Text == "detail" ? true : false;
         }
     }
 }

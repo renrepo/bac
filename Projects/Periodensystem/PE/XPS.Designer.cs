@@ -203,7 +203,7 @@
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tb_dashboard = new System.Windows.Forms.TabPage();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gb_scanarea = new System.Windows.Forms.GroupBox();
             this.tb_detailscan_stop = new System.Windows.Forms.TextBox();
             this.tb_detailscan_start = new System.Windows.Forms.TextBox();
             this.label78 = new System.Windows.Forms.Label();
@@ -401,7 +401,7 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tb_dashboard.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.gb_scanarea.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -2066,7 +2066,7 @@
             // tb_dashboard
             // 
             this.tb_dashboard.BackColor = System.Drawing.SystemColors.Control;
-            this.tb_dashboard.Controls.Add(this.groupBox6);
+            this.tb_dashboard.Controls.Add(this.gb_scanarea);
             this.tb_dashboard.Controls.Add(this.tableLayoutPanel4);
             this.tb_dashboard.Controls.Add(this.groupBox2);
             this.tb_dashboard.Controls.Add(this.groupBox1);
@@ -2074,15 +2074,15 @@
             resources.ApplyResources(this.tb_dashboard, "tb_dashboard");
             this.tb_dashboard.Name = "tb_dashboard";
             // 
-            // groupBox6
+            // gb_scanarea
             // 
-            this.groupBox6.Controls.Add(this.tb_detailscan_stop);
-            this.groupBox6.Controls.Add(this.tb_detailscan_start);
-            this.groupBox6.Controls.Add(this.label78);
-            this.groupBox6.Controls.Add(this.label56);
-            resources.ApplyResources(this.groupBox6, "groupBox6");
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.TabStop = false;
+            this.gb_scanarea.Controls.Add(this.tb_detailscan_stop);
+            this.gb_scanarea.Controls.Add(this.tb_detailscan_start);
+            this.gb_scanarea.Controls.Add(this.label78);
+            this.gb_scanarea.Controls.Add(this.label56);
+            resources.ApplyResources(this.gb_scanarea, "gb_scanarea");
+            this.gb_scanarea.Name = "gb_scanarea";
+            this.gb_scanarea.TabStop = false;
             // 
             // tb_detailscan_stop
             // 
@@ -2184,6 +2184,7 @@
             resources.GetString("cb_scanrange.Items1")});
             resources.ApplyResources(this.cb_scanrange, "cb_scanrange");
             this.cb_scanrange.Name = "cb_scanrange";
+            this.cb_scanrange.SelectedIndexChanged += new System.EventHandler(this.cb_scanrange_SelectedIndexChanged);
             // 
             // label55
             // 
@@ -3505,8 +3506,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tb_dashboard.ResumeLayout(false);
             this.tb_dashboard.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.gb_scanarea.ResumeLayout(false);
+            this.gb_scanarea.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -3714,7 +3715,7 @@
         private System.Windows.Forms.Label lb_num_spectra;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tb_dashboard;
-        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.GroupBox gb_scanarea;
         private System.Windows.Forms.TextBox tb_detailscan_stop;
         private System.Windows.Forms.TextBox tb_detailscan_start;
         private System.Windows.Forms.Label label78;
