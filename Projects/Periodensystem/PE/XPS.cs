@@ -367,7 +367,7 @@ namespace XPS
                     await H150666.clear();
                     await H150666.dispose();
                     c.Text = "Iseg Xray disconnected";
-                    c.BackColor = Color.Silver;
+                    c.BackColor = Color.LightCoral;
                     btn_start.Enabled = cb_H150666.Enabled = false;
                 }
                 catch (Exception exp)
@@ -423,7 +423,7 @@ namespace XPS
                     await DPS.clear();
                     await DPS.dispose();
                     c.Text = "Iseg DPS disconnected";
-                    c.BackColor = Color.Silver;
+                    c.BackColor = Color.LightCoral;
                     tableLayoutPanel3.Enabled = gb_scanarea.Enabled = groupBox7.Enabled = groupBox2.Enabled = false;
                 }
                 catch (Exception exp)
