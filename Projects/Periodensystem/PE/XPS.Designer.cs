@@ -2181,7 +2181,8 @@
             this.cb_scanrange.FormattingEnabled = true;
             this.cb_scanrange.Items.AddRange(new object[] {
             resources.GetString("cb_scanrange.Items"),
-            resources.GetString("cb_scanrange.Items1")});
+            resources.GetString("cb_scanrange.Items1"),
+            resources.GetString("cb_scanrange.Items2")});
             resources.ApplyResources(this.cb_scanrange, "cb_scanrange");
             this.cb_scanrange.Name = "cb_scanrange";
             this.cb_scanrange.SelectedIndexChanged += new System.EventHandler(this.cb_scanrange_SelectedIndexChanged);
@@ -2208,7 +2209,8 @@
             resources.GetString("cb_samp_ev.Items2"),
             resources.GetString("cb_samp_ev.Items3"),
             resources.GetString("cb_samp_ev.Items4"),
-            resources.GetString("cb_samp_ev.Items5")});
+            resources.GetString("cb_samp_ev.Items5"),
+            resources.GetString("cb_samp_ev.Items6")});
             resources.ApplyResources(this.cb_samp_ev, "cb_samp_ev");
             this.cb_samp_ev.Name = "cb_samp_ev";
             // 

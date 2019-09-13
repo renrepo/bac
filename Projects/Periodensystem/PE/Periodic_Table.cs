@@ -23,15 +23,16 @@ namespace XPS
         List<List<string>> elec_bind = new List<List<string>>();
         List<string> display_labels = new List<string>();
         PointPairList values_to_plot = new PointPairList();
-        PointPairList values_to_plot_svg = new PointPairList();
-        PointPairList values_to_plot_svg_deriv = new PointPairList();
+        PointPairList values_to_plot_mean = new PointPairList();
+        //PointPairList values_to_plot_svg = new PointPairList();
+        //PointPairList values_to_plot_svg_deriv = new PointPairList();
         PointPairList errorlist = new PointPairList();
         Dictionary<string, string> binding_energies_dict = new Dictionary<string, string>();
         Dictionary<string, string> color_dict = new Dictionary<string, string>();
         Dictionary<string, string> dic = new Dictionary<string, string>();
         GraphPane myPane;
         LineItem myCurve;
-        LineItem myCurve_svg;
+        LineItem myCurve_mean;
         LineItem myCurve_svg_deriv;
         ErrorBarItem errorCurve;
         TextObj pane_labs;
@@ -166,25 +167,28 @@ namespace XPS
             //int error_red = 128;
             //int error_green = 21;
             //int error_blue = 0;
-            myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(svg_red, svg_green, svg_blue), SymbolType.None);
-            myCurve_svg.Line.Width = 1;
-            myCurve_svg.Tag = 1;
+            //myCurve_svg = myPane.AddCurve("", values_to_plot_svg, Color.FromArgb(svg_red, svg_green, svg_blue), SymbolType.None);
+            //myCurve_svg.Line.Width = 1;
+            //myCurve_svg.Tag = 1;
             //myCurve_svg.YAxisIndex = 1;
 
-            myCurve_svg_deriv = myPane.AddCurve("", values_to_plot_svg_deriv, Color.FromArgb(21, 172, 61), SymbolType.None);
-            myCurve_svg_deriv.Line.Width = 1;
-            myCurve_svg_deriv.Tag = 2;
+            //myCurve_svg_deriv = myPane.AddCurve("", values_to_plot_svg_deriv, Color.FromArgb(21, 172, 61), SymbolType.None);
+            //myCurve_svg_deriv.Line.Width = 1;
+            //myCurve_svg_deriv.Tag = 2;
             //myCurve_svg_deriv.YAxisIndex = 2;
 
             
             //errorCurve.YAxisIndex = 3;
 
             myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(red, green, blue), SymbolType.Circle);
+            myCurve_mean = myPane.AddCurve("", values_to_plot_mean, Color.FromArgb(0, 255, 0), SymbolType.Diamond);
             //myCurve = myPane.AddCurve("", values_to_plot, Color.FromArgb(210, 104, 87), SymbolType.Circle);
             myCurve.Symbol.Size = 1;
+            myCurve_mean.Symbol.Size = 1;
             //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
             //myCurve.Line.Color = Color.FromArgb(90, 15, 0);
             myCurve.Line.Color = Color.FromArgb(230, 225, 215);
+            myCurve_mean.Line.Color = Color.FromArgb(0, 255, 0);
             myCurve.Tag = 3;
 
 

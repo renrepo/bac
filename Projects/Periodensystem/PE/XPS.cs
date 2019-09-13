@@ -54,6 +54,7 @@ namespace XPS
         double UPS_delta = 30.0;
         double ups_volt = 0;
         double ups_step = 0.08;
+        double offset;
         // General settings
         //double V_photon;
         double E_HeI;               // Energy HeI-line
@@ -494,8 +495,9 @@ namespace XPS
             zedGraphControl1.GraphPane.CurveList.Clear();
             zedGraphControl1.GraphPane.GraphObjList.Clear();
             values_to_plot.Clear();
-            values_to_plot_svg.Clear();
-            values_to_plot_svg_deriv.Clear();
+            values_to_plot_mean.Clear();
+            //values_to_plot_svg.Clear();
+            //values_to_plot_svg_deriv.Clear();
             errorlist.Clear();
             display_labels.Clear();
             myPane.YAxisList.Clear();
@@ -652,9 +654,10 @@ namespace XPS
             //await Task.Delay(500);
             //Thread.Sleep(500);
             values_to_plot.Clear();
-            values_to_plot_svg.Clear();
+            values_to_plot_mean.Clear();
+            //values_to_plot_svg.Clear();
             errorlist.Clear();
-            values_to_plot_svg_deriv.Clear();
+            //values_to_plot_svg_deriv.Clear();
                                  
         }
 
@@ -763,7 +766,7 @@ namespace XPS
                     await Task.Delay(sleeptime);
                 }
 
-                if (mode == "UPS")
+                if (mode == "UPS________________")
                 {
                     ups_volt = set_voltage_hemo / fac_amp;
                     LJM.eWriteName(handle_tdac, "TDAC0", ups_volt);
@@ -791,8 +794,9 @@ namespace XPS
             zedGraphControl1.GraphPane.CurveList.Clear();
             zedGraphControl1.GraphPane.GraphObjList.Clear();
             values_to_plot.Clear();
-            values_to_plot_svg.Clear();
-            values_to_plot_svg_deriv.Clear();
+            values_to_plot_mean.Clear();
+            //values_to_plot_svg.Clear();
+            //values_to_plot_svg_deriv.Clear();
             display_labels.Clear();
             myPane.YAxisList.Clear();
             myPane.AddYAxis("counts");
@@ -1024,17 +1028,15 @@ namespace XPS
                 try
                 {
                     H150666.Is_HV_on = false;
-                    
-                    await H150666.current_ramp(3);
-                    await Task.Delay(30); // sometimes, current does not get switched off
-                    await H150666.set_current(0.0, 1);
-                    await Task.Delay(30);
-                    await H150666.channel_off(0);
-                    await H150666.voltage_ramp(20);                    
+
+                    await H150666.voltage_ramp(20);
                     await H150666.set_voltage(0, 0);
                     await H150666.channel_off(0);
-                    await Task.Delay(30); // sometimes, current does not get switched off
+                    await Task.Delay(300);
+                    await H150666.current_ramp(3);
+                    await Task.Delay(300); // sometimes, current does not get switched off
                     await H150666.set_current(0.0, 1);
+                    await H150666.channel_off(0);
                     //await H150666.reset_channels();
 
                     c.Text = "HV off";

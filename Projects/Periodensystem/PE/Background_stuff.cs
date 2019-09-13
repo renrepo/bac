@@ -307,10 +307,10 @@ namespace XPS
             }
 
             Queue<double> filt_values = new Queue<double>();
-            string dict_entry_smooth = "smooth_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
-            string dict_entry_deriv = "deriv_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
-            double[] coeff = sav_gol_coeff[dict_entry_smooth];
-            double[] coeff_deriv = sav_gol_coeff[dict_entry_deriv];
+            //string dict_entry_smooth = "smooth_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
+            //string dict_entry_deriv = "deriv_deg_4_num_points_" + (Convert.ToInt32(cb_samp_ev.SelectedItem) * 2 + 1).ToString();
+            //double[] coeff = sav_gol_coeff[dict_entry_smooth];
+            //double[] coeff_deriv = sav_gol_coeff[dict_entry_deriv];
             double timee = 0;
             double p_ak = 0;
             double flow_rate = 0;
@@ -321,6 +321,8 @@ namespace XPS
 
             int DeviceScanBacklog = 0;
             int LJMScanBacklog = 0;
+
+            bool Is_spot = false;
 
 
 
@@ -391,12 +393,16 @@ namespace XPS
                 counter_flow_LSB};
                 int numAddresses = aScanList.Length;
                 int data_length = numAddresses * scansPerRead;
-                double[] aData = (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) ? new double[data_length] : new double[samples_for_mean * numAddresses];
+                double[] aData = (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1 || cb_select.SelectedIndex == 2) ? new double[data_length] : new double[samples_for_mean * numAddresses];
                 double[] v_hemo_arr = new double[data_length];
                 //double v_ctn_cum = 0;
 
                 // read in desired values for Passenergy, voltage bias, stepsize, time per step and lens voltage
                 double vpass = Convert.ToDouble(cb_pass.SelectedItem);
+                //if (cb_pass.SelectedIndex == 2)
+                //{
+                //    offset = 0.9;
+                //}
                 //double vbias = Convert.ToDouble(cb_bias.SelectedItem);
                 //double vbias = 0.0;
                 double vbias = LJM_ADC(pin_bias_voltage, 16);
@@ -406,7 +412,7 @@ namespace XPS
 
                 
 
-                if (cb_select.SelectedIndex != 2)
+                if (cb_select.SelectedIndex != 2 || cb_select.SelectedIndex == 2)
                 {
                     try
                     {
@@ -414,8 +420,9 @@ namespace XPS
                         {
                             case ("survey"):
                                 //E_B_end = V_photon;
-                                E_B_end = 1200;
-                                set_all_control_voltages(0, 15, 100, vbias, 0, "XPS");
+                                //E_B_end = V_photon > 1200 ? 1200 : V_photon;
+                                E_B_end = 1400;
+                                set_all_control_voltages(-2, 15, 100, vbias, 0, "XPS");
                                 pb_hv_icon.Visible = true;
                                 E_B_starting = 0;
                                 break;
@@ -437,7 +444,7 @@ namespace XPS
                                     return;
                                 }
                                 break;
-                            case ("Spot"):
+                            case ("spot"):
                                 
                                 if (Double.TryParse(tb_set_E_B.Text.Replace(",", "."), out double U_E_binding))
                                 {
@@ -448,6 +455,7 @@ namespace XPS
                                     tb_safe.Enabled = false;
                                     tb_set_E_B.Text = String.Empty;
                                     tb_set_E_B.Text = tb_set_E_B.Text.ToString();
+                                    Is_spot = true;
                                 }
                                 else
                                 {
@@ -480,12 +488,12 @@ namespace XPS
                 }
 
 
-                else if(cb_select.SelectedIndex == 2)
+                else if(cb_select.SelectedIndex == 2000000000)
                 {
                     try
                     {
                         LJM.OpenS("T7", LJM_connection_type, "ANY", ref handle_tdac);
-                        set_all_control_voltages(0, 15.0, 100, vbias, handle_tdac, "UPS");
+                        set_all_control_voltages(0, 15.0, 100, vbias, handle_tdac, "XPS");
                         pb_hv_icon.Visible = true;
                         E_B_end = V_photon + 6.0;
                         await Task.Delay(8000, token);
@@ -560,7 +568,7 @@ namespace XPS
                 LJM.eWriteName(handle_stream, "STREAM_RESOLUTION_INDEX", 6); //Resolution Index  8 still ok?
 
                 LJM.LJMERROR LJMError;
-                if (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1)
+                if (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1 || cb_select.SelectedIndex == 2)
                 {
                     LJMError = LJM.eStreamStart(handle_stream, scansPerRead, numAddresses, aScanList, ref scanRate);
                     Thread.Sleep(20);
@@ -587,9 +595,10 @@ namespace XPS
                     double cps_old = 1;
                     Stopwatch sw = new Stopwatch();
 
-                    num_scans = (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1) ? scansPerRead : samples_for_mean;
+                    num_scans = (cb_select.SelectedIndex == 0 || cb_select.SelectedIndex == 1 || cb_select.SelectedIndex == 2) ? scansPerRead : samples_for_mean;
 
-                    if (cb_select.SelectedIndex != 2)
+                    if (!Is_spot)
+                    //if (cb_select.SelectedIndex != 2 && !Is_spot)
                     {
                         set_all_control_voltages(E_B_end + 10, voltramp, 100, vbias, 0, "XPS");
                     }
@@ -620,7 +629,7 @@ namespace XPS
                         while (true)
                         {
                             //if (oldtime > 20)
-                            if (E_B_end < curr_E_B)
+                            if (E_B_end < curr_E_B && !Is_spot)
                             {
                                 break; //jumps out of await Task.Run();
                             }
@@ -633,7 +642,7 @@ namespace XPS
                                 if (LJMError == 0)
                                 {
                                     sw.Start();
-                                    var old_values = data_processing(aData, numAddresses, filt_values, coeff, coeff_deriv, samples_per_second, samples_for_mean, samp_ev,
+                                    var old_values = data_processing(aData, numAddresses, filt_values, samples_per_second, samples_for_mean, samp_ev,
                                         ctn_old, t_old, mean_volt_hemo, oldtime, cps_old, V_photon, vbias, vpass, k_fac, name);
                                     ctn_old = old_values.Item1;
                                     t_old = old_values.Item2;
@@ -662,6 +671,7 @@ namespace XPS
                             }
 
                             //UPS
+                            /***
                             if (num_scans == samples_for_mean)
                             {
                                 LJMError = LJM.StreamBurst(handle_stream, numAddresses, aScanList, ref scanRate, num_scans, aData);
@@ -685,7 +695,7 @@ namespace XPS
                                     break;
                                 }
                             }
-
+                            ***/
                         }
 
                         try
@@ -784,14 +794,14 @@ namespace XPS
 
         public Tuple<double, double, double, double, double, double, double, Tuple<double>> data_processing(
             double[] aData, int numAddresses, Queue<double> filt_values,
-            double[] coeff, double[] coeff_deriv, int samples_per_second,
+            int samples_per_second,
             int samples_for_mean, double samp_ev, double ctn_old, double t_old, 
             double mean_volt_hemo, double oldtime, double cps_old, double V_photon,
             double vbias, double vpass, double k_fac, string name)
 
         {
-            double ctn, ctn_now, t_now, error, E_bind, result, result_deriv, flow_beg, flow_end, flow_rate;
-            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = flow_beg = flow_end = flow_rate = 0;
+            double ctn, ctn_now, t_now, error, E_bind, result, result_deriv, flow_beg, flow_end, flow_rate, test;
+            ctn = ctn_now = t_now = error = E_bind = result = result_deriv = flow_beg = flow_end = flow_rate = test = 0;
             double p_ak = 0;
             var inc = 0;
             int l = 0;
@@ -817,16 +827,16 @@ namespace XPS
                 ctn = ((t_now < t_old) ? (ctn_now - ctn_old) / (t_now - t_old + 4294967295) : (ctn_now - ctn_old) / (t_now - t_old)) * 40000000 + 1;
                 ctn = ctn < 0 ? 0 : ctn;
 
-                //int p = 0;
+                int p = 0;
                 while (l <= i * samples_for_mean - 1)
                 {
                     mean_volt_hemo += aData[l * numAddresses + 0];
-                    //arr_median[p] = aData[l * numAddresses + 0];
+                    arr_median[p] = aData[l * numAddresses + 0];
                     l++;
-                    //p++;
+                    p++;
                 }
                 l--;
-                //p--;
+                p--;
                 /***
                 using (var file = new StreamWriter(path_logfile + "debug" + ".txt", true))
                 {
@@ -839,18 +849,19 @@ namespace XPS
                     file.WriteLine("" + Environment.NewLine);
                 }
                 ***/
-                        //mean_volt_hemo = median(arr_median);
+                test = median(arr_median);
                 mean_volt_hemo = mean_volt_hemo / (samples_for_mean + 1);
                 //mean_volt_hemo = (mean_volt_hemo * ctn + mean_volt_hemo_old * cps_old) / (ctn + cps_old);
 
                 ////E_bind = V_photon - workfunction - vbias + mean_volt_hemo * voltage_divider - vpass / k_fac + vpass * 0.4;
-                E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4 + 0.77 * vpass;
+                E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4 + 0.77 * vpass + offset;
                 //E_bind = V_photon + mean_volt_hemo * voltage_divider - vbias - workfunction - vpass;
 
                 // because ctn is measured only for 1/samples_per_second time intervall, and so total poisson-error is samples_per_sec * ctn_in_meas_interval
                 error = Math.Sqrt(samples_per_second) * Math.Sqrt(ctn);
                 //values_to_plot.Add(oldtime, E_bind);
                 values_to_plot.Add(E_bind, ctn);
+                values_to_plot_mean.Add(V_photon + test * voltage_divider - vbias - workfunction - vpass / k_fac + vpass * 0.4 + 0.77 * vpass + offset, ctn);
 
 
                 //myCurve.AddPoint(oldtime, oldtime + 1000);
@@ -971,7 +982,7 @@ namespace XPS
         }
         l--;
         mean_volt_hemo = mean_volt_hemo / (num_scans);
-        E_bind = mean_volt_hemo * volt_div_ups + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
+        //E_bind = mean_volt_hemo * volt_div_ups + V_photon - vbias - vpass / k_fac - workfunction + vpass * 0.4;
         error = Math.Sqrt(40000000/ (t_now - t_old)) * Math.Sqrt(ctn);
         values_to_plot.Add(E_bind, ctn);
         errorlist.Add(E_bind, ctn - error, ctn + error);

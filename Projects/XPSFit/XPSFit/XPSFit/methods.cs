@@ -133,7 +133,7 @@ namespace XPSFit
             }
             for (int i = 0; i < data_length; i++) { B_n_old[i] += I_max; }
 
-            if (x_data.Count() > 50)
+            if (data_length > 50)
             {
                 for (int i = 6; i < 15; i++)
                 {

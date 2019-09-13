@@ -7239,6 +7239,9 @@
   <data name="cb_scanrange.Items1" xml:space="preserve">
     <value>detail</value>
   </data>
+  <data name="cb_scanrange.Items2" xml:space="preserve">
+    <value>spot</value>
+  </data>
   <data name="cb_scanrange.Location" type="System.Drawing.Point, System.Drawing">
     <value>108, 106</value>
   </data>
@@ -7336,12 +7339,15 @@
     <value>5</value>
   </data>
   <data name="cb_samp_ev.Items3" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="cb_samp_ev.Items4" xml:space="preserve">
-    <value>16</value>
+    <value>10</value>
   </data>
   <data name="cb_samp_ev.Items5" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="cb_samp_ev.Items6" xml:space="preserve">
     <value>25</value>
   </data>
   <data name="cb_samp_ev.Location" type="System.Drawing.Point, System.Drawing">
