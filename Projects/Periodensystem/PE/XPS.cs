@@ -932,6 +932,9 @@ namespace XPS
             try
             {
                 await DPS.voltage_ramp(20);
+                await Task.Delay(20);
+                await DPS.reset_channels();
+                await Task.Delay(20);
                 await DPS.reset_channels();
                 for (int i = 0; i <= 5; i++)
                 {

@@ -741,6 +741,8 @@ namespace XPS
                     }
                     pb_hv_icon.Visible = false;
                     //LJM.CloseAll();
+
+                    background_meas_pressure_labjack();
                 }
 
                 catch (OperationCanceledException)
@@ -773,15 +775,18 @@ namespace XPS
                     }
                     //LJM.CloseAll();
                     pb_hv_icon.Visible = false;
+
                     return; // jumps into "finally"                
                 }
 
                 finally
                 {
                     DPS_reset();
-                    Iseg_DPS_session.Enabled = Iseg_Xray_session.Enabled = true;
+                    Iseg_DPS_session.Enabled = Iseg_Xray_session.Enabled = true;                   
                     Thread.Sleep(20);
                     LJM.CloseAll();
+                    Thread.Sleep(20);
+                    background_meas_pressure_labjack();
                 }
 
                 if (i != num_spectra)
