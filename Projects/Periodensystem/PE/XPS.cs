@@ -1035,14 +1035,17 @@ namespace XPS
                     await H150666.voltage_ramp(20);
                     await H150666.set_voltage(0, 0);
                     await H150666.channel_off(0);
-                    await Task.Delay(300);
+                    await Task.Delay(30);
                     await H150666.current_ramp(3);
-                    await Task.Delay(300); // sometimes, current does not get switched off
+                    await Task.Delay(30); // sometimes, current does not get switched off
                     await H150666.set_current(0.0, 1);
+                    await Task.Delay(30);
+                    await H150666.set_current(0.0, 1);
+                    await Task.Delay(30);
                     await H150666.channel_off(0);
                     //await H150666.reset_channels();
 
-                    c.Text = "HV off";
+                    c.Text = "HV off [check p, Q]";
                     c.BackColor = Color.LightCoral;
                 }
                 catch (Exception exp)
@@ -1090,6 +1093,9 @@ namespace XPS
 
 // TODO:
 /*** 
+ * ---------------------------------------------------- Richtige Anwahl der Anode ergänzen
+ * ---------------------------------------------------- Druckmessung als Sicherheit Röntgenquelle
+ * ---------------------------------------------------- UPS Voltagerange
 --- read_raw_sync zweifach
 --- resolution index adc? nur 16 bit?
 --- overflow counter mit if verhindern

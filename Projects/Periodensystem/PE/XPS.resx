@@ -6988,7 +6988,7 @@
     <value>328</value>
   </data>
   <data name="cb_H150666.Text" xml:space="preserve">
-    <value>HV off</value>
+    <value>HV off [check p, Q]</value>
   </data>
   <data name="cb_H150666.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
