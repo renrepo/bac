@@ -7134,6 +7134,39 @@
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
+  <data name="label69.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label69.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="label69.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label69.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 161</value>
+  </data>
+  <data name="label69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 15</value>
+  </data>
+  <data name="label69.TabIndex" type="System.Int32, mscorlib">
+    <value>342</value>
+  </data>
+  <data name="label69.Text" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="&gt;&gt;label69.Name" xml:space="preserve">
+    <value>label69</value>
+  </data>
+  <data name="&gt;&gt;label69.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label69.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;label69.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="tb_num_spectra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
@@ -7165,7 +7198,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;tb_num_spectra.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="label68.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7177,7 +7210,7 @@
     <value>NoControl</value>
   </data>
   <data name="label68.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 159</value>
+    <value>138, 161</value>
   </data>
   <data name="label68.Size" type="System.Drawing.Size, System.Drawing">
     <value>12, 18</value>
@@ -7198,7 +7231,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label68.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="label70.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7231,7 +7264,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label70.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cb_scanrange.Items" xml:space="preserve">
     <value>survey</value>
@@ -7261,7 +7294,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cb_scanrange.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label55.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7291,13 +7324,13 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label55.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tb_samples_for_mean.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tb_samples_for_mean.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 158</value>
+    <value>151, 158</value>
   </data>
   <data name="tb_samples_for_mean.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -7327,7 +7360,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;tb_samples_for_mean.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cb_samp_ev.Items" xml:space="preserve">
     <value>1</value>
@@ -7369,7 +7402,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cb_samp_ev.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cb_select.Items" xml:space="preserve">
     <value>XPS Al   Ka</value>
@@ -7405,7 +7438,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cb_select.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="label67.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7417,16 +7450,16 @@
     <value>NoControl</value>
   </data>
   <data name="label67.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 159</value>
+    <value>9, 161</value>
   </data>
   <data name="label67.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 15</value>
+    <value>63, 15</value>
   </data>
   <data name="label67.TabIndex" type="System.Int32, mscorlib">
     <value>337</value>
   </data>
   <data name="label67.Text" xml:space="preserve">
-    <value>Samp.  sec /mean</value>
+    <value>samp./sec</value>
   </data>
   <data name="&gt;&gt;label67.Name" xml:space="preserve">
     <value>label67</value>
@@ -7438,7 +7471,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label67.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cb_pass.Items" xml:space="preserve">
     <value>7.44</value>
@@ -7474,13 +7507,13 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;cb_pass.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="tb_samples_per_second.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
   <data name="tb_samples_per_second.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 158</value>
+    <value>74, 158</value>
   </data>
   <data name="tb_samples_per_second.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7507,7 +7540,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;tb_samples_per_second.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label75.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7537,7 +7570,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label75.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label73.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -7567,7 +7600,7 @@
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;label73.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="groupBox2.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>

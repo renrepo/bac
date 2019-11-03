@@ -394,6 +394,7 @@
             this.tb_show = new System.Windows.Forms.TextBox();
             this.lb_element_name = new System.Windows.Forms.Label();
             this.lb_atomic_number = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_hv_icon)).BeginInit();
@@ -2143,6 +2144,7 @@
             // groupBox2
             // 
             resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Controls.Add(this.label69);
             this.groupBox2.Controls.Add(this.tb_num_spectra);
             this.groupBox2.Controls.Add(this.label68);
             this.groupBox2.Controls.Add(this.label70);
@@ -3485,6 +3487,11 @@
             resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
             this.lb_atomic_number.Name = "lb_atomic_number";
             // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.Name = "label69";
+            // 
             // XPS
             // 
             resources.ApplyResources(this, "$this");
@@ -3908,6 +3915,7 @@
         private System.Windows.Forms.TextBox tb_show;
         private System.Windows.Forms.Label lb_element_name;
         private System.Windows.Forms.Label lb_atomic_number;
+        private System.Windows.Forms.Label label69;
     }
 }
 
