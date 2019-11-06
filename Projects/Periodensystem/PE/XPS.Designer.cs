@@ -213,6 +213,7 @@
             this.Iseg_Xray_session = new System.Windows.Forms.CheckBox();
             this.Iseg_DPS_session = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label69 = new System.Windows.Forms.Label();
             this.tb_num_spectra = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
             this.label70 = new System.Windows.Forms.Label();
@@ -394,7 +395,6 @@
             this.tb_show = new System.Windows.Forms.TextBox();
             this.lb_element_name = new System.Windows.Forms.Label();
             this.lb_atomic_number = new System.Windows.Forms.Label();
-            this.label69 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_hv_icon)).BeginInit();
@@ -2161,6 +2161,11 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // label69
+            // 
+            resources.ApplyResources(this.label69, "label69");
+            this.label69.Name = "label69";
+            // 
             // tb_num_spectra
             // 
             resources.ApplyResources(this.tb_num_spectra, "tb_num_spectra");
@@ -3486,11 +3491,6 @@
             // 
             resources.ApplyResources(this.lb_atomic_number, "lb_atomic_number");
             this.lb_atomic_number.Name = "lb_atomic_number";
-            // 
-            // label69
-            // 
-            resources.ApplyResources(this.label69, "label69");
-            this.label69.Name = "label69";
             // 
             // XPS
             // 
